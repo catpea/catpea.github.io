@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="Cat Pea">
+<meta name="generator" content="Notepad">
+<title>Cat Pea University</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<meta name="theme-color" content="#712cf9">
+<link href="/stylesheet.css" rel="stylesheet">
+<link rel="stylesheet" href="/bootstrap-icons.css">
+<link rel="stylesheet" href="/highlight-js/base16/solarized-dark.css">
+
+  </head>
+  <body>
+
+  <div class="container">
+  <nav class="navbar navbar-expand-lg rounded-bottom navbar-dark bg-dark mb-3 shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Cat Pea University<sup class="text-muted" style="font-size: .75rem"> 5.5-gh</sup></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="me-xl-2"><a class="nav-link" href="/"><i class="d-lg-none d-xl-inline bi bi-house-heart"></i> Home
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="/lectures.html"><i class="d-lg-none d-xl-inline bi bi-camera-reels"></i> Lectures
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="/toc.html"><i class="d-lg-none d-xl-inline bi bi-list-columns"></i> List
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="/links.html"><i class="d-lg-none d-xl-inline bi bi-journal-bookmark"></i> Links
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="/tiles.html"><i class="d-lg-none d-xl-inline bi bi-grid-3x3-gap"></i> Tiles
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="/portfolio.jpg"><i class="d-lg-none d-xl-inline bi bi-palette"></i> Art
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link active text-warning" href="/snippets.html"><i class="d-lg-none d-xl-inline bi bi-code-slash"></i> Code
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="https://archive.org/details/116-hours-of-poems"><i class="d-lg-none d-xl-inline bi bi-book"></i> Audiobook
+          
+          
+          
+          </a>
+          </li>
+        
+          <li class="me-xl-2"><a class="nav-link" href="/alerts.html"><i class="d-lg-none d-xl-inline bi bi-chat-dots"></i> Alerts
+          
+          
+          
+          </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  </div>
+
+
+
+  <main class="container">
+    <div class="row my-5">
+      <div class="col">
+
+
+      <div class="card text-bg-dark shadow p-3" style="background-color: #001f27 !important;">
+      <div class="card-body">
+        <h3>A Strange Little Discovery</h3>
+<p>I was debugging something with a simple checksum algorithm as I was deep in some complex code, and this thing got me.
+Both Athens and Naples return the same number, based on the ASCII table.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+[<span class="hljs-string">&#x27;Athens&#x27;</span>, <span class="hljs-string">&#x27;Naples&#x27;</span>]
+  .<span class="hljs-title function_">map</span>(
+    <span class="hljs-function"><span class="hljs-params">name</span>=&gt;</span>name.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">letter</span>=&gt;</span>letter.<span class="hljs-title function_">charCodeAt</span>()).<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">response, asciiValue</span>)=&gt;</span>response+asciiValue)
+  );
+
+<span class="hljs-comment">// Array [ 611, 611 ] :(</span>
+
+</code></pre>
+<h3>Convert A List Of Paths To A Tree</h3>
+<p>Unusually short piece of code for converting a simple list of files into a complex data structure.</p>
+<p>A list of files may look like this</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>[
+  <span class="hljs-string">&#x27;.checksums.json&#x27;</span>,
+  <span class="hljs-string">&#x27;SMARTSUM&#x27;</span>,
+  <span class="hljs-string">&#x27;a/a.txt&#x27;</span>,
+  <span class="hljs-string">&#x27;a/b/c/x.txt&#x27;</span>,
+  <span class="hljs-string">&#x27;b.txt&#x27;</span>,
+  <span class="hljs-string">&#x27;c.txt&#x27;</span>,
+  <span class="hljs-string">&#x27;games/dott/dott-ega.exe&#x27;</span>,
+  <span class="hljs-string">&#x27;games/rott/manual/index.html&#x27;</span>,
+  <span class="hljs-string">&#x27;games/rott/play.exe&#x27;</span>,
+  <span class="hljs-string">&#x27;my-documents/3d-stuff/blender/bork.blend&#x27;</span>,
+  <span class="hljs-string">&#x27;my-documents/3d-stuff/blender/old-version.blend&#x27;</span>,
+  <span class="hljs-string">&#x27;my-documents/music/some-file.mp3&#x27;</span>,
+  <span class="hljs-string">&#x27;sub/sub-a.txt&#x27;</span>
+]
+</code></pre>
+<p>And the resulting tree like this</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>{
+  <span class="hljs-string">&#x27;my-documents&#x27;</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;my-documents&#x27;</span>,
+    <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">elements</span>: {
+      <span class="hljs-attr">music</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;music&#x27;</span>,
+        <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">elements</span>: { <span class="hljs-string">&#x27;some-file.mp3&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;some-file.mp3&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> } }
+      },
+      <span class="hljs-string">&#x27;3d-stuff&#x27;</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;3d-stuff&#x27;</span>,
+        <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">elements</span>: {
+          <span class="hljs-attr">blender</span>: {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;blender&#x27;</span>,
+            <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">elements</span>: {
+              <span class="hljs-string">&#x27;bork.blend&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;bork.blend&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> },
+              <span class="hljs-string">&#x27;old-version.blend&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;old-version.blend&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> }
+            }
+          }
+        }
+      }
+    }
+  },
+  <span class="hljs-attr">a</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;a&#x27;</span>,
+    <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">elements</span>: {
+      <span class="hljs-attr">b</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;b&#x27;</span>,
+        <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">elements</span>: {
+          <span class="hljs-attr">c</span>: {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;c&#x27;</span>,
+            <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">elements</span>: { <span class="hljs-string">&#x27;x.txt&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;x.txt&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> } }
+          }
+        }
+      },
+      <span class="hljs-string">&#x27;a.txt&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;a.txt&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> }
+    }
+  },
+  <span class="hljs-attr">sub</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;sub&#x27;</span>,
+    <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">elements</span>: { <span class="hljs-string">&#x27;sub-a.txt&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;sub-a.txt&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> } }
+  },
+  <span class="hljs-attr">games</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;games&#x27;</span>,
+    <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">elements</span>: {
+      <span class="hljs-attr">rott</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rott&#x27;</span>,
+        <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">elements</span>: {
+          <span class="hljs-attr">manual</span>: {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;manual&#x27;</span>,
+            <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">elements</span>: { <span class="hljs-string">&#x27;index.html&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;index.html&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> } }
+          },
+          <span class="hljs-string">&#x27;play.exe&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;play.exe&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> }
+        }
+      },
+      <span class="hljs-attr">dott</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;dott&#x27;</span>,
+        <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">elements</span>: { <span class="hljs-string">&#x27;dott-ega.exe&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;dott-ega.exe&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> } }
+      }
+    }
+  },
+  <span class="hljs-string">&#x27;b.txt&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;b.txt&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-string">&#x27;c.txt&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;c.txt&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-string">&#x27;.checksums.json&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;.checksums.json&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-attr">SMARTSUM</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;SMARTSUM&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> }
+}
+</code></pre>
+<p>This is what a programmer does for a million dollars a year. It is short, it is void of any theory, and it is just data flowing through pipes.
+A lot of company owners don't understand that they don't have to understand a program, they can reason about it from the data flow alone.</p>
+<p>Functional programming as you see here, can be represented graphically, thus it puts them into the game... hence the high pay.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+    <span class="hljs-keyword">const</span> targets = lo.<span class="hljs-title function_">uniqBy</span>(filtered.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> path.<span class="hljs-title function_">dirname</span>(o)).<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o !== <span class="hljs-string">&#x27;.&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;/&#x27;</span>)).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> <span class="hljs-title function_">cascade2</span>(o)).<span class="hljs-title function_">flat</span>(<span class="hljs-number">1</span>), <span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.<span class="hljs-title function_">join</span>())
+    
+    targets.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> [o, <span class="hljs-string">&#x27;elements&#x27;</span>]).<span class="hljs-title function_">flat</span>()).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> lo.<span class="hljs-title function_">set</span>(tree, o.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o), {}))
+    targets.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> lo.<span class="hljs-title function_">initial</span>(o.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> [o, <span class="hljs-string">&#x27;elements&#x27;</span>]).<span class="hljs-title function_">flat</span>())).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> lo.<span class="hljs-title function_">set</span>(tree, o.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o), { <span class="hljs-attr">name</span>: lo.<span class="hljs-title function_">nth</span>(o, -<span class="hljs-number">1</span>), <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span> }))
+    filtered.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;/&#x27;</span>)).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> lo.<span class="hljs-title function_">initial</span>(o.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> [o, <span class="hljs-string">&#x27;elements&#x27;</span>]).<span class="hljs-title function_">flat</span>())).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> lo.<span class="hljs-title function_">set</span>(tree, o.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o), { <span class="hljs-attr">name</span>: lo.<span class="hljs-title function_">nth</span>(o, -<span class="hljs-number">1</span>), <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> }))
+
+
+</code></pre>
+<p>To get at the data here you have to use a dig function which looks like this:</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">dig</span> = (<span class="hljs-params">path, data = tree</span>) =&gt; lo.<span class="hljs-title function_">get</span>(data, lo.<span class="hljs-title function_">initial</span>(path.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^\//</span>, <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\/$/</span>, <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">split</span>(separator).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> [o, <span class="hljs-string">&#x27;elements&#x27;</span>]).<span class="hljs-title function_">flat</span>()))
+
+</code></pre>
+<p>And this is how you'd use it:</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(  <span class="hljs-title function_">dig</span>(<span class="hljs-string">&#x27;/my-documents/3d-stuff/blender/&#x27;</span>)  )
+
+<span class="hljs-comment">// would print</span>
+
+{
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;blender&#x27;</span>,
+  <span class="hljs-attr">directory</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">created</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-comment">// note that it includes elements because it is not costly, and makes things simple.</span>
+  <span class="hljs-attr">elements</span>: {
+    <span class="hljs-string">&#x27;bork.blend&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;bork.blend&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> },
+    <span class="hljs-string">&#x27;old-version.blend&#x27;</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;old-version.blend&#x27;</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">true</span> }
+  }
+}
+
+</code></pre>
+<h3>Changed File Solver</h3>
+<p>Unusually short piece of code for listing file changes. Intersection means pick items that are the same, and difference pick the ones that are different.</p>
+<p>This program operates both on filenames, and a hash of the content of the file.
+I made it calculate changed files based on name <strong>and</strong> file contents.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">solver</span>(<span class="hljs-params">current, previous, pick=[<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;size&#x27;</span>, <span class="hljs-string">&#x27;mdate&#x27;</span>, <span class="hljs-string">&#x27;hash&#x27;</span>]</span>){
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">lookup</span> = o =&gt; <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(o.<span class="hljs-property">data</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">[name, fingerprints]</span>) =&gt;</span> ({name, <span class="hljs-attr">hash</span>:[name, ...<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(lo.<span class="hljs-title function_">pick</span>(fingerprints, pick))].<span class="hljs-title function_">join</span>()}));
+  <span class="hljs-keyword">const</span> [currentNames, previousNames] = [current, previous].<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span>=&gt;</span><span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(o.<span class="hljs-property">data</span>));
+  <span class="hljs-keyword">const</span> [currentHash, previousHash] = [current, previous].<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> lookup);
+  <span class="hljs-keyword">const</span> normal = <span class="hljs-title function_">intersectionBy</span>(currentHash, previousHash, <span class="hljs-function"><span class="hljs-params">o</span>=&gt;</span>o.<span class="hljs-property">hash</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.<span class="hljs-property">name</span>);
+  <span class="hljs-keyword">const</span> create = <span class="hljs-title function_">difference</span>(currentNames, previousNames);
+  <span class="hljs-keyword">const</span> update = <span class="hljs-title function_">difference</span>(<span class="hljs-title function_">intersection</span>(previousNames, currentNames), normal);
+  <span class="hljs-keyword">const</span> remove = <span class="hljs-title function_">difference</span>(previousNames, currentNames);
+  <span class="hljs-keyword">return</span> { create, update, remove, normal };
+}
+
+</code></pre>
+<h3>Pretty Pagerizer</h3>
+<p>I use a popular function called chunk, to split a list into groups or chunks.
+You get another list, but now it holds the chunks, and the chunks hold the items.</p>
+<p>The chunks are the things you see on a single page. <code>pp</code> variable means per page.
+I then enrich the chunks with browsing information, this information makes the 1,2,3,4,5,6,7... buttons on the bottom.</p>
+<p>But there is a nuisance here, because when you are in the middle of a list,
+then you have an even number of items going back and forth:</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>1 2 3 4 5 [6] 7 8 9 10 11
+
+</code></pre>
+<p>But as you near the end, you run out of them:</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+1 2 3 4 5 6 7 8 [9] 10 11
+
+</code></pre>
+<p>So what I do here is run a simulation, of moving through the list,
+and then as I near the end, I calculate how many places there are, basically without math.
+I speak the language of manipulating lists, like the rest of the program.</p>
+<p>Simulation is a powerful technique, you drop yourself in the context of your challenge,
+and now you <code>&quot;see&quot;</code> everything around you, you can taste it, sample it, inspect it.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">doLayout</span>(<span class="hljs-params">db,pp</span>){
+  <span class="hljs-keyword">const</span> layout = [];
+  <span class="hljs-keyword">const</span> pages = <span class="hljs-title function_">chunk</span>(db, pp)
+  <span class="hljs-keyword">let</span> counter = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">const</span> posts <span class="hljs-keyword">of</span> pages){
+    <span class="hljs-keyword">const</span> home = counter==<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">const</span> name = counter==<span class="hljs-number">0</span>?<span class="hljs-string">&#x27;index.html&#x27;</span>:<span class="hljs-string">`index-<span class="hljs-subst">${counter}</span>.html`</span>;
+    <span class="hljs-keyword">const</span> next = (counter+<span class="hljs-number">1</span>&gt;(pages.<span class="hljs-property">length</span>-<span class="hljs-number">1</span>)?<span class="hljs-number">0</span>:counter+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">const</span> prev = (counter-<span class="hljs-number">1</span>&lt;<span class="hljs-number">0</span>?(pages.<span class="hljs-property">length</span>-<span class="hljs-number">1</span>):counter-<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">const</span> first = !counter;
+    <span class="hljs-keyword">const</span> last = counter==pages.<span class="hljs-property">length</span>-<span class="hljs-number">1</span>
+    <span class="hljs-keyword">const</span> total = pages.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">const</span> browse = {home, name,total,counter,next,prev,first,last};
+    layout.<span class="hljs-title function_">push</span>({browse,posts});
+    counter++;
+  }
+
+  <span class="hljs-keyword">let</span> cursor = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">const</span> [leftSize, rightSize] = [<span class="hljs-number">7</span>,<span class="hljs-number">7</span>];
+  <span class="hljs-keyword">const</span> simulation = <span class="hljs-title function_">range</span>(layout.<span class="hljs-property">length</span>);
+   <span class="hljs-keyword">for</span>(<span class="hljs-keyword">const</span> page <span class="hljs-keyword">of</span> simulation ){
+     <span class="hljs-keyword">const</span> [left,right] = <span class="hljs-title function_">partition</span>(simulation.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">i</span>=&gt;</span>i!=cursor), <span class="hljs-function"><span class="hljs-params">o</span>=&gt;</span>(<span class="hljs-title function_">indexOf</span>(simulation,o)&lt;cursor))
+     <span class="hljs-keyword">let</span> back = <span class="hljs-title function_">takeRight</span>(left,leftSize)
+     <span class="hljs-keyword">let</span> forw = <span class="hljs-title function_">take</span>(right,rightSize)
+     <span class="hljs-keyword">if</span>(back.<span class="hljs-property">length</span>&lt;leftSize) forw = <span class="hljs-title function_">take</span>(right, rightSize + (leftSize-back.<span class="hljs-property">length</span> ) );
+     <span class="hljs-keyword">if</span>(forw.<span class="hljs-property">length</span>&lt;rightSize) back =     <span class="hljs-title function_">takeRight</span>(left,  leftSize  + (rightSize-forw.<span class="hljs-property">length</span>) );
+     <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(layout[cursor].<span class="hljs-property">browse</span>, {back, forw})
+     cursor++
+   }
+  <span class="hljs-keyword">return</span> layout;
+}
+
+
+</code></pre>
+<h3>Use An Object For Command Arguments</h3>
+<p>Very useful in executing system commands, with clean to read code.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">createCover</span>(<span class="hljs-params">selected, dest, square = <span class="hljs-literal">false</span></span>){
+  <span class="hljs-keyword">const</span> command = <span class="hljs-string">&#x27;montage&#x27;</span>;
+  <span class="hljs-keyword">const</span> args = {
+    <span class="hljs-string">&#x27;-background&#x27;</span>: <span class="hljs-string">&#x27;#f96982&#x27;</span>,
+    <span class="hljs-string">&#x27;_sources&#x27;</span>: square?<span class="hljs-title function_">takeRight</span>(selected, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>(tile,<span class="hljs-number">2</span>)):selected,
+    <span class="hljs-string">&#x27;-tile&#x27;</span>: (square?<span class="hljs-built_in">parseInt</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(selected.<span class="hljs-property">length</span>)):<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(selected.<span class="hljs-property">length</span>))) + <span class="hljs-string">&#x27;x&#x27;</span>,
+    <span class="hljs-string">&#x27;-geometry&#x27;</span>: <span class="hljs-string">&#x27;+0+0&#x27;</span>,
+    <span class="hljs-string">&#x27;_destination&#x27;</span>: dest,
+  }
+  <span class="hljs-keyword">const</span> { stdout } = <span class="hljs-keyword">await</span> <span class="hljs-title function_">execFile</span>(command, <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(args).<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">[k,v]</span>)=&gt;</span>[k.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">&#x27;_&#x27;</span>)?<span class="hljs-attr">undefined</span>:k,v]).<span class="hljs-title function_">flat</span>(<span class="hljs-number">2</span>).<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">i</span>=&gt;</span>i));
+  <span class="hljs-keyword">if</span>(stdout) <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(stdout);
+}
+
+</code></pre>
+<h3>Quick Drag And Drop For Svelte</h3>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+&lt;script&gt;
+  <span class="hljs-keyword">let</span> selected;
+  <span class="hljs-keyword">let</span> list = [
+    {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;I&quot;</span>},
+    {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Am&quot;</span>},
+    {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Yoda&quot;</span>}
+  ];
+&lt;/script&gt;
+
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+  {#each list as item, index (item.id)}
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>
+      <span class="hljs-attr">draggable</span>=<span class="hljs-string">&quot;true&quot;</span>
+      <span class="hljs-attr">on:dragstart</span>=<span class="hljs-string">{(event)</span>=&gt;</span>event.dataTransfer.setData(&quot;text/plain&quot;, index)}
+      on:dragover={(event)=&gt;(parseInt(event.dataTransfer.getData(&quot;text/plain&quot;))==index)?null:event.preventDefault()}
+      on:drop={(event)=&gt;{event.preventDefault(); list.splice(index, 0, list.splice(parseInt(event.dataTransfer.getData(&quot;text/plain&quot;)), 1)[0]); list=list; console.log   (`Moved: ${event.dataTransfer.getData(&quot;text/plain&quot;)} to ${index}`)}}
+      on:click={()=&gt;{selected=item.id; console.log(`Selected: ${selected}`)}}&gt;
+      {item.title}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  {/each}
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
+
+{#<span class="hljs-keyword">if</span> selected}
+  <span class="hljs-attr">selected</span>: {selected}
+{/<span class="hljs-keyword">if</span>}
+
+</code></pre>
+<h3>Make Vinyl Files From A Simple Array And Use Gulp</h3>
+<p>Useful for generating files based on some content.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">import</span> {<span class="hljs-title class_">Server</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;socket.io&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Vinyl</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vinyl&#x27;</span>;
+<span class="hljs-keyword">import</span> gulp <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gulp&#x27;</span>;
+<span class="hljs-keyword">import</span> uglify <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gulp-uglify&#x27;</span>;
+<span class="hljs-keyword">import</span> babel <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gulp-babel&#x27;</span>;
+<span class="hljs-keyword">import</span> gulpIf <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gulp-if&#x27;</span>;
+<span class="hljs-keyword">import</span> map <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;map-stream&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Readable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:stream&#x27;</span>;
+<span class="hljs-comment">/*...*/</span>
+
+
+socket.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;generate&#x27;</span>, <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-comment">// Make Vinyl Files</span>
+  <span class="hljs-keyword">const</span> vfs = data.<span class="hljs-property">files</span>
+  .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span>=&gt;</span><span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(o, { <span class="hljs-attr">contents</span>: <span class="hljs-title class_">Buffer</span>.<span class="hljs-title function_">from</span>( <span class="hljs-title function_">isString</span>(o.<span class="hljs-property">contents</span>)?o.<span class="hljs-property">contents</span>:<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(o.<span class="hljs-property">contents</span>),<span class="hljs-string">&#x27;utf-8&#x27;</span>) })) <span class="hljs-comment">// create buffer</span>
+  .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">o</span>=&gt;</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vinyl</span>(o)) <span class="hljs-comment">// convert to vinyl object</span>
+  <span class="hljs-comment">// Stream To Dest</span>
+  <span class="hljs-title class_">Readable</span>.<span class="hljs-title function_">from</span>(vfs)
+  .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">map</span>(log))
+  .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">gulpIf</span>(isJavaScript, <span class="hljs-title function_">babel</span>({   })))
+  .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">gulpIf</span>(isJavaScript, <span class="hljs-title function_">uglify</span>()))
+  .<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-variable language_">console</span>.<span class="hljs-property">log</span>)
+  .<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(path.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;dist&#x27;</span>,data.<span class="hljs-property">name</span>), { <span class="hljs-attr">sourcemaps</span>: <span class="hljs-string">&#x27;.&#x27;</span> }));
+ });
+
+</code></pre>
+<h3>Blob To Buffer</h3>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">var</span> reader = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>();
+reader.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;loadend&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+<span class="hljs-keyword">var</span> buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Buffer</span>(reader.<span class="hljs-property">result</span>, <span class="hljs-string">&quot;binary&quot;</span>);
+ fs.<span class="hljs-title function_">writeFile</span>(<span class="hljs-string">&quot;test.wav&quot;</span>, buffer, <span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) {
+   <span class="hljs-keyword">if</span>(err) {
+     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;err&quot;</span>, err);
+   } <span class="hljs-keyword">else</span> {
+     <span class="hljs-comment">// success</span>
+   }
+ });
+});
+reader.<span class="hljs-title function_">readAsArrayBuffer</span>(wavBlob);
+
+
+</code></pre>
+<h3>Know What Directory Your Code Is In</h3>
+<p>This just restores the old __dirname, useful for dynamically loading modules</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
+<span class="hljs-keyword">const</span> moduleURL = <span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>);
+<span class="hljs-keyword">const</span> dirname = path.<span class="hljs-title function_">dirname</span>(moduleURL.<span class="hljs-property">pathname</span>);
+
+
+</code></pre>
+<h3>Clunky HTML Includes</h3>
+<p>When you need to expand pages with some more layout code.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+
+<span class="hljs-comment">// tag &lt;div data-import=&quot;component&quot; data-component=&quot;my-component&quot;&gt;</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">let</span> promise = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>();
+  <span class="hljs-keyword">const</span> elements = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;[data-import=&quot;component&quot;]&#x27;</span>);
+  elements.<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">element</span>){
+    promise = promise.<span class="hljs-title function_">then</span>(<span class="hljs-function">()=&gt;</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>){
+      <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`components/<span class="hljs-subst">${element.dataset.component}</span>/index.html`</span>)
+      .<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>){<span class="hljs-keyword">return</span> response.<span class="hljs-title function_">text</span>();})
+      .<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">text</span>){element.<span class="hljs-property">outerHTML</span> = text; <span class="hljs-title function_">resolve</span>()});
+    }))
+  })
+  <span class="hljs-keyword">return</span> promise;
+}
+
+
+</code></pre>
+<h3>Convert Snapshots Of Artwork To A Time-lapse Video</h3>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+
+<span class="hljs-comment"># smush frames intoa video</span>
+ffmpeg -framerate 7 -pattern_type glob -i <span class="hljs-string">&#x27;*.jpg&#x27;</span> -c:v libx264 -r 30 ~/output1.mp4
+
+<span class="hljs-comment"># hold the last frame for 60 s</span>
+ffmpeg -i output1.mp4 -vf tpad=stop_mode=<span class="hljs-built_in">clone</span>:stop_duration=60 output1-long.mp4
+
+</code></pre>
+<h3>Upload via sftp</h3>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-comment"># Download</span>
+sftp [user]@host[:port][/dest_path/file] [/local_path]
+
+<span class="hljs-comment"># Upload</span>
+sftp meow@earth:/media/meow/ssd1/ &lt;&lt;&lt; $<span class="hljs-string">&#x27;put antwerp.tar&#x27;</span>
+
+</code></pre>
+<h3>Install MATE On A Raspberry PI</h3>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+apt install mate-desktop-environment-extras -y
+update-alternatives --config x-session-manager <span class="hljs-comment"># select mate session</span>
+reboot
+
+</code></pre>
+<h3>How I Like My Unit Tests</h3>
+<p>Just actual, expected and deepEqual;</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">const</span> assert = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;assert&#x27;</span>);
+<span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./index.js&#x27;</span>);
+
+<span class="hljs-keyword">const</span> input = [<span class="hljs-number">4</span>, [ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]];
+<span class="hljs-keyword">const</span> actual = program.<span class="hljs-title function_">apply</span>(program, input);
+<span class="hljs-keyword">const</span> expected = [ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(actual);
+
+assert.<span class="hljs-title function_">deepEqual</span>( actual , expected );
+
+</code></pre>
+<h3>How I Like To Structure My Objects</h3>
+<p>There is something poetic about meta &amp; data</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+{
+
+  <span class="hljs-attr">meta</span>: {
+       <span class="hljs-attr">uuid</span>: <span class="hljs-string">&#x27;50b55281-adb2-46d0-85d0-d8a80dcc6b92&#x27;</span>,
+       <span class="hljs-attr">user</span>: <span class="hljs-string">&#x27;07791d11-125b-43f7-ad27-694bb7f10a48&#x27;</span>,
+    <span class="hljs-attr">inherit</span>: [<span class="hljs-string">&#x27;User&#x27;</span>, <span class="hljs-string">&#x27;Authenticated&#x27;</span>, <span class="hljs-string">&#x27;Animal&#x27;</span>],
+       <span class="hljs-attr">tags</span>: [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;green&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>],
+    <span class="hljs-attr">version</span>: <span class="hljs-string">&#x27;132-0677083e-5edd-4e4d-8e67-388c479fec51&#x27;</span>,
+      <span class="hljs-attr">order</span>: <span class="hljs-string">&#x27;0000001-c9dc5f89-b4ef-4e5b-a736-0caa9c3d0f57&#x27;</span>,
+    <span class="hljs-attr">deleted</span>: <span class="hljs-literal">false</span>,
+  },
+
+  <span class="hljs-attr">data</span>: {
+      <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;Buy Socks&#x27;</span>
+  }
+
+}
+
+</code></pre>
+<h3>String Interpolator</h3>
+<p>I needed more dynamic string templates for some strange use case.</p>
+<pre class="hljs p-3 shadow rounded" style="margin-bottom: 5rem;"><code>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">interpolate</span>(<span class="hljs-params">t, c</span>){<span class="hljs-keyword">return</span> t.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\${([^}]+)}/g</span>,<span class="hljs-function">(<span class="hljs-params">m,p</span>)=&gt;</span>p.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;.&#x27;</span>).<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">a,f</span>)=&gt;</span>a?a[f]:<span class="hljs-literal">undefined</span>,c)??m);}
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;My ${a} is full of eels.&#x27;</span>,{<span class="hljs-attr">a</span>:<span class="hljs-string">&#x27;hovercraft&#x27;</span>})
+<span class="hljs-comment">//&gt; My hovercraft is full of eels.</span>
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;Answer to the Ultimate Question of Life, the Universe, and Everything is: ${robotic}&#x27;</span>,{<span class="hljs-attr">robotic</span>:<span class="hljs-built_in">parseInt</span>(<span class="hljs-number">101010</span>, <span class="hljs-number">2</span>)})
+<span class="hljs-comment">//&gt; Answer to the Ultimate Question of Life, the Universe, and Everything is: 42</span>
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;Errors are kept to minimum: ${x.o.x.o.x.o.x.o.x.o.x.o.x.o}&#x27;</span>)
+<span class="hljs-comment">//&gt; Errors are kept to minimum: ${x.o.x.o.x.o.x.o.x.o.x.o.x.o}</span>
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;Simple arrays are kind of ${0}&#x27;</span>, [<span class="hljs-string">&quot;supported!&quot;</span>])
+<span class="hljs-comment">//&gt; Simple arrays are kind of supported!</span>
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;Including complex arrays... ${A.c.h.0.0.0}! and will make you very brave, if used in production, and bless you for being so mighty! &lt;3&#x27;</span>, {<span class="hljs-attr">A</span>:{<span class="hljs-attr">c</span>:{<span class="hljs-attr">h</span>:[[[<span class="hljs-string">&#x27;Achooo&#x27;</span>]]]}}})
+<span class="hljs-comment">//&gt; Including complex arrays... Achooo! and will make you very brave, if used in production, and bless you for being so mighty! &lt;3</span>
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;A more complex answer to the Ultimate Question of Life, the Universe, and Everything is still: ${human.answer}&#x27;</span>,
+{<span class="hljs-attr">human</span>:{<span class="hljs-attr">answer</span>:[<span class="hljs-string">&#x27;Love&#x27;</span>, <span class="hljs-string">&#x27;Wisdom&#x27;</span>, <span class="hljs-string">&#x27;Funnyness&#x27;</span>, <span class="hljs-string">&#x27;Aardvark&#x27;</span>, <span class="hljs-string">&#x27;Hugs&#x27;</span>].<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">word</span>=&gt;</span>word.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>)).<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">a,i</span>)=&gt;</span>a^i)/<span class="hljs-number">2</span>}})
+<span class="hljs-comment">//&gt; A more complex answer to the Ultimate Question of Life, the Universe, and Everything is still: 42</span>
+
+<span class="hljs-title function_">interpolate</span>(<span class="hljs-string">&#x27;When variable data is not present the interpolator re-prints ${data} (leaves it alone, as it should be).&#x27;</span>,{})
+<span class="hljs-comment">//&gt; When variable data is not present the interpolator re-prints ${data} (leaves it alone, as it should be).</span>
+
+</code></pre>
+<p>More To Come, this is just what I had sitting around in gists and recent code.</p>
+
+      </div>
+      </div>
+
+      </div>
+    </div>
+  </main>
+
+
+  <div class="container">
+  <footer class="text-bg-dark pb-2 mt-3 shadow rounded-top" style="min-height: 32rem;">
+
+  <div class="text-end">
+  <a class="d-inline p-2" href="#top"><i class="bi bi-box-arrow-in-up"></i></a>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-12 col-md-6 col-lg-3 mb-md-5">
+        <img class="w-100 pt-5" src="/logo.png">
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 mb-md-5">
+        <h5 class="mb-3 mb-lg-5 mt-5"> Navigation <small class="text-muted">Site Navigation</small> </h5>
+        <ul class="list-unstyled ms-3">
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/"><i class="bi bi-house-heart"></i> Home</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/lectures.html"><i class="bi bi-camera-reels"></i> Lectures</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/toc.html"><i class="bi bi-list-columns"></i> List</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/links.html"><i class="bi bi-journal-bookmark"></i> Links</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/tiles.html"><i class="bi bi-grid-3x3-gap"></i> Tiles</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/portfolio.jpg"><i class="bi bi-palette"></i> Art</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/snippets.html"><i class="bi bi-code-slash"></i> Code</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/116-hours-of-poems"><i class="bi bi-book"></i> Audiobook</a></li>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/alerts.html"><i class="bi bi-chat-dots"></i> Alerts</a></li>
+        
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="mb-3 mb-lg-5 mt-5"> Mirrors <small class="text-muted">Website Backups & Snapshots</small> </h5>
+        <ul class="list-unstyled ms-3">
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.org">Backup Server at catpea.org</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/912-poems">Cat Pea Audio Book (4GB/92hrs)</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.vercel.app/">Vercel Mirror</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.onrender.com/">Render Archive Mirror</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.pages.dev/">Cloudflare Archive Mirror</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.youtube.com/playlist?list=PLOo-pqnffyOqsK6hf5tFwMqzvhogksrgW">Poetry At YouTube</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.bitbucket.io/">Bitbucket Mirror</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea/furkies-purrkies">Github Source Code</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea/furkies-purrkies/issues">Furkies Purkies Bugs</a></li>
+          
+            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://westland-valhalla.github.io/warrior/">Westland Warrior Snapshot</a></li>
+          
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="mb-3 mb-lg-5 mt-5"> Network <small class="text-muted">Cat Pea In The Wild</small> </h5>
+        <ul class="list-unstyled ms-3">
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://news.ycombinator.com/user?id=catpea">Hacker News</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.youtube.com/@catpea">YouTube</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.reddit.com/user/catpea-com/">Cat Pea Reddit</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/@catpea-com">Internet Archive</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://web.archive.org/web/*/catpea.com">Wayback Machine</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://dribbble.com/catpea">Dribbble</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://gitlab.com/catpea">GitLab</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.npmjs.com/~catpea">NPM</a></i>
+        
+          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea">GitHub</a></i>
+        
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col">
+      <a class="opacity-25 pe-2 float-end text-decoration-none fw-bold fs-3 text-warning " data-bs-toggle="collapse" href="#collapseDebug" role="button" aria-expanded="false" aria-controls="collapseDebug">&pi;</a>
+
+      <div class="collapse p-5" id="collapseDebug">
+
+
+        <div class="card text-bg-dark shadow">
+        <!-- <img src="/logo.png" class="card-img-top" alt="Cat Pea Logo"> -->
+        <div class="card-body">
+          <h5 class="card-title">Debug Information</h5>
+          <p class="card-text"></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-bg-dark">
+          <span class="d-sm-none">responsive-layout:xs</span> <span class="d-none d-sm-inline d-md-none">responsive-layout:sm</span> <span class="d-none d-md-inline d-lg-none">responsive-layout:md</span> <span class="d-none d-lg-inline d-xl-none">responsive-layout:lg</span> <span class="d-none d-xl-inline d-xxl-none">responsive-layout:xl</span> <span class="d-none d-xxl-inline">responsive-layout:xxl</span>
+          </li>
+          <li class="list-group-item text-bg-dark">posts-on-page (pp): 1309</li>
+          <li class="list-group-item text-bg-dark">filename: snippets.html</li>
+        </ul>
+        <!-- <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div> -->
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</footer>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
+  </div>
+
+
+
+  </body>
+</html>
