@@ -41,7 +41,7 @@ class ObservableWhipflash {
   constructor(subscribeFn) { this.subscribeFn = subscribeFn; }
   subscribe(observer) { return this.subscribeFn(observer); }
   pipe(...operators) { return operators.reduce((acc, operator) => operator(acc), this); }
-  static of(...values) { return new Observable(subscriber => { values.forEach(value => subscriber.next(value)); subscriber.complete(); }); }
+  static of(...values) { return new ObservableWhipflash(subscriber => { values.forEach(value => subscriber.next(value)); subscriber.complete(); }); }
 }
 // Example
 const observable = ObservableWhipflash.of(1, 2, 3);
