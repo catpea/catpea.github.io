@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        #alarm-time {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h2>Set Alarm</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="hour">Hour:</label>
+                        <input type="number" id="hour" min="0" max="23" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="minute">Minute:</label>
+                        <input type="number" id="minute" min="0" max="59" value="0">
+                    </div>
+                    <button type="button" id="set-alarm" class="btn btn-primary">Set Alarm</button>
+                </form>
+                <p id="alarm-time">Alarm will activate in 00:00:00</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        let hourInput = document.getElementById('hour');
+        let minuteInput = document.getElementById('minute');
+        let alarmTimeDisplay = document.getElementById('alarm-time');
+        let alarmQueue = [];
+        let audioFiles = ['a.mp3', 'b.mp3', 'c.mp3'];
+        let currentTime = new Date();
+        let alarmTime;
+
+        document.getElementById('set-alarm').addEventListener('click', () => {
+            let hour = parseInt(hourInput.value);
+            let minute = parseInt(minuteInput.value);
+            alarmTime = new Date(currentTime.getTime() + (hour * 60 * 60 * 1000) + (minute * 60 * 1000));
+            updateAlarmTimeDisplay();
+            checkAlarmTime();
+        });
+
+        function updateAlarmTimeDisplay() {
+            let timeDiff = alarmTime.getTime() - currentTime.getTime();
+            let hours = Math.floor(timeDiff / (60 * 60 * 1000));
+            let minutes = Math.floor((timeDiff % (60 * 60 * 1000)) / (60 * 1000));
+            let seconds = Math.floor((timeDiff % (60 * 1000)) / 1000);
+            alarmTimeDisplay.textContent = `Alarm will activate in ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+            currentTime = new Date();
+            if (timeDiff > 0) {
+                setTimeout(updateAlarmTimeDisplay, 1000);
+            } else {
+                dispatchAlarmEvent();
+            }
+        }
+
+        function checkAlarmTime() {
+            setInterval(() => {
+                if (new Date().getTime() >= alarmTime.getTime()) {
+                    dispatchAlarmEvent();
+                }
+            }, 1000);
+        }
+
+        function dispatchAlarmEvent() {
+            document.dispatchEvent(new CustomEvent('alarm'));
+        }
+
+        document.addEventListener('alarm', () => {
+            shuffleArray(audioFiles);
+            playAudio();
+        });
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                let temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            alarmQueue = array.slice();
+        }
+
+        function playAudio() {
+            if (alarmQueue.length > 0) {
+                let audio = new Audio(alarmQueue.shift());
+                audio.play();
+                audio.onended = playAudio;
+            }
+        }
+
+        function padZero(num) {
+            return (num < 10 ? '0' : '') + num;
+        }
+    </script>
+</body>
+</html>
