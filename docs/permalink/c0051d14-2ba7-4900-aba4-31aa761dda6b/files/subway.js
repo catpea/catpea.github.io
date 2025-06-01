@@ -1,26 +1,76 @@
 // Simple reactive signal implementation
-function Signal(initialValue) {
-  let value = initialValue;
-  const subscribers = new Set();
+class EventEmitter {
+  #events = new Map();
 
-  function get() {
-    return value;
+  on(event, callback) {
+    if (!this.#events.has(event)) {
+      this.#events.set(event, new Set());
+    }
+    this.#events.get(event).add(callback);
+    return () => this.off(event, callback);
   }
 
-  function set(newValue) {
-    if (value !== newValue) {
-      value = newValue;
-      subscribers.forEach((sub) => sub(value));
+  off(event, callback) {
+    const callbacks = this.#events.get(event);
+    if (callbacks) {
+      callbacks.delete(callback);
+      if (callbacks.size === 0) {
+        this.#events.delete(event);
+      }
     }
   }
 
-  function subscribe(callback) {
-    subscribers.add(callback);
-    callback(value); // Initial call
-    return () => subscribers.delete(callback);
+  emit(event, ...args) {
+    const callbacks = this.#events.get(event);
+    if (callbacks) {
+      for (const callback of callbacks) {
+        callback(...args);
+      }
+    }
+  }
+}
+
+class Signal {
+  #value;
+  #emitter;
+
+  constructor(value) {
+    this.#value = value;
+    this.#emitter = new EventEmitter();
   }
 
-  return { get, set, subscribe };
+  // Avoid using get()/set(*) use .value instead
+  get(){
+    return this.value;
+  }
+
+  set(value){
+    this.value = value;
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(v) {
+    this.#value = v;
+    this.notify();
+  }
+
+  update(callback){
+    //NOTE: assumes update, always calls notify
+    this.#value = callback(this.#value);
+    this.notify();
+  }
+
+  subscribe(callback) {
+    if(!(this.#value === undefined)) callback(this.#value);
+    return this.#emitter.on('change', callback);
+  }
+
+  notify(){
+    this.#emitter.emit('change', this.#value);
+  }
 }
 
 
@@ -31,15 +81,15 @@ class FlowConnector extends HTMLElement {
     this.attachShadow({ mode: 'open' });
 
     // Create signals
-    this.x1 = Signal(0);
-    this.y1 = Signal(0);
-    this.x2 = Signal(100);
-    this.y2 = Signal(100);
+    this.x1 = new Signal(0);
+    this.y1 = new Signal(0);
+    this.x2 = new Signal(100);
+    this.y2 = new Signal(100);
 
-    this.color = Signal(this.getAttribute('color') || 'black');
-    this.label1 = Signal(this.getAttribute('label1') || '');
-    this.label2 = Signal(this.getAttribute('label2') || '');
-    this.lineLabel = Signal(this.getAttribute('line-label') || '');
+    this.color = new Signal(this.getAttribute('color') || 'black');
+    this.label1 = new Signal(this.getAttribute('label1') || '');
+    this.label2 = new Signal(this.getAttribute('label2') || '');
+    this.lineLabel = new Signal(this.getAttribute('line-label') || '');
 
     // Create the shadow DOM structure
     this.shadowRoot.innerHTML = `
@@ -83,10 +133,10 @@ class FlowConnector extends HTMLElement {
 
   connectedCallback() {
     const update = () => {
-      const x1 = this.x1.get();
-      const y1 = this.y1.get();
-      const x2 = this.x2.get();
-      const y2 = this.y2.get();
+      const x1 = this.x1.value;
+      const y1 = this.y1.value;
+      const x2 = this.x2.value;
+      const y2 = this.y2.value;
       const minX = Math.min(x1, x2);
       const minY = Math.min(y1, y2);
       const width = Math.abs(x2 - x1);
@@ -104,28 +154,28 @@ class FlowConnector extends HTMLElement {
       this.line.setAttribute('y1', sy1);
       this.line.setAttribute('x2', sx2);
       this.line.setAttribute('y2', sy2);
-      this.line.setAttribute('stroke', this.color.get());
+      this.line.setAttribute('stroke', this.color.value);
 
       this.circles[0].setAttribute('cx', sx1);
       this.circles[0].setAttribute('cy', sy1);
-      // this.circles[0].setAttribute('stroke', this.color.get());
+      // this.circles[0].setAttribute('stroke', this.color.value);
 
       this.circles[1].setAttribute('cx', sx2);
       this.circles[1].setAttribute('cy', sy2);
-      // this.circles[1].setAttribute('stroke', this.color.get());
+      // this.circles[1].setAttribute('stroke', this.color.value);
 
       // Text Labels
       this.labelEls.label1.setAttribute('x', sx1);
       this.labelEls.label1.setAttribute('y', sy1 - 18);
-      this.labelEls.label1.textContent = this.label1.get();
+      this.labelEls.label1.textContent = this.label1.value;
 
       this.labelEls.label2.setAttribute('x', sx2);
       this.labelEls.label2.setAttribute('y', sy2 - 18);
-      this.labelEls.label2.textContent = this.label2.get();
+      this.labelEls.label2.textContent = this.label2.value;
 
       this.labelEls.lineLabel.setAttribute('x', (sx1 + sx2) / 2);
       this.labelEls.lineLabel.setAttribute('y', (sy1 + sy2) / 2 - 18);
-      this.labelEls.lineLabel.textContent = this.lineLabel.get();
+      this.labelEls.lineLabel.textContent = this.lineLabel.value;
     };
 
     // Subscribe all signals to update
@@ -139,22 +189,22 @@ class FlowConnector extends HTMLElement {
 
   attributeChangedCallback(name, _, newVal) {
 
-    if (name === 'x1') this.x1.set(newVal);
-    if (name === 'y1') this.y1.set(newVal);
-    if (name === 'x2') this.x2.set(newVal);
-    if (name === 'y2') this.y2.set(newVal);
+    if (name === 'x1') this.x1.value = newVal;
+    if (name === 'y1') this.y1.value = newVal;
+    if (name === 'x2') this.x2.value = newVal;
+    if (name === 'y2') this.y2.value = newVal;
 
-    if (name === 'color') this.color.set(newVal);
-    if (name === 'label1') this.label1.set(newVal);
-    if (name === 'label2') this.label2.set(newVal);
-    if (name === 'line-label') this.lineLabel.set(newVal);
+    if (name === 'color') this.color.value = newVal;
+    if (name === 'label1') this.label1.value = newVal;
+    if (name === 'label2') this.label2.value = newVal;
+    if (name === 'line-label') this.lineLabel.value = newVal;
   }
 
   setCoordinates(x1, y1, x2, y2) {
-    this.x1.set(x1);
-    this.y1.set(y1);
-    this.x2.set(x2);
-    this.y2.set(y2);
+    this.x1.value = x1;
+    this.y1.value = y1;
+    this.x2.value = x2;
+    this.y2.value = y2;
   }
 }
 
@@ -373,10 +423,10 @@ class WindowContainer extends HTMLElement {
     this.attachShadow({ mode: 'open' });
 
     // Signals
-    this.left = Signal(parseInt(this.getAttribute('left') || 100));
-    this.top = Signal(parseInt(this.getAttribute('top') || 100));
-    this.width = Signal(parseInt(this.getAttribute('width') || 400));
-    this.height = Signal(parseInt(this.getAttribute('height') || 300));
+    this.left = new Signal(parseInt(this.getAttribute('left') || 100));
+    this.top = new Signal(parseInt(this.getAttribute('top') || 100));
+    this.width = new Signal(parseInt(this.getAttribute('width') || 400));
+    this.height = new Signal(parseInt(this.getAttribute('height') || 300));
 
     // Template with slot for content
     this.shadowRoot.innerHTML = `
@@ -407,10 +457,13 @@ class WindowContainer extends HTMLElement {
   connectedCallback() {
     // Initial position and size
     const updatePosition = () => {
-      this.style.left = this.left.get() + 'px';
-      this.style.top = this.top.get() + 'px';
-      this.style.width = this.width.get() + 'px';
-      this.style.height = this.height.get() + 'px';
+
+      this.style.left = this.left.value + 'px';
+      this.style.top = this.top.value + 'px';
+
+      this.style.width = Math.max(320, this.width.value) + 'px';
+      this.style.height = Math.max(320, this.height.value) + 'px';
+
     };
 
     [this.left, this.top, this.width, this.height].forEach(signal =>
@@ -427,14 +480,14 @@ class WindowContainer extends HTMLElement {
 
     let offsetX = 0, offsetY = 0;
     const onMouseDown = (e) => {
-      offsetX = e.clientX - this.left.get();
-      offsetY = e.clientY - this.top.get();
+      offsetX = e.clientX - this.left.value;
+      offsetY = e.clientY - this.top.value;
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
     };
     const onMouseMove = (e) => {
-      this.left.set(e.clientX - offsetX);
-      this.top.set(e.clientY - offsetY);
+      this.left.value = e.clientX - offsetX;
+      this.top.value = e.clientY - offsetY;
     };
     const onMouseUp = () => {
       document.removeEventListener('mousemove', onMouseMove);
@@ -451,15 +504,15 @@ class WindowContainer extends HTMLElement {
       e.preventDefault();
       startX = e.clientX;
       startY = e.clientY;
-      startWidth = this.width.get();
-      startHeight = this.height.get();
+      startWidth = this.width.value;
+      startHeight = this.height.value;
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
     };
 
     const onMouseMove = (e) => {
-      this.width.set(startWidth + (e.clientX - startX));
-      this.height.set(startHeight + (e.clientY - startY));
+      this.width.value = startWidth + (e.clientX - startX);
+      this.height.value = startHeight + (e.clientY - startY);
     };
 
     const onMouseUp = () => {
@@ -510,4 +563,12 @@ customElements.define('window-container', WindowContainer);
       const window2InputPositionUnsubscribe = window2InputPosition.subscribe((x, y, w, h) => {
         connector2.setAttribute('x2', x+(w/2));
         connector2.setAttribute('y2', y+(h/2));
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.shiftKey) window.parent.postMessage({ type: 'special-on' }, '*');
+      });
+
+      window.addEventListener('keyup', (e) => {
+        if (e.key == 'Shift') window.parent.postMessage({ type: 'special-off' }, '*');
       });
