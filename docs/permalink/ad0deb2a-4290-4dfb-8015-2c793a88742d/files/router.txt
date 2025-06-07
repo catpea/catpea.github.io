@@ -1,0 +1,93 @@
+import { createServer } from 'node:http';
+import { parse } from 'url'; // Required for extracting method from incoming request
+
+
+// Enhanced router supporting all HTTP verbs
+function createRouter() {
+  const methods = new Map(); // Map to store different handlers for different methods
+
+  function addRoute(method, path, handler) {
+    const segments = path.split('/').filter(Boolean);
+    methods.set(method, methods.get(method) || [],
+      (existingHandlers, index) => {
+        existingHandlers.unshift({ segments, handler });
+        return existingHandlers;
+      }
+    ); // Using index to ensure handler order
+  }
+
+  function matchRoute(req) {
+    const urlSegments = parse(req.url, true).pathname.split('/').filter(Boolean);
+    let methodHandlers = methods.get(req.method);
+    if (!methodHandlers) {
+      return null; // Method not registered
+    }
+
+    for (const route of methodHandlers) {
+      const { segments, handler } = route;
+      if (segments.length !== urlSegments.length) continue;
+      const params = {};
+      let match = true;
+      for (let i = 0; i < segments.length; i++) {
+        const routeSegment = segments[i];
+        const urlSegment = urlSegments[i];
+        if (routeSegment.startsWith(':')) {
+          params[routeSegment.slice(1)] = urlSegment;
+        } else if (routeSegment !== urlSegment) {
+          match = false;
+          break;
+        }
+      }
+      if (match) {
+        req.params = params;
+        return { handler, params };
+      }
+    }
+    return null;
+  }
+
+  return {
+    get: (path, handler) => addRoute('GET', path, handler),
+    post: (path, handler) => addRoute('POST', path, handler),
+    put: (path, handler) => addRoute('PUT', path, handler),
+    delete: (path, handler) => addRoute('DELETE', path, handler),
+    patch: (path, handler) => addRoute('PATCH', path, handler),
+    options: (path, handler) => addRoute('OPTIONS', path, handler),
+    // You can add more here for other HTTP verbs
+
+    handle: (req, res) => {
+      const match = matchRoute(req);
+      if (match) {
+        req.params = match.params;
+        match.handler.call(null, req, res);
+      } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not Found\n');
+      }
+    },
+  };
+}
+
+
+const router = createRouter();
+
+// Example routes
+router.get('/users/:userId/books/:bookId', (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(req.params));
+});
+
+router.post('/users', (req, res) => {
+  // POST handler implementation
+  res.writeHead(201, { 'Content-Type': 'application/json' });
+  res.end('User created\n');
+});
+
+
+const server = createServer((req, res) => {
+  router.handle(req, res);
+});
+
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Listening on 127.0.0.1:3000');
+});

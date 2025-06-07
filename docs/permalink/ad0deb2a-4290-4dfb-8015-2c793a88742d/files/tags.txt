@@ -1,0 +1,25 @@
+const fs = require('fs');
+const path = require('path');
+
+function addTag(tag, articleId) {
+  const dir = path.join('./tags_index', tag);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, articleId), '1');
+}
+
+function removeTag(tag, articleId) {
+  const filePath = path.join('./tags_index', tag, articleId);
+  if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+}
+
+function getArticlesForTag(tag) {
+  const dir = path.join('./tags_index', tag);
+  return fs.existsSync(dir) ? fs.readdirSync(dir) : [];
+}
+
+function getArticlesByTags(tags) {
+  return tags.reduce((acc, tag) => {
+    const articles = new Set(getArticlesForTag(tag));
+    return acc === null ? articles : new Set([...acc].filter(x => articles.has(x)));
+  }, null);
+}
