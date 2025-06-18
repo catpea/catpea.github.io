@@ -1,0 +1,37 @@
+  voidTag: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '<' },
+                    'voidTagName',
+                    'attributes',
+                    'ws',
+                    { type: 'literal', value: '>' }
+                ],
+                action: (result) => ({
+                    type: 'element',
+                    name: result[1],
+                    attributes: result[2],
+                    children: [],
+                    void: true
+                })
+            },
+
+            voidTagName: {
+                type: 'choice',
+                alternatives: [
+                    { type: 'literal', value: 'area' },
+                    { type: 'literal', value: 'base' },
+                    { type: 'literal', value: 'br' },
+                    { type: 'literal', value: 'col' },
+                    { type: 'literal', value: 'embed' },
+                    { type: 'literal', value: 'hr' },
+                    { type: 'literal', value: 'img' },
+                    { type: 'literal', value: 'input' },
+                    { type: 'literal', value: 'link' },
+                    { type: 'literal', value: 'meta' },
+                    { type: 'literal', value: 'param' },
+                    { type: 'literal', value: 'source' },
+                    { type: 'literal', value: 'track' },
+                    { type: 'literal', value: 'wbr' }
+                ]
+            },

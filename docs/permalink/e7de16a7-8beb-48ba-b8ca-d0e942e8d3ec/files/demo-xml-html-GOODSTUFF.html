@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML PEG Parser</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .section h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .output {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #34495e;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .grammar-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border: 1px solid #dee2e6;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 XML PEG Parser</h1>
+
+        <div class="section">
+            <h3>Grammar Definition</h3>
+            <div class="grammar-display" id="grammarDisplay"></div>
+        </div>
+
+        <div class="section">
+            <h3>XML Input</h3>
+<textarea id="xmlInput" placeholder="Enter your XML here..."><?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <div>Hello World</div>
+    <div >Content with space</div >
+    <item name="test">Regular item</item>
+    <img src="funny.jpg">
+</root></textarea>
+            <br><br>
+            <button onclick="parseXML()">Parse XML</button>
+        </div>
+
+        <div class="section">
+            <h3>Parse Result</h3>
+            <div class="output" id="output"></div>
+        </div>
+    </div>
+
+    <script>
+
+        // PEG Parser Implementation
+        class PEGParser {
+            constructor(grammar) {
+                this.grammar = grammar;
+                this.input = '';
+                this.pos = 0;
+                this.farthest = 0;
+                this.expected = new Set();
+            }
+
+            parse(input, startRule = 'document') {
+                this.input = input;
+                this.pos = 0;
+                this.farthest = 0;
+                this.expected.clear();
+
+                const result = this.parseRule(startRule);
+
+                if (result === null || this.pos < this.input.length) {
+                    return {
+                        success: false,
+                        error: this.formatError(),
+                        result: null
+                    };
+                }
+
+                return {
+                    success: true,
+                    error: null,
+                    result: result
+                };
+            }
+
+            parseRule(ruleName) {
+                if (!this.grammar[ruleName]) {
+                    throw new Error(`Rule '${ruleName}' not found in grammar`);
+                }
+
+                const rule = this.grammar[ruleName];
+                return this.parseExpression(rule);
+            }
+
+            parseExpression(expr) {
+                if (typeof expr === 'string') {
+                    return this.parseRuleRef(expr);
+                }
+
+                if (Array.isArray(expr)) {
+                    return this.parseSequence(expr);
+                }
+
+                if (typeof expr === 'object' && expr !== null) {
+                    if (expr.type === 'choice') {
+                        return this.parseChoice(expr.alternatives);
+                    } else if (expr.type === 'optional') {
+                        return this.parseOptional(expr.expr);
+                    } else if (expr.type === 'repeat') {
+                        return this.parseRepeat(expr.expr, expr.min || 0, expr.max || Infinity);
+                    } else if (expr.type === 'literal') {
+                        return this.parseLiteral(expr.value);
+                    } else if (expr.type === 'regex') {
+                        return this.parseRegex(expr.pattern);
+                    } else if (expr.type === 'action') {
+                        const result = this.parseExpression(expr.expr);
+                        return result !== null ? expr.action(result) : null;
+                    }
+                }
+
+                throw new Error(`Unknown expression type: ${JSON.stringify(expr)}`);
+            }
+
+            parseRuleRef(ruleName) {
+                return this.parseRule(ruleName);
+            }
+
+            parseSequence(sequence) {
+                const startPos = this.pos;
+                const results = [];
+
+                for (const expr of sequence) {
+                    const result = this.parseExpression(expr);
+                    if (result === null) {
+                        this.pos = startPos;
+                        return null;
+                    }
+                    results.push(result);
+                }
+
+                return results;
+            }
+
+            parseChoice(alternatives) {
+                for (const alt of alternatives) {
+                    const startPos = this.pos;
+                    const result = this.parseExpression(alt);
+                    if (result !== null) {
+                        return result;
+                    }
+                    this.pos = startPos;
+                }
+                return null;
+            }
+
+            parseOptional(expr) {
+                const result = this.parseExpression(expr);
+                return result !== null ? result : [];
+            }
+
+            parseRepeat(expr, min, max) {
+                const results = [];
+                let count = 0;
+
+                while (count < max) {
+                    const startPos = this.pos;
+                    const result = this.parseExpression(expr);
+                    if (result === null) {
+                        this.pos = startPos;
+                        break;
+                    }
+                    results.push(result);
+                    count++;
+                }
+
+                return count >= min ? results : null;
+            }
+
+            parseLiteral(text) {
+                this.updateExpected(text);
+
+                if (this.input.substr(this.pos, text.length) === text) {
+                    this.pos += text.length;
+                    return text;
+                }
+                return null;
+            }
+
+            parseRegex(pattern) {
+                const regex = new RegExp('^' + pattern);
+                const match = regex.exec(this.input.substr(this.pos));
+
+                if (match) {
+                    this.pos += match[0].length;
+                    return match[0];
+                }
+                return null;
+            }
+
+            updateExpected(text) {
+                if (this.pos >= this.farthest) {
+                    if (this.pos > this.farthest) {
+                        this.farthest = this.pos;
+                        this.expected.clear();
+                    }
+                    this.expected.add(text);
+                }
+            }
+
+            formatError() {
+                const line = this.input.substr(0, this.farthest).split('\n').length;
+                const col = this.farthest - this.input.lastIndexOf('\n', this.farthest - 1);
+                const context = this.input.substr(Math.max(0, this.farthest - 20), 40);
+                const expected = Array.from(this.expected).join(', ');
+
+                return `Parse error at line ${line}, column ${col}:\n` +
+                       `Context: "${context}"\n` +
+                       `Expected: ${expected}`;
+            }
+        }
+
+        // XML Grammar Definition
+        const xmlGrammar = {
+            document: {
+                type: 'action',
+                expr: ['ws', 'prolog', 'ws', 'element', 'ws'],
+                action: (result) => ({
+                    type: 'document',
+                    prolog: result[1],
+                    element: result[3]
+                })
+            },
+
+                element: {
+                type: 'choice',
+                alternatives: [  'selfClosingTag', 'voidTag', 'normalTag'   ]
+            },
+
+
+
+            prolog: {
+                type: 'action',
+                expr: {
+                    type: 'repeat',
+                    expr: ['processingInstruction', 'ws']
+                },
+                action: (result) => {
+                    return result.map(([pi, ws]) => pi).filter(pi => pi !== null);
+                }
+            },
+
+            processingInstructionRaw: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '<?' },
+                    'piTarget',
+                    'ws',
+                    { type: 'optional', expr: 'piData' },
+                    { type: 'literal', value: '?>' }
+                ],
+                action: (result) => ({
+                    type: 'processingInstruction',
+                    target: result[1],
+                   data: result[3] && result[3].length > 0 ? result[3][0] : null
+                })
+            },
+
+
+
+
+            templateOperation: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '{#' },
+                    'piTarget',
+                    'ws',
+                    { type: 'optional', expr: 'piData' },
+                    { type: 'literal', value: '}' }
+                ],
+                action: (result) => ({
+                    type: 'processingInstruction',
+                    target: result[1],
+                   data: result[3] && result[3].length > 0 ? result[3][0] : null
+                })
+            },
+
+
+
+
+
+
+
+
+
+            processingInstruction: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '<?' },
+                    'piTarget',
+                    'ws',
+                    // { type: 'optional', expr: 'piData' },
+                    'attributes',
+                    { type: 'literal', value: '?>' }
+                ],
+                action: (result) => ({
+                    type: 'processingInstruction',
+                    target: result[1],
+                   // data: result[3] && result[3].length > 0 ? result[3][0] : null
+                   attributes: result[3],
+                })
+            },
+
+            piTarget: {
+                type: 'regex',
+                pattern: '[a-zA-Z_][a-zA-Z0-9_-]*'
+            },
+
+            piData: {
+                type: 'action',
+                expr: {
+                    type: 'regex',
+                    pattern: '[^?]*(?:\\?[^>][^?]*)*'
+                },
+                action: (result) => result.trim()
+            },
+
+
+            voidTag: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '<' },
+                    'voidTagName',
+                    'attributes',
+                    'ws',
+                    { type: 'literal', value: '>' },
+                    'ws'
+                ],
+                action: (result) => ({
+                    type: 'element',
+                    name: result[1],
+                    attributes: result[2],
+                    children: [],
+                    void: true
+                })
+            },
+
+            voidTagName: {
+                type: 'choice',
+                alternatives: [
+                    { type: 'literal', value: 'area' },
+                    { type: 'literal', value: 'base' },
+                    { type: 'literal', value: 'br' },
+                    { type: 'literal', value: 'col' },
+                    { type: 'literal', value: 'embed' },
+                    { type: 'literal', value: 'hr' },
+                    { type: 'literal', value: 'img' },
+                    { type: 'literal', value: 'input' },
+                    { type: 'literal', value: 'link' },
+                    { type: 'literal', value: 'meta' },
+                    { type: 'literal', value: 'param' },
+                    { type: 'literal', value: 'source' },
+                    { type: 'literal', value: 'track' },
+                    { type: 'literal', value: 'wbr' },
+
+                    { type: 'literal', value: 'elseif' },
+                    { type: 'literal', value: 'else' },
+                    { type: 'literal', value: 'then' },
+                    { type: 'literal', value: 'catch' },
+                ]
+            },
+
+
+
+
+            normalTag: {
+                type: 'action',
+                expr: ['openTag', 'content', 'closeTag'],
+                action: (result) => {
+                    const openTag = result[0];
+                    const content = result[1] || [];
+                    const closeTag = result[2];
+
+                    if (openTag.name !== closeTag.name) {
+                        throw new Error(`Mismatched tags: <${openTag.name}> and </${closeTag.name}>`);
+                    }
+
+                    // Filter out null values from content
+                    const filteredContent = content.filter(item => item !== null);
+
+                    return {
+                        type: 'element',
+                        name: openTag.name,
+                        attributes: openTag.attributes,
+                        children: filteredContent
+                    };
+                }
+            },
+
+            selfClosingTag: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '<' },
+                    'tagName',
+                    'attributes',
+                    'ws',
+                    { type: 'literal', value: '/>' },
+                    'ws'
+                ],
+                action: (result) => ({
+                    type: 'element',
+                    name: result[1],
+                    attributes: result[2],
+                    children: [],
+                    selfClosing: true,
+
+                })
+            },
+
+            openTag: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '<' },
+                    'tagName',
+                    'attributes',
+                    'ws',
+                    { type: 'literal', value: '>' },
+                    'ws'
+                ],
+                action: (result) => ({
+                    name: result[1],
+                    attributes: result[2]
+                })
+            },
+
+            closeTag: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '</' },
+                    'tagName',
+                    'ws',
+                    { type: 'literal', value: '>' },
+                    'ws',
+                ],
+                action: (result) => ({
+                    name: result[1]
+                })
+            },
+
+            content: {
+                type: 'action',
+                expr: {
+                    type: 'repeat',
+                    expr: {
+                        type: 'choice',
+                        alternatives: [
+                            ['ws', 'element', 'ws'],
+                            'textNode',
+                        ]
+                    }
+                },
+                action: (result) => {
+                    const filtered = [];
+                    for (const item of result) {
+                        if (Array.isArray(item)) {
+                            // This is [ws, element, ws] - extract the element
+                            if (item[1] && item[1].type === 'element') {
+                                filtered.push(item[1]);
+                            }
+                        } else if (item && item.type === 'text') {
+                            // This is a text node
+                            filtered.push(item);
+                        }
+                    }
+                    return filtered;
+                }
+            },
+
+            textNode: {
+                type: 'action',
+                expr: {
+                    type: 'regex',
+                    pattern: '[^<\\s]+(?:\\s+[^<\\s]+)*'
+                },
+                action: (result) => {
+                    const trimmed = result.trim();
+                    return trimmed ? { type: 'text', content: trimmed } : null;
+                }
+            },
+
+            tagName: {
+                type: 'regex',
+                pattern: '[a-zA-Z_][a-zA-Z0-9_-]*'
+            },
+
+            attributes: {
+                type: 'action',
+                expr: {
+                    type: 'repeat',
+                    expr: ['ws', 'attribute']
+                },
+                action: (result) => {
+                    const attrs = {};
+                    result.forEach(([ws, attr]) => {
+                        if (attr) {
+                            attrs[attr.name] = attr.value;
+                        }
+                    });
+                    return attrs;
+                }
+            },
+
+            attribute: {
+                type: 'action',
+                expr: [
+                    'attributeName',
+                    'ws',
+                    { type: 'literal', value: '=' },
+                    'ws',
+                    'attributeValue'
+                ],
+                action: (result) => ({
+                    name: result[0],
+                    value: result[4]
+                })
+            },
+
+            attributeName: {
+                type: 'regex',
+                pattern: '[a-zA-Z_][a-zA-Z0-9_-]*'
+            },
+
+            attributeValue: {
+                type: 'choice',
+                alternatives: ['quotedValue', 'singleQuotedValue']
+            },
+
+            quotedValue: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: '"' },
+                    {
+                        type: 'regex',
+                        pattern: '[^"]*'
+                    },
+                    { type: 'literal', value: '"' }
+                ],
+                action: (result) => result[1]
+            },
+
+            singleQuotedValue: {
+                type: 'action',
+                expr: [
+                    { type: 'literal', value: "'" },
+                    {
+                        type: 'regex',
+                        pattern: "[^']*"
+                    },
+                    { type: 'literal', value: "'" }
+                ],
+                action: (result) => result[1]
+            },
+
+            ws: {
+                type: 'regex',
+                pattern: '[ \\t\\n\\r]*'
+            },
+
+
+
+
+
+
+
+
+
+
+        };
+
+        // Initialize and display grammar
+        function displayGrammar() {
+            const display = document.getElementById('grammarDisplay');
+            display.textContent = JSON.stringify(xmlGrammar, null, 2);
+        }
+
+        // Parse XML function with debugging
+        function parseXML() {
+            const input = document.getElementById('xmlInput').value;
+            const output = document.getElementById('output');
+
+            try {
+                const parser = new PEGParser(xmlGrammar);
+
+                // Add some debugging
+                console.log('Parsing input:', input);
+
+                const result = parser.parse(input);
+
+                if (result.success) {
+                    console.log('Parse result:', result.result);
+                    output.innerHTML = '<span class="success">✅ Parse successful!</span>\n\n' +
+                                     'AST:\n' + JSON.stringify(result.result, null, 2);
+                } else {
+                    console.log('Parse failed:', result.error);
+                    output.innerHTML = '<span class="error">❌ Parse failed!</span>\n\n' +
+                                     result.error;
+                }
+            } catch (error) {
+                console.log('Parser error:', error);
+                output.innerHTML = '<span class="error">💥 Parser error!</span>\n\n' + error.message;
+            }
+        }
+
+        // Initialize the page
+        displayGrammar();
+        parseXML(); // Parse the default XML
+    </script>
+</body>
+</html>
