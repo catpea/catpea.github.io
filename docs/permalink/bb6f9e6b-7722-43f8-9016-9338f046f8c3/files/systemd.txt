@@ -1,0 +1,127 @@
+## 🗂️ Directory Layout
+
+```
+mini-systemd/
+├── services/
+│   ├── web.service.json
+│   └── db.service.json
+└── systemd.js
+```
+
+---
+
+### 📄 Example `web.service.json`
+
+```json
+{
+  "name": "web",
+  "description": "Simple web server",
+  "execStart": "node -e \"require('http').createServer((_,res)=>res.end('ok')).listen(3000)\"",
+  "after": ["db"]
+}
+```
+
+### 📄 Example `db.service.json`
+
+```json
+{
+  "name": "db",
+  "description": "Mock DB",
+  "execStart": "sleep 1000"
+}
+```
+
+---
+
+### 🧠 `systemd.js`: Lightweight Service Manager
+
+```js
+const fs = require('fs');
+const { spawn } = require('child_process');
+const path = require('path');
+
+const SERVICES_DIR = path.join(__dirname, 'services');
+let services = {};
+let running = {};
+
+function loadServices() {
+    const files = fs.readdirSync(SERVICES_DIR).filter(f => f.endsWith('.json'));
+    for (const file of files) {
+        const fullPath = path.join(SERVICES_DIR, file);
+        const config = JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+        services[config.name] = config;
+    }
+}
+
+async function startService(name) {
+    if (running[name]) return;
+
+    const service = services[name];
+    if (!service) {
+        console.error(`[!] Service "${name}" not found.`);
+        return;
+    }
+
+    // Handle dependencies
+    if (service.after && service.after.length > 0) {
+        for (const dep of service.after) {
+            await startService(dep);
+        }
+    }
+
+    console.log(`[+] Starting service: ${name}`);
+    const parts = service.execStart.split(' ');
+    const proc = spawn(parts[0], parts.slice(1), { stdio: 'inherit', shell: true });
+
+    running[name] = proc;
+
+    proc.on('exit', (code) => {
+        console.log(`[-] Service "${name}" exited with code ${code}`);
+        delete running[name];
+    });
+}
+
+async function stopService(name) {
+    const proc = running[name];
+    if (!proc) {
+        console.log(`[i] Service "${name}" is not running.`);
+        return;
+    }
+    proc.kill('SIGTERM');
+    console.log(`[x] Stopped service: ${name}`);
+    delete running[name];
+}
+
+async function main() {
+    loadServices();
+    for (const name in services) {
+        await startService(name);
+    }
+}
+
+main();
+```
+
+---
+
+## 🧪 Run it
+
+```bash
+node systemd.js
+```
+
+It will:
+
+* Load the services from JSON.
+* Start them in order of dependencies.
+* Run them in the foreground.
+* Stop them if terminated.
+
+---
+
+## ✅ You Learn
+
+* How services are defined and orchestrated.
+* Process management via `spawn`.
+* Dependency resolution (`after`).
+* Basic logging and lifecycle tracking.

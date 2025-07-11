@@ -1,0 +1,238 @@
+## ✅ Goals for the VFS
+
+1. **Mount paths** like `/home`, `/bin`, `/tmp`.
+2. Each mount point maps to a **backend** (e.g., memory FS, fake disk, etc.).
+3. Support basic operations:
+
+   * `read(path)`
+   * `write(path, data)`
+   * `list(path)`
+4. Allow “programs” to use it via syscalls: `readFile()`, `writeFile()`, etc.
+
+We'll focus on **in-memory storage**, but the design allows plugging in different backends.
+
+---
+
+## 📁 Structure
+
+```
+mini-kernel/
+├── kernel.js
+├── vfs/
+│   ├── vfs.js          <-- VFS manager
+│   ├── memfs.js        <-- Memory-backed FS
+├── programs/
+│   └── testfs.js       <-- Demo user program
+```
+
+---
+
+## 🧠 Step-by-step
+
+---
+
+### 📄 `vfs/memfs.js`: Memory-backed filesystem
+
+```js
+class MemFS {
+    constructor() {
+        this.files = {};
+    }
+
+    write(path, content) {
+        this.files[path] = content;
+    }
+
+    read(path) {
+        if (!(path in this.files)) throw new Error(`File not found: ${path}`);
+        return this.files[path];
+    }
+
+    list(prefix = '/') {
+        return Object.keys(this.files)
+            .filter(f => f.startsWith(prefix))
+            .map(f => f.slice(prefix.length).split('/')[0])
+            .filter((v, i, a) => v && a.indexOf(v) === i);
+    }
+}
+
+module.exports = MemFS;
+```
+
+---
+
+### 📄 `vfs/vfs.js`: VFS Layer with Mounting
+
+```js
+const path = require('path');
+
+class VFS {
+    constructor() {
+        this.mounts = {}; // e.g., { "/home": memfsInstance }
+    }
+
+    mount(mountPath, fs) {
+        this.mounts[mountPath] = fs;
+        console.log(`[VFS] Mounted ${mountPath}`);
+    }
+
+    resolve(pathname) {
+        const mountPoints = Object.keys(this.mounts).sort((a, b) => b.length - a.length);
+        for (const mount of mountPoints) {
+            if (pathname.startsWith(mount)) {
+                const subpath = pathname.slice(mount.length) || '/';
+                return { fs: this.mounts[mount], subpath };
+            }
+        }
+        throw new Error(`No FS mounted for path: ${pathname}`);
+    }
+
+    write(pathname, data) {
+        const { fs, subpath } = this.resolve(pathname);
+        fs.write(subpath, data);
+    }
+
+    read(pathname) {
+        const { fs, subpath } = this.resolve(pathname);
+        return fs.read(subpath);
+    }
+
+    list(pathname) {
+        const { fs, subpath } = this.resolve(pathname);
+        return fs.list(subpath);
+    }
+}
+
+module.exports = VFS;
+```
+
+---
+
+### 📄 `programs/testfs.js`: User Program
+
+```js
+module.exports = async function (syscall) {
+    syscall.write("Writing to /home/notes.txt...\n");
+    syscall.writeFile("/home/notes.txt", "Hello FS!");
+
+    syscall.write("Reading back...\n");
+    const data = syscall.readFile("/home/notes.txt");
+    syscall.write("Content: " + data + "\n");
+
+    syscall.write("Listing /home:\n");
+    const files = syscall.listDir("/home");
+    syscall.write(JSON.stringify(files) + "\n");
+
+    syscall.exit();
+};
+```
+
+---
+
+### 🧠 Update to `kernel.js`: Integrate VFS
+
+```js
+const fs = require('fs');
+const path = require('path');
+const MemFS = require('./vfs/memfs');
+const VFS = require('./vfs/vfs');
+
+class Kernel {
+    constructor() {
+        this.processTable = {};
+        this.pidCounter = 1;
+
+        this.vfs = new VFS();
+        const memfs = new MemFS();
+        this.vfs.mount("/home", memfs); // mount memory FS at /home
+    }
+
+    loadProgram(name) {
+        const programPath = path.join(__dirname, 'programs', name + '.js');
+        if (!fs.existsSync(programPath)) {
+            console.error(`[KERNEL] Program not found: ${name}`);
+            return;
+        }
+        const program = require(programPath);
+        const pid = this.pidCounter++;
+        this.processTable[pid] = {
+            pid,
+            name,
+            state: 'ready',
+            program
+        };
+        console.log(`[KERNEL] Loaded program "${name}" as PID ${pid}`);
+        return pid;
+    }
+
+    async runProcess(pid) {
+        const proc = this.processTable[pid];
+        if (!proc || proc.state !== 'ready') return;
+
+        proc.state = 'running';
+
+        const syscall = {
+            write: (msg) => process.stdout.write(`[PID ${pid}] ${msg}`),
+            exit: () => {
+                proc.state = 'terminated';
+                console.log(`[KERNEL] PID ${pid} exited.`);
+            },
+            writeFile: (path, data) => this.vfs.write(path, data),
+            readFile: (path) => this.vfs.read(path),
+            listDir: (path) => this.vfs.list(path),
+        };
+
+        try {
+            await proc.program(syscall);
+        } catch (e) {
+            console.error(`[KERNEL] PID ${pid} crashed:`, e);
+            proc.state = 'crashed';
+        }
+    }
+
+    async scheduler() {
+        while (true) {
+            const active = Object.values(this.processTable).filter(p => p.state === 'ready');
+            if (active.length === 0) break;
+            for (const proc of active) {
+                await this.runProcess(proc.pid);
+            }
+        }
+        console.log(`[KERNEL] All processes completed.`);
+    }
+
+    boot() {
+        console.log(`[KERNEL] Booting kernel...`);
+        this.loadProgram('testfs');
+        this.scheduler();
+    }
+}
+
+new Kernel().boot();
+```
+
+---
+
+## ✅ Sample Output
+
+```
+[KERNEL] Booting kernel...
+[VFS] Mounted /home
+[KERNEL] Loaded program "testfs" as PID 1
+[PID 1] Writing to /home/notes.txt...
+[PID 1] Reading back...
+[PID 1] Content: Hello FS!
+[PID 1] Listing /home:
+[PID 1] ["notes.txt"]
+[KERNEL] PID 1 exited.
+[KERNEL] All processes completed.
+```
+
+---
+
+## 🎓 You’ve Now Built
+
+* A **virtual filesystem with mount points**.
+* Per-path resolution like a real OS (Unix-style path matching).
+* Backend-agnostic file operations (can plug in different FSs).
+* A kernel that can mount filesystems and expose syscalls to programs.
