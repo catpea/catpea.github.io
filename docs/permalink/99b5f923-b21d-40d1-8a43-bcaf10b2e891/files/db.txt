@@ -1,0 +1,258 @@
+## ✅ Overview of New Features:
+
+### 1. ✅ **Multi-tab sync**
+
+* Already discussed; based on `storage` events.
+
+### 2. ✅ **`_rev` field** (like CouchDB/PouchDB)
+
+* Every document has a `_rev` field like `"1-uuid"`, `"2-uuid"`, etc.
+* On `update`, we compare the provided `_rev` against the current one:
+
+  * If it's **older or equal** → **conflict**.
+  * If **newer** → update is accepted.
+* New `_rev` generated with incremented prefix and new UUID suffix.
+
+### 3. ✅ **Optional Revision Log**
+
+* Config option: `enableRevisions: true`
+* If enabled, we store prior versions (and conflicts) in-memory in a `_revisions` map.
+
+---
+
+## 📦 Final Version of `RxCollection`
+
+```js
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+function generateUUID() {
+  return crypto.randomUUID();
+}
+
+function nextRevision(currentRev = '0-') {
+  const [revNum] = currentRev.split('-');
+  const nextNum = parseInt(revNum, 10) + 1;
+  return `${nextNum}-${generateUUID()}`;
+}
+
+class RxCollection {
+  constructor(name, schema, options = {}) {
+    this.name = name;
+    this.schema = schema;
+    this.options = options;
+    this._docs$ = new BehaviorSubject([]);
+    this._idToStorageKey = new Map();
+    this._revisions = new Map(); // optional revision log
+    this._loadAllDocs();
+    window.addEventListener('storage', this._handleStorageChange.bind(this));
+  }
+
+  _buildStorageKey(doc) {
+    return `${this.name}:${doc.name}:${doc._id}`;
+  }
+
+  _extractIdFromKey(key) {
+    const parts = key.split(':');
+    return parts[2]; // uuid
+  }
+
+  _loadAllDocs() {
+    const allKeys = Object.keys(localStorage);
+    const docs = [];
+
+    for (const key of allKeys) {
+      if (key.startsWith(`${this.name}:`)) {
+        const doc = JSON.parse(localStorage.getItem(key));
+        docs.push(doc);
+        this._idToStorageKey.set(doc._id, key);
+      }
+    }
+
+    this._docs$.next(docs);
+  }
+
+  _handleStorageChange(event) {
+    if (!event.key || !event.key.startsWith(`${this.name}:`)) return;
+
+    const id = this._extractIdFromKey(event.key);
+    const docs = this._docs$.getValue();
+    const index = docs.findIndex(d => d._id === id);
+
+    if (event.newValue === null) {
+      if (index !== -1) {
+        docs.splice(index, 1);
+        this._idToStorageKey.delete(id);
+        this._docs$.next([...docs]);
+      }
+    } else {
+      const doc = JSON.parse(event.newValue);
+      this._idToStorageKey.set(id, event.key);
+      if (index !== -1) docs[index] = doc;
+      else docs.push(doc);
+      this._docs$.next([...docs]);
+    }
+  }
+
+  async insert(doc) {
+    const _id = generateUUID();
+    const _rev = nextRevision();
+    const newDoc = { _id, _rev, ...doc };
+    const key = this._buildStorageKey(newDoc);
+
+    localStorage.setItem(key, JSON.stringify(newDoc));
+    this._idToStorageKey.set(_id, key);
+    const docs = this._docs$.getValue();
+    this._docs$.next([...docs, newDoc]);
+    return newDoc;
+  }
+
+  async has(id) {
+    return this._idToStorageKey.has(id);
+  }
+
+  async delete(id) {
+    const key = this._idToStorageKey.get(id);
+    if (!key) return false;
+
+    localStorage.removeItem(key);
+    this._idToStorageKey.delete(id);
+
+    const docs = this._docs$.getValue().filter(d => d._id !== id);
+    this._docs$.next(docs);
+    return true;
+  }
+
+  async update(id, partial) {
+    const key = this._idToStorageKey.get(id);
+    if (!key) return null;
+
+    const currentDoc = JSON.parse(localStorage.getItem(key));
+    const incomingRev = partial._rev || '0-';
+    const [incomingRevNum] = incomingRev.split('-');
+    const [currentRevNum] = currentDoc._rev.split('-');
+
+    if (parseInt(incomingRevNum, 10) <= parseInt(currentRevNum, 10)) {
+      // Conflict
+      if (this.options.enableRevisions) {
+        if (!this._revisions.has(id)) this._revisions.set(id, []);
+        this._revisions.get(id).push({ conflict: true, doc: partial });
+      }
+      return null;
+    }
+
+    const updated = {
+      ...currentDoc,
+      ...partial,
+      _rev: nextRevision(currentDoc._rev)
+    };
+
+    // If name changes, we must update storage key
+    let newKey = key;
+    if (partial.name && partial.name !== currentDoc.name) {
+      newKey = this._buildStorageKey(updated);
+      localStorage.removeItem(key);
+      this._idToStorageKey.set(id, newKey);
+    }
+
+    if (this.options.enableRevisions) {
+      if (!this._revisions.has(id)) this._revisions.set(id, []);
+      this._revisions.get(id).push({ ...currentDoc });
+    }
+
+    localStorage.setItem(newKey, JSON.stringify(updated));
+    const docs = this._docs$.getValue().map(d => (d._id === id ? updated : d));
+    this._docs$.next(docs);
+    return updated;
+  }
+
+  find({ selector }) {
+    const filterFn = doc =>
+      Object.entries(selector).every(([key, condition]) => {
+        if ('$gt' in condition) return doc[key] > condition['$gt'];
+        if ('$lt' in condition) return doc[key] < condition['$lt'];
+        return doc[key] === condition;
+      });
+
+    return {
+      exec: () => Promise.resolve(this._docs$.getValue().filter(filterFn)),
+      $: this._docs$.asObservable().pipe(map(docs => docs.filter(filterFn)))
+    };
+  }
+
+  getRevisionHistory(id) {
+    return this._revisions.get(id) || [];
+  }
+}
+```
+
+---
+
+### 📦 Updated `RxDatabase`
+
+```js
+class RxDatabase {
+  constructor(name) {
+    this.name = name;
+    this.collections = {};
+  }
+
+  async addCollections(collectionsObj) {
+    for (const [name, config] of Object.entries(collectionsObj)) {
+      const { schema, options } = config;
+      this.collections[name] = new RxCollection(name, schema, options);
+    }
+  }
+}
+```
+
+---
+
+### 🧪 Usage
+
+```js
+const db = await createRxDatabase({ name: 'heroesdb' });
+
+await db.addCollections({
+  heroes: {
+    schema: {
+      properties: { name: { type: 'string' }, healthpoints: { type: 'number' } },
+      required: ['name', 'healthpoints']
+    },
+    options: { enableRevisions: true }
+  }
+});
+
+// Insert
+const hero = await db.heroes.insert({ name: 'alice', healthpoints: 100 });
+
+// Update with correct _rev
+const updated = await db.heroes.update(hero._id, {
+  healthpoints: 90,
+  _rev: hero._rev
+});
+
+// Conflict (same _rev)
+const conflict = await db.heroes.update(hero._id, {
+  healthpoints: 85,
+  _rev: hero._rev
+});
+console.log('Conflict?', conflict === null); // true
+
+// View history
+const history = db.heroes.getRevisionHistory(hero._id);
+console.log('Revision history:', history);
+```
+
+---
+
+### ✅ Summary
+
+| Feature              | Supported?    |
+| -------------------- | ------------- |
+| Per-doc localStorage | ✅            |
+| UUID-based `_id`     | ✅            |
+| `_rev` tracking      | ✅            |
+| Revision conflict    | ✅            |
+| Revision log         | ✅ (optional) |
+| Multi-tab sync       | ✅            |
