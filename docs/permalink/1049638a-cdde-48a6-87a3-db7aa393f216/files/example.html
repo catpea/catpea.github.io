@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤠</text></svg>" />
+    <title>Signal Example</title>
+    <style>
+      body {
+        background: #002b36;
+        color: #2aa198;
+      }
+      button,
+      input {
+        background: #002b36;
+        color: #2aa198;
+        border: 1px solid #0c464f;
+      }
+    </style>
+  </head>
+  <body>
+    <p>But what can you do with Signals?</p>
+    <button id="button1">Click!</button>
+    <button id="button2">Click!</button>
+    <p id="message"></p>
+    <input id="name" placeholder="enter your name" />
+    <p id="greeting"></p>
+    <p id="cowboys" style="margin: 0"></p>
+    <script type="module">
+      import { Signal, fromEvent, combineLatest } from "./signals.js";
+      // PART ONE BUTTON (based on: https://svelte.dev/playground/reactive-assignments)
+      const button1 = document.getElementById("button1");
+      const button2 = document.getElementById("button2");
+      const count1 = new Signal(0);
+      const count2 = new Signal(0);
+      count1.map(count=> `Clicked ${count}`).toInnerTextOf(button1);
+      count2.map(count=> `Clicked ${count}`).toInnerTextOf(button2);
+      fromEvent(button1, "click").subscribe(()=> count1.value = count1.value + 1);
+      fromEvent(button2, "click").subscribe(()=> count2.value = count2.value + 1);
+      // PART TWO: combineLatest
+      const messageParagraph = document.getElementById("message");
+      combineLatest(count1, count2).map(([value1, value2]) => `You can program in style: ${value1}+${value2}=${value1 + value2}`).toInnerTextOf(messageParagraph);
+      const cowboysParagraph = document.getElementById("cowboys");
+      combineLatest(count1, count2).map(([value1, value2]) => "🤠".repeat(value1 + value2) || "0").toInnerTextOf(cowboys);
+      combineLatest(count1, count2).subscribe(([value1, value2]) => (cowboys.style.fontSize = `${value1 + value2}rem`));
+      // PART THREE: input (based on: https://svelte.dev/playground/text-inputs)
+      const inputName = document.getElementById("name");
+      const greetingParagraph = document.getElementById("greeting");
+      fromEvent(inputName, "keyup").map((event) => `Howdy Do ${event.target.value || "stranger"}?`).toInnerTextOf(greetingParagraph);
+      // Tiny Bonus
+      const myName = new Signal();
+      myName.subscribe(console.info); // we print this to the console
+      fromEvent(inputName, "change").map((event) => event.target.value).toSignal(myName); //NOTE: change fires after cursor leaves the input box
+    </script>
+  </body>
+</html>
