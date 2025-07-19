@@ -41,8 +41,8 @@
       const messageParagraph = document.getElementById("message");
       combineLatest(count1, count2).map(([value1, value2]) => `You can program in style: ${value1}+${value2}=${value1 + value2}`).toInnerTextOf(messageParagraph);
       const cowboysParagraph = document.getElementById("cowboys");
-      combineLatest(count1, count2).map(([value1, value2]) => "🤠".repeat(value1 + value2) || "0").toInnerTextOf(cowboys);
-      combineLatest(count1, count2).subscribe(([value1, value2]) => (cowboys.style.fontSize = `${value1 + value2}rem`));
+      combineLatest(count1, count2).map(([value1, value2]) => "🤠".repeat(value1 + value2) || "0").toInnerTextOf(cowboysParagraph);
+      combineLatest(count1, count2).subscribe(([value1, value2]) => (cowboysParagraph.style.fontSize = `${value1 + value2}rem`));
       // PART THREE: input (based on: https://svelte.dev/playground/text-inputs)
       const inputName = document.getElementById("name");
       const greetingParagraph = document.getElementById("greeting");
