@@ -1,0 +1,1 @@
+Post‑humous “canonization” – When a thinker was later rehabilitated (e.g., Aquinas), the Vatican produced official biographies that recast earlier opponents as misguided, effectively rewriting the intellectual record.
