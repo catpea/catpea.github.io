@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Porkchop Engineering</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😵‍💫</text></svg>" />
+
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="app1"> <!-- we will attach context to app1 -->
+
+      <hello-world id="helloWorldMessageComponent" template="Hello ${value} Wold" value="Programming"></hello-world>
+
+      <div style="margin-top:12px;">
+        <button id="btn0">Change value → Wild</button>
+        <button id="btn1">Change value → Interesting</button>
+        <button id="btn2">Change template → "Hi ${value}! Cat"</button>
+        <button id="btn3">Change template → "Wild ${value} Porkchop..."</button>
+      </div>
+
+    </div>
+
+    <div id="app2"> <!-- you could install another app context here -->
+
+    </div>
+
+
+    <script type="module">
+
+    // THIS STARTS WITH SOME LIBRARY CODE,
+    // I want to keep everything in one file so that you can save it on your disk and edit it.
+
+    // This is our hello world component, it was created on github via gpt5-mini
+    /*
+    It was created with:
+    Create a <hello-world> web component for me, it should have a template attribute that holds "Hello ${} Wold" and a value attribute value "Programming", and it shoud update when attribute changes.
+    Use this to interpolate the template: function interpolate(t, c){return t.replace(/\${([^}]+)}/g,(m,p)=>p.split('.').reduce((a,f)=>a?a[f]:undefined,c)??'');}
+    this is just my experimental code, from here: https://gist.github.com/smeijer/6580740a0ff468960a5257108af1384e
+
+    */
+
+    class HelloWorld extends HTMLElement {
+      static get observedAttributes() {
+        return ['template', 'value'];
+      }
+
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+
+        // initialize internal state from attributes (or defaults)
+        this._template = this.getAttribute('template') ?? 'Hello ${} Wold';
+        this._value = this.getAttribute('value') ?? 'Programming';
+
+        // render initial content
+        this.render();
+      }
+
+      // use the exact interpolate function you provided
+      interpolate(t, c) {
+        return t.replace(/\${([^}]+)}/g, (m, p) => p.split('.').reduce((a, f) => a ? a[f] : undefined, c) ?? '');
+      }
+
+      render() {
+        // provide context for interpolation. we also map the empty key ('') to value
+        // so templates like "Hello ${} Wold" will insert `value` when braces are empty.
+        const ctx = { value: this._value };
+
+
+        const content = this.interpolate(this._template, ctx);
+
+        // simple, styleable shadow DOM output
+        this.shadowRoot.innerHTML = `
+          <style>
+            :host { display: inline-block; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+            span { white-space: pre; }
+          </style>
+          <span part="label">${this._escape(content)}</span>
+        `;
+      }
+
+      // minimal escaping to avoid HTML injection when setting via attributes
+      _escape(s) {
+        return String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue === newValue) return;
+        if (name === 'template') {
+          this._template = newValue ?? '';
+        }
+        if (name === 'value') {
+          this._value = newValue ?? '';
+        }
+        this.render();
+      }
+
+      // property accessors mirror attributes so JS usage is ergonomic
+      get value() {
+        return this._value;
+      }
+      set value(v) {
+        this.setAttribute('value', v);
+      }
+
+      get template() {
+        return this._template;
+      }
+      set template(t) {
+        this.setAttribute('template', t);
+      }
+    }
+    customElements.define('hello-world', HelloWorld);
+
+    // HERE WE BUILD UP A REACTIVE VARIABLE WE CAN LISTEN TO (by fusing Pulse Subscriptions Collections classes)
+    // This is a decomposed JavaScript Signal, learn from this, it is the future.
+    export class Collections {
+      #disposables = new Set();
+      collect(...input) {
+        input.flat(Infinity).forEach((disposable) => this.#disposables.add(disposable.dispose?disposable:{dispose:disposable}));
+      }
+      clear(){
+        this.#disposables.forEach((disposable) => disposable.dispose());
+        this.#disposables.clear(); // execute and clear disposables
+      }
+    }
+    export class Subscriptions extends Collections {
+      #subscribers = new Set();
+      subscribe(subscriber) {
+        this.#subscribers.add(subscriber);
+        return () => this.#subscribers.delete(subscriber); // IMPORTANT FEATURE: return unsubscribe function, execute this to stop getting notifications.
+      }
+      notify(value) {
+        for (const subscriber of this.#subscribers) subscriber(value);
+      }
+      clear() {
+        super.clear();
+        this.#subscribers.clear();
+      }
+    }
+    export class Pulse extends Subscriptions {
+      #value;
+      constructor(value) {
+        super()
+        this.#value = value;
+      }
+      get() {
+        return this.#value;
+      }
+      set(newValue) {
+        if (Object.is(newValue, this.#value)) return;
+        this.#value = newValue;
+        this.notify(this.#value);
+      }
+      subscribe(subscriber) {
+        const hasValue = this.#value !== null && this.#value !== undefined;
+        if (hasValue) subscriber(this.#value);
+        return super.subscribe(subscriber)
+      }
+      clear() {
+        super.clear();
+      }
+    }
+
+    // THIS IS MY CONVOLUTED BUT REALLY NEAT APPLICATION CONTEXT
+    // it just accepts variables at root like applicationContext.someName, applicationContext.anotherName
+    // and you subscribe to their changes applicationContext.sub('someName', value=>console.log(value))
+    class ApplicationContext {
+      has(name){
+        return name in this;
+      }
+      get(name){
+        if(!this.has(name)) this.set(name);
+        return this[name].get();
+      }
+      set(name, value=null){
+        if(this.has(name)){
+          this[name].set(value);
+        }else{
+          this[name] = new Pulse(value);
+        }
+      }
+      sub(name, fn){
+        if(!this.has(name)) this.set(name);
+        return this[name].subscribe(fn);
+      }
+    }
+
+    // OUR PROGRAM STARTS HERE
+    const applicationContext = new ApplicationContext();
+
+    // we put the context on document body
+    // ONE APP -> document.body.addEventListener('context-request', event => {
+
+    app1.addEventListener('context-request', event => {
+      event.stopImmediatePropagation();
+      event.detail.register(applicationContext);
+    });
+
+    // example context request
+    const contextRegistration = new CustomEvent('context-request', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        register:(applicationContext)=> {
+          console.log('Got Context!', applicationContext);
+          // in a more complex application we would assign applicationContext comewhere like this.applicationContext = applicationContext;
+        }
+      }
+    });
+
+    // we ask for context that surrounds our hello world.
+    helloWorldMessageComponent.dispatchEvent(contextRegistration);
+
+    // when selected* changes, send the value to hw (hello world component)
+    applicationContext.sub('selectedMessage', value=>helloWorldMessageComponent.value=value); // we can sub[scribe] before we create the selectedMessage property
+    applicationContext.sub('selectedTemplate', value=>helloWorldMessageComponent.template=value); // we can sub[scribe] before we create the selectedMessage property
+
+    document.getElementById('btn0').addEventListener('click', () => {
+      applicationContext.set('selectedMessage', 'Wild');
+    });
+    document.getElementById('btn1').addEventListener('click', () => {
+      applicationContext.set('selectedMessage', 'Interesting');
+    });
+    document.getElementById('btn2').addEventListener('click', () => {
+      applicationContext.set('selectedTemplate', 'Hi ${value}! Cat');
+    });
+    document.getElementById('btn3').addEventListener('click', () => {
+      applicationContext.set('selectedTemplate', 'My ${value} Porkchop.');
+    });
+
+    // example of how you get a value withut subscription: const selectedMessage = applicationContext.get('selectedMessage');
+
+    </script>
+
+  </body>
+</html>
