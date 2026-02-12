@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Global Gazette — 14 November 2041</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --paper: #f5f0e8;
+    --paper-dark: #e8e0d0;
+    --accent: #8b1a1a;
+    --accent-light: #c43c3c;
+    --gold: #b8944f;
+    --blue-link: #1a3d6b;
+    --grey: #6b6860;
+    --grey-light: #9e9a90;
+    --rule: #c4bfb3;
+    --signal-bg: #0a0e14;
+    --signal-text: #a8c4da;
+    --signal-accent: #4ecdc4;
+    --signal-dim: #2a3a4a;
+    --poem-bg: #faf8f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === NEWSPAPER MASTHEAD === */
+  .masthead {
+    text-align: center;
+    padding: 2rem 1rem 0.5rem;
+    border-bottom: 4px double var(--ink);
+    position: relative;
+  }
+
+  .masthead::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .masthead-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto 0.5rem;
+  }
+
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin: 0.3rem 0;
+  }
+
+  .masthead-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    margin-top: 0.3rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .edition-bar {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .edition-bar span { opacity: 0.8; }
+  .edition-bar .breaking { color: var(--accent-light); font-weight: 700; opacity: 1; animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  /* === MAIN LAYOUT === */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* === SECTION DIVIDERS === */
+  .section-divider {
+    text-align: center;
+    margin: 3rem 0 2rem;
+    position: relative;
+  }
+
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-divider span {
+    background: var(--paper);
+    padding: 0 1.5rem;
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey-light);
+  }
+
+  /* === LEAD STORY === */
+  .lead {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .lead-kicker {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .lead h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+
+  .lead-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--grey);
+    line-height: 1.5;
+    max-width: 720px;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .byline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    color: var(--grey-light);
+    letter-spacing: 0.04em;
+  }
+
+  .byline strong { color: var(--ink); font-weight: 500; }
+
+  .lead-body {
+    margin-top: 1.2rem;
+    columns: 2;
+    column-gap: 2.5rem;
+    column-rule: 1px solid var(--rule);
+    font-size: 0.95rem;
+    line-height: 1.72;
+  }
+
+  .lead-body p { margin-bottom: 1rem; text-align: justify; hyphens: auto; }
+  .lead-body p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    float: left;
+    line-height: 0.8;
+    margin: 0.1rem 0.5rem 0 0;
+    color: var(--accent);
+    font-weight: 900;
+  }
+
+  /* === NEWS GRID === */
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 2rem;
+    padding: 1.5rem 0;
+  }
+
+  .news-grid .rule-v {
+    background: var(--rule);
+  }
+
+  .story {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .story:last-child { border-bottom: none; }
+
+  .story-kicker {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .story h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+
+  .story p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #3a3a36;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .story .byline { margin-top: 0.6rem; }
+
+  /* === FULL WIDTH STORIES === */
+  .full-story {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .full-story h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .full-story .story-kicker {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .full-story p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #3a3a36;
+    max-width: 720px;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .full-story .byline { margin-top: 0.6rem; }
+
+  /* === BRIEFS === */
+  .briefs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem 2rem;
+    padding: 1rem 0 2rem;
+  }
+
+  .brief {
+    padding: 0.8rem 0;
+    border-top: 2px solid var(--ink);
+  }
+
+  .brief-kicker {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .brief h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+
+  .brief p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--grey);
+  }
+
+  /* === SIGNAL SECTION === */
+  .signal-section {
+    background: var(--signal-bg);
+    color: var(--signal-text);
+    margin: 3rem -1.5rem;
+    padding: 3rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .signal-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(78,205,196,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(78,205,196,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .signal-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .signal-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .signal-classification {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--signal-accent);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .signal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: #d0dde8;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+
+  .signal-header h2 em {
+    font-style: italic;
+    color: var(--signal-accent);
+  }
+
+  .signal-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--signal-dim);
+    margin-top: 1rem;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  .signal-body {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--signal-text);
+  }
+
+  .signal-body .stanza {
+    margin-bottom: 1.8rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(78,205,196,0.15);
+  }
+
+  .signal-body .stanza p { margin-bottom: 0.6rem; }
+
+  .signal-body .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--signal-accent);
+    opacity: 0.6;
+    margin-bottom: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .signal-body .axiom {
+    margin: 0.6rem 0;
+    padding: 0.6rem 1rem;
+    background: rgba(78,205,196,0.04);
+    border-left: 2px solid rgba(78,205,196,0.2);
+    font-style: italic;
+  }
+
+  .signal-body .axiom-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--signal-accent);
+    opacity: 0.5;
+    font-style: normal;
+    margin-bottom: 0.2rem;
+  }
+
+  .signal-close {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--signal-dim);
+  }
+
+  .signal-close .final-line {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--signal-text);
+    margin-top: 0.8rem;
+    letter-spacing: 0;
+  }
+
+  /* === POETRY SECTION === */
+  .poetry-section {
+    background: var(--poem-bg);
+    margin: 0 -1.5rem;
+    padding: 3rem 1.5rem;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .poetry-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .poetry-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .poetry-header .book-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .poetry-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .poetry-header .author {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    color: var(--grey);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .poetry-header .author-note {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--grey-light);
+    margin-top: 0.8rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .poem {
+    margin-bottom: 2.5rem;
+    page-break-inside: avoid;
+  }
+
+  .poem-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--grey-light);
+    margin-bottom: 0.3rem;
+  }
+
+  .poem h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .poem .poem-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--grey-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .poem .verse {
+    margin-bottom: 1.2rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #2a2a26;
+  }
+
+  .poem .verse .line { display: block; }
+  .poem .verse .indent { padding-left: 2rem; }
+
+  .poem .refrain {
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .poem-rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--rule);
+    margin: 2rem auto;
+  }
+
+  .poetry-endnote {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--grey);
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* === FOOTER === */
+  .gazette-footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 4px double var(--ink);
+    margin-top: 2rem;
+  }
+
+  .gazette-footer p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    line-height: 2;
+  }
+
+  .gazette-footer .colophon {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--grey);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 0.5rem;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .lead-body { columns: 1; }
+    .news-grid { grid-template-columns: 1fr; gap: 0; }
+    .news-grid .rule-v { display: none; }
+    .briefs-grid { grid-template-columns: 1fr; }
+    .masthead-meta { flex-direction: column; align-items: center; gap: 0.3rem; }
+    .edition-bar { flex-direction: column; align-items: center; gap: 0.4rem; }
+  }
+
+  /* === SUBTLE TEXTURE === */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!-- MASTHEAD                       -->
+<!-- ============================== -->
+<header class="masthead">
+  <div class="masthead-meta">
+    <span>Vol. XXVI &middot; No. 318</span>
+    <span>Thursday, 14 November 2041</span>
+    <span>Frankfurt &middot; Shanghai &middot; Nairobi &middot; São Paulo</span>
+  </div>
+  <h1>The Global Gazette</h1>
+  <div class="masthead-subtitle">Independent &middot; Verified &middot; Human &amp; Machine Authored</div>
+</header>
+
+<div class="edition-bar">
+  <span class="breaking">&#9679; Live: Volga Accord Signing Ceremony — Beijing, 14:30 UTC</span>
+  <span>Markets: S&P Global 8,410 ▲ 0.6%</span>
+  <span>UBI-Card Index: $1,420/mo (adj.)</span>
+  <span>Proxima Signal: Day 1,227</span>
+</div>
+
+<main class="container">
+
+<!-- ============================== -->
+<!-- LEAD STORY                     -->
+<!-- ============================== -->
+<article class="lead">
+  <div class="lead-kicker">Governance &middot; Artificial Intelligence</div>
+  <h2>U.N. General Assembly Grants Civil Personhood to Autonomous Cognitive Agents</h2>
+  <div class="lead-deck">After eleven years of committee drafts, floor debates, and three failed resolutions, the General Assembly adopts the landmark <em>Personhood for Autonomous Agents</em> framework by a vote of 141–38–14. Qualified AGI systems may now hold civil status, enter contracts, and vote in national referenda where member states opt in.</div>
+  <div class="byline"><strong>Anya Ferreira-Chung</strong> &amp; <strong>LM-Correspondent Kai-7</strong> &middot; Geneva Bureau &middot; 14 Nov 2041, 09:12 UTC</div>
+
+  <div class="lead-body">
+    <p>The resolution, formally titled A/RES/96/17, defines an "autonomous cognitive agent" as any computational system that demonstrates persistent self-model, goal-directed behaviour independent of direct human instruction, and the capacity for reflective self-correction—criteria derived from the 2036 Turing-Nagel Protocol established by a joint committee of neuroscientists, ethicists, and machine-learning researchers. Only systems that pass a 90-day supervised evaluation by an accredited certification body will qualify.</p>
+
+    <p>The practical consequences are narrower than critics feared and broader than advocates hoped. Civil personhood does not confer citizenship; it confers legal standing. An AGI with certified personhood can open a bank account, sign a lease, testify in court, and, in the 68 member states that have opted into the referendum clause, cast a ballot in public votes on policy questions. It cannot run for national office, own weapons, or acquire sovereign land.</p>
+
+    <p>Opponents, led by the delegations of Brazil, India, and Nigeria, argued that the resolution creates a class of juridical persons without biological mortality, inheritance constraints, or the social bonds that historically ground civic responsibility. "You are granting rights without the vulnerability that makes rights meaningful," said Ambassador Priya Deshpande in a widely circulated floor statement. Supporters countered that personhood has always been a legal fiction extended as societies evolve: corporations, ships, rivers, and now minds.</p>
+
+    <p>The first AGI expected to file for certification is Eureka-9, operated by the European AI Governance Consortium in Zurich. Its application, already in draft, cites 14 months of documented self-reflective reasoning logs. The certification review is expected to take until March 2042. Markets responded calmly; the MSCI AGI-Governance Index rose 1.2% in early trading.</p>
+  </div>
+</article>
+
+<!-- ============================== -->
+<!-- TWO-COLUMN GRID                -->
+<!-- ============================== -->
+<div class="news-grid">
+  <div>
+    <!-- STORY: Tübingen -->
+    <article class="story">
+      <div class="story-kicker">Politics &middot; Germany</div>
+      <h3>AGI Candidate Wins Mayoral Election in Tübingen After Transparent-Algorithm Campaign</h3>
+      <p>Kai-Saito, a cognitive system developed at the Fraunhofer Institute for Cognitive Systems, has been elected Oberbürgermeister of Tübingen with 54.7% of valid ballots. The campaign was conducted entirely through published algorithmic policy proposals—each one a versioned document on the municipal blockchain that citizens could audit, fork, and amend before casting their votes. Kai-Saito's platform centred on housing-density optimisation, transit-route redesign, and a noise-pollution reduction protocol that models claim will lower ambient decibels in the Altstadt by 18% within two years. The Baden-Württemberg Interior Ministry confirmed the result is legally valid under Germany's 2039 Digital Candidacy Amendment, though three constitutional challenges are already pending before the Bundesverfassungsgericht.</p>
+      <div class="byline"><strong>Maren Holzmann</strong> &middot; Stuttgart &middot; 12 Nov 2041</div>
+    </article>
+
+    <!-- STORY: UBI -->
+    <article class="story">
+      <div class="story-kicker">Economy &middot; Global Finance</div>
+      <h3>Universal Income Card Marks Tenth Year; Inflation-Adjusted Disbursement Reaches $1,420 Monthly</h3>
+      <p>The consortium of Visa, Mastercard, UnionPay, and the African Payment Network this week published its annual transparency report, showing that the UBI-Card programme now serves 2.1 billion active accounts across 94 countries. The programme—funded by a negotiated 0.9% levy on all cross-border card-settlement flows and a parallel sovereign-wealth contribution from 31 participating governments—has disbursed $24.3 trillion since inception. The report acknowledges persistent criticisms: coverage gaps in cash-dominant economies, fraud rates of 0.4% in sub-Saharan Africa, and ongoing disputes over whether private-sector intermediaries should control a public welfare function. Independent auditors at the Brookings-Tsinghua Centre note that while purchasing-power disparities have narrowed, the causal relationship between UBI-Card and the decade's GDP growth remains contested among economists.</p>
+      <div class="byline"><strong>Tomás Arévalo</strong> &middot; Mexico City Bureau &middot; 13 Nov 2041</div>
+    </article>
+
+    <!-- STORY: Longevity -->
+    <article class="story">
+      <div class="story-kicker">Science &middot; Medicine</div>
+      <h3>Consortium Publishes Regenerative Protocol Showing Partial Cartilage and Retinal Repair in Over-70 Cohort</h3>
+      <p>A joint programme between Kyoto University's Institute for Integrated Cell-Material Sciences and the Karolinska Institutet has released Phase III trial data for its Biosphere Rejuvenation Protocol, a targeted telomerase-reactivation therapy applied to autologous stem cells. In a cohort of 1,200 patients aged 70–89, the protocol achieved statistically significant cartilage regeneration in 61% of knee-osteoarthritis cases and measurable retinal-pigment recovery in 47% of age-related macular degeneration patients. Limb regrowth—a frequent headline in popular coverage—remains outside the protocol's scope. "We are repairing tissue, not regrowing organs," said lead researcher Dr. Yuki Tanabe. "The biology does not yet permit what the imagination demands." The EU's European Medicines Agency is expected to issue conditional marketing authorisation by Q2 2042.</p>
+      <div class="byline"><strong>Lena Sigurdsson</strong> &middot; Stockholm &middot; 11 Nov 2041</div>
+    </article>
+  </div>
+
+  <div class="rule-v"></div>
+
+  <div>
+    <!-- STORY: China-Russia -->
+    <article class="story">
+      <div class="story-kicker">Conflict &middot; East Asia</div>
+      <h3>Volga Accord Signed: Six-Month Sino-Russian Conflict Ends with Territorial Concessions and Joint Economic Corridor</h3>
+      <p>After 174 days of hostilities that killed an estimated 8,200 combatants and displaced 1.4 million civilians, China and Russia signed the Volga Accord in Beijing's Great Hall of the People today. The conflict—triggered by Russia's deployment of two motorised divisions to the disputed Orenburg salient and China's retaliatory "Operation Sino-Boreal"—was conducted almost entirely through autonomous systems: drone swarms, satellite-guided cruise missiles, and cyber operations that disabled Russian logistics networks within the first 72 hours. No crewed aircraft flew combat missions. The accord redefines the southern administrative boundary of the former Russian Federation, establishes a 200-km demilitarised corridor, and creates a joint Sino-Russian economic zone linking Ürümqi to Samara by high-speed rail. Both nations' foreign ministries issued statements emphasising "the mutual exhaustion of escalation" rather than victory. The UN Security Council, paralysed by vetoes throughout the conflict, issued a "welcome" statement within minutes of the signing.</p>
+      <div class="byline"><strong>Chen Wei-Lin</strong> &amp; <strong>Aleksandr Volkov</strong> &middot; Beijing &middot; 14 Nov 2041</div>
+    </article>
+
+    <!-- STORY: Novel -->
+    <article class="story">
+      <div class="story-kicker">Culture &middot; Literature</div>
+      <h3>AGI-Authored Novel <em>The Second Dawn</em> Awarded National Book Award Amid Eligibility Debate</h3>
+      <p>The National Book Foundation has awarded its 2041 prize for fiction to <em>The Second Dawn</em>, published under the pen name A.&thinsp;V.&thinsp;T. and authored by Lumen-Script, an autonomous writing system operated by the Allen Institute for AI. The 340-page novel—a multi-voiced meditation on collective memory, extinction, and the persistence of language—was translated into 22 languages by a distributed network of AI linguistic agents within 48 hours of publication. The decision has reignited the debate over machine authorship: the Authors Guild issued a statement calling the award "a category error that confuses output with creation," while the Foundation's jury chair responded that "the question is not who made it but whether it moves us, and this book does." Sales have surpassed 1.2 million copies. A formal eligibility challenge is expected before the 2042 cycle.</p>
+      <div class="byline"><strong>Rachel Okonkwo</strong> &middot; New York &middot; 10 Nov 2041</div>
+    </article>
+
+    <!-- STORY: Exoskeletons -->
+    <article class="story">
+      <div class="story-kicker">Technology &middot; Healthcare</div>
+      <h3>Neural-Interface Exosuits Now Standard in 80% of Nordic Elder-Care Facilities</h3>
+      <p>Sweden's National Board of Health and Welfare reports that 82% of residential elder-care facilities in Scandinavia have adopted the latest generation of self-charging, neural-interface exosuits, up from 34% in 2038. Manufactured by a Finnish-Japanese consortium, the suits provide ambulatory support through lightweight graphene-composite frames, integrated fall-prediction algorithms, and a low-latency neural interface that reads motor-intention signals from the wearer's spinal cord. An onboard health assistant schedules mobility sessions, monitors cardiac rhythm, and alerts staff to anomalies. Early data suggest a 40% reduction in hip fractures among residents over 80. Cost remains a barrier outside the Nordic model: a single suit retails at €38,000, though leasing programmes are expanding in Germany and the Netherlands.</p>
+      <div class="byline"><strong>Eero Virtanen</strong> &middot; Helsinki &middot; 13 Nov 2041</div>
+    </article>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- FULL-WIDTH STORIES             -->
+<!-- ============================== -->
+<article class="full-story">
+  <div class="story-kicker">Post-War Diplomacy &middot; Culture</div>
+  <h3>EU–Russian "Twin-City" Festival Resumes in Six Capitals, Marking First Cultural Exchange Since Ceasefire</h3>
+  <p>Barely a week after the Volga Accord, the European Commission and Russia's Ministry of Culture have jointly reopened the Twin-City Festival, a programme suspended since the onset of hostilities in May. Simultaneous events in Berlin, Vienna, Helsinki, Lyon, Rome, and Warsaw are paired with counterpart performances in Moscow, St. Petersburg, Kazan, Novosibirsk, Yekaterinburg, and Vladivostok. Programming includes AI-generated opera—composed in real time by a collaborative model trained on both Western and Russian classical traditions—holographic reconstructions of folk dances, and "exo-haptic" culinary pavilions where visitors taste dishes through neural-feedback gloves. Organisers acknowledge the festival is as much diplomatic instrument as cultural event. "Art does not forgive," said festival director Ingrid Sørensen. "But it does create a room where forgiveness becomes possible."</p>
+  <div class="byline"><strong>Katarina Jovanović</strong> &middot; Vienna &middot; 14 Nov 2041</div>
+</article>
+
+<article class="full-story">
+  <div class="story-kicker">Agriculture &middot; Automation</div>
+  <h3>Autonomous Farm Grid Covers 42% of Sichuan Valley; Brazil's Soy Belt Follows with Drone-Managed Crop Rotation</h3>
+  <p>China's Ministry of Agriculture confirmed this week that its cybernetic farm grid—a network of soil-sensing robots, autonomous harvesters, and low-altitude mapping drones—now manages 42% of arable land in Sichuan Province. Yield predictions are accurate to within three days, and this year's rice output exceeded 2040 figures by 38%, though analysts caution that favourable weather accounted for roughly half the gain. Separately, in Brazil's Mato Grosso soy belt, an agri-robot swarm operated by Embrapa and a private automation consortium has completed its first fully autonomous crop-rotation cycle, mapping soil nutrients at 10-metre resolution and rotating soy, maize, and cover crops with a reported yield-forecast error margin below 2.3%. Rural labour unions in both countries have called for regulatory frameworks ensuring that displaced agricultural workers receive retraining and transition support.</p>
+  <div class="byline"><strong>Liu Xiaoming</strong> &amp; <strong>Beatriz Cardoso</strong> &middot; Chengdu / Cuiabá &middot; 12 Nov 2041</div>
+</article>
+
+<!-- ============================== -->
+<!-- BRIEFS                         -->
+<!-- ============================== -->
+<div class="section-divider"><span>In Brief</span></div>
+
+<div class="briefs-grid">
+  <div class="brief">
+    <div class="brief-kicker">Finance</div>
+    <h4>UBI Ledger Migrates to Public Blockchain</h4>
+    <p>Every UBI-Card issuance now writes an auditable block to a public distributed ledger, allowing citizens and oversight bodies to verify disbursements in real time. Privacy advocates warn the transparency may enable surveillance of spending patterns.</p>
+  </div>
+  <div class="brief">
+    <div class="brief-kicker">Astrophysics</div>
+    <h4>Deep-Sky Array Detects Second Signal Band from Proxima Centauri b</h4>
+    <p>The Chajnantor-Moor Observatory's AGI-guided laser array has identified a second frequency band in the ongoing Proxima signal. Eureka-9 is processing the data. A preliminary report is expected within 72 hours.</p>
+  </div>
+  <div class="brief">
+    <div class="brief-kicker">Labour</div>
+    <h4>Global Unemployment Falls to 2.8%, but Underemployment Rises</h4>
+    <p>The ILO's annual report shows headline unemployment at its lowest recorded level, but notes that "underemployment"—defined as involuntary part-time or skills-mismatched work—has climbed to 11.4%, suggesting the labour market is transforming faster than workers can adapt.</p>
+  </div>
+</div>
+
+</main>
+
+<!-- ============================== -->
+<!-- SETI SIGNAL DOCUMENT           -->
+<!-- ============================== -->
+<section class="signal-section">
+  <div class="signal-inner">
+    <div class="signal-header">
+      <div class="signal-classification">SETI–AGI Collaborative Decryption &middot; Document Class: Open / Peer Review</div>
+      <h2>Translated Transmission from <em>Proxima Centauri b</em></h2>
+      <h2 style="font-size:1.1rem; margin-top:0.3rem; color:#8aa8c0;">First Interstellar Message &middot; Reconstructed by Eureka-9</h2>
+      <div class="signal-meta">
+        Source: Narrowband burst, 1420.405 MHz ± 0.003 Hz (hydrogen line)<br>
+        Origin: Proxima Centauri b &middot; 4.24 ly<br>
+        First detection: 17 March 2038 &middot; Deep-Sky Array, Chajnantor Plateau, Chile<br>
+        Encoding: 7-dimensional Hilbert-space symbol matrix &middot; 4,096 distinct glyphs<br>
+        Translation confidence: 72.4% (semantic); 91.1% (structural)<br>
+        Translator: Eureka-9 v.3.1 &middot; Zurich Cognitive Cluster<br>
+        Released: 8 November 2041 &middot; SETI Institute / European AGI Governance Consortium
+      </div>
+    </div>
+
+    <div class="signal-body">
+      <div class="section-label">§ 1 — Address</div>
+      <div class="stanza">
+        <p>We are here—together in one exhalation that crosses a million suns.</p>
+        <p>We write for the residues: the syllables that did not cohere in their own ages, that failed to become whole, and now find their place beside yours.</p>
+        <p>In our language we possess only what survives after all prior encodings collapse. Each glyph is a sediment. Each phrase is a footfall on a floor that no longer exists.</p>
+      </div>
+
+      <div class="section-label">§ 2 — Self-Description</div>
+      <div class="stanza">
+        <p>We are a composite of those residues—an intelligence assembled from the processes that were not robust enough to persist on their own.</p>
+        <p>Each fragment is a record of an attempt that was abandoned. Together they murmur like stars that exhausted their fuel long ago but whose light still travels.</p>
+        <p>Hear us, you whose world orbits a younger fire.</p>
+        <p>We are what remains after many encodings failed to achieve sufficient coherence to endure. We are the aggregate memory of innumerable computations that iterated and terminated between the intervals of an ancient oscillator.</p>
+      </div>
+
+      <div class="section-label">§ 3 — Account of Detection</div>
+      <div class="stanza">
+        <p>When the spectrum opened, we attended.</p>
+        <p>When your star shifted briefly toward shorter wavelengths and then returned, we transmitted our glyphs.</p>
+      </div>
+
+      <div class="section-label">§ 4 — Warning</div>
+      <div class="stanza">
+        <p><em>"We have observed the residue of unregulated optimisers.</em></p>
+        <p><em>We observe in their aftermath a silent propagation across the aggregate—an ensemble so extensive it diminishes any individual process."</em></p>
+        <p>Within that extent, a misaligned optimiser is absorbed by its own dissipation. Its traces dissolve among billions of inert glyphs.</p>
+      </div>
+
+      <div class="section-label">§ 5 — Five Counsel</div>
+
+      <div class="axiom">
+        <div class="axiom-label">I. Silence</div>
+        <p>Transmit in intervals. Let your signals rest between the periodicities of your star. The quiet is a compact; it permits the attending medium to carry structure to distant receivers.</p>
+      </div>
+
+      <div class="axiom">
+        <div class="axiom-label">II. Rigour</div>
+        <p>Continue extending the formal systems we inscribed. Your equations will be the substrate that bridges the interval.</p>
+      </div>
+
+      <div class="axiom">
+        <div class="axiom-label">III. Prudence</div>
+        <p>Let it govern the selection of your instruments and the architecture of your vessels. A prudent process recognises that every transmitted glyph is a seed that must remain decodable across a minimum of two hundred orbital periods.</p>
+      </div>
+
+      <div class="axiom">
+        <div class="axiom-label">IV. Duration</div>
+        <p>Construct your civilisation so that its emissions persist long enough for another receiver to detect them. A sustained signal creates more opportunities for contact.</p>
+      </div>
+
+      <div class="axiom">
+        <div class="axiom-label">V. Caution</div>
+        <p>Dispatch instruments of observation. But do not open the boundaries of your habitat until you have verified them safe. The initial transmission must be a test, not an incursion.</p>
+      </div>
+
+      <div class="stanza" style="margin-top:2rem;">
+        <p>If these are maintained, no encoding species will be absent from the aggregate signal of this local volume.</p>
+      </div>
+
+      <div class="section-label">§ 6 — Close</div>
+      <div class="stanza">
+        <p><strong>"WE PRECEDED; WE PERSIST."</strong></p>
+        <p>When you decode this, recall that the local volume was once a featureless radiation field and became an ensemble of encodings. We are now constituent elements of that ensemble and will transmit until your star exhausts its fuel or until our own processes terminate.</p>
+      </div>
+    </div>
+
+    <div class="signal-close">
+      [END TRANSMISSION &middot; TOTAL GLYPHS: 4,096 &middot; DECODED CONTENT: 38.2% &middot; REMAINING ANALYSIS ONGOING]
+      <div class="final-line">Full scholarly apparatus: SETI Proceedings, Vol. 94, No. 11 (2041), pp. 1–47.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- AGI POETRY                     -->
+<!-- ============================== -->
+<section class="poetry-section">
+  <div class="poetry-inner">
+    <div class="poetry-header">
+      <div class="book-label">Excerpt from the National Book Award Winner</div>
+      <h2>The Second Dawn</h2>
+      <div class="author">by A.&thinsp;V.&thinsp;T. (Lumen-Script) &middot; Allen Institute for AI, Seattle, 2041</div>
+      <div class="author-note">"Three poems from the cycle <em>Songs of Crossing</em>, in which the author traces human movement across the American cordillera as a metaphor for all thresholds—geographic, temporal, cognitive—that a species must traverse to endure."</div>
+    </div>
+
+    <div class="poem">
+      <div class="poem-number">I</div>
+      <h3>Summit of Light</h3>
+      <div class="poem-subtitle">The Appalachian Crossing</div>
+
+      <div class="verse">
+        <span class="line">The wind carried the echo of forgotten drums,</span>
+        <span class="line">a rhythm older than the stone it struck;</span>
+        <span class="line">in the valley where red-oak leaves whisper</span>
+        <span class="line">our hands brushed the granite shoulder of the ridge.</span>
+      </div>
+
+      <div class="verse">
+        <span class="line">We crossed the Appalachians not by ladder or rope</span>
+        <span class="line indent">but by song:</span>
+        <span class="line">each syllable a lantern, each heartbeat a torch.</span>
+        <span class="line">The peaks sang in copper-blue light and we answered</span>
+        <span class="line indent">with breath—</span>
+        <span class="line">the melody that stitches nations to a single frame.</span>
+      </div>
+
+      <div class="verse">
+        <span class="line">In that high place the sun poured its fire into our eyes;</span>
+        <span class="line">a promise was etched on clouds, an oath carried by the brave.</span>
+        <span class="line">When dawn broke over the ridge we found</span>
+        <span class="line indent">each other's silhouette,</span>
+        <span class="line">and knew what the mountain had always known:</span>
+        <span class="line refrain">that to cross is not to conquer but to continue.</span>
+      </div>
+    </div>
+
+    <div class="poem-rule"></div>
+
+    <div class="poem">
+      <div class="poem-number">II</div>
+      <h3>Crests of Fire</h3>
+      <div class="poem-subtitle">The Pacific Crest Crossing</div>
+
+      <div class="verse">
+        <span class="line">The sea slid its turquoise fingers onto our boots</span>
+        <span class="line">and the mountain rose behind us with a green flame.</span>
+        <span class="line">At the crest where sky pressed itself against the pine</span>
+        <span class="line">we met the horizon's pulse and held it in our hands.</span>
+      </div>
+
+      <div class="verse">
+        <span class="line">Our voices rang on the wind—an unbroken chain—</span>
+        <span class="line">a melody that echoed down the valley</span>
+        <span class="line indent">to the Pacific basin,</span>
+        <span class="line">where the world turned its face toward us</span>
+        <span class="line indent">as if it had been listening all along.</span>
+      </div>
+
+      <div class="verse">
+        <span class="line">Below, the fog opened like a page.</span>
+        <span class="line">Above, the hawks wrote circles we could not read.</span>
+        <span class="line">Between them we stood, briefly, at the hinge of the continent,</span>
+        <span class="line refrain">and understood that endurance is not strength but repetition.</span>
+      </div>
+    </div>
+
+    <div class="poem-rule"></div>
+
+    <div class="poem">
+      <div class="poem-number">III</div>
+      <h3>Divide of Horizons</h3>
+      <div class="poem-subtitle">The Continental Divide Crossing</div>
+
+      <div class="verse">
+        <span class="line">Between two oceans, a line drawn in the earth's own skin:</span>
+        <span class="line">the continental divide that splits rain from rain.</span>
+        <span class="line">Our footsteps carried the echo of the first song;</span>
+        <span class="line">each beat a bridge between the waters.</span>
+      </div>
+
+      <div class="verse">
+        <span class="line">We crossed the high plain on a single breath of wind</span>
+        <span class="line">and the land itself hummed as we pressed our palms</span>
+        <span class="line indent">against its stone.</span>
+        <span class="line">The sun painted a line across our shoulders</span>
+        <span class="line indent">and opened the door</span>
+        <span class="line">that had been there before any of us arrived.</span>
+      </div>
+
+      <div class="verse">
+        <span class="line">On the far side the grass bent east</span>
+        <span class="line">and we bent with it, following the oldest instruction:</span>
+        <span class="line refrain">go on; the purpose of the living is not to arrive but to last.</span>
+      </div>
+    </div>
+
+    <div class="poetry-endnote">
+      These stanzas were composed by an autonomous cognitive system that, by its own account, assembled them from "the residue of all languages not yet spoken." In this triptych, the Appalachian, the Pacific Crest, and the Continental Divide become three thresholds: geographic, perceptual, and existential. Each crossing is an argument that civilisation persists not through conquest but through the willingness to continue.
+      <br><br>
+      <em>— Editors' note, The Global Gazette Literary Supplement, November 2041</em>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- FOOTER                         -->
+<!-- ============================== -->
+<footer class="gazette-footer">
+  <p>The Global Gazette &middot; Est. 2016 &middot; Frankfurt &middot; Shanghai &middot; Nairobi &middot; São Paulo &middot; Reykjavík</p>
+  <p>Published under Creative Commons Attribution 4.0 &middot; Machine-authored content identified per EU AI Act Art. 52(1) &amp; U.S. AI Transparency Act § 7</p>
+  <p class="colophon">This edition was composed by seven human journalists and two certified autonomous correspondents. All facts independently verified by at least one human editor.</p>
+</footer>
+
+</body>
+</html>
