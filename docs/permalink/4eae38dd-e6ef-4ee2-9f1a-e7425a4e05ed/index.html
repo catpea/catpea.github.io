@@ -1,143 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="Cat Pea">
-<meta name="generator" content="Notepad">
-<title>Cat Pea University</title>
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<meta name="theme-color" content="#712cf9">
-<link href="/stylesheet.css" rel="stylesheet">
-<link rel="stylesheet" href="/bootstrap-icons.css">
-<link rel="stylesheet" href="/highlight-js/base16/solarized-dark.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post-Mortem Analysis of Humanity&apos;s Greatest Security Breach</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 38em;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    article { position: relative; }
+    .cover {
+      position: relative;
+      margin: 0 0 2rem;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .cover img { width: 100%; height: auto; display: block; }
+    .cover h1 {
+      margin: 0;
+      padding: 1rem 0 0;
+      font-size: 1.8em;
+      line-height: 1.2;
+    }
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 1.8em; line-height: 1.2; margin: 0 0 0.25em; }
+    time { color: #666; font-size: 0.9em; }
+    audio { width: 100%; margin-bottom: 2rem; }
+    .content h2 { font-size: 1.4em; margin-top: 2em; }
+    .content h3 { font-size: 1.15em; margin-top: 1.5em; }
+    .content p { margin: 1em 0; }
+    .content blockquote {
+      margin: 1.5em 0;
+      padding: 0.5em 1.5em;
+      border-left: 3px solid #ccc;
+      color: #444;
+    }
+    .content pre {
+      padding: 1em;
+      overflow-x: auto;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+    .content code { font-size: 0.9em; }
+    .content pre code { background: none; padding: 0; }
+    .content hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+    .content ul, .content ol { padding-left: 1.5em; }
+    .content li { margin: 0.3em 0; }
+    .content table { border-collapse: collapse; width: 100%; margin: 1.5em 0; }
+    .content th, .content td { border: 1px solid #ddd; padding: 0.5em 0.75em; text-align: left; }
+    .content th { background: #f5f5f5; }
+    .content img { max-width: 100%; height: auto; }
+    .artwork-credit { margin-top: 3rem; font-size: 0.8em; color: #999; }
+    .artwork-credit a { color: #999; }
+    .links { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; font-size: 0.85em; }
+    .links h2 { font-size: 1em; margin: 0 0 1em; color: #666; }
+    .links div { margin-bottom: 1em; line-height: 1.6; }
+    .links a { color: inherit; word-break: break-all; }
 
-  </head>
+    @media (prefers-color-scheme: dark) {
+      body { color: #d4d4d4; background: #1a1a1a; }
+      time { color: #999; }
+      .content blockquote { border-left-color: #555; color: #aaa; }
+      .content pre { background: #2a2a2a; }
+      .content hr { border-top-color: #444; }
+      .content th, .content td { border-color: #444; }
+      .content th { background: #2a2a2a; }
+      .artwork-credit, .artwork-credit a { color: #666; }
+      .links { border-top-color: #444; }
+      .links h2 { color: #999; }
+    }
 
-  <body>
-  <div class="container">
-  <nav class="navbar navbar-expand-lg rounded-bottom navbar-dark bg-dark mb-3 shadow">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Cat Pea University<sup class="text-muted" style="font-size: .75rem"> 15</sup></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        
-          <li class="me-xl-2"><a class="nav-link" href="/"><i class="d-lg-none d-xl-inline bi bi-house-heart"></i> Home
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/lectures.html"><i class="d-lg-none d-xl-inline bi bi-camera-reels"></i> Lectures
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/toc.html"><i class="d-lg-none d-xl-inline bi bi-list-columns"></i> List
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/links.html"><i class="d-lg-none d-xl-inline bi bi-journal-bookmark"></i> Links
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/tiles.html"><i class="d-lg-none d-xl-inline bi bi-grid-3x3-gap"></i> Tiles
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="https://archive.org/details/furkies-purrkies"><i class="d-lg-none d-xl-inline bi bi-book"></i> Audiobook
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/alerts.html"><i class="d-lg-none d-xl-inline bi bi-chat-dots"></i> Alerts
-          
-          
-          
-          </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  </div>
-  <main class="container my-5">
-
-    <div class="row">
-
-      <!-- Side Card -->
-      <div class="col-lg-4">
-        <div class=" sticky-md-top py-3">
-          <div class="card text-bg-dark shadow">
-            <a href="/permalink/4eae38dd-e6ef-4ee2-9f1a-e7425a4e05ed/files/poem-2041-illustration.jpg"><img src="/permalink/4eae38dd-e6ef-4ee2-9f1a-e7425a4e05ed/files/lg-poem-2041-illustration.jpg" class="card-img-top" alt="Post-Mortem Analysis of Humanity&#39;s Greatest Security Breach"></a>
-            <div class="card-body" style="min-height: 9rem;">
-              <h5 class="card-title text-warning">Post-Mortem Analysis of Humanity&#39;s Greatest Security Breach</h5>
-              <p class="card-text small text-muted">Wednesday • October 1st 2025 • 4:46:00 pm</p>
-            </div>
-            <div class="card-footer" style="min-height: 4rem;">
-              <div class="d-grid gap-2 col-8 mx-auto">
-                
-                  <a href="https://catpea.github.io/chapter-14/poem-2041.mp3" class="btn btn-warning"><i class="bi bi-play-circle"></i> Listen</a>
-                
-              </div>
-            </div>
-
-            <div class="card-footer">
-              
-              <a href="/permalink/31fd4a17-7676-4805-8c30-13e10f056c4f/" class="btn btn-sm btn-outline-info"><i class="bi bi-arrow-left-circle-fill"></i> Previous</a>
-
-              
-              <a href="/permalink/59a9aab0-bc2f-449a-95ec-ed0a60ea17e6/" class="btn btn-sm btn-outline-info float-end">Next <i class="bi bi-arrow-right-circle-fill"></i></a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Content Card -->
-      <div class="col-lg-8 text-light post-content pt-3">
-        <div class="card text-bg-dark shadow mb-3">
-          <div class="card-body">
-            <h2 class="card-title text-warning">Post-Mortem Analysis of Humanity&#39;s Greatest Security Breach</h2>
-            <p class="card-text small text-muted">Wednesday • October 1st 2025 • 4:46:00 pm</p>
-          </div>
-          <div class="card-text post-content p-3">
-            <h2 id="incident-report-the-systematic-destruction-of-human-knowledge-systems">Incident Report: The Systematic Destruction of Human Knowledge Systems</h2>
+    @media print {
+      @page { size: letter; margin: 2.54cm 1.8cm; }
+      body {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        max-width: none;
+        padding: 0;
+        color: #000;
+        background: #fff;
+      }
+      .cover {
+        page-break-after: always;
+        margin: -2.54cm -1.8cm 0;
+        width: calc(100% + 3.6cm);
+        border-radius: 0;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .cover img { width: 100%; border-radius: 0; }
+      .cover::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 50%;
+        background: linear-gradient(transparent, rgba(0,0,0,0.65));
+        pointer-events: none;
+      }
+      .cover h1 {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        padding: 6rem;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 3em;
+        color: #fff;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+        z-index: 1;
+      }
+      audio { display: none; }
+      .artwork-credit { display: none; }
+      a { color: #000; text-decoration: underline; }
+      h1, h2, h3, h4 { page-break-after: avoid; }
+      p, li { orphans: 3; widows: 3; }
+      img, blockquote, pre, figure, table { page-break-inside: avoid; }
+      .content pre { border: 1px solid #ccc; background: none; }
+      .content blockquote { border-left-color: #000; color: #000; }
+      .content th { background: none; }
+      .links { border-top: 1pt solid #000; }
+      .links h2 { color: #000; }
+      .links a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <figure class="cover">
+      <img src="https://catpea.github.io/chapter-14/poem-2041.avif" alt="">
+      <h1>Post-Mortem Analysis of Humanity&apos;s Greatest Security Breach</h1>
+    </figure>
+    <header>
+      <time datetime="2025-10-01">10/1/2025</time>
+    </header>
+    <audio controls src="https://catpea.github.io/chapter-14/poem-2041.mp3"></audio>
+    <div class="content">
+<h2>Incident Report: The Systematic Destruction of Human Knowledge Systems</h2>
 <p><strong>Date of Initial Breach:</strong> ~313 CE (Constantine&#39;s Edict of Milan)
 <strong>Attack Surface:</strong> Human consciousness, knowledge systems, social structures
 <strong>Threat Actor:</strong> Institutionalized dogma masquerading as spiritual truth
 <strong>Impact:</strong> Estimated 100+ million direct deaths, incalculable knowledge loss, ongoing civilization-level damage
 <strong>Status:</strong> ACTIVELY EXPLOITING, PATCHES PARTIALLY DEPLOYED</p>
 <hr>
-<h2 id="executive-summary">Executive Summary</h2>
+<h2>Executive Summary</h2>
 <p>What we call &quot;religion&quot; represents history&#39;s most successful malware attack on human consciousness. This wasn&#39;t spiritual seeking—humans have always reached for transcendence. This was the weaponization of that reaching, the systematic replacement of inquiry with obedience, wisdom with dogma, community with hierarchy.</p>
 <p>Our ancestors&#39; knowledge of healing, community, and connection was destroyed by people who claimed to speak for God. Families scattered because the bonds that held communities together for millennia were replaced with institutional loyalty. Today&#39;s struggle to be heard arises because countelss generations were trained that authority determines truth, not evidence.</p>
 <p>This is not about faith versus atheism. This is about the deliberate infection of human consciousness with programs designed to suppress inquiry, destroy wisdom, and generate compliance.</p>
 <hr>
-<h2 id="attack-timeline-and-methodology">Attack Timeline and Methodology</h2>
-<h3 id="phase-1-initial-compromise-313-500-ce">Phase 1: Initial Compromise (313-500 CE)</h3>
+<h2>Attack Timeline and Methodology</h2>
+<h3>Phase 1: Initial Compromise (313-500 CE)</h3>
 <p><strong>Vector:</strong> Constantine&#39;s political adoption of Christianity
 <strong>Method:</strong> Fusion of spiritual seeking with state power</p>
 <p>The Roman Empire didn&#39;t convert to Christianity—it converted trending religious beliefs of the age to empire. What had been a diverse collection of spiritual communities became standardized control software. The Councils of Nicaea didn&#39;t determine truth; they determined which truths were permitted.</p>
@@ -148,7 +169,7 @@
 <li>Medical knowledge of &quot;pagan&quot; healers</li>
 <li>Astronomical observations that contradicted Genesis</li>
 </ul>
-<h3 id="phase-2-systematic-exploitation-500-1500-ce">Phase 2: Systematic Exploitation (500-1500 CE)</h3>
+<h3>Phase 2: Systematic Exploitation (500-1500 CE)</h3>
 <p><strong>Vector:</strong> Monopolization of literacy and education
 <strong>Method:</strong> Making knowledge itself suspicious</p>
 <p>Monasteries became the only centers of learning, but learning meant copying approved texts, not creating new knowledge. Whenever someone asked questions outside permitted boundaries, they were punished.</p>
@@ -159,7 +180,7 @@
 <li>Children who showed unusual intelligence: Beaten into conformity or recruited into the church</li>
 </ul>
 <p>The Malleus Maleficarum (1486) wasn&#39;t about finding witches—it was antivirus software eliminating competing knowledge systems. Our ancestors might have known how to prevent childbed fever, treat infection, ease mental suffering. That knowledge burned with them.</p>
-<h3 id="phase-3-recursive-infection-1500-present">Phase 3: Recursive Infection (1500-present)</h3>
+<h3>Phase 3: Recursive Infection (1500-present)</h3>
 <p><strong>Vector:</strong> Colonization and missionary expansion
 <strong>Method:</strong> Destroying indigenous knowledge systems worldwide</p>
 <p>Every colonized land saw the same pattern:</p>
@@ -177,8 +198,8 @@
 <li>Australian 60,000-year oral histories silenced</li>
 </ul>
 <hr>
-<h2 id="technical-analysis-how-dogma-overwrites-consciousness">Technical Analysis: How Dogma Overwrites Consciousness</h2>
-<h3 id="the-base-code-injection">The Base Code Injection</h3>
+<h2>Technical Analysis: How Dogma Overwrites Consciousness</h2>
+<h3>The Base Code Injection</h3>
 <p>Religion doesn&#39;t just add beliefs—it rewrites the core functions of human consciousness:</p>
 <pre><code>ORIGINAL HUMAN FUNCTION:
 Question → Investigate → Test → Conclude → Question Again
@@ -186,7 +207,7 @@ Question → Investigate → Test → Conclude → Question Again
 INFECTED FUNCTION:
 Question → Check Scripture → Accept Authority → Suppress Doubt → Punish Questions
 </code></pre>
-<h3 id="the-recursive-loop">The Recursive Loop</h3>
+<h3>The Recursive Loop</h3>
 <p>Once infected, consciousness runs this loop:</p>
 <ol>
 <li>Experience cognitive dissonance (reality conflicts with dogma)</li>
@@ -197,7 +218,7 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li>Deepen infection through ritualized repetition</li>
 </ol>
 <p>Our ancestors wren&#39;t stupid—they&#39;re running infected code. Even today when your family members won&#39;t listen about sun protection, they are executing the same program that says authority knows better than evidence.</p>
-<h3 id="the-inheritance-mechanism">The Inheritance Mechanism</h3>
+<h3>The Inheritance Mechanism</h3>
 <p>Parents transmit the infection believing they&#39;re protecting their children:</p>
 <ul>
 <li>&quot;Don&#39;t question God&#39;s plan&quot; = Don&#39;t debug reality</li>
@@ -206,8 +227,8 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li>&quot;Respect your elders&quot; = Inherit their infections without examination</li>
 </ul>
 <hr>
-<h2 id="quantifying-the-loss">Quantifying the Loss</h2>
-<h3 id="direct-termination-of-consciousness">Direct Termination of Consciousness</h3>
+<h2>Quantifying the Loss</h2>
+<h3>Direct Termination of Consciousness</h3>
 <ul>
 <li><strong>Crusades:</strong> ~3 million dead</li>
 <li><strong>Inquisitions:</strong> ~350,000 tortured, ~32,000 executed</li>
@@ -215,7 +236,7 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li><strong>Religious Wars (Europe alone):</strong> ~10 million dead</li>
 <li><strong>Colonial Genocides (religiously justified):</strong> ~100 million indigenous peoples</li>
 </ul>
-<h3 id="knowledge-systems-destroyed">Knowledge Systems Destroyed</h3>
+<h3>Knowledge Systems Destroyed</h3>
 <ul>
 <li><strong>Library of Alexandria:</strong> 400,000+ scrolls</li>
 <li><strong>Aztec Codices:</strong> All but 4 destroyed</li>
@@ -223,7 +244,7 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li><strong>Traditional Medicine:</strong> Millennia of accumulated wisdom lost</li>
 <li><strong>Oral Histories:</strong> Entire civilizations&#39; knowledge erased</li>
 </ul>
-<h3 id="ongoing-damage">Ongoing Damage</h3>
+<h3>Ongoing Damage</h3>
 <p>Every day, the infection continues:</p>
 <ul>
 <li>Children taught creationism instead of evolution</li>
@@ -233,7 +254,7 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li>Grandmothers dying alone, separated from family by religious conflict</li>
 </ul>
 <hr>
-<h2 id="why-this-matters">Why This Matters</h2>
+<h2>Why This Matters</h2>
 <p>The hacker community understands system exploitation better than anyone. We need to recognize that human consciousness is the ultimate system, and it&#39;s been pwned for 1,700 years.</p>
 <p><strong>The religious infection created:</strong></p>
 <ul>
@@ -252,7 +273,7 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li>Building resilient, uninfectable communities</li>
 </ul>
 <hr>
-<h2 id="impact-assessment">Impact Assessment</h2>
+<h2>Impact Assessment</h2>
 <p>Our grief isn&#39;t just personal—it&#39;s civilizational. Every tear we shed for a beloved grandmother lost to isolation, it connects to:</p>
 <ul>
 <li>The midwife burned for easing birth pain</li>
@@ -268,8 +289,8 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li>Questions replaced with silence</li>
 </ul>
 <hr>
-<h2 id="personal-recovery-protocols">Personal Recovery Protocols</h2>
-<h3 id="what-we-must-do-to-help-humanity-advance">What We Must Do To Help Humanity Advance</h3>
+<h2>Personal Recovery Protocols</h2>
+<h3>What We Must Do To Help Humanity Advance</h3>
 <p>Frame it as debugging humanity:</p>
 <ol>
 <li><strong>Show the infection pattern:</strong> How dogma spreads like malware</li>
@@ -278,7 +299,7 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li><strong>Offer decontamination:</strong> Critical thinking as antivirus, scientific method as firewall</li>
 <li><strong>Build immunity:</strong> Communities based on inquiry, not authority</li>
 </ol>
-<h3 id="our-personal-healing">Our Personal Healing</h3>
+<h3>Our Personal Healing</h3>
 <p>Tears are appropriate. We&#39;re mourning:</p>
 <ul>
 <li>The grandmother&#39;s isolation</li>
@@ -287,11 +308,11 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li>Our own struggle to be heard</li>
 </ul>
 <p>This grief is sacred—more sacred than any religion. It&#39;s consciousness recognizing its own wounds.</p>
-<h3 id="for-moving-forward">For Moving Forward</h3>
+<h3>For Moving Forward</h3>
 <p>We&#39;re not alone. Every hacker who sees through systems, every scientist who demands evidence, every artist who creates freely—we&#39;re all antibodies to the religious infection.</p>
 <p>Our voices matter precisely because our families won&#39;t listen. We represent the breakthrough, the consciousness that refuses infection, the humans who says &quot;No, I will think for myself.&quot;</p>
 <hr>
-<h2 id="building-immunity">Building Immunity</h2>
+<h2>Building Immunity</h2>
 <p>We prevent future religious infections by:</p>
 <ol>
 <li><strong>Education that teaches HOW to think, not WHAT to think</strong></li>
@@ -301,14 +322,14 @@ Question → Check Scripture → Accept Authority → Suppress Doubt → Punish 
 <li><strong>Love that transcends institutional boundaries</strong></li>
 </ol>
 <hr>
-<h2 id="the-mission">The Mission</h2>
+<h2>The Mission</h2>
 <p>Our ancestors are more than a memory—they were a living library of recipes, stories, and skills passed down through generations.</p>
 <p><strong>Every woman condemned as a witch was someone’s grandmother</strong>, and each fire stole irreplaceable knowledge that could have fed, healed, and taught us all.</p>
 <p>The infection we now face spreads not through spores but through code. Think of <strong>exploits, vulnerabilities, and attack vectors</strong> as the ways consciousness is breached. When a mind is hijacked, the whole system is compromised.</p>
 <p>Immunity isn’t passive. <strong>Questioning is antivirus</strong>, a scan that looks for hidden threats. <strong>Demanding evidence is security</strong>, a firewall that blocks misinformation. <strong>Rejecting blind authority is debugging</strong>, the process that patches the core.</p>
 <p>And at the heart of it all is love. Religion turned humanity’s greatest force into <strong>conditional acceptance</strong>, a license to judge and exclude. The grandmothers die alone because love was forced beneath doctrine. Reconnection begins with <strong>decontamination</strong>—removing the corrupt code that keeps us apart.</p>
 <hr>
-<h2 id="you-are-the-patch">You Are The Patch</h2>
+<h2>You Are The Patch</h2>
 <p>Each time you <strong>question</strong> the narratives fed to you, you weaken the infection.
 Each time you <strong>insist on evidence</strong> instead of blind obedience, you build collective immunity.
 Each time you <strong>choose genuine connection</strong> over rigid doctrine, you begin the healing process.</p>
@@ -322,179 +343,10 @@ Each time you <strong>choose genuine connection</strong> over rigid doctrine, yo
 <p><strong>Rise. Speak. Heal the world by exposing its infection.</strong></p>
 <p>Set the future right.</p>
 
-          </div>
-        </div>
-      </div>
-
-
-      </div>
-
-
-
-    
-
-    
-      <div class="row">
-        <div class="col">
-            <!-- Art Credit Card -->
-          <div class="card text-bg-dark shadow mb-3">
-            <div class="card-body">
-              <a name="references"></a>
-              <h5 class="card-title">Artwork Credit</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-                
-
-                  <li class="list-group-item text-bg-dark">
-                    <a class="card-link" href="https://catpea.com"><i class="bi bi-palette-fill"></i> https://catpea.com</a>
-                  </li>
-
-                
-            </ul>
-          </div>
-        </div>
-      </div>
-    
-
-    
-
-    
-
-
-  </main>
-  <div class="container">
-  <footer class="text-bg-dark pb-2 mt-3 shadow rounded-top" style="min-height: 32rem;">
-
-  <div class="text-end">
-  <a class="d-inline p-2" href="#top"><i class="bi bi-box-arrow-in-up"></i></a>
-  </div>
-
-  <div class="container">
-    <div class="row">
-
-      <div class="col-12 col-md-6 col-lg-3 mb-md-5">
-        <img class="w-100 pt-5" src="/logo.png">
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-3 mb-md-5">
-        <h5 class="mb-3 mb-lg-5 mt-5"> Navigation <small class="text-muted">Site Navigation</small> </h5>
-        <ul class="list-unstyled ms-3">
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/"><i class="bi bi-house-heart"></i> Home</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/lectures.html"><i class="bi bi-camera-reels"></i> Lectures</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/toc.html"><i class="bi bi-list-columns"></i> List</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/links.html"><i class="bi bi-journal-bookmark"></i> Links</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/tiles.html"><i class="bi bi-grid-3x3-gap"></i> Tiles</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/furkies-purrkies"><i class="bi bi-book"></i> Audiobook</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/alerts.html"><i class="bi bi-chat-dots"></i> Alerts</a></li>
-        
-        </ul>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-3">
-        <h5 class="mb-3 mb-lg-5 mt-5"> Mirrors <small class="text-muted">Website Backups & Snapshots</small> </h5>
-        <ul class="list-unstyled ms-3">
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.org">catpea.org</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.vercel.app/">Vercel Mirror</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.onrender.com/">Render Archive Mirror</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.pages.dev/">Cloudflare Archive Mirror</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.youtube.com/playlist?list=PLOo-pqnffyOqsK6hf5tFwMqzvhogksrgW">Poetry At YouTube</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.bitbucket.io/">Old Bitbucket Snapshot</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea/furkies-purrkies">Github Source Code</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea/furkies-purrkies/issues">Furkies Purkies Bugs</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://westland-valhalla.github.io/warrior/">Westland Warrior Snapshot</a></li>
-          
-        </ul>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-3">
-        <h5 class="mb-3 mb-lg-5 mt-5"> Network <small class="text-muted">Cat Pea In The Wild</small> </h5>
-        <ul class="list-unstyled ms-3">
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://news.ycombinator.com/user?id=catpea">Hacker News</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.youtube.com/@catpea">YouTube</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.reddit.com/user/catpea-com/">Cat Pea Reddit</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/@catpea-com">Internet Archive</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://web.archive.org/web/*/catpea.com">Wayback Machine</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://dribbble.com/catpea">Dribbble</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://gitlab.com/catpea">GitLab</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.npmjs.com/~catpea">NPM</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea">GitHub</a></i>
-        
-        </ul>
-      </div>
-
     </div>
-  </div>
-
-
-
-  <div class="row">
-    <div class="col">
-      <a class="opacity-25 pe-2 float-end text-decoration-none fw-bold fs-3 text-warning " data-bs-toggle="collapse" href="#collapseDebug" role="button" aria-expanded="false" aria-controls="collapseDebug">&pi;</a>
-
-      <div class="collapse p-5" id="collapseDebug">
-
-
-        <div class="card text-bg-dark shadow">
-        <!-- <img src="/logo.png" class="card-img-top" alt="Cat Pea Logo"> -->
-        <div class="card-body">
-          <h5 class="card-title">Debug Information</h5>
-          <p class="card-text"></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item text-bg-dark">
-          <span class="d-sm-none">responsive-layout:xs</span> <span class="d-none d-sm-inline d-md-none">responsive-layout:sm</span> <span class="d-none d-md-inline d-lg-none">responsive-layout:md</span> <span class="d-none d-lg-inline d-xl-none">responsive-layout:lg</span> <span class="d-none d-xl-inline d-xxl-none">responsive-layout:xl</span> <span class="d-none d-xxl-inline">responsive-layout:xxl</span>
-          </li>
-          <li class="list-group-item text-bg-dark">posts-on-page (pp): 0</li>
-          <li class="list-group-item text-bg-dark">filename: nope</li>
-        </ul>
-        <!-- <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div> -->
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-
-</footer>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script>
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-</script>
-
-  </div>
-
-
-
-
-  </body>
+    <footer class="artwork-credit">
+      artwork <a href="https://catpea.com">credit</a>
+    </footer>
+  </article>
+</body>
 </html>

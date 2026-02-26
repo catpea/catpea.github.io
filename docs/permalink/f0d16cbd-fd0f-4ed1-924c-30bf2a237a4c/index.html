@@ -1,143 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="Cat Pea">
-<meta name="generator" content="Notepad">
-<title>Cat Pea University</title>
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<meta name="theme-color" content="#712cf9">
-<link href="/stylesheet.css" rel="stylesheet">
-<link rel="stylesheet" href="/bootstrap-icons.css">
-<link rel="stylesheet" href="/highlight-js/base16/solarized-dark.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asking AI About Learning Programming</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 38em;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    article { position: relative; }
+    .cover {
+      position: relative;
+      margin: 0 0 2rem;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .cover img { width: 100%; height: auto; display: block; }
+    .cover h1 {
+      margin: 0;
+      padding: 1rem 0 0;
+      font-size: 1.8em;
+      line-height: 1.2;
+    }
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 1.8em; line-height: 1.2; margin: 0 0 0.25em; }
+    time { color: #666; font-size: 0.9em; }
+    audio { width: 100%; margin-bottom: 2rem; }
+    .content h2 { font-size: 1.4em; margin-top: 2em; }
+    .content h3 { font-size: 1.15em; margin-top: 1.5em; }
+    .content p { margin: 1em 0; }
+    .content blockquote {
+      margin: 1.5em 0;
+      padding: 0.5em 1.5em;
+      border-left: 3px solid #ccc;
+      color: #444;
+    }
+    .content pre {
+      padding: 1em;
+      overflow-x: auto;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+    .content code { font-size: 0.9em; }
+    .content pre code { background: none; padding: 0; }
+    .content hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+    .content ul, .content ol { padding-left: 1.5em; }
+    .content li { margin: 0.3em 0; }
+    .content table { border-collapse: collapse; width: 100%; margin: 1.5em 0; }
+    .content th, .content td { border: 1px solid #ddd; padding: 0.5em 0.75em; text-align: left; }
+    .content th { background: #f5f5f5; }
+    .content img { max-width: 100%; height: auto; }
+    .artwork-credit { margin-top: 3rem; font-size: 0.8em; color: #999; }
+    .artwork-credit a { color: #999; }
+    .links { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; font-size: 0.85em; }
+    .links h2 { font-size: 1em; margin: 0 0 1em; color: #666; }
+    .links div { margin-bottom: 1em; line-height: 1.6; }
+    .links a { color: inherit; word-break: break-all; }
 
-  </head>
+    @media (prefers-color-scheme: dark) {
+      body { color: #d4d4d4; background: #1a1a1a; }
+      time { color: #999; }
+      .content blockquote { border-left-color: #555; color: #aaa; }
+      .content pre { background: #2a2a2a; }
+      .content hr { border-top-color: #444; }
+      .content th, .content td { border-color: #444; }
+      .content th { background: #2a2a2a; }
+      .artwork-credit, .artwork-credit a { color: #666; }
+      .links { border-top-color: #444; }
+      .links h2 { color: #999; }
+    }
 
-  <body>
-  <div class="container">
-  <nav class="navbar navbar-expand-lg rounded-bottom navbar-dark bg-dark mb-3 shadow">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Cat Pea University<sup class="text-muted" style="font-size: .75rem"> 15</sup></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        
-          <li class="me-xl-2"><a class="nav-link" href="/"><i class="d-lg-none d-xl-inline bi bi-house-heart"></i> Home
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/lectures.html"><i class="d-lg-none d-xl-inline bi bi-camera-reels"></i> Lectures
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/toc.html"><i class="d-lg-none d-xl-inline bi bi-list-columns"></i> List
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/links.html"><i class="d-lg-none d-xl-inline bi bi-journal-bookmark"></i> Links
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/tiles.html"><i class="d-lg-none d-xl-inline bi bi-grid-3x3-gap"></i> Tiles
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="https://archive.org/details/furkies-purrkies"><i class="d-lg-none d-xl-inline bi bi-book"></i> Audiobook
-          
-          
-          
-          </a>
-          </li>
-        
-          <li class="me-xl-2"><a class="nav-link" href="/alerts.html"><i class="d-lg-none d-xl-inline bi bi-chat-dots"></i> Alerts
-          
-          
-          
-          </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  </div>
-  <main class="container my-5">
-
-    <div class="row">
-
-      <!-- Side Card -->
-      <div class="col-lg-4">
-        <div class=" sticky-md-top py-3">
-          <div class="card text-bg-dark shadow">
-            <a href="/permalink/f0d16cbd-fd0f-4ed1-924c-30bf2a237a4c/files/poem-1796-illustration.jpg"><img src="/permalink/f0d16cbd-fd0f-4ed1-924c-30bf2a237a4c/files/lg-poem-1796-illustration.jpg" class="card-img-top" alt="Asking AI About Learning Programming"></a>
-            <div class="card-body" style="min-height: 9rem;">
-              <h5 class="card-title text-warning">Asking AI About Learning Programming</h5>
-              <p class="card-text small text-muted">Thursday • January 30th 2025 • 8:20:18 pm</p>
-            </div>
-            <div class="card-footer" style="min-height: 4rem;">
-              <div class="d-grid gap-2 col-8 mx-auto">
-                
-                  <a href="https://catpea.github.io/chapter-12/poem-1796.mp3" class="btn btn-warning"><i class="bi bi-play-circle"></i> Listen</a>
-                
-              </div>
-            </div>
-
-            <div class="card-footer">
-              
-              <a href="/permalink/f987edc0-2181-4fc7-ac6f-ea2314d39d77/" class="btn btn-sm btn-outline-info"><i class="bi bi-arrow-left-circle-fill"></i> Previous</a>
-
-              
-              <a href="/permalink/a4be7a5a-4453-412b-8cb9-c4990fc3ca48/" class="btn btn-sm btn-outline-info float-end">Next <i class="bi bi-arrow-right-circle-fill"></i></a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Content Card -->
-      <div class="col-lg-8 text-light post-content pt-3">
-        <div class="card text-bg-dark shadow mb-3">
-          <div class="card-body">
-            <h2 class="card-title text-warning">Asking AI About Learning Programming</h2>
-            <p class="card-text small text-muted">Thursday • January 30th 2025 • 8:20:18 pm</p>
-          </div>
-          <div class="card-text post-content p-3">
-            <h1 id="question-which-programming-language-allows-me-to-write-for-server-desktop-websites-web-extensions-smartphones-and-tablets-and-with-95-or-more-code-re-usability">Question: Which programming language allows me to write, for server, desktop, websites, web extensions, smartphones and tablets, and with 95% or more code re-usability?</h1>
+    @media print {
+      @page { size: letter; margin: 2.54cm 1.8cm; }
+      body {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        max-width: none;
+        padding: 0;
+        color: #000;
+        background: #fff;
+      }
+      .cover {
+        page-break-after: always;
+        margin: -2.54cm -1.8cm 0;
+        width: calc(100% + 3.6cm);
+        border-radius: 0;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .cover img { width: 100%; border-radius: 0; }
+      .cover::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 50%;
+        background: linear-gradient(transparent, rgba(0,0,0,0.65));
+        pointer-events: none;
+      }
+      .cover h1 {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        padding: 6rem;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 3em;
+        color: #fff;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+        z-index: 1;
+      }
+      audio { display: none; }
+      .artwork-credit { display: none; }
+      a { color: #000; text-decoration: underline; }
+      h1, h2, h3, h4 { page-break-after: avoid; }
+      p, li { orphans: 3; widows: 3; }
+      img, blockquote, pre, figure, table { page-break-inside: avoid; }
+      .content pre { border: 1px solid #ccc; background: none; }
+      .content blockquote { border-left-color: #000; color: #000; }
+      .content th { background: none; }
+      .links { border-top: 1pt solid #000; }
+      .links h2 { color: #000; }
+      .links a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <figure class="cover">
+      <img src="https://catpea.github.io/chapter-12/poem-1796.avif" alt="">
+      <h1>Asking AI About Learning Programming</h1>
+    </figure>
+    <header>
+      <time datetime="2025-01-31">1/30/2025</time>
+    </header>
+    <audio controls src="https://catpea.github.io/chapter-12/poem-1796.mp3"></audio>
+    <div class="content">
+<h1>Question: Which programming language allows me to write, for server, desktop, websites, web extensions, smartphones and tablets, and with 95% or more code re-usability?</h1>
 <p><strong>JavaScript</strong> (along with its rich ecosystem of frameworks and tools) is an excellent choice. Here&#39;s how JavaScript can be applied to different platforms:</p>
-<h2 id="1-desktop-applications">1. <strong>Desktop Applications</strong>:</h2>
+<h2>1. <strong>Desktop Applications</strong>:</h2>
 <ul>
 <li><strong>Electron</strong>: Build cross-platform desktop apps using web technologies (HTML, CSS, JavaScript). You can write the code once and deploy it on Windows, macOS, and Linux.</li>
 <li><strong>NW.js</strong>: Another option for creating desktop applications with web technologies. NW.js allows for a more direct access to system resources and is flexible for certain types of apps.</li>
 </ul>
-<h2 id="2-server-applications">2. <strong>Server Applications</strong>:</h2>
+<h2>2. <strong>Server Applications</strong>:</h2>
 <ul>
 <li><strong>Node.js</strong>: A powerful runtime for building scalable server-side applications. With Node.js 20 (recently released), you can now compile your Node.js project into a single executable, making it easier to deploy without needing a Node.js environment installed.</li>
 <li><strong>Deno</strong>: A modern JavaScript/TypeScript runtime built by the creator of Node.js, offering enhanced security, better performance, and a focus on simplicity.</li>
 <li><strong>Bun</strong>: A fast JavaScript runtime that promises better performance for tasks like bundling and running server-side code. It&#39;s especially optimized for modern web workflows and microservices.</li>
 </ul>
-<h2 id="3-websites">3. <strong>Websites</strong>:</h2>
+<h2>3. <strong>Websites</strong>:</h2>
 <ul>
 <li><strong>React.js</strong>, <strong>Vue.js</strong>, <strong>Svelte</strong>, <strong>Angular</strong>: These JavaScript frameworks make building dynamic, reusable components easy, enabling efficient web development.</li>
 <li><strong>Svelte</strong>: A newer framework that shifts much of the work to compile time, resulting in faster, leaner apps.</li>
@@ -145,16 +166,16 @@
 <li><strong>WebComponents</strong>: Native browser technology for creating reusable components, ensuring that your app is agnostic of the underlying framework.</li>
 <li><strong>Signals and Observables</strong>: These are used to manage state and events in a reactive way, making it easier to handle changes in large applications efficiently.</li>
 </ul>
-<h2 id="4-web-extensions">4. <strong>Web Extensions</strong>:</h2>
+<h2>4. <strong>Web Extensions</strong>:</h2>
 <ul>
 <li>JavaScript is the go-to language for building browser extensions. You can easily write cross-browser extensions using the same core JavaScript logic and deploy on Chrome, Firefox, and Edge.</li>
 </ul>
-<h2 id="5-smartphones-and-tablets">5. <strong>Smartphones and Tablets</strong>:</h2>
+<h2>5. <strong>Smartphones and Tablets</strong>:</h2>
 <ul>
 <li><strong>React Native</strong>: Build mobile apps for both iOS and Android with a shared JavaScript codebase. React Native allows you to access native APIs for deep integration with device features.</li>
 <li><strong>Ionic</strong>: Use web technologies (HTML, CSS, JavaScript) to build cross-platform mobile apps, targeting iOS, Android, and even Progressive Web Apps (PWAs).</li>
 </ul>
-<h2 id="6-javascript-friendly-databases">6. <strong>JavaScript-Friendly Databases</strong>:</h2>
+<h2>6. <strong>JavaScript-Friendly Databases</strong>:</h2>
 <ul>
 <li><strong>NoSQL Databases</strong>: JavaScript is naturally suited for working with NoSQL databases, and many such databases have JavaScript-friendly interfaces.<ul>
 <li><strong>CouchDB</strong>: A NoSQL database that uses JavaScript for querying and is known for its ease of use and support for JSON-based documents. It’s a great option for building apps that require flexible, schema-less storage.</li>
@@ -164,25 +185,25 @@
 </li>
 <li><strong>Lowdb</strong>: A small, local JSON-based database that is perfect for simple apps or projects that require a persistent, local store.</li>
 </ul>
-<h2 id="7-web-assembly">7. <strong>Web Assembly</strong>:</h2>
+<h2>7. <strong>Web Assembly</strong>:</h2>
 <p>WebAssembly (WASM) allows developers to run code at near-native speeds in the browser by compiling languages like C, C++, or Rust into a binary format that can be executed directly by the browser. Unlike JavaScript, which is interpreted and runs slower, WASM is designed to be a low-level, efficient format that can be executed at speeds much closer to those of native machine code. This makes it ideal for performance-critical applications like games, video processing, or heavy computations, where JavaScript alone may fall short. By leveraging WASM alongside JavaScript, developers can achieve high performance while still maintaining the flexibility and reach of web technologies.</p>
-<h2 id="8-web-services">8. <strong>Web Services</strong>:</h2>
+<h2>8. <strong>Web Services</strong>:</h2>
 <p>JavaScript is an ideal language for interacting with web services, including AI, due to its seamless integration with web APIs, real-time data handling, and extensive ecosystem. JavaScript&#39;s asynchronous nature allows for smooth communication with AI-powered web services, like those used for natural language processing, image recognition, or machine learning model inference, without blocking the user interface. With frameworks and libraries like TensorFlow.js and others, JavaScript can run AI models directly in the browser, enabling real-time AI applications without needing server-side processing. Additionally, JavaScript&#39;s widespread usage across the web ensures compatibility with cloud-based AI services, making it easy to fetch data, process it, and integrate AI capabilities into dynamic, interactive web applications.</p>
-<h2 id="conclusion">Conclusion:</h2>
+<h2>Conclusion:</h2>
 <p>Using JavaScript allows for significant code reusability across multiple platforms, making it easier to build and maintain applications for desktop, mobile, web, and server environments. You can write most of your application logic in JavaScript, and with frameworks like React Native, Electron, and Deno, the need for rewriting code is minimal, maximizing your development efficiency. Additionally, the support for JavaScript-friendly NoSQL databases like CouchDB or MongoDB further simplifies the storage and management of your app’s data.</p>
 <hr>
-<h1 id="question-why-is-it-called-javascript-when-it-is-not-connected-or-even-compatible-with-java">Question: Why is it called JavaScript when it is not connected or even compatible with Java?</h1>
+<h1>Question: Why is it called JavaScript when it is not connected or even compatible with Java?</h1>
 <p>Answer: JavaScript has nothing to do with Java—it&#39;s actually a bit of a marketing trick! When it was created in the 90s, it was originally called &quot;LiveScript,&quot; but the company behind it wanted to ride the hype of Java, which was super popular at the time, so they renamed it to &quot;JavaScript&quot; to make it sound related. In reality, JavaScript is based on ECMAScript, a set of standards for scripting languages, which defines how JavaScript should behave. A better name might have been &quot;WebScript&quot; or &quot;BrowserScript,&quot; since that&#39;s really where it begun—helping to make websites interactive.</p>
 <hr>
-<h1 id="question-can-you-give-a-brief-overview-of-javascript-in-a-way-people-new-to-programming-can-understand-it-with-ease">Question: Can you give a brief overview of javascript in a way people new to programming can understand it with ease.</h1>
+<h1>Question: Can you give a brief overview of javascript in a way people new to programming can understand it with ease.</h1>
 <p>Let&#39;s break it down layer by layer, so you can understand how it works and how to use it.</p>
-<h2 id="1-line-by-line-execution">1. Line-by-Line Execution</h2>
+<h2>1. Line-by-Line Execution</h2>
 <p>When the browser runs your JavaScript code, it does so <strong>line by line</strong>, just like reading instructions. Each line of code tells the browser to do something specific, like change the color of a button or show a message.</p>
 <p><strong>Example:</strong></p>
 <pre><code class="language-javascript">console.log(&quot;Hello, world!&quot;);
 </code></pre>
 <p>This line simply tells the browser to display the message <strong>&quot;Hello, world!&quot;</strong> in the console.</p>
-<h2 id="2-functions-wrapping-code-for-reuse">2. Functions: Wrapping Code for Reuse</h2>
+<h2>2. Functions: Wrapping Code for Reuse</h2>
 <p>Sometimes, you want to do the same thing over and over again. Instead of writing the same code multiple times, you can <strong>wrap</strong> it in a <strong>function</strong>. A function is like a box that holds your instructions, and you can &quot;call&quot; the function whenever you need it.</p>
 <p><strong>Example:</strong></p>
 <pre><code class="language-javascript">function sayHello() {
@@ -193,7 +214,7 @@ sayHello();  // Calling the function to display &quot;Hello!&quot;
 sayHello();  // You can call it again whenever you need
 </code></pre>
 <p>Functions help you keep your code clean and avoid repetition.</p>
-<h2 id="3-objects-grouping-related-code">3. Objects: Grouping Related Code</h2>
+<h2>3. Objects: Grouping Related Code</h2>
 <p>In JavaScript, you can use <strong>objects</strong> to group related functions and data together. Think of an object as a container that holds both values (like numbers or strings) and functions (like actions to perform).</p>
 <p><strong>Example:</strong></p>
 <pre><code class="language-javascript">let car = {
@@ -210,7 +231,7 @@ console.log(car.brand);   // Accessing the value inside the object
 car.start();              // Calling a function inside the object
 </code></pre>
 <p>Objects are helpful when you want to organize different related tasks or properties.</p>
-<h2 id="4-start-stop-and-control-flow">4. Start, Stop, and Control Flow</h2>
+<h2>4. Start, Stop, and Control Flow</h2>
 <p>Objects can also control things, like starting or stopping a process. This makes them really useful for managing actions in your program. For example, you might create a <strong>timer</strong> object that can start counting or stop when you want.</p>
 <p><strong>Example:</strong></p>
 <pre><code class="language-javascript">let timer = {
@@ -228,7 +249,7 @@ timer.start();
 timer.stop();
 </code></pre>
 <p>This is how you can control the flow of actions within your program using objects.</p>
-<h2 id="5-nesting-objects-creating-more-complex-structures">5. Nesting Objects: Creating More Complex Structures</h2>
+<h2>5. Nesting Objects: Creating More Complex Structures</h2>
 <p>Objects can also <strong>nest</strong> inside other objects. This allows you to create more complex, hierarchical structures. It’s like organizing your code into a tree where each branch can have its own branches.</p>
 <p><strong>Example:</strong></p>
 <pre><code class="language-javascript">let house = {
@@ -245,7 +266,7 @@ timer.stop();
 console.log(house.rooms.kitchen.appliances);  // Accessing a nested value
 </code></pre>
 <p>This makes your code more organized, especially when dealing with multiple related elements.</p>
-<h2 id="6-libraries-sharing-and-enhancing-your-code">6. Libraries: Sharing and Enhancing Your Code</h2>
+<h2>6. Libraries: Sharing and Enhancing Your Code</h2>
 <p>As you write more JavaScript, you&#39;ll find that there are lots of <strong>libraries</strong> available. Libraries are collections of pre-written code that you can use to add powerful features to your projects without having to write everything from scratch.</p>
 <p>For example, a library might let you add cool animations or handle user input more easily. <strong>jQuery</strong> and <strong>React</strong> are popular JavaScript libraries that can make building websites faster and easier.</p>
 <p><strong>Example:</strong></p>
@@ -256,7 +277,7 @@ $(&#39;#button&#39;).click(function() {
 </code></pre>
 <p>Libraries let you <strong>reuse</strong> code created by other developers, making your job easier and speeding up your progress.</p>
 <hr>
-<h2 id="summary">Summary</h2>
+<h2>Summary</h2>
 <ul>
 <li><strong>Line-by-line execution</strong>: JavaScript runs one instruction at a time.</li>
 <li><strong>Functions</strong>: You can wrap code in functions to reuse them easily.</li>
@@ -266,185 +287,16 @@ $(&#39;#button&#39;).click(function() {
 <li><strong>Libraries</strong>: Pre-written code that helps you build faster and easier.</li>
 </ul>
 <p>With JavaScript, you start simple and gradually build more powerful tools. You&#39;ll write instructions line by line, group related tasks together, control actions, and create more complex systems using objects and libraries. The more you practice, the better you&#39;ll get at making websites that do cool things!</p>
-<h2 id="last-question-will-llms-help-everyone-learn-javascript-be-there-for-them-along-the-way-and-especially-if-they-ever-get-stuck-speak-directly-to-the-young-people-this-text-is-for">Last Question: Will LLMs help everyone learn JavaScript? Be there for them along the way, and especially if they ever get stuck. Speak directly to the young people this text is for.</h2>
+<h2>Last Question: Will LLMs help everyone learn JavaScript? Be there for them along the way, and especially if they ever get stuck. Speak directly to the young people this text is for.</h2>
 <p>Absolutely! Large Language Models (LLMs), like the one you&#39;re talking to right now, have the potential to be incredible tools for learning JavaScript and beyond. They can guide you step by step through concepts, help explain tricky code, and offer instant feedback whenever you get stuck. Whether you&#39;re just starting out or tackling advanced topics, LLMs can be your support system, making learning faster and more interactive.
 The future you dream of — one where you can take control of your learning and future career — is more within reach than ever before. With technology like this, the barriers to learning are lower, and the possibilities are endless. JavaScript is an essential skill in the tech world, and learning it can open doors to exciting opportunities, from building your own websites to working at top tech companies.
 There will be challenges, of course, but with the right tools and support — and LLMs being right there to help you when things get tough — you can push through those moments. Whether you&#39;re building your first program or creating something that will change the world, you won&#39;t be alone. Keep learning, keep dreaming, and know that you&#39;re always one step closer to a future where you’re in control of your success.
 So yes, LLMs will be there for you — to help you learn, troubleshoot, and grow. You’ve got this!</p>
 
-          </div>
-        </div>
-      </div>
-
-
-      </div>
-
-
-
-    
-
-    
-      <div class="row">
-        <div class="col">
-            <!-- Art Credit Card -->
-          <div class="card text-bg-dark shadow mb-3">
-            <div class="card-body">
-              <a name="references"></a>
-              <h5 class="card-title">Artwork Credit</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-                
-
-                  <li class="list-group-item text-bg-dark">
-                    <a class="card-link" href="https://catpea.com"><i class="bi bi-palette-fill"></i> https://catpea.com</a>
-                  </li>
-
-                
-            </ul>
-          </div>
-        </div>
-      </div>
-    
-
-    
-
-    
-
-
-  </main>
-  <div class="container">
-  <footer class="text-bg-dark pb-2 mt-3 shadow rounded-top" style="min-height: 32rem;">
-
-  <div class="text-end">
-  <a class="d-inline p-2" href="#top"><i class="bi bi-box-arrow-in-up"></i></a>
-  </div>
-
-  <div class="container">
-    <div class="row">
-
-      <div class="col-12 col-md-6 col-lg-3 mb-md-5">
-        <img class="w-100 pt-5" src="/logo.png">
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-3 mb-md-5">
-        <h5 class="mb-3 mb-lg-5 mt-5"> Navigation <small class="text-muted">Site Navigation</small> </h5>
-        <ul class="list-unstyled ms-3">
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/"><i class="bi bi-house-heart"></i> Home</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/lectures.html"><i class="bi bi-camera-reels"></i> Lectures</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/toc.html"><i class="bi bi-list-columns"></i> List</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/links.html"><i class="bi bi-journal-bookmark"></i> Links</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/tiles.html"><i class="bi bi-grid-3x3-gap"></i> Tiles</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/furkies-purrkies"><i class="bi bi-book"></i> Audiobook</a></li>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="/alerts.html"><i class="bi bi-chat-dots"></i> Alerts</a></li>
-        
-        </ul>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-3">
-        <h5 class="mb-3 mb-lg-5 mt-5"> Mirrors <small class="text-muted">Website Backups & Snapshots</small> </h5>
-        <ul class="list-unstyled ms-3">
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.org">catpea.org</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.vercel.app/">Vercel Mirror</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.onrender.com/">Render Archive Mirror</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.pages.dev/">Cloudflare Archive Mirror</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.youtube.com/playlist?list=PLOo-pqnffyOqsK6hf5tFwMqzvhogksrgW">Poetry At YouTube</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://catpea.bitbucket.io/">Old Bitbucket Snapshot</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea/furkies-purrkies">Github Source Code</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea/furkies-purrkies/issues">Furkies Purkies Bugs</a></li>
-          
-            <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://westland-valhalla.github.io/warrior/">Westland Warrior Snapshot</a></li>
-          
-        </ul>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-3">
-        <h5 class="mb-3 mb-lg-5 mt-5"> Network <small class="text-muted">Cat Pea In The Wild</small> </h5>
-        <ul class="list-unstyled ms-3">
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://news.ycombinator.com/user?id=catpea">Hacker News</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.youtube.com/@catpea">YouTube</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.reddit.com/user/catpea-com/">Cat Pea Reddit</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://archive.org/details/@catpea-com">Internet Archive</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://web.archive.org/web/*/catpea.com">Wayback Machine</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://dribbble.com/catpea">Dribbble</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://gitlab.com/catpea">GitLab</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://www.npmjs.com/~catpea">NPM</a></i>
-        
-          <li class="mb-2"><a class="btn-link text-muted text-decoration-none" href="https://github.com/catpea">GitHub</a></i>
-        
-        </ul>
-      </div>
-
     </div>
-  </div>
-
-
-
-  <div class="row">
-    <div class="col">
-      <a class="opacity-25 pe-2 float-end text-decoration-none fw-bold fs-3 text-warning " data-bs-toggle="collapse" href="#collapseDebug" role="button" aria-expanded="false" aria-controls="collapseDebug">&pi;</a>
-
-      <div class="collapse p-5" id="collapseDebug">
-
-
-        <div class="card text-bg-dark shadow">
-        <!-- <img src="/logo.png" class="card-img-top" alt="Cat Pea Logo"> -->
-        <div class="card-body">
-          <h5 class="card-title">Debug Information</h5>
-          <p class="card-text"></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item text-bg-dark">
-          <span class="d-sm-none">responsive-layout:xs</span> <span class="d-none d-sm-inline d-md-none">responsive-layout:sm</span> <span class="d-none d-md-inline d-lg-none">responsive-layout:md</span> <span class="d-none d-lg-inline d-xl-none">responsive-layout:lg</span> <span class="d-none d-xl-inline d-xxl-none">responsive-layout:xl</span> <span class="d-none d-xxl-inline">responsive-layout:xxl</span>
-          </li>
-          <li class="list-group-item text-bg-dark">posts-on-page (pp): 0</li>
-          <li class="list-group-item text-bg-dark">filename: nope</li>
-        </ul>
-        <!-- <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div> -->
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-
-</footer>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script>
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-</script>
-
-  </div>
-
-
-
-
-  </body>
+    <footer class="artwork-credit">
+      artwork <a href="https://catpea.com">credit</a>
+    </footer>
+  </article>
+</body>
 </html>
