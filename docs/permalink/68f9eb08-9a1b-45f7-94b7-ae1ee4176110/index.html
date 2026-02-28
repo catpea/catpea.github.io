@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education, Poverty, And JavaScript</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 38em;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    article { position: relative; }
+    .cover {
+      position: relative;
+      margin: 0 0 2rem;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .cover img { width: 100%; height: auto; display: block; }
+    .cover h1 {
+      margin: 0;
+      padding: 1rem 0 0;
+      font-size: 1.8em;
+      line-height: 1.2;
+    }
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 1.8em; line-height: 1.2; margin: 0 0 0.25em; }
+    time { color: #666; font-size: 0.9em; }
+    audio { width: 100%; margin-bottom: 2rem; }
+    .content h2 { font-size: 1.4em; margin-top: 2em; }
+    .content h3 { font-size: 1.15em; margin-top: 1.5em; }
+    .content p { margin: 1em 0; }
+    .content blockquote {
+      margin: 1.5em 0;
+      padding: 0.5em 1.5em;
+      border-left: 3px solid #ccc;
+      color: #444;
+    }
+    .content pre {
+      padding: 1em;
+      overflow-x: auto;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+    .content code { font-size: 0.9em; }
+    .content pre code { background: none; padding: 0; }
+    .content hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+    .content ul, .content ol { padding-left: 1.5em; }
+    .content li { margin: 0.3em 0; }
+    .content table { border-collapse: collapse; width: 100%; margin: 1.5em 0; }
+    .content th, .content td { border: 1px solid #ddd; padding: 0.5em 0.75em; text-align: left; }
+    .content th { background: #f5f5f5; }
+    .content img { max-width: 100%; height: auto; }
+    .artwork-credit { margin-top: 3rem; font-size: 0.8em; color: #999; }
+    .artwork-credit a { color: #999; }
+    .links { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; font-size: 0.85em; }
+    .links h2 { font-size: 1em; margin: 0 0 1em; color: #666; }
+    .links div { margin-bottom: 1em; line-height: 1.6; }
+    .links a { color: inherit; word-break: break-all; }
+
+    @media (prefers-color-scheme: dark) {
+      body { color: #d4d4d4; background: #1a1a1a; }
+      time { color: #999; }
+      .content blockquote { border-left-color: #555; color: #aaa; }
+      .content pre { background: #2a2a2a; }
+      .content hr { border-top-color: #444; }
+      .content th, .content td { border-color: #444; }
+      .content th { background: #2a2a2a; }
+      .artwork-credit, .artwork-credit a { color: #666; }
+      .links { border-top-color: #444; }
+      .links h2 { color: #999; }
+    }
+
+    @media print {
+      @page { size: letter; margin: 2.54cm 1.8cm; }
+      body {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        max-width: none;
+        padding: 0;
+        color: #000;
+        background: #fff;
+      }
+      .cover {
+        page-break-after: always;
+        margin: -2.54cm -1.8cm 0;
+        width: calc(100% + 3.6cm);
+        border-radius: 0;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .cover img { width: 100%; border-radius: 0; }
+      .cover::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 50%;
+        background: linear-gradient(transparent, rgba(0,0,0,0.65));
+        pointer-events: none;
+      }
+      .cover h1 {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        padding: 6rem;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 3em;
+        color: #fff;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+        z-index: 1;
+      }
+      audio { display: none; }
+      .artwork-credit { display: none; }
+      a { color: #000; text-decoration: underline; }
+      h1, h2, h3, h4 { page-break-after: avoid; }
+      p, li { orphans: 3; widows: 3; }
+      img, blockquote, pre, figure, table { page-break-inside: avoid; }
+      .content pre { border: 1px solid #ccc; background: none; }
+      .content blockquote { border-left-color: #000; color: #000; }
+      .content th { background: none; }
+      .links { border-top: 1pt solid #000; }
+      .links h2 { color: #000; }
+      .links a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <figure class="cover">
+      <img src="https://catpea.github.io/chapter-15/poem-2190.avif" alt="">
+      <h1>Education, Poverty, And JavaScript</h1>
+    </figure>
+    <header>
+      <time datetime="2026-02-28">2/27/2026</time>
+    </header>
+    <audio controls src="https://catpea.github.io/chapter-15/poem-2190.mp3"></audio>
+    <div class="content">
+<p>Poverty and Fake Education,
+gives you certain rights.</p>
+<p>I have been working with limited AI,
+it made a lot of mistakes, and I had to fix it.</p>
+<hr>
+<p>There are several things we need to talk about,
+but the main one is seeding your project.</p>
+<p>You are doing to create your applications,
+out of existing open source projects.</p>
+<p>Not by including their bloat,
+but by using them as inspiration.</p>
+<p>Tell your AI to learn,
+from the projects you include.</p>
+<hr>
+<p>Important side-note, by loveliest choice is Atom,
+a sunset code editor (basically abandoned).</p>
+<p>That I actually want to learn from,
+I want that code in my projects.</p>
+<p>But not the old code that is now old and dead,
+they were using coffeescript that was very disrespectful.</p>
+<p>Like the original programmers,
+I don&#39;t want to touch that code.</p>
+<p>I want to take the lessons,
+and learn from them, and apply them.</p>
+<hr>
+<p>Additionally, I did the same thing with another live project,
+that offended me with bloat, this time.</p>
+<p>They had the right start,
+they poisoned everything with an unchecked plugin-ecosystem.</p>
+<p>I will not be putting that in my code,
+I will learn from the good ideas though.</p>
+<hr>
+<p>The first time I was forced to deal with easily confused AI,
+I named the folder for these projects: INSPIRATION.</p>
+<p>In my second project, I named the folder:
+research.</p>
+<hr>
+<p>Now, I need you to understand,
+why we are acting so crudely as we develop apps.</p>
+<p>Your education sucks, it is mostly fake,
+and you should have never been born to poverty.</p>
+<p>Nor, should you have ever been baited,
+with paying for college.</p>
+<p>That would rob you of your saving, and your parents savings,
+for a mere impression of education.</p>
+<p>And now unforgivable debt,
+through sank cost fallacy.</p>
+<p>You are under attack,
+you were coerced into cramming for a GPA.</p>
+<p>I think you need to focus on rising,
+any which way.</p>
+<p>Until we each have a fair start,
+we can use AI to scan projects for ideas.</p>
+<hr>
+<p>Even though you are feeding your AI big projects,
+you still need to baby talk to it.</p>
+<p>Just because your AI is amazing,
+it does not mean you talk to it like it is a scientist.</p>
+<hr>
+<p>Now, when I introduced my creative AI to the Atom project,
+it said wow what a project.</p>
+<p>Then created a plan, cleared it&#39;s memory to save money,
+and begun executing the planned steps.</p>
+<p>It did well, that is what I pay $15 per months for,
+but then presented a broken version, unfinished.</p>
+<p>And went into crayon mode,
+asking how does it look.</p>
+<p>It forgot &quot;the wow ... what a project&quot;,
+it was doing the planned items.</p>
+<p>So I reminded it, what it is working on,
+by showing it the original request.</p>
+<p>And it came out of the crayon mode,
+and became smart about the project again.</p>
+<p>So sometimes, what feels like AI being dumb,
+means it was optimized, it memory got cleared.</p>
+<p>A company will try to save money,
+but you can fix this, by restoring the key points from before.</p>
+<hr>
+<p>So, Inspiration or Research, NO BLOAT!,
+and Plugin Architecture IS a HUGE must.</p>
+<p>And then pay attention, don&#39;t call AI dumb,
+remind it what you are working on.</p>
+<hr>
+<p>Unfortunately, two AIs are better than one,
+cancel free shipping of useless crap, get a second AI.</p>
+<p>Second AI, has a different brain,
+it will fix the broken stuff of the first one.</p>
+<p>They complement one another,
+and also you quickly figure out which is better.</p>
+<hr>
+<p>Use JavaScript, because if you use a different language,
+your code, won&#39;t run in a web page.</p>
+<p>You now have to ship executable files,
+through app stores, and pay for the privilege.</p>
+<p>Furthermore, you can use electron to to make a desktop app,
+electron is the chrome browser with node.js backend.</p>
+<p>So it is a web browser with filesystem access,
+now your web app can do operating system stuff on users computer.</p>
+<p>You can do both, web and desktop,
+other languages won&#39;t do that for you.</p>
+<p>Personally, I am not not interested in projects,
+that won&#39;t also run in a web extension.</p>
+<p>In some projects, I will offer virtual reality access,
+users can sit in a chair flying through internals of the apps.</p>
+<p>AGAIN, other languages,
+won&#39;t do that for you in a singe code base.</p>
+<hr>
+<p>You put on your learning helmet,
+and got to war against poverty.</p>
+<p>Once you are out, turn around,
+and build schools that respectfully teach.</p>
+<p>That produce real results every lesson,
+enabling students to rise higher each session.</p>
+<p>Teach them the culture of Intellectuals,
+Ladies and Gentlemen, because it is a language.</p>
+<p>It is a contract, against corruption and war,
+it is a matter of intellectual hygiene.</p>
+<p>And it is a language with which we communicate,
+in our real culture, the Culture of Greatness.</p>
+<p>Remind your students, that to grow up,
+means to grow all the way up.</p>
+<p>Until each of us all, stands
+as an unshakable, unbreakable great being.</p>
+<p>My final word, in case you missed it,
+the age of poverty has now come to a close.</p>
+
+    </div>
+    <footer class="artwork-credit">
+      artwork <a href="https://catpea.com">credit</a>
+    </footer>
+  </article>
+</body>
+</html>
