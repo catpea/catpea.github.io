@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,166 +8,170 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-13/poem-1964.avif" alt="">
-      <h1>A Quick Look At A Signal Operator</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-13/poem-1964.avif" alt="A Quick Look At A Signal Operator">
     </figure>
-    <header>
-      <time datetime="2025-07-18">7/17/2025</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-13/poem-1964.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-13/poem-1964.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">A Quick Look At A Signal Operator</h1>
+
+          <time class="permalink-time" datetime="2025-07-18">7/17/2025</time>
+  </header>
+
     <section>
-<p>Before we begin, just between us, we have to internally change the name Signal to Pulse,
+<p class="permalink-paragraph">Before we begin, just between us, we have to internally change the name Signal to Pulse,
 pulse is a short burst, a signal is a kid and caboodle with extras.</p>
-<p>I didn’t come up with the name signal,
+<p class="permalink-paragraph">I didn’t come up with the name signal,
 but pulse is the correct term.</p>
-<p>I will still use the term signal,
+<p class="permalink-paragraph">I will still use the term signal,
 up until I show you why it is important that we switch.</p>
-<hr>
-<p><a href="files/Signal.txt">Allow me to remind us what Signals are</a>,
+<hr class="permalink-divider">
+<p class="permalink-paragraph"><a href="files/Signal.txt">Allow me to remind us what Signals are</a>,
 it is a complex variable, meaning an object with properties and methods.</p>
-<p>Similar to how an Array has a length property,
+<p class="permalink-paragraph">Similar to how an Array has a length property,
 and push method.</p>
-<p>And an array is a complex variable, an object, that is efficiently programmed,
+<p class="permalink-paragraph">And an array is a complex variable, an object, that is efficiently programmed,
 for the purpose of storing things like numbers, letters, and other objects.</p>
-<p>Unlike an array, which does not announce changes,
+<p class="permalink-paragraph">Unlike an array, which does not announce changes,
 a signal when given a non null value will notify all its subscribers.</p>
-<p>A subscriber is just a function that is given the value of the signal,
+<p class="permalink-paragraph">A subscriber is just a function that is given the value of the signal,
 during value change notification, it only gets one argument, the value.</p>
-<p>Let us make a signal, and we will call it username,
+<p class="permalink-paragraph">Let us make a signal, and we will call it username,
 const usernameSignal = new Signal();</p>
-<p>This is a null signal, because we didn’t specify value between the parentheses,
+<p class="permalink-paragraph">This is a null signal, because we didn’t specify value between the parentheses,
 we will now subscribe to it: // usernameSignal.subscribe(v=&gt;console.log(v));</p>
-<p>I use the letter v, but you can use the word username,
+<p class="permalink-paragraph">I use the letter v, but you can use the word username,
 though can see that it is the username signal, that’s why I only use “v”.</p>
-<hr>
-<p>In a horrible mistake, some people give the signal dependencies,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">In a horrible mistake, some people give the signal dependencies,
 so that you can log, v and another signal.</p>
-<p>And that second signal will be remembered as a dependency,
+<p class="permalink-paragraph">And that second signal will be remembered as a dependency,
 and now whenever “it” or the username changes the subscription will be reran.</p>
-<p>Don’t do that, do not make the signal more that a value holder,
+<p class="permalink-paragraph">Don’t do that, do not make the signal more that a value holder,
 that notifies subscribers on non-null value changes.</p>
-<hr>
-<p>Last week I was fool enough to tweak the non-null comparator,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Last week I was fool enough to tweak the non-null comparator,
 to foolishly provide a customization isNull function.</p>
-<p>With just such a tiny change, you can no longer check if .value is null,
+<p class="permalink-paragraph">With just such a tiny change, you can no longer check if .value is null,
 you now have to run .test() and then use the .value.</p>
-<p>I do believe it,
+<p class="permalink-paragraph">I do believe it,
 they used to call that a blivet.</p>
-<p>You must protect the simplicity of signals,
+<p class="permalink-paragraph">You must protect the simplicity of signals,
 they are far too precious.</p>
-<p>Especially in context of User Interfaces,
+<p class="permalink-paragraph">Especially in context of User Interfaces,
 something that is outside of JavaScript/ECMAscript design considerations.</p>
-<hr>
-<p>This simple signal can’t do much but notify on non null,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">This simple signal can’t do much but notify on non null,
 but that give you power, because your mind is good at simplicity.</p>
-<p>So we will make a map function, this is a signal utility,
+<p class="permalink-paragraph">So we will make a map function, this is a signal utility,
 and it should be both external where you can say map(usernameSignal, mapFunction)…</p>
-<p>But also, be good to yourself, create a class that extends Signal,
+<p class="permalink-paragraph">But also, be good to yourself, create a class that extends Signal,
 and give it a map method, that will call the reusable map function.</p>
-<p>With the “this” keyword,
+<p class="permalink-paragraph">With the “this” keyword,
 as the first argument, and the given mapFunction as the second.</p>
-<p>And then return the result of the map function,
+<p class="permalink-paragraph">And then return the result of the map function,
 as the result of the map method.</p>
-<p>So you are just wrapping the method around the function,
+<p class="permalink-paragraph">So you are just wrapping the method around the function,
 setting this as first argument and mapFunction method argument as second.</p>
-<p>The keyword this,
+<p class="permalink-paragraph">The keyword this,
 is how objects refer to themselves, internally.</p>
-<p>So inside the usernameSignal, we don’t say usernameSignal,
+<p class="permalink-paragraph">So inside the usernameSignal, we don’t say usernameSignal,
 because when we create the Signal…</p>
-<p>We have no clue what variable name the user will pick,
+<p class="permalink-paragraph">We have no clue what variable name the user will pick,
 as they instantiate it at a later data.</p>
-<p>So we use the keyword “this”,
+<p class="permalink-paragraph">So we use the keyword “this”,
 which always refers to the owner of the method.</p>
-<p>The difference between function and method,
+<p class="permalink-paragraph">The difference between function and method,
 is that functions are just programming language functions.</p>
-<p>Methods however,
+<p class="permalink-paragraph">Methods however,
 are functions that belong to an object, and can use the keyword “this”.</p>
-<p>If you want to call another method of the object you are in,
+<p class="permalink-paragraph">If you want to call another method of the object you are in,
 you say “this” followed by the method name.</p>
-<hr>
-<p>The Signal extension,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The Signal extension,
 is where the naming problem reveals it self.</p>
-<p>Our perfect little signal,
+<p class="permalink-paragraph">Our perfect little signal,
 must be renamed to Pulse.</p>
-<p>You will often find yourself using pulses,
+<p class="permalink-paragraph">You will often find yourself using pulses,
 without any of the extras.</p>
-<p>But the extension that has map, is now what we will refer to as Signal,
+<p class="permalink-paragraph">But the extension that has map, is now what we will refer to as Signal,
 so; externally no one will notice this change.</p>
-<p>But you will know, that if you don’t need anything extra,
+<p class="permalink-paragraph">But you will know, that if you don’t need anything extra,
 you can just use a pulse – such is the world of programming.</p>
-<hr>
-<p>Map takes two argument, a signal to map, and a function,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Map takes two argument, a signal to map, and a function,
 to send the value of the signal through.</p>
-<p>So a map,
+<p class="permalink-paragraph">So a map,
 transforms or maps the value for the signal.</p>
-<p>And the way this is accomplished,
+<p class="permalink-paragraph">And the way this is accomplished,
 without ruining anything.</p>
-<p>Remember,
+<p class="permalink-paragraph">Remember,
 pulses and signals are precious,</p>
-<p>Is, by creating a new signal called mappedSignal,
+<p class="permalink-paragraph">Is, by creating a new signal called mappedSignal,
 subscribing to the given signal in this case usernameSignal.</p>
-<p>And taking that v of the usrname signal,
+<p class="permalink-paragraph">And taking that v of the usrname signal,
 and passing it through the mapFunction…</p>
-<p>And then setting the mappedSignal value,
+<p class="permalink-paragraph">And then setting the mappedSignal value,
 as the result of mapFunction(v);</p>
-<p>And remember that the v is the usernameSignal.value,
+<p class="permalink-paragraph">And remember that the v is the usernameSignal.value,
 and then the map function and thus method return the mappedSignal.</p>
-<p>So when you call a map on a signal,
+<p class="permalink-paragraph">So when you call a map on a signal,
 you get another and equally uniform signal.</p>
-<p>And it also has a map method,
+<p class="permalink-paragraph">And it also has a map method,
 so not the pulse bu signal.</p>
-<p>Just to give the fast version, map returns a new signal,
+<p class="permalink-paragraph">Just to give the fast version, map returns a new signal,
 the mappedSignal.</p>
-<p>It is a standard signal as we have it here,
+<p class="permalink-paragraph">It is a standard signal as we have it here,
 that subscribed to the signal that we fed into the map function.</p>
-<p>And then each time the signal we fed into the map function changes,
+<p class="permalink-paragraph">And then each time the signal we fed into the map function changes,
 that new value is passed through mapFunction…</p>
-<p>and assigned to out mappedSignal,
+<p class="permalink-paragraph">and assigned to out mappedSignal,
 that was returned from the mapped function.</p>
-<hr>
-<p>It does not get much more complicated than this,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">It does not get much more complicated than this,
 this was the shot, and it dod not hurt.</p>
-<p>Just like the function of an object is called a method.
+<p class="permalink-paragraph">Just like the function of an object is called a method.
 a function that operates on signals, alslo has a special name, that name is operator.</p>
-<p>So map is an operator,
+<p class="permalink-paragraph">So map is an operator,
 there are many operators.</p>
-<p>You can look up Reactive Operators,
+<p class="permalink-paragraph">You can look up Reactive Operators,
 but don’t read the documentation.</p>
-<p>Instead, ask AI for a simple implementation,
+<p class="permalink-paragraph">Instead, ask AI for a simple implementation,
 that works with your pulse.</p>
-<p>To understand an operator,
+<p class="permalink-paragraph">To understand an operator,
 you have to understand its code.</p>
-<p>It is pretty simple in our case we just pass the original signal value,
+<p class="permalink-paragraph">It is pretty simple in our case we just pass the original signal value,
 through the mapFunction, often referred to as predicate.</p>
-<hr>
-<p>So our mapFunction predicate,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So our mapFunction predicate,
 is where we can add stuff to out username, not signals, but some text, like hello.</p>
-<p>We can now say  usernameSignal.value = “Alice”,
+<p class="permalink-paragraph">We can now say  usernameSignal.value = “Alice”,
 and say  usernameSignal.map(v=&gt;<code>Hello ${v}</code>).subscribe(v=&gt;console.log(v))</p>
-<p>And we will see “Hello Alice” in the console,
+<p class="permalink-paragraph">And we will see “Hello Alice” in the console,
 as the map function automatically subscribes us to usernameSignal.</p>
-<p>Which now that it holds the value of “Alice”,
+<p class="permalink-paragraph">Which now that it holds the value of “Alice”,
 instantly executes the subscription.</p>
-<p>Which means it sends its value Alice to the map subscriber,
+<p class="permalink-paragraph">Which means it sends its value Alice to the map subscriber,
 which sends the v thorough the mappedSignal mapFunction predicate.</p>
-<p>And assigns to the value of the mappedSignal,
+<p class="permalink-paragraph">And assigns to the value of the mappedSignal,
 which then yet again….</p>
-<p>Instantly executes the subscription which just has console.log
+<p class="permalink-paragraph">Instantly executes the subscription which just has console.log
 that prints Hello Alice.</p>
-<hr>
-<p>It is not complexity you hear,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">It is not complexity you hear,
 it is just English that sounds weird when describing program flow.</p>
-<p>Looking at the tiny snippet,
+<p class="permalink-paragraph">Looking at the tiny snippet,
 undoes all the tangled words.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>Allow me to remind us what Signals are (local)<br><a href="files/Signal.txt">files/Signal.txt</a></div>
+      <div class="permalink-link"><a href="files/Signal.txt">Allow me to remind us what Signals are</a> (local)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

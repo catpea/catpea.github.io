@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,88 +8,92 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-12/poem-1849.avif" alt="">
-      <h1>Just Two Numbers; Or, Easy Peasy Data Synchronization For The Rest Of Us</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-12/poem-1849.avif" alt="Just Two Numbers; Or, Easy Peasy Data Synchronization For The Rest Of Us">
     </figure>
-    <header>
-      <time datetime="2025-03-25">3/24/2025</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-12/poem-1849.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-12/poem-1849.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Just Two Numbers; Or, Easy Peasy Data Synchronization For The Rest Of Us</h1>
+
+          <time class="permalink-time" datetime="2025-03-25">3/24/2025</time>
+  </header>
+
     <section>
-<p>Every use case has its quirks,
+<p class="permalink-paragraph">Every use case has its quirks,
 so we will not get too deeply into examples.</p>
-<p>We will simply solve the problem of data synchronization,
+<p class="permalink-paragraph">We will simply solve the problem of data synchronization,
 and let you apply it, to whatever you need.</p>
-<p>This type of synchronization is called eventual consistency,
+<p class="permalink-paragraph">This type of synchronization is called eventual consistency,
 as it assumes that all things will eventually get all the data.</p>
-<hr>
-<p>It relies on a revision number, that must me incremented,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">It relies on a revision number, that must me incremented,
 each time you make a change.</p>
-<p>Each time you update a file, move a window to a new position,
+<p class="permalink-paragraph">Each time you update a file, move a window to a new position,
 or change the user profile where ever it may live.</p>
-<hr>
-<p>But two users, or even two browser windows,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">But two users, or even two browser windows,
 can in the complexity of our world end up with the same revision.</p>
-<p>But different changes... Alice and Bob,
+<p class="permalink-paragraph">But different changes... Alice and Bob,
 can each submit a new and unique version of some data.</p>
-<p>Whose original revision was 2, and now they both submit revision 3,
+<p class="permalink-paragraph">Whose original revision was 2, and now they both submit revision 3,
 and both of these documents are different.</p>
-<hr>
-<p>To solve this problem, there is a second number,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">To solve this problem, there is a second number,
 this time, the number is completely random, cryptographically random.</p>
-<p>When we get two revisions each marked 3,
+<p class="permalink-paragraph">When we get two revisions each marked 3,
 we save them both to database…</p>
-<p>But pick the one with a larger random number,
+<p class="permalink-paragraph">But pick the one with a larger random number,
 as a winner, marking the loser(s) as conflicts.</p>
-<p>We effectively select a winner at random,
+<p class="permalink-paragraph">We effectively select a winner at random,
 and as long at all participants eventually get all the revisions.</p>
-<p>They will all select the same winning random number,
+<p class="permalink-paragraph">They will all select the same winning random number,
 the biggest one of the bunch.</p>
-<hr>
-<p>Now, sometimes, you need to make a user interface,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now, sometimes, you need to make a user interface,
 where your users can go in and review the conflicts.</p>
-<p>Other times, you just treat the winner as supreme,
+<p class="permalink-paragraph">Other times, you just treat the winner as supreme,
 and destroy the conflicts.</p>
-<p>Position of a window is a good example,
+<p class="permalink-paragraph">Position of a window is a good example,
 you don’t care who the losers are, so as long as all participating desktops agree.</p>
-<hr>
-<p>On the file system, you make a directory named after the filename,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">On the file system, you make a directory named after the filename,
 and save data as revision hyphen random number, or uuid.</p>
-<p>This way, all the data is always saved and never over written.
+<p class="permalink-paragraph">This way, all the data is always saved and never over written.
 it is a neat way to make a WikiWiki.</p>
-<hr>
-<p>In object oriented programming,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">In object oriented programming,
 <a href="https://github.com/catpea/odious/blob/72fba2caf958e955947146e61ebe010e6963666a/src/modules/settings/memory/synchronizable/Synchronizable.js#L1">and lets use Signals as example</a>.</p>
-<p>During normal use you just assign a .value,
+<p class="permalink-paragraph">During normal use you just assign a .value,
 and that increments the revision, and changes the random number.</p>
-<p>But when remote data comes in,
+<p class="permalink-paragraph">But when remote data comes in,
 you first compare versions and check the random number winner.</p>
-<hr>
-<p>If you have a central database, a single source of truth,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">If you have a central database, a single source of truth,
 call it up, and ensure you grab the latest data .</p>
-<p>And check again, when the user hits the save button,
+<p class="permalink-paragraph">And check again, when the user hits the save button,
 if you detect a conflict, interrupt the user and have them resolve it.</p>
-<p>Finally, in summary, just the revision number alone is not enough,
+<p class="permalink-paragraph">Finally, in summary, just the revision number alone is not enough,
 you need a random number to go along with it.</p>
-<p>This way, you are guaranteed eventual consistency,
+<p class="permalink-paragraph">This way, you are guaranteed eventual consistency,
 and completely eliminate data loss issues.</p>
-<p>If you have a master server, check for conflicts before a write,
+<p class="permalink-paragraph">If you have a master server, check for conflicts before a write,
 if not, the highest revision and random numbers win.</p>
-<p>It is a cruel world when you are a piece of data,
+<p class="permalink-paragraph">It is a cruel world when you are a piece of data,
 but the highest numbers often mean the most work.</p>
-<p>So they deserve to go first,
+<p class="permalink-paragraph">So they deserve to go first,
 and the rest, the rest is pure luck.</p>
-<p>This way, when all hell breaks loose on a Friday afternoon,
+<p class="permalink-paragraph">This way, when all hell breaks loose on a Friday afternoon,
 all you need to do, is make sure everyone gets all the data eventually, and go home.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>and lets use Signals as example (github.com)<br><a href="https://github.com/catpea/odious/blob/72fba2caf958e955947146e61ebe010e6963666a/src/modules/settings/memory/synchronizable/Synchronizable.js#L1">https://github.com/catpea/odious/blob/72fba2caf958e955947146e61ebe010e6963666a/src/modules/settings/memory/synchronizable/Synchronizable.js#L1</a></div>
+      <div class="permalink-link"><a href="https://github.com/catpea/odious/blob/72fba2caf958e955947146e61ebe010e6963666a/src/modules/settings/memory/synchronizable/Synchronizable.js#L1">and lets use Signals as example</a> (github.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

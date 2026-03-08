@@ -1,0 +1,418 @@
+/* ── Variables ────────────────────────────────────────────── */
+:root {
+
+  --bg-a1: #110a1a;
+  --bg-a2: #081420;
+  --bg-a3: #1e1433;
+
+  --color-a1: #1b161a;
+  --color-a2: #2b264e;
+  --color-a3: #231d43;
+
+  --color-b1: #774b1e;
+  --color-b2: #ac7362;
+  --color-b3: #dfc185;
+
+  --text: #83613b;
+  --mute: #1c1924;
+
+  --link: #a9628a;
+  --over: #59043b;
+
+  /* SIZE */
+
+  --base: clamp(1rem, 0.9vw + 0.9rem, 1.25rem);
+  --ratio: 1.25;
+
+  --step--2: calc(var(--base) / (var(--ratio) * var(--ratio)));
+  --step--1: calc(var(--base) / var(--ratio));
+  --step-0: var(--base);
+  --step-1: calc(var(--base) * var(--ratio));
+  --step-2: calc(var(--base) * var(--ratio) * var(--ratio));
+  --step-3: calc(var(--step-2) * var(--ratio));
+  --step-4: calc(var(--step-3) * var(--ratio));
+
+
+  /* SPACE */
+  --space-xs: var(--step--2);
+  --space-sm: var(--step--1);
+  --space-md: var(--step-0);
+  --space-lg: var(--step-1);
+  --space-xl: var(--step-2);
+
+  /* gap and pad are for convenience and clarity, you use --space-n directly in classes */
+  --gap: var(--space-md);
+  --pad: var(--space-lg);
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  --shadow: 0 var(--space-xs)
+              var(--space-lg)
+              rgba(0,0,0,0.6);
+
+  --radius: 8px;
+
+  /*
+  The browser keeps adding columns until they can’t stay at least 300px wide.
+  300px → minimum card width
+  1fr → grow to fill remaining space
+  auto-fit → automatically create as many columns as fit
+  */
+  --grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  --bg-i1: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+  --bg-i2: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544V0h.284zM0 5.373l25.456 25.455-1.414 1.415L0 8.2V5.374zm0 5.656l22.627 22.627-1.414 1.414L0 13.86v-2.83zm0 5.656l19.8 19.8-1.415 1.413L0 19.514v-2.83zm0 5.657l16.97 16.97-1.414 1.415L0 25.172v-2.83zM0 28l14.142 14.142-1.414 1.414L0 30.828V28zm0 5.657L11.314 44.97 9.9 46.386l-9.9-9.9v-2.828zm0 5.657L8.485 47.8 7.07 49.212 0 42.143v-2.83zm0 5.657l5.657 5.657-1.414 1.415L0 47.8v-2.83zm0 5.657l2.828 2.83-1.414 1.413L0 53.456v-2.83zM54.627 60L30 35.373 5.373 60H8.2L30 38.2 51.8 60h2.827zm-5.656 0L30 41.03 11.03 60h2.828L30 43.858 46.142 60h2.83zm-5.656 0L30 46.686 16.686 60h2.83L30 49.515 40.485 60h2.83zm-5.657 0L30 52.343 22.343 60h2.83L30 55.172 34.828 60h2.83zM32 60l-2-2-2 2h4zM59.716 0l-28 28 1.414 1.414L60 2.544V0h-.284zM60 5.373L34.544 30.828l1.414 1.415L60 8.2V5.374zm0 5.656L37.373 33.656l1.414 1.414L60 13.86v-2.83zm0 5.656l-19.8 19.8 1.415 1.413L60 19.514v-2.83zm0 5.657l-16.97 16.97 1.414 1.415L60 25.172v-2.83zM60 28L45.858 42.142l1.414 1.414L60 30.828V28zm0 5.657L48.686 44.97l1.415 1.415 9.9-9.9v-2.828zm0 5.657L51.515 47.8l1.414 1.413 7.07-7.07v-2.83zm0 5.657l-5.657 5.657 1.414 1.415L60 47.8v-2.83zm0 5.657l-2.828 2.83 1.414 1.413L60 53.456v-2.83zM39.9 16.385l1.414-1.414L30 3.658 18.686 14.97l1.415 1.415 9.9-9.9 9.9 9.9zm-2.83 2.828l1.415-1.414L30 9.313 21.515 17.8l1.414 1.413 7.07-7.07 7.07 7.07zm-2.827 2.83l1.414-1.416L30 14.97l-5.657 5.657 1.414 1.415L30 17.8l4.243 4.242zm-2.83 2.827l1.415-1.414L30 20.626l-2.828 2.83 1.414 1.414L30 23.456l1.414 1.414zM56.87 59.414L58.284 58 30 29.716 1.716 58l1.414 1.414L30 32.544l26.87 26.87z' fill='%230e0814' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+
+/* ── Base ────────────────────────────────────────────────── */
+
+a { color: var(--link); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--over); }
+
+body {
+  min-height: 100dvh;
+
+  color: var(--text);
+  background-color: var(--color-b2);
+  background-image: var(--bg-i1);
+
+  font-size: var(--step-0);
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+
+  padding: var(--pad);
+
+}
+
+
+
+h3 {
+  font-size: var(--step-1);
+}
+
+h2 {
+  font-size: var(--step-2);
+}
+
+h1 {
+  font-size: var(--step-3);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.content {
+  max-width: clamp(45ch, 50vw, 75ch);
+  padding-inline: 1rem;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ── Basics ─────────────────────────────────────────────────── */
+
+
+a { color: var(--link); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--over); }
+
+
+/* COMPONENTS */
+
+/* ── Post grid ────────────────────────────────────────────── */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-4);
+}
+
+/* ── Post card (article.post) ─────────────────────────────── */
+article.post {
+  border: 1px solid var(--color-b2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: var(--bg-a2);
+  background-image: url(var(--bg-i2));
+  box-shadow: var(--shadow);
+  transition: box-shadow .2s;
+  margin-bottom: 2rem;
+}
+
+
+
+article.post:hover { box-shadow: none; }
+
+/* Cover: full-bleed image + overlaid play button */
+article.post .cover          { position: relative; margin: 0; }
+article.post .cover a        { display: block; }
+article.post .cover img      { display: block; width: 100%; object-fit: cover; }
+
+article.post .btn.play {
+
+  padding: var(--step-0) var(--step-1);
+
+  position: absolute;
+  left: 50%;
+  bottom: -1rem;
+  transform: translate(-50%, 50%);
+
+  border: 1px solid var(--color-a3);
+  border-radius: 8px;
+  color: var(--color-a2);
+  box-shadow: var(--shadow);
+  transition: background .1s, box-shadow .1s;
+  background: var(--bg-a2);
+  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+
+}
+article.post .btn.play:hover { background: var(--color-b2); box-shadow: none; }
+
+/* Card body — each element carries its own padding */
+article.post .time   { display: block;               padding: .75rem 1rem .666rem;    font-size: .8rem;              color: var(--color-a3); }
+article.post .number { font-size: 1rem; font-weight: 100;                                     color: var(--color-a1); }
+article.post .title  { margin: 0;  font-size: 1.2rem;                    padding: .25rem 1rem;         font-weight: 300; line-height: 1.2; color: var(--color-a2); }
+article.post .tags   { list-style: none; margin: 0;  padding: 0 1rem .25rem;     font-size: .8rem;}
+article.post .tag    {}
+article.post .text   { margin: 0;                    padding: 2rem 1rem;     font-size: 0.9rem; }
+article.post .meta   { list-style: none; margin: 0;  padding: 0 1rem .75rem;    font-size: .8rem;                        color: var(--color-a3); }
+article.post .link   {                               padding: 0 1rem .75rem;    font-size: .85rem; display: block; }
+
+article.post .title a        { color: inherit; }
+article.post .title a:hover  { color: var(--link); }
+
+article.post .tags       { color: var(--color-b1); }
+article.post .tags .tag  {}
+
+article.post .meta li        { display: inline; }
+article.post .meta li + li::before { content: ' · '; }
+
+
+
+
+
+/* ── Nav: prev / next ─────────────────────────────────────── */
+nav.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .75rem 0;
+  color: var(--mute);
+}
+
+/* ── Nav: pager buttons ───────────────────────────────────── */
+nav.pager {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: 1.5rem 0;
+}
+
+nav.pager a,
+nav.pager span {
+  padding: .4rem .75rem;
+  border-radius: 4px;
+  font-size: .85rem;
+  background: var(--bg-a3);
+  color: var(--mute);
+  transition: background .2s, color .2s;
+}
+
+nav.pager a:hover               { background: var(--color-a3); color: var(--bg-a1); }
+nav.pager [aria-current="true"] { background: var(--color-a1);     color: var(--bg-a1); font-weight: 700; }
+
+
+
+/* ── Footer Links ────────────────────────────────────── */
+
+
+footer {
+ color: var(--mute);
+
+ font-size: var(--step-1);
+ text-align: center;
+
+ padding: var(--pad);
+}
+
+
+
+
+/* ── Permalink article ────────────────────────────────────── */
+article.permalink {
+  max-width: 38em;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+article.permalink figure { overflow: hidden; border-radius: 4px; margin: 0 0 2rem; }
+article.permalink img { display: block; width: 100%; height: auto; }
+article.permalink audio { width: 100%; margin-bottom: 2rem; }
+
+article.permalink h1 { font-size: 1.8em; }
+article.permalink h2 { font-size: 1.4em; }
+article.permalink h3 { font-size: 1.15em; }
+
+article.permalink blockquote {
+  padding: 0.5em 1.5em;
+  border-left: 3px solid var(--mute);
+  color: var(--mute);
+}
+
+article.permalink pre {
+  padding: 1em;
+  overflow-x: auto;
+  background: var(--bg-a2);
+  border-radius: 4px;
+}
+
+article.permalink pre code {
+  padding: 0;
+  background: none;
+}
+
+article.permalink hr {
+  border: 0;
+  border-top: 1px solid var(--mute);
+}
+
+article.permalink ul,
+article.permalink ol {
+  padding-left: 1.5em;
+}
+
+
+
+
+
+
+
+article.permalink time,
+article.permalink footer {
+  color: var(--mute);
+}
+
+article.permalink footer.links {
+  border-top: 1px solid var(--mute);
+}
+
+article.permalink footer.links div {
+  padding-bottom: 1rem;
+}
+
+
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print {
+  @page { size: letter; margin: 2.54cm 1.8cm; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    padding: 0;
+    color: #000;
+    background: #fff;
+  }
+
+  article.permalink { max-width: none; }
+
+  article.permalink figure {
+    position: relative;
+    page-break-after: always;
+    margin: -2.54cm -1.8cm 0;
+    width: calc(100% + 3.6cm);
+    border-radius: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  article.permalink figure::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .65));
+    pointer-events: none;
+  }
+
+  article.permalink figure h1 {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 6rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, .7);
+    z-index: 1;
+  }
+
+  article.permalink audio,
+  article.permalink footer.artwork-credit { display: none; }
+
+  a    { color: #000; text-decoration: underline; }
+  h1, h2, h3, h4 { page-break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  img, blockquote, pre, figure, table { page-break-inside: avoid; }
+
+  article.permalink section pre        { border: 1px solid #ccc; background: none; }
+  article.permalink section blockquote { border-left-color: #000; color: #000; }
+  article.permalink section th,
+  article.permalink section td         { border-color: #ccc; }
+  article.permalink section th         { background: none; }
+
+  article.permalink footer.links       { border-top: 1pt solid #000; }
+  article.permalink footer.links h2    { color: #000; }
+  article.permalink footer.links a     { text-decoration: none; }
+}

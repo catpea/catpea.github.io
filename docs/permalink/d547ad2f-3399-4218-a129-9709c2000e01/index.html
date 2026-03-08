@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,121 +8,125 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-02/poem-0420.avif" alt="">
-      <h1>Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-02/poem-0420.avif" alt="Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter">
     </figure>
-    <header>
-      <time datetime="2021-04-25">4/24/2021</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-02/poem-0420.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-02/poem-0420.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter</h1>
+
+          <time class="permalink-time" datetime="2021-04-25">4/24/2021</time>
+  </header>
+
     <section>
-<p>Normally,</p>
-<p>you want to go as simple as possible.</p>
-<p>So the main file to your program should not be the program it self,</p>
-<p>but rather a kind of an index of all the things that you are calling.</p>
-<p>It should be written for your <a href="https://www.youtube.com/watch?v=IHJd-vk5x7k">Rubber Duck</a>,</p>
-<p>for your tired self few years down the road.</p>
-<p>The opening file to your program,</p>
-<p>ties everything together, reveals the structure of the whole thing.</p>
-<p>It should be basic if/then statements,</p>
-<p>and calls to functions that do the actual work.</p>
-<hr>
-<p>If you ever change your mind about something in your program,</p>
-<p>you will only have to edit that simple main file to make the changes.</p>
-<hr>
-<p>But, as you can imagine, some programs can get really complex,</p>
-<p>even a simple chat application can turn a simple program into non sequential madness.</p>
-<p>Where things jump out of the server at you,</p>
-<p>when for example someone sends you a private message.</p>
-<p>All of a sudden, your program can&#39;t have a starting point,</p>
-<p>can&#39;t to things in a sequence.</p>
-<p>It is no longer like the music roll in a player piano,</p>
-<p>but more like a telegraph, a radio, or a phone.</p>
-<p>It first has to listen,</p>
-<p>and only then can it execute its functions.</p>
-<hr>
-<p>So there is this programming pattern, or a strategy called Event Emitter,</p>
-<p>and it only really has two things, it is part of its beauty.</p>
-<p>The event emitter can listen to events,</p>
-<p>and it can emit events.</p>
-<p>In a chat program,</p>
-<p>it would listen for an event named &quot;incoming-message&quot;.</p>
-<p>The thing that it would listen to is is the web server,</p>
-<p>you need a hosting company that will sell you a server for about $5 per month.</p>
-<p>Once you install the chat program, and someone connects to it,</p>
-<p>and types something in, and hits send...</p>
-<p>They will be emitting an event to the server,</p>
-<p>let us call this event &quot;outgoing-message&quot;.</p>
-<p>So the stranger presses the send button,</p>
-<p>and the now-standard-program attached to the &quot;outgoing-message&quot; event...</p>
-<p>Will grab the text that the stranger typed in,</p>
-<p>create a data object and then send it to the server.</p>
-<p>The server will then send the object to all the users in the chat,</p>
-<p>and that will be represented as the &quot;incoming-message&quot; event...</p>
-<p>Here the event handler will take the text out of the object,</p>
-<p>and stick it into the chat window.</p>
-<hr>
-<p>All this requires maybe 20 lines of code,</p>
-<p>it is a very simple program, as an example, it is just two events, &quot;incoming-message&quot; and &quot;outgoing-message&quot;,</p>
-<p>Both of those events have very simple programs attached to them,</p>
-<p>these programs are just five line functions, and the correct term for them is event handler.</p>
-<p>Once an event is received by the event emitter,</p>
-<p>it will trigger the event handler.</p>
-<p>And yes the event handlers can also emit events,</p>
-<p>making the entire program come to life.</p>
-<p>And that is it,</p>
-<p>Event Emitter can listen for events, or emit them.</p>
-<hr>
-<p><a href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">My most recent use of the EventEmitter, was just about a week ago</a>,</p>
-<p>I had to say, once the server has started, then begin downloading its files.</p>
-<p>I wanted to create a very simple abstraction,</p>
-<p>and not need to worry about what server I will end up using, or how long it will take for it to start.</p>
-<hr>
-<p>One of my most favorite ways of perceiving the event emitter,</p>
-<p>is to see it as a command system, instead of thinking about emitting an event, I think about executing a command.</p>
-<p>And my most colorful use of the Event Emitter,</p>
-<p>was for a MUD program, an interactive Text Adventure Game.</p>
-<p>I made a world that consisted of locations like room, palace, woods,</p>
-<p>and then send a Golden Snitch from Harry Potter Movies through it.</p>
-<p>The Golden Snitch, when opening doors,</p>
-<p>would actually trigger the Open Door event and i9nteract with the environment.</p>
-<p>(I don&#39;t know what a Golden Snitch does in Harry Potter&#39;s books,</p>
-<p>I am a fan of Twilight, I never had time for Harry Potter, but maybe some day.</p>
-<p>One time after a long programming session for a charity event,</p>
-<p>my teammates and I were asked to to step out for a photo.</p>
-<p>And the day was so ridiculous bright that I before I could stop myself I said,</p>
-<p>if I step into that sun I am going to sparkle like a vampire from Twilight.</p>
-<p>This was a weekend long programming session,</p>
-<p>and I really didn&#39;t like the idea of mixing PHP with JavaScript when node.js was already around.</p>
-<p>I was wearing my superman shirt, one one programmer, was fool enough to say &quot;Hey Superman&quot;,</p>
-<p>to which I quickly replied *Good morning Lois* in the most Clark Kent voice I could muster.</p>
-<p>I am pretty sure nobody liked me there,</p>
-<p>I was justifying to be funny.)</p>
-<p>Anyway, the Golden Snitch led me to a new appreciation for the Event Emitter,</p>
-<p>it makes creating virtual worlds very simple, and very fun, I called it Thought Programming, because of how little work needs to get done.</p>
-<p>And since it does not matter if it is a Non Playable Character or a User moving through an environment,</p>
-<p>it is fun to watch things happening all on their own when just the bots are bumping into each other.</p>
-<p>As a side note, I once connected two chat bots together over a network,</p>
-<p>and they started chatting to one another, and asking and sometimes answering each other&#39;s questions, that is a perfect job for the emitter, it was like 15 lines of code.</p>
-<hr>
-<p>In closing, the Event Emitter makes complicated things simple,</p>
-<p>and if you stick to structuring your entire program out of events, you can create a beautiful diagram of it.</p>
-<p>Even without a computer, armed with just an... arm and a pencil, you can start sketching complicated multi-input/multi-user programs,</p>
-<p>with multiple things creating ordered chaos.</p>
-<p>If you are just starting out with programming,</p>
-<p>try to imagine how you would create a program you like, by just listening to, and emitting events.</p>
-<p>And if there is ever a program that is confusing you,</p>
-<p>try wrapping it in an Event Emitter, and giving it a simpler front-end.</p>
+<p class="permalink-paragraph">Normally,</p>
+<p class="permalink-paragraph">you want to go as simple as possible.</p>
+<p class="permalink-paragraph">So the main file to your program should not be the program it self,</p>
+<p class="permalink-paragraph">but rather a kind of an index of all the things that you are calling.</p>
+<p class="permalink-paragraph">It should be written for your <a href="https://www.youtube.com/watch?v=IHJd-vk5x7k">Rubber Duck</a>,</p>
+<p class="permalink-paragraph">for your tired self few years down the road.</p>
+<p class="permalink-paragraph">The opening file to your program,</p>
+<p class="permalink-paragraph">ties everything together, reveals the structure of the whole thing.</p>
+<p class="permalink-paragraph">It should be basic if/then statements,</p>
+<p class="permalink-paragraph">and calls to functions that do the actual work.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">If you ever change your mind about something in your program,</p>
+<p class="permalink-paragraph">you will only have to edit that simple main file to make the changes.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">But, as you can imagine, some programs can get really complex,</p>
+<p class="permalink-paragraph">even a simple chat application can turn a simple program into non sequential madness.</p>
+<p class="permalink-paragraph">Where things jump out of the server at you,</p>
+<p class="permalink-paragraph">when for example someone sends you a private message.</p>
+<p class="permalink-paragraph">All of a sudden, your program can&#39;t have a starting point,</p>
+<p class="permalink-paragraph">can&#39;t to things in a sequence.</p>
+<p class="permalink-paragraph">It is no longer like the music roll in a player piano,</p>
+<p class="permalink-paragraph">but more like a telegraph, a radio, or a phone.</p>
+<p class="permalink-paragraph">It first has to listen,</p>
+<p class="permalink-paragraph">and only then can it execute its functions.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So there is this programming pattern, or a strategy called Event Emitter,</p>
+<p class="permalink-paragraph">and it only really has two things, it is part of its beauty.</p>
+<p class="permalink-paragraph">The event emitter can listen to events,</p>
+<p class="permalink-paragraph">and it can emit events.</p>
+<p class="permalink-paragraph">In a chat program,</p>
+<p class="permalink-paragraph">it would listen for an event named &quot;incoming-message&quot;.</p>
+<p class="permalink-paragraph">The thing that it would listen to is is the web server,</p>
+<p class="permalink-paragraph">you need a hosting company that will sell you a server for about $5 per month.</p>
+<p class="permalink-paragraph">Once you install the chat program, and someone connects to it,</p>
+<p class="permalink-paragraph">and types something in, and hits send...</p>
+<p class="permalink-paragraph">They will be emitting an event to the server,</p>
+<p class="permalink-paragraph">let us call this event &quot;outgoing-message&quot;.</p>
+<p class="permalink-paragraph">So the stranger presses the send button,</p>
+<p class="permalink-paragraph">and the now-standard-program attached to the &quot;outgoing-message&quot; event...</p>
+<p class="permalink-paragraph">Will grab the text that the stranger typed in,</p>
+<p class="permalink-paragraph">create a data object and then send it to the server.</p>
+<p class="permalink-paragraph">The server will then send the object to all the users in the chat,</p>
+<p class="permalink-paragraph">and that will be represented as the &quot;incoming-message&quot; event...</p>
+<p class="permalink-paragraph">Here the event handler will take the text out of the object,</p>
+<p class="permalink-paragraph">and stick it into the chat window.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">All this requires maybe 20 lines of code,</p>
+<p class="permalink-paragraph">it is a very simple program, as an example, it is just two events, &quot;incoming-message&quot; and &quot;outgoing-message&quot;,</p>
+<p class="permalink-paragraph">Both of those events have very simple programs attached to them,</p>
+<p class="permalink-paragraph">these programs are just five line functions, and the correct term for them is event handler.</p>
+<p class="permalink-paragraph">Once an event is received by the event emitter,</p>
+<p class="permalink-paragraph">it will trigger the event handler.</p>
+<p class="permalink-paragraph">And yes the event handlers can also emit events,</p>
+<p class="permalink-paragraph">making the entire program come to life.</p>
+<p class="permalink-paragraph">And that is it,</p>
+<p class="permalink-paragraph">Event Emitter can listen for events, or emit them.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph"><a href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">My most recent use of the EventEmitter, was just about a week ago</a>,</p>
+<p class="permalink-paragraph">I had to say, once the server has started, then begin downloading its files.</p>
+<p class="permalink-paragraph">I wanted to create a very simple abstraction,</p>
+<p class="permalink-paragraph">and not need to worry about what server I will end up using, or how long it will take for it to start.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">One of my most favorite ways of perceiving the event emitter,</p>
+<p class="permalink-paragraph">is to see it as a command system, instead of thinking about emitting an event, I think about executing a command.</p>
+<p class="permalink-paragraph">And my most colorful use of the Event Emitter,</p>
+<p class="permalink-paragraph">was for a MUD program, an interactive Text Adventure Game.</p>
+<p class="permalink-paragraph">I made a world that consisted of locations like room, palace, woods,</p>
+<p class="permalink-paragraph">and then send a Golden Snitch from Harry Potter Movies through it.</p>
+<p class="permalink-paragraph">The Golden Snitch, when opening doors,</p>
+<p class="permalink-paragraph">would actually trigger the Open Door event and i9nteract with the environment.</p>
+<p class="permalink-paragraph">(I don&#39;t know what a Golden Snitch does in Harry Potter&#39;s books,</p>
+<p class="permalink-paragraph">I am a fan of Twilight, I never had time for Harry Potter, but maybe some day.</p>
+<p class="permalink-paragraph">One time after a long programming session for a charity event,</p>
+<p class="permalink-paragraph">my teammates and I were asked to to step out for a photo.</p>
+<p class="permalink-paragraph">And the day was so ridiculous bright that I before I could stop myself I said,</p>
+<p class="permalink-paragraph">if I step into that sun I am going to sparkle like a vampire from Twilight.</p>
+<p class="permalink-paragraph">This was a weekend long programming session,</p>
+<p class="permalink-paragraph">and I really didn&#39;t like the idea of mixing PHP with JavaScript when node.js was already around.</p>
+<p class="permalink-paragraph">I was wearing my superman shirt, one one programmer, was fool enough to say &quot;Hey Superman&quot;,</p>
+<p class="permalink-paragraph">to which I quickly replied *Good morning Lois* in the most Clark Kent voice I could muster.</p>
+<p class="permalink-paragraph">I am pretty sure nobody liked me there,</p>
+<p class="permalink-paragraph">I was justifying to be funny.)</p>
+<p class="permalink-paragraph">Anyway, the Golden Snitch led me to a new appreciation for the Event Emitter,</p>
+<p class="permalink-paragraph">it makes creating virtual worlds very simple, and very fun, I called it Thought Programming, because of how little work needs to get done.</p>
+<p class="permalink-paragraph">And since it does not matter if it is a Non Playable Character or a User moving through an environment,</p>
+<p class="permalink-paragraph">it is fun to watch things happening all on their own when just the bots are bumping into each other.</p>
+<p class="permalink-paragraph">As a side note, I once connected two chat bots together over a network,</p>
+<p class="permalink-paragraph">and they started chatting to one another, and asking and sometimes answering each other&#39;s questions, that is a perfect job for the emitter, it was like 15 lines of code.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">In closing, the Event Emitter makes complicated things simple,</p>
+<p class="permalink-paragraph">and if you stick to structuring your entire program out of events, you can create a beautiful diagram of it.</p>
+<p class="permalink-paragraph">Even without a computer, armed with just an... arm and a pencil, you can start sketching complicated multi-input/multi-user programs,</p>
+<p class="permalink-paragraph">with multiple things creating ordered chaos.</p>
+<p class="permalink-paragraph">If you are just starting out with programming,</p>
+<p class="permalink-paragraph">try to imagine how you would create a program you like, by just listening to, and emitting events.</p>
+<p class="permalink-paragraph">And if there is ever a program that is confusing you,</p>
+<p class="permalink-paragraph">try wrapping it in an Event Emitter, and giving it a simpler front-end.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>Rubber Duck (www.youtube.com)<br><a href="https://www.youtube.com/watch?v=IHJd-vk5x7k">https://www.youtube.com/watch?v=IHJd-vk5x7k</a></div>
-      <div>My most recent use of the EventEmitter, was just about a week ago (github.com)<br><a href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28</a></div>
+      <div class="permalink-link"><a href="https://www.youtube.com/watch?v=IHJd-vk5x7k">Rubber Duck</a> (www.youtube.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">My most recent use of the EventEmitter, was just about a week ago</a> (github.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://unsplash.com/photos/BxEgi-70FQk">credit</a>
     </footer>
   </article>

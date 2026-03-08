@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,161 +8,165 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-06/poem-1143.avif" alt="">
-      <h1>Programming Is Not Hard; You Just Need Real Context</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-06/poem-1143.avif" alt="Programming Is Not Hard; You Just Need Real Context">
     </figure>
-    <header>
-      <time datetime="2023-04-19">4/18/2023</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-06/poem-1143.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-06/poem-1143.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Programming Is Not Hard; You Just Need Real Context</h1>
+
+          <time class="permalink-time" datetime="2023-04-19">4/18/2023</time>
+  </header>
+
     <section>
-<p>Allow me to explain to you completely and in context,
+<p class="permalink-paragraph">Allow me to explain to you completely and in context,
 what relational databases are, and how they work.</p>
-<hr>
-<p>You might have already heard that databases are like spreadsheets,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">You might have already heard that databases are like spreadsheets,
 they have rows and columns, but that is all you should visualize, rows and columns.</p>
-<p>Spreadsheets emphasize cells and have formulas like SUM,
+<p class="permalink-paragraph">Spreadsheets emphasize cells and have formulas like SUM,
 that can dynamically generate cell values.</p>
-<p>Database tables, focus on relationships with other tables,
+<p class="permalink-paragraph">Database tables, focus on relationships with other tables,
 to establish a relationship two tables will share data.</p>
-<p>Each table will have a column with the same information,
+<p class="permalink-paragraph">Each table will have a column with the same information,
 so that you can say join those two tables on that column.</p>
-<p>This is a different trick than dynamically calculated cells in spreadsheets,
+<p class="permalink-paragraph">This is a different trick than dynamically calculated cells in spreadsheets,
 but the underlying data structure is the same a grid, rows, columns cells or fields.</p>
-<hr>
-<p>The next thing textbooks talk about,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The next thing textbooks talk about,
 is the different types of joins.</p>
-<p>But there is only one type of join that you should ever remember,
+<p class="permalink-paragraph">But there is only one type of join that you should ever remember,
 the LEFT JOIN, or the one to many relationship.</p>
-<p>Now before we go any further,
+<p class="permalink-paragraph">Now before we go any further,
 we need to understand what we are doing, speaking in abstract terms is useless for understanding databases.</p>
-<p>You cannot understand databases, without a reason, a picture,
+<p class="permalink-paragraph">You cannot understand databases, without a reason, a picture,
 an idea, and our idea here is to create an internet version of a music player with multiple users.</p>
-<hr>
-<p>The first thing we must do, is create a starting point,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The first thing we must do, is create a starting point,
 and that is the notion of accounts, it is the main database table.</p>
-<p>The only thing this table really holds is a userID,
+<p class="permalink-paragraph">The only thing this table really holds is a userID,
 just in case you ever want to support multiple logins per account.</p>
-<p>Gmail has a feature, where you can combine inboxes,
+<p class="permalink-paragraph">Gmail has a feature, where you can combine inboxes,
 that is how a singe account would envelop multiple users.</p>
-<p>If we were just to run a LEFT JOIN or establish one to many relationship here,
+<p class="permalink-paragraph">If we were just to run a LEFT JOIN or establish one to many relationship here,
 we would get multiple rows for the same account, with different users.</p>
-<p>If you had one account with two users, you would get back, two rows,
+<p class="permalink-paragraph">If you had one account with two users, you would get back, two rows,
 they would have the same account number but different user information.</p>
-<hr>
-<p>Our professor, wold have a huge-problem with this setup,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Our professor, wold have a huge-problem with this setup,
 because the concept of database referential integrity states.</p>
-<p>That if you just have one user per account,
+<p class="permalink-paragraph">That if you just have one user per account,
 then you need a one to one relationship.</p>
-<p>And that would be pretty cute,
+<p class="permalink-paragraph">And that would be pretty cute,
 but nobody has time for that.</p>
-<p>We just use a left join everywhere,
+<p class="permalink-paragraph">We just use a left join everywhere,
 this way, we create a consistent tree.</p>
-<p>The account is root,
+<p class="permalink-paragraph">The account is root,
 it may contain multiple users.</p>
-<p>The account it root,
+<p class="permalink-paragraph">The account it root,
 it will totally contain multiple playlists.</p>
-<p>Now when you get into a playlists, and think of it as a root,
+<p class="permalink-paragraph">Now when you get into a playlists, and think of it as a root,
 then it will absolute have multiple songs.</p>
-<p>Now your songs will have multiple ratings,
+<p class="permalink-paragraph">Now your songs will have multiple ratings,
 bob give a song thumb down, Alice gives it thumbs up.</p>
-<p>When you are connecting tables together, relating them,
+<p class="permalink-paragraph">When you are connecting tables together, relating them,
 imagine a folder structure.</p>
-<hr>
-<p>Now we violate another rule, the do not repeat yourself rule,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now we violate another rule, the do not repeat yourself rule,
 because we are going top put accountId into evey table. User, Playlist, Songs, Rating, etc.</p>
-<p>Becasue we are working in the real world scenatio of making a minimum viable product,
+<p class="permalink-paragraph">Becasue we are working in the real world scenatio of making a minimum viable product,
 accountId is very special.</p>
-<p>Because as your user is moving around the user interface,
+<p class="permalink-paragraph">Because as your user is moving around the user interface,
 they are always submitting that accountId, that information is always present.</p>
-<p>So even though we have this tree structure of nested tables,
+<p class="permalink-paragraph">So even though we have this tree structure of nested tables,
 to get all the songs you only query one freaking table, you say:</p>
-<p>Select all from Songs table where accountId is,
+<p class="permalink-paragraph">Select all from Songs table where accountId is,
 and here you plugin in that account id number.</p>
-<p>Later, you can run a query to see if the account is active,
+<p class="permalink-paragraph">Later, you can run a query to see if the account is active,
 and maybe create something complex.</p>
-<p>Where you combine account table with user table,
+<p class="permalink-paragraph">Where you combine account table with user table,
 with playlists table and the songs table, and here you will get all songs with account information.</p>
-<p>Presumably, this would be useful for some internal company report,
+<p class="permalink-paragraph">Presumably, this would be useful for some internal company report,
 or some graph or statistics, that functionality is there, but you don’t need it.</p>
-<p>Because you did repeat yourself,
+<p class="permalink-paragraph">Because you did repeat yourself,
 you put the accountId everywhere.</p>
-<p>All tables have an id, but that is one piece of information,
+<p class="permalink-paragraph">All tables have an id, but that is one piece of information,
 that you never change, you can change an email, or mark account disabled.</p>
-<p>But you never have a need to alter an id,
+<p class="permalink-paragraph">But you never have a need to alter an id,
 and you should never do that anyway.</p>
-<hr>
-<p>Now, to make the website go, you now create <a href="https://nobackend.org/dreamcode.html">beautiful function names</a>,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now, to make the website go, you now create <a href="https://nobackend.org/dreamcode.html">beautiful function names</a>,
 that you will use for your API.</p>
-<p>JavaScript, the only language that works in he browser,
+<p class="permalink-paragraph">JavaScript, the only language that works in he browser,
 and on the server, that is the only language you learn.</p>
-<p>Allows you to mark your functions for export,
+<p class="permalink-paragraph">Allows you to mark your functions for export,
 and then when importing them say import * as playlist from playlist.js</p>
-<p>So you are never crating a list of functions, like an array with names,
+<p class="permalink-paragraph">So you are never crating a list of functions, like an array with names,
 so when you add an API function such as addSongToPlaylist.</p>
-<p>You hit save, nodemon restarts your sever,
+<p class="permalink-paragraph">You hit save, nodemon restarts your sever,
 and that function is now part of your API.</p>
-<p>These functions are conceptually higher than your database,
+<p class="permalink-paragraph">These functions are conceptually higher than your database,
 so your signUp funcion, will execute two queries.</p>
-<p>Add account, where you grab the accoun number that the database gives you,
+<p class="permalink-paragraph">Add account, where you grab the accoun number that the database gives you,
 and then add user, where the first thing you do is save the accountId.</p>
-<p>And then you put in the email,
+<p class="permalink-paragraph">And then you put in the email,
 password, first last name, whatever.</p>
-<p>Encrypt or hash your password,
+<p class="permalink-paragraph">Encrypt or hash your password,
 encrypt means that you have a master password for all user passwords.</p>
-<p>Not a good idea,
+<p class="permalink-paragraph">Not a good idea,
 it just adds unnecessary worry.</p>
-<p>If you hash your password, you still get an encrypted string,
+<p class="permalink-paragraph">If you hash your password, you still get an encrypted string,
 but there is no way for you to decrypt it.</p>
-<p>It is a one way encryption,
+<p class="permalink-paragraph">It is a one way encryption,
 to check if the password matches, during login.</p>
-<p>You encrypt the password user is sending again,
+<p class="permalink-paragraph">You encrypt the password user is sending again,
 and compare if the encrypted strings match.</p>
-<hr>
-<p>These functions become your automatic API,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">These functions become your automatic API,
 when you wrap them in a JavaScript Object Proxy.</p>
-<p>An object proxy gives you the ability to intercept the call to the API,
+<p class="permalink-paragraph">An object proxy gives you the ability to intercept the call to the API,
 and either say that function does not exist, or execute it if it does.</p>
-<p>To create the API object that you apply the proxy to,
+<p class="permalink-paragraph">To create the API object that you apply the proxy to,
 you just use a spread operator on the objects returned by “import * as playlist from playlist.js”</p>
-<p>In this case the playlist object,
+<p class="permalink-paragraph">In this case the playlist object,
 it is now assigned to you api, and you API object now features all the funcions you marked for export in playlist.js.</p>
-<p>And here, you create a web socket and http endpoints,
+<p class="permalink-paragraph">And here, you create a web socket and http endpoints,
 that use application/json and thus can contian information like funcionName and functionArguments, along with Authentication.</p>
-<p>At first you present only signIn and signUp,
+<p class="permalink-paragraph">At first you present only signIn and signUp,
 but you always check for authentication property on the incoming object.</p>
-<p>Becasue once auithenticated, you than apply all the otherfuncions to the API,
+<p class="permalink-paragraph">Becasue once auithenticated, you than apply all the otherfuncions to the API,
 like uploadSong, or createPlaylist.</p>
-<p>When executing signIn, you will actually authenticate twice,
+<p class="permalink-paragraph">When executing signIn, you will actually authenticate twice,
 do not optimize that, hoisting your API from anonymous to logged in.</p>
-<p>And then performing signIn tasks, are two different things,
+<p class="permalink-paragraph">And then performing signIn tasks, are two different things,
 this grants you the ability to execute addPlaylist from caommand line for exmple.</p>
-<p>Without ever eve needing to sign in, there are different ways to acces your API,
+<p class="permalink-paragraph">Without ever eve needing to sign in, there are different ways to acces your API,
 and to account for all of them, you kind of authenticate twice when signingIn.</p>
-<p>Rule braking, makes your programs consistent,
+<p class="permalink-paragraph">Rule braking, makes your programs consistent,
 and powerful.</p>
-<hr>
-<p>Now you expose your API object as WebSocket, then via HTTP/S route,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now you expose your API object as WebSocket, then via HTTP/S route,
 you should call it v1, as in API version 1.</p>
-<p>And use the npm commander module, to expose your API,
+<p class="permalink-paragraph">And use the npm commander module, to expose your API,
 on the command line as well, just in case you ever need it.</p>
-<p>You don’t have to put authentication information int every command,
+<p class="permalink-paragraph">You don’t have to put authentication information int every command,
 just set it as an environment variable or a dot file.</p>
-<p>Now you are done, you have a headless API server,
+<p class="permalink-paragraph">Now you are done, you have a headless API server,
 and you grab Svelte and Bootstrap, create a UI, and use HTTP/S or web sockets.</p>
-<p>To call those neatly named api funcions singUp, signIn, addSong,
+<p class="permalink-paragraph">To call those neatly named api funcions singUp, signIn, addSong,
 which trigger one or more queries on your database…</p>
-<p>And return the table data,
+<p class="permalink-paragraph">And return the table data,
 that you then use in your interface.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>beautiful function names (nobackend.org)<br><a href="https://nobackend.org/dreamcode.html">https://nobackend.org/dreamcode.html</a></div>
+      <div class="permalink-link"><a href="https://nobackend.org/dreamcode.html">beautiful function names</a> (nobackend.org)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://www.pexels.com/photo/network-servers-on-an-enclosure-6466141/">credit</a>
     </footer>
   </article>

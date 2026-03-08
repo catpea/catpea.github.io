@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,140 +8,144 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-10/poem-1562.avif" alt="">
-      <h1>The Worker Queue Explained For The New Programmer</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-10/poem-1562.avif" alt="The Worker Queue Explained For The New Programmer">
     </figure>
-    <header>
-      <time datetime="2024-06-11">6/11/2024</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-10/poem-1562.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-10/poem-1562.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">The Worker Queue Explained For The New Programmer</h1>
+
+          <time class="permalink-time" datetime="2024-06-11">6/11/2024</time>
+  </header>
+
     <section>
-<p>Visual programming, like any kind of programming,
+<p class="permalink-paragraph">Visual programming, like any kind of programming,
 can get pretty complicated.</p>
-<p>If we were to base visual programming,
+<p class="permalink-paragraph">If we were to base visual programming,
 on standard programming concepts like loops and ifs…</p>
-<p>We would quickly defeat the point of visual programming,
+<p class="permalink-paragraph">We would quickly defeat the point of visual programming,
 which is easy to comprehend programs.</p>
-<p>Low level constructs are useful to get things started,
+<p class="permalink-paragraph">Low level constructs are useful to get things started,
 but too primitive to use in creation of large programs.</p>
-<hr>
-<p>Furthermore there is a problem,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Furthermore there is a problem,
 because computers have multiple CPU/s.</p>
-<p>So from the get go,
+<p class="permalink-paragraph">So from the get go,
 we have to write programs with parts that may run at the same time.</p>
-<p>How in the wold can you manage such a feat,
+<p class="permalink-paragraph">How in the wold can you manage such a feat,
 not only tracing the flow of your program as you design it.</p>
-<p>But 8 or 32 flows of your program at the same time,
+<p class="permalink-paragraph">But 8 or 32 flows of your program at the same time,
 when do you know all the flows completed, even.</p>
-<hr>
-<p>In comes, the <a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a>,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">In comes, the <a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a>,
 it is a list of things that need to get done.</p>
-<p>Instead of loading a list of blog articles that need processing,
+<p class="permalink-paragraph">Instead of loading a list of blog articles that need processing,
 and then pushing them down a simple pipeline.</p>
-<p>Where it is likely,
+<p class="permalink-paragraph">Where it is likely,
 that only a singe CPU core would process it,</p>
-<p>And you have to keep track of,
+<p class="permalink-paragraph">And you have to keep track of,
 a no more data signal, along with too much data, or the slow-down signal.</p>
-<p>You load your blog articles,
+<p class="permalink-paragraph">You load your blog articles,
 and push them onto a worker queue.</p>
-<p>In visual programming, that would mean,
+<p class="permalink-paragraph">In visual programming, that would mean,
 connect your JSON Feed, where you blog articles are, to a Worker Queue Node.</p>
-<p>Pretty much,
+<p class="permalink-paragraph">Pretty much,
 a single swipe of a mouse.</p>
-<p>The worker queue, has a single output,
+<p class="permalink-paragraph">The worker queue, has a single output,
 that spits all the data out once it has been processed.</p>
-<p>That is the DONE signal,
+<p class="permalink-paragraph">That is the DONE signal,
 you get another feed, this time a list of transformed articles.</p>
-<p>And it has the marvelous,
+<p class="permalink-paragraph">And it has the marvelous,
 worker input socket.</p>
-<p>Where, you put your program in,
+<p class="permalink-paragraph">Where, you put your program in,
 conceptually your blog article processor function is a worker.</p>
-<p>So you have, JSON Feed Box, a Worker Function Chain Of Boxes, plugged into the Queue,
+<p class="permalink-paragraph">So you have, JSON Feed Box, a Worker Function Chain Of Boxes, plugged into the Queue,
 and an output port, that spits out another feed you can iterate over.</p>
-<p>You can configure the number of workers to match your CPU core count,
+<p class="permalink-paragraph">You can configure the number of workers to match your CPU core count,
 or set it to any number including 1.</p>
-<p>If you are going to process one article at a time,
+<p class="permalink-paragraph">If you are going to process one article at a time,
 don’t wait for the whole list, tap into the job done output socket.</p>
-<p>If you can afford to initially process your blog articles,
+<p class="permalink-paragraph">If you can afford to initially process your blog articles,
 with 32 workers crunching data at the same time, go for it.</p>
-<p>But then need to start worry about memory as things get complex,
+<p class="permalink-paragraph">But then need to start worry about memory as things get complex,
 you send the list to another queue, this time process one item at a time.</p>
-<hr>
-<p>You are not limited to the CPU cores,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">You are not limited to the CPU cores,
 of a single computer.</p>
-<p>Imagine you have 128 articles in your blog,
+<p class="permalink-paragraph">Imagine you have 128 articles in your blog,
 and you want to clean them up.</p>
-<p>If you have a Raspberry PI Cluster,
+<p class="permalink-paragraph">If you have a Raspberry PI Cluster,
 of say 32 computers, totaling 128 cores.</p>
-<p>You can theoretically, have a worker on each of those,
+<p class="permalink-paragraph">You can theoretically, have a worker on each of those,
 distributing your worker queue processing to theoretically run 128 times faster.</p>
-<p>Go from two minute wait time (if your program ran single threaded),
+<p class="permalink-paragraph">Go from two minute wait time (if your program ran single threaded),
 to two second wait time.</p>
-<p>There would be bottlenecks,
+<p class="permalink-paragraph">There would be bottlenecks,
 but you could deal with those.</p>
-<p>The theory here matters the most,
+<p class="permalink-paragraph">The theory here matters the most,
 as you can go beyond the local network, now.</p>
-<p>And request, 128 powerful servers,
+<p class="permalink-paragraph">And request, 128 powerful servers,
 which will get booted up, just for a moment, and won’t break the bank.</p>
-<p>This kind of dynamic worker network expansion,
+<p class="permalink-paragraph">This kind of dynamic worker network expansion,
 is called self provisioning, or automatic scaling.</p>
-<p>If you wanted to let your users,
+<p class="permalink-paragraph">If you wanted to let your users,
 to convert their blogs to video, you would want a self provisioning network.</p>
-<p>As it could theoretically scale, to meet all demand,
+<p class="permalink-paragraph">As it could theoretically scale, to meet all demand,
 and since you know ahead of time how much it cost to run the remote workers.</p>
-<p>You just include that in what the user pays,
+<p class="permalink-paragraph">You just include that in what the user pays,
 so you don’t worry about the cost, and it wouldn’t be to expensive.</p>
-<hr>
-<p>There is one more interesting use of a queue,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">There is one more interesting use of a queue,
 that I must mention as it is just too enchanting.</p>
-<p>If for example, you needed 128 cooking recipes,
+<p class="permalink-paragraph">If for example, you needed 128 cooking recipes,
 with some strained but interesting background stories.</p>
-<p>You could put that in a queue, and create a worker,
+<p class="permalink-paragraph">You could put that in a queue, and create a worker,
 that posts a bounty somewhere.</p>
-<p>And a lady comes in, shares her recipe gets paid,
+<p class="permalink-paragraph">And a lady comes in, shares her recipe gets paid,
 and your worker marks that job as solved.</p>
-<p>Later sending it to another queue that verifies quality,
+<p class="permalink-paragraph">Later sending it to another queue that verifies quality,
 perhaps even with the use of AI this time.</p>
-<hr>
-<p>These functions that comprise a worker,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">These functions that comprise a worker,
 do resent a challenge to the novice programmer.</p>
-<p>But, this is a solved problem,
+<p class="permalink-paragraph">But, this is a solved problem,
 and Apple Automator is a neat example of that.</p>
-<p>It is just a comprehensive library of actions
+<p class="permalink-paragraph">It is just a comprehensive library of actions
 with some options that you configure,</p>
-<p>Automator is a visual programming language,
+<p class="permalink-paragraph">Automator is a visual programming language,
 that chose to only allow for two ports, input an output.</p>
-<p>And rather than lines,
+<p class="permalink-paragraph">And rather than lines,
 the UI designers created the idea of Blocks that go on top of the other.</p>
-<hr>
-<p>For the sake of completion, the application framework,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">For the sake of completion, the application framework,
 that wraps these feeds, queues, and workers or automations.</p>
-<p>Is event based, I once called Event Based programming,
+<p class="permalink-paragraph">Is event based, I once called Event Based programming,
 Thought Programming.</p>
-<p>So you just emit events such as, load initial JSON feed,
+<p class="permalink-paragraph">So you just emit events such as, load initial JSON feed,
 program complete, save the result.</p>
-<p>And you setup listeners, that hear those events,
+<p class="permalink-paragraph">And you setup listeners, that hear those events,
 and respond with more actions such as load from URL and save to disk.</p>
-<hr>
-<p>So visual programming done right,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So visual programming done right,
 does not bother you with ifs and loops.</p>
-<p>It brings out the Elite, Exclusive, and Luxury patters,
+<p class="permalink-paragraph">It brings out the Elite, Exclusive, and Luxury patters,
 that guide your hand.</p>
-<p>It is of some note, that the more luxurious the pattern,
+<p class="permalink-paragraph">It is of some note, that the more luxurious the pattern,
 the uglier it is in standard non-visual code.</p>
-<p>It is just hard to track everything,
+<p class="permalink-paragraph">It is just hard to track everything,
 as there are no shortcuts here you are operating a virtual machine.</p>
-<p>But once you move up to the higher generation of programming languages,
+<p class="permalink-paragraph">But once you move up to the higher generation of programming languages,
 then it is just a couple of boxes, as the hard to imagine machine becomes visualized.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>Worker Queue (www.youtube.com)<br><a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue</a></div>
+      <div class="permalink-link"><a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a> (www.youtube.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

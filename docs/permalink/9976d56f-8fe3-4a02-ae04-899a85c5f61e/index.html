@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,200 +8,204 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-10/poem-1616.avif" alt="">
-      <h1>Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-10/poem-1616.avif" alt="Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong">
     </figure>
-    <header>
-      <time datetime="2024-08-04">8/3/2024</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-10/poem-1616.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-10/poem-1616.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</h1>
+
+          <time class="permalink-time" datetime="2024-08-04">8/3/2024</time>
+  </header>
+
     <section>
-<p>I recall some expert giving his opinion on the work of a young researcher,
+<p class="permalink-paragraph">I recall some expert giving his opinion on the work of a young researcher,
 that went something like:</p>
-<p>“All the new breakthroughs they claimed to have made are old,
+<p class="permalink-paragraph">“All the new breakthroughs they claimed to have made are old,
 and everything else has already been proven wrong.”</p>
-<p>I think this is lovely,
+<p class="permalink-paragraph">I think this is lovely,
 and I am sure the expert was wrong, and off his head.</p>
-<p>And the loveliness comes from the fact that the young researcher,
+<p class="permalink-paragraph">And the loveliness comes from the fact that the young researcher,
 was independently re-inventing things.</p>
-<p>Becoming as wise as the original inventors,
+<p class="permalink-paragraph">Becoming as wise as the original inventors,
 and becoming able to see all the paths they didn’t take.</p>
-<p>The old guy was wrong,
+<p class="permalink-paragraph">The old guy was wrong,
 the young researcher probably changed the world.</p>
-<hr>
-<p>Lets jump right into it, as the introduction would take hours,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Lets jump right into it, as the introduction would take hours,
 and I primary want you to know what a data structure feels like.</p>
-<p>So, programmers have variables of type number and text (called strings of letters),
+<p class="permalink-paragraph">So, programmers have variables of type number and text (called strings of letters),
 and then many of them don’t realize they have bucket variables.</p>
-<p>Those are objects and lists (called arrays),
+<p class="permalink-paragraph">Those are objects and lists (called arrays),
 and I call them buckets, because they can hold other variables of any type.</p>
-<p>In low level programming languages like C a string variable is almost a bucket,
+<p class="permalink-paragraph">In low level programming languages like C a string variable is almost a bucket,
 because it is an array of numbers that represent letters.</p>
-<p>But we are working with JavaScript, on a higher level,
+<p class="permalink-paragraph">But we are working with JavaScript, on a higher level,
 where we can just put some text in quotes and we get a string variable.</p>
-<p>Not some array,
+<p class="permalink-paragraph">Not some array,
 of whatever.</p>
-<hr>
-<p>Now this being the modern world,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now this being the modern world,
 we want arrays to announce when they change.</p>
-<p>This is why we are using a High Level language,
+<p class="permalink-paragraph">This is why we are using a High Level language,
 we don’t want to be tripping over type definitions and low level concepts.</p>
-<p>Because what we are doing is already messy,
+<p class="permalink-paragraph">Because what we are doing is already messy,
 lets say our array holds a list of people.</p>
-<p>And that list can be updated by the server,
+<p class="permalink-paragraph">And that list can be updated by the server,
 or from the user interface.</p>
-<p>There are many crazy ways that programmers try to tame this,
+<p class="permalink-paragraph">There are many crazy ways that programmers try to tame this,
 event emitters with wildcards, immutable data structures, alcohol.</p>
-<p>But we want to be revolutionary,
+<p class="permalink-paragraph">But we want to be revolutionary,
 our array will emit a singe message when something is added or removed.</p>
-<p>It will tell all the things interested in it,
+<p class="permalink-paragraph">It will tell all the things interested in it,
 I changed.</p>
-<p>If we tracked added or removed, which seems efficient,
+<p class="permalink-paragraph">If we tracked added or removed, which seems efficient,
 our user interface would need to do two different things.</p>
-<p>But we are not going to be efficient, and send out only a notification of change,
+<p class="permalink-paragraph">But we are not going to be efficient, and send out only a notification of change,
 and that will mean our user interface will have to re-run it self to update.</p>
-<p>There is room for optimization here,
+<p class="permalink-paragraph">There is room for optimization here,
 because our list will always mark entries with a unique ID.</p>
-<p>So when the UI is re-rendering, it can compare ID numbers,
+<p class="permalink-paragraph">So when the UI is re-rendering, it can compare ID numbers,
 and see what has been removed or added.</p>
-<p>But computers are fast, and we want to keep our code clean,
+<p class="permalink-paragraph">But computers are fast, and we want to keep our code clean,
 and encourage our coder to use a templating engine like Svelte.</p>
-<p>Which will look at the ID,
+<p class="permalink-paragraph">Which will look at the ID,
 and automatically optimize re-rendering of the UI.</p>
-<hr>
-<p>Now when we add or remove person,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now when we add or remove person,
 the array announces I changed.</p>
-<p>Lets us call our array a table,
+<p class="permalink-paragraph">Lets us call our array a table,
 to make it sound special and friendly.</p>
-<p>And give our table columns for integrity,
+<p class="permalink-paragraph">And give our table columns for integrity,
 id, first, last, age.</p>
-<p>We want to keep the same ID at all times,
+<p class="permalink-paragraph">We want to keep the same ID at all times,
 but first last and age <strong>can</strong> change.</p>
-<p>And just like with the array, we want to emit a single message,
+<p class="permalink-paragraph">And just like with the array, we want to emit a single message,
 I changed.</p>
-<p>We are not going to emit, filed empty, or error in filed,
+<p class="permalink-paragraph">We are not going to emit, filed empty, or error in filed,
 just changed.</p>
-<p>So with three users in our table,
+<p class="permalink-paragraph">So with three users in our table,
 we have 12 fields, containing id, first, last, age.</p>
-<p>The id field does not support changes,
+<p class="permalink-paragraph">The id field does not support changes,
 so we only have nine fields that announce their updates.</p>
-<hr>
-<p>And all of them just emit,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">And all of them just emit,
 changed.</p>
-<hr>
-<p>Lets say we have Alice Smith, 101, Bob Smith, 99, and Carol Smith, 50,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Lets say we have Alice Smith, 101, Bob Smith, 99, and Carol Smith, 50,
 where the number is their age.</p>
-<p>And now we create a report, with people over 100 years old,
+<p class="permalink-paragraph">And now we create a report, with people over 100 years old,
 in our case that will be Alice.</p>
-<p>And this is a toll order, because we have to monitor the table,
+<p class="permalink-paragraph">And this is a toll order, because we have to monitor the table,
 for when it changes.</p>
-<p>And we also have to monitor age column.
+<p class="permalink-paragraph">And we also have to monitor age column.
 because that will get updated as well, (think typo rather than yearly)</p>
-<p>So we are monitoring three fields and the array,
+<p class="permalink-paragraph">So we are monitoring three fields and the array,
 and then, to make our report, we re-run it at any of the four changes.</p>
-<p>Our filter for creating the report simply says:
+<p class="permalink-paragraph">Our filter for creating the report simply says:
 report.filter = table.filter( person.age gt 100 );</p>
-<p>This is pseudo code, but a special part of our system,
+<p class="permalink-paragraph">This is pseudo code, but a special part of our system,
 because the person object here, is not the perron in our table.</p>
-<p>We are using an object proxy, to intercept,
+<p class="permalink-paragraph">We are using an object proxy, to intercept,
 what is being used in a filter, and now we will know to subscribe to age.</p>
-<p>To listen to age for changes,
+<p class="permalink-paragraph">To listen to age for changes,
 and automatically update the report, we are already listening to the table.</p>
-<hr>
-<p>So our old and wrong, and inefficient, software machine,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So our old and wrong, and inefficient, software machine,
 creates a report, that updates it self, whenever its sources change.</p>
-<p>And as with everything else,
+<p class="permalink-paragraph">And as with everything else,
 the report will emit a change event.</p>
-<p>So now we can use this report as a source for a new report,
+<p class="permalink-paragraph">So now we can use this report as a source for a new report,
 and return all the last names of old people.</p>
-<p>We can chain,
+<p class="permalink-paragraph">We can chain,
 reports.</p>
-<p>This is just about 10 lines of code,
+<p class="permalink-paragraph">This is just about 10 lines of code,
 but we get automatic dependencies and updates.</p>
-<p>Hidden here is a mechanism,
+<p class="permalink-paragraph">Hidden here is a mechanism,
 for un-listening, to free up memory, a stop function for every report and table.</p>
-<hr>
-<p>Now, we tables that create and update other tables,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now, we tables that create and update other tables,
 let us give them order.</p>
-<p>Lets do something crazy and say,
+<p class="permalink-paragraph">Lets do something crazy and say,
 object folder has an array called folders.</p>
-<p>And this creates a tree, we make a root folder called application,
+<p class="permalink-paragraph">And this creates a tree, we make a root folder called application,
 and a folder called users, and add the users folder to application’s folder array.</p>
-<p>We can nest things like this to no end,
+<p class="permalink-paragraph">We can nest things like this to no end,
 creating an entire application hierarchy.</p>
-<p>To which we can attach tables,
+<p class="permalink-paragraph">To which we can attach tables,
 we can make a new array or throw them into the folders array.</p>
-<p>Very similar to how files work,
+<p class="permalink-paragraph">Very similar to how files work,
 in a file system.</p>
-<hr>
-<p>Now we can sort our reports,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now we can sort our reports,
 we can talk about people and users.</p>
-<p>And call tables from other places in the tree,
+<p class="permalink-paragraph">And call tables from other places in the tree,
 but which is more, we can map put the user interface with the tree.</p>
-<p>Application folder, would have a window, window would have a side pane,
+<p class="permalink-paragraph">Application folder, would have a window, window would have a side pane,
 and a main pane, main pane would have a list.</p>
-<p>A UI system like svelte, can crawl data structures like trees,
+<p class="permalink-paragraph">A UI system like svelte, can crawl data structures like trees,
 with a for each loop.</p>
-<p>So our window having a side pane, and a main pane,
+<p class="permalink-paragraph">So our window having a side pane, and a main pane,
 means we have two entries in the window’s folder array.</p>
-<p>And the for each loop would scan window.folders,
+<p class="permalink-paragraph">And the for each loop would scan window.folders,
 and first render a component for side pane, and then main pane.</p>
-<p>We can change the folder array to a report,
+<p class="permalink-paragraph">We can change the folder array to a report,
 and the for each loop would re-run making the UI dynamic.</p>
-<p>But out aim is to use the for each loop,
+<p class="permalink-paragraph">But out aim is to use the for each loop,
 with the users over 100 report.</p>
-<p>Our one line tree,
+<p class="permalink-paragraph">Our one line tree,
 and 10 line data machine.</p>
-<p>Will alert the for each loop, when the report changes,
+<p class="permalink-paragraph">Will alert the for each loop, when the report changes,
 efficiently updating the UI representing a person.</p>
-<p>But also at the same time,
+<p class="permalink-paragraph">But also at the same time,
 if only the person’s age changes, in the original table.</p>
-<p>The UI will just update that number alone,
+<p class="permalink-paragraph">The UI will just update that number alone,
 without re-running the for loop.</p>
-<hr>
-<p>Unfortunately it is not possible to go into greater detail,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Unfortunately it is not possible to go into greater detail,
 but there really inst much more to add.</p>
-<p>We have a tree with tables and reports that self update,
+<p class="permalink-paragraph">We have a tree with tables and reports that self update,
 and use svelte to efficiently decorate our data tree with user interface components.</p>
-<hr>
-<p>Svelte programmers would notice here,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Svelte programmers would notice here,
 that components don’t have to extract data because that happens in the table.</p>
-<p>This way user interface components can just deal with clicks,
+<p class="permalink-paragraph">This way user interface components can just deal with clicks,
 and filed and list updates.</p>
-<p>Low level and low-ish leveler programmers would notice scary things here,
+<p class="permalink-paragraph">Low level and low-ish leveler programmers would notice scary things here,
 because their programs demand discipline and force them away from dynamic UI stuff.</p>
-<p>And for the rest of us, we shouldn&#39;t feel bad that we only emit change events,
+<p class="permalink-paragraph">And for the rest of us, we shouldn&#39;t feel bad that we only emit change events,
 these tables never hold more than a screenful of stuff.</p>
-<p>My precise use case is color gradient creation for a fantasy user interface,
+<p class="permalink-paragraph">My precise use case is color gradient creation for a fantasy user interface,
 my tables will have five items on average.</p>
-<p>And my tree, does use tables for other baches,
+<p class="permalink-paragraph">And my tree, does use tables for other baches,
 so in my case the very structure of my tree also announces change.</p>
-<hr>
-<p>Programming only gets complex, when programmers don’t know the vision of a program,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Programming only gets complex, when programmers don’t know the vision of a program,
 imagine someone quote optimizing unquote our report to emit more than change.</p>
-<p>We lose that pretty simplicity, and if someone removes the tree,
+<p class="permalink-paragraph">We lose that pretty simplicity, and if someone removes the tree,
 thinking that was useless.</p>
-<p>We can no longer decorate the tree with user interface,
+<p class="permalink-paragraph">We can no longer decorate the tree with user interface,
 which in svelte is quite simple and readable.</p>
-<p>Few programmers optimizing, would complexity the application,
+<p class="permalink-paragraph">Few programmers optimizing, would complexity the application,
 and then code would become unreadable and need unit tests and an office of old men.</p>
-<hr>
-<p>Re-inventing, what people tell you has already proven to be wrong,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Re-inventing, what people tell you has already proven to be wrong,
 or has been done better is a magnificent way to learn and become an expert.</p>
-<p>And being inefficient, is quite the powerful act during re-invention,
+<p class="permalink-paragraph">And being inefficient, is quite the powerful act during re-invention,
 because those are the path that original inventors omitted thinking they are sub-optimal.</p>
-<p>But as the case is with rendering you can calculate if you are adding, or removing,
+<p class="permalink-paragraph">But as the case is with rendering you can calculate if you are adding, or removing,
 based on whether the ID is there or not, it is a quick check, not at all inefficient.</p>
-<hr>
-<p>I invite you all now, to ask your favorite AI,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I invite you all now, to ask your favorite AI,
 to create a minimalist JavaScript Signals implementation.</p>
-<p>And ask it about Object Oriented version,
+<p class="permalink-paragraph">And ask it about Object Oriented version,
 and how Signals help, and their subscribe/unsubscribe life-cycle.</p>
 
     </section>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

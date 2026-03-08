@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,83 +8,87 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-12/poem-1833.avif" alt="">
-      <h1>Reactive Programming For Girls</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-12/poem-1833.avif" alt="Reactive Programming For Girls">
     </figure>
-    <header>
-      <time datetime="2025-03-09">3/8/2025</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-12/poem-1833.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-12/poem-1833.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Reactive Programming For Girls</h1>
+
+          <time class="permalink-time" datetime="2025-03-09">3/8/2025</time>
+  </header>
+
     <section>
-<p>For those of you who are new to programming,
+<p class="permalink-paragraph">For those of you who are new to programming,
 you usually say, username = “alice”; followed by; refreshUserInterface().</p>
-<p>The program will then use the name alice,
+<p class="permalink-paragraph">The program will then use the name alice,
 in all the right places.</p>
-<p>But as you add more to your program, manually refreshing the user interface,
+<p class="permalink-paragraph">But as you add more to your program, manually refreshing the user interface,
 especially under some component architecture gets difficult, becomes unclear.</p>
-<hr>
-<p><a href="https://github.com/catpea/mawp/blob/00dd3480be884977109337441b38c5ec7d4797ab/test.html">In reactive programming, you first subscribe to username</a>,
+<hr class="permalink-divider">
+<p class="permalink-paragraph"><a href="https://github.com/catpea/mawp/blob/00dd3480be884977109337441b38c5ec7d4797ab/test.html">In reactive programming, you first subscribe to username</a>,
 think of username as a radio station.</p>
-<p>And then in your subscription, which is just a function,
+<p class="permalink-paragraph">And then in your subscription, which is just a function,
 that is called, when username changes.</p>
-<p>You put in the code that updates the UI,
+<p class="permalink-paragraph">You put in the code that updates the UI,
 and your username is now bound to the User Interface.</p>
-<p>You can just stop worrying about refreshing the UI,
+<p class="permalink-paragraph">You can just stop worrying about refreshing the UI,
 because you know any time you change the reactive variables</p>
-<p>The UI will update,
+<p class="permalink-paragraph">The UI will update,
 automatically.</p>
-<hr>
-<p>And you do just do one UI binding at a time,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">And you do just do one UI binding at a time,
 if you want to update few things, in a singe change.</p>
-<p>You just subscribe to the thing multiple times,
+<p class="permalink-paragraph">You just subscribe to the thing multiple times,
 a subscription is the end of the UI story, you set it and forget it.</p>
-<hr>
-<p>To assign alice to the username, you now say,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">To assign alice to the username, you now say,
 username .value = “alice”;</p>
-<p>So username, is no longer just a primitive variable,
+<p class="permalink-paragraph">So username, is no longer just a primitive variable,
 it is an object with a .value getter and setter.</p>
-<p>And then a .subscribe method, that accepts your function,
+<p class="permalink-paragraph">And then a .subscribe method, that accepts your function,
 and keeps track of all its subscribers.</p>
-<p>When you first subscribe, and there is a value in there already,
+<p class="permalink-paragraph">When you first subscribe, and there is a value in there already,
 for example bob, your subscriber will instantly get called with the string bob.</p>
-<p>But if the value is null, or undefined,
+<p class="permalink-paragraph">But if the value is null, or undefined,
 nothing will happen, your UI component will show a default state.</p>
-<p>Nothing also happens, if you change the value to what it already was,
+<p class="permalink-paragraph">Nothing also happens, if you change the value to what it already was,
 the subscribers will not be triggered.</p>
-<p>That is reactive programming,
+<p class="permalink-paragraph">That is reactive programming,
 everything else is up to you, you may move to functional reactive programming.</p>
-<p>Or create something that acts as a dependency tree for nested signals,
+<p class="permalink-paragraph">Or create something that acts as a dependency tree for nested signals,
 or just rely on your own application architecture.</p>
-<p>Or just use reactive variables alone, with the Document Object Model,
+<p class="permalink-paragraph">Or just use reactive variables alone, with the Document Object Model,
 because it is just .value and .subscribe everything is clear.</p>
-<hr>
-<p>Finally, I recommend you go reactive as soon as you can,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Finally, I recommend you go reactive as soon as you can,
 it makes all of your programs simple, and self updatable.</p>
-<p>It may not be possible to to take a non-reactive program,
+<p class="permalink-paragraph">It may not be possible to to take a non-reactive program,
 convert it to use reactivity, and benefit from that reactive simplicity.</p>
-<p>I also worry that non-reactive one person projects, needlessly suffer,
+<p class="permalink-paragraph">I also worry that non-reactive one person projects, needlessly suffer,
 from necessary complexity, that may prevent shipping.</p>
-<p>So reactive programming,
+<p class="permalink-paragraph">So reactive programming,
 is perfect for learning,</p>
-<p>Because it adapts your mind
+<p class="permalink-paragraph">Because it adapts your mind
 to seeing a program for what it is: an interactive application.</p>
-<p>And it is perfect for one person project and side projects,
+<p class="permalink-paragraph">And it is perfect for one person project and side projects,
 that it would be fun to complete.</p>
-<p>Make your own reactive variable object,
+<p class="permalink-paragraph">Make your own reactive variable object,
 write from scratch or extent EventEmitter.</p>
-<p>Don’t make it complicated, don’t add an addDependency method,
+<p class="permalink-paragraph">Don’t make it complicated, don’t add an addDependency method,
 or nested reactive variable detection via context proxies, or something.</p>
-<p>Reactive programming is a big deal,
+<p class="permalink-paragraph">Reactive programming is a big deal,
 and it is very friendly, it is just one little fancy thing.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>In reactive programming, you first subscribe to username (github.com)<br><a href="https://github.com/catpea/mawp/blob/00dd3480be884977109337441b38c5ec7d4797ab/test.html">https://github.com/catpea/mawp/blob/00dd3480be884977109337441b38c5ec7d4797ab/test.html</a></div>
+      <div class="permalink-link"><a href="https://github.com/catpea/mawp/blob/00dd3480be884977109337441b38c5ec7d4797ab/test.html">In reactive programming, you first subscribe to username</a> (github.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,168 +8,172 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-11/poem-1661.avif" alt="">
-      <h1>The Mouse Whisperer: On Dragging A Cat With A Mouse; Or The DeltaX And Why Of Programming A Mouse</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-11/poem-1661.avif" alt="The Mouse Whisperer: On Dragging A Cat With A Mouse; Or The DeltaX And Why Of Programming A Mouse">
     </figure>
-    <header>
-      <time datetime="2024-09-18">9/17/2024</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-11/poem-1661.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-11/poem-1661.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">The Mouse Whisperer: On Dragging A Cat With A Mouse; Or The DeltaX And Why Of Programming A Mouse</h1>
+
+          <time class="permalink-time" datetime="2024-09-18">9/17/2024</time>
+  </header>
+
     <section>
-<p>Programming the mouse,
+<p class="permalink-paragraph">Programming the mouse,
 is not as simple as it sounds.</p>
-<p>But you only need to know one thing,
+<p class="permalink-paragraph">But you only need to know one thing,
 the mouse move is based on a timer.</p>
-<p>Let us imagine we have a blank web page,
+<p class="permalink-paragraph">Let us imagine we have a blank web page,
 with a small photo of a cat in the center.</p>
-<p>I will show you how to drag the cat,
+<p class="permalink-paragraph">I will show you how to drag the cat,
 without bothering you with source code.</p>
-<p>I want you to understand how to think about the mouse,
+<p class="permalink-paragraph">I want you to understand how to think about the mouse,
 for an actual tutorial just search for JavaScript Mouse Drag tutorial.</p>
-<hr>
-<p>The way we know that the user wants to drag the cat,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The way we know that the user wants to drag the cat,
 is by listening for the mousedown event that we attach to the cat.</p>
-<p>Mousedown is the first half of a click,
+<p class="permalink-paragraph">Mousedown is the first half of a click,
 the other half is mouse up.</p>
-<p>Here is the first unusual thing,
+<p class="permalink-paragraph">Here is the first unusual thing,
 within the mouse down event when the user is pressing the mouse button.</p>
-<p>We must install a mousemove event listener,
+<p class="permalink-paragraph">We must install a mousemove event listener,
 so until that moment we don’t know if the mouse is moving.</p>
-<p>We must also listen for mouse up, though now outside of mouse down,
+<p class="permalink-paragraph">We must also listen for mouse up, though now outside of mouse down,
 to remove the mouse move listener.</p>
-<p>So mousedown and mouseup,
+<p class="permalink-paragraph">So mousedown and mouseup,
 basically install and unistall the mouse move listener.</p>
-<p>The mousedown and mouseup themselves,
+<p class="permalink-paragraph">The mousedown and mouseup themselves,
 are only removed when you want to remove the draggability of the cat.</p>
-<p>If you wan the cat to stay draggable,
+<p class="permalink-paragraph">If you wan the cat to stay draggable,
 let the browser clean up when the user navigates to some other page.</p>
-<hr>
-<p>This is where things get wild and confusing,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">This is where things get wild and confusing,
 and tough, but, what you have learned thus far.</p>
-<p>Shows you how to install a cat dragging function,
+<p class="permalink-paragraph">Shows you how to install a cat dragging function,
 and clean up when the user lets go of the mouse.</p>
-<p>This is an awesome lesson, you install the mousemove,
+<p class="permalink-paragraph">This is an awesome lesson, you install the mousemove,
 inside the mousedown, and get rid of it, in mouse up.</p>
-<hr>
-<p>Ok, grab on to something,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Ok, grab on to something,
 and just listen.</p>
-<p>The mouse move event, does not trigger each time a mouse moves by a pixel,
+<p class="permalink-paragraph">The mouse move event, does not trigger each time a mouse moves by a pixel,
 it runs on a timer, it samples the cursor position every 50 ms or so,</p>
-<p>The mouse is a dumb device,
+<p class="permalink-paragraph">The mouse is a dumb device,
 it does not know about the size of the pixels on your screen.</p>
-<p>So it is like the mouse move listener is a radio,
+<p class="permalink-paragraph">So it is like the mouse move listener is a radio,
 that receives a broadcast if the mouse coordinates change.</p>
-<hr>
-<p>OK, it is going to get worse,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">OK, it is going to get worse,
 maybe grab a snack or something, it is about to get even weirder.</p>
-<p>Listen, we can’t use the raw x and y coordinates,
+<p class="permalink-paragraph">Listen, we can’t use the raw x and y coordinates,
 of where the mouse is on the screen, NOPE.</p>
-<p>Because if we used that x and y,
+<p class="permalink-paragraph">Because if we used that x and y,
 and applied it to the image of the cat.</p>
-<p>We would ignore, where on the cat,
+<p class="permalink-paragraph">We would ignore, where on the cat,
 the user has clicked.</p>
-<p>And we would set the position of the upper left corner,
+<p class="permalink-paragraph">And we would set the position of the upper left corner,
 to the position of the mouse, making the cat jump…</p>
-<p>If the user was dragging the cat,
+<p class="permalink-paragraph">If the user was dragging the cat,
 by its rear.</p>
-<p>So we can’t synchronize the mouse position,
+<p class="permalink-paragraph">So we can’t synchronize the mouse position,
 with cat position.</p>
-<p>Further more, we mustn’t try to measure,
+<p class="permalink-paragraph">Further more, we mustn’t try to measure,
 the distance from the upper left corner of the cat.</p>
-<p>Our cat here is just an example,
+<p class="permalink-paragraph">Our cat here is just an example,
 this could be a deeply nested window.</p>
-<p>In a panning and zooming application,
+<p class="permalink-paragraph">In a panning and zooming application,
 that can be nested in annotate panning and zooming application.</p>
-<p>You would need to measure every border, margin, padding,
+<p class="permalink-paragraph">You would need to measure every border, margin, padding,
 every, offset.</p>
-<p>And measuring scale, or the zoom in and zoom out,
+<p class="permalink-paragraph">And measuring scale, or the zoom in and zoom out,
 is not something we can go around, we must always divide by scale.</p>
-<p>And scale, is a weird measurement, because scale zero,
+<p class="permalink-paragraph">And scale, is a weird measurement, because scale zero,
 means finitely zoomed out, and scale 2 infinitely zoomed in.</p>
-<p>But let us leave it at that, the talk about working with zoom and pan systems,
+<p class="permalink-paragraph">But let us leave it at that, the talk about working with zoom and pan systems,
 belongs in a text specifically about them.</p>
-<hr>
-<p>So let us imagine the user clicked on the left eye of the cat,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So let us imagine the user clicked on the left eye of the cat,
 and that eye and the cursor must be in perfect sync…</p>
-<p>While we are dragging,
+<p class="permalink-paragraph">While we are dragging,
 the now pretty freaked out creature.</p>
-<hr>
-<p>To accomplish this, from within our mouse move listener,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">To accomplish this, from within our mouse move listener,
 we have to figure out what the cursor position delta or difference is.</p>
-<p>And we will apply that tiny number,
+<p class="permalink-paragraph">And we will apply that tiny number,
 that we know our cursor has moved by, to the x and y of the cat image.</p>
-<p>So we don’t set the coordinates of where the mouse is on the screen,
+<p class="permalink-paragraph">So we don’t set the coordinates of where the mouse is on the screen,
 to our poor cat.</p>
-<p>We figure out, by how many pixels the mouse has moved in x direction,
+<p class="permalink-paragraph">We figure out, by how many pixels the mouse has moved in x direction,
 and y direction, and we add this tiny number, to the x and y of the cat.</p>
-<p>So it is a relative calculation,
+<p class="permalink-paragraph">So it is a relative calculation,
 relative to the previous position.</p>
-<hr>
-<p>So set this up correctly, and simply,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So set this up correctly, and simply,
 you should capture the initial x and y coordinate on mouse down.</p>
-<p>And just call them previousX and previousY,
+<p class="permalink-paragraph">And just call them previousX and previousY,
 we are initializing here, and these are real screen coordinates.</p>
-<p>Of where your mouse pointer is,
+<p class="permalink-paragraph">Of where your mouse pointer is,
 relative, to the corner of your viewport, let us imagine we are in full screen mode.</p>
-<p>On an 800x600 monitor, with our cat in the center,
+<p class="permalink-paragraph">On an 800x600 monitor, with our cat in the center,
 we initialize previousX to 400 and previousY to 300, cursor being right in the middle.</p>
-<p>But as we install the mouse move listener here,
+<p class="permalink-paragraph">But as we install the mouse move listener here,
 and the user does move the mouse with the button pressed.</p>
-<p>Inside the mouse movelistener,
+<p class="permalink-paragraph">Inside the mouse movelistener,
 we calculate the mouse delta or change or difference between previous and current.</p>
-<p>So we say deltaX = current.screenX – previousX;
+<p class="permalink-paragraph">So we say deltaX = current.screenX – previousX;
 and So we say deltaY = current.screenY – previousY;</p>
-<p>So if we moved the cursor right by 5 pixels in the last 50 miliseconds,
+<p class="permalink-paragraph">So if we moved the cursor right by 5 pixels in the last 50 miliseconds,
 our deltaX would be 405 – 400, which equals 5.</p>
-<p>If we moved the cursor left by 5 pixels,
+<p class="permalink-paragraph">If we moved the cursor left by 5 pixels,
 our deltaX would be 395 – 400, which equals -5.</p>
-<p>Once we have that little number that perfectly captures motion,
+<p class="permalink-paragraph">Once we have that little number that perfectly captures motion,
 We add it to the x and y of the cat.</p>
-<p>And because our cursor moved 5 pixels,
+<p class="permalink-paragraph">And because our cursor moved 5 pixels,
 the cat now moves 5 pixels, and the cat’s eye, stays under the cursor.</p>
-<p>…</p>
-<p>Again, we are not setting the cat position to the cursor position,
+<p class="permalink-paragraph">…</p>
+<p class="permalink-paragraph">Again, we are not setting the cat position to the cursor position,
 because we don’t know where on the cat the cursor is.</p>
-<p>We are instead calculating how far our mouse has moved,
+<p class="permalink-paragraph">We are instead calculating how far our mouse has moved,
 and applying the same values to the cat.</p>
-<p>Onec the mouse button is pressed,
+<p class="permalink-paragraph">Onec the mouse button is pressed,
 we move the image by the same x and y that the cursor moved.</p>
-<p>And now that we adjusted the position of the cat,
+<p class="permalink-paragraph">And now that we adjusted the position of the cat,
 we must update previousX and previousY, for the next delta calculation.</p>
-<p>We set previousX to the current value of screenX,
+<p class="permalink-paragraph">We set previousX to the current value of screenX,
 and previousY to current screenY.</p>
-<p>These are actual coordinates of the cursor,
+<p class="permalink-paragraph">These are actual coordinates of the cursor,
 not the deltas, the delta is only applied to what you are dragging.</p>
-<hr>
-<p>To just to give extra information at the end for the rare instance,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">To just to give extra information at the end for the rare instance,
 you are in a pan and zoom system.</p>
-<p>If you are zoomed out, you will have to divide the deltaX and deltaY,
+<p class="permalink-paragraph">If you are zoomed out, you will have to divide the deltaX and deltaY,
 by your scale, and again, given that scale of 1 means no change.</p>
-<p>So at 50% zoom, your scale is .5,
+<p class="permalink-paragraph">So at 50% zoom, your scale is .5,
 and your 5 pixel deltaX would become 5 / .5 which is 10.</p>
-<p>When you are dividing by a fraction, you are asking,
+<p class="permalink-paragraph">When you are dividing by a fraction, you are asking,
 how many of those fractions fit into the whole number.</p>
-<p>Our deltaX in a zoomed out landscape, is doubled,
+<p class="permalink-paragraph">Our deltaX in a zoomed out landscape, is doubled,
 because those litte zoomed out pixels need to do more work.</p>
-<p>The pointer, is just on the screen,
+<p class="permalink-paragraph">The pointer, is just on the screen,
 in a world that cannot be scaled, that is outside of the browser.</p>
-<p>I want to make it clear that the division by scale,
+<p class="permalink-paragraph">I want to make it clear that the division by scale,
 is just for daring user interfaces, and edge cases.</p>
-<p>The web browser does have a movementX and movementY,
+<p class="permalink-paragraph">The web browser does have a movementX and movementY,
 but <a href="https://github.com/w3c/pointerlock/issues/42">they don’t yet think in tiny or virtual pixels, consistently</a>.</p>
-<p>There is also a much easier drag and drop mechanism,
+<p class="permalink-paragraph">There is also a much easier drag and drop mechanism,
 especially fun if you need to drop files on the browser window.</p>
-<p>But applying the deltas, being so relatively low level,
+<p class="permalink-paragraph">But applying the deltas, being so relatively low level,
 gives you all the power, including the power to go around browser bugs.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>they don’t yet think in tiny or virtual pixels, consistently (github.com)<br><a href="https://github.com/w3c/pointerlock/issues/42">https://github.com/w3c/pointerlock/issues/42</a></div>
+      <div class="permalink-link"><a href="https://github.com/w3c/pointerlock/issues/42">they don’t yet think in tiny or virtual pixels, consistently</a> (github.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

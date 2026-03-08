@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,112 +8,116 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-14/poem-2044.avif" alt="">
-      <h1>Spooky Programming</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-14/poem-2044.avif" alt="Spooky Programming">
     </figure>
-    <header>
-      <time datetime="2025-10-05">10/4/2025</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-14/poem-2044.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-14/poem-2044.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Spooky Programming</h1>
+
+          <time class="permalink-time" datetime="2025-10-05">10/4/2025</time>
+  </header>
+
     <section>
-<p>Let us imagine we have a list, contains three letters,
+<p class="permalink-paragraph">Let us imagine we have a list, contains three letters,
 “a”, “b”, and “c”;</p>
-<p>Most teachers will ask you to use a loop,
+<p class="permalink-paragraph">Most teachers will ask you to use a loop,
 which will deliver each of the letters to you separately.</p>
-<p>Inside the body of the loop that delivers one letter at t a time,
+<p class="permalink-paragraph">Inside the body of the loop that delivers one letter at t a time,
 you just say print letter.</p>
-<p>You should know how to do this, to build a system,
+<p class="permalink-paragraph">You should know how to do this, to build a system,
 that does it correctly in the age of the web.</p>
-<hr>
-<p>In a web page, the list is sure to change,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">In a web page, the list is sure to change,
 the letters could be users, or emails, or todo items.</p>
-<p>So you will need to know when the list changes,
+<p class="permalink-paragraph">So you will need to know when the list changes,
 calling update_ui() after you make a change is not possible.</p>
-<p>Because this type of complexity only grows,
+<p class="permalink-paragraph">Because this type of complexity only grows,
 you will have nested lists, parent lists, and sub lists.</p>
-<p>At which point, what does update_ui() update,
+<p class="permalink-paragraph">At which point, what does update_ui() update,
 what does it even means.</p>
-<p>Well,
+<p class="permalink-paragraph">Well,
 it means it won’t work.</p>
-<hr>
-<p>You need to make your list reactive, by extending array,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">You need to make your list reactive, by extending array,
 and returning an object proxy that monitors for changes.</p>
-<p>And then give your list a subscribe method,
+<p class="permalink-paragraph">And then give your list a subscribe method,
 just like you have an add mechanism.</p>
-<p>You will need a subscription mechanism,
+<p class="permalink-paragraph">You will need a subscription mechanism,
 to be notified when the array changed.</p>
-<p>You give the subscribe a function to execute, called subscriber,
+<p class="permalink-paragraph">You give the subscribe a function to execute, called subscriber,
 and it will execute it each time there was a change.</p>
-<p>An object proxy has a get and set,
+<p class="permalink-paragraph">An object proxy has a get and set,
 so you can tell when a user is just reading, and when they are changing.</p>
-<p>You also need to monitor for adding and deleting actions,
+<p class="permalink-paragraph">You also need to monitor for adding and deleting actions,
 <a href="https://github.com/catpea/occult/blob/d554d63f2a9fb6f8a33661a27ff02afe1ce966b0/index.js#L219">9+ actions in total</a>.</p>
-<p>“push&quot;, &quot;pop&quot;, &quot;shift&quot;, &quot;unshift&quot;, &quot;splice&quot;, &quot;sort&quot;,
+<p class="permalink-paragraph">“push&quot;, &quot;pop&quot;, &quot;shift&quot;, &quot;unshift&quot;, &quot;splice&quot;, &quot;sort&quot;,
 &quot;reverse&quot;, &quot;fill&quot;, &quot;copyWithin&quot;.</p>
-<p>And ask AI to double check, as new methods may be added,
+<p class="permalink-paragraph">And ask AI to double check, as new methods may be added,
 as JavaScript gets updates.</p>
-<hr>
-<p>But <a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L432">knowing that there was a change</a> is not enough,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">But <a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L432">knowing that there was a change</a> is not enough,
 especially because you likely already added stuff to the web page.</p>
-<p>That means you only update,
+<p class="permalink-paragraph">That means you only update,
 what you already created.</p>
-<p>So you need to know what was deleted,
+<p class="permalink-paragraph">So you need to know what was deleted,
 to delete the thing in the area of the web page you are working on.</p>
-<p>You need to know what was added,
+<p class="permalink-paragraph">You need to know what was added,
 to add the new thing.</p>
-<p>And you need to know what was moved,
+<p class="permalink-paragraph">And you need to know what was moved,
 so that you can reorder things that already exist.</p>
-<p>More over, you may not want to delete things,
+<p class="permalink-paragraph">More over, you may not want to delete things,
 that is such a violent thing to when carefully managing resources.</p>
-<p>You may wish to mark something as deleted,
+<p class="permalink-paragraph">You may wish to mark something as deleted,
 so that a tiny internal deletion process of that thing kicks off.</p>
-<hr>
-<p>What this calls for is a <a href="https://github.com/catpea/supernatural/blob/58684a42ee8754c2d7b8a33a8c688f050f1d6eac/Arr.js#L5">diff</a> and <a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L435">patch</a> operation,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">What this calls for is a <a href="https://github.com/catpea/supernatural/blob/58684a42ee8754c2d7b8a33a8c688f050f1d6eac/Arr.js#L5">diff</a> and <a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L435">patch</a> operation,
 which is as simple as you can make it.</p>
-<p>Check what was deleted,
+<p class="permalink-paragraph">Check what was deleted,
 put in in your diff list as a delete operation.</p>
-<p>Check what was added,
+<p class="permalink-paragraph">Check what was added,
 and put it in the diff list under operation add.</p>
-<p>And then what was moved,
+<p class="permalink-paragraph">And then what was moved,
 and note which index moved where.</p>
-<hr>
-<p>Finally, you interpret your diff list,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Finally, you interpret your diff list,
 by applying a patch to what was in your web page.</p>
-<p>Patching means updating,
+<p class="permalink-paragraph">Patching means updating,
 only in the places that have changed, like repairing socks.</p>
-<hr>
-<p>Spooky, yes,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Spooky, yes,
 but if you are just learning programming.</p>
-<p>And drawing life lines with life extension,
+<p class="permalink-paragraph">And drawing life lines with life extension,
 exercise and  healthy diet, add-ons…</p>
-<p>Or space travel lines with moving pixels showing time dilation,
+<p class="permalink-paragraph">Or space travel lines with moving pixels showing time dilation,
 is not for you…</p>
-<p>Because it feels like you are moving away from programming,
+<p class="permalink-paragraph">Because it feels like you are moving away from programming,
 then studying <a href="https://github.com/catpea/occult">Reactive Variables</a> may just be for you.</p>
-<p>In the age of powerful programming AI everywhere,
+<p class="permalink-paragraph">In the age of powerful programming AI everywhere,
 studying reactive systems is fun, and interesting, enjoyable.</p>
-<p>Not at all as spooky as I made it out to be,
+<p class="permalink-paragraph">Not at all as spooky as I made it out to be,
 so as long as you ask for simple and lightweight JavaScript code.</p>
-<hr>
-<p>Reactive Programming, is something you put first in your Resume/CV,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Reactive Programming, is something you put first in your Resume/CV,
 it is something to be very proud of, and very hard to let go.</p>
-<p>Once you get the AI to create enough implementations,
+<p class="permalink-paragraph">Once you get the AI to create enough implementations,
 or variations for you, it is not at all a challenge.</p>
-<p>But it is indistinguishable from magic,
+<p class="permalink-paragraph">But it is indistinguishable from magic,
 and it makes you a proper Sorceress or Wizard.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>9+ actions in total (github.com)<br><a href="https://github.com/catpea/occult/blob/d554d63f2a9fb6f8a33661a27ff02afe1ce966b0/index.js#L219">https://github.com/catpea/occult/blob/d554d63f2a9fb6f8a33661a27ff02afe1ce966b0/index.js#L219</a></div>
-      <div>knowing that there was a change (github.com)<br><a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L432">https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L432</a></div>
-      <div>diff (github.com)<br><a href="https://github.com/catpea/supernatural/blob/58684a42ee8754c2d7b8a33a8c688f050f1d6eac/Arr.js#L5">https://github.com/catpea/supernatural/blob/58684a42ee8754c2d7b8a33a8c688f050f1d6eac/Arr.js#L5</a></div>
-      <div>patch (github.com)<br><a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L435">https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L435</a></div>
-      <div>Reactive Variables (github.com)<br><a href="https://github.com/catpea/occult">https://github.com/catpea/occult</a></div>
+      <div class="permalink-link"><a href="https://github.com/catpea/occult/blob/d554d63f2a9fb6f8a33661a27ff02afe1ce966b0/index.js#L219">9+ actions in total</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L432">knowing that there was a change</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/supernatural/blob/58684a42ee8754c2d7b8a33a8c688f050f1d6eac/Arr.js#L5">diff</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/cede/blob/e251fd19e428eff72b8a5516de00eb9f3009c23d/Lifecycles.js#L435">patch</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/occult">Reactive Variables</a> (github.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

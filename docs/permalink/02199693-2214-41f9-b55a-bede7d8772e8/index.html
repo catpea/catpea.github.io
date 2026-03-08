@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,119 +8,123 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-12/poem-1734.avif" alt="">
-      <h1>The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-12/poem-1734.avif" alt="The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans">
     </figure>
-    <header>
-      <time datetime="2024-11-30">11/29/2024</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-12/poem-1734.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-12/poem-1734.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</h1>
+
+          <time class="permalink-time" datetime="2024-11-30">11/29/2024</time>
+  </header>
+
     <section>
-<p>Just a few weeks ago I mentioned it is not possible to parse XML,
+<p class="permalink-paragraph">Just a few weeks ago I mentioned it is not possible to parse XML,
 with regular expressions, but yesterday I had a fun time doing just that.</p>
-<p>This is because well made Configuration Files do not nest the same elements,
+<p class="permalink-paragraph">This is because well made Configuration Files do not nest the same elements,
 it is OK to have siblings with the same name, but nesting is different.</p>
-<p>Because the opening tag will not be able to recognize its closing tag,
+<p class="permalink-paragraph">Because the opening tag will not be able to recognize its closing tag,
 when it has another instance of it self within it self.</p>
-<p>So when you say open box, and then again open a new box inside the open box,
+<p class="permalink-paragraph">So when you say open box, and then again open a new box inside the open box,
 you now have two box closing tags, and they look the same to naive parsers like mine.</p>
-<p>If an XML file is made with this in mind, and never nests the same thing,
+<p class="permalink-paragraph">If an XML file is made with this in mind, and never nests the same thing,
 within it self, then it will work fine.</p>
-<p>My XML parser can be further reduced to just one line of code here,
+<p class="permalink-paragraph">My XML parser can be further reduced to just one line of code here,
 but nesting elements or tags with the same name will not work.</p>
-<p>The miniature program just grabs the first closing that it sees,
+<p class="permalink-paragraph">The miniature program just grabs the first closing that it sees,
 and when things are nested like a Russian doll, that will not be the right one.</p>
-<hr>
-<p>I woke up this morning, and without thinking about my code,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I woke up this morning, and without thinking about my code,
 and not wanting to test it…</p>
-<p>I just said to myself, regular expressions, the technology I relied on,
+<p class="permalink-paragraph">I just said to myself, regular expressions, the technology I relied on,
 cannot do that.</p>
-<p>And I know this from attempts at parsing XML,
+<p class="permalink-paragraph">And I know this from attempts at parsing XML,
 back when it was cool, and programmers randomly mention this.</p>
-<p>But they may not know, the problem is only with nesting the same tags,
+<p class="permalink-paragraph">But they may not know, the problem is only with nesting the same tags,
 if it is a configuration file, it will work.</p>
-<p>But if it is a document with formatting boxes, and they can be nested,
+<p class="permalink-paragraph">But if it is a document with formatting boxes, and they can be nested,
 nope, it will be the wrong closing tag.</p>
-<hr>
-<p>To popery parse an XML file, you need two unique technologies,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">To popery parse an XML file, you need two unique technologies,
 a tokenizer and a lexer.</p>
-<p>The tokenizer crawls the XML document from the first character,
+<p class="permalink-paragraph">The tokenizer crawls the XML document from the first character,
 to the last, ignoring new lines it just sees a long line.</p>
-<p>Tokenizer, extracts tokens,
+<p class="permalink-paragraph">Tokenizer, extracts tokens,
 and <a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">you have to register patters or rules that it should recognize</a>.</p>
-<p>Xml continues being extremly self similar,
+<p class="permalink-paragraph">Xml continues being extremly self similar,
 so there are only six patterns, that is a small number.</p>
-<p>Because we are eating every letter of the file,
+<p class="permalink-paragraph">Because we are eating every letter of the file,
 we have to process spaces and new lines, throwing them away.</p>
-<p>And then there is the convenient self closing tag,
+<p class="permalink-paragraph">And then there is the convenient self closing tag,
 instead of creating a closing tag you use a forward slash in the opening tag.</p>
-<p>Then there is the open tag,
+<p class="permalink-paragraph">Then there is the open tag,
 and the close tag.</p>
-<p>And text,
+<p class="permalink-paragraph">And text,
 or letters that are not enclosed in any special brackets.</p>
-<p>And finally a code comment,
+<p class="permalink-paragraph">And finally a code comment,
 which are always ignored, like spaces.</p>
-<hr>
-<p>So you feed in the xml file as a long string of characters,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">So you feed in the xml file as a long string of characters,
 and you apply each of these rules or patterns.</p>
-<p>Until one matches,
+<p class="permalink-paragraph">Until one matches,
 and consumes some of the characters,</p>
-<p>For example,
+<p class="permalink-paragraph">For example,
 an opening tag called button, would eat 8 lettters, two brackets and the word button.</p>
-<p>The brackets, or the surrounding less than, and greater than signs,
+<p class="permalink-paragraph">The brackets, or the surrounding less than, and greater than signs,
 are there to tell the tokenizes, that this is an element and not  some text.</p>
-<p>And slowly few characters at a time, we convert the long string,
+<p class="permalink-paragraph">And slowly few characters at a time, we convert the long string,
 into tokens, objects that have a name, type, position in raw text.</p>
-<hr>
-<p>And if the process arrives at something, that was not specifed by a rule,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">And if the process arrives at something, that was not specifed by a rule,
 then we crash on purpose, because we discovered malformed XML.</p>
-<p>That is a syntax error, nothing that the computer can recover from,
+<p class="permalink-paragraph">That is a syntax error, nothing that the computer can recover from,
 you need to go in there and fix your typos, and ensure all your tags are closed.</p>
-<p>The result is a flat list of tokens, no nesting, just a list of what we matched,
+<p class="permalink-paragraph">The result is a flat list of tokens, no nesting, just a list of what we matched,
 in the original sting of text, of the xml document.</p>
-<p>And at this point all the hard work is done,
+<p class="permalink-paragraph">And at this point all the hard work is done,
 <a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">a simple tokenizer has an outer loop, just jumps past what was claimed by a token</a>.</p>
-<p>And that iner loop, where the new beginning that we just jumped to,
+<p class="permalink-paragraph">And that iner loop, where the new beginning that we just jumped to,
 is <a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">evaluated by the rules</a>.</p>
-<p><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a>,
+<p class="permalink-paragraph"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a>,
 and sent to the Lexer, for Lexical analisis.</p>
-<p>The lexer converts the tidy list of tokens into elements,
+<p class="permalink-paragraph">The lexer converts the tidy list of tokens into elements,
 actual objects, that live in a nested tree.</p>
-<p>Whenever an open tag is found, it is added to the tree,
+<p class="permalink-paragraph">Whenever an open tag is found, it is added to the tree,
 to build the resulting document up.</p>
-<p>Then added to a stack,
+<p class="permalink-paragraph">Then added to a stack,
 and set as the new parent for elements that follow.</p>
-<p>We go as deep as possible though all the opening tags,
+<p class="permalink-paragraph">We go as deep as possible though all the opening tags,
 building a tree, until a deepest tag becomes a parent.</p>
-<p>And because it is the deepest tag,
+<p class="permalink-paragraph">And because it is the deepest tag,
 it gets closed right away.</p>
-<p>And now its outer tag becomes the parent again,
+<p class="permalink-paragraph">And now its outer tag becomes the parent again,
 as that nested tag is now correctly placed in the tree.</p>
-<p>Here we may open a new tag,
+<p class="permalink-paragraph">Here we may open a new tag,
 if there was stuff below it, for example an image beneath a title.</p>
-<p>But slowly, we start making our way back,
+<p class="permalink-paragraph">But slowly, we start making our way back,
 out the deepest parts of the tree, emptying our stack of parents.</p>
-<p>And finally, having the lexer,
+<p class="permalink-paragraph">And finally, having the lexer,
 return the now fully inflated tree.</p>
-<p>That a moment ago, was just our tokens,
+<p class="permalink-paragraph">That a moment ago, was just our tokens,
 informing us of opening and closing instructions.</p>
-<p><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a>,
+<p class="permalink-paragraph"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a>,
 is <a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">returned to whatever requested the parsing</a> of <a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">our XML document</a>.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>you have to register patters or rules that it should recognize (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11</a></div>
-      <div>a simple tokenizer has an outer loop, just jumps past what was claimed by a token (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32</a></div>
-      <div>evaluated by the rules (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39</a></div>
-      <div>The resulting list of token is then returned to the main program (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14</a></div>
-      <div>Here our tree, called the abstract syntax tree (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18</a></div>
-      <div>returned to whatever requested the parsing (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83</a></div>
-      <div>our XML document (github.com)<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1</a></div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">you have to register patters or rules that it should recognize</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">a simple tokenizer has an outer loop, just jumps past what was claimed by a token</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">evaluated by the rules</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">returned to whatever requested the parsing</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">our XML document</a> (github.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

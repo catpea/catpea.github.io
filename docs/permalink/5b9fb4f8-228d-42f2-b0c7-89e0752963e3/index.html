@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,70 +8,74 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-03/poem-0515.avif" alt="">
-      <h1>Programming A Remote Controlled Portable Raspberry Pi Audio Player</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-03/poem-0515.avif" alt="Programming A Remote Controlled Portable Raspberry Pi Audio Player">
     </figure>
-    <header>
-      <time datetime="2021-07-29">7/28/2021</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-03/poem-0515.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-03/poem-0515.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Programming A Remote Controlled Portable Raspberry Pi Audio Player</h1>
+
+          <time class="permalink-time" datetime="2021-07-29">7/28/2021</time>
+  </header>
+
     <section>
-<p>I finally connected the little Bluetooth remote shutter,<br>to my heavy little mp3 player invention.</p>
-<p>My 1998 design was a small mp3 decoder equpped Printed Circuit Board (PCB),<br>strapped onto a huge CD-ROM drive filled with a lot of MOD files converted to mp3.</p>
-<p>It was meant for a car,<br>but also for learning.</p>
-<p>Inventions are important things,<br>they help us dream and learn.</p>
-<hr>
-<p>I took a computer hardware class,<br>but it was so simple that it was painful to see my time being wasted.</p>
-<p>It was all good people, weird but OK,<br>it is that kind of simplified education that holds everyone back.</p>
-<p>An you know it, everyone was just laid back,<br>the semester passed everyone got an A, and nobody learned a thing.</p>
-<p>And there was no education to be had,<br>I had to hurry with my English.</p>
-<p>I still had bunch of words to learn,<br>it was a high priority item for me, so I spent my teenage years reading paperbacks at Plymouth&#39;s Denny&#39;s.</p>
-<p>Our education has to progress the way water moves through a piece of paper,<br>observe, how it starts as a dot, and then it spreads as far as it can see.</p>
-<p>The more it knows the more it grows,<br>we must reject fake education, we mustn&#39;t tolerate it.</p>
-<hr>
-<p>I had my little invention,<br>but I didn&#39;t have so much as an LED to make a <a href="https://www.youtube.com/watch?v=hme5ladDQ_0">throwie</a>.</p>
-<hr>
-<p>The player I made today, has a battery where the old CD-ROM was supposed to go,<br>and the PCB is now replaced with an actual GNU/Linux powered Computer.</p>
-<p>I finished programming the shutter <a href="https://www.amazon.com/Cellphone-Shutter-Multifunction-Playback-Smartphones/dp/B08SWC2DQW">thingie</a>,<br>but I didn&#39;t even try to figure out the buttons.</p>
-<p>The thought hardly occurred to me,<br>the shutter has six buttons that trigger a lot of data.</p>
-<p>I can see that a single button press triggers multiple <a href="https://www.youtube.com/watch?v=EBfkiprmoi0">light pen actions</a>,<br>that is probably what the kernel calls a finger.</p>
-<p>Left and right buttons tiger what maybe to be a swipe,<br>up and down, actually trigger many rows of data, as if counting from 0 to 100.</p>
-<p>Holding down the Y-axis key, does something slightly different,<br>it slides values between 0 and possibly 1,000.</p>
-<p>The values are always the same,<br>there is no continuation from where the button last left off.</p>
-<p>So if I am always getting the same events,<br>I can just glue (concatenate) all the data and call it a single button.</p>
-<p>The long press is a bit off, because the stream of data that long-press sends,<br>ends when a person lets go, it ends at an arbitrary location within that 1,000 virtual key presses.</p>
-<p>It is really good for changing audio volume,<br>but I&#39;ll have to think about it some more.</p>
-<p><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/learn.js#L51">So the program I wrote, has a learn function that concatenates all button data into a single recognizable ID</a>,<br>and then when the program is in normal operation mode, it <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L41">monitors for the presence of the same flurry of key presses</a>.</p>
-<p>When the stored and detected sequence matches,<br>it then <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L49">triggers a command that is manually associated with the ID</a>.</p>
-<p>And the GNU/Linux commands it triggers are extremely simple,<br>the play button simply <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L2">stops</a> music if it is already playing and then <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L3">plays</a> songs from the Music folder, shuffling them first.</p>
-<p>Pressing play, multiple times,<br>stops playing current song, and it picks a new one at random, it is surprisingly simple.</p>
-<hr>
-<p>I had a fun time this Sunday learning how to manually connect a Bluetooth device,<br>it took me four hours because that little shutter button pad, demands that pairing the device and connecting the device, happens instantly.</p>
-<p>I couldn&#39;t issue the commands manually, I only had hundreds of milliseconds to go from pair to connect,<br>so it needed to be scripted, the computer had to issue connect right after pairing.</p>
-<hr>
-<p>This little $50 of $75 invention is extremely interesting,<br>even for people that like having closed source phones around.</p>
-<p>Not only can you control everything from your phone,<br>but also proxy your phone traffic through <a href="https://pi-hole.net/">Pi-hole</a> a which greatly reduces spam and ads.</p>
-<p>The openness of the Raspberry Pi and the underlying GNU/Linux,<br><a href="https://www.youtube.com/watch?v=WDa_odxAGUU">allows for things that aren&#39;t possible with closed source phones</a>.</p>
-<p>It is this kind of tinkering that makes learning GNU/Linux fun and painless,<br>it takes many years, but there is no hurry, in the end being able to reprogram things without investing too much time into custom PCBs is a fun talent to have.</p>
-<p>I think my next project is going to be,<br>a Linux driven Boom Box.</p>
+<p class="permalink-paragraph">I finally connected the little Bluetooth remote shutter,<br>to my heavy little mp3 player invention.</p>
+<p class="permalink-paragraph">My 1998 design was a small mp3 decoder equpped Printed Circuit Board (PCB),<br>strapped onto a huge CD-ROM drive filled with a lot of MOD files converted to mp3.</p>
+<p class="permalink-paragraph">It was meant for a car,<br>but also for learning.</p>
+<p class="permalink-paragraph">Inventions are important things,<br>they help us dream and learn.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I took a computer hardware class,<br>but it was so simple that it was painful to see my time being wasted.</p>
+<p class="permalink-paragraph">It was all good people, weird but OK,<br>it is that kind of simplified education that holds everyone back.</p>
+<p class="permalink-paragraph">An you know it, everyone was just laid back,<br>the semester passed everyone got an A, and nobody learned a thing.</p>
+<p class="permalink-paragraph">And there was no education to be had,<br>I had to hurry with my English.</p>
+<p class="permalink-paragraph">I still had bunch of words to learn,<br>it was a high priority item for me, so I spent my teenage years reading paperbacks at Plymouth&#39;s Denny&#39;s.</p>
+<p class="permalink-paragraph">Our education has to progress the way water moves through a piece of paper,<br>observe, how it starts as a dot, and then it spreads as far as it can see.</p>
+<p class="permalink-paragraph">The more it knows the more it grows,<br>we must reject fake education, we mustn&#39;t tolerate it.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I had my little invention,<br>but I didn&#39;t have so much as an LED to make a <a href="https://www.youtube.com/watch?v=hme5ladDQ_0">throwie</a>.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The player I made today, has a battery where the old CD-ROM was supposed to go,<br>and the PCB is now replaced with an actual GNU/Linux powered Computer.</p>
+<p class="permalink-paragraph">I finished programming the shutter <a href="https://www.amazon.com/Cellphone-Shutter-Multifunction-Playback-Smartphones/dp/B08SWC2DQW">thingie</a>,<br>but I didn&#39;t even try to figure out the buttons.</p>
+<p class="permalink-paragraph">The thought hardly occurred to me,<br>the shutter has six buttons that trigger a lot of data.</p>
+<p class="permalink-paragraph">I can see that a single button press triggers multiple <a href="https://www.youtube.com/watch?v=EBfkiprmoi0">light pen actions</a>,<br>that is probably what the kernel calls a finger.</p>
+<p class="permalink-paragraph">Left and right buttons tiger what maybe to be a swipe,<br>up and down, actually trigger many rows of data, as if counting from 0 to 100.</p>
+<p class="permalink-paragraph">Holding down the Y-axis key, does something slightly different,<br>it slides values between 0 and possibly 1,000.</p>
+<p class="permalink-paragraph">The values are always the same,<br>there is no continuation from where the button last left off.</p>
+<p class="permalink-paragraph">So if I am always getting the same events,<br>I can just glue (concatenate) all the data and call it a single button.</p>
+<p class="permalink-paragraph">The long press is a bit off, because the stream of data that long-press sends,<br>ends when a person lets go, it ends at an arbitrary location within that 1,000 virtual key presses.</p>
+<p class="permalink-paragraph">It is really good for changing audio volume,<br>but I&#39;ll have to think about it some more.</p>
+<p class="permalink-paragraph"><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/learn.js#L51">So the program I wrote, has a learn function that concatenates all button data into a single recognizable ID</a>,<br>and then when the program is in normal operation mode, it <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L41">monitors for the presence of the same flurry of key presses</a>.</p>
+<p class="permalink-paragraph">When the stored and detected sequence matches,<br>it then <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L49">triggers a command that is manually associated with the ID</a>.</p>
+<p class="permalink-paragraph">And the GNU/Linux commands it triggers are extremely simple,<br>the play button simply <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L2">stops</a> music if it is already playing and then <a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L3">plays</a> songs from the Music folder, shuffling them first.</p>
+<p class="permalink-paragraph">Pressing play, multiple times,<br>stops playing current song, and it picks a new one at random, it is surprisingly simple.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I had a fun time this Sunday learning how to manually connect a Bluetooth device,<br>it took me four hours because that little shutter button pad, demands that pairing the device and connecting the device, happens instantly.</p>
+<p class="permalink-paragraph">I couldn&#39;t issue the commands manually, I only had hundreds of milliseconds to go from pair to connect,<br>so it needed to be scripted, the computer had to issue connect right after pairing.</p>
+<hr class="permalink-divider">
+<p class="permalink-paragraph">This little $50 of $75 invention is extremely interesting,<br>even for people that like having closed source phones around.</p>
+<p class="permalink-paragraph">Not only can you control everything from your phone,<br>but also proxy your phone traffic through <a href="https://pi-hole.net/">Pi-hole</a> a which greatly reduces spam and ads.</p>
+<p class="permalink-paragraph">The openness of the Raspberry Pi and the underlying GNU/Linux,<br><a href="https://www.youtube.com/watch?v=WDa_odxAGUU">allows for things that aren&#39;t possible with closed source phones</a>.</p>
+<p class="permalink-paragraph">It is this kind of tinkering that makes learning GNU/Linux fun and painless,<br>it takes many years, but there is no hurry, in the end being able to reprogram things without investing too much time into custom PCBs is a fun talent to have.</p>
+<p class="permalink-paragraph">I think my next project is going to be,<br>a Linux driven Boom Box.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>throwie (www.youtube.com)<br><a href="https://www.youtube.com/watch?v=hme5ladDQ_0">https://www.youtube.com/watch?v=hme5ladDQ_0</a></div>
-      <div>thingie (www.amazon.com)<br><a href="https://www.amazon.com/Cellphone-Shutter-Multifunction-Playback-Smartphones/dp/B08SWC2DQW">https://www.amazon.com/Cellphone-Shutter-Multifunction-Playback-Smartphones/dp/B08SWC2DQW</a></div>
-      <div>light pen actions (www.youtube.com)<br><a href="https://www.youtube.com/watch?v=EBfkiprmoi0">https://www.youtube.com/watch?v=EBfkiprmoi0</a></div>
-      <div>So the program I wrote, has a learn function that concatenates all button data into a single recognizable ID (github.com)<br><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/learn.js#L51">https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/learn.js#L51</a></div>
-      <div>monitors for the presence of the same flurry of key presses (github.com)<br><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L41">https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L41</a></div>
-      <div>triggers a command that is manually associated with the ID (github.com)<br><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L49">https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L49</a></div>
-      <div>stops (github.com)<br><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L2">https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L2</a></div>
-      <div>plays (github.com)<br><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L3">https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L3</a></div>
-      <div>Pi-hole (pi-hole.net)<br><a href="https://pi-hole.net/">https://pi-hole.net/</a></div>
-      <div>allows for things that aren&#39;t possible with closed source phones (www.youtube.com)<br><a href="https://www.youtube.com/watch?v=WDa_odxAGUU">https://www.youtube.com/watch?v=WDa_odxAGUU</a></div>
+      <div class="permalink-link"><a href="https://www.youtube.com/watch?v=hme5ladDQ_0">throwie</a> (www.youtube.com)</div>
+      <div class="permalink-link"><a href="https://www.amazon.com/Cellphone-Shutter-Multifunction-Playback-Smartphones/dp/B08SWC2DQW">thingie</a> (www.amazon.com)</div>
+      <div class="permalink-link"><a href="https://www.youtube.com/watch?v=EBfkiprmoi0">light pen actions</a> (www.youtube.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/learn.js#L51">So the program I wrote, has a learn function that concatenates all button data into a single recognizable ID</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L41">monitors for the presence of the same flurry of key presses</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/command/listen.js#L49">triggers a command that is manually associated with the ID</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L2">stops</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://github.com/catpea/isir/blob/01ef4b7e55058fde70e5098aad8402345d7e113c/bin/p.sh#L3">plays</a> (github.com)</div>
+      <div class="permalink-link"><a href="https://pi-hole.net/">Pi-hole</a> (pi-hole.net)</div>
+      <div class="permalink-link"><a href="https://www.youtube.com/watch?v=WDa_odxAGUU">allows for things that aren&#39;t possible with closed source phones</a> (www.youtube.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://unsplash.com/photos/NN15NFflk90">credit</a>
     </footer>
   </article>

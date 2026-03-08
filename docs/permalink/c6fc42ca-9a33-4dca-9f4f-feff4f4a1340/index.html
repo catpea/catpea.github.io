@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,83 +8,87 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-11/poem-1645.avif" alt="">
-      <h1>Programmers! Don&apos;t Just Use Plain Variables, Oh No!</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-11/poem-1645.avif" alt="Programmers! Don&amp;apos;t Just Use Plain Variables, Oh No!">
     </figure>
-    <header>
-      <time datetime="2024-09-02">9/1/2024</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-11/poem-1645.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-11/poem-1645.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Programmers! Don&apos;t Just Use Plain Variables, Oh No!</h1>
+
+          <time class="permalink-time" datetime="2024-09-02">9/1/2024</time>
+  </header>
+
     <section>
-<p>When calculating the sum of two numbers,
+<p class="permalink-paragraph">When calculating the sum of two numbers,
 we say x = 1, y = 1, and get 2 by executing x+y.</p>
-<p>That is good for crunching numbers,
+<p class="permalink-paragraph">That is good for crunching numbers,
 but in the old school way, where we rerun x+y if either variables change.</p>
-<p>In web pages where we deal with information that can come from a database,
+<p class="permalink-paragraph">In web pages where we deal with information that can come from a database,
 a live remote web socket, or user input, we can’t use old school, no, no!</p>
-<p>Instead of saying profileName = ‘<a href="mailto:alice@example.com">alice@example.com</a>’,
+<p class="permalink-paragraph">Instead of saying profileName = ‘<a href="mailto:alice@example.com">alice@example.com</a>’,
 we must say profileName = new Signal(‘<a href="mailto:alice@example.com">alice@example.com</a>’);</p>
-<p>And if we want to update the profileName we talk to the signal,
+<p class="permalink-paragraph">And if we want to update the profileName we talk to the signal,
 which has simple .get, .set and .subscribe functions.</p>
-<p>And we say  profileName.set(‘<a href="mailto:bob@example.com">bob@example.com</a>’),
+<p class="permalink-paragraph">And we say  profileName.set(‘<a href="mailto:bob@example.com">bob@example.com</a>’),
 because this is not an old school assignment, but interaction with a Signal object.</p>
-<p>Now stuff can happen behind the closed curtains,
+<p class="permalink-paragraph">Now stuff can happen behind the closed curtains,
 for one, while we can just get a value once, that is still old school.</p>
-<p>Signals allow us to subscribe to variables like profileName,
+<p class="permalink-paragraph">Signals allow us to subscribe to variables like profileName,
 which you should imagine being displayed atop a web page now.</p>
-<p>So we can say,  profileName.subscibe() and put in function that is executed,
+<p class="permalink-paragraph">So we can say,  profileName.subscibe() and put in function that is executed,
 each time the profileName is set.</p>
-<p>This function could select the label in a profile drop-down,
+<p class="permalink-paragraph">This function could select the label in a profile drop-down,
 and update the text to reflect the newly logged in user.</p>
-<hr>
-<p>This is nice, but one signal is not a big deal,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">This is nice, but one signal is not a big deal,
 yet.</p>
-<hr>
-<p>What we need to do,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">What we need to do,
 to create real applications, is to use a signal tree.</p>
-<p>It is just a normal Object, that accepts any proper, and has a children list,
+<p class="permalink-paragraph">It is just a normal Object, that accepts any proper, and has a children list,
 which is an array, that can accept other objects of its own kind.</p>
-<p>This can be generalized, where any property can be used to hold objects,
+<p class="permalink-paragraph">This can be generalized, where any property can be used to hold objects,
 but for simplicity and explanation we just use the children array.</p>
-<p>So it is a recursive object tree,
+<p class="permalink-paragraph">So it is a recursive object tree,
 and it does not really require any special notation.</p>
-<p>The curly brackets in JavaScript work perfectly fine,
+<p class="permalink-paragraph">The curly brackets in JavaScript work perfectly fine,
 but you do have to transform the nested objects or signalize them.</p>
-<p>This converts every property, including children,
+<p class="permalink-paragraph">This converts every property, including children,
 into signals, with .set, .get, and .subscribe.</p>
-<p>The code is perfectly readable,
+<p class="permalink-paragraph">The code is perfectly readable,
 the tree does not need to be complex, just whatever works for the app.</p>
-<p>And then we use a web component,
+<p class="permalink-paragraph">And then we use a web component,
 which is a way to extend the HTML of a web page.</p>
-<p>I made one called loop, that loops over the children property,
+<p class="permalink-paragraph">I made one called loop, that loops over the children property,
 and another one called bind, that can connect any property to any bit of HTML.</p>
-<p>So we can say bind profileName to .drop-down-button,
+<p class="permalink-paragraph">So we can say bind profileName to .drop-down-button,
 the .drop-down-button finds the nearest button tagged with that class name.</p>
-<p>And of course, the bind tag does not use the old school get function, oh no,
+<p class="permalink-paragraph">And of course, the bind tag does not use the old school get function, oh no,
 it uses the .subscribe method, so profileName always automatically updates.</p>
-<hr>
-<p>In summary, if you are adding numbers,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">In summary, if you are adding numbers,
 or must use standard and fast assignments in your program, you are good.</p>
-<p>But if you are marking a web page,
+<p class="permalink-paragraph">But if you are marking a web page,
 you need a Signal Tree.</p>
-<p>All information coming from the server, or from whatever the user is up to,
+<p class="permalink-paragraph">All information coming from the server, or from whatever the user is up to,
 always goes into the tree, that is the single source of truth.</p>
-<p>And whenever a value changes in the tree,
+<p class="permalink-paragraph">And whenever a value changes in the tree,
 all the components, and tags automatically update.</p>
-<p>So when you are working on a web page,
+<p class="permalink-paragraph">So when you are working on a web page,
 you can’t use normal variables.</p>
-<p>You need a tree of signals,
+<p class="permalink-paragraph">You need a tree of signals,
 where the server can send data into, and the User Interface can auto-magically update from.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>alice@example.com ()<br><a href="mailto:alice@example.com">mailto:alice@example.com</a></div>
-      <div>bob@example.com ()<br><a href="mailto:bob@example.com">mailto:bob@example.com</a></div>
+      <div class="permalink-link"><a href="mailto:alice@example.com">alice@example.com</a> ()</div>
+      <div class="permalink-link"><a href="mailto:bob@example.com">bob@example.com</a> ()</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

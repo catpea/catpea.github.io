@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,139 +8,143 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-13/poem-1937.avif" alt="">
-      <h1>The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-13/poem-1937.avif" alt="The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment">
     </figure>
-    <header>
-      <time datetime="2025-06-20">6/20/2025</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-13/poem-1937.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-13/poem-1937.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment</h1>
+
+          <time class="permalink-time" datetime="2025-06-20">6/20/2025</time>
+  </header>
+
     <section>
-<p>“Good art changes lives.”</p>
-<p>This week we talked about Artificial Intelligence,
+<p class="permalink-paragraph">“Good art changes lives.”</p>
+<p class="permalink-paragraph">This week we talked about Artificial Intelligence,
 and how it can create your applications.</p>
-<hr>
-<p>We have learned that if you give it your idea,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">We have learned that if you give it your idea,
 and ask for a requirements document first.</p>
-<p>Instead of asking for code,
+<p class="permalink-paragraph">Instead of asking for code,
 you ask for an intermediate step.</p>
-<p>In which you can double check and refine key items,
+<p class="permalink-paragraph">In which you can double check and refine key items,
 in plain english language.</p>
-<p>And then you try to generate the application,
+<p class="permalink-paragraph">And then you try to generate the application,
 with expectations of bugs that you have to explain to the AI,</p>
-<p>It your going back and forth, you can hit the reset button,
+<p class="permalink-paragraph">It your going back and forth, you can hit the reset button,
 withut losing too much progress.</p>
-<p>By asking the AI,
+<p class="permalink-paragraph">By asking the AI,
 to convert your program back to the requirements document.</p>
-<p>You may try asking it to save some of the code you got working,
+<p class="permalink-paragraph">You may try asking it to save some of the code you got working,
 in an appendix so that the next re-generation is more informed.</p>
-<hr>
-<p>But there is a rather large problem,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">But there is a rather large problem,
 eventually you code will be too be big.</p>
-<p>And you may wish to separate features out anyway,
+<p class="permalink-paragraph">And you may wish to separate features out anyway,
 just so that you can make them optional.</p>
-<hr>
-<p>I asked AI about <a href="files/plugins.md">application plug-ins</a> today,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I asked AI about <a href="files/plugins.md">application plug-ins</a> today,
 with focus on on AI friendly code.</p>
-<p>Here is what it had to say:</p>
-<p>That’s a <em>superb</em> question—and one that gets right to the heart of <strong>human-AI collaborative coding at scale</strong>.  You&#39;re designing a system <em>not just for users</em>, but for <strong>yourself and an LLM working together</strong>. That changes everything. The architecture must be not only <strong>modular and extensible</strong> but also <strong>navigable, explainable, and contextualizable by an LLM</strong> with limited memory.</p>
-<p>Here is what to focus on:</p>
-<p>Explicit structure, configuration over convention,
+<p class="permalink-paragraph">Here is what it had to say:</p>
+<p class="permalink-paragraph">That’s a <em>superb</em> question—and one that gets right to the heart of <strong>human-AI collaborative coding at scale</strong>.  You&#39;re designing a system <em>not just for users</em>, but for <strong>yourself and an LLM working together</strong>. That changes everything. The architecture must be not only <strong>modular and extensible</strong> but also <strong>navigable, explainable, and contextualizable by an LLM</strong> with limited memory.</p>
+<p class="permalink-paragraph">Here is what to focus on:</p>
+<p class="permalink-paragraph">Explicit structure, configuration over convention,
 LLMs can&#39;t infer large codebases without guidance.</p>
-<p>Uniform plugin contracts, predictable plug-in structure,
+<p class="permalink-paragraph">Uniform plugin contracts, predictable plug-in structure,
 makes reasoning and code generation easier.</p>
-<p>Registry-based discovery,
+<p class="permalink-paragraph">Registry-based discovery,
 lets LLMs &quot;scan&quot; functionality without loading every file.</p>
-<p>File separation (1 plugin = 1 file),
+<p class="permalink-paragraph">File separation (1 plugin = 1 file),
 keeps context sizes manageable.</p>
-<p>Flat call graph (low indirection),
+<p class="permalink-paragraph">Flat call graph (low indirection),
 avoids LLMs getting lost in multiple layers of abstraction.</p>
-<p>Metadata, and Self-describing plugins,
+<p class="permalink-paragraph">Metadata, and Self-describing plugins,
 Makes summarization and documentation easier.</p>
-<p>This means that evey plugin has a name, description, type,
+<p class="permalink-paragraph">This means that evey plugin has a name, description, type,
 it may mention what it provides.</p>
-<p>And then all plugins have a simple init function,
+<p class="permalink-paragraph">And then all plugins have a simple init function,
 that will receive the application object it self.</p>
-<p>Here it can access app.events where it can subscribe-to and emit event,
+<p class="permalink-paragraph">Here it can access app.events where it can subscribe-to and emit event,
 and mountUI where it can append it self to some UI selector or zone.</p>
-<p>AI wants simplicity,
+<p class="permalink-paragraph">AI wants simplicity,
 just give the whole application object to the plugin.</p>
-<p>And make sure that good metadata describing the plugins,
+<p class="permalink-paragraph">And make sure that good metadata describing the plugins,
 and maybe even what they provide, exists.</p>
-<hr>
-<p>The result of this, is you having the ability to add and throw-away plugins,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The result of this, is you having the ability to add and throw-away plugins,
 without harming the application.</p>
-<p>One plugin per file, is trouble for sample projects,
+<p class="permalink-paragraph">One plugin per file, is trouble for sample projects,
 but it makes sense, because when you include all the plugin code…</p>
-<p>The free AI runs out of context memory,
+<p class="permalink-paragraph">The free AI runs out of context memory,
 but eventually even premium AI may have trouble with one file.</p>
-<p>When everything is split into plugins,
+<p class="permalink-paragraph">When everything is split into plugins,
 you will not encounter any problems.</p>
-<p>Make plugin architecture part of the requirements document,
+<p class="permalink-paragraph">Make plugin architecture part of the requirements document,
 and at first while the applicaion is still small, let the plugins sit in the index,.html.</p>
-<p>Once things start working, pull them out,
+<p class="permalink-paragraph">Once things start working, pull them out,
 and uses an AI that can scan multiple files, that works with file systems.</p>
-<hr>
-<p>Just to say it again, your plugins need to have an initialize or init function,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Just to say it again, your plugins need to have an initialize or init function,
 and the application of app object will be passed in as the first and only argument.</p>
-<p>Here you will hook into the app events, UI, bus,
+<p class="permalink-paragraph">Here you will hook into the app events, UI, bus,
 and even helper funcions.</p>
-<p>This is one step out of of index.html,
+<p class="permalink-paragraph">This is one step out of of index.html,
 you are not adding any other layer than plugin with initialize.</p>
-<p>You must protect the AI,
+<p class="permalink-paragraph">You must protect the AI,
 from confusion.</p>
-<hr>
-<p>Now let us talk about homework,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Now let us talk about homework,
 and graduation.</p>
-<p>Because the self educated never get a break,
+<p class="permalink-paragraph">Because the self educated never get a break,
 you are receiving homework for this weekend.</p>
-<p>You don’t have to turn it in,
+<p class="permalink-paragraph">You don’t have to turn it in,
 becasue there are no deadlines in my programming class.</p>
-<p>But, once you understand what it is about,
+<p class="permalink-paragraph">But, once you understand what it is about,
 there is not much you can do to stop yourself from doing it.</p>
-<p>So I ask you to get plenty of rest,
+<p class="permalink-paragraph">So I ask you to get plenty of rest,
 touch grass often, eat your vegetables and drink plenty of water.</p>
-<hr>
-<p>Sit down for this one,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Sit down for this one,
 because like I said before…</p>
-<p>The world has changed,
+<p class="permalink-paragraph">The world has changed,
 it will take some time to understand it, and get used to it.</p>
-<hr>
-<p>You are to ask artificial intelligence,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">You are to ask artificial intelligence,
 to create a drag and drop visual programming language.</p>
-<p><a href="files/demo.html">You can use source code I generated, as a stable seed</a></p>
-<p>But you have to unstruct the AI to use functional reactive programming operators,
+<p class="permalink-paragraph"><a href="files/demo.html">You can use source code I generated, as a stable seed</a></p>
+<p class="permalink-paragraph">But you have to unstruct the AI to use functional reactive programming operators,
 written in vanilla JS, to code your visual programming language.</p>
-<p>(You can ask it to use Rx.js
+<p class="permalink-paragraph">(You can ask it to use Rx.js
 or Bacon, or ramda if you wish.)</p>
-<p>And then to allow using those functions,
+<p class="permalink-paragraph">And then to allow using those functions,
 in the programming language it self (See <a href="https://nodered.org/">Node-RED</a>)</p>
-<p>You can ask it to pop up a modal search box,
+<p class="permalink-paragraph">You can ask it to pop up a modal search box,
 that means tell the AI to use latest <a href="https://getbootstrap.com">bootstrap from their CDN</a>.</p>
-<p>And then once the user interface works,
+<p class="permalink-paragraph">And then once the user interface works,
 instruct the AI to replace the code of the visual programming language.</p>
-<p>With, programs that run on your visual canvas,
+<p class="permalink-paragraph">With, programs that run on your visual canvas,
 continue asking the AI to move everything into the visual programming environment.</p>
-<p>Until the visulal programming language,
+<p class="permalink-paragraph">Until the visulal programming language,
 is written in it self.</p>
-<p>Upon completion for this task,
+<p class="permalink-paragraph">Upon completion for this task,
 which may take anywhere between one hour and 25 years.</p>
-<p>You may consider yourself a graduate of the CPU,
+<p class="permalink-paragraph">You may consider yourself a graduate of the CPU,
 and a programmer of the Brave New Era Of Artificial Intelligence.</p>
-<p>Please remember,
+<p class="permalink-paragraph">Please remember,
 what I said about the vegetables.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>application plug-ins (local)<br><a href="files/plugins.md">files/plugins.md</a></div>
-      <div>You can use source code I generated, as a stable seed (local)<br><a href="files/demo.html">files/demo.html</a></div>
-      <div>Node-RED (nodered.org)<br><a href="https://nodered.org/">https://nodered.org/</a></div>
-      <div>bootstrap from their CDN (getbootstrap.com)<br><a href="https://getbootstrap.com">https://getbootstrap.com</a></div>
+      <div class="permalink-link"><a href="files/plugins.md">application plug-ins</a> (local)</div>
+      <div class="permalink-link"><a href="files/demo.html">You can use source code I generated, as a stable seed</a> (local)</div>
+      <div class="permalink-link"><a href="https://nodered.org/">Node-RED</a> (nodered.org)</div>
+      <div class="permalink-link"><a href="https://getbootstrap.com">bootstrap from their CDN</a> (getbootstrap.com)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>

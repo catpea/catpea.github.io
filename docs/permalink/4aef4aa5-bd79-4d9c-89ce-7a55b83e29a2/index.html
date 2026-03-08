@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="permalink">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,104 +8,108 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
 <body>
-  <article class="permalink">
+  <article class="permalink-article">
     <figure>
-      <img src="https://catpea.github.io/chapter-12/poem-1800.avif" alt="">
-      <h1>Subscribable, Observable, Signal, Sugar and Whipflash</h1>
+      <img class="permalink-image" src="https://catpea.github.io/chapter-12/poem-1800.avif" alt="Subscribable, Observable, Signal, Sugar and Whipflash">
     </figure>
-    <header>
-      <time datetime="2025-02-04">2/3/2025</time>
-    </header>
-    <audio controls src="https://catpea.github.io/chapter-12/poem-1800.mp3"></audio>
+
+      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-12/poem-1800.mp3"></audio> 
+
+  <header>
+          <h1 class="permalink-title">Subscribable, Observable, Signal, Sugar and Whipflash</h1>
+
+          <time class="permalink-time" datetime="2025-02-04">2/3/2025</time>
+  </header>
+
     <section>
-<p>We are going to start,
+<p class="permalink-paragraph">We are going to start,
 by building a Subscribable not exacly a real class but think of it that way.</p>
-<p>It is an array or list of functions,
+<p class="permalink-paragraph">It is an array or list of functions,
 called subscribers.</p>
-<p>And two functions,
+<p class="permalink-paragraph">And two functions,
 subscribe and unsubscribe.</p>
-<p>These two functions accept just one argument,
+<p class="permalink-paragraph">These two functions accept just one argument,
 it is the subscriber, which is a function that gets data.</p>
-<p>Subscribe puts the function into the subscribers list,
+<p class="permalink-paragraph">Subscribe puts the function into the subscribers list,
 and unsubscribe, gets rid of it – nice and easy.</p>
-<p>As a very useful bonus, that you should always implement,
+<p class="permalink-paragraph">As a very useful bonus, that you should always implement,
 the subscribe function, should return a tiny anonymous function.</p>
-<p>That when executed, automatically,
+<p class="permalink-paragraph">That when executed, automatically,
 calls unsubscribe with your function.</p>
-<p>This is our Subscribable,
+<p class="permalink-paragraph">This is our Subscribable,
 the first layer is complete.</p>
-<hr>
-<p>The next layer,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">The next layer,
 is the massive huge Observables.</p>
-<p>Our cute little Signals,
+<p class="permalink-paragraph">Our cute little Signals,
 are a superset of Observables.</p>
-<p>All an observable is,
+<p class="permalink-paragraph">All an observable is,
 is one more function added to our Subscribable.</p>
-<p>And that function is notify(),
+<p class="permalink-paragraph">And that function is notify(),
 it accepts a singe argument, data.</p>
-<p>The notify function,
+<p class="permalink-paragraph">The notify function,
 iterates over the subscribers, delivering to each that data.</p>
-<p>That is all an observable is,
+<p class="permalink-paragraph">That is all an observable is,
 notify(data);</p>
-<p>So you subscribe to an observable,
+<p class="permalink-paragraph">So you subscribe to an observable,
 and something somewhere in your applicaion will say:</p>
-<p>observable.notify(‘hello world!’);
+<p class="permalink-paragraph">observable.notify(‘hello world!’);
 and all your subscribers are given that data.</p>
-<hr>
-<p>Signals, are one more additional thing,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Signals, are one more additional thing,
 just one! A data property.</p>
-<p>So instead of using notify with data,
+<p class="permalink-paragraph">So instead of using notify with data,
 signals send their data property to all the listeners.</p>
-<p>There are a couple of things that you must know,
+<p class="permalink-paragraph">There are a couple of things that you must know,
 we will be modifying the Subscribable, customizing it for signals.</p>
-<p>Fist of all, upon subscription,
+<p class="permalink-paragraph">Fist of all, upon subscription,
 if the data value is <em>something</em>, as in not null or undefined;</p>
-<p>You must send it to the subscriber immediately,
+<p class="permalink-paragraph">You must send it to the subscriber immediately,
 so you say if this.data subscriber(this.data);</p>
-<p>And you gave to add a getter and a setter,
+<p class="permalink-paragraph">And you gave to add a getter and a setter,
 some also add get and set functions but that is extra.</p>
-<p>So you have a set value(v) that if value is different from this.data,
+<p class="permalink-paragraph">So you have a set value(v) that if value is different from this.data,
 assigns to this.data, and calls notify, to update the subscribers.</p>
-<p>And and a get value that reads from this.data,
+<p class="permalink-paragraph">And and a get value that reads from this.data,
 for when you don’t want to subscribe to get the value.</p>
-<hr>
-<p>I made this sound way too complicated,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">I made this sound way too complicated,
 but I wanted to show you all the details of a Signal(),</p>
-<p>So now when you say mySignal.value = “My hovercraft is full of eels!”
+<p class="permalink-paragraph">So now when you say mySignal.value = “My hovercraft is full of eels!”
 all the subscribers will be given that data.</p>
-<p>But also that latest data is kept in the Signal under value,
+<p class="permalink-paragraph">But also that latest data is kept in the Signal under value,
 if you just need to grab it real quick.</p>
-<p>Otherwise, you subscribe, and if it is not null,
+<p class="permalink-paragraph">Otherwise, you subscribe, and if it is not null,
 then your subscriber function will be given that value immediately.</p>
-<p>And than at any point in time,
+<p class="permalink-paragraph">And than at any point in time,
 that it changes.</p>
-<hr>
-<p>This part is for those of us,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">This part is for those of us,
 who looked at Observables but never understood them.</p>
-<p>I know the question that is on your mind,
+<p class="permalink-paragraph">I know the question that is on your mind,
 and that other sssstuff in Angular and Rx, that is just syntacting sugar.</p>
-<p>Please quote me on this one,
+<p class="permalink-paragraph">Please quote me on this one,
 &quot;Be it in code, or real life, sugar is poison&quot;</p>
-<p>Sugar just means you handle data, and error seperatley,
+<p class="permalink-paragraph">Sugar just means you handle data, and error seperatley,
 otherwise you would get function arguments (err, /<em>and</em>/ data), like in node.</p>
-<p>And now in your subscriber you have to check if there was an error,
+<p class="permalink-paragraph">And now in your subscriber you have to check if there was an error,
 and only then process data, but sugar is bad, and extremly bad for learning.</p>
-<hr>
-<p>Finally, I will end this text,
+<hr class="permalink-divider">
+<p class="permalink-paragraph">Finally, I will end this text,
 with a Whipflash.</p>
-<p>You can create an Observable that accepts a doStuffFuncion via constructor,
+<p class="permalink-paragraph">You can create an Observable that accepts a doStuffFuncion via constructor,
 that may send clicks of a mouse or the tick tocks of a clock.</p>
-<p>Without, a subscribers array, or the Subscribable layer,
+<p class="permalink-paragraph">Without, a subscribers array, or the Subscribable layer,
 by simply giving every subscriber to the doStuffFuncion as an argument.</p>
-<p>Not counting method names,
+<p class="permalink-paragraph">Not counting method names,
 that is two lines of <a href="./files/code.txt">code</a>.</p>
 
     </section>
-    <footer class="links">
+    <footer class="permalink-links">
       <h2>Links</h2>
-      <div>code (local)<br><a href="./files/code.txt">./files/code.txt</a></div>
+      <div class="permalink-link"><a href="./files/code.txt">code</a> (local)</div>
     </footer>
-    <footer class="artwork-credit">
+    <footer class="permalink-artwork-credit">
       artwork <a href="https://catpea.com">credit</a>
     </footer>
   </article>
