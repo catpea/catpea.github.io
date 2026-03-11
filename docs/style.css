@@ -24,17 +24,27 @@
   --base: clamp(1rem, 0.9vw + 0.9rem, 1.25rem);
   --ratio: 1.25;
 
-  --step--4: calc(var(--base) / (var(--ratio) * var(--ratio) * var(--ratio) * var(--ratio)));
-  --step--3: calc(var(--base) / (var(--ratio) * var(--ratio) * var(--ratio)));
-  --step--2: calc(var(--base) / (var(--ratio) * var(--ratio)));
-  --step--1: calc(var(--base) / var(--ratio));
+  --ratio-down: calc(1 / var(--ratio));
+
   --step-0: var(--base);
-  --step-1: calc(var(--base) * var(--ratio));
-  --step-2: calc(var(--base) * var(--ratio) * var(--ratio));
+
+  --step-1: calc(var(--step-0) * var(--ratio));
+  --step-2: calc(var(--step-1) * var(--ratio));
   --step-3: calc(var(--step-2) * var(--ratio));
   --step-4: calc(var(--step-3) * var(--ratio));
   --step-5: calc(var(--step-4) * var(--ratio));
   --step-6: calc(var(--step-5) * var(--ratio));
+  --step-7: calc(var(--step-6) * var(--ratio));
+  --step-8: calc(var(--step-7) * var(--ratio));
+
+  --step--1: calc(var(--step-0)  * var(--ratio-down));
+  --step--2: calc(var(--step--1) * var(--ratio-down));
+  --step--3: calc(var(--step--2) * var(--ratio-down));
+  --step--4: calc(var(--step--3) * var(--ratio-down));
+  --step--5: calc(var(--step--4) * var(--ratio-down));
+  --step--6: calc(var(--step--5) * var(--ratio-down));
+  --step--7: calc(var(--step--6) * var(--ratio-down));
+  --step--8: calc(var(--step--7) * var(--ratio-down));
 
   /* SPACE */
   --space-xs: var(--step--2);
@@ -206,16 +216,18 @@ article.post {
 
 .post .details,
 .post .tags {
-  font-size: var(--step--2);
   text-align: center;
+  font-size: var(--step--1);
+
 }
 
 .post .detail,
 .post .tag {
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-  padding: var(--step--4) var(--step--3);
-  margin: 0.2rem 0.4rem;
+  border-radius: var(--step-1);
+  padding: var(--step--8) var(--step--2);
+  /*margin:var(--step--8) var(--step--8);*/
+  margin-bottom: var(--step--8);
   white-space: nowrap;
   display: inline-block;
 }
@@ -226,6 +238,8 @@ article.post {
   margin-inline: auto;
   text-wrap: balance;
   text-align: center;
+  color: var(--color-b3);
+
 }
 
 .homepage-footer {
