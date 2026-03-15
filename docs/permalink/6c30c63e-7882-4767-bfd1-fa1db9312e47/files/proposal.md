@@ -873,3 +873,128 @@ The redid metaphor becomes a simple but powerful structure for:
 * evaluating knowledge
 * building persistent memory.
 
+# Appendix B: System Structure
+
+```txt
+
+/
+├── hot/                               # GlobalFeed : Listing<Post>
+├── new/                               # GlobalFeed : Listing<Post>
+├── rising/                            # GlobalFeed : Listing<Post>
+├── top/                               # GlobalFeed : Listing<Post>
+├── controversial/                     # GlobalFeed : Listing<Post>
+├── comments/
+│   └── {article}/                     # CommentTree : Post -> Listing<Comment>
+│       └── {comment?context=...}/     # FocalCommentView : Comment subtree / context slice
+├── duplicates/
+│   └── {article}/                     # DuplicatePostIndex
+│
+├── r/                                 # SubredditNamespace : Map<SubredditName, Subreddit>
+│   └── {subreddit}/
+│       ├── hot/                       # SubredditFeed : Listing<Post>
+│       ├── new/
+│       ├── rising/
+│       ├── top/
+│       ├── controversial/
+│       ├── comments/
+│       │   └── {article}/             # Local CommentTree
+│       ├── wiki/                      # WikiNamespace
+│       │   ├── {page}                 # WikiPage
+│       │   ├── pages                  # WikiPageIndex
+│       │   ├── revisions              # WikiRecentChanges
+│       │   ├── revisions/{page}       # WikiPageHistory
+│       │   ├── discussions/{page}     # WikiTalkPage-ish listing
+│       │   └── settings/{page}        # WikiACL / visibility
+│       └── about/                     # ModeratorSurface / metadata-ish branch
+│           ├── reports                # ModListing<Post>
+│           ├── spam                   # ModListing<Post>
+│           ├── modqueue               # ModQueue
+│           ├── unmoderated            # NeedsReviewQueue
+│           └── edited                 # RecentlyEditedListing
+│
+├── u/                                 # UserNamespace shorthand in your model
+│   └── {username}/                    # UserProfile
+│       ├── about                      # UserMeta
+│       ├── overview/                  # UserHistory : Listing<Post|Comment>
+│       ├── submitted/                 # UserPosts
+│       ├── comments/                  # UserComments
+│       ├── gilded/                    # AwardedContent
+│       ├── upvoted/                   # PrivateUserListing
+│       ├── downvoted/                 # PrivateUserListing
+│       ├── hidden/                    # PrivateUserListing
+│       └── saved/                     # PrivateUserListing
+│
+├── subreddits/                        # Directory of communities
+│   ├── default/                       # Default community set
+│   ├── popular/                       # Popular communities
+│   ├── new/                           # Newly created communities
+│   └── mine/
+│       ├── subscriber/                # My subscribed communities
+│       ├── moderator/                 # Communities I moderate
+│       ├── contributor/               # Communities I can submit to specially
+│       └── streams/                   # Streamable/custom subset
+│
+├── users/                             # Directory of users
+│   ├── popular/                       # Popular accounts
+│   └── new/                           # New accounts
+│
+├── message/                           # PrivateMessageNamespace
+│   ├── inbox                          # InboxListing<Message>
+│   ├── unread                         # UnreadListing<Message>
+│   └── sent                           # SentListing<Message>
+│
+├── m/                                 # Multireddit / custom-feed mental mount
+│   └── {multipath}/                   # MultiReddit : Set<Subreddit>
+│       ├── description                # Multi metadata
+│       └── r/
+│           └── {subreddit}            # MemberSubreddit
+│
+├── live/
+│   └── {thread}/                      # LiveThread
+│       ├── discussions                # Linked discussions
+│       └── updates/
+│           └── {update_id}            # LiveUpdate
+│
+└── api/                               # Action / mutation layer, not content tree
+    ├── compose                        # Create message
+    ├── comment                        # Create comment / reply
+    ├── subscribe                      # Join/leave subreddit
+    ├── submit                         # Create post
+    ├── multi/...                      # Manage multis
+    └── wiki/...                       # Manage wiki
+
+```
+
+The clean OOP version is:
+
+* `Root`
+
+  * `Listing`
+  * `Subreddit`
+
+    * `Feed`
+    * `CommentTree`
+    * `Wiki`
+    * `ModerationQueue`
+  * `UserProfile`
+
+    * `HistoryListing`
+    * `ProfileMeta`
+  * `MessageBox`
+  * `MultiReddit`
+  * `LiveThread`
+  * `ApiAction`
+
+The important structural trick is that Reddit is not really a pure tree; it is a **graph dressed as a tree**. Most branches are actually **Listings** with cursor-style pagination (`after`, `before`, `limit`, `count`) rather than stable folders, and many views are filtered projections over the same underlying things: `Post`, `Comment`, `Message`, `WikiPage`, `Subreddit`, and `User`. ([Reddit][1])
+
+The backbone for that model comes straight from Reddit’s public API surface: global listings such as `/hot`, `/new`, `/rising`, `/top`, `/controversial`, plus `/comments/{article}` and `/duplicates/{article}`; user-history routes like `/user/{username}/overview`, `/submitted`, `/comments`, `/upvoted`, `/downvoted`, `/hidden`, `/saved`, and `/gilded`; and user metadata at `/user/{username}/about`. ([Reddit][1])
+
+The subreddit branch is its own mounted subtree: a subreddit can expose moderator listings under `/about/{reports|spam|modqueue|unmoderated|edited}` and wiki routes under `/wiki/{page}`, `/wiki/pages`, `/wiki/revisions`, `/wiki/revisions/{page}`, `/wiki/discussions/{page}`, and `/wiki/settings/{page}`. ([Reddit][1])
+
+Outside the `r/` and `u/` worlds, Reddit also exposes directory-style indexes for communities and users under `/subreddits/...` and `/users/...`, message mailboxes under `/message/{inbox|unread|sent}`, and multi/custom-feed objects via the multi APIs, which treat a “multipath” as a named container of subreddits. ([Reddit][1])
+
+One extra nuance: profile visibility is layered on top of this route surface. Reddit’s help docs show that profile content/activity settings can hide certain profile material, so the tree above is best understood as the **logical route/class hierarchy**, not a guarantee that every node is always visible to every viewer. ([Reddit Help][2])
+
+[1]: https://www.reddit.com/dev/api/ "reddit.com: api documentation"
+[2]: https://support.reddithelp.com/hc/en-us/articles/360043471231-How-do-I-update-my-profile-settings?utm_source=chatgpt.com "How do I update my profile settings? - Reddit Help"
+
