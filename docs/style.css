@@ -16,8 +16,8 @@
   --text: #83613b;
   --mute: #1c1924;
 
-  --link: #a9628a;
-  --over: #59043b;
+  --link: #26ab79;
+  --over: #ffef07;
 
   /* SIZE */
 
@@ -59,7 +59,7 @@
   --pad: var(--space-lg);
 
   --shadow: 0 var(--space-xs) var(--space-lg) rgba(0, 0, 0, 0.25);
-  --radius: var(--step--1);
+  --radius: 16px;
 
   /*
   The browser keeps adding columns until they can’t stay at least 300px wide.
@@ -173,8 +173,7 @@ article.post {
   margin: 0;
 }
 .post .cover img {
-  border-top-left-radius: var(--step--1);
-  border-top-right-radius: var(--step--1);
+  border-radius: calc(var(--radius) / 2) calc(var(--radius) / 2) 0 0;
   display: block;
   width: 100%;
   object-fit: cover;
@@ -230,6 +229,11 @@ article.post {
   margin-bottom: var(--step--8);
   white-space: nowrap;
   display: inline-block;
+}
+
+.post .detail.primary,
+.post .tag.primary {
+  color: var(--color-b3);
 }
 
 .text {
@@ -340,7 +344,26 @@ nav.pager [aria-current="true"] {
   padding: 2rem;
 }
 
+.permalink-links {
+  margin-top: var(--step-3);
+  text-align: center;
+}
+.permalink-links .permalink-link {
+  margin: var(--step-3) 0;
+}
+
+  hr.web-divider {
+    margin: 6.666rem 0;
+    border-color: transparent;
+  }
+
+.permalink-content-body {
+  margin-bottom: 12rem;
+}
+
 .permalink-artwork-credit {
+  margin-top: var(--step-3);
+  text-align: center;
   font-size: var(--step--2);
 }
 
@@ -369,6 +392,13 @@ nav.pager [aria-current="true"] {
     background: #fff;
   }
 
+
+
+  hr.web-divider {
+    display: none;
+  }
+
+
   body {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 12pt;
@@ -383,6 +413,10 @@ nav.pager [aria-current="true"] {
 
   .permalink-paragraph {
     margin-bottom: .5rem;
+  }
+
+  section, footer {
+        break-after: always;
   }
 
   .permalink-image {
@@ -400,7 +434,9 @@ nav.pager [aria-current="true"] {
     box-shadow: none;
   }
 
-
+.permalink-content-body {
+  margin: 0;
+}
 
   .permalink-paragraph {
     margin-bottom: 3rem;
@@ -413,4 +449,7 @@ nav.pager [aria-current="true"] {
   .permalink-artwork-credit {
     display: none;
   }
+}
+section.divider {
+  margin: 6rem 0;
 }
