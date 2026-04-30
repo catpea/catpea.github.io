@@ -1,0 +1,48 @@
+import { Concern } from "./concerns.js";
+
+export class ReactiveHTMLElement extends HTMLElement {
+  #mounted = false;
+
+  constructor() {
+    super();
+
+    this.concern = new Concern(this.localName || this.constructor.name);
+
+    // Constructor: create signals only.
+    // Do not depend on attributes being ready here.
+    this.concern.attributes(this);
+  }
+
+  connectedCallback() {
+    if (this.#mounted) return;
+
+    this.#mounted = true;
+
+    // Connection: hydrate current attribute values.
+    this.concern.hydrateAttributes(this);
+
+    this.mount?.();
+  }
+
+  disconnectedCallback() {
+    this.concern.dispose();
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (Object.is(oldValue, newValue)) return;
+
+    this.concern.attribute(name, newValue);
+  }
+
+  signal(name, value) {
+    return this.concern.signal(name, value);
+  }
+
+  subscribe(source, fn, immediate = true) {
+    return this.concern.subscribe(source, fn, immediate);
+  }
+
+  combineLatest(name, ...sources) {
+    return this.concern.combineLatest(name, ...sources);
+  }
+}
