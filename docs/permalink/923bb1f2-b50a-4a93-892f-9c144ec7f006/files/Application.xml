@@ -1,18 +1,98 @@
 <Application name="hello-xml-app" version="0.1.0">
 
+  <!--
+    SCREEN
+
+    The Screen describes what is currently mounted as the visible application UI.
+
+    This does not describe behavior.
+    It only says which interface structure should be rendered.
+  -->
   <Screen>
     <Panel use="main-panel" />
   </Screen>
 
+
+  <!--
+    STATE TREE
+
+    States are nested like MUD rooms.
+
+    The current application location is a path, for example:
+
+      /application/hello-world
+      /application/hello-world/hello-universe
+
+    Moving to a child state keeps the parent state active.
+    Moving to ".." exits the current child and returns to the parent.
+
+    Lifecycle rule:
+
+      enter
+        Runs when a state becomes active for the first time in the new path.
+
+      exit
+        Runs when a state is removed from the active path.
+
+      resume
+        Runs when returning upward to a parent state that was already active.
+
+    The runtime determines enter/resume/exit by comparing:
+
+      previous state path
+      next state path
+  -->
   <State name="application" initial="hello-world">
 
+    <!--
+      Room:
+
+        /application/hello-world
+
+      This is the first room entered by the app.
+    -->
     <State name="hello-world" title="Hello World">
 
-      <Goal use="screen" state="hello-world" />
+      <!--
+        First arrival.
+      -->
+      <Workflow on="enter" use="hello-world" />
 
+      <!--
+        Returning from a child state, such as:
+
+          /application/hello-world/hello-universe
+          back to
+          /application/hello-world
+      -->
+      <Workflow on="resume" use="hello-world" />
+
+      <!--
+        Leaving hello-world completely.
+
+        This does not run when entering hello-universe,
+        because hello-universe is a child of hello-world.
+      -->
+      <Workflow on="exit">
+        <Action use="cls" />
+      </Workflow>
+
+
+      <!--
+        Child room:
+
+          /application/hello-world/hello-universe
+
+        Entering this state does not exit hello-world.
+        hello-world remains active as the parent room.
+      -->
       <State name="hello-universe" title="Hello Universe">
 
-        <Goal use="screen" state="hello-universe" />
+        <Workflow on="enter" use="hello-universe" />
+
+        <Workflow on="exit">
+          <Action use="cls" />
+        </Workflow>
 
       </State>
 
@@ -20,65 +100,353 @@
 
   </State>
 
+
+  <!--
+    INTERFACES
+
+    Interfaces are reusable UI structures.
+
+    These are made from nested Web Components.
+    They are not behavior.
+    They are UI layouts.
+  -->
   <Interfaces>
+
+    <!--
+      The main panel contains the conversational interface.
+
+      Actions like alert, echo, and goto can print components into this chat.
+    -->
     <Panel name="main-panel">
       <Chat name="main-chat" />
     </Panel>
+
   </Interfaces>
 
+
+  <!--
+    COMPONENTS
+
+    Component registry.
+
+    name:
+      The XML name used in the application map.
+
+    tag:
+      The actual custom element tag used in the DOM.
+
+    url:
+      The JavaScript module that defines the Web Component.
+
+    Example:
+
+      <Alert text="Hello" color="primary" />
+
+    can become:
+
+      <x-alert text="Hello" color="primary"></x-alert>
+  -->
   <Components>
-    <Component name="panel" tag="x-panel" url="src/components/panel/panel.js" />
-    <Component name="chat" tag="x-chat" url="src/components/chat/chat.js" />
-    <Component name="alert" tag="x-alert" url="src/components/alert/alert.js" />
-    <Component name="button" tag="x-button" url="src/components/button/button.js" />
+
+    <Component
+      name="panel"
+      tag="x-panel"
+      url="src/components/panel/panel.js" />
+
+    <Component
+      name="chat"
+      tag="x-chat"
+      url="src/components/chat/chat.js" />
+
+    <Component
+      name="alert"
+      tag="x-alert"
+      url="src/components/alert/alert.js" />
+
+    <Component
+      name="button"
+      tag="x-button"
+      url="src/components/button/button.js" />
+
   </Components>
 
-  <Goals>
 
-    <Goal name="screen" default="empty">
+  <!--
+    WORKFLOWS
 
-      <Plan state="empty">
-        <Action use="cls" />
-      </Plan>
+    Workflows are Apple Automator-like recipes.
 
-      <Plan state="hello-world">
-        <Action use="cls" />
+    They are ordered lists of actions.
 
-        <Action
-          use="alert"
-          text="Hello World"
-          color="primary" />
+    A workflow may declare local variables.
+    Actions may read those variables with $name syntax.
 
-        <Action
-          use="goto"
-          to="hello-universe"
-          text="Go to Hello Universe"
-          color="secondary" />
-      </Plan>
+    Example:
 
-      <Plan state="hello-universe">
-        <Action use="cls" />
+      <Variable name="message" value="Hello World" />
+      <Action use="alert" text="$message" />
 
-        <Action
-          use="alert"
-          text="Hello Universe"
-          color="success" />
+    Keep workflows shallow and readable.
+    Prefer attributes over deeply nested input trees.
+  -->
+  <Workflows>
 
-        <Action
-          use="goto"
-          to=".."
-          text="Go to Hello World"
-          color="secondary" />
-      </Plan>
 
-    </Goal>
+    <!--
+      Workflow:
 
-  </Goals>
+        hello-world
 
+      Used when entering or resuming:
+
+        /application/hello-world
+
+      This workflow clears the chat, shows an x-alert,
+      then prints a goto button for the child state.
+    -->
+    <Workflow
+      name="hello-world"
+      title="Hello World"
+      category="demo">
+
+      <Variables>
+        <Variable name="message" value="Hello World" />
+        <Variable name="alertColor" value="primary" />
+        <Variable name="nextState" value="hello-universe" />
+        <Variable name="buttonText" value="Go to Hello Universe" />
+      </Variables>
+
+      <Action use="cls" />
+
+      <Action
+        use="alert"
+        text="$message"
+        color="$alertColor" />
+
+      <!--
+        Relative goto.
+
+        From:
+
+          /application/hello-world
+
+        To:
+
+          /application/hello-world/hello-universe
+      -->
+      <Action
+        use="goto"
+        to="$nextState"
+        text="$buttonText"
+        color="secondary" />
+
+    </Workflow>
+
+
+    <!--
+      Workflow:
+
+        hello-universe
+
+      Used when entering:
+
+        /application/hello-world/hello-universe
+
+      This workflow clears the chat, shows an x-alert,
+      then prints a goto button that moves back up to the parent state.
+    -->
+    <Workflow
+      name="hello-universe"
+      title="Hello Universe"
+      category="demo">
+
+      <Variables>
+        <Variable name="message" value="Hello Universe" />
+        <Variable name="alertColor" value="success" />
+        <Variable name="nextState" value=".." />
+        <Variable name="buttonText" value="Go to Hello World" />
+      </Variables>
+
+      <Action use="cls" />
+
+      <Action
+        use="alert"
+        text="$message"
+        color="$alertColor" />
+
+      <!--
+        Parent goto.
+
+        From:
+
+          /application/hello-world/hello-universe
+
+        To:
+
+          /application/hello-world
+
+        This causes:
+
+          exit hello-universe
+          resume hello-world
+      -->
+      <Action
+        use="goto"
+        to="$nextState"
+        text="$buttonText"
+        color="secondary" />
+
+    </Workflow>
+
+  </Workflows>
+
+
+  <!--
+    ACTIONS
+
+    Action registry.
+
+    name:
+      The action name used by workflows.
+
+    title:
+      Human-friendly label for the workflow editor.
+
+    category:
+      Used to organize actions in the editor sidebar.
+
+    url:
+      JavaScript module that implements the action.
+
+    Dependencies:
+
+      Some actions require components or other actions.
+
+      Example:
+
+        alert requires the alert component.
+        alert also requires ensure-chat.
+
+      The workflow editor/runtime may automatically insert or prepare
+      dependencies when an action is used.
+
+    Keep dependencies simple for now:
+
+      <Requires component="..." />
+      <Requires action="..." />
+  -->
   <Actions>
-    <Action name="cls" url="src/actions/cls/cls.js" />
-    <Action name="alert" url="src/actions/alert/alert.js" />
-    <Action name="goto" url="src/actions/goto/goto.js" />
+
+
+    <!--
+      Category: utility
+
+      Clears the conversational output area.
+    -->
+    <Action
+      name="cls"
+      title="Clear Chat"
+      category="utility"
+      url="src/actions/cls/cls.js">
+
+      <Description>
+        Clears the conversational user interface.
+      </Description>
+
+      <Output type="void" />
+
+    </Action>
+
+
+    <!--
+      Category: interface
+
+      Ensures there is a valid chat target before actions print UI.
+      This is mostly a dependency action.
+    -->
+    <Action
+      name="ensure-chat"
+      title="Ensure Chat Target"
+      category="interface"
+      url="src/actions/ensure-chat/ensure-chat.js">
+
+      <Description>
+        Ensures that the main conversational output target is available.
+      </Description>
+
+      <Output type="target" name="chat" />
+
+    </Action>
+
+
+    <!--
+      Category: interface
+
+      Prints an x-alert component into the conversational UI.
+
+      This action depends on:
+
+        component: alert
+        action: ensure-chat
+    -->
+    <Action
+      name="alert"
+      title="Show Alert"
+      category="interface"
+      url="src/actions/alert/alert.js">
+
+      <Description>
+        Prints an x-alert component into the conversational user interface.
+      </Description>
+
+      <Requires component="alert" />
+      <Requires action="ensure-chat" />
+
+      <Input name="text" type="text/plain" />
+      <Input name="color" type="text/plain" default="primary" />
+
+      <Output type="component" component="alert" />
+
+    </Action>
+
+
+    <!--
+      Category: navigation
+
+      Prints a button that moves the application to another state.
+
+      The goto target may be:
+
+        hello-universe
+          child state
+
+        ..
+          parent state
+
+        /application/hello-world
+          absolute state path
+    -->
+    <Action
+      name="goto"
+      title="Goto State Button"
+      category="navigation"
+      url="src/actions/goto/goto.js">
+
+      <Description>
+        Prints a button that transitions the application to another state.
+      </Description>
+
+      <Requires component="button" />
+      <Requires action="ensure-chat" />
+
+      <Input name="to" type="state/path" />
+      <Input name="text" type="text/plain" default="Continue" />
+      <Input name="color" type="text/plain" default="secondary" />
+
+      <Output type="component" component="button" />
+
+    </Action>
+
   </Actions>
 
 </Application>
