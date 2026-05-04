@@ -1,0 +1,1270 @@
+// =============================================================================
+// AMBER FANTASYUI — Bootstrap 5 Dark Cyberpunk Theme
+// "Dark Ice. Military Countermeasures. Context Color Explosions."
+//
+// Color philosophy: everything ships at 20–40% brightness.
+// On interaction, color EXPLODES to full glow. Strategic. Cinematic.
+// No white anywhere. The lightest color in this world is dim amber.
+// =============================================================================
+
+// ── 1. FUI COLOR TOKENS ───────────────────────────────────────────────────────
+//    Source inputs: atmosphere #220410, amber #fde104 / #de1909, neon #6e049a
+//    Model M grays: #8f8f87 / #686761 (improved below)
+
+// Background stack — crimson-void tint from #220410
+$fui-void:      #050108;  // absolute dark, page canvas
+$fui-abyss:     #0a0210;  // structural bg (nav, sidebar)
+$fui-pit:       #100218;  // panel background
+$fui-surface:   #160320;  // card background
+$fui-raised:    #1e0328;  // elevated card / hover bg
+$fui-crest:     #220410;  // user's atmosphere color — active/selected
+
+// Amber — CRT phosphor, the soul of this theme
+$fui-amber-raw: #fde104;  // reference — full brightness, rarely used directly
+$fui-amber-hi:  #d4a800;  // HOT: hover, active glow edges
+$fui-amber:     #9a7b00;  // PRIMARY TEXT: readable CRT amber
+$fui-amber-lo:  #5c4900;  // DIM: borders, structural chrome
+$fui-amber-bg:  #2e2400;  // DEAD: background tinting
+
+// Red — alarm, danger, action (from #de1909)
+$fui-red-raw:   #de1909;  // reference — full alarm brightness
+$fui-red-hi:    #c41408;  // HOT: critical alerts, eject
+$fui-red:       #8c0f06;  // WARM: warning states
+$fui-red-lo:    #4a0703;  // DIM: structural danger
+$fui-red-bg:    #1e0301;  // DEAD: background danger tint
+
+// Purple — neon accent, special operations (from #6e049a)
+$fui-purple-raw: #6e049a; // reference
+$fui-purple-hi:  #5c0382; // HOT: elite actions, key events
+$fui-purple:     #3f0259; // MEDIUM: accent borders, info states
+$fui-purple-lo:  #200130; // DIM: structural accents
+$fui-purple-bg:  #0e0018; // DEAD: background accent tint
+
+// Model M keyboard grays — improved, warm-tinted for amber compatibility
+$fui-gray-1:    #7a7a72;  // secondary text  (was #8f8f87)
+$fui-gray-2:    #57574f;  // borders          (was #686761)
+$fui-gray-3:    #33332d;  // dead chrome
+$fui-gray-4:    #181812;  // near-void chrome
+
+// ── 2. TYPOGRAPHY TOKENS ─────────────────────────────────────────────────────
+
+$fui-font-display: 'Orbitron', 'Share Tech Mono', monospace;
+$fui-font-body:    'Share Tech Mono', 'JetBrains Mono', 'Fira Code', monospace;
+$fui-font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+// ── 3. BOOTSTRAP VARIABLE OVERRIDES ──────────────────────────────────────────
+//    Remap the entire Bootstrap color system to the FUI world.
+//    "white" in this world is dim amber. "black" is the void.
+
+$white:   #2e2400;   // the "white" of the FUI world — amber-bg tone
+$black:   $fui-void;
+
+// Gray scale — no true neutrals, everything is amber-warm
+$gray-100: #252018;
+$gray-200: #1f1b13;
+$gray-300: #19160f;
+$gray-400: #14110c;
+$gray-500: $fui-gray-2;
+$gray-600: $fui-gray-3;
+$gray-700: #26261e;
+$gray-800: $fui-abyss;
+$gray-900: $fui-void;
+
+$primary:   $fui-amber-hi;
+$secondary: $fui-gray-2;
+$success:   #1d5400;
+$info:      $fui-purple;
+$warning:   $fui-red;
+$danger:    $fui-red-hi;
+$light:     $fui-crest;
+$dark:      $fui-abyss;
+
+$body-bg:           $fui-void;
+$body-color:        $fui-amber;
+$body-emphasis-color: $fui-amber-hi;
+
+$font-family-base:       $fui-font-body;
+$font-family-monospace:  $fui-font-mono;
+$font-size-base:         .8125rem;   // 13px — compact terminal
+$font-size-sm:           .75rem;     // 12px
+$line-height-base:       1.55;
+$headings-font-family:   $fui-font-display;
+$headings-color:         $fui-amber-hi;
+$headings-font-weight:   700;
+
+$link-color:             $fui-amber;
+$link-hover-color:       $fui-amber-hi;
+$link-decoration:        none;
+
+$border-color:           $fui-amber-lo;
+$border-radius:          2px;
+$border-radius-sm:       1px;
+$border-radius-lg:       4px;
+$border-radius-pill:     2px;  // FUI has sharp corners, not pills
+
+$input-bg:               $fui-pit;
+$input-color:            $fui-amber;
+$input-border-color:     $fui-amber-lo;
+$input-focus-border-color: $fui-amber-hi;
+$input-placeholder-color: $fui-gray-2;
+$input-focus-box-shadow: 0 0 0 3px rgba($fui-amber-raw, .08);
+
+$btn-font-size:          .75rem;
+$btn-font-weight:        600;
+$btn-padding-y:          .4rem;
+$btn-padding-x:          1rem;
+$btn-border-radius:      2px;
+
+$card-bg:                $fui-surface;
+$card-border-color:      $fui-amber-lo;
+$card-border-radius:     2px;
+$card-cap-bg:            $fui-pit;
+$card-color:             $fui-amber;
+
+$modal-content-bg:       $fui-pit;
+$modal-backdrop-opacity: .85;
+
+$table-color:            $fui-amber;
+$table-bg:               transparent;
+$table-border-color:     $fui-amber-lo;
+$table-striped-bg:       rgba($fui-amber-raw, .03);
+$table-hover-bg:         rgba($fui-amber-raw, .06);
+
+$navbar-dark-color:      $fui-amber;
+$navbar-dark-hover-color: $fui-amber-hi;
+$navbar-dark-active-color: $fui-amber-hi;
+$navbar-dark-brand-color: $fui-amber-hi;
+
+$badge-font-size:        .65em;
+
+$code-color:             $fui-amber-hi;
+$pre-color:              $fui-amber;
+
+// ── 3b. ADDITIONAL COMPONENT VARIABLE OVERRIDES ───────────────────────────────
+
+// Accordion
+$accordion-bg:                     $fui-surface;
+$accordion-border-color:           $fui-amber-lo;
+$accordion-button-bg:              $fui-pit;
+$accordion-button-color:           $fui-amber;
+$accordion-button-active-bg:       $fui-crest;
+$accordion-button-active-color:    $fui-amber-hi;
+$accordion-icon-color:             $fui-amber;
+$accordion-icon-active-color:      $fui-amber-hi;
+
+// List Group
+$list-group-color:                 $fui-amber;
+$list-group-bg:                    $fui-surface;
+$list-group-border-color:          $fui-amber-lo;
+$list-group-hover-bg:              $fui-raised;
+$list-group-active-color:          $fui-amber-hi;
+$list-group-active-bg:             $fui-amber-bg;
+$list-group-active-border-color:   $fui-amber-lo;
+$list-group-disabled-color:        $fui-gray-2;
+$list-group-disabled-bg:           $fui-surface;
+
+// Dropdowns
+$dropdown-color:                   $fui-amber;
+$dropdown-bg:                      $fui-pit;
+$dropdown-border-color:            $fui-amber-lo;
+$dropdown-divider-bg:              $fui-gray-3;
+$dropdown-link-color:              $fui-amber;
+$dropdown-link-hover-color:        $fui-amber-hi;
+$dropdown-link-hover-bg:           $fui-raised;
+$dropdown-link-active-color:       $fui-amber-hi;
+$dropdown-link-active-bg:          $fui-amber-bg;
+$dropdown-header-color:            $fui-gray-1;
+
+// Navs
+$nav-link-color:                   $fui-amber;
+$nav-link-hover-color:             $fui-amber-hi;
+$nav-link-disabled-color:          $fui-gray-2;
+$nav-tabs-border-color:            $fui-amber-lo;
+$nav-tabs-link-active-color:       $fui-amber-hi;
+$nav-tabs-link-active-bg:          $fui-surface;
+$nav-tabs-link-active-border-color: $fui-amber-hi $fui-amber-hi $fui-surface;
+$nav-pills-link-active-color:      $fui-amber-hi;
+$nav-pills-link-active-bg:         $fui-amber-bg;
+
+// Pagination
+$pagination-color:                 $fui-amber;
+$pagination-bg:                    $fui-surface;
+$pagination-border-color:          $fui-amber-lo;
+$pagination-hover-color:           $fui-amber-hi;
+$pagination-hover-bg:              $fui-raised;
+$pagination-hover-border-color:    $fui-amber;
+$pagination-active-color:          $fui-amber-hi;
+$pagination-active-bg:             $fui-amber-bg;
+$pagination-active-border-color:   $fui-amber;
+$pagination-disabled-color:        $fui-gray-2;
+$pagination-disabled-bg:           $fui-abyss;
+$pagination-disabled-border-color: $fui-gray-3;
+
+// Breadcrumb
+$breadcrumb-divider-color:         $fui-gray-2;
+$breadcrumb-active-color:          $fui-amber;
+
+// Progress
+$progress-height:                  6px;
+$progress-bg:                      $fui-pit;
+$progress-bar-bg:                  $fui-amber;
+$progress-border-radius:           1px;
+
+// Toast
+$toast-background-color:           rgba($fui-pit, .95);
+$toast-border-color:               $fui-amber-lo;
+$toast-color:                      $fui-amber;
+$toast-header-background-color:    rgba($fui-abyss, .92);
+$toast-header-color:               $fui-amber-hi;
+$toast-header-border-color:        $fui-amber-lo;
+
+// Popover
+$popover-bg:                       $fui-pit;
+$popover-border-color:             $fui-amber-lo;
+$popover-body-color:               $fui-amber;
+$popover-header-bg:                $fui-abyss;
+$popover-header-color:             $fui-amber-hi;
+
+// Tooltip
+$tooltip-bg:                       $fui-pit;
+$tooltip-color:                    $fui-amber-hi;
+$tooltip-opacity:                  .95;
+
+// ── 4. BOOTSTRAP IMPORT ──────────────────────────────────────────────────────
+@import "bootstrap/scss/bootstrap";
+
+// ── 5. GOOGLE FONTS (runtime — no compile-time HTTP) ─────────────────────────
+// Loaded in <head> link tag, not here.
+
+// ── 6. CSS CUSTOM PROPERTIES ─────────────────────────────────────────────────
+:root {
+  --fui-void:          #{$fui-void};
+  --fui-abyss:         #{$fui-abyss};
+  --fui-pit:           #{$fui-pit};
+  --fui-surface:       #{$fui-surface};
+  --fui-raised:        #{$fui-raised};
+  --fui-crest:         #{$fui-crest};
+
+  --fui-amber-raw:     #{$fui-amber-raw};
+  --fui-amber-hi:      #{$fui-amber-hi};
+  --fui-amber:         #{$fui-amber};
+  --fui-amber-lo:      #{$fui-amber-lo};
+  --fui-amber-bg:      #{$fui-amber-bg};
+
+  --fui-red-raw:       #{$fui-red-raw};
+  --fui-red-hi:        #{$fui-red-hi};
+  --fui-red:           #{$fui-red};
+  --fui-red-lo:        #{$fui-red-lo};
+
+  --fui-purple-raw:    #{$fui-purple-raw};
+  --fui-purple-hi:     #{$fui-purple-hi};
+  --fui-purple:        #{$fui-purple};
+  --fui-purple-lo:     #{$fui-purple-lo};
+
+  --fui-gray-1:        #{$fui-gray-1};
+  --fui-gray-2:        #{$fui-gray-2};
+  --fui-gray-3:        #{$fui-gray-3};
+
+  // customer color intensity knob (1.0 = ship default, 2.0 = full brightness)
+  --fui-intensity:     1.0;
+}
+
+// ── 7. GLOW MIXINS ───────────────────────────────────────────────────────────
+
+@mixin glow($color, $level: med) {
+  @if $level == whisper {
+    box-shadow: 0 0 6px  rgba($color, .15);
+  } @else if $level == med {
+    box-shadow: 0 0 6px  rgba($color, .35),
+                0 0 18px rgba($color, .12);
+  } @else if $level == hot {
+    box-shadow: 0 0 4px  rgba($color, .7),
+                0 0 14px rgba($color, .35),
+                0 0 36px rgba($color, .1);
+  } @else if $level == explosion {
+    box-shadow: 0 0 3px  rgba($color, 1.0),
+                0 0 10px rgba($color, .7),
+                0 0 28px rgba($color, .35),
+                0 0 60px rgba($color, .12);
+  }
+}
+
+@mixin text-glow($color, $level: med) {
+  @if $level == whisper {
+    text-shadow: 0 0 8px rgba($color, .3);
+  } @else if $level == med {
+    text-shadow: 0 0 6px rgba($color, .55), 0 0 18px rgba($color, .2);
+  } @else if $level == hot {
+    text-shadow: 0 0 4px rgba($color, .9), 0 0 14px rgba($color, .45), 0 0 32px rgba($color, .18);
+  }
+}
+
+// Corner bracket decoration — the FUI signature
+@mixin fui-corners($color, $size: 8px, $width: 1px) {
+  position: relative;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: $size;
+    height: $size;
+    border-color: $color;
+    border-style: solid;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  &::before { top: -1px; left: -1px; border-width: $width $width 0 0; transform: rotate(180deg); }
+  &::after  { bottom: -1px; right: -1px; border-width: $width $width 0 0; }
+}
+
+// ── 8. GLOBAL / BODY ──────────────────────────────────────────────────────────
+
+html { background-color: $fui-void; }
+
+body {
+  background-color: $fui-void;
+  color: $fui-amber;
+  font-family: $fui-font-body;
+  // Subtle scanline overlay — the authentic CRT soul
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba($fui-void, .25) 2px,
+    rgba($fui-void, .25) 4px
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+// Selection — amber glow
+::selection {
+  background: rgba($fui-amber-raw, .25);
+  color: $fui-amber-hi;
+}
+
+// Scrollbar — minimal amber-on-void
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: $fui-abyss; }
+::-webkit-scrollbar-thumb { background: $fui-amber-lo; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: $fui-amber; }
+
+// ── 9. TACTICAL NAVIGATION ───────────────────────────────────────────────────
+
+.fui-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  height: 42px;
+  background-color: $fui-abyss;
+  border-bottom: 1px solid $fui-amber-lo;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 2rem;
+  @include glow($fui-amber-raw, whisper);
+
+  .fui-nav-brand {
+    font-family: $fui-font-display;
+    font-size: .7rem;
+    font-weight: 700;
+    color: $fui-amber-hi;
+    letter-spacing: .2em;
+    text-decoration: none;
+    @include text-glow($fui-amber-raw, med);
+    &::before { content: '█ '; opacity: .6; }
+  }
+
+  .fui-nav-link {
+    font-size: .65rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: $fui-amber;
+    text-decoration: none;
+    transition: color .15s;
+    &:hover { color: $fui-amber-hi; @include text-glow($fui-amber-raw, whisper); }
+    &.active { color: $fui-amber-hi; }
+  }
+
+  .fui-nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .fui-nav-status {
+    font-size: .6rem;
+    letter-spacing: .1em;
+    color: $fui-gray-2;
+    &.nominal { color: #2a6600; }
+    &.warning { color: $fui-red; @include text-glow($fui-red-raw, whisper); }
+    &.critical { color: $fui-red-hi; @include text-glow($fui-red-raw, med); animation: fui-blink 1s step-end infinite; }
+    &::before { content: '● '; }
+  }
+}
+
+// ── 10. FUI BUTTONS — SPECTACULAR ────────────────────────────────────────────
+
+// Base FUI button — amber operational
+.btn-fui {
+  @include fui-corners($fui-amber-lo);
+  background: transparent;
+  border: 1px solid $fui-amber-lo;
+  color: $fui-amber;
+  font-family: $fui-font-body;
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: .45rem 1.1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+
+  &:hover, &:focus-visible {
+    background: rgba($fui-amber-raw, .07);
+    border-color: $fui-amber-hi;
+    color: $fui-amber-hi;
+    @include glow($fui-amber-raw, med);
+    @include text-glow($fui-amber-raw, med);
+    &::before, &::after { border-color: $fui-amber-hi; }
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(.97);
+    background: rgba($fui-amber-raw, .12);
+    @include glow($fui-amber-raw, hot);
+  }
+}
+
+// Red — ABORT / EJECT / CRITICAL
+.btn-fui-red {
+  @extend .btn-fui;
+  border-color: $fui-red-lo;
+  color: $fui-red;
+  &::before, &::after { border-color: $fui-red-lo; }
+
+  &:hover, &:focus-visible {
+    background: rgba($fui-red-raw, .07);
+    border-color: $fui-red-hi;
+    color: $fui-red-hi;
+    @include glow($fui-red-raw, med);
+    @include text-glow($fui-red-raw, med);
+    &::before, &::after { border-color: $fui-red-hi; }
+  }
+  &:active { @include glow($fui-red-raw, hot); }
+}
+
+// Purple — SPECIAL OPERATIONS / ELITE ACCESS
+.btn-fui-purple {
+  @extend .btn-fui;
+  border-color: $fui-purple-lo;
+  color: $fui-purple;
+  &::before, &::after { border-color: $fui-purple-lo; }
+
+  &:hover, &:focus-visible {
+    background: rgba($fui-purple-raw, .1);
+    border-color: $fui-purple-hi;
+    color: $fui-purple-hi;
+    @include glow($fui-purple-raw, med);
+    @include text-glow($fui-purple-raw, med);
+    &::before, &::after { border-color: $fui-purple-hi; }
+  }
+  &:active { @include glow($fui-purple-raw, hot); }
+}
+
+// Ghost — barely exists until you look at it
+.btn-fui-ghost {
+  @extend .btn-fui;
+  border-color: $fui-gray-3;
+  color: $fui-gray-2;
+  &::before, &::after { border-color: $fui-gray-3; }
+  &:hover, &:focus-visible {
+    border-color: $fui-gray-1;
+    color: $fui-gray-1;
+    background: rgba($fui-gray-2, .08);
+    box-shadow: none;
+    @include text-glow($fui-amber-raw, whisper);
+  }
+}
+
+// Large action button — hero CTAs
+.btn-fui-lg {
+  font-size: .8rem;
+  padding: .65rem 1.75rem;
+  letter-spacing: .18em;
+}
+
+// ── 11. FUI CARDS ────────────────────────────────────────────────────────────
+
+.fui-card {
+  background-color: $fui-surface;
+  border: 1px solid $fui-amber-lo;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+
+  // Top accent line
+  &::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $fui-amber, transparent);
+    opacity: .4;
+  }
+
+  &-header {
+    background: $fui-pit;
+    border-bottom: 1px solid $fui-amber-lo;
+    padding: .5rem .875rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: $fui-amber-hi;
+
+    .fui-label {
+      font-family: $fui-font-display;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+
+    .fui-id {
+      color: $fui-gray-2;
+      font-size: .6rem;
+    }
+
+    .fui-card-header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+  }
+
+  &-body {
+    padding: .875rem;
+  }
+
+  &-footer {
+    border-top: 1px solid $fui-amber-lo;
+    padding: .45rem .875rem;
+    background: $fui-pit;
+    font-size: .6rem;
+    color: $fui-gray-2;
+    letter-spacing: .08em;
+  }
+}
+
+// Status indicator dot
+.fui-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $fui-gray-3;
+  display: inline-block;
+  flex-shrink: 0;
+
+  &-amber { background: $fui-amber; @include glow($fui-amber-raw, whisper); }
+  &-red   { background: $fui-red;   @include glow($fui-red-raw,   whisper); animation: fui-blink 1.2s step-end infinite; }
+  &-purple{ background: $fui-purple; }
+  &-green { background: #2a6600; }
+  &-dead  { background: $fui-gray-4; }
+}
+
+// ── 12. NUMBERS STATION ──────────────────────────────────────────────────────
+
+.numbers-station {
+  .ns-grid {
+    font-family: $fui-font-body;
+    font-size: .8rem;
+    line-height: 1.9;
+    color: $fui-amber;
+    letter-spacing: .08em;
+  }
+
+  .ns-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba($fui-amber-lo, .4);
+    padding: .15rem 0;
+
+    &:last-child { border-bottom: none; }
+    &:nth-child(odd) { color: $fui-amber; }
+    &:nth-child(even) { color: rgba($fui-amber-raw, .55); }
+  }
+
+  .ns-num {
+    min-width: 3.5ch;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    transition: color .1s;
+
+    &.hot {
+      color: $fui-amber-hi;
+      @include text-glow($fui-amber-raw, whisper);
+    }
+  }
+
+  .ns-header {
+    font-family: $fui-font-display;
+    font-size: .6rem;
+    letter-spacing: .25em;
+    color: $fui-gray-2;
+    text-transform: uppercase;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid $fui-amber-lo;
+    margin-bottom: .4rem;
+  }
+}
+
+// ── 13. HEX DUMP ─────────────────────────────────────────────────────────────
+
+.fui-hex-dump {
+  font-family: $fui-font-mono;
+  font-size: .72rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  .hd-row {
+    display: grid;
+    grid-template-columns: 9ch 1fr 1fr max-content;
+    gap: .75rem;
+    padding: .1rem 0;
+    border-bottom: 1px solid rgba($fui-amber-lo, .3);
+
+    &:hover {
+      background: rgba($fui-amber-raw, .04);
+    }
+
+    &:last-child { border-bottom: none; }
+  }
+
+  .hd-addr  { color: $fui-gray-1; letter-spacing: .05em; }
+  .hd-bytes { color: $fui-amber;  letter-spacing: .08em; }
+  .hd-bytes-hi { color: rgba($fui-amber-raw, .55); letter-spacing: .08em; }
+  .hd-ascii {
+    color: $fui-amber-lo;
+    &::before { content: '|'; color: $fui-gray-3; }
+    &::after  { content: '|'; color: $fui-gray-3; }
+    .hot { color: $fui-amber-hi; @include text-glow($fui-amber-raw, whisper); }
+  }
+
+  .hd-header {
+    display: grid;
+    grid-template-columns: 9ch 1fr 1fr max-content;
+    gap: .75rem;
+    color: $fui-gray-2;
+    font-size: .6rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid $fui-amber-lo;
+    padding-bottom: .3rem;
+    margin-bottom: .3rem;
+  }
+}
+
+// ── 14. SVG COMPONENTS ───────────────────────────────────────────────────────
+
+.fui-svg-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $fui-amber;
+}
+
+// Radar
+.fui-radar {
+  width: 140px;
+  height: 140px;
+
+  .radar-sweep {
+    transform-origin: 60px 60px;
+    animation: fui-radar-spin 5s linear infinite;
+  }
+
+  .radar-trail {
+    transform-origin: 60px 60px;
+    animation: fui-radar-spin 5s linear infinite;
+    opacity: .08;
+  }
+
+  .blip {
+    animation: fui-blip-pulse 2.3s ease-in-out infinite;
+    &:nth-child(2) { animation-delay: .8s; animation-duration: 3.1s; }
+    &:nth-child(3) { animation-delay: 1.4s; animation-duration: 1.9s; }
+  }
+}
+
+// Signal bars
+.fui-signal-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 24px;
+
+  span {
+    width: 5px;
+    background: $fui-amber-lo;
+    border-radius: 1px;
+    animation: fui-bar-bounce 1.4s ease-in-out infinite;
+
+    &.active { background: $fui-amber; @include glow($fui-amber-raw, whisper); }
+
+    @for $i from 1 through 8 {
+      &:nth-child(#{$i}) {
+        height: #{8 + $i * 4}px;
+        animation-delay: #{($i - 1) * 0.08}s;
+      }
+    }
+  }
+}
+
+// Circuit trace SVG
+.fui-circuit { color: $fui-amber-lo; }
+
+// ── 15. FUI PLACEHOLDERS (not Bootstrap's) ───────────────────────────────────
+
+// Scanning bar — tactical load indicator
+.fui-scan {
+  height: 2px;
+  background: $fui-amber-bg;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, $fui-amber-hi, transparent);
+    animation: fui-scan-sweep 2s ease-in-out infinite;
+  }
+
+  &-slow::after { animation-duration: 4s; }
+  &-fast::after { animation-duration: .8s; }
+}
+
+// Terminal cursor block
+.fui-cursor-block {
+  display: inline-block;
+  width: .55em;
+  height: .85em;
+  background: $fui-amber;
+  vertical-align: text-bottom;
+  animation: fui-blink .9s step-end infinite;
+  @include glow($fui-amber-raw, whisper);
+}
+
+// Data stream — numbers flowing in a narrow band
+.fui-data-stream {
+  font-family: $fui-font-mono;
+  font-size: .6rem;
+  color: rgba($fui-amber-raw, .3);
+  line-height: 1.4;
+  overflow: hidden;
+  position: relative;
+  height: 5rem;
+  letter-spacing: .06em;
+
+  .fui-stream-inner {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    animation: fui-stream-scroll 6s linear infinite;
+  }
+
+  .hot { color: $fui-amber; }
+}
+
+// Waveform placeholder — flat oscilloscope
+.fui-waveform {
+  width: 100%;
+  height: 40px;
+  color: $fui-amber-lo;
+
+  path { stroke: currentColor; fill: none; stroke-width: 1; }
+  .hot { color: $fui-amber; @include glow($fui-amber-raw, whisper); }
+}
+
+// Corner bracket frame — standalone decorative element
+.fui-bracket-frame {
+  border: 1px solid transparent;
+  padding: .75rem 1rem;
+  position: relative;
+
+  &::before, &::after,
+  .fui-bracket-bl, .fui-bracket-tr {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    border-color: $fui-amber-lo;
+    border-style: solid;
+  }
+  &::before   { top:    -1px; left:  -1px; border-width: 1px 0 0 1px; }
+  &::after    { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+  .fui-bracket-bl { bottom: -1px; left:  -1px; border-width: 0 0 1px 1px; }
+  .fui-bracket-tr { top:    -1px; right: -1px; border-width: 1px 1px 0 0; }
+}
+
+// ── 16. FUI TABLE ────────────────────────────────────────────────────────────
+
+.fui-table {
+  width: 100%;
+  font-size: .72rem;
+  border-collapse: collapse;
+  letter-spacing: .04em;
+
+  th {
+    font-family: $fui-font-display;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: $fui-gray-1;
+    border-bottom: 1px solid $fui-amber-lo;
+    padding: .35rem .6rem;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: .3rem .6rem;
+    border-bottom: 1px solid rgba($fui-amber-lo, .35);
+    color: $fui-amber;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  tr:hover td {
+    background: rgba($fui-amber-raw, .04);
+    color: $fui-amber-hi;
+  }
+
+  .td-status {
+    &.nominal  { color: #2a6600; }
+    &.tracking { color: $fui-amber; }
+    &.dark     { color: $fui-gray-2; }
+    &.critical { color: $fui-red-hi; @include text-glow($fui-red-raw, whisper); }
+    &.abort    { color: $fui-red-hi; animation: fui-blink 1s step-end infinite; }
+  }
+
+  .td-mono { font-family: $fui-font-mono; }
+}
+
+// ── 17. FUI UTILITIES ────────────────────────────────────────────────────────
+
+// Text utilities
+.text-amber     { color: $fui-amber !important; }
+.text-amber-hi  { color: $fui-amber-hi !important; @include text-glow($fui-amber-raw, whisper); }
+.text-amber-lo  { color: $fui-amber-lo !important; }
+.text-red       { color: $fui-red !important; }
+.text-red-hi    { color: $fui-red-hi !important; @include text-glow($fui-red-raw, whisper); }
+.text-purple    { color: $fui-purple !important; }
+.text-purple-hi { color: $fui-purple-hi !important; @include text-glow($fui-purple-raw, whisper); }
+.text-ghost     { color: $fui-gray-2 !important; }
+.text-void      { color: $fui-gray-4 !important; }
+.text-display   { font-family: $fui-font-display !important; }
+.text-mono      { font-family: $fui-font-mono !important; }
+.text-upper     { text-transform: uppercase; letter-spacing: .12em; }
+
+// Glow utilities
+.glow-amber  { @include glow($fui-amber-raw, med); }
+.glow-red    { @include glow($fui-red-raw,   med); }
+.glow-purple { @include glow($fui-purple-raw, med); }
+
+// Background utilities
+.bg-abyss   { background-color: $fui-abyss !important; }
+.bg-pit     { background-color: $fui-pit !important; }
+.bg-surface { background-color: $fui-surface !important; }
+.bg-crest   { background-color: $fui-crest !important; }
+
+// Border utilities
+.border-amber    { border-color: $fui-amber-lo !important; }
+.border-amber-hi { border-color: $fui-amber-hi !important; }
+.border-red      { border-color: $fui-red-lo !important; }
+.border-purple   { border-color: $fui-purple-lo !important; }
+
+// Separator lines
+.fui-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, $fui-amber-lo, transparent);
+  margin: 1rem 0;
+  opacity: .6;
+}
+
+// Monospace readout display
+.fui-readout {
+  font-family: $fui-font-mono;
+  font-size: .75rem;
+  color: $fui-amber-hi;
+  background: $fui-abyss;
+  border: 1px solid $fui-amber-lo;
+  padding: .25rem .5rem;
+  border-radius: 1px;
+  display: inline-block;
+  letter-spacing: .06em;
+  @include glow($fui-amber-raw, whisper);
+}
+
+// Tactical label chip
+.fui-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .6rem;
+  font-family: $fui-font-body;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .2rem .5rem;
+  border: 1px solid;
+  border-radius: 1px;
+
+  &-amber  { border-color: $fui-amber-lo;  color: $fui-amber; }
+  &-red    { border-color: $fui-red-lo;    color: $fui-red; }
+  &-purple { border-color: $fui-purple-lo; color: $fui-purple; }
+  &-ghost  { border-color: $fui-gray-3;    color: $fui-gray-2; }
+}
+
+// Section header with side rules
+.fui-section-head {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  span {
+    font-family: $fui-font-display;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: $fui-amber-hi;
+    white-space: nowrap;
+    @include text-glow($fui-amber-raw, whisper);
+  }
+
+  &::before, &::after {
+    content: '';
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $fui-amber-lo);
+  }
+  &::after { background: linear-gradient(90deg, $fui-amber-lo, transparent); }
+}
+
+// Footer
+.fui-footer {
+  background: $fui-abyss;
+  border-top: 1px solid $fui-amber-lo;
+  padding: 1.5rem;
+  font-size: .65rem;
+  letter-spacing: .08em;
+  color: $fui-gray-2;
+
+  a { color: $fui-amber-lo; text-decoration: none; &:hover { color: $fui-amber; } }
+}
+
+// ── 18. ANIMATIONS ───────────────────────────────────────────────────────────
+
+@keyframes fui-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes fui-radar-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fui-blip-pulse {
+  0%, 100% { opacity: .8; }
+  50%       { opacity: .1; }
+}
+
+@keyframes fui-scan-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+@keyframes fui-bar-bounce {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(.4); }
+}
+
+@keyframes fui-stream-scroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes fui-power-on {
+  0%   { opacity: 0; filter: brightness(4); }
+  10%  { opacity: 1; filter: brightness(2); }
+  30%  { opacity: .7; }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+.fui-power-on { animation: fui-power-on .6s ease-out forwards; }
+
+// ── 19. HERO / TERMINAL HEADER ───────────────────────────────────────────────
+
+.fui-terminal-hero {
+  background: $fui-abyss;
+  border-bottom: 1px solid $fui-amber-lo;
+  padding: 2.5rem 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  // Background grid
+  background-image:
+    linear-gradient(rgba($fui-amber-lo, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($fui-amber-lo, .04) 1px, transparent 1px);
+  background-size: 40px 40px;
+
+  .hero-system {
+    font-family: $fui-font-display;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: .12em;
+    color: $fui-amber-hi;
+    @include text-glow($fui-amber-raw, hot);
+    line-height: 1;
+    margin-bottom: .5rem;
+  }
+
+  .hero-sub {
+    font-family: $fui-font-body;
+    font-size: .75rem;
+    letter-spacing: .2em;
+    color: $fui-gray-1;
+    text-transform: uppercase;
+  }
+
+  .hero-tagline {
+    font-size: .8rem;
+    color: $fui-amber;
+    letter-spacing: .08em;
+    margin-top: 1rem;
+    max-width: 560px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba($fui-amber-lo, .5);
+  }
+
+  .stat-item {
+    .stat-label {
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: $fui-gray-2;
+      margin-bottom: .15rem;
+    }
+    .stat-value {
+      font-family: $fui-font-mono;
+      font-size: .95rem;
+      color: $fui-amber-hi;
+      letter-spacing: .06em;
+      @include text-glow($fui-amber-raw, whisper);
+    }
+  }
+}
+
+// ── 20. RESPONSIVE ───────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .fui-nav .fui-nav-link.d-md-hide { display: none; }
+  .fui-hex-dump .hd-row { grid-template-columns: 7ch 1fr; }
+  .fui-hex-dump .hd-bytes-hi,
+  .fui-hex-dump .hd-ascii { display: none; }
+  .fui-terminal-hero .hero-system { font-size: 1.5rem; }
+  .numbers-station .ns-row { gap: .6rem; font-size: .72rem; }
+}
+
+// ── 21. STYLEGUIDE LAYOUT ─────────────────────────────────────────────────────
+
+.sg-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.sg-sidebar {
+  width: 192px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 42px;
+  height: calc(100vh - 42px);
+  overflow-y: auto;
+  background: $fui-abyss;
+  border-right: 1px solid $fui-amber-lo;
+  padding: .75rem 0 2rem;
+  scrollbar-width: thin;
+
+  .sg-toc-section { margin-bottom: .1rem; }
+
+  .sg-toc-head {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: .4rem 1rem;
+    font-family: $fui-font-display;
+    font-size: .52rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: $fui-gray-1;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color .15s;
+
+    &:hover { color: $fui-amber; }
+
+    &::after {
+      content: '▾';
+      font-size: .65rem;
+      transition: transform .2s;
+    }
+    &.collapsed::after { transform: rotate(-90deg); }
+  }
+
+  .sg-toc-links {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: .35rem;
+  }
+
+  .sg-toc-link {
+    display: block;
+    padding: .22rem .75rem .22rem 1.25rem;
+    font-size: .58rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: $fui-gray-2;
+    text-decoration: none;
+    transition: color .1s, background .1s;
+    border-left: 2px solid transparent;
+
+    &:hover {
+      color: $fui-amber;
+      background: rgba($fui-amber-raw, .04);
+    }
+
+    &.active {
+      color: $fui-amber-hi;
+      border-left-color: $fui-amber-hi;
+      background: rgba($fui-amber-raw, .06);
+      @include text-glow($fui-amber-raw, whisper);
+    }
+  }
+}
+
+.sg-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1.75rem 2rem 3rem;
+}
+
+.sg-section-title {
+  font-family: $fui-font-display;
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: $fui-gray-2;
+  border-bottom: 1px solid $fui-amber-lo;
+  padding-bottom: .3rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+
+  &:first-child { margin-top: 0; }
+}
+
+.sg-article {
+  margin-bottom: 2rem;
+}
+
+.sg-article-title {
+  font-family: $fui-font-display;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: $fui-amber-hi;
+  padding: .3rem 0;
+  margin-bottom: .85rem;
+  position: sticky;
+  top: 42px;
+  background: $fui-void;
+  z-index: 10;
+  @include text-glow($fui-amber-raw, whisper);
+
+  &::after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin-top: .28rem;
+    background: linear-gradient(90deg, rgba($fui-amber, .4), transparent);
+  }
+}
+
+.sg-example {
+  background: $fui-pit;
+  border: 1px solid rgba($fui-amber-lo, .7);
+  border-radius: 2px;
+  padding: 1.25rem;
+}
+
+.sg-demo-label {
+  font-size: .55rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: $fui-gray-2;
+  margin-bottom: .45rem;
+}
+
+// Color swatch grid
+.sg-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: .6rem;
+}
+
+.sg-swatch-item { text-align: center; }
+
+.sg-swatch {
+  display: block;
+  width: 44px;
+  height: 36px;
+  border-radius: 2px;
+  border: 1px solid rgba($fui-amber-raw, .1);
+  margin: 0 auto;
+}
+
+.sg-swatch-name {
+  font-family: $fui-font-mono;
+  font-size: .5rem;
+  color: $fui-gray-1;
+  letter-spacing: .03em;
+  margin-top: .25rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+  .sg-sidebar { display: none; }
+  .sg-main { padding: 1rem; }
+}
