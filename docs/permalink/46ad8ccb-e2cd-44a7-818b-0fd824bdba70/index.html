@@ -1,100 +1,166 @@
 <!DOCTYPE html>
-<html lang="en" class="permalink">
+<html lang="en" class="h-100" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/bootstrap.min.css">
+  <link rel="stylesheet" href="/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/theme.css">
+  
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
-<body>
-  <article class="permalink-article">
-    <figure>
-      <img class="permalink-image" src="https://catpea.github.io/chapter-12/poem-1802.avif" alt="switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree">
-    </figure>
+<body class="bg-body-tertiary text-body min-vh-100">
+  <main class="container py-5">
+    <article class="row justify-content-center">
 
-      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-12/poem-1802.mp3"></audio> 
+      <div class="col-lg-10 col-xl-8">
 
-  <header>
-          <h1 class="permalink-title">switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</h1>
+        <nav class="mb-4" aria-label="Post navigation">
+          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
+        </nav>
 
-          <time class="permalink-time" datetime="2025-02-06">2/5/2025</time>
-  </header>
+        <div class="card border-0 shadow-sm overflow-hidden mb-3">
 
-    <section class="permalink-content-body">
-<p class="permalink-paragraph">Switch Map, is a strange name for anything,
+          
+
+          <div class="card-body p-4 p-md-5">
+
+            
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
+                <li class="breadcrumb-item fw-lighter active">Post #1802</li>
+              </ol>
+            </nav>
+            <header class="mb-5">
+              <h1 class="display-5 fw-bold lh-1 mb-3 text-wrap-balance">switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</h1>
+              <p class="text-body-secondary mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-02-06">2/5/2025</time></p>
+            </header>
+
+            <section class="d-grid gap-3">
+            <p class="fs-5 lh-lg mb-0">Switch Map, is a strange name for anything,
 outside of the reactive programming community.</p>
-<p class="permalink-paragraph">In the reactive programming community,
+<p class="fs-5 lh-lg mb-0">In the reactive programming community,
 it is a combination of two meanings.</p>
-<p class="permalink-paragraph">Where switch refers to Observables,
+<p class="fs-5 lh-lg mb-0">Where switch refers to Observables,
 and Map means change on thing into another.</p>
-<p class="permalink-paragraph">You may not use, a correct name,
+<p class="fs-5 lh-lg mb-0">You may not use, a correct name,
 which is Swap Observable.</p>
-<p class="permalink-paragraph">Because, you will then fail to speak the same language,
+<p class="fs-5 lh-lg mb-0">Because, you will then fail to speak the same language,
 as the members of the Functional Reactive Programming Communities.</p>
-<p class="permalink-paragraph">How are you supposed to know the strange meanings,
+<p class="fs-5 lh-lg mb-0">How are you supposed to know the strange meanings,
 and the subset of language?</p>
-<p class="permalink-paragraph">That is illustrated by a quote,
+<p class="fs-5 lh-lg mb-0">That is illustrated by a quote,
 from the 1991 Pointbreak surfer movie:</p>
-<p class="permalink-paragraph">“Well, look. Look at &#39;em. They&#39;re like some kind of tribe.
+<p class="fs-5 lh-lg mb-0">“Well, look. Look at &#39;em. They&#39;re like some kind of tribe.
 They got their own language.”</p>
-<p class="permalink-paragraph">You either have to practice a lot,
+<p class="fs-5 lh-lg mb-0">You either have to practice a lot,
 or stalk your prey for long enough.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">I once saw a piece of code I couldn&#39;t read,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">I once saw a piece of code I couldn&#39;t read,
 it contained map, reduce, and filter, and it to me it looked like jewelry.</p>
-<p class="permalink-paragraph">It took weeks of being mindful of existence of map and reduce,
+<p class="fs-5 lh-lg mb-0">It took weeks of being mindful of existence of map and reduce,
 to finally click with it and in my case start writing CouchDB queries.</p>
-<p class="permalink-paragraph">Which some consider to be a fire-able offense,
-on par with <a href="https://howfuckedismydatabase.com/nosql/">speaking the f-word to the next upper ranking employee</a>.</p>
-<p class="permalink-paragraph">As beautiful as that map reduce code was,
+<p class="fs-5 lh-lg mb-0">Which some consider to be a fire-able offense,
+on par with <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://howfuckedismydatabase.com/nosql/">speaking the f-word to the next upper ranking employee</a>.</p>
+<p class="fs-5 lh-lg mb-0">As beautiful as that map reduce code was,
 it hurt me, it told me I was left out, and not capable of higher beauty.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">The word switch, gained it significance for me,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">The word switch, gained it significance for me,
 when I saw that it only refers to observable under RxJs.</p>
-<p class="permalink-paragraph">There are three operators there, switchMap, switchMapTo,
-<a href="https://rxjs.dev/api/index/function/switchAll">and switchAll, whose marble diagram is the f-Word illustrated</a>.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">Functional reactive programming, is not necessary,
+<p class="fs-5 lh-lg mb-0">There are three operators there, switchMap, switchMapTo,
+<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://rxjs.dev/api/index/function/switchAll">and switchAll, whose marble diagram is the f-Word illustrated</a>.</p>
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">Functional reactive programming, is not necessary,
 but it is the beautiful magic of a sorceress, or enchanters, or a wizard.</p>
-<p class="permalink-paragraph">It is the escape from the mundane,
+<p class="fs-5 lh-lg mb-0">It is the escape from the mundane,
 it is how you rise above prestigious small minded men, who think they have it all.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">Finally, I will always recommens that you learn FRP,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">Finally, I will always recommens that you learn FRP,
 by building your own Functional Reactive Programming system.</p>
-<p class="permalink-paragraph">And you can see how that eases you into the community,
+<p class="fs-5 lh-lg mb-0">And you can see how that eases you into the community,
 where you pickup the language.</p>
-<p class="permalink-paragraph">But, if you are looking to learn Reactive Programming in JavaScript,
+<p class="fs-5 lh-lg mb-0">But, if you are looking to learn Reactive Programming in JavaScript,
 right, real quick.</p>
-<p class="permalink-paragraph">Then I recommend looking at the <a href="https://github.com/WICG/observable">Observables Proposal</a>,
+<p class="fs-5 lh-lg mb-0">Then I recommend looking at the <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/WICG/observable">Observables Proposal</a>,
 from The Web Incubator Community Group (WICG).</p>
-<p class="permalink-paragraph">They don’t carry the Observable it self,
-that you will find at the <a href="https://github.com/tc39/proposal-observable">Technical Committee 39 Observable Proposal</a></p>
-<p class="permalink-paragraph">Aside from The Web Incubator Community showing you nice code examples,
+<p class="fs-5 lh-lg mb-0">They don’t carry the Observable it self,
+that you will find at the <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/tc39/proposal-observable">Technical Committee 39 Observable Proposal</a></p>
+<p class="fs-5 lh-lg mb-0">Aside from The Web Incubator Community showing you nice code examples,
 along side their ugly imperative versions.</p>
-<p class="permalink-paragraph">They also name the 15 essential functions that you can start with,
+<p class="fs-5 lh-lg mb-0">They also name the 15 essential functions that you can start with,
 a familiar list that is nowhere as nearly overwhelming as Rx operators.</p>
-<p class="permalink-paragraph">And I will close this text,
+<p class="fs-5 lh-lg mb-0">And I will close this text,
 by naming them for you:</p>
-<p class="permalink-paragraph">from, map, flatMap, filter, reduce, take, takeUntil, drop,
+<p class="fs-5 lh-lg mb-0">from, map, flatMap, filter, reduce, take, takeUntil, drop,
 some, every, find, forEach, toArray, catch, and finally.</p>
 
-    </section>
-    <hr class="web-divider">
-    </hr>
+            </section>
 
-    <footer class="permalink-links">
-      <h2>Links</h2>
-      <a id="links"></a>
-              <div class="permalink-link"><a href="https://howfuckedismydatabase.com/nosql/">speaking the f-word to the next upper ranking employee<br><small>https://howfuckedismydatabase.com/nosql/</small></a></div>
-      <div class="permalink-link"><a href="https://rxjs.dev/api/index/function/switchAll">and switchAll, whose marble diagram is the f-Word illustrated<br><small>https://rxjs.dev/api/index/function/switchAll</small></a></div>
-      <div class="permalink-link"><a href="https://github.com/WICG/observable">Observables Proposal<br><small>https://github.com/WICG/observable</small></a></div>
-      <div class="permalink-link"><a href="https://github.com/tc39/proposal-observable">Technical Committee 39 Observable Proposal<br><small>https://github.com/tc39/proposal-observable</small></a></div>
-    </footer>
-     <hr class="web-divider">
-    <footer class="permalink-artwork-credit">
-artwork <a href="https://catpea.com">credit</a>
-    </footer>
-  </article>
+          </div>
+        </div>
+
+        
+          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+              <div class="card-body">
+                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
+              </div>
+              <ul class="list-group list-group-flush">
+                
+                  <li class="list-group-item">
+                    <a class="text-decoration-none my-2" href="https://howfuckedismydatabase.com/nosql/">
+                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> speaking the f-word to the next upper ranking employee</span>
+                      <small class="d-block text-body-secondary fw-lighter mt-2">https://howfuckedismydatabase.com/nosql/</small>
+                    </a>
+                  </li>
+                
+                  <li class="list-group-item">
+                    <a class="text-decoration-none my-2" href="https://rxjs.dev/api/index/function/switchAll">
+                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> and switchAll, whose marble diagram is the f-Word illustrated</span>
+                      <small class="d-block text-body-secondary fw-lighter mt-2">https://rxjs.dev/api/index/function/switchAll</small>
+                    </a>
+                  </li>
+                
+                  <li class="list-group-item">
+                    <a class="text-decoration-none my-2" href="https://github.com/WICG/observable">
+                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> Observables Proposal</span>
+                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/WICG/observable</small>
+                    </a>
+                  </li>
+                
+                  <li class="list-group-item">
+                    <a class="text-decoration-none my-2" href="https://github.com/tc39/proposal-observable">
+                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> Technical Committee 39 Observable Proposal</span>
+                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/tc39/proposal-observable</small>
+                    </a>
+                  </li>
+                
+              </ul>
+          </div>
+        
+
+
+        
+          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+
+              <div class="card-body">
+                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
+              </div>
+              <ul class="list-group list-group-flush">
+                
+                <li class="list-group-item">
+                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image text-secondary me-2" aria-hidden="true"></i><small class="text-secondary">https://catpea.com</small></a>
+                </li>
+                
+              </ul>
+          </div>
+        
+
+      </div>
+    </article>
+  </main>
+  <script src="/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,158 +1,206 @@
 <!DOCTYPE html>
-<html lang="en" class="permalink">
+<html lang="en" class="h-100" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Worker Queue Explained For The New Programmer</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/bootstrap.min.css">
+  <link rel="stylesheet" href="/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/theme.css">
+  
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
-<body>
-  <article class="permalink-article">
-    <figure>
-      <img class="permalink-image" src="https://catpea.github.io/chapter-10/poem-1562.avif" alt="The Worker Queue Explained For The New Programmer">
-    </figure>
+<body class="bg-body-tertiary text-body min-vh-100">
+  <main class="container py-5">
+    <article class="row justify-content-center">
 
-      <audio class="permalink-audio-player" controls src="https://catpea.github.io/chapter-10/poem-1562.mp3"></audio> 
+      <div class="col-lg-10 col-xl-8">
 
-  <header>
-          <h1 class="permalink-title">The Worker Queue Explained For The New Programmer</h1>
+        <nav class="mb-4" aria-label="Post navigation">
+          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
+        </nav>
 
-          <time class="permalink-time" datetime="2024-06-11">6/11/2024</time>
-  </header>
+        <div class="card border-0 shadow-sm overflow-hidden mb-3">
 
-    <section class="permalink-content-body">
-<p class="permalink-paragraph">Visual programming, like any kind of programming,
+          
+
+          <div class="card-body p-4 p-md-5">
+
+            
+
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
+                <li class="breadcrumb-item fw-lighter active">Post #1562</li>
+              </ol>
+            </nav>
+            <header class="mb-5">
+              <h1 class="display-5 fw-bold lh-1 mb-3 text-wrap-balance">The Worker Queue Explained For The New Programmer</h1>
+              <p class="text-body-secondary mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-06-11">6/11/2024</time></p>
+            </header>
+
+            <section class="d-grid gap-3">
+            <p class="fs-5 lh-lg mb-0">Visual programming, like any kind of programming,
 can get pretty complicated.</p>
-<p class="permalink-paragraph">If we were to base visual programming,
+<p class="fs-5 lh-lg mb-0">If we were to base visual programming,
 on standard programming concepts like loops and ifs…</p>
-<p class="permalink-paragraph">We would quickly defeat the point of visual programming,
+<p class="fs-5 lh-lg mb-0">We would quickly defeat the point of visual programming,
 which is easy to comprehend programs.</p>
-<p class="permalink-paragraph">Low level constructs are useful to get things started,
+<p class="fs-5 lh-lg mb-0">Low level constructs are useful to get things started,
 but too primitive to use in creation of large programs.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">Furthermore there is a problem,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">Furthermore there is a problem,
 because computers have multiple CPU/s.</p>
-<p class="permalink-paragraph">So from the get go,
+<p class="fs-5 lh-lg mb-0">So from the get go,
 we have to write programs with parts that may run at the same time.</p>
-<p class="permalink-paragraph">How in the wold can you manage such a feat,
+<p class="fs-5 lh-lg mb-0">How in the wold can you manage such a feat,
 not only tracing the flow of your program as you design it.</p>
-<p class="permalink-paragraph">But 8 or 32 flows of your program at the same time,
+<p class="fs-5 lh-lg mb-0">But 8 or 32 flows of your program at the same time,
 when do you know all the flows completed, even.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">In comes, the <a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a>,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">In comes, the <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a>,
 it is a list of things that need to get done.</p>
-<p class="permalink-paragraph">Instead of loading a list of blog articles that need processing,
+<p class="fs-5 lh-lg mb-0">Instead of loading a list of blog articles that need processing,
 and then pushing them down a simple pipeline.</p>
-<p class="permalink-paragraph">Where it is likely,
+<p class="fs-5 lh-lg mb-0">Where it is likely,
 that only a singe CPU core would process it,</p>
-<p class="permalink-paragraph">And you have to keep track of,
+<p class="fs-5 lh-lg mb-0">And you have to keep track of,
 a no more data signal, along with too much data, or the slow-down signal.</p>
-<p class="permalink-paragraph">You load your blog articles,
+<p class="fs-5 lh-lg mb-0">You load your blog articles,
 and push them onto a worker queue.</p>
-<p class="permalink-paragraph">In visual programming, that would mean,
+<p class="fs-5 lh-lg mb-0">In visual programming, that would mean,
 connect your JSON Feed, where you blog articles are, to a Worker Queue Node.</p>
-<p class="permalink-paragraph">Pretty much,
+<p class="fs-5 lh-lg mb-0">Pretty much,
 a single swipe of a mouse.</p>
-<p class="permalink-paragraph">The worker queue, has a single output,
+<p class="fs-5 lh-lg mb-0">The worker queue, has a single output,
 that spits all the data out once it has been processed.</p>
-<p class="permalink-paragraph">That is the DONE signal,
+<p class="fs-5 lh-lg mb-0">That is the DONE signal,
 you get another feed, this time a list of transformed articles.</p>
-<p class="permalink-paragraph">And it has the marvelous,
+<p class="fs-5 lh-lg mb-0">And it has the marvelous,
 worker input socket.</p>
-<p class="permalink-paragraph">Where, you put your program in,
+<p class="fs-5 lh-lg mb-0">Where, you put your program in,
 conceptually your blog article processor function is a worker.</p>
-<p class="permalink-paragraph">So you have, JSON Feed Box, a Worker Function Chain Of Boxes, plugged into the Queue,
+<p class="fs-5 lh-lg mb-0">So you have, JSON Feed Box, a Worker Function Chain Of Boxes, plugged into the Queue,
 and an output port, that spits out another feed you can iterate over.</p>
-<p class="permalink-paragraph">You can configure the number of workers to match your CPU core count,
+<p class="fs-5 lh-lg mb-0">You can configure the number of workers to match your CPU core count,
 or set it to any number including 1.</p>
-<p class="permalink-paragraph">If you are going to process one article at a time,
+<p class="fs-5 lh-lg mb-0">If you are going to process one article at a time,
 don’t wait for the whole list, tap into the job done output socket.</p>
-<p class="permalink-paragraph">If you can afford to initially process your blog articles,
+<p class="fs-5 lh-lg mb-0">If you can afford to initially process your blog articles,
 with 32 workers crunching data at the same time, go for it.</p>
-<p class="permalink-paragraph">But then need to start worry about memory as things get complex,
+<p class="fs-5 lh-lg mb-0">But then need to start worry about memory as things get complex,
 you send the list to another queue, this time process one item at a time.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">You are not limited to the CPU cores,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">You are not limited to the CPU cores,
 of a single computer.</p>
-<p class="permalink-paragraph">Imagine you have 128 articles in your blog,
+<p class="fs-5 lh-lg mb-0">Imagine you have 128 articles in your blog,
 and you want to clean them up.</p>
-<p class="permalink-paragraph">If you have a Raspberry PI Cluster,
+<p class="fs-5 lh-lg mb-0">If you have a Raspberry PI Cluster,
 of say 32 computers, totaling 128 cores.</p>
-<p class="permalink-paragraph">You can theoretically, have a worker on each of those,
+<p class="fs-5 lh-lg mb-0">You can theoretically, have a worker on each of those,
 distributing your worker queue processing to theoretically run 128 times faster.</p>
-<p class="permalink-paragraph">Go from two minute wait time (if your program ran single threaded),
+<p class="fs-5 lh-lg mb-0">Go from two minute wait time (if your program ran single threaded),
 to two second wait time.</p>
-<p class="permalink-paragraph">There would be bottlenecks,
+<p class="fs-5 lh-lg mb-0">There would be bottlenecks,
 but you could deal with those.</p>
-<p class="permalink-paragraph">The theory here matters the most,
+<p class="fs-5 lh-lg mb-0">The theory here matters the most,
 as you can go beyond the local network, now.</p>
-<p class="permalink-paragraph">And request, 128 powerful servers,
+<p class="fs-5 lh-lg mb-0">And request, 128 powerful servers,
 which will get booted up, just for a moment, and won’t break the bank.</p>
-<p class="permalink-paragraph">This kind of dynamic worker network expansion,
+<p class="fs-5 lh-lg mb-0">This kind of dynamic worker network expansion,
 is called self provisioning, or automatic scaling.</p>
-<p class="permalink-paragraph">If you wanted to let your users,
+<p class="fs-5 lh-lg mb-0">If you wanted to let your users,
 to convert their blogs to video, you would want a self provisioning network.</p>
-<p class="permalink-paragraph">As it could theoretically scale, to meet all demand,
+<p class="fs-5 lh-lg mb-0">As it could theoretically scale, to meet all demand,
 and since you know ahead of time how much it cost to run the remote workers.</p>
-<p class="permalink-paragraph">You just include that in what the user pays,
+<p class="fs-5 lh-lg mb-0">You just include that in what the user pays,
 so you don’t worry about the cost, and it wouldn’t be to expensive.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">There is one more interesting use of a queue,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">There is one more interesting use of a queue,
 that I must mention as it is just too enchanting.</p>
-<p class="permalink-paragraph">If for example, you needed 128 cooking recipes,
+<p class="fs-5 lh-lg mb-0">If for example, you needed 128 cooking recipes,
 with some strained but interesting background stories.</p>
-<p class="permalink-paragraph">You could put that in a queue, and create a worker,
+<p class="fs-5 lh-lg mb-0">You could put that in a queue, and create a worker,
 that posts a bounty somewhere.</p>
-<p class="permalink-paragraph">And a lady comes in, shares her recipe gets paid,
+<p class="fs-5 lh-lg mb-0">And a lady comes in, shares her recipe gets paid,
 and your worker marks that job as solved.</p>
-<p class="permalink-paragraph">Later sending it to another queue that verifies quality,
+<p class="fs-5 lh-lg mb-0">Later sending it to another queue that verifies quality,
 perhaps even with the use of AI this time.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">These functions that comprise a worker,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">These functions that comprise a worker,
 do resent a challenge to the novice programmer.</p>
-<p class="permalink-paragraph">But, this is a solved problem,
+<p class="fs-5 lh-lg mb-0">But, this is a solved problem,
 and Apple Automator is a neat example of that.</p>
-<p class="permalink-paragraph">It is just a comprehensive library of actions
+<p class="fs-5 lh-lg mb-0">It is just a comprehensive library of actions
 with some options that you configure,</p>
-<p class="permalink-paragraph">Automator is a visual programming language,
+<p class="fs-5 lh-lg mb-0">Automator is a visual programming language,
 that chose to only allow for two ports, input an output.</p>
-<p class="permalink-paragraph">And rather than lines,
+<p class="fs-5 lh-lg mb-0">And rather than lines,
 the UI designers created the idea of Blocks that go on top of the other.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">For the sake of completion, the application framework,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">For the sake of completion, the application framework,
 that wraps these feeds, queues, and workers or automations.</p>
-<p class="permalink-paragraph">Is event based, I once called Event Based programming,
+<p class="fs-5 lh-lg mb-0">Is event based, I once called Event Based programming,
 Thought Programming.</p>
-<p class="permalink-paragraph">So you just emit events such as, load initial JSON feed,
+<p class="fs-5 lh-lg mb-0">So you just emit events such as, load initial JSON feed,
 program complete, save the result.</p>
-<p class="permalink-paragraph">And you setup listeners, that hear those events,
+<p class="fs-5 lh-lg mb-0">And you setup listeners, that hear those events,
 and respond with more actions such as load from URL and save to disk.</p>
-<hr class="permalink-divider">
-<p class="permalink-paragraph">So visual programming done right,
+<hr class="my-4">
+<p class="fs-5 lh-lg mb-0">So visual programming done right,
 does not bother you with ifs and loops.</p>
-<p class="permalink-paragraph">It brings out the Elite, Exclusive, and Luxury patters,
+<p class="fs-5 lh-lg mb-0">It brings out the Elite, Exclusive, and Luxury patters,
 that guide your hand.</p>
-<p class="permalink-paragraph">It is of some note, that the more luxurious the pattern,
+<p class="fs-5 lh-lg mb-0">It is of some note, that the more luxurious the pattern,
 the uglier it is in standard non-visual code.</p>
-<p class="permalink-paragraph">It is just hard to track everything,
+<p class="fs-5 lh-lg mb-0">It is just hard to track everything,
 as there are no shortcuts here you are operating a virtual machine.</p>
-<p class="permalink-paragraph">But once you move up to the higher generation of programming languages,
+<p class="fs-5 lh-lg mb-0">But once you move up to the higher generation of programming languages,
 then it is just a couple of boxes, as the hard to imagine machine becomes visualized.</p>
 
-    </section>
-    <hr class="web-divider">
-    </hr>
+            </section>
 
-    <footer class="permalink-links">
-      <h2>Links</h2>
-      <a id="links"></a>
-              <div class="permalink-link"><a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue<br><small>https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue</small></a></div>
-    </footer>
-     <hr class="web-divider">
-    <footer class="permalink-artwork-credit">
-artwork <a href="https://catpea.com">credit</a>
-    </footer>
-  </article>
+          </div>
+        </div>
+
+        
+          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+              <div class="card-body">
+                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
+              </div>
+              <ul class="list-group list-group-flush">
+                
+                  <li class="list-group-item">
+                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">
+                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> Worker Queue</span>
+                      <small class="d-block text-body-secondary fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue</small>
+                    </a>
+                  </li>
+                
+              </ul>
+          </div>
+        
+
+
+        
+          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+
+              <div class="card-body">
+                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
+              </div>
+              <ul class="list-group list-group-flush">
+                
+                <li class="list-group-item">
+                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image text-secondary me-2" aria-hidden="true"></i><small class="text-secondary">https://catpea.com</small></a>
+                </li>
+                
+              </ul>
+          </div>
+        
+
+      </div>
+    </article>
+  </main>
+  <script src="/bootstrap.bundle.min.js"></script>
 </body>
 </html>
