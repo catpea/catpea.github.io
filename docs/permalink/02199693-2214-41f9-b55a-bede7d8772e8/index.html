@@ -10,7 +10,7 @@
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
-<body class="bg-body-tertiary text-body min-vh-100">
+<body class="text-body min-vh-100">
   <main class="container py-5">
     <article class="row justify-content-center">
 
@@ -73,7 +73,7 @@ a tokenizer and a lexer.</p>
 <p class="fs-5 lh-lg mb-0">The tokenizer crawls the XML document from the first character,
 to the last, ignoring new lines it just sees a long line.</p>
 <p class="fs-5 lh-lg mb-0">Tokenizer, extracts tokens,
-and <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">you have to register patters or rules that it should recognize</a>.</p>
+and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">you have to register patters or rules that it should recognize</a>.</p>
 <p class="fs-5 lh-lg mb-0">Xml continues being extremly self similar,
 so there are only six patterns, that is a small number.</p>
 <p class="fs-5 lh-lg mb-0">Because we are eating every letter of the file,
@@ -105,10 +105,10 @@ you need to go in there and fix your typos, and ensure all your tags are closed.
 <p class="fs-5 lh-lg mb-0">The result is a flat list of tokens, no nesting, just a list of what we matched,
 in the original sting of text, of the xml document.</p>
 <p class="fs-5 lh-lg mb-0">And at this point all the hard work is done,
-<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">a simple tokenizer has an outer loop, just jumps past what was claimed by a token</a>.</p>
+<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">a simple tokenizer has an outer loop, just jumps past what was claimed by a token</a>.</p>
 <p class="fs-5 lh-lg mb-0">And that iner loop, where the new beginning that we just jumped to,
-is <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">evaluated by the rules</a>.</p>
-<p class="fs-5 lh-lg mb-0"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a>,
+is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">evaluated by the rules</a>.</p>
+<p class="fs-5 lh-lg mb-0"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a>,
 and sent to the Lexer, for Lexical analisis.</p>
 <p class="fs-5 lh-lg mb-0">The lexer converts the tidy list of tokens into elements,
 actual objects, that live in a nested tree.</p>
@@ -130,8 +130,8 @@ out the deepest parts of the tree, emptying our stack of parents.</p>
 return the now fully inflated tree.</p>
 <p class="fs-5 lh-lg mb-0">That a moment ago, was just our tokens,
 informing us of opening and closing instructions.</p>
-<p class="fs-5 lh-lg mb-0"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a>,
-is <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">returned to whatever requested the parsing</a> of <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">our XML document</a>.</p>
+<p class="fs-5 lh-lg mb-0"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a>,
+is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">returned to whatever requested the parsing</a> of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">our XML document</a>.</p>
 
             </section>
 
