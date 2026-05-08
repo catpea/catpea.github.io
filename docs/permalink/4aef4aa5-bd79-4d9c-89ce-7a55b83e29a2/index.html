@@ -10,7 +10,7 @@
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
-<body class="text-body min-vh-100">
+<body class="min-vh-100">
   <main class="container py-5">
     <article class="row justify-content-center">
 
@@ -20,108 +20,110 @@
           <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
         </nav>
 
-        <div class="card border-0 shadow-sm overflow-hidden mb-3">
+        <div class="card overflow-hidden mb-3">
 
           <img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1800.avif" alt="Subscribable, Observable, Signal, Sugar and Whipflash">
 
           <div class="card-body p-4 p-md-5">
 
-            
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1800.mp3"></audio>
-            
 
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1800</li>
+                <li class="breadcrumb-item">Chapter 12</li>
+                <li class="breadcrumb-item active">Post #1800</li>
               </ol>
             </nav>
+
+            
+              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1800.mp3"></audio>
+            
+            
             <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3 text-wrap-balance">Subscribable, Observable, Signal, Sugar and Whipflash</h1>
-              <p class="text-body-secondary mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-02-04">2/3/2025</time></p>
+              <h1 class="display-5 fw-bold lh-2 my-5">Subscribable, Observable, Signal, Sugar and Whipflash</h1>
+              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-02-04">2/3/2025</time></p>
             </header>
 
             <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-0">We are going to start,
+            <p class="fs-5 lh-lg mb-3 text-wrap-balance">We are going to start,
 by building a Subscribable not exacly a real class but think of it that way.</p>
-<p class="fs-5 lh-lg mb-0">It is an array or list of functions,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is an array or list of functions,
 called subscribers.</p>
-<p class="fs-5 lh-lg mb-0">And two functions,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And two functions,
 subscribe and unsubscribe.</p>
-<p class="fs-5 lh-lg mb-0">These two functions accept just one argument,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">These two functions accept just one argument,
 it is the subscriber, which is a function that gets data.</p>
-<p class="fs-5 lh-lg mb-0">Subscribe puts the function into the subscribers list,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Subscribe puts the function into the subscribers list,
 and unsubscribe, gets rid of it – nice and easy.</p>
-<p class="fs-5 lh-lg mb-0">As a very useful bonus, that you should always implement,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a very useful bonus, that you should always implement,
 the subscribe function, should return a tiny anonymous function.</p>
-<p class="fs-5 lh-lg mb-0">That when executed, automatically,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">That when executed, automatically,
 calls unsubscribe with your function.</p>
-<p class="fs-5 lh-lg mb-0">This is our Subscribable,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is our Subscribable,
 the first layer is complete.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">The next layer,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The next layer,
 is the massive huge Observables.</p>
-<p class="fs-5 lh-lg mb-0">Our cute little Signals,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our cute little Signals,
 are a superset of Observables.</p>
-<p class="fs-5 lh-lg mb-0">All an observable is,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">All an observable is,
 is one more function added to our Subscribable.</p>
-<p class="fs-5 lh-lg mb-0">And that function is notify(),
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that function is notify(),
 it accepts a singe argument, data.</p>
-<p class="fs-5 lh-lg mb-0">The notify function,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The notify function,
 iterates over the subscribers, delivering to each that data.</p>
-<p class="fs-5 lh-lg mb-0">That is all an observable is,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is all an observable is,
 notify(data);</p>
-<p class="fs-5 lh-lg mb-0">So you subscribe to an observable,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you subscribe to an observable,
 and something somewhere in your applicaion will say:</p>
-<p class="fs-5 lh-lg mb-0">observable.notify(‘hello world!’);
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">observable.notify(‘hello world!’);
 and all your subscribers are given that data.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Signals, are one more additional thing,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Signals, are one more additional thing,
 just one! A data property.</p>
-<p class="fs-5 lh-lg mb-0">So instead of using notify with data,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So instead of using notify with data,
 signals send their data property to all the listeners.</p>
-<p class="fs-5 lh-lg mb-0">There are a couple of things that you must know,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are a couple of things that you must know,
 we will be modifying the Subscribable, customizing it for signals.</p>
-<p class="fs-5 lh-lg mb-0">Fist of all, upon subscription,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Fist of all, upon subscription,
 if the data value is <em>something</em>, as in not null or undefined;</p>
-<p class="fs-5 lh-lg mb-0">You must send it to the subscriber immediately,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must send it to the subscriber immediately,
 so you say if this.data subscriber(this.data);</p>
-<p class="fs-5 lh-lg mb-0">And you gave to add a getter and a setter,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you gave to add a getter and a setter,
 some also add get and set functions but that is extra.</p>
-<p class="fs-5 lh-lg mb-0">So you have a set value(v) that if value is different from this.data,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you have a set value(v) that if value is different from this.data,
 assigns to this.data, and calls notify, to update the subscribers.</p>
-<p class="fs-5 lh-lg mb-0">And and a get value that reads from this.data,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And and a get value that reads from this.data,
 for when you don’t want to subscribe to get the value.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">I made this sound way too complicated,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made this sound way too complicated,
 but I wanted to show you all the details of a Signal(),</p>
-<p class="fs-5 lh-lg mb-0">So now when you say mySignal.value = “My hovercraft is full of eels!”
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now when you say mySignal.value = “My hovercraft is full of eels!”
 all the subscribers will be given that data.</p>
-<p class="fs-5 lh-lg mb-0">But also that latest data is kept in the Signal under value,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also that latest data is kept in the Signal under value,
 if you just need to grab it real quick.</p>
-<p class="fs-5 lh-lg mb-0">Otherwise, you subscribe, and if it is not null,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Otherwise, you subscribe, and if it is not null,
 then your subscriber function will be given that value immediately.</p>
-<p class="fs-5 lh-lg mb-0">And than at any point in time,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And than at any point in time,
 that it changes.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">This part is for those of us,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This part is for those of us,
 who looked at Observables but never understood them.</p>
-<p class="fs-5 lh-lg mb-0">I know the question that is on your mind,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">I know the question that is on your mind,
 and that other sssstuff in Angular and Rx, that is just syntacting sugar.</p>
-<p class="fs-5 lh-lg mb-0">Please quote me on this one,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please quote me on this one,
 &quot;Be it in code, or real life, sugar is poison&quot;</p>
-<p class="fs-5 lh-lg mb-0">Sugar just means you handle data, and error seperatley,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sugar just means you handle data, and error seperatley,
 otherwise you would get function arguments (err, /<em>and</em>/ data), like in node.</p>
-<p class="fs-5 lh-lg mb-0">And now in your subscriber you have to check if there was an error,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now in your subscriber you have to check if there was an error,
 and only then process data, but sugar is bad, and extremly bad for learning.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Finally, I will end this text,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, I will end this text,
 with a Whipflash.</p>
-<p class="fs-5 lh-lg mb-0">You can create an Observable that accepts a doStuffFuncion via constructor,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can create an Observable that accepts a doStuffFuncion via constructor,
 that may send clicks of a mouse or the tick tocks of a clock.</p>
-<p class="fs-5 lh-lg mb-0">Without, a subscribers array, or the Subscribable layer,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without, a subscribers array, or the Subscribable layer,
 by simply giving every subscriber to the doStuffFuncion as an argument.</p>
-<p class="fs-5 lh-lg mb-0">Not counting method names,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not counting method names,
 that is two lines of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="./files/code.txt">code</a>.</p>
 
             </section>
@@ -130,7 +132,7 @@ that is two lines of <a class="link-info link-offset-2 link-underline-opacity-25
         </div>
 
         
-          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+          <div class="card overflow-hidden mb-3">
               <div class="card-body">
                 <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
               </div>
@@ -138,8 +140,8 @@ that is two lines of <a class="link-info link-offset-2 link-underline-opacity-25
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="./files/code.txt">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> code</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">./files/code.txt</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>code</span>
+                      <small class="d-block text-muted fw-lighter mt-2">./files/code.txt</small>
                     </a>
                   </li>
                 
@@ -148,14 +150,14 @@ that is two lines of <a class="link-info link-offset-2 link-underline-opacity-25
         
 
         
-          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+          <div class="card overflow-hidden mb-3">
               <div class="card-body">
                 <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
               </div>
               <ul class="list-group list-group-flush">
                 
                 <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image text-secondary me-2" aria-hidden="true"></i><small class="text-secondary">https://catpea.com</small></a>
+                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
                 </li>
                 
               </ul>

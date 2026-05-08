@@ -10,7 +10,7 @@
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
-<body class="text-body min-vh-100">
+<body class="min-vh-100">
   <main class="container py-5">
     <article class="row justify-content-center">
 
@@ -20,117 +20,119 @@
           <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
         </nav>
 
-        <div class="card border-0 shadow-sm overflow-hidden mb-3">
+        <div class="card overflow-hidden mb-3">
 
           <img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1734.avif" alt="The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans">
 
           <div class="card-body p-4 p-md-5">
 
-            
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1734.mp3"></audio>
-            
 
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1734</li>
+                <li class="breadcrumb-item">Chapter 12</li>
+                <li class="breadcrumb-item active">Post #1734</li>
               </ol>
             </nav>
+
+            
+              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1734.mp3"></audio>
+            
+            
             <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3 text-wrap-balance">The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</h1>
-              <p class="text-body-secondary mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-11-30">11/29/2024</time></p>
+              <h1 class="display-5 fw-bold lh-2 my-5">The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</h1>
+              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-11-30">11/29/2024</time></p>
             </header>
 
             <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-0">Just a few weeks ago I mentioned it is not possible to parse XML,
+            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Just a few weeks ago I mentioned it is not possible to parse XML,
 with regular expressions, but yesterday I had a fun time doing just that.</p>
-<p class="fs-5 lh-lg mb-0">This is because well made Configuration Files do not nest the same elements,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is because well made Configuration Files do not nest the same elements,
 it is OK to have siblings with the same name, but nesting is different.</p>
-<p class="fs-5 lh-lg mb-0">Because the opening tag will not be able to recognize its closing tag,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because the opening tag will not be able to recognize its closing tag,
 when it has another instance of it self within it self.</p>
-<p class="fs-5 lh-lg mb-0">So when you say open box, and then again open a new box inside the open box,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when you say open box, and then again open a new box inside the open box,
 you now have two box closing tags, and they look the same to naive parsers like mine.</p>
-<p class="fs-5 lh-lg mb-0">If an XML file is made with this in mind, and never nests the same thing,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">If an XML file is made with this in mind, and never nests the same thing,
 within it self, then it will work fine.</p>
-<p class="fs-5 lh-lg mb-0">My XML parser can be further reduced to just one line of code here,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">My XML parser can be further reduced to just one line of code here,
 but nesting elements or tags with the same name will not work.</p>
-<p class="fs-5 lh-lg mb-0">The miniature program just grabs the first closing that it sees,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The miniature program just grabs the first closing that it sees,
 and when things are nested like a Russian doll, that will not be the right one.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">I woke up this morning, and without thinking about my code,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">I woke up this morning, and without thinking about my code,
 and not wanting to test it…</p>
-<p class="fs-5 lh-lg mb-0">I just said to myself, regular expressions, the technology I relied on,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just said to myself, regular expressions, the technology I relied on,
 cannot do that.</p>
-<p class="fs-5 lh-lg mb-0">And I know this from attempts at parsing XML,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I know this from attempts at parsing XML,
 back when it was cool, and programmers randomly mention this.</p>
-<p class="fs-5 lh-lg mb-0">But they may not know, the problem is only with nesting the same tags,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But they may not know, the problem is only with nesting the same tags,
 if it is a configuration file, it will work.</p>
-<p class="fs-5 lh-lg mb-0">But if it is a document with formatting boxes, and they can be nested,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if it is a document with formatting boxes, and they can be nested,
 nope, it will be the wrong closing tag.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">To popery parse an XML file, you need two unique technologies,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">To popery parse an XML file, you need two unique technologies,
 a tokenizer and a lexer.</p>
-<p class="fs-5 lh-lg mb-0">The tokenizer crawls the XML document from the first character,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The tokenizer crawls the XML document from the first character,
 to the last, ignoring new lines it just sees a long line.</p>
-<p class="fs-5 lh-lg mb-0">Tokenizer, extracts tokens,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tokenizer, extracts tokens,
 and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">you have to register patters or rules that it should recognize</a>.</p>
-<p class="fs-5 lh-lg mb-0">Xml continues being extremly self similar,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Xml continues being extremly self similar,
 so there are only six patterns, that is a small number.</p>
-<p class="fs-5 lh-lg mb-0">Because we are eating every letter of the file,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because we are eating every letter of the file,
 we have to process spaces and new lines, throwing them away.</p>
-<p class="fs-5 lh-lg mb-0">And then there is the convenient self closing tag,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then there is the convenient self closing tag,
 instead of creating a closing tag you use a forward slash in the opening tag.</p>
-<p class="fs-5 lh-lg mb-0">Then there is the open tag,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then there is the open tag,
 and the close tag.</p>
-<p class="fs-5 lh-lg mb-0">And text,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And text,
 or letters that are not enclosed in any special brackets.</p>
-<p class="fs-5 lh-lg mb-0">And finally a code comment,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally a code comment,
 which are always ignored, like spaces.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">So you feed in the xml file as a long string of characters,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you feed in the xml file as a long string of characters,
 and you apply each of these rules or patterns.</p>
-<p class="fs-5 lh-lg mb-0">Until one matches,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until one matches,
 and consumes some of the characters,</p>
-<p class="fs-5 lh-lg mb-0">For example,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example,
 an opening tag called button, would eat 8 lettters, two brackets and the word button.</p>
-<p class="fs-5 lh-lg mb-0">The brackets, or the surrounding less than, and greater than signs,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The brackets, or the surrounding less than, and greater than signs,
 are there to tell the tokenizes, that this is an element and not  some text.</p>
-<p class="fs-5 lh-lg mb-0">And slowly few characters at a time, we convert the long string,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And slowly few characters at a time, we convert the long string,
 into tokens, objects that have a name, type, position in raw text.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">And if the process arrives at something, that was not specifed by a rule,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if the process arrives at something, that was not specifed by a rule,
 then we crash on purpose, because we discovered malformed XML.</p>
-<p class="fs-5 lh-lg mb-0">That is a syntax error, nothing that the computer can recover from,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is a syntax error, nothing that the computer can recover from,
 you need to go in there and fix your typos, and ensure all your tags are closed.</p>
-<p class="fs-5 lh-lg mb-0">The result is a flat list of tokens, no nesting, just a list of what we matched,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The result is a flat list of tokens, no nesting, just a list of what we matched,
 in the original sting of text, of the xml document.</p>
-<p class="fs-5 lh-lg mb-0">And at this point all the hard work is done,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And at this point all the hard work is done,
 <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">a simple tokenizer has an outer loop, just jumps past what was claimed by a token</a>.</p>
-<p class="fs-5 lh-lg mb-0">And that iner loop, where the new beginning that we just jumped to,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that iner loop, where the new beginning that we just jumped to,
 is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">evaluated by the rules</a>.</p>
-<p class="fs-5 lh-lg mb-0"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a>,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">The resulting list of token is then returned to the main program</a>,
 and sent to the Lexer, for Lexical analisis.</p>
-<p class="fs-5 lh-lg mb-0">The lexer converts the tidy list of tokens into elements,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The lexer converts the tidy list of tokens into elements,
 actual objects, that live in a nested tree.</p>
-<p class="fs-5 lh-lg mb-0">Whenever an open tag is found, it is added to the tree,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whenever an open tag is found, it is added to the tree,
 to build the resulting document up.</p>
-<p class="fs-5 lh-lg mb-0">Then added to a stack,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then added to a stack,
 and set as the new parent for elements that follow.</p>
-<p class="fs-5 lh-lg mb-0">We go as deep as possible though all the opening tags,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We go as deep as possible though all the opening tags,
 building a tree, until a deepest tag becomes a parent.</p>
-<p class="fs-5 lh-lg mb-0">And because it is the deepest tag,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And because it is the deepest tag,
 it gets closed right away.</p>
-<p class="fs-5 lh-lg mb-0">And now its outer tag becomes the parent again,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now its outer tag becomes the parent again,
 as that nested tag is now correctly placed in the tree.</p>
-<p class="fs-5 lh-lg mb-0">Here we may open a new tag,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here we may open a new tag,
 if there was stuff below it, for example an image beneath a title.</p>
-<p class="fs-5 lh-lg mb-0">But slowly, we start making our way back,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But slowly, we start making our way back,
 out the deepest parts of the tree, emptying our stack of parents.</p>
-<p class="fs-5 lh-lg mb-0">And finally, having the lexer,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally, having the lexer,
 return the now fully inflated tree.</p>
-<p class="fs-5 lh-lg mb-0">That a moment ago, was just our tokens,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">That a moment ago, was just our tokens,
 informing us of opening and closing instructions.</p>
-<p class="fs-5 lh-lg mb-0"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a>,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">Here our tree, called the abstract syntax tree</a>,
 is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">returned to whatever requested the parsing</a> of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">our XML document</a>.</p>
 
             </section>
@@ -139,7 +141,7 @@ is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-op
         </div>
 
         
-          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+          <div class="card overflow-hidden mb-3">
               <div class="card-body">
                 <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
               </div>
@@ -147,50 +149,50 @@ is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-op
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> you have to register patters or rules that it should recognize</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>you have to register patters or rules that it should recognize</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L5-L11</small>
                     </a>
                   </li>
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> a simple tokenizer has an outer loop, just jumps past what was claimed by a token</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>a simple tokenizer has an outer loop, just jumps past what was claimed by a token</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L32</small>
                     </a>
                   </li>
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> evaluated by the rules</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>evaluated by the rules</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlTokenizer.js#L36-L39</small>
                     </a>
                   </li>
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> The resulting list of token is then returned to the main program</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The resulting list of token is then returned to the main program</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L13-L14</small>
                     </a>
                   </li>
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> Here our tree, called the abstract syntax tree</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Here our tree, called the abstract syntax tree</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/xml-parser/XmlParser.js#L18</small>
                     </a>
                   </li>
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> returned to whatever requested the parsing</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>returned to whatever requested the parsing</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/index.html#L83</small>
                     </a>
                   </li>
                 
                   <li class="list-group-item">
                     <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1">
-                      <span class="fw-semibold text-secondary"><i class="bi bi-link text-warning"></i> our XML document</span>
-                      <small class="d-block text-body-secondary fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1</small>
+                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>our XML document</span>
+                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/architecture.xml#L1</small>
                     </a>
                   </li>
                 
@@ -199,14 +201,14 @@ is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-op
         
 
         
-          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+          <div class="card overflow-hidden mb-3">
               <div class="card-body">
                 <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
               </div>
               <ul class="list-group list-group-flush">
                 
                 <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image text-secondary me-2" aria-hidden="true"></i><small class="text-secondary">https://catpea.com</small></a>
+                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
                 </li>
                 
               </ul>

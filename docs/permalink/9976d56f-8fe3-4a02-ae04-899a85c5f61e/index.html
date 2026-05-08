@@ -10,7 +10,7 @@
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
 </head>
-<body class="text-body min-vh-100">
+<body class="min-vh-100">
   <main class="container py-5">
     <article class="row justify-content-center">
 
@@ -20,208 +20,210 @@
           <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
         </nav>
 
-        <div class="card border-0 shadow-sm overflow-hidden mb-3">
+        <div class="card overflow-hidden mb-3">
 
           <img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1616.avif" alt="Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong">
 
           <div class="card-body p-4 p-md-5">
 
-            
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1616.mp3"></audio>
-            
 
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1616</li>
+                <li class="breadcrumb-item">Chapter 10</li>
+                <li class="breadcrumb-item active">Post #1616</li>
               </ol>
             </nav>
+
+            
+              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1616.mp3"></audio>
+            
+            
             <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3 text-wrap-balance">Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</h1>
-              <p class="text-body-secondary mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-08-04">8/3/2024</time></p>
+              <h1 class="display-5 fw-bold lh-2 my-5">Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</h1>
+              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-08-04">8/3/2024</time></p>
             </header>
 
             <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-0">I recall some expert giving his opinion on the work of a young researcher,
+            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I recall some expert giving his opinion on the work of a young researcher,
 that went something like:</p>
-<p class="fs-5 lh-lg mb-0">“All the new breakthroughs they claimed to have made are old,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">“All the new breakthroughs they claimed to have made are old,
 and everything else has already been proven wrong.”</p>
-<p class="fs-5 lh-lg mb-0">I think this is lovely,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think this is lovely,
 and I am sure the expert was wrong, and off his head.</p>
-<p class="fs-5 lh-lg mb-0">And the loveliness comes from the fact that the young researcher,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the loveliness comes from the fact that the young researcher,
 was independently re-inventing things.</p>
-<p class="fs-5 lh-lg mb-0">Becoming as wise as the original inventors,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Becoming as wise as the original inventors,
 and becoming able to see all the paths they didn’t take.</p>
-<p class="fs-5 lh-lg mb-0">The old guy was wrong,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The old guy was wrong,
 the young researcher probably changed the world.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Lets jump right into it, as the introduction would take hours,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets jump right into it, as the introduction would take hours,
 and I primary want you to know what a data structure feels like.</p>
-<p class="fs-5 lh-lg mb-0">So, programmers have variables of type number and text (called strings of letters),
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, programmers have variables of type number and text (called strings of letters),
 and then many of them don’t realize they have bucket variables.</p>
-<p class="fs-5 lh-lg mb-0">Those are objects and lists (called arrays),
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those are objects and lists (called arrays),
 and I call them buckets, because they can hold other variables of any type.</p>
-<p class="fs-5 lh-lg mb-0">In low level programming languages like C a string variable is almost a bucket,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">In low level programming languages like C a string variable is almost a bucket,
 because it is an array of numbers that represent letters.</p>
-<p class="fs-5 lh-lg mb-0">But we are working with JavaScript, on a higher level,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we are working with JavaScript, on a higher level,
 where we can just put some text in quotes and we get a string variable.</p>
-<p class="fs-5 lh-lg mb-0">Not some array,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not some array,
 of whatever.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Now this being the modern world,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now this being the modern world,
 we want arrays to announce when they change.</p>
-<p class="fs-5 lh-lg mb-0">This is why we are using a High Level language,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is why we are using a High Level language,
 we don’t want to be tripping over type definitions and low level concepts.</p>
-<p class="fs-5 lh-lg mb-0">Because what we are doing is already messy,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because what we are doing is already messy,
 lets say our array holds a list of people.</p>
-<p class="fs-5 lh-lg mb-0">And that list can be updated by the server,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that list can be updated by the server,
 or from the user interface.</p>
-<p class="fs-5 lh-lg mb-0">There are many crazy ways that programmers try to tame this,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are many crazy ways that programmers try to tame this,
 event emitters with wildcards, immutable data structures, alcohol.</p>
-<p class="fs-5 lh-lg mb-0">But we want to be revolutionary,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we want to be revolutionary,
 our array will emit a singe message when something is added or removed.</p>
-<p class="fs-5 lh-lg mb-0">It will tell all the things interested in it,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will tell all the things interested in it,
 I changed.</p>
-<p class="fs-5 lh-lg mb-0">If we tracked added or removed, which seems efficient,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we tracked added or removed, which seems efficient,
 our user interface would need to do two different things.</p>
-<p class="fs-5 lh-lg mb-0">But we are not going to be efficient, and send out only a notification of change,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we are not going to be efficient, and send out only a notification of change,
 and that will mean our user interface will have to re-run it self to update.</p>
-<p class="fs-5 lh-lg mb-0">There is room for optimization here,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is room for optimization here,
 because our list will always mark entries with a unique ID.</p>
-<p class="fs-5 lh-lg mb-0">So when the UI is re-rendering, it can compare ID numbers,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when the UI is re-rendering, it can compare ID numbers,
 and see what has been removed or added.</p>
-<p class="fs-5 lh-lg mb-0">But computers are fast, and we want to keep our code clean,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But computers are fast, and we want to keep our code clean,
 and encourage our coder to use a templating engine like Svelte.</p>
-<p class="fs-5 lh-lg mb-0">Which will look at the ID,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which will look at the ID,
 and automatically optimize re-rendering of the UI.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Now when we add or remove person,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now when we add or remove person,
 the array announces I changed.</p>
-<p class="fs-5 lh-lg mb-0">Lets us call our array a table,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets us call our array a table,
 to make it sound special and friendly.</p>
-<p class="fs-5 lh-lg mb-0">And give our table columns for integrity,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And give our table columns for integrity,
 id, first, last, age.</p>
-<p class="fs-5 lh-lg mb-0">We want to keep the same ID at all times,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We want to keep the same ID at all times,
 but first last and age <strong>can</strong> change.</p>
-<p class="fs-5 lh-lg mb-0">And just like with the array, we want to emit a single message,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just like with the array, we want to emit a single message,
 I changed.</p>
-<p class="fs-5 lh-lg mb-0">We are not going to emit, filed empty, or error in filed,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are not going to emit, filed empty, or error in filed,
 just changed.</p>
-<p class="fs-5 lh-lg mb-0">So with three users in our table,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So with three users in our table,
 we have 12 fields, containing id, first, last, age.</p>
-<p class="fs-5 lh-lg mb-0">The id field does not support changes,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The id field does not support changes,
 so we only have nine fields that announce their updates.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">And all of them just emit,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And all of them just emit,
 changed.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Lets say we have Alice Smith, 101, Bob Smith, 99, and Carol Smith, 50,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets say we have Alice Smith, 101, Bob Smith, 99, and Carol Smith, 50,
 where the number is their age.</p>
-<p class="fs-5 lh-lg mb-0">And now we create a report, with people over 100 years old,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now we create a report, with people over 100 years old,
 in our case that will be Alice.</p>
-<p class="fs-5 lh-lg mb-0">And this is a toll order, because we have to monitor the table,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this is a toll order, because we have to monitor the table,
 for when it changes.</p>
-<p class="fs-5 lh-lg mb-0">And we also have to monitor age column.
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we also have to monitor age column.
 because that will get updated as well, (think typo rather than yearly)</p>
-<p class="fs-5 lh-lg mb-0">So we are monitoring three fields and the array,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we are monitoring three fields and the array,
 and then, to make our report, we re-run it at any of the four changes.</p>
-<p class="fs-5 lh-lg mb-0">Our filter for creating the report simply says:
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our filter for creating the report simply says:
 report.filter = table.filter( person.age gt 100 );</p>
-<p class="fs-5 lh-lg mb-0">This is pseudo code, but a special part of our system,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is pseudo code, but a special part of our system,
 because the person object here, is not the perron in our table.</p>
-<p class="fs-5 lh-lg mb-0">We are using an object proxy, to intercept,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are using an object proxy, to intercept,
 what is being used in a filter, and now we will know to subscribe to age.</p>
-<p class="fs-5 lh-lg mb-0">To listen to age for changes,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">To listen to age for changes,
 and automatically update the report, we are already listening to the table.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">So our old and wrong, and inefficient, software machine,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So our old and wrong, and inefficient, software machine,
 creates a report, that updates it self, whenever its sources change.</p>
-<p class="fs-5 lh-lg mb-0">And as with everything else,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And as with everything else,
 the report will emit a change event.</p>
-<p class="fs-5 lh-lg mb-0">So now we can use this report as a source for a new report,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now we can use this report as a source for a new report,
 and return all the last names of old people.</p>
-<p class="fs-5 lh-lg mb-0">We can chain,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can chain,
 reports.</p>
-<p class="fs-5 lh-lg mb-0">This is just about 10 lines of code,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is just about 10 lines of code,
 but we get automatic dependencies and updates.</p>
-<p class="fs-5 lh-lg mb-0">Hidden here is a mechanism,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hidden here is a mechanism,
 for un-listening, to free up memory, a stop function for every report and table.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Now, we tables that create and update other tables,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, we tables that create and update other tables,
 let us give them order.</p>
-<p class="fs-5 lh-lg mb-0">Lets do something crazy and say,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets do something crazy and say,
 object folder has an array called folders.</p>
-<p class="fs-5 lh-lg mb-0">And this creates a tree, we make a root folder called application,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this creates a tree, we make a root folder called application,
 and a folder called users, and add the users folder to application’s folder array.</p>
-<p class="fs-5 lh-lg mb-0">We can nest things like this to no end,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can nest things like this to no end,
 creating an entire application hierarchy.</p>
-<p class="fs-5 lh-lg mb-0">To which we can attach tables,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">To which we can attach tables,
 we can make a new array or throw them into the folders array.</p>
-<p class="fs-5 lh-lg mb-0">Very similar to how files work,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Very similar to how files work,
 in a file system.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Now we can sort our reports,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now we can sort our reports,
 we can talk about people and users.</p>
-<p class="fs-5 lh-lg mb-0">And call tables from other places in the tree,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And call tables from other places in the tree,
 but which is more, we can map put the user interface with the tree.</p>
-<p class="fs-5 lh-lg mb-0">Application folder, would have a window, window would have a side pane,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Application folder, would have a window, window would have a side pane,
 and a main pane, main pane would have a list.</p>
-<p class="fs-5 lh-lg mb-0">A UI system like svelte, can crawl data structures like trees,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">A UI system like svelte, can crawl data structures like trees,
 with a for each loop.</p>
-<p class="fs-5 lh-lg mb-0">So our window having a side pane, and a main pane,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">So our window having a side pane, and a main pane,
 means we have two entries in the window’s folder array.</p>
-<p class="fs-5 lh-lg mb-0">And the for each loop would scan window.folders,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the for each loop would scan window.folders,
 and first render a component for side pane, and then main pane.</p>
-<p class="fs-5 lh-lg mb-0">We can change the folder array to a report,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can change the folder array to a report,
 and the for each loop would re-run making the UI dynamic.</p>
-<p class="fs-5 lh-lg mb-0">But out aim is to use the for each loop,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But out aim is to use the for each loop,
 with the users over 100 report.</p>
-<p class="fs-5 lh-lg mb-0">Our one line tree,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our one line tree,
 and 10 line data machine.</p>
-<p class="fs-5 lh-lg mb-0">Will alert the for each loop, when the report changes,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will alert the for each loop, when the report changes,
 efficiently updating the UI representing a person.</p>
-<p class="fs-5 lh-lg mb-0">But also at the same time,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also at the same time,
 if only the person’s age changes, in the original table.</p>
-<p class="fs-5 lh-lg mb-0">The UI will just update that number alone,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">The UI will just update that number alone,
 without re-running the for loop.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Unfortunately it is not possible to go into greater detail,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unfortunately it is not possible to go into greater detail,
 but there really inst much more to add.</p>
-<p class="fs-5 lh-lg mb-0">We have a tree with tables and reports that self update,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have a tree with tables and reports that self update,
 and use svelte to efficiently decorate our data tree with user interface components.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Svelte programmers would notice here,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Svelte programmers would notice here,
 that components don’t have to extract data because that happens in the table.</p>
-<p class="fs-5 lh-lg mb-0">This way user interface components can just deal with clicks,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way user interface components can just deal with clicks,
 and filed and list updates.</p>
-<p class="fs-5 lh-lg mb-0">Low level and low-ish leveler programmers would notice scary things here,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Low level and low-ish leveler programmers would notice scary things here,
 because their programs demand discipline and force them away from dynamic UI stuff.</p>
-<p class="fs-5 lh-lg mb-0">And for the rest of us, we shouldn&#39;t feel bad that we only emit change events,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And for the rest of us, we shouldn&#39;t feel bad that we only emit change events,
 these tables never hold more than a screenful of stuff.</p>
-<p class="fs-5 lh-lg mb-0">My precise use case is color gradient creation for a fantasy user interface,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">My precise use case is color gradient creation for a fantasy user interface,
 my tables will have five items on average.</p>
-<p class="fs-5 lh-lg mb-0">And my tree, does use tables for other baches,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my tree, does use tables for other baches,
 so in my case the very structure of my tree also announces change.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Programming only gets complex, when programmers don’t know the vision of a program,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming only gets complex, when programmers don’t know the vision of a program,
 imagine someone quote optimizing unquote our report to emit more than change.</p>
-<p class="fs-5 lh-lg mb-0">We lose that pretty simplicity, and if someone removes the tree,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We lose that pretty simplicity, and if someone removes the tree,
 thinking that was useless.</p>
-<p class="fs-5 lh-lg mb-0">We can no longer decorate the tree with user interface,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can no longer decorate the tree with user interface,
 which in svelte is quite simple and readable.</p>
-<p class="fs-5 lh-lg mb-0">Few programmers optimizing, would complexity the application,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Few programmers optimizing, would complexity the application,
 and then code would become unreadable and need unit tests and an office of old men.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">Re-inventing, what people tell you has already proven to be wrong,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">Re-inventing, what people tell you has already proven to be wrong,
 or has been done better is a magnificent way to learn and become an expert.</p>
-<p class="fs-5 lh-lg mb-0">And being inefficient, is quite the powerful act during re-invention,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And being inefficient, is quite the powerful act during re-invention,
 because those are the path that original inventors omitted thinking they are sub-optimal.</p>
-<p class="fs-5 lh-lg mb-0">But as the case is with rendering you can calculate if you are adding, or removing,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">But as the case is with rendering you can calculate if you are adding, or removing,
 based on whether the ID is there or not, it is a quick check, not at all inefficient.</p>
 <hr class="my-4">
-<p class="fs-5 lh-lg mb-0">I invite you all now, to ask your favorite AI,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">I invite you all now, to ask your favorite AI,
 to create a minimalist JavaScript Signals implementation.</p>
-<p class="fs-5 lh-lg mb-0">And ask it about Object Oriented version,
+<p class="fs-5 lh-lg mb-3 text-wrap-balance">And ask it about Object Oriented version,
 and how Signals help, and their subscribe/unsubscribe life-cycle.</p>
 
             </section>
@@ -232,14 +234,14 @@ and how Signals help, and their subscribe/unsubscribe life-cycle.</p>
         
 
         
-          <div class="card border-0 shadow-sm overflow-hidden mb-3">
+          <div class="card overflow-hidden mb-3">
               <div class="card-body">
                 <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
               </div>
               <ul class="list-group list-group-flush">
                 
                 <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image text-secondary me-2" aria-hidden="true"></i><small class="text-secondary">https://catpea.com</small></a>
+                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
                 </li>
                 
               </ul>
