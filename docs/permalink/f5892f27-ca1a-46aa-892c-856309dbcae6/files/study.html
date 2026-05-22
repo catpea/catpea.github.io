@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Six Feet o' Singin' Steel — A Lassie's Argument for the Zweihänder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:        #f3e9d2;
+    --paper-edge:   #e6d8b6;
+    --ink:          #1f1611;
+    --ink-soft:     #4a3b30;
+    --oxblood:      #8c2e1f;
+    --oxblood-dk:   #6a1f12;
+    --ochre:        #b8821f;
+    --moss:         #4a5d2c;
+    --moss-soft:    #6e7e4c;
+    --tartan-red:   #8c2e1f;
+    --tartan-grn:   #2c4022;
+    --tartan-ylw:   #c69e3a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.4;
+  }
+
+  /* paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(140,46,31,0.05), transparent 60%),
+      radial-gradient(ellipse at 80% 90%, rgba(74,93,44,0.06), transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+    opacity: 0.65;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 36px 80px;
+  }
+
+  /* TARTAN STRIPE */
+  .tartan {
+    height: 14px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--tartan-red) 0 24px,
+        var(--ink) 24px 28px,
+        var(--tartan-grn) 28px 52px,
+        var(--ink) 52px 54px,
+        var(--tartan-ylw) 54px 60px,
+        var(--ink) 60px 62px,
+        var(--tartan-grn) 62px 86px,
+        var(--ink) 86px 90px,
+        var(--tartan-red) 90px 114px,
+        var(--paper-edge) 114px 118px
+      );
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    opacity: 0.92;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 48px 0 28px;
+  }
+  .eyebrow {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 12px;
+    color: var(--oxblood);
+    margin-bottom: 24px;
+  }
+  h1.title {
+    font-family: 'IM Fell English SC', 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: clamp(38px, 7vw, 64px);
+    line-height: 1.02;
+    margin: 0 0 6px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    text-shadow: 1px 1px 0 rgba(140,46,31,0.18);
+  }
+  h1.title .red {
+    color: var(--oxblood);
+    display: inline-block;
+    transform: rotate(-1.5deg);
+  }
+  .subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 12px auto 0;
+    line-height: 1.4;
+  }
+  .byline {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-top: 20px;
+  }
+
+  /* KEY / how to read */
+  .key {
+    border: 1px dashed var(--ink-soft);
+    background: rgba(255,255,255,0.25);
+    padding: 18px 22px;
+    margin: 28px 0 36px;
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .key .key-title {
+    font-family: 'IM Fell English SC', serif;
+    color: var(--oxblood);
+    font-size: 18px;
+    margin: 0 0 8px;
+    letter-spacing: 0.04em;
+  }
+  .key b { color: var(--ink); }
+  .key .stress-demo { color: var(--oxblood); font-weight: 700; }
+  .key .punch-demo { color: var(--oxblood-dk); font-weight: 700; text-transform: uppercase; }
+
+  /* STANZAS */
+  .stanza {
+    margin: 0 0 38px;
+    position: relative;
+  }
+  .stanza-num {
+    position: absolute;
+    left: -42px;
+    top: 4px;
+    font-family: 'IM Fell English SC', serif;
+    color: var(--oxblood);
+    font-size: 22px;
+    opacity: 0.65;
+  }
+  @media (max-width: 720px) {
+    .stanza-num { position: static; display: block; margin-bottom: 6px; }
+  }
+
+  .line {
+    margin: 0 0 14px;
+  }
+  .poem-line {
+    display: block;
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    line-height: 1.32;
+    color: var(--ink);
+  }
+  .pronun {
+    display: block;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--moss);
+    padding-left: 14px;
+    margin-top: 4px;
+    border-left: 2px solid var(--moss-soft);
+  }
+  .pronun b {
+    color: var(--ink);
+    font-weight: 400;
+    background: rgba(74,93,44,0.10);
+    padding: 0 3px;
+    border-radius: 2px;
+  }
+  .pronun .ph {
+    color: var(--oxblood);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .pronun .note {
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* IN-POEM EMPHASIS */
+  .stress {
+    color: var(--oxblood);
+    font-weight: 700;
+  }
+  .punch {
+    color: var(--oxblood-dk);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.08em;
+    letter-spacing: 0.02em;
+  }
+  .scot {
+    font-style: italic;
+    color: var(--moss);
+    text-decoration: underline dotted var(--moss-soft);
+    text-underline-offset: 3px;
+  }
+
+  /* ORNAMENT BETWEEN STANZAS */
+  .ornament {
+    text-align: center;
+    margin: 18px 0 24px;
+    color: var(--oxblood);
+    font-size: 16px;
+    letter-spacing: 0.6em;
+    opacity: 0.55;
+  }
+
+  /* INSULTS SECTION */
+  .insults {
+    margin-top: 56px;
+    background: rgba(140,46,31,0.06);
+    border: 2px solid var(--ink);
+    border-style: double;
+    padding: 28px 30px 32px;
+    position: relative;
+  }
+  .insults::before {
+    content: '⚔';
+    position: absolute;
+    top: -18px;
+    left: 24px;
+    background: var(--paper);
+    color: var(--oxblood);
+    font-size: 22px;
+    padding: 0 8px;
+  }
+  .insults h2 {
+    font-family: 'IM Fell English SC', serif;
+    font-weight: 400;
+    color: var(--oxblood);
+    font-size: 28px;
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+  }
+  .insults .insults-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-size: 16px;
+  }
+  .insults ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 28px;
+  }
+  @media (max-width: 600px) {
+    .insults ul { columns: 1; }
+  }
+  .insults li {
+    font-family: 'EB Garamond', serif;
+    font-size: 16.5px;
+    line-height: 1.45;
+    padding: 6px 0 6px 18px;
+    position: relative;
+    break-inside: avoid;
+    color: var(--ink);
+  }
+  .insults li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--oxblood);
+    font-size: 11px;
+  }
+  .insults li b {
+    color: var(--oxblood);
+    font-weight: 700;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ink-soft);
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  footer .sword {
+    font-size: 18px;
+    color: var(--oxblood);
+    letter-spacing: 0.4em;
+    margin-bottom: 8px;
+  }
+
+  /* PRINT */
+  @media print {
+    body::before { display: none; }
+    .page { padding: 0; max-width: none; }
+    .key { page-break-inside: avoid; }
+    .stanza { page-break-inside: avoid; }
+    .insults { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tartan"></div>
+
+<div class="page">
+
+  <header>
+    <div class="eyebrow">A Highland Broadsheet · Anno Domini MDLV</div>
+    <h1 class="title">Six Feet o' <span class="red">Singin' Steel</span></h1>
+    <p class="subtitle">A young lassie's heated argument for the absolute, indisputable, gloriously dirty superiority of the <b>Zweihänder</b>, delivered en route home, to her long-suffering friend.</p>
+    <div class="byline">— Narration Edition · With Pronunciation Aids —</div>
+  </header>
+
+  <section class="key">
+    <h3 class="key-title">How to spit it proper</h3>
+    <b>Plain text</b> — say it natural-like, soft and quick. <br>
+    <span class="stress-demo">Red bold</span> — punch it. Lean on the syllable. Let it land. <br>
+    <span class="punch-demo">RED CAPS</span> — SPIT it. Loud, sharp, scunner-hot. The fire-words. <br>
+    Below each line, the typewriter notes tell ye how to say the Scottish bits: <b>word</b>=<span class="ph">PRO-NUN-see-AY-shun</span>. The "<span class="ph">KH</span>" sound is the gargly back-of-the-throat noise from "loch" — never a hard K. Roll your R's if ye dare. <br>
+    Breathe between stanzas. She doesn't, but ye should.
+  </section>
+
+  <!-- STANZA 1 -->
+  <div class="stanza">
+    <span class="stanza-num">I.</span>
+    <div class="line">
+      <span class="poem-line"><span class="punch">Och</span>, <span class="stress">gie</span> me ma <span class="stress">Zwei</span>händer, <span class="stress">six feet</span> o' singin' <span class="punch">steel</span>,</span>
+      <span class="pronun"><b>Och</b>=<span class="ph">OKH</span> <span class="note">(gargle-clear yer throat, no K)</span> · <b>gie</b>=<span class="ph">GHEE</span> <span class="note">(hard G, "give")</span> · <b>ma</b>=<span class="ph">MAH</span> · <b>Zweihänder</b>=<span class="ph">TSVAI-hen-der</span> · <b>o'</b>=<span class="ph">uh</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">The <span class="stress">bonniest</span> blade tae ever make a <span class="stress">battlefield</span> <span class="punch">kneel</span>!</span>
+      <span class="pronun"><b>bonniest</b>=<span class="ph">BON-ee-ist</span> · <b>tae</b>=<span class="ph">TAY</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">A <span class="stress">sword</span> sae <span class="stress">lang</span>, sae <span class="stress">lovely</span>, ye could prop the <span class="stress">moon</span> upon her —</span>
+      <span class="pronun"><b>sae</b>=<span class="ph">SAY</span> · <b>lang</b>=<span class="ph">LANG</span> <span class="note">("long")</span> · <b>ye</b>=<span class="ph">YEE</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">And any wee <span class="stress">lord</span> wha <span class="stress">doubts</span> it can <span class="punch">sook</span> on the <span class="stress">pommel</span> for honor.</span>
+      <span class="pronun"><b>wee</b>=<span class="ph">WEE</span> · <b>wha</b>=<span class="ph">WHA</span> <span class="note">("who")</span> · <b>sook</b>=<span class="ph">SOOK</span> <span class="note">(rhymes wi' "book"; means "suck")</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 2 -->
+  <div class="stanza">
+    <span class="stanza-num">II.</span>
+    <div class="line">
+      <span class="poem-line"><span class="punch">Pikes</span>? Pikes are for <span class="stress">ploughboys</span>! And <span class="stress">rapiers</span> — <span class="punch">feh</span>! —</span>
+      <span class="pronun"><b>ploughboys</b>=<span class="ph">PLOW-boyz</span> · <b>feh</b>=<span class="ph">FEH</span> <span class="note">(spit it like a hairball)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">A rapier's a <span class="stress">knittin'</span> needle held by a <span class="stress">daisy</span> named <span class="stress">Beth</span>.</span>
+      <span class="pronun"><b>knittin'</b>=<span class="ph">KNIT-in</span> <span class="note">(drop the G)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">A <span class="stress">claymore's</span> awright, I'll grant ye, but a claymore is a <span class="punch">wean</span> —</span>
+      <span class="pronun"><b>claymore</b>=<span class="ph">CLAY-mor</span> · <b>awright</b>=<span class="ph">aw-RYTE</span> · <b>wean</b>=<span class="ph">WAYN</span> <span class="note">(rhymes wi' "lane"; means "wee child")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ma Zweihänder's its <span class="stress">braw</span> big <span class="stress">brother</span>, and <span class="stress">twice</span> as <span class="punch">mean</span>.</span>
+      <span class="pronun"><b>braw</b>=<span class="ph">BRAW</span> <span class="note">(rhymes wi' "raw"; means "grand, fine")</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 3 -->
+  <div class="stanza">
+    <span class="stanza-num">III.</span>
+    <div class="line">
+      <span class="poem-line">Now <span class="stress">tell</span> me, ye <span class="stress">drippin'</span> candle, ye <span class="stress">damp</span> wee <span class="punch">sock</span>,</span>
+      <span class="pronun"><b>drippin'</b>=<span class="ph">DRIP-in</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">custard-spined</span> <span class="stress">cuddle-cake</span> wi' the spine of a <span class="punch">clock</span> —</span>
+      <span class="pronun"><b>wi'</b>=<span class="ph">WI</span> <span class="note">(like "we"; means "with")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">How's a <span class="stress">pork-chop</span> tae reach me wi' his <span class="stress">dainty</span> wee <span class="stress">dirk</span></span>
+      <span class="pronun"><b>dirk</b>=<span class="ph">DIRK</span> <span class="note">(a wee Scottish dagger)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">When his <span class="punch">heid's</span> already <span class="stress">split</span> <span class="stress">six feet</span> afore he can <span class="punch">lurch</span>?</span>
+      <span class="pronun"><b>heid</b>=<span class="ph">HEED</span> <span class="note">("head")</span> · <b>afore</b>=<span class="ph">uh-FOR</span> <span class="note">("before")</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 4 -->
+  <div class="stanza">
+    <span class="stanza-num">IV.</span>
+    <div class="line">
+      <span class="poem-line">I'll <span class="punch">snicker-snack</span> a path through a <span class="stress">castle</span> o' <span class="stress">blueberry muffins</span>,</span>
+      <span class="pronun"><b>snicker-snack</b>=<span class="ph">SNICK-er SNACK</span> <span class="note">(quick! one breath! two clean cuts!)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line"><span class="stress">Lop</span> the <span class="stress">loaves</span> clean off the <span class="stress">toffs</span> in their <span class="stress">lacy</span> wee <span class="punch">stuffins</span>!</span>
+      <span class="pronun"><b>toffs</b>=<span class="ph">TOFFS</span> <span class="note">(posh dandified idiots)</span> · <b>stuffins</b>=<span class="ph">STUFF-inz</span> <span class="note">(frilly clothes)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line"><span class="punch">Ram</span> a pike up a <span class="stress">macaroni hat</span>, send the <span class="stress">feathers</span> a-<span class="stress">flyin'</span> —</span>
+      <span class="pronun"><b>macaroni</b>=<span class="ph">mack-uh-RO-nee</span> <span class="note">(a fop in a tall feathered hat)</span> · <b>a-flyin'</b>=<span class="ph">uh-FLY-in</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">A <span class="stress">peacock</span> without a <span class="stress">heid</span> <span class="punch">disnae</span> do much cryin'.</span>
+      <span class="pronun"><b>disnae</b>=<span class="ph">DIZ-nay</span> <span class="note">("doesn't")</span> · <b>cryin'</b>=<span class="ph">CRY-in</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 5 -->
+  <div class="stanza">
+    <span class="stanza-num">V.</span>
+    <div class="line">
+      <span class="poem-line"><span class="stress">Tell</span> me again, ye <span class="stress">boiled bishop</span>, ye <span class="stress">pudding-faced</span> <span class="punch">pope</span>,</span>
+      <span class="pronun"><span class="note">(no Scots here — just spit it sharp)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">lily-livered</span>, <span class="stress">lard-fisted</span>, <span class="stress">weasel-in-a-wig</span> <span class="punch">dope</span> —</span>
+      <span class="pronun"><span class="note">(let "weasel-in-a-wig" run together quick, then PUNCH "dope")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">That a <span class="stress">halberd</span> is <span class="stress">better</span>? A halberd's a <span class="punch">hoe</span> wi' <span class="stress">delusions</span>!</span>
+      <span class="pronun"><b>halberd</b>=<span class="ph">HAL-berd</span> <span class="note">(axe-on-a-stick)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ma sword <span class="punch">IS</span> the halberd, ye <span class="stress">haggis</span> o' <span class="stress">wrong</span> <span class="punch">conclusions</span>!</span>
+      <span class="pronun"><b>haggis</b>=<span class="ph">HAG-iss</span> <span class="note">(sheep's-pluck pudding; here an insult, of course)</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 6 -->
+  <div class="stanza">
+    <span class="stanza-num">VI.</span>
+    <div class="line">
+      <span class="poem-line">Ye <span class="punch">duller</span> than a <span class="stress">spoon</span>! Ye <span class="punch">dimmer</span> than a candle in <span class="punch">soup</span>!</span>
+      <span class="pronun"><span class="note">(rapid-fire — barely a breath between insults)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">haggis</span> on its way <span class="stress">out</span> the way it came <span class="stress">in</span> — and out the way it <span class="punch">didnae</span>!</span>
+      <span class="pronun"><b>didnae</b>=<span class="ph">DID-nay</span> <span class="note">("didn't" — meaning, baith ends, ye droop)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">soggy oatcake</span>! Ye <span class="stress">chamberpot Charlie</span>! Ye <span class="stress">turnip-skulled</span> <span class="punch">toff</span>!</span>
+      <span class="pronun"><b>oatcake</b>=<span class="ph">OAT-kayk</span> · <span class="note">three insults, three different rhythms — keep it galloping</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Yer <span class="stress">wife</span> wears the <span class="punch">breeks</span> and yer <span class="stress">horse</span> laughs ye <span class="punch">off</span>!</span>
+      <span class="pronun"><b>yer</b>=<span class="ph">YIR</span> · <b>breeks</b>=<span class="ph">BREEKS</span> <span class="note">("trousers")</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 7 -->
+  <div class="stanza">
+    <span class="stanza-num">VII.</span>
+    <div class="line">
+      <span class="poem-line"><span class="stress">Six feet</span> o' <span class="stress">German thunder</span>, forged by some <span class="stress">big-armed</span> <span class="punch">lass</span></span>
+      <span class="pronun"><span class="note">(slow this stanza — it's a wee love story)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">(<span class="stress">Aye</span>, I bet she was a <span class="stress">lass</span> — <span class="stress">nae</span> man could pour that much <span class="punch">sass</span>) —</span>
+      <span class="pronun"><b>aye</b>=<span class="ph">EYE</span> <span class="note">("yes")</span> · <b>nae</b>=<span class="ph">NAY</span> <span class="note">("no/not")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">She <span class="stress">danced</span> in the foundry, she <span class="stress">sang</span> tae the <span class="punch">steel</span>,</span>
+      <span class="pronun"><span class="note">(dreamy, almost a whisper here)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">An' she whispered tae her sword: "<span class="stress">Go</span> find a <span class="punch">Scottish</span> lass <span class="punch">real</span>."</span>
+      <span class="pronun"><b>an'</b>=<span class="ph">an</span> <span class="note">(short, almost a tongue-click)</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 8 -->
+  <div class="stanza">
+    <span class="stanza-num">VIII.</span>
+    <div class="line">
+      <span class="poem-line">And <span class="stress">here I am</span>, ma <span class="punch">darlin'</span>! Come <span class="stress">hame</span> tae yer <span class="punch">wife</span>!</span>
+      <span class="pronun"><b>darlin'</b>=<span class="ph">DAR-lin</span> · <b>hame</b>=<span class="ph">HAYM</span> <span class="note">("home")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">We'll <span class="stress">waltz</span> through the <span class="stress">pikemen</span> and put the <span class="punch">fear</span> in their <span class="stress">life</span>!</span>
+      <span class="pronun"><span class="note">(swell here — she's getting carried away)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">We'll <span class="stress">twirl</span> through the <span class="stress">doppelsöldners</span>, we'll <span class="stress">dance</span> through the <span class="stress">queues</span>,</span>
+      <span class="pronun"><b>doppelsöldners</b>=<span class="ph">DOP-pell-SURL-derz</span> <span class="note">(German "double-pay" sword-soldiers — Zweihänder lads)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">We'll <span class="stress">leave</span> a wee trail o' <span class="punch">duke-mince</span> and a <span class="stress">duchess's</span> <span class="stress">shoes</span>!</span>
+      <span class="pronun"><b>duke-mince</b>=<span class="ph">DOOK-mintz</span> <span class="note">(chopped-up nobleman, served fresh)</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 9 -->
+  <div class="stanza">
+    <span class="stanza-num">IX.</span>
+    <div class="line">
+      <span class="poem-line">Ma <span class="stress">brothers</span>? Ma brothers go <span class="punch">pale</span> when I sharpen ma <span class="stress">love</span>.</span>
+      <span class="pronun"><span class="note">(grin in yer voice here — she loves it)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Wee <span class="stress">Hamish</span> hides in the <span class="stress">haystack</span>, wee <span class="stress">Angus</span> runs tae the <span class="punch">cove</span> —</span>
+      <span class="pronun"><b>Hamish</b>=<span class="ph">HAY-mish</span> · <b>Angus</b>=<span class="ph">ANG-gus</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">"<span class="punch">Da</span>! <span class="punch">Da</span>! She's at it <span class="stress">again</span> wi' the <span class="stress">whetstone</span> an' <span class="stress">grin</span>!"</span>
+      <span class="pronun"><b>Da</b>=<span class="ph">DAH</span> <span class="note">("Dad" — shriek it, panicked, wee laddie voice)</span> · <b>whetstone</b>=<span class="ph">WET-stone</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">And Da just <span class="stress">sighs</span>, "<span class="stress">Aye</span>, lads. Let yer sister <span class="punch">begin</span>."</span>
+      <span class="pronun"><span class="note">(deep weary Da-voice, then satisfied smirk)</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 10 -->
+  <div class="stanza">
+    <span class="stanza-num">X.</span>
+    <div class="line">
+      <span class="poem-line">Ye <span class="punch">whey-faced</span> wassailer! Ye <span class="punch">thimble-dicked</span> thane!</span>
+      <span class="pronun"><b>whey</b>=<span class="ph">WAY</span> <span class="note">(pale as milk-water)</span> · <b>wassailer</b>=<span class="ph">WASS-uh-ler</span> <span class="note">(festive drunkard)</span> · <b>thane</b>=<span class="ph">THAYN</span> <span class="note">(Scottish lord, rhymes wi' "lane")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">bonnet</span> wi' <span class="stress">nothin'</span> in it, ye <span class="stress">half a haggis</span> o' <span class="punch">brain</span>!</span>
+      <span class="pronun"><b>bonnet</b>=<span class="ph">BON-it</span> <span class="note">(soft hat)</span> · <b>nothin'</b>=<span class="ph">NUTH-in</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">starched fart</span> in a <span class="stress">doublet</span>! Ye <span class="stress">buttered toad</span> in <span class="punch">mail</span>!</span>
+      <span class="pronun"><b>doublet</b>=<span class="ph">DUB-let</span> <span class="note">(fitted jacket)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Ye <span class="stress">codpiece</span> wi' a <span class="stress">cough</span>! Ye <span class="stress">dribble</span> at the end o' the <span class="punch">ale</span>!</span>
+      <span class="pronun"><b>codpiece</b>=<span class="ph">COD-peese</span> <span class="note">(the wee armored pouch over a fellow's nethers)</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 11 -->
+  <div class="stanza">
+    <span class="stanza-num">XI.</span>
+    <div class="line">
+      <span class="poem-line">For I'll <span class="punch">snicker-snack</span> through <span class="stress">princes</span>, I'll <span class="punch">snicker-snack</span> through <span class="stress">kings</span>,</span>
+      <span class="pronun"><span class="note">(build! BUILD! she's pure gleeful now)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">I'll <span class="stress">lop</span> the <span class="stress">lairds</span> in two and I'll <span class="stress">giggle</span> as they <span class="punch">ping</span> —</span>
+      <span class="pronun"><b>lairds</b>=<span class="ph">LAIRDZ</span> <span class="note">("lords")</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line"><span class="punch">Ping</span> goes the helmet, <span class="punch">ping-ping</span> goes the <span class="stress">greave</span>,</span>
+      <span class="pronun"><b>greave</b>=<span class="ph">GREEV</span> <span class="note">(leg armor)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line"><span class="punch">Ping-ping-PLOP</span> goes the <span class="stress">heid</span>, and the body takes its <span class="punch">leave</span>.</span>
+      <span class="pronun"><span class="note">(the PLOP is the punchline — let it land wet)</span></span>
+    </div>
+  </div>
+
+  <div class="ornament">⚔ · ⚔ · ⚔</div>
+
+  <!-- STANZA 12 -->
+  <div class="stanza">
+    <span class="stanza-num">XII.</span>
+    <div class="line">
+      <span class="poem-line">So <span class="punch">gie</span> me ma Zweihänder! <span class="punch">Gie</span> me ma <span class="stress">weddin' day</span> <span class="punch">blade</span>!</span>
+      <span class="pronun"><b>weddin'</b>=<span class="ph">WED-in</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">Let the <span class="stress">fools</span> line up in their <span class="stress">frills</span> and their <span class="stress">fancy parade</span> —</span>
+      <span class="pronun"><span class="note">(savour the F's — frills, fancy — sneer through 'em)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">I'll be the <span class="stress">lass</span> at the end o' the <span class="stress">lane</span> wi' a <span class="stress">smile</span> and a <span class="stress">swing</span>,</span>
+      <span class="pronun"><span class="note">(quiet now — almost a sweet wee promise)</span></span>
+    </div>
+    <div class="line">
+      <span class="poem-line">And <span class="punch">six feet</span> o' singin' <span class="punch">steel</span> makin' the whole world <span class="punch">ring</span>.</span>
+      <span class="pronun"><b>singin'</b>=<span class="ph">SING-in</span> · <b>makin'</b>=<span class="ph">MAY-kin</span> <span class="note">(then SILENCE. ye're done. let it ring.)</span></span>
+    </div>
+  </div>
+
+  <!-- INSULTS TO STEAL -->
+  <section class="insults">
+    <h2>Insults Tae Steal</h2>
+    <p class="insults-sub">For yer friends, yer foes, and that one cousin. Copy freely, deliver with venom.</p>
+    <ul>
+      <li><b>Duller than a spoon.</b></li>
+      <li><b>Dimmer than a candle in soup.</b></li>
+      <li><b>A haggis on its way out the way it came in — and out the way it didnae.</b></li>
+      <li><b>Soggy oatcake.</b></li>
+      <li><b>Chamberpot Charlie.</b></li>
+      <li><b>Turnip-skulled toff.</b></li>
+      <li><b>Drippin' candle.</b></li>
+      <li><b>Damp wee sock.</b></li>
+      <li><b>Custard-spined cuddle-cake.</b></li>
+      <li><b>A spine of a clock.</b></li>
+      <li><b>Boiled bishop.</b></li>
+      <li><b>Pudding-faced pope.</b></li>
+      <li><b>Lily-livered, lard-fisted, weasel-in-a-wig.</b></li>
+      <li><b>Haggis o' wrong conclusions.</b></li>
+      <li><b>Whey-faced wassailer.</b></li>
+      <li><b>Thimble-dicked thane.</b></li>
+      <li><b>Bonnet wi' nothin' in it.</b></li>
+      <li><b>Half a haggis o' brain.</b></li>
+      <li><b>Starched fart in a doublet.</b></li>
+      <li><b>Buttered toad in mail.</b></li>
+      <li><b>Codpiece wi' a cough.</b></li>
+      <li><b>Dribble at the end o' the ale.</b></li>
+      <li><b>A rapier of a daisy named Beth.</b></li>
+      <li><b>A halberd is a hoe wi' delusions.</b></li>
+      <li><b>A peacock without a heid.</b></li>
+      <li><b>Yer wife wears the breeks and yer horse laughs ye off.</b></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="sword">⚔ · ⚔ · ⚔</div>
+    Six Feet o' Singin' Steel · Forged in jest · For narration practice and friendly malice
+  </footer>
+
+</div>
+
+<div class="tartan"></div>
+
+</body>
+</html>
