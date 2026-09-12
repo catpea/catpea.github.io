@@ -1,0 +1,31 @@
+
+class Signal {
+  #value;
+  #listeners;
+  constructor(value) {
+    this.#value = value;
+    this.#listeners = [];
+  }
+  subscribe(listener) {
+    this.#listeners.push(listener);
+    let initializeListener = true;
+    if(this.#value === undefined) initializeListener = false;
+    if(this.#value === null) initializeListener = false;
+    if(initializeListener) listener(this.#value); // DO NOTHING IF NO VALUE
+    return () => this.unsubscribe(listener); /* Return Unsubscribe Funcion */
+  }
+  unsubscribe(listener) {
+    this.#listeners = this.#listeners.filter((l) => l !== listener);
+  }
+  #notify() {
+    this.#listeners.forEach((listener) => listener(this.#value));
+  }
+  set value(v) {
+    if (this.#value == v) return; // DO NOTHING!
+    this.#value = v;
+    this.#notify();
+  }
+  get value() {
+    return this.#value;
+  }
+}

@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LipSync EventEmitter System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .visualizers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .visualizer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .visualizer h3 {
+            margin-top: 0;
+            color: #4a5568;
+            font-size: 1.3em;
+        }
+
+        .mouth-svg {
+            width: 200px;
+            height: 150px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .mouth-canvas {
+            width: 200px;
+            height: 150px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .pixel-mouth {
+            width: 200px;
+            height: 150px;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            background: #f7fafc;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .status {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status h3 {
+            margin-top: 0;
+            color: #0369a1;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .status-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #e0f2fe;
+        }
+
+        .config-panel {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .config-group {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .config-group h4 {
+            margin-top: 0;
+            color: #4a5568;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .config-item label {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .config-item input {
+            width: 60px;
+            padding: 4px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .frequency-bars {
+            display: flex;
+            gap: 5px;
+            height: 40px;
+            align-items: flex-end;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .frequency-bar {
+            width: 20px;
+            background: linear-gradient(to top, #667eea, #764ba2);
+            border-radius: 3px 3px 0 0;
+            transition: height 0.1s ease;
+        }
+
+        .events-log {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .events-log h4 {
+            margin-top: 0;
+            color: #81c7ff;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 3px 5px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .log-timestamp {
+            color: #9ca3af;
+            font-size: 10px;
+        }
+
+        .log-event {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .log-data {
+            color: #fbbf24;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .active-visualizer {
+            animation: pulse 2s infinite;
+        }
+
+        .error {
+            background: #fef2f2;
+            border: 1px solid #f87171;
+            color: #dc2626;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎤 LipSync EventEmitter System</h1>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="startBtn">Start Audio</button>
+            <button class="btn btn-secondary" id="stopBtn" disabled>Stop Audio</button>
+            <button class="btn btn-secondary" id="resetBtn">Reset</button>
+            <button class="btn btn-secondary" id="configBtn">Toggle Config</button>
+        </div>
+
+        <div id="errorMsg" class="error" style="display: none;"></div>
+
+        <div class="status">
+            <h3>System Status</h3>
+            <div class="status-grid">
+                <div class="status-item">
+                    <strong>Audio:</strong> <span id="audioStatus">Stopped</span>
+                </div>
+                <div class="status-item">
+                    <strong>Volume:</strong> <span id="volumeLevel">0</span>
+                </div>
+                <div class="status-item">
+                    <strong>Dominant Freq:</strong> <span id="dominantFreq">-</span>
+                </div>
+                <div class="status-item">
+                    <strong>Mouth Shape:</strong> <span id="mouthShape">closed</span>
+                </div>
+                <div class="status-item">
+                    <strong>Plugins:</strong> <span id="pluginCount">0</span>
+                </div>
+                <div class="status-item">
+                    <strong>Events/sec:</strong> <span id="eventRate">0</span>
+                </div>
+            </div>
+            <div class="frequency-bars">
+                <div class="frequency-bar" id="lowFreq" style="height: 2px;"></div>
+                <div class="frequency-bar" id="midFreq" style="height: 2px;"></div>
+                <div class="frequency-bar" id="highFreq" style="height: 2px;"></div>
+            </div>
+        </div>
+
+        <div class="visualizers">
+            <div class="visualizer">
+                <h3>SVG Visualizer</h3>
+                <svg class="mouth-svg" id="svgMouth" viewBox="0 0 200 150">
+                    <defs>
+                        <radialGradient id="mouthGradient" cx="50%" cy="50%">
+                            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ee5a52;stop-opacity:1" />
+                        </radialGradient>
+                    </defs>
+                    <ellipse cx="100" cy="75" rx="60" ry="25" fill="url(#mouthGradient)" stroke="#333" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="visualizer">
+                <h3>Canvas Visualizer</h3>
+                <canvas class="mouth-canvas" id="canvasMouth" width="200" height="150"></canvas>
+            </div>
+
+            <div class="visualizer">
+                <h3>Pixel Art Visualizer</h3>
+                <div class="pixel-mouth" id="pixelMouth">😐</div>
+            </div>
+        </div>
+
+        <div class="config-panel" id="configPanel" style="display: none;">
+            <h3>Configuration</h3>
+            <div class="config-grid">
+                <div class="config-group">
+                    <h4>Audio Settings</h4>
+                    <div class="config-item">
+                        <label>FFT Size:</label>
+                        <input type="number" id="fftSize" value="512">
+                    </div>
+                    <div class="config-item">
+                        <label>Smoothing:</label>
+                        <input type="number" id="smoothing" value="0.3" step="0.1" min="0" max="1">
+                    </div>
+                </div>
+                <div class="config-group">
+                    <h4>Analysis Settings</h4>
+                    <div class="config-item">
+                        <label>Volume Threshold:</label>
+                        <input type="number" id="volumeThreshold" value="15">
+                    </div>
+                    <div class="config-item">
+                        <label>Sensitivity:</label>
+                        <input type="number" id="sensitivity" value="0.7" step="0.1" min="0" max="1">
+                    </div>
+                </div>
+                <div class="config-group">
+                    <h4>Event Settings</h4>
+                    <div class="config-item">
+                        <label>Throttle (ms):</label>
+                        <input type="number" id="throttle" value="16">
+                    </div>
+                    <div class="config-item">
+                        <label>Transition Smooth:</label>
+                        <input type="number" id="transitionSmooth" value="0.8" step="0.1" min="0" max="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="events-log">
+            <h4>Event Log</h4>
+            <div id="eventLog"></div>
+        </div>
+    </div>
+
+    <script>
+        // EventEmitter Implementation
+        class EventEmitter {
+            constructor() {
+                this.events = {};
+            }
+
+            on(event, listener) {
+                if (!this.events[event]) {
+                    this.events[event] = [];
+                }
+                this.events[event].push(listener);
+            }
+
+            emit(event, data) {
+                if (this.events[event]) {
+                    this.events[event].forEach(listener => listener(data));
+                }
+            }
+
+            off(event, listener) {
+                if (this.events[event]) {
+                    this.events[event] = this.events[event].filter(l => l !== listener);
+                }
+            }
+
+            removeAllListeners(event) {
+                if (event) {
+                    delete this.events[event];
+                } else {
+                    this.events = {};
+                }
+            }
+        }
+
+        // Audio Analyzer
+        class AudioAnalyzer {
+            constructor(config) {
+                this.config = config;
+                this.audioContext = null;
+                this.analyser = null;
+                this.microphone = null;
+                this.dataArray = null;
+                this.isActive = false;
+                this.lastVolume = 0;
+                this.lastShape = 'closed';
+                this.frequencyRanges = {
+                    low: [0, 32],
+                    mid: [32, 96],
+                    high: [96, 128]
+                };
+            }
+
+            async initialize() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    this.analyser.fftSize = this.config.audio.fftSize;
+                    this.analyser.smoothingTimeConstant = this.config.audio.smoothingTimeConstant;
+
+                    this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        audio: {
+                            echoCancellation: this.config.audio.echoCancellation,
+                            noiseSuppression: this.config.audio.noiseSuppression,
+                            autoGainControl: this.config.audio.autoGainControl
+                        }
+                    });
+
+                    this.microphone = this.audioContext.createMediaStreamSource(stream);
+                    this.microphone.connect(this.analyser);
+
+                    this.isActive = true;
+                    return true;
+                } catch (error) {
+                    console.error('Audio initialization failed:', error);
+                    throw error;
+                }
+            }
+
+            analyze() {
+                if (!this.isActive) return null;
+
+                this.analyser.getByteFrequencyData(this.dataArray);
+
+                const volume = this.calculateVolume();
+                const frequencies = this.analyzeFrequencies();
+                const shape = this.determineMouthShape(volume, frequencies);
+
+                return {
+                    volume,
+                    frequencies,
+                    shape,
+                    timestamp: performance.now()
+                };
+            }
+
+            calculateVolume() {
+                let sum = 0;
+                for (let i = 0; i < this.dataArray.length; i++) {
+                    sum += this.dataArray[i];
+                }
+                return sum / this.dataArray.length;
+            }
+
+            analyzeFrequencies() {
+                const binSize = this.audioContext.sampleRate / this.analyser.fftSize;
+                const frequencies = { low: 0, mid: 0, high: 0 };
+
+                // Calculate frequency range averages
+                for (let i = 0; i < this.dataArray.length; i++) {
+                    const freq = i * binSize;
+                    const value = this.dataArray[i];
+
+                    if (freq >= this.frequencyRanges.low[0] && freq < this.frequencyRanges.low[1]) {
+                        frequencies.low += value;
+                    } else if (freq >= this.frequencyRanges.mid[0] && freq < this.frequencyRanges.mid[1]) {
+                        frequencies.mid += value;
+                    } else if (freq >= this.frequencyRanges.high[0] && freq < this.frequencyRanges.high[1]) {
+                        frequencies.high += value;
+                    }
+                }
+
+                // Find dominant frequency
+                const dominant = frequencies.low > frequencies.mid && frequencies.low > frequencies.high ? 'low' :
+                                frequencies.mid > frequencies.high ? 'mid' : 'high';
+
+                return { ...frequencies, dominant };
+            }
+
+            determineMouthShape(volume, frequencies) {
+                const threshold = this.config.analysis.volumeThreshold;
+                const sensitivity = this.config.analysis.sensitivityCurve;
+
+                if (volume < threshold) {
+                    return { shape: 'closed', intensity: 0, confidence: 0.9 };
+                }
+
+                const normalizedVolume = Math.pow(volume / 255, sensitivity);
+                const dominantFreq = frequencies.dominant;
+
+                let shape = 'open';
+                let intensity = normalizedVolume;
+                let confidence = 0.7;
+
+                // Determine shape based on frequency characteristics
+                if (dominantFreq === 'low') {
+                    shape = normalizedVolume > 0.7 ? 'round' : 'open';
+                } else if (dominantFreq === 'mid') {
+                    shape = normalizedVolume > 0.8 ? 'wide' : 'open';
+                } else if (dominantFreq === 'high') {
+                    shape = normalizedVolume > 0.9 ? 'extraWide' : 'wide';
+                }
+
+                // Extra shapes for very high volumes
+                if (normalizedVolume > 0.9) {
+                    shape = 'extraOpen';
+                    intensity = 1;
+                    confidence = 0.8;
+                }
+
+                return { shape, intensity, confidence };
+            }
+
+            stop() {
+                this.isActive = false;
+                if (this.microphone) {
+                    this.microphone.disconnect();
+                }
+                if (this.audioContext) {
+                    this.audioContext.close();
+                }
+            }
+        }
+
+        // Base Plugin Class
+        class LipSyncPlugin {
+            constructor(name, options = {}) {
+                this.name = name;
+                this.options = options;
+                this.app = null;
+                this.isActive = false;
+            }
+
+            init(app) {
+                this.app = app;
+                this.isActive = true;
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Override in subclasses
+            }
+
+            destroy() {
+                this.isActive = false;
+                this.app = null;
+            }
+
+            onVolumeChange(data) {}
+            onMouthShape(data) {}
+            onFrequencyAnalysis(data) {}
+        }
+
+        // SVG Visualizer Plugin
+        class SVGVisualizerPlugin extends LipSyncPlugin {
+            constructor(options = {}) {
+                super('SVGVisualizer', options);
+                this.svg = null;
+                this.mouth = null;
+            }
+
+            init(app) {
+                super.init(app);
+                this.svg = document.getElementById('svgMouth');
+                this.mouth = this.svg.querySelector('ellipse');
+            }
+
+            setupEventListeners() {
+                this.app.on('mouth:shape', (data) => this.onMouthShape(data));
+                this.app.on('volume:change', (data) => this.onVolumeChange(data));
+            }
+
+            onMouthShape(data) {
+                if (!this.mouth) return;
+
+                const shapes = {
+                    closed: { rx: 30, ry: 8 },
+                    open: { rx: 50, ry: 20 },
+                    wide: { rx: 70, ry: 15 },
+                    round: { rx: 40, ry: 40 },
+                    extraWide: { rx: 80, ry: 12 },
+                    extraOpen: { rx: 60, ry: 35 }
+                };
+
+                const shape = shapes[data.shape] || shapes.closed;
+                this.mouth.setAttribute('rx', shape.rx);
+                this.mouth.setAttribute('ry', shape.ry);
+            }
+
+            onVolumeChange(data) {
+                if (!this.mouth) return;
+
+                const opacity = 0.7 + (data.normalized * 0.3);
+                this.mouth.style.opacity = opacity;
+            }
+        }
+
+        // Canvas Visualizer Plugin
+        class CanvasVisualizerPlugin extends LipSyncPlugin {
+            constructor(options = {}) {
+                super('CanvasVisualizer', options);
+                this.canvas = null;
+                this.ctx = null;
+                this.currentShape = 'closed';
+                this.intensity = 0;
+            }
+
+            init(app) {
+                super.init(app);
+                this.canvas = document.getElementById('canvasMouth');
+                this.ctx = this.canvas.getContext('2d');
+                this.draw();
+            }
+
+            setupEventListeners() {
+                this.app.on('mouth:shape', (data) => this.onMouthShape(data));
+            }
+
+            onMouthShape(data) {
+                this.currentShape = data.shape;
+                this.intensity = data.intensity;
+                this.draw();
+            }
+
+            draw() {
+                if (!this.ctx) return;
+
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+
+                // Create gradient
+                const gradient = this.ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 50);
+                gradient.addColorStop(0, '#ff6b6b');
+                gradient.addColorStop(1, '#ee5a52');
+
+                this.ctx.fillStyle = gradient;
+                this.ctx.strokeStyle = '#333';
+                this.ctx.lineWidth = 2;
+
+                // Draw mouth based on shape
+                this.ctx.beginPath();
+                switch (this.currentShape) {
+                    case 'closed':
+                        this.ctx.ellipse(centerX, centerY, 30, 8, 0, 0, 2 * Math.PI);
+                        break;
+                    case 'open':
+                        this.ctx.ellipse(centerX, centerY, 50, 20, 0, 0, 2 * Math.PI);
+                        break;
+                    case 'wide':
+                        this.ctx.ellipse(centerX, centerY, 70, 15, 0, 0, 2 * Math.PI);
+                        break;
+                    case 'round':
+                        this.ctx.ellipse(centerX, centerY, 40, 40, 0, 0, 2 * Math.PI);
+                        break;
+                    case 'extraWide':
+                        this.ctx.ellipse(centerX, centerY, 80, 12, 0, 0, 2 * Math.PI);
+                        break;
+                    case 'extraOpen':
+                        this.ctx.ellipse(centerX, centerY, 60, 35, 0, 0, 2 * Math.PI);
+                        break;
+                }
+
+                this.ctx.fill();
+                this.ctx.stroke();
+
+                // Add intensity-based glow effect
+                if (this.intensity > 0.5) {
+                    this.ctx.shadowColor = '#ff6b6b';
+                    this.ctx.shadowBlur = 20 * this.intensity;
+                    this.ctx.stroke();
+                    this.ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+        // Pixel Art Visualizer Plugin
+        class PixelArtPlugin extends LipSyncPlugin {
+            constructor(options = {}) {
+                super('PixelArt', options);
+                this.element = null;
+                this.shapes = {
+                    closed: '😐',
+                    open: '😮',
+                    wide: '😁',
+                    round: '😯',
+                    extraWide: '😵',
+                    extraOpen: '😱'
+                };
+            }
+
+            init(app) {
+                super.init(app);
+                this.element = document.getElementById('pixelMouth');
+            }
+
+            setupEventListeners() {
+                this.app.on('mouth:shape', (data) => this.onMouthShape(data));
+            }
+
+            onMouthShape(data) {
+                if (!this.element) return;
+
+                const emoji = this.shapes[data.shape] || this.shapes.closed;
+                this.element.textContent = emoji;
+
+                // Add scaling effect based on intensity
+                const scale = 1 + (data.intensity * 0.2);
+                this.element.style.transform = `scale(${scale})`;
+            }
+        }
+
+        // Main LipSync App
+        class LipSyncApp extends EventEmitter {
+            constructor(config = {}) {
+                super();
+                this.config = this.mergeConfig(config);
+                this.analyzer = new AudioAnalyzer(this.config);
+                this.plugins = new Map();
+                this.isRunning = false;
+                this.animationFrame = null;
+                this.eventCount = 0;
+                this.lastEventTime = 0;
+                this.eventRate = 0;
+            }
+
+            mergeConfig(userConfig) {
+                const defaultConfig = {
+                    audio: {
+                        fftSize: 512,
+                        smoothingTimeConstant: 0.3,
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true
+                    },
+                    analysis: {
+                        volumeThreshold: 15,
+                        sensitivityCurve: 0.7,
+                        transitionSmoothness: 0.8
+                    },
+                    events: {
+                        throttleMs: 16,
+                        enableGranular: true
+                    }
+                };
+
+                return { ...defaultConfig, ...userConfig };
+            }
+
+            use(plugin) {
+                if (plugin instanceof LipSyncPlugin) {
+                    this.plugins.set(plugin.name, plugin);
+                    plugin.init(this);
+                    this.updatePluginCount();
+                    return true;
+                }
+                return false;
+            }
+
+            remove(pluginName) {
+                const plugin = this.plugins.get(pluginName);
+                if (plugin) {
+                    plugin.destroy();
+                    this.plugins.delete(pluginName);
+                    this.updatePluginCount();
+                    return true;
+                }
+                return false;
+            }
+
+            async start() {
+                if (this.isRunning) return;
+
+                try {
+                    await this.analyzer.initialize();
+                    this.isRunning = true;
+                    this.emit('audio:start', {
+                        sampleRate: this.analyzer.audioContext.sampleRate,
+                        bufferSize: this.analyzer.analyser.fftSize
+                    });
+                    this.startAnalysisLoop();
+                } catch (error) {
+                    this.emit('audio:error', { error, context: 'initialization' });
+                    throw error;
+                }
+            }
+
+            stop() {
+                if (!this.isRunning) return;
+
+                this.isRunning = false;
+                this.analyzer.stop();
+
+                if (this.animationFrame) {
+                    cancelAnimationFrame(this.animationFrame);
+                }
+
+                this.emit('audio:stop', { reason: 'user_requested' });
+            }
+
+            startAnalysisLoop() {
+                if (!this.isRunning) return;
+
+                const analysis = this.analyzer.analyze();
+                if (analysis) {
+                    this.processAnalysis(analysis);
+                }
+
+                this.animationFrame = requestAnimationFrame(() => this.startAnalysisLoop());
+            }
+
+            processAnalysis(analysis) {
+                const now = performance.now();
+
+                // Throttle events
+                if (now - this.lastEventTime < this.config.events.throttleMs) {
+                    return;
+                }
+
+                this.lastEventTime = now;
+                this.eventCount++;
+
+                // Calculate event rate
+                if (this.eventCount % 60 === 0) {
+                    this.eventRate = Math.round(60 / ((now - this.lastEventTime) / 1000));
+                }
+
+                // Emit events
+                this.emit('volume:change', {
+                    level: analysis.volume,
+                    normalized: analysis.volume / 255,
+                    timestamp: analysis.timestamp
+                });
+
+                this.emit('frequency:analysis', {
+                    low: analysis.frequencies.low,
+                    mid: analysis.frequencies.mid,
+                    high: analysis.frequencies.high,
+                    dominant: analysis.frequencies.dominant,
+                    timestamp: analysis.timestamp
+                });
+
+                this.emit('mouth:shape', {
+                    shape: analysis.shape.shape,
+                    intensity: analysis.shape.intensity,
+                    confidence: analysis.shape.confidence,
+                    timestamp: analysis.timestamp
+                });
+
+                // Log event
+                this.logEvent('mouth:shape', analysis.shape);
+            }
+
+            updatePluginCount() {
+                const count = this.plugins.size;
+                const element = document.getElementById('pluginCount');
+                if (element) {
+                    element.textContent = count;
+                }
+            }
+
+            logEvent(eventType, data) {
+                const log = document.getElementById('eventLog');
+                if (!log) return;
+
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                entry.innerHTML = `
+                    <span class="log-timestamp">${new Date().toLocaleTimeString()}</span>
+                    <span class="log-event">${eventType}</span>
+                    <span class="log-data">${JSON.stringify(data).substring(0, 50)}...</span>
+                `;
+
+                log.appendChild(entry);
+
+                // Keep only last 20 entries
+                while (log.children.length > 20) {
+                    log.removeChild(log.firstChild);
+                }
+
+                log.scrollTop = log.scrollHeight;
+            }
+
+            updateConfig(newConfig) {
+                this.config = this.mergeConfig(newConfig);
+                if (this.analyzer) {
+                    this.analyzer.config = this.config;
+                }
+            }
+        }
+
+        // UI Controller
+        class UIController {
+            constructor() {
+                this.app = null;
+                this.isConfigVisible = false;
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Control buttons
+                document.getElementById('startBtn').addEventListener('click', () => this.startAudio());
+                document.getElementById('stopBtn').addEventListener('click', () => this.stopAudio());
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetSystem());
+                document.getElementById('configBtn').addEventListener('click', () => this.toggleConfig());
+
+                // Config inputs
+                const configInputs = ['fftSize', 'smoothing', 'volumeThreshold', 'sensitivity', 'throttle', 'transitionSmooth'];
+                configInputs.forEach(id => {
+                    document.getElementById(id).addEventListener('change', () => this.updateConfig());
+                });
+            }
+
+            async startAudio() {
+                try {
+                    if (!this.app) {
+                        this.initializeApp();
+                    }
+
+                    await this.app.start();
+                    this.updateUI({ audioStatus: 'Running' });
+
+                    document.getElementById('startBtn').disabled = true;
+                    document.getElementById('stopBtn').disabled = false;
+
+                    this.hideError();
+                } catch (error) {
+                    this.showError('Failed to start audio: ' + error.message);
+                }
+            }
+
+            stopAudio() {
+                if (this.app) {
+                    this.app.stop();
+                    this.updateUI({ audioStatus: 'Stopped' });
+
+                    document.getElementById('startBtn').disabled = false;
+                    document.getElementById('stopBtn').disabled = true;
+                }
+            }
+
+            resetSystem() {
+                this.stopAudio();
+                if (this.app) {
+                    this.app.removeAllListeners();
+                    this.app = null;
+                }
+                this.updateUI({
+                    audioStatus: 'Stopped',
+                    volumeLevel: '0',
+                    dominantFreq: '-',
+                    mouthShape: 'closed',
+                    eventRate: '0'
+                });
+                this.clearEventLog();
+            }
+
+            initializeApp() {
+                const config = this.getConfigFromUI();
+                this.app = new LipSyncApp(config);
+
+                // Register plugins
+                this.app.use(new SVGVisualizerPlugin());
+                this.app.use(new CanvasVisualizerPlugin());
+                this.app.use(new PixelArtPlugin());
+
+                // Setup event listeners for UI updates
+                this.app.on('volume:change', (data) => {
+                    this.updateUI({ volumeLevel: Math.round(data.level) });
+                });
+
+                this.app.on('frequency:analysis', (data) => {
+                    this.updateUI({ dominantFreq: data.dominant });
+                    this.updateFrequencyBars(data);
+                });
+
+                this.app.on('mouth:shape', (data) => {
+                    this.updateUI({ mouthShape: data.shape });
+                });
+
+                this.app.on('audio:error', (data) => {
+                    this.showError('Audio error: ' + data.error.message);
+                });
+
+                // Update event rate periodically
+                setInterval(() => {
+                    if (this.app) {
+                        this.updateUI({ eventRate: this.app.eventRate });
+                    }
+                }, 1000);
+            }
+
+            getConfigFromUI() {
+                return {
+                    audio: {
+                        fftSize: parseInt(document.getElementById('fftSize').value),
+                        smoothingTimeConstant: parseFloat(document.getElementById('smoothing').value),
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true
+                    },
+                    analysis: {
+                        volumeThreshold: parseInt(document.getElementById('volumeThreshold').value),
+                        sensitivityCurve: parseFloat(document.getElementById('sensitivity').value),
+                        transitionSmoothness: parseFloat(document.getElementById('transitionSmooth').value)
+                    },
+                    events: {
+                        throttleMs: parseInt(document.getElementById('throttle').value),
+                        enableGranular: true
+                    }
+                };
+            }
+
+            updateConfig() {
+                if (this.app) {
+                    const config = this.getConfigFromUI();
+                    this.app.updateConfig(config);
+                }
+            }
+
+            updateUI(updates) {
+                Object.keys(updates).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = updates[key];
+                    }
+                });
+            }
+
+            updateFrequencyBars(data) {
+                const maxHeight = 38;
+                const bars = {
+                    lowFreq: Math.min(maxHeight, (data.low / 255) * maxHeight),
+                    midFreq: Math.min(maxHeight, (data.mid / 255) * maxHeight),
+                    highFreq: Math.min(maxHeight, (data.high / 255) * maxHeight)
+                };
+
+                Object.keys(bars).forEach(id => {
+                    const bar = document.getElementById(id);
+                    if (bar) {
+                        bar.style.height = Math.max(2, bars[id]) + 'px';
+                    }
+                });
+            }
+
+            toggleConfig() {
+                this.isConfigVisible = !this.isConfigVisible;
+                const panel = document.getElementById('configPanel');
+                if (panel) {
+                    panel.style.display = this.isConfigVisible ? 'block' : 'none';
+                }
+            }
+
+            showError(message) {
+                const errorDiv = document.getElementById('errorMsg');
+                if (errorDiv) {
+                    errorDiv.textContent = message;
+                    errorDiv.style.display = 'block';
+                }
+            }
+
+            hideError() {
+                const errorDiv = document.getElementById('errorMsg');
+                if (errorDiv) {
+                    errorDiv.style.display = 'none';
+                }
+            }
+
+            clearEventLog() {
+                const log = document.getElementById('eventLog');
+                if (log) {
+                    log.innerHTML = '';
+                }
+            }
+        }
+
+        // Performance Monitor
+        class PerformanceMonitor {
+            constructor(app) {
+                this.app = app;
+                this.frameCount = 0;
+                this.lastTime = performance.now();
+                this.cpuUsage = 0;
+                this.memoryUsage = 0;
+                this.isMonitoring = false;
+            }
+
+            start() {
+                this.isMonitoring = true;
+                this.monitor();
+            }
+
+            stop() {
+                this.isMonitoring = false;
+            }
+
+            monitor() {
+                if (!this.isMonitoring) return;
+
+                const now = performance.now();
+                this.frameCount++;
+
+                // Calculate FPS every second
+                if (now - this.lastTime >= 1000) {
+                    const fps = this.frameCount;
+                    this.frameCount = 0;
+                    this.lastTime = now;
+
+                    // Monitor memory usage if available
+                    if (performance.memory) {
+                        this.memoryUsage = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024);
+                    }
+
+                    // Emit performance metrics
+                    this.app.emit('performance:metrics', {
+                        fps,
+                        memoryMB: this.memoryUsage,
+                        timestamp: now
+                    });
+                }
+
+                requestAnimationFrame(() => this.monitor());
+            }
+        }
+
+        // Advanced Features
+        class AdvancedFeatures {
+            constructor(app) {
+                this.app = app;
+                this.isRecording = false;
+                this.recordedEvents = [];
+                this.speechDetector = new SpeechDetector();
+            }
+
+            startRecording() {
+                this.isRecording = true;
+                this.recordedEvents = [];
+
+                // Record all events
+                const originalEmit = this.app.emit.bind(this.app);
+                this.app.emit = (event, data) => {
+                    if (this.isRecording) {
+                        this.recordedEvents.push({
+                            event,
+                            data: JSON.parse(JSON.stringify(data)),
+                            timestamp: performance.now()
+                        });
+                    }
+                    originalEmit(event, data);
+                };
+            }
+
+            stopRecording() {
+                this.isRecording = false;
+                return this.recordedEvents;
+            }
+
+            playback(events, speed = 1) {
+                if (!events || events.length === 0) return;
+
+                const startTime = performance.now();
+                const originalStartTime = events[0].timestamp;
+
+                events.forEach(eventData => {
+                    const delay = (eventData.timestamp - originalStartTime) / speed;
+                    setTimeout(() => {
+                        this.app.emit(eventData.event, eventData.data);
+                    }, delay);
+                });
+            }
+        }
+
+        // Speech Detection Helper
+        class SpeechDetector {
+            constructor() {
+                this.isSpeaking = false;
+                this.silenceStart = 0;
+                this.speechStart = 0;
+                this.silenceThreshold = 200; // ms
+                this.speechThreshold = 100; // ms
+            }
+
+            analyze(volume, timestamp) {
+                const wasSpeaking = this.isSpeaking;
+                const isCurrentlySpeaking = volume > 15;
+
+                if (isCurrentlySpeaking && !wasSpeaking) {
+                    // Speech started
+                    this.isSpeaking = true;
+                    this.speechStart = timestamp;
+                    return { type: 'speech:start', confidence: 0.8 };
+                } else if (!isCurrentlySpeaking && wasSpeaking) {
+                    // Potential speech end
+                    if (timestamp - this.speechStart > this.speechThreshold) {
+                        this.isSpeaking = false;
+                        this.silenceStart = timestamp;
+                        return { type: 'speech:end', duration: timestamp - this.speechStart };
+                    }
+                } else if (!isCurrentlySpeaking && !wasSpeaking) {
+                    // Silence continues
+                    if (timestamp - this.silenceStart > this.silenceThreshold) {
+                        return { type: 'speech:silence', duration: timestamp - this.silenceStart };
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            const ui = new UIController();
+
+            // Add some demo information
+            console.log('🎤 LipSync EventEmitter System Initialized');
+            console.log('Features:');
+            console.log('- Real-time audio analysis');
+            console.log('- Multiple visualization plugins');
+            console.log('- Event-driven architecture');
+            console.log('- Configurable parameters');
+            console.log('- Performance monitoring');
+            console.log('- Event logging');
+
+            // Add visual feedback for active state
+            const visualizers = document.querySelectorAll('.visualizer');
+            visualizers.forEach(viz => {
+                viz.addEventListener('mouseenter', () => {
+                    viz.classList.add('active-visualizer');
+                });
+                viz.addEventListener('mouseleave', () => {
+                    viz.classList.remove('active-visualizer');
+                });
+            });
+        });
+
+        // Export for potential external use
+        window.LipSyncSystem = {
+            LipSyncApp,
+            LipSyncPlugin,
+            SVGVisualizerPlugin,
+            CanvasVisualizerPlugin,
+            PixelArtPlugin,
+            AudioAnalyzer,
+            EventEmitter
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="A foundational contract for a portable, prompt-first MLML music-label game and an independent AI proxy."><title>Music Label Game — Foundation 01</title><style>
+:root{color-scheme:light dark;--paper:#fcfcf8;--ink:#202824;--muted:#5a6760;--line:#dce2da;--accent:#25684b;--soft:#f0f4ee;--code:#edf1ed}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.68 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:5px}.layout{max-width:1180px;margin:auto;display:grid;grid-template-columns:225px minmax(0,1fr);gap:55px;padding:50px 32px 80px}aside{align-self:start;position:sticky;top:30px;font-size:13px;line-height:1.55}.eyebrow{color:var(--accent);font-size:11px;letter-spacing:.16em;font-weight:750;text-transform:uppercase;margin:0 0 18px}aside nav{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:17px}aside nav a{text-decoration:none;color:var(--muted)}aside nav a:hover{color:var(--accent)}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.controls a,.controls button{font:600 12px/1.4 system-ui;background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 10px;cursor:pointer;text-decoration:none}main{min-width:0;max-width:820px}h1{font-size:clamp(38px,5vw,56px);line-height:1.08;letter-spacing:-.04em;margin:0 0 14px}h2{font-size:26px;line-height:1.25;letter-spacing:-.025em;margin:44px 0 18px;border-top:1px solid var(--line);padding-top:24px}h1+h2{font-size:21px;color:var(--accent);margin:0 0 24px;padding:0;border:0;font-weight:550}h3{font-size:20px;margin:29px 0 14px;line-height:1.3}p{margin:0 0 18px}main>p:first-of-type{font-size:12px;color:var(--muted);margin-bottom:26px}ol{padding-left:29px;margin:22px 0}li{padding-left:7px;margin-bottom:18px}li::marker{font-weight:750;color:var(--accent)}li p{margin:0}strong{font-weight:730}pre{font-size:12px;line-height:1.65;overflow:auto;background:var(--code);padding:18px 20px;border:1px solid var(--line);border-radius:8px;margin:22px 0;tab-size:2}code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}p code,li code,td code{font-size:.87em;background:var(--code);padding:1px 4px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:14px;margin:22px 0}th,td{padding:12px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.06em}td:first-child{white-space:nowrap;width:115px}.reference{font-size:.72em;vertical-align:super;white-space:nowrap;text-decoration:none;margin-left:1px}.source{font-size:12px;line-height:1.6;color:var(--muted);margin-bottom:12px}.source .reference{vertical-align:baseline;font-size:1em;margin-right:6px}hr{border:0;border-top:1px solid var(--line);margin:44px 0}footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:11px;color:var(--muted)}
+@media(prefers-color-scheme:dark){:root{--paper:#111915;--ink:#e8eee8;--muted:#aebeb2;--line:#344339;--accent:#abe0bd;--soft:#1c2a21;--code:#19261e}}
+@media(max-width:850px){.layout{grid-template-columns:1fr;gap:28px;padding:26px 20px 50px}aside{position:static}aside nav{display:flex;gap:10px 17px;flex-wrap:wrap}aside nav a{font-size:12px}.controls{margin-top:15px}body{font-size:16px}h2{font-size:24px}pre{font-size:11px;padding:15px}table{font-size:13px}}
+@media print{:root{color-scheme:light;--paper:white;--ink:#151a16;--muted:#48534b;--line:#cbd3cb;--accent:#21503a;--soft:#f3f5f1;--code:#f3f5f1}@page{size:A4;margin:17mm 17mm 19mm}body{font-size:10.5pt;line-height:1.48}.layout{display:block;padding:0;max-width:none}aside{display:none}main{max-width:none}h1{font-size:30pt}h1+h2{font-size:14pt}h2{font-size:16pt;margin-top:20pt;padding-top:12pt;break-after:avoid}h3{font-size:12pt;break-after:avoid}p{margin-bottom:9pt}li{margin-bottom:9pt}li,pre,tr{break-inside:avoid}pre{white-space:pre-wrap;font-size:8pt;line-height:1.45;padding:10pt}a{color:inherit}table{font-size:9pt}.source{font-size:8pt}footer{font-size:8pt}}
+</style></head>
+<body><div class="layout"><aside aria-label="Document navigation"><p class="eyebrow">Music Label Game / 01</p><nav><a href="#the-rules">The rules</a><a href="#what-lives-inside-the-world">What lives inside the world</a><a href="#talk-to-the-world">Talk to the world</a><a href="#the-code-we-actually-need">The code we actually need</a><a href="#the-ai-proxy-is-a-different-program">The AI proxy is a different program</a><a href="#borrow-mechanisms-not-frameworks">Borrow mechanisms, not frameworks</a><a href="#the-first-playable-result">The first playable result</a><a href="#reference-notes">Reference notes</a></nav><div class="controls"><a href="FOUNDATION.md" download>Markdown</a><button type="button" onclick="window.print()">Print</button></div></aside><main><h1>Music Label Game</h1>
+<h2 id="foundation-01-the-world-is-the-product">Foundation 01 — The world is the product</h2>
+<p><em>September 11, 2026 · Implementation contract; commands and files below are proposed.</em></p>
+<p>A portable, prompt-driven management game. <strong>Load a meaningful world, let capable AI develop it, and save its successor.</strong> The first result is a browsable company—not a plan for building one.</p>
+<p>The player owns the world. Models and providers are replaceable resources.</p>
+<h2 id="the-rules">The rules</h2>
+<ol>
+<li>
+<p><strong>Show the whole first.</strong> Begin with named artists, albums, songs, descriptions, and future dates. The default seed contains three artists and ten albums each. There must be something meaningful to explore before any media is rendered.</p>
+</li>
+<li>
+<p><strong>Keep one precious text save.</strong> MLML contains the selected identities, memories, intentions, writing, schedules, decisions, production briefs, and selected instruction text with its versions needed to continue. No essential memory may exist only inside an agent or proxy.</p>
+</li>
+<li>
+<p><strong>Distill; do not empty.</strong> Short descriptions inherit meaning from their surroundings: label → artist → album → song. Add structure only when it expresses a real distinction. A missing recording is not a missing song.</p>
+</li>
+<li>
+<p><strong>Prompt the imagination; code the container.</strong> Put creative development, taste, and semantic review in instructions. Keep parsing, permissions, identities, arithmetic, budgets, and safe saving in ordinary code. Good prose replaces bespoke behavior—not enforced boundaries.</p>
+</li>
+<li>
+<p><strong>Give AI tools, not ownership.</strong> Models inspect scoped context and propose changes through named world operations. The engine validates and commits them. A request to add an artist should produce the artist and her initial catalog, not a new task list for the player.</p>
+</li>
+<li>
+<p><strong>Regenerate attempts; preserve the world.</strong> A separate reviewer accepts or rejects a candidate against its source context. Rejection starts a fresh attempt with concise feedback, not an endless repair conversation. Bound retries; retain accepted work and continue elsewhere when necessary.</p>
+</li>
+<li>
+<p><strong>Time belongs to the save.</strong> Store world time and event dates as Unix seconds; display human dates. Advance explicitly. Keep intended dates, fictional events, and actual production facts distinct. A date passing never fabricates a recording or approval.</p>
+</li>
+<li>
+<p><strong>Advance meaning; render media separately.</strong> <code>play</code> develops the text world. <code>produce</code> realizes selected audio and image briefs without advancing its clock. Missing generators leave visible pending work; they do not block the world's development.</p>
+</li>
+<li>
+<p><strong>Let people exercise taste, not supervise repairs.</strong> Likes and dislikes on future ideas guide direction. Approval of a recording belongs to that exact retained audio, not its title or brief. Rejection requests regeneration; routine production does not request permission to retry.</p>
+</li>
+<li>
+<p><strong>Make the future visible.</strong> The same save supplies the next-30-days calendar, workload charts, generation backlog, listening queue, upcoming artists, journal, and media gallery. Count meaningful deliverables, not retries. Opening a view requires no AI and changes nothing.</p>
+</li>
+<li>
+<p><strong>Keep game actions inside the game.</strong> Personas cannot deploy, purchase, email, browse arbitrarily, run shell commands, or grant permissions. Generation is an explicitly budgeted external capability. Public websites and feeds are selected local exports; deployment is another application's responsibility.</p>
+</li>
+<li>
+<p><strong>Make every session useful.</strong> Use a capable text model for progression, with explicit time and inference limits. Save the last coherent result when access ends. Do not silently downgrade the model or pretend the requested future was reached. Previous saves remain untouched.</p>
+</li>
+</ol>
+<h2 id="what-lives-inside-the-world">What lives inside the world</h2>
+<p>The world contains a label; artists with voices, histories, relationships, and creative eras; albums and songs; scenes, comments, and journal posts; future intentions; and requests for recordings and images. Personas are persistent characters, not continuously running processes.</p>
+<p><strong>Characters know their past and selected intentions—not an omniscient account of their future.</strong> Fictional scenes may inspire real work; they do not become fabricated sales, audience praise, or owner decisions. Public presentation identifies virtual artists and generated imagery.</p>
+<p>A small illustrative fragment:</p>
+<pre><code class="language-xml">&lt;label name="Star Records" now="1789166572"&gt;
+  &lt;artist id="poppy" name="Poppy Paradox" at="1789771372"&gt;
+    &lt;bio&gt;A virtual singer who makes questioning feel joyful.&lt;/bio&gt;
+    &lt;style&gt;Female lead; bubblegum pop; bright hooks, playful wit.&lt;/style&gt;
+    &lt;album id="ask-why" name="Ask Me Why" at="1791585772"&gt;
+      &lt;description&gt;Catchy invitations to think for yourself.&lt;/description&gt;
+      &lt;song id="who-says" name="Who Says?"&gt;
+        A borrowed certainty becomes an honest question;
+        make changing your mind sound like freedom.
+        &lt;audio&gt;Warm lead, buoyant rhythm, a chorus worth sharing.&lt;/audio&gt;
+      &lt;/song&gt;
+      &lt;image&gt;Pastel question marks orbit a homemade telescope.&lt;/image&gt;
+    &lt;/album&gt;
+  &lt;/artist&gt;
+&lt;/label&gt;
+</code></pre>
+<p>An unresolved <code>&lt;audio&gt;</code> or <code>&lt;image&gt;</code> is already a production request. The engine derives work from the world; there is no second task database to maintain. Production binds to a specific version of its brief and inherited context.</p>
+<p>The complete text travels in one MLML file. Binary assets are optional companions, referenced by identity and digest. Keep valued recordings and visual references: generating a replacement is not recovering the identical original. Timestamp filenames are convenient; distinct revisions still need distinct identities.</p>
+<h2 id="talk-to-the-world">Talk to the world</h2>
+<pre><code class="language-bash">music-label-game ask \
+  --load world-1789166572.mlml \
+  --save expanded.mlml \
+  "Add a female bubblegum-pop artist whose songs introduce \
+   philosophers and help young people think independently."
+</code></pre>
+<p>The inner AI can use <code>world.read</code>, <code>world.propose</code>, <code>world.schedule</code>, and <code>world.requestMedia</code>. Mutations are staged for review and committed by the engine. Owner approval is a separate player operation, never an agent-granted permission.</p>
+<p>Start with an author and reviewer sharing one small harness. Artist, lyricist, manager, and editorial roles are instruction sets; add separate workers only for a concrete need. Models request tool calls; application code executes authorized ones—the separation used in documented function-calling workflows.<a class="reference" href="#ref-1">[1]</a></p>
+<p><strong>Command meanings:</strong> <code>view</code> browses; <code>ask</code> expands; <code>play</code> progresses with AI; <code>advance</code> moves the clock without inventing events; <code>schedule</code> changes dates; <code>produce --list</code> reveals pending media; <code>produce</code> renders it; <code>like</code>/<code>dislike</code> records taste; <code>export</code> builds selected local outputs. State-changing commands load one save and write its successor.</p>
+<h2 id="the-code-we-actually-need">The code we actually need</h2>
+<p>Node.js, ESM, <code>.js</code> files, no third-party npm packages in the game. These are responsibilities, not invitations to build a framework.</p>
+<pre><code class="language-text">music-label-game/
+  cli.js             Commands and conversational entry
+  mlml.js            Bounded XML subset; parsing and serialization
+  world.js           Objects, explicit time, scoped changes, work discovery
+  agents.js          Context → prompt → tool calls → author/reviewer loop
+  tools.js           Allowed world operations; no host tools
+  ai.js              Provider-neutral client for the separate proxy
+  media.js           Pending briefs and imported asset receipts
+  views.js           Terminal/HTML, calendar, listening, public exports
+  save.js            Read-only input, checkpoints, successor commits
+  prompts/           Versioned author, reviewer, and specialist instructions
+  tests/game.test.js Boundary, recovery, scheduling, and approval tests
+  build/sea.js       Later: packaging, never world behavior
+</code></pre>
+<p>Keep the XML subset small and reject external entities and executable content. Models return scoped changes, not rewritten copies of the entire company. Serialize accepted changes with code.</p>
+<p>Keep modules easy to bundle and avoid dynamic plugin loading. Node's current SEA documentation supports an embedded ESM entry script, but ordinary filesystem module loading is not the default inside it: packaging must deliberately bundle the application and its prompt assets. Build for each supported platform. SEA is a later distribution step, not an architectural prerequisite.<a class="reference" href="#ref-2">[2]</a></p>
+<h2 id="the-ai-proxy-is-a-different-program">The AI proxy is a different program</h2>
+<pre><code class="language-text">MLML → game / agent harness → capability request → AI proxy
+                                                   ↓
+                                          API or isolated CLI
+                                                   ↓
+Next MLML ← accepted changes ← normalized result ← output
+</code></pre>
+<p><strong>The game asks for a capability. The proxy chooses how to supply it.</strong> Text reasoning, music, images, transcription, and audio assessment are different advertised capabilities. Missing capability means deferred work—not a silent substitute or a text model pretending to have listened.</p>
+<p>Keep one small, versioned protocol: discover capabilities, submit a bounded request, collect its result, and cancel when supported. A request carries an ID, capability/profile, relevant input, permitted tool descriptions, and limits. A result carries structured content or tool requests, artifact descriptors, actual provider/model identity, and usage when available. Reconnects reconcile the same request; they do not blindly create another paid generation.</p>
+<p>The proxy must not execute world tools. Tool requests return to <code>tools.js</code>. Adapters may use approved local executables, but model-produced arguments never become unrestricted shell commands.</p>
+<h3 id="a-personal-proxy-can-stay-personal">A personal proxy can stay personal</h3>
+<p>A suggested four-file implementation:</p>
+<pre><code class="language-text">ai-proxy/
+  server.js          Authentication, limits, request lifecycle
+  routes.js          Capability routing and normalized responses
+  openai.js          Selected text/API adapter
+  elevenmusic.js     Selected music/API adapter
+</code></pre>
+<p>No adapter is required merely because a provider exists. Eleven Music documents a music-generation API; choosing it does not require the game to know its request format.<a class="reference" href="#ref-3">[3]</a> Other adapters may call a CLI, a local service, or a containerized worker. Vercel's AI SDK is a possible multi-provider implementation <strong>behind</strong> this boundary—not a game dependency.<a class="reference" href="#ref-4">[4]</a></p>
+<p>The proxy may retain credentials, caches, provider sessions, tickets, and usage records. It must return every result and relevant receipt needed by the world. Export accepted text into MLML and retain identifiers for outstanding work. No artist memory or essential continuation state is allowed to live only in the proxy.</p>
+<p>A hosted proxy should require only an endpoint and scoped access token in local configuration—not in MLML. Use authenticated TLS, per-user isolation, explicit capability/spending limits, and a stated retention policy. Send the relevant context, not the whole world by default. Changing providers or hosts must not change the save format.</p>
+<p><strong>Containerization contains risk; it does not prove dependencies safe.</strong> Isolate adapter workers with restricted mounts and egress, non-root execution, pinned dependencies, limited credentials, and no host-control socket. Docker's security documentation explicitly notes that mounts, capabilities, and kernel vulnerabilities can leave isolation incomplete.<a class="reference" href="#ref-5">[5]</a></p>
+<p>With remote inference, this is a <strong>closed game with declared external generation</strong>, not strictly offline or fully hermetic computation. The proxy boundary controls that exception; it does not make it disappear.</p>
+<h2 id="borrow-mechanisms-not-frameworks">Borrow mechanisms, not frameworks</h2>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Mechanism worth retaining</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>pi</strong></td>
+<td>A small harness, prompt/skill extension points, and process/RPC integration.<a class="reference" href="#ref-6">[6]</a></td>
+</tr>
+<tr>
+<td><strong>Hermes</strong></td>
+<td>Separate durable facts from reusable procedures; load detailed skills when relevant.<a class="reference" href="#ref-7">[7]</a></td>
+</tr>
+<tr>
+<td><strong>OpenCode</strong></td>
+<td>Separate the interface from a programmatically accessible engine.<a class="reference" href="#ref-8">[8]</a></td>
+</tr>
+<tr>
+<td><strong>OpenClaw</strong></td>
+<td>Centralize connection ownership and make requests, capabilities, and events explicit.<a class="reference" href="#ref-9">[9]</a></td>
+</tr>
+</tbody>
+</table>
+<p>None is a required dependency. Do not import their general filesystem, shell, messaging, or device authority into the game.</p>
+<h2 id="the-first-playable-result">The first playable result</h2>
+<p>Deliver the populated label and offline reader first. Then demonstrate one real <code>ask</code> that adds the requested artist, her initial albums, song briefs, introduction date, and future post. Show her immediately on the calendar. Advance the text world, expose pending media, produce one recording when a generator is available, and record a listening decision.</p>
+<p>Reload the successor save in a fresh process. The company must still be there without the previous model conversation or proxy cache. Deterministic tests protect that boundary; real model runs establish creative capability. A fixture is not an AI demonstration.</p>
+<p>Other kinds of company can come later. Preserve the reusable load/play/save and proxy boundaries; do not build a universal company framework now.</p>
+<p><strong>The world is durable. Attempts are disposable. Intelligence is borrowed. The result belongs to the player.</strong></p>
+<hr/>
+<h2 id="reference-notes">Reference notes</h2>
+<p>These references support the borrowed mechanisms and current packaging/provider details, not a claim that this game has already been implemented. Checked September 11, 2026.</p>
+<p id="ref-1" class="source"><span class="reference">[1]</span> <a href="https://developers.openai.com/api/docs/guides/function-calling">OpenAI — Function calling</a>: the model returns tool calls; the application executes tool logic.</p>
+<p id="ref-2" class="source"><span class="reference">[2]</span> <a href="https://nodejs.org/api/single-executable-applications.html">Node.js — Single executable applications</a>: embedded ESM, bundled scripts, assets, and module-loading constraints.</p>
+<p id="ref-3" class="source"><span class="reference">[3]</span> <a href="https://elevenlabs.io/docs/overview/capabilities/music">ElevenLabs — Eleven Music</a>: music API availability and generation capabilities.</p>
+<p id="ref-4" class="source"><span class="reference">[4]</span> <a href="https://github.com/vercel/ai">Vercel — AI SDK repository</a>: a provider-agnostic toolkit that can be isolated behind the proxy.</p>
+<p id="ref-5" class="source"><span class="reference">[5]</span> <a href="https://docs.docker.com/engine/security/">Docker — Engine security</a>: isolation, capabilities, mounts, and host risks.</p>
+<p id="ref-6" class="source"><span class="reference">[6]</span> <a href="https://github.com/earendil-works/pi/tree/main/packages/coding-agent">pi — Coding agent</a>: minimal harness, skills, prompt templates, and RPC mode.</p>
+<p id="ref-7" class="source"><span class="reference">[7]</span> <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills/">Hermes — Skills system</a>: reusable procedural knowledge and its distinction from durable factual memory.</p>
+<p id="ref-8" class="source"><span class="reference">[8]</span> <a href="https://opencode.ai/docs/server/">OpenCode — Server</a>: headless server and multiple clients.</p>
+<p id="ref-9" class="source"><span class="reference">[9]</span> <a href="https://docs.openclaw.ai/concepts/architecture">OpenClaw — Gateway architecture</a>: connection ownership, typed requests, capability declarations, and request deduplication.</p>
+<footer>Foundation 01 · September 11, 2026 · Portable text world / independent AI proxy</footer></main></div></body></html>

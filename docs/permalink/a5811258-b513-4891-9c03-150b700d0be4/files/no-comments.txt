@@ -1,0 +1,73 @@
+// This code is tested
+// install node.js and you can run it on command line with: node Signal.js
+// it will just say: Hello Alice
+// see the main() function on the bottom
+
+export class Pulse {
+  #value;
+  #subscribers;
+  #disposables;
+  constructor(value) {
+    this.#value = value;
+    this.#subscribers = new Set();
+    this.#disposables = new Set();
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(newValue) {
+    // IMPORTANT FEATURE: if value is the same, exit early, don't disturb if you don't need to
+    if (newValue == this.#value) return;
+
+    this.#value = newValue;
+    this.notify(); // all observers
+  }
+
+  subscribe(subscriber) {
+
+    // IMPORTANT FEATURE: instant notification (initialization on subscribe), but don't notify on null/undefined
+    if (this.#value !== null) subscriber(this.#value);
+
+    this.#subscribers.add(subscriber);
+
+    // IMPORTANT FEATURE: return unsubscribe function, execute this to stop getting notifications.
+    return () => this.#subscribers.delete(subscriber);
+  }
+
+  notify() {
+    for (const subscriber of this.#subscribers) subscriber(this.#value);
+  }
+
+  clear() {
+    this.#subscribers.clear();
+    this.#disposables.forEach((disposable) => disposable());
+    this.#disposables.clear();
+  }
+
+  dispose(disposable) {
+    this.#disposables.add(disposable);
+  }
+}
+
+export class Signal extends Pulse { // we are making the pulse into a Signal
+  map(mapFunctionPredicate) { // here we are wrapping the function with the method
+    return map(this, mapFunctionPredicate);
+  }
+}
+
+export function map(parentSignal, mapFunctionPredicate) {
+  const mappedSignal = new Signal(undefined);
+  const subscription = parentSignal.subscribe((parentSignalValue) => (mappedSignal.value = mapFunctionPredicate(parentSignalValue)));
+  mappedSignal.dispose(subscription);
+  return mappedSignal;
+}
+
+function main(){
+  const usernameSignal = new Signal();
+  usernameSignal.value = "Alice";
+  const mappedSignal = usernameSignal.map(v=>`Hello ${v}`);
+  mappedSignal.subscribe(console.log)
+}
+main(); // run program

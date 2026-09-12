@@ -1,0 +1,704 @@
+// ── concerns.js ───────────────────────────────────────────────────────────────
+// Minimal reactive core for Web Components.
+//
+// This file gives us three small building blocks:
+//
+//   Scope
+//     Owns cleanup.
+//     Anything that needs to be undone later goes into a Scope.
+//
+//   Signal
+//     A reactive variable.
+//     It stores one value and notifies subscribers when the value changes.
+//
+//   Concern
+//     A named Scope that owns Signals.
+//     In a Web Component, each component instance should own one Concern.
+//
+// The intended Web Component pattern:
+//
+//   class MyElement extends HTMLElement {
+//     constructor() {
+//       super();
+//       this.concern = new Concern("my-element");
+//     }
+//
+//     disconnectedCallback() {
+//       this.concern.dispose();
+//     }
+//   }
+//
+// When the element leaves the page, dispose the Concern.
+// That removes event listeners, signal subscriptions, child concerns, and other
+// collected cleanup callbacks.
+
+
+// ── Small helper ──────────────────────────────────────────────────────────────
+// In this system, null and undefined mean “no value yet”.
+//
+// Signals silently ignore null and undefined.
+// This keeps reactive code simple because subscribers only fire when there is
+// something meaningful to work with.
+
+const hasValue = value => value !== null && value !== undefined;
+
+
+// ── disposeOne() ──────────────────────────────────────────────────────────────
+// A Scope can collect different kinds of cleanup resources:
+//
+//   - a function:
+//       () => element.removeEventListener(...)
+//
+//   - an object with .dispose():
+//       childConcern.dispose()
+//
+//   - an object with Symbol.dispose:
+//       newer JavaScript disposal pattern
+//
+// disposeOne() knows how to clean up each of those shapes.
+
+function disposeOne(item) {
+  if (!item) return;
+
+  if (typeof item === "function") {
+    item();
+    return;
+  }
+
+  if (typeof item.dispose === "function") {
+    item.dispose();
+    return;
+  }
+
+  if (typeof item[Symbol.dispose] === "function") {
+    item[Symbol.dispose]();
+  }
+}
+
+
+// ── Scope ─────────────────────────────────────────────────────────────────────
+// Scope is the lifetime manager.
+//
+// It does not know anything about Signals.
+// It does not know anything about DOM.
+// It only knows this:
+//
+//   “Here are things to clean up later.”
+//
+// Example:
+//
+//   const scope = new Scope();
+//
+//   const handler = () => console.log("clicked");
+//   button.addEventListener("click", handler);
+//
+//   scope.collect(() => {
+//     button.removeEventListener("click", handler);
+//   });
+//
+//   scope.dispose(); // removes the event listener
+//
+// This is important for Web Components because components are created and
+// destroyed often. We need a reliable way to prevent memory leaks.
+
+export class Scope {
+  #items = [];
+  #children = new Map();
+  #disposed = false;
+
+  get disposed() {
+    return this.#disposed;
+  }
+
+  // collect(...items)
+  //
+  // Store cleanup resources so they can be disposed later.
+  //
+  // This accepts:
+  //
+  //   scope.collect(cleanupFunction)
+  //   scope.collect(childScope)
+  //   scope.collect([cleanupA, cleanupB])
+  //
+  // If the Scope is already disposed, the resource is cleaned up immediately.
+  // This prevents late async work from leaking resources.
+  collect(...items) {
+    const flat = items.flat(Infinity).filter(Boolean);
+
+    if (this.#disposed) {
+      for (let i = flat.length - 1; i >= 0; i--) {
+        try {
+          disposeOne(flat[i]);
+        } catch (error) {
+          console.error("[Scope] late dispose error:", error);
+        }
+      }
+
+      return this;
+    }
+
+    this.#items.push(...flat);
+
+    return this;
+  }
+
+  // child(name, create)
+  //
+  // Create or retrieve a named child Scope.
+  //
+  // Child scopes are useful when part of a component has its own lifetime:
+  //
+  //   const modal = concern.child("modal");
+  //   const toolbar = concern.child("toolbar");
+  //
+  // When the parent Scope is disposed, its children are disposed too.
+  child(name, create = () => new Scope()) {
+    if (this.#disposed) {
+      throw new Error(`[Scope] cannot create child after dispose: ${name}`);
+    }
+
+    if (!this.#children.has(name)) {
+      const child = create();
+
+      this.#children.set(name, child);
+
+      // By collecting the child, we guarantee parent.dispose() also disposes it.
+      this.collect(child);
+    }
+
+    return this.#children.get(name);
+  }
+
+  // dispose()
+  //
+  // Run all collected cleanup work.
+  //
+  // Cleanup runs newest-first. That usually matches how resources were created:
+  // the most recently created thing is usually the first thing that should die.
+  dispose() {
+    if (this.#disposed) return;
+
+    this.#disposed = true;
+
+    const items = this.#items.splice(0);
+
+    for (let i = items.length - 1; i >= 0; i--) {
+      try {
+        disposeOne(items[i]);
+      } catch (error) {
+        console.error("[Scope] dispose error:", error);
+      }
+    }
+
+    this.#children.clear();
+  }
+}
+
+
+// ── Signal ────────────────────────────────────────────────────────────────────
+// Signal is a reactive variable.
+//
+// It has:
+//   - one current value
+//   - a set of subscriber functions
+//
+// When the value changes, all subscribers are called.
+//
+// Important laws:
+//
+//   1. null and undefined are ignored.
+//   2. subscribing immediately fires with the current value, if there is one.
+//   3. setting the same value again does not notify subscribers.
+//   4. subscribe(fn) returns an unsubscribe function.
+//
+// Example:
+//
+//   const name = new Signal("Ada");
+//
+//   const unsubscribe = name.subscribe(value => {
+//     console.log("name is", value);
+//   });
+//
+//   name.value = "Grace";
+//
+//   unsubscribe();
+
+export class Signal {
+  #value;
+  #subscribers = new Set();
+
+  constructor(value) {
+    if (hasValue(value)) {
+      this.#value = value;
+    }
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(next) {
+    this.set(next);
+  }
+
+  get hasValue() {
+    return hasValue(this.#value);
+  }
+
+  // set(next)
+  //
+  // Change the signal value.
+  //
+  // Returns true if the value actually changed.
+  // Returns false if the value was ignored or unchanged.
+  set(next) {
+    if (!hasValue(next)) return false;
+    if (Object.is(next, this.#value)) return false;
+
+    this.#value = next;
+    this.notify();
+
+    return true;
+  }
+
+  // subscribe(fn)
+  //
+  // Add a subscriber.
+  //
+  // If the Signal already has a value, the subscriber fires immediately.
+  // There is intentionally no "immediate: false" option.
+  //
+  // Operators like combineLatest handle wiring concerns themselves.
+  subscribe(fn) {
+    this.#subscribers.add(fn);
+
+    if (this.hasValue) {
+      fn(this.#value);
+    }
+
+    return () => {
+      this.#subscribers.delete(fn);
+    };
+  }
+
+  // notify()
+  //
+  // Tell every subscriber about the current value.
+  //
+  // We copy the Set before iterating so that subscribers may safely unsubscribe
+  // while notification is happening.
+  notify() {
+    if (!this.hasValue) return;
+
+    for (const fn of [...this.#subscribers]) {
+      fn(this.#value);
+    }
+  }
+}
+
+
+// ── Concern ───────────────────────────────────────────────────────────────────
+// Concern is the main class Web Components should use.
+//
+// A Concern is:
+//   - a Scope
+//   - a registry of named Signals
+//   - a registry of named child Concerns
+//   - a small helper library for DOM binding and reactive composition
+//
+// In plain language:
+//
+//   A Concern is “the reactive life of one component or one part of a component.”
+//
+// Example:
+//
+//   this.concern = new Concern("x-alert");
+//
+//   this.concern.signal("text", "Hello");
+//   this.concern.signal("color", "primary");
+//
+//   this.concern.subscribe("text", value => {
+//     this.textContent = value;
+//   });
+//
+// When this.concern.dispose() runs, all subscriptions are removed.
+
+export class Concern extends Scope {
+  #name;
+  #parent;
+  #signals = new Map();
+  #concerns = new Map();
+
+  constructor(name = "concern", parent = null) {
+    super();
+
+    this.#name = name;
+    this.#parent = parent;
+  }
+
+  get name() {
+    return this.#name;
+  }
+
+  get parent() {
+    return this.#parent || this;
+  }
+
+  get root() {
+    let node = this;
+
+    while (node.#parent) {
+      node = node.#parent;
+    }
+
+    return node;
+  }
+
+  // concern(name)
+  //
+  // Create or retrieve a named child Concern.
+  //
+  // This is useful when a component has internal regions with their own cleanup:
+  //
+  //   const form = this.concern.concern("form");
+  //   const menu = this.concern.concern("menu");
+  //   const modal = this.concern.concern("modal");
+  //
+  // Each child concern can own its own subscriptions and event listeners.
+  // When the parent concern is disposed, all child concerns are disposed too.
+  concern(name) {
+    if (this.disposed) {
+      throw new Error(`[Concern:${this.#name}] cannot create child concern after dispose: ${name}`);
+    }
+
+    if (!this.#concerns.has(name)) {
+      const child = new Concern(name, this);
+
+      this.#concerns.set(name, child);
+
+      // This is the key line.
+      // The child Concern joins the parent's cleanup workflow immediately.
+      this.collect(child);
+    }
+
+    return this.#concerns.get(name);
+  }
+
+  // signal(name, value)
+  //
+  // Create, retrieve, register, or update a named Signal.
+  //
+  // Forms:
+  //
+  //   concern.signal("text")
+  //     Get the "text" signal, creating it if needed.
+  //
+  //   concern.signal("text", "Hello")
+  //     Get/create the "text" signal and set its value.
+  //
+  //   concern.signal("text", existingSignal)
+  //     Register an existing Signal under the name "text".
+  signal(name, value) {
+    if (value instanceof Signal) {
+      this.#signals.set(name, value);
+      return value;
+    }
+
+    let signal = this.#signals.get(name);
+
+    if (!signal) {
+      signal = new Signal(value);
+      this.#signals.set(name, signal);
+      return signal;
+    }
+
+    if (arguments.length > 1) {
+      signal.value = value;
+    }
+
+    return signal;
+  }
+
+  // resolve(source)
+  //
+  // Many Concern methods accept either:
+  //
+  //   - a Signal object
+  //   - the name of a signal
+  //
+  // resolve() normalizes both forms into an actual Signal.
+  resolve(source) {
+    if (source instanceof Signal) return source;
+
+    return this.signal(source);
+  }
+
+  // subscribe(source, fn)
+  //
+  // Subscribe to a Signal or named Signal.
+  //
+  // The unsubscribe function is automatically collected by this Concern.
+  // That means concern.dispose() removes the subscription.
+  subscribe(source, fn) {
+    const signal = this.resolve(source);
+    const unsubscribe = signal.subscribe(fn);
+
+    this.collect(unsubscribe);
+
+    return unsubscribe;
+  }
+
+  // combineLatest(name, ...sources)
+  //
+  // Create a new Signal from multiple source Signals.
+  //
+  // The output Signal receives an array of values:
+  //
+  //   [valueA, valueB, valueC]
+  //
+  // It only fires after all source signals have values.
+  //
+  // Example:
+  //
+  //   concern.signal("first", "Ada");
+  //   concern.signal("last", "Lovelace");
+  //
+  //   concern.combineLatest("fullName", "first", "last");
+  //
+  //   concern.subscribe("fullName", ([first, last]) => {
+  //     console.log(`${first} ${last}`);
+  //   });
+  //
+  // Why the "wiring" flag?
+  //
+  // Signal.subscribe() always fires immediately if the signal has a value.
+  // While combineLatest is attaching several subscriptions, we do not want
+  // several partial setup calls. So we ignore updates during wiring, then run
+  // one clean update after all subscriptions are attached.
+  combineLatest(name, ...sources) {
+    const input = sources.flat().map(source => this.resolve(source));
+    const output = new Signal();
+
+    let wiring = true;
+
+    const update = () => {
+      if (wiring) return;
+
+      const values = input.map(signal => signal.value);
+
+      if (values.every(hasValue)) {
+        output.value = values;
+      }
+    };
+
+    for (const signal of input) {
+      this.collect(signal.subscribe(update));
+    }
+
+    wiring = false;
+    update();
+
+    this.signal(name, output);
+
+    return output;
+  }
+
+  // effect(sources, fn)
+  //
+  // Run a function whenever one or more Signals change.
+  //
+  // Like combineLatest, the effect only runs once every source has a value.
+  //
+  // Example:
+  //
+  //   concern.effect(["color", "text"], (color, text) => {
+  //     console.log(color, text);
+  //   });
+  //
+  // This is useful when you do not need a new derived Signal.
+  // You only want a side effect, such as updating the DOM.
+  effect(sources, fn) {
+    const input = (Array.isArray(sources) ? sources : [sources])
+      .map(source => this.resolve(source));
+
+    let wiring = true;
+
+    const run = () => {
+      if (wiring) return;
+
+      const values = input.map(signal => signal.value);
+
+      if (values.every(hasValue)) {
+        fn(...values);
+      }
+    };
+
+    for (const signal of input) {
+      this.collect(signal.subscribe(run));
+    }
+
+    wiring = false;
+    run();
+
+    return this;
+  }
+
+  // attribute(name, value)
+  //
+  // Push an HTML attribute value into a named Signal.
+  //
+  // Example:
+  //
+  //   <x-alert color="primary"></x-alert>
+  //
+  // The component can treat "color" as a Signal:
+  //
+  //   this.concern.attribute("color", "primary");
+  //
+  // This is normally called from attributeChangedCallback().
+  attribute(name, value) {
+    const signal = this.signal(name);
+
+    if (hasValue(value)) {
+      signal.value = value;
+    }
+
+    return signal;
+  }
+
+  // attributes(element, names)
+  //
+  // Create Signals for observed attributes.
+  //
+  // This usually runs in a component constructor.
+  //
+  // It only creates the Signals.
+  // It does not read attribute values yet.
+  //
+  // Reading attributes too early in a constructor can be unreliable, so actual
+  // hydration is handled by hydrateAttributes() during connectedCallback().
+  attributes(element, names = element.constructor.observedAttributes ?? []) {
+    for (const name of names) {
+      this.signal(name);
+    }
+
+    return this;
+  }
+
+  // hydrateAttributes(element, names)
+  //
+  // Read current DOM attributes and copy them into Signals.
+  //
+  // This usually runs in connectedCallback().
+  //
+  // Example:
+  //
+  //   connectedCallback() {
+  //     this.concern.hydrateAttributes(this);
+  //   }
+  hydrateAttributes(element, names = element.constructor.observedAttributes ?? []) {
+    for (const name of names) {
+      if (element.hasAttribute(name)) {
+        this.attribute(name, element.getAttribute(name));
+      }
+    }
+
+    return this;
+  }
+
+  // on(target, eventName, handler, options)
+  //
+  // Add an event listener and automatically remove it on dispose.
+  //
+  // Example:
+  //
+  //   concern.on(button, "click", () => {
+  //     console.log("clicked");
+  //   });
+  //
+  // Later:
+  //
+  //   concern.dispose();
+  //
+  // The click listener is removed.
+  on(target, eventName, handler, options) {
+    target.addEventListener(eventName, handler, options);
+
+    this.collect(() => {
+      target.removeEventListener(eventName, handler, options);
+    });
+
+    return this;
+  }
+
+  // bindText(source, node)
+  //
+  // Keep a DOM node's textContent synced to a Signal.
+  //
+  // Example:
+  //
+  //   concern.signal("text", "Hello");
+  //   concern.bindText("text", span);
+  //
+  // When the "text" Signal changes, span.textContent changes.
+  bindText(source, node) {
+    this.subscribe(source, value => {
+      const next = String(value);
+
+      if (node.textContent !== next) {
+        node.textContent = next;
+      }
+    });
+
+    return this;
+  }
+
+  // bindValue(source, element)
+  //
+  // Two-way bind a Signal to a form element's value.
+  //
+  // Signal → input:
+  //   When the Signal changes, element.value updates.
+  //
+  // input → Signal:
+  //   When the user types, the Signal updates.
+  //
+  // Example:
+  //
+  //   concern.signal("name", "Ada");
+  //   concern.bindValue("name", input);
+  bindValue(source, element) {
+    const signal = this.resolve(source);
+
+    this.subscribe(signal, value => {
+      const next = String(value);
+
+      if (element.value !== next) {
+        element.value = next;
+      }
+    });
+
+    this.on(element, "input", () => {
+      signal.value = element.value;
+    });
+
+    return this;
+  }
+
+  // dispose()
+  //
+  // Dispose all subscriptions, event listeners, cleanup callbacks, and child
+  // concerns, then clear this Concern's signal registry.
+  //
+  // The Signals themselves do not need special disposal.
+  // Once subscriptions are removed and maps are cleared, they can be garbage
+  // collected normally.
+  dispose() {
+    if (this.disposed) return;
+
+    super.dispose();
+
+    this.#signals.clear();
+    this.#concerns.clear();
+  }
+}

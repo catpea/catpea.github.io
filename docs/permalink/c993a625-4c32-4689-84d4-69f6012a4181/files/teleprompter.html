@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catpea Teleprompter</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📃</text></svg>">
+
+    <style>
+      /* generic styles */
+      .user-select-none { user-select: none; }
+      .pointer-events-none {pointer-events: none;}
+      /* UI customizations */
+      .btn-outline-secondary.active {background-color: var(--bs-gray-800)}
+      .btn.btn-outline-secondary[disabled],.btn.btn-outline-secondary.disabled { color: var(--bs-gray-700); border-color: var(--bs-gray-700)}
+    </style>
+  </head>
+  <body class="pt-4">
+
+    <nav class="navbar fixed-top bg-body-tertiary shadow-lg">
+      <div class="container-fluid flex-row-reverse">
+        <div class="btn-toolbar float-end" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group me-2 py-1" role="group" aria-label="Third group">
+            <button id="play-btn" class="btn btn-outline-secondary" disabled>Play</button>
+            <button id="pause-btn" class="btn btn-outline-secondary" disabled>Stop</button>
+          </div>
+          <div class="btn-group me-2 py-1" role="group" aria-label="Third group">
+            <button id="download-recording-btn" class="btn btn-outline-secondary" disabled>Download</button>
+            <button id="auto-recording-btn" class="btn btn-outline-secondary active" data-bs-toggle="button">Auto</button>
+          </div>
+          <div class="btn-group me-2 py-1" role="group" aria-label="Third group">
+            <button id="build-btn" class="btn btn-outline-secondary">Build</button>
+          </div>
+          <div class="btn-group me-2 py-1" role="group" aria-label="Third group">
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <audio id="audio-player" style="display: none;"></audio>
+
+    <div class="container-fluid">
+
+      <div class="row p-5">
+        <div class="col-md-4">
+
+
+
+
+          <nav>
+            <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-chooser-tab" data-bs-toggle="tab" data-bs-target="#nav-chooser" type="button" role="tab" aria-controls="nav-chooser" aria-selected="true">Chooser</button>
+              <button class="nav-link" id="nav-editor-tab" data-bs-toggle="tab" data-bs-target="#nav-editor" type="button" role="tab" aria-controls="nav-editor" aria-selected="false">Editor</button>
+              <button class="nav-link" id="nav-configurator-tab" data-bs-toggle="tab" data-bs-target="#nav-configurator" type="button" role="tab" aria-controls="nav-configurator" aria-selected="false">Configurator</button>
+            </div>
+          </nav>
+
+          <div class="tab-content" id="nav-tabContent">
+
+            <div class="tab-pane fade show active" id="nav-chooser" role="tabpanel" aria-labelledby="nav-chooser-tab" tabindex="0">
+              <div id="audio-file-list" class="p-2" style="height: 75vh; overflow-y: auto;">
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-editor" role="tabpanel" aria-labelledby="nav-editor-tab" tabindex="0">
+              <textarea id="text-input" class="form-control bg-body-tertiary mb-2" placeholder="Enter newline delimited text" style="min-height: 64vh;"></textarea>
+
+              <div class="btn-toolbar justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="Second group">
+                  <button id="assimilate-text" class="btn btn-outline-secondary">Update</button>
+                  <!-- <button id="normalize-text" class="btn btn-outline-secondary">Normalize</button> -->
+                </div>
+              </div>
+              <small class="text-body-secondary opacity-25 user-select-none d-block">&middot; Do not change the hex number.</small>
+              <small class="text-body-secondary opacity-25 user-select-none d-block">&middot; Paste the contents of the poem, and press assimilate.</small>
+              <small class="text-body-secondary opacity-25 user-select-none d-block">&middot; Assimilation assigns permanent id numbers to each of your lines.</small>
+              <small class="text-body-secondary opacity-25 user-select-none d-block">&middot; The poem format is: line1[enter]line2[enter][enter]</small>
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-configurator" role="tabpanel" aria-labelledby="nav-configurator-tab" tabindex="0">...</div>
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+
+        <div class="col-md-8">
+
+
+          <div id="silence-alert" class="alert user-select-none" role="alert">
+            <span class="opacity-50">SILENCE ON SET<span>
+            &middot;
+            <small class="opacity-50">recording in progress</small>
+          </div>
+
+
+          <div id="current-line-container" class="bg-body-tertiary border rounded-3 mb-3 p-3" style="min-height: 32vh;">
+            <h4 id="current-line-number" class="text-body-secondary opacity-50 mb-0"></h4>
+            <small class="text-body-secondary opacity-25 user-select-none mb-3 d-inline-block">Press record and narrate this stanza:</small>
+            <p id="current-line1" class="h5 mb-3"></p>
+            <p id="current-line2" class="h5"></p>
+          </div>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2 py-1" role="group" aria-label="Second group">
+              <button id="start-recording-btn" class="btn btn-outline-secondary">Start Recording</button>
+              <button id="stop-recording-btn" class="btn btn-outline-secondary" disabled>Stop Recording</button>
+            </div>
+            <div class="btn-group me-2 py-1" role="group" aria-label="First group">
+              <button id="previous-line-btn" class="btn btn-outline-secondary">Previous</button>
+              <button id="next-line-btn" class="btn btn-outline-secondary">Next Line</button>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="teleprompter.js"></script>
+
+    <template id="narration-item">
+
+      <div class="narration-container shadow-lg">
+        <div class="bg-body-tertiary border rounded-3 mb-3 p-3">
+        <small class="text-body-secondary opacity-25 user-select-none d-block text-truncate" slot="id"></small>
+        <small class="text-body-secondary opacity-25 user-select-none mb-3 d-block text-truncate" slot="name"></small>
+
+        <p class="mb-3 text-truncate">
+          <span slot="line1"></span>
+          <span slot="line2"></span>
+        </p>
+
+        <div class="row">
+          <div class="col">
+            <div class="btn-group" role="group" aria-label="Third group">
+              <button type="button" class="btn btn-outline-secondary btn-sm recording-navigation previous-recording" disabled>&laquo;</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm recording-navigation pointer-events-none" disabled slot="position"><span slot="selected"></span>/<span slot="total"></span></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm recording-navigation next-recording" disabled>&raquo;</button>
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="d-flex flex-row-reverse">
+              <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-outline-secondary btn-sm create-recording"><i class="bi bi-record-circle text-danger"></i></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm recording-interaction play-recording" disabled><i class="bi bi-play-circle"></i></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm recording-interaction download-recording" disabled><i class="bi bi-arrow-down-circle"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </template>
+
+    <div class="modal" id="initial-modal" tabindex="-1">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Script Installer</h5>
+          </div>
+
+          <div class="modal-body">
+            <textarea id="initial-script-input" class="form-control bg-body-tertiary h-100" placeholder="Enter twiline+newline delimited script"></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Begin &raquo;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

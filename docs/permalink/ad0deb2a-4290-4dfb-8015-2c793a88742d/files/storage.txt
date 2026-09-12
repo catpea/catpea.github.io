@@ -1,0 +1,119 @@
+const fs = require('fs').promises;
+const path = require('path');
+const { randomUUID } = require('crypto');
+
+// Helper to ensure a directory exists
+async function ensureDir(dir) {
+  await fs.mkdir(dir, { recursive: true });
+}
+
+// Helper to parse revision and uuid from filename (supports both: <rev>-<uuid>.txt and <uuid>-<rev>.txt)
+function parseRevisionUUID(filename) {
+  const match = filename.match(/^(\d+)-([a-f0-9-]+)\.txt$/i) ||
+                filename.match(/^([a-f0-9-]+)-(\d+)\.txt$/i);
+  if (!match) return null;
+  if (/^\d+$/.test(match[1])) return { rev: Number(match[1]), uuid: match[2] };
+  return { uuid: match[1], rev: Number(match[2]) };
+}
+
+// Get all revision files for an object (returns [{rev, uuid, filename, fullpath}])
+async function listRevisions(baseDir, objectId) {
+  const dir = path.resolve(baseDir, objectId);
+  let files = [];
+  try {
+    files = await fs.readdir(dir);
+  } catch (e) {
+    return [];
+  }
+  return files
+    .map(f => {
+      const parsed = parseRevisionUUID(f);
+      if (!parsed) return null;
+      return {
+        ...parsed,
+        filename: f,
+        fullpath: path.join(dir, f),
+      };
+    })
+    .filter(Boolean);
+}
+
+// Get the latest revision file info ({rev, uuid, filename, fullpath}) and possible conflicts
+async function getLatestRevision(baseDir, objectId) {
+  const revisions = await listRevisions(baseDir, objectId);
+  if (revisions.length === 0) return { latest: null, conflicts: [] };
+  // Find files with highest revision number
+  const maxRev = Math.max(...revisions.map(r => r.rev));
+  const candidates = revisions.filter(r => r.rev === maxRev);
+  // Use sort order to pick a winner, per spec
+  candidates.sort((a, b) => a.filename.localeCompare(b.filename));
+  const [winner, ...conflicts] = candidates;
+  return { latest: winner, conflicts };
+}
+
+// Read the latest revision data (returns {data, rev, uuid, conflicts})
+async function readObject(baseDir, objectId) {
+  const { latest, conflicts } = await getLatestRevision(baseDir, objectId);
+  if (!latest) return null;
+  const data = JSON.parse(await fs.readFile(latest.fullpath, 'utf8'));
+  return { data, rev: latest.rev, uuid: latest.uuid, conflicts: conflicts.map(c => c.filename) };
+}
+
+// Write a new revision, returns final {rev, uuid, filename, conflict} (conflict true if revision already exists)
+async function writeObject(baseDir, objectId, data, prevRev = null) {
+  const dir = path.resolve(baseDir, objectId);
+  await ensureDir(dir);
+
+  // Get current latest revision
+  const { latest } = await getLatestRevision(baseDir, objectId);
+  let newRev = 1;
+  if (latest) {
+    if (prevRev !== null && prevRev !== latest.rev) {
+      // There's a concurrent update
+      return { conflict: true, reason: 'edit_conflict', latestRev: latest.rev, latestUUID: latest.uuid };
+    }
+    newRev = latest.rev + 1;
+  }
+  const uuid = randomUUID();
+  const filename = `${newRev}-${uuid}.txt`;
+  const fullpath = path.join(dir, filename);
+  await fs.writeFile(fullpath, JSON.stringify(data, null, 2), 'utf8');
+  return { rev: newRev, uuid, filename, conflict: false };
+}
+
+// List all revisions for an object (returns array of {rev, uuid, filename})
+async function listObjectRevisions(baseDir, objectId) {
+  const revisions = await listRevisions(baseDir, objectId);
+  // sorted by rev, filename
+  revisions.sort((a, b) => a.rev - b.rev || a.filename.localeCompare(b.filename));
+  return revisions.map(r => ({ rev: r.rev, uuid: r.uuid, filename: r.filename }));
+}
+
+// Exported API
+module.exports = {
+  /**
+   * Reads the latest version of an object.
+   * @param {string} baseDir - The storage root directory.
+   * @param {string} objectId - The object id.
+   * @returns {Promise<{data:any, rev:number, uuid:string, conflicts:string[]}|null>}
+   */
+  readObject,
+
+  /**
+   * Writes a new revision of an object, optionally checking for edit conflicts.
+   * @param {string} baseDir - The storage root directory.
+   * @param {string} objectId - The object id.
+   * @param {any} data - The data to write (will be JSON stringified).
+   * @param {number|null} prevRev - The expected previous revision, or null to skip conflict check.
+   * @returns {Promise<{rev:number, uuid:string, filename:string, conflict:boolean, reason?:string, latestRev?:number, latestUUID?:string}>}
+   */
+  writeObject,
+
+  /**
+   * Lists all revisions for an object.
+   * @param {string} baseDir
+   * @param {string} objectId
+   * @returns {Promise<Array<{rev:number, uuid:string, filename:string}>>}
+   */
+  listObjectRevisions,
+};

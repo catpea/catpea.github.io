@@ -1,0 +1,167 @@
+    class PEGParser1 {
+            constructor(grammar) {
+                this.grammar = grammar;
+                this.input = '';
+                this.pos = 0;
+                this.farthest = 0;
+                this.expected = new Set();
+            }
+
+            parse(input, startRule = 'document') {
+                this.input = input;
+                this.pos = 0;
+                this.farthest = 0;
+                this.expected.clear();
+
+                const result = this.parseRule(startRule);
+
+                if (result === null || this.pos < this.input.length) {
+                    return {
+                        success: false,
+                        error: this.formatError(),
+                        result: null
+                    };
+                }
+
+                return {
+                    success: true,
+                    error: null,
+                    result: result
+                };
+            }
+
+            parseRule(ruleName) {
+                if (!this.grammar[ruleName]) {
+                    throw new Error(`Rule '${ruleName}' not found in grammar`);
+                }
+
+                const rule = this.grammar[ruleName];
+                return this.parseExpression(rule);
+            }
+
+            parseExpression(expr) {
+                if (typeof expr === 'string') {
+                    return this.parseRuleRef(expr);
+                }
+
+                if (Array.isArray(expr)) {
+                    return this.parseSequence(expr);
+                }
+
+                if (typeof expr === 'object' && expr !== null) {
+                    if (expr.type === 'choice') {
+                        return this.parseChoice(expr.alternatives);
+                    } else if (expr.type === 'optional') {
+                        return this.parseOptional(expr.expr);
+                    } else if (expr.type === 'repeat') {
+                        return this.parseRepeat(expr.expr, expr.min || 0, expr.max || Infinity);
+                    } else if (expr.type === 'literal') {
+                        return this.parseLiteral(expr.value);
+                    } else if (expr.type === 'regex') {
+                        return this.parseRegex(expr.pattern);
+                    } else if (expr.type === 'action') {
+                        const result = this.parseExpression(expr.expr);
+                        return result !== null ? expr.action(result) : null;
+                    }
+                }
+
+                throw new Error(`Unknown expression type: ${JSON.stringify(expr)}`);
+            }
+
+            parseRuleRef(ruleName) {
+                return this.parseRule(ruleName);
+            }
+
+            parseSequence(sequence) {
+                const startPos = this.pos;
+                const results = [];
+
+                for (const expr of sequence) {
+                    const result = this.parseExpression(expr);
+                    if (result === null) {
+                        this.pos = startPos;
+                        return null;
+                    }
+                    results.push(result);
+                }
+
+                return results;
+            }
+
+            parseChoice(alternatives) {
+                for (const alt of alternatives) {
+                    const startPos = this.pos;
+                    const result = this.parseExpression(alt);
+                    if (result !== null) {
+                        return result;
+                    }
+                    this.pos = startPos;
+                }
+                return null;
+            }
+
+            parseOptional(expr) {
+                const result = this.parseExpression(expr);
+                return result !== null ? result : [];
+            }
+
+            parseRepeat(expr, min, max) {
+                const results = [];
+                let count = 0;
+
+                while (count < max) {
+                    const startPos = this.pos;
+                    const result = this.parseExpression(expr);
+                    if (result === null) {
+                        this.pos = startPos;
+                        break;
+                    }
+                    results.push(result);
+                    count++;
+                }
+
+                return count >= min ? results : null;
+            }
+
+            parseLiteral(text) {
+                this.updateExpected(text);
+
+                if (this.input.substr(this.pos, text.length) === text) {
+                    this.pos += text.length;
+                    return text;
+                }
+                return null;
+            }
+
+            parseRegex(pattern) {
+                const regex = new RegExp('^' + pattern);
+                const match = regex.exec(this.input.substr(this.pos));
+
+                if (match) {
+                    this.pos += match[0].length;
+                    return match[0];
+                }
+                return null;
+            }
+
+            updateExpected(text) {
+                if (this.pos >= this.farthest) {
+                    if (this.pos > this.farthest) {
+                        this.farthest = this.pos;
+                        this.expected.clear();
+                    }
+                    this.expected.add(text);
+                }
+            }
+
+            formatError() {
+                const line = this.input.substr(0, this.farthest).split('\n').length;
+                const col = this.farthest - this.input.lastIndexOf('\n', this.farthest - 1);
+                const context = this.input.substr(Math.max(0, this.farthest - 20), 40);
+                const expected = Array.from(this.expected).join(', ');
+
+                return `Parse error at line ${line}, column ${col}:\n` +
+                       `Context: "${context}"\n` +
+                       `Expected: ${expected}`;
+            }
+        }

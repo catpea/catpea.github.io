@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Husbandry of the Grail — annotated edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cardo:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #efe2c1;
+  --paper-warm: #f4ead0;
+  --paper-deep: #e3d4ad;
+  --ink: #2a1a10;
+  --ink-soft: #5a4530;
+  --rubric: #8a2424;
+  --rubric-soft: #b04848;
+  --gold: #a8843a;
+  --gold-deep: #826224;
+  --gold-soft: #c8a85e;
+  --gloss: #6b5942;
+  --whisper: #9c8a70;
+  --rule: rgba(168, 132, 58, 0.35);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cardo', 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,240,200,0.55), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(139,36,36,0.05), transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.15  0 0 0 0 0.10  0 0 0 0 0.06  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  min-height: 100vh;
+}
+
+.scroll {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4rem 1.6rem 6rem;
+}
+
+/* ─── TITLE PAGE ─────────────────────────────────────── */
+.title-page {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  padding: 1rem 0 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+
+.title-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-variant: small-caps;
+  letter-spacing: 0.35em;
+  font-size: 0.78rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  font-weight: 600;
+  color: var(--rubric);
+  margin: 0 0 0.4rem;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+}
+
+.title .amp {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.15rem;
+  font-family: 'Cormorant Garamond', serif;
+  margin: 0.4rem 0 0;
+}
+
+.attribution {
+  font-style: italic;
+  color: var(--gloss);
+  font-size: 0.95rem;
+  margin: 1.4rem 0 0;
+}
+
+.ornament {
+  color: var(--gold);
+  letter-spacing: 0.6em;
+  margin: 1.8rem 0;
+  font-size: 1rem;
+}
+
+/* ─── LEGEND ─────────────────────────────────────────── */
+.legend {
+  background:
+    linear-gradient(135deg, rgba(168,132,58,0.06), rgba(139,36,36,0.04)),
+    var(--paper-warm);
+  border: 1px solid rgba(168, 132, 58, 0.4);
+  border-radius: 1px;
+  padding: 1.6rem 1.8rem;
+  margin: 0 0 3.5rem;
+  font-size: 0.94rem;
+  position: relative;
+}
+
+.legend::before, .legend::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--gold);
+}
+.legend::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.legend::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+.legend-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-variant: small-caps;
+  letter-spacing: 0.22em;
+  color: var(--rubric);
+  font-size: 0.82rem;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.legend-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+  align-items: baseline;
+}
+.legend-row:last-child { margin-bottom: 0; }
+
+.legend-key {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--ink);
+  text-align: right;
+}
+
+.legend-key strong {
+  color: var(--rubric);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.legend-val {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+/* ─── STANZA ─────────────────────────────────────────── */
+.stanza {
+  margin: 0 0 3.2rem;
+  position: relative;
+}
+
+.stanza-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.stanza-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-variant: small-caps;
+  letter-spacing: 0.3em;
+  color: var(--gold-deep);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.stanza-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  opacity: 0.55;
+}
+
+.stanza-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--rubric-soft);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+/* ─── LINE BLOCK ─────────────────────────────────────── */
+.line {
+  margin-bottom: 1.3rem;
+  padding: 0 0 0 1.1rem;
+  border-left: 1px solid transparent;
+  transition: border-color 0.4s ease, background 0.4s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.line:hover {
+  border-left-color: var(--gold);
+  background: rgba(168, 132, 58, 0.04);
+}
+
+.verse {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.42rem;
+  font-weight: 500;
+  line-height: 1.32;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.005em;
+}
+
+/* drop cap on the first line of each stanza */
+.stanza > .line:first-of-type .verse::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.1em;
+  color: var(--rubric);
+  font-weight: 700;
+  line-height: 0.85;
+  float: left;
+  padding: 0.05em 0.1em 0 0;
+}
+
+.scan {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.18rem;
+  line-height: 1.55;
+}
+
+.scan strong {
+  color: var(--rubric);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+
+.scan .sep {
+  color: var(--gold);
+  margin: 0 0.18rem;
+  opacity: 0.7;
+}
+
+.meter {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--whisper);
+  letter-spacing: 0.12em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meter .beats {
+  color: var(--gold-deep);
+  letter-spacing: 0.22em;
+  font-weight: 500;
+}
+
+.meter .tag {
+  font-style: italic;
+  font-family: 'Cardo', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--gloss);
+  text-transform: lowercase;
+}
+
+/* ─── GLOSS ──────────────────────────────────────────── */
+.gloss {
+  margin: 0.5rem 0 0 0.6rem;
+  padding: 0.4rem 0 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--gloss);
+  font-style: italic;
+  border-left: 2px solid var(--gold-soft);
+  line-height: 1.5;
+}
+
+.gloss b {
+  font-weight: 700;
+  font-style: normal;
+  color: var(--rubric);
+}
+
+.gloss .ph {
+  font-family: 'DM Mono', monospace;
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--ink);
+  background: rgba(168, 132, 58, 0.14);
+  padding: 0.05em 0.4em;
+  border-radius: 2px;
+  margin: 0 0.15rem;
+  letter-spacing: 0.02em;
+}
+
+.gloss-multi { display: block; margin-top: 0.25rem; }
+.gloss-multi:first-child { margin-top: 0; }
+
+/* ─── NOTES (between stanzas) ────────────────────────── */
+.note {
+  margin: 2.2rem 0;
+  padding: 1.1rem 1.4rem 1.1rem 2.2rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  background:
+    linear-gradient(135deg, rgba(139, 36, 36, 0.045), rgba(168, 132, 58, 0.05));
+  border-top: 1px solid rgba(139, 36, 36, 0.18);
+  border-bottom: 1px solid rgba(139, 36, 36, 0.18);
+  position: relative;
+  line-height: 1.65;
+}
+
+.note::before {
+  content: '¶';
+  position: absolute;
+  left: 0.7rem;
+  top: 0.95rem;
+  color: var(--rubric);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.note b {
+  font-style: normal;
+  color: var(--rubric);
+  font-weight: 600;
+}
+
+.note em.cite {
+  color: var(--gold-deep);
+  font-style: italic;
+}
+
+/* ─── TENNYSON BLOCK ─────────────────────────────────── */
+.tennyson-wrap {
+  background:
+    linear-gradient(180deg, rgba(139, 36, 36, 0.05), rgba(139, 36, 36, 0.01));
+  margin: 0 -0.5rem 1.3rem;
+  padding: 1rem 1rem 0.8rem;
+  border-top: 1px solid rgba(139, 36, 36, 0.25);
+  border-bottom: 1px solid rgba(139, 36, 36, 0.25);
+  position: relative;
+}
+
+.tennyson-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-variant: small-caps;
+  font-size: 0.74rem;
+  letter-spacing: 0.25em;
+  color: var(--rubric);
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
+.tennyson-wrap .verse {
+  font-style: italic;
+}
+
+/* ─── COLOPHON ───────────────────────────────────────── */
+.colophon {
+  margin: 4.5rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gloss);
+  font-style: italic;
+}
+
+.colophon .ornament { margin: 0.8rem 0; }
+.colophon p { margin: 0.4rem 0; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 540px) {
+  .scroll { padding: 2.5rem 1.1rem 4rem; }
+  .verse { font-size: 1.2rem; }
+  .scan { font-size: 0.72rem; }
+  .legend-row { grid-template-columns: 90px 1fr; }
+  .note { padding-left: 2rem; }
+}
+
+/* selection */
+::selection { background: rgba(139,36,36,0.2); color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="scroll">
+
+  <!-- ═══════════════════ TITLE PAGE ═══════════════════ -->
+  <header class="title-page">
+    <div class="title-mark">✦ annotated edition ✦</div>
+    <h1 class="title">The Husbandry <span class="amp">of the</span> Grail</h1>
+    <p class="subtitle">a sacred poem, Jabberwocky style</p>
+    <div class="ornament">❦ ❦ ❦</div>
+    <p class="attribution">after Carroll, after Tennyson,<br/>after the long quiet table</p>
+  </header>
+
+  <!-- ═══════════════════ LEGEND ═══════════════════ -->
+  <section class="legend" aria-label="How to read the annotations">
+    <h2 class="legend-title">how to read the annotations</h2>
+    <div class="legend-row">
+      <div class="legend-key"><strong>Verse</strong></div>
+      <div class="legend-val">the line as written, set in display serif.</div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-key">'twas <strong>GRIM</strong>-ling</div>
+      <div class="legend-val">pronunciation track — <b style="font-style:normal;color:var(--rubric)">small caps in red</b> mark a stressed syllable; hyphens divide syllables; <span style="color:var(--gold)">·</span> marks a foot break.</div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-key">⏑ — ⏑ — ⏑ — ⏑ —</div>
+      <div class="legend-val">meter signature — ⏑ unstressed, — stressed. Most lines are <em>iambic tetrameter</em> (four beats). The Tennyson stanza alternates 4 / 3.</div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-key">¶</div>
+      <div class="legend-val">scholar's note — appears between stanzas to point at echoes, choices, and seams.</div>
+    </div>
+  </section>
+
+  <!-- Opening note -->
+  <aside class="note">
+    <b>Opening.</b> The first stanza is a deliberate echo of Carroll's <em class="cite">'Twas brillig, and the slithy toves / Did gyre and gimble in the wabe.</em> The borrowed scaffolding does work: by stanza XVIII the same opening returns, but the droves <em>look up</em>. Bookends are not decoration here — they measure the change.
+  </aside>
+
+  <!-- ═══════════════════ STANZA I ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza I</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the pasture at dusk</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">'Twas grimling, and the thrallsome droves</div>
+      <div class="scan">'twas <strong>GRIM</strong>-ling <span class="sep">·</span> and the <strong>THRALL</strong>-some <span class="sep">·</span> <strong>DROVES</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>grimling</b> <span class="ph">GRIM-ling</span> coined — a grim twilight hour (Carrollian "brillig").</span>
+        <span class="gloss-multi"><b>thrallsome</b> <span class="ph">THRAWL-suhm</span> coined from <em>thrall</em> (bondage) — burdened with thralldom.</span>
+        <span class="gloss-multi"><b>droves</b> <span class="ph">DROHVZ</span> — herds being driven. The poem's central metaphor enters here.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Did mope and moil in millish fen;</div>
+      <div class="scan">did <strong>MOPE</strong> <span class="sep">·</span> and <strong>MOIL</strong> <span class="sep">·</span> in <strong>MILL</strong>-ish <span class="sep">·</span> <strong>FEN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>moil</b> <span class="ph">MOYL</span> archaic — to toil, drudge, churn.</span>
+        <span class="gloss-multi"><b>millish</b> <span class="ph">MILL-ish</span> coined — mill-like; of a place where lives are ground.</span>
+        <span class="gloss-multi"><b>fen</b> <span class="ph">FEN</span> — low marshy ground.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">All weary were the worksome groves,</div>
+      <div class="scan">all <strong>WEA</strong>-ry <span class="sep">·</span> were the <strong>WORK</strong>-some <span class="sep">·</span> <strong>GROVES</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>worksome</b> <span class="ph">WURK-suhm</span> coined — laden with work; the inverse of leisure.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And whimpered low the toilworn men.</div>
+      <div class="scan">and <strong>WHIM</strong>-pered <span class="sep">·</span> <strong>LOW</strong> the <span class="sep">·</span> <strong>TOIL</strong>-worn <span class="sep">·</span> <strong>MEN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>toilworn</b> <span class="ph">TOYL-worn</span> — worn down by labor. The line ends not on Carroll's playful nonsense but on the sober word <em>men</em>: the poem signals its turn.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA II ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza II</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the warning</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">"Beware the Grail, my child," he said,</div>
+      <div class="scan">be-<strong>WARE</strong> <span class="sep">·</span> the <strong>GRAIL</strong> <span class="sep">·</span> my <strong>CHILD</strong> <span class="sep">·</span> he <strong>SAID</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">Mirrors Carroll's <em>"Beware the Jabberwock, my son!"</em> — but the warning has been swapped onto the holy object itself.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">"That cup whose shine is shepherd-lie —</div>
+      <div class="scan">that <strong>CUP</strong> <span class="sep">·</span> whose <strong>SHINE</strong> <span class="sep">·</span> is <strong>SHEPH</strong>-erd <span class="sep">·</span> <strong>LIE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>shepherd-lie</b> <span class="ph">SHEPH-erd-lie</span> coined compound — the falsehood the shepherd tells the flock. Pastoral imagery turned predatory.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Whose scrolls within count out the dead</div>
+      <div class="scan">whose <strong>SCROLLS</strong> <span class="sep">·</span> with-<strong>IN</strong> <span class="sep">·</span> count <strong>OUT</strong> <span class="sep">·</span> the <strong>DEAD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And tally lambs that bleat and die."</div>
+      <div class="scan">and <strong>TAL</strong>-ly <span class="sep">·</span> <strong>LAMBS</strong> that <span class="sep">·</span> <strong>BLEAT</strong> and <span class="sep">·</span> <strong>DIE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>tally</b> — to keep account of. The pastoral lamb of Christian iconography becomes inventory.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA III ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza III</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the reading begins</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Sir Galahad in chamber pale</div>
+      <div class="scan">sir <strong>GAL</strong>-a-<strong>HAD</strong> <span class="sep">·</span> in <strong>CHAM</strong>-ber <span class="sep">·</span> <strong>PALE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>Galahad</b> <span class="ph">GAL-uh-had</span> — three syllables; the middle syllable is light.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Unrolled the parchment, leaf and page,</div>
+      <div class="scan">un-<strong>ROLLED</strong> <span class="sep">·</span> the <strong>PARCH</strong>-ment <span class="sep">·</span> <strong>LEAF</strong> and <span class="sep">·</span> <strong>PAGE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And found beneath the chalice-veil</div>
+      <div class="scan">and <strong>FOUND</strong> <span class="sep">·</span> be-<strong>NEATH</strong> <span class="sep">·</span> the <strong>CHAL</strong>-ice <span class="sep">·</span> <strong>VEIL</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>chalice</b> <span class="ph">CHAL-iss</span> — a ceremonial cup; here, the cover hiding the document beneath.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">The husbandry of every age:</div>
+      <div class="scan">the <strong>HUS</strong>-band-<strong>RY</strong> <span class="sep">·</span> of <strong>EV</strong>-ry <span class="sep">·</span> <strong>AGE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>husbandry</b> <span class="ph">HUZ-buhn-dree</span> — the management of livestock or land. The poem's title-word, declared here in the open: the scrolls describe how to <em>farm</em> a populace.</div>
+    </div>
+  </section>
+
+  <aside class="note">
+    <b>A turn in the meter.</b> Stanzas IV and V — the recipe for human husbandry — lean into <em>trochaic</em> openings ("KEEP them," "STIR up"). The stress lands on the first syllable, which gives the lines the cadence of a barked command. The four-beat count holds steady, but the falling rhythm makes the instructions feel issued, not asked.
+  </aside>
+
+  <!-- ═══════════════════ STANZA IV ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza IV</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the recipe, first part</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">"Keep them gallow'd, keep them gaunt,</div>
+      <div class="scan"><strong>KEEP</strong> them <span class="sep">·</span> <strong>GAL</strong>-low'd <span class="sep">·</span> <strong>KEEP</strong> them <span class="sep">·</span> <strong>GAUNT</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ — ⏑ —</span><span class="tag">trochaic tetrameter (catalectic)</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>gallow'd</b> <span class="ph">GAL-lowd</span> coined verb from <em>gallows</em> — kept under threat of the noose; cowed.</span>
+        <span class="gloss-multi"><b>gaunt</b> — thin from hunger.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Keep them shaken, slumber-shorn;</div>
+      <div class="scan"><strong>KEEP</strong> them <span class="sep">·</span> <strong>SHA</strong>-ken <span class="sep">·</span> <strong>SLUM</strong>-ber <span class="sep">·</span> <strong>SHORN</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ — ⏑ —</span><span class="tag">trochaic tetrameter (catalectic)</span></div>
+      <div class="gloss"><b>slumber-shorn</b> <span class="ph">SLUM-ber-shorn</span> coined — shorn of sleep, sleep-stripped. Exhausted people are easier to manage.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Brew their bread with whispered want</div>
+      <div class="scan"><strong>BREW</strong> their <span class="sep">·</span> <strong>BREAD</strong> with <span class="sep">·</span> <strong>WHIS</strong>-pered <span class="sep">·</span> <strong>WANT</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ — ⏑ —</span><span class="tag">trochaic tetrameter (catalectic)</span></div>
+      <div class="gloss">The bread itself carries the message of scarcity. To <em>brew</em> bread (instead of bake) twists the verb — this is bread mixed with something.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And lash their gods upon the morn."</div>
+      <div class="scan">and <strong>LASH</strong> <span class="sep">·</span> their <strong>GODS</strong> <span class="sep">·</span> up-<strong>ON</strong> <span class="sep">·</span> the <strong>MORN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter — meter resolves</span></div>
+      <div class="gloss">The closing line steadies into pure iambic, as if the order has been issued and accepted. <b>lash … upon the morn</b> — fasten (a sail, a rule, a god) at the start of each day.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA V ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza V</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the recipe, continued</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">"Stir up wars to thin the strong,</div>
+      <div class="scan"><strong>STIR</strong> up <span class="sep">·</span> <strong>WARS</strong> to <span class="sep">·</span> <strong>THIN</strong> the <span class="sep">·</span> <strong>STRONG</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ — ⏑ —</span><span class="tag">trochaic tetrameter (catalectic)</span></div>
+      <div class="gloss">The plainest line in the poem. War as population management — the strong are <em>thinned</em> like a herd.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Loose the brillig beasts to bray;</div>
+      <div class="scan"><strong>LOOSE</strong> the <span class="sep">·</span> <strong>BRIL</strong>-lig <span class="sep">·</span> <strong>BEASTS</strong> to <span class="sep">·</span> <strong>BRAY</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ — ⏑ —</span><span class="tag">trochaic tetrameter (catalectic)</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>brillig</b> <span class="ph">BRIL-ig</span> — borrowed straight from Carroll. The Jabberwock and its kin are <em>made things</em>, released on purpose to keep fear cooking.</span>
+        <span class="gloss-multi"><b>bray</b> — to cry harshly; the sound of a donkey, a horn, a beast.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Sing the smallfolk slumber-song,</div>
+      <div class="scan"><strong>SING</strong> the <span class="sep">·</span> <strong>SMALL</strong>-folk <span class="sep">·</span> <strong>SLUM</strong>-ber <span class="sep">·</span> <strong>SONG</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ — ⏑ —</span><span class="tag">trochaic tetrameter (catalectic)</span></div>
+      <div class="gloss"><b>slumber-song</b> — a lullaby. Sung not to soothe but to sedate. The smallfolk are sung asleep so they won't notice the next line.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Then plough them sweetly into clay."</div>
+      <div class="scan">then <strong>PLOUGH</strong> <span class="sep">·</span> them <strong>SWEET</strong>-ly <span class="sep">·</span> <strong>IN</strong>-to <span class="sep">·</span> <strong>CLAY</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter — meter resolves</span></div>
+      <div class="gloss">The cruelest word here is <em>sweetly</em>. The whole system is designed so the dying do it gratefully. <b>plough into clay</b> — bury, as one ploughs a field.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA VI ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza VI</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the beloved kings</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">He saw the helms of garnet kings —</div>
+      <div class="scan">he <strong>SAW</strong> <span class="sep">·</span> the <strong>HELMS</strong> <span class="sep">·</span> of <strong>GAR</strong>-net <span class="sep">·</span> <strong>KINGS</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>garnet</b> — deep red gemstone. Anglo-Saxon royal helms (notably the Sutton Hoo helmet) were set with garnet inlay. The image is meant to summon that artifact specifically.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">The Sutton-sleeper, beamish, lone —</div>
+      <div class="scan">the <strong>SUT</strong>-ton-<strong>SLEEP</strong>-er <span class="sep">·</span> <strong>BEAM</strong>-ish <span class="sep">·</span> <strong>LONE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>Sutton-sleeper</b> — the king buried at Sutton Hoo (Suffolk, ca. 625 AD), almost certainly Rædwald of East Anglia. He was great, he was loved, he was sent into the earth in a ship full of treasure. He did not change the structure he ruled inside.</span>
+        <span class="gloss-multi"><b>beamish</b> <span class="ph">BEEM-ish</span> — Carroll's coinage from <em>Jabberwocky</em>; radiant, beaming. Here applied to a dead king lying in his ship.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Drawn by the glamour-glory's wings</div>
+      <div class="scan"><strong>DRAWN</strong> by <span class="sep">·</span> the <strong>GLAM</strong>-our <span class="sep">·</span> <strong>GLO</strong>-ry's <span class="sep">·</span> <strong>WINGS</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>glamour</b> <span class="ph">GLAM-er</span> — in its older sense, a magical enchantment cast over the eyes; not modern <em>glamor</em>, but bewitchment. The glory is the spell.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">To die beloved on a throne,</div>
+      <div class="scan">to <strong>DIE</strong> <span class="sep">·</span> be-<strong>LOVED</strong> <span class="sep">·</span> on a <span class="sep">·</span> <strong>THRONE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>beloved</b> <span class="ph">be-LUH-ved</span> or <span class="ph">be-LUVD</span> — here pronounced as three syllables (<em>be-LUH-ved</em>) for the meter, in the older churchly manner.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA VII ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza VII</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">what they left undone</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Yet leaving naught: no chain unstrung,</div>
+      <div class="scan">yet <strong>LEAV</strong>-ing <span class="sep">·</span> <strong>NAUGHT</strong> <span class="sep">·</span> no <strong>CHAIN</strong> <span class="sep">·</span> un-<strong>STRUNG</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>naught</b> <span class="ph">NAWT</span> — nothing. The kings died loved and left every shackle exactly where they found it.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">No tally evened, no field made fair —</div>
+      <div class="scan">no <strong>TAL</strong>-ly <span class="sep">·</span> <strong>E</strong>-vened <span class="sep">·</span> no <strong>FIELD</strong> <span class="sep">·</span> made <strong>FAIR</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The accounting book of stanza II — the one that tallies lambs — is still uneven. None of these kings touched it.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Their songs unspooled, their bells unrung,</div>
+      <div class="scan">their <strong>SONGS</strong> <span class="sep">·</span> un-<strong>SPOOLED</strong> <span class="sep">·</span> their <strong>BELLS</strong> <span class="sep">·</span> un-<strong>RUNG</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>unspooled</b> — released, run out (like thread from a spool). The triple <em>un-</em> (unstrung / unspooled / unrung) builds a quiet drumbeat of negation.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Their better-world an empty chair.</div>
+      <div class="scan">their <strong>BET</strong>-ter <span class="sep">·</span> <strong>WORLD</strong> <span class="sep">·</span> an <strong>EMP</strong>-ty <span class="sep">·</span> <strong>CHAIR</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The future they promised is a seat with no one in it — and never had one.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA VIII ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza VIII</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the answer-folk</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">He saw the creed-clad answer-folk</div>
+      <div class="scan">he <strong>SAW</strong> <span class="sep">·</span> the <strong>CREED</strong>-clad <span class="sep">·</span> <strong>AN</strong>-swer <span class="sep">·</span> <strong>FOLK</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>creed-clad</b> coined — clothed in creed; wearing dogma as armor.</span>
+        <span class="gloss-multi"><b>answer-folk</b> coined — those whose business is to have answers ready before anyone asks.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Whose yes outran the asking lip,</div>
+      <div class="scan">whose <strong>YES</strong> <span class="sep">·</span> out-<strong>RAN</strong> <span class="sep">·</span> the <strong>ASK</strong>-ing <span class="sep">·</span> <strong>LIP</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The clearest formulation of your governing line: <em>religion fills in the answers before the questions are asked</em>. The <em>yes</em> arrives ahead of the lip that would have asked.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Who filled the well before the stroke</div>
+      <div class="scan">who <strong>FILLED</strong> <span class="sep">·</span> the <strong>WELL</strong> <span class="sep">·</span> be-<strong>FORE</strong> <span class="sep">·</span> the <strong>STROKE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>the stroke</b> — of the bucket; the act of drawing water. The well is pre-filled, so no one ever learns to dig. The metaphor doubles for the questing mind.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And clipped the wonderwords' wingtip.</div>
+      <div class="scan">and <strong>CLIPPED</strong> <span class="sep">·</span> the <strong>WON</strong>-der-<strong>WORDS'</strong> <span class="sep">·</span> <strong>WING</strong>-tip</div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>wonderwords</b> coined — words of wonder; the question-words (<em>why, how, what if</em>). <b>Clip the wingtip</b> — as one clips a bird's flight feathers to keep it from flying. The image is domestication.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA IX ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza IX</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the ancient line, remembered</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Then murmured he the ancient line</div>
+      <div class="scan">then <strong>MUR</strong>-mured <span class="sep">·</span> <strong>HE</strong> <span class="sep">·</span> the <strong>AN</strong>-cient <span class="sep">·</span> <strong>LINE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+    </div>
+
+    <div class="line">
+      <div class="verse">That long had set his heart astride:</div>
+      <div class="scan">that <strong>LONG</strong> <span class="sep">·</span> had <strong>SET</strong> <span class="sep">·</span> his <strong>HEART</strong> <span class="sep">·</span> a-<strong>STRIDE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>astride</b> — as one sits astride a horse. The verse rode him; he did not ride it. Worth holding onto for what follows.</div>
+    </div>
+  </section>
+
+  <aside class="note">
+    <b>Why Tennyson's lines break the meter.</b> The next four lines are taken verbatim from Tennyson's <em class="cite">Sir Galahad</em> (1842). They sit inside our poem like a quotation in a quotation. Tennyson wrote the stanza in <b>ballad meter</b> — alternating <em>iambic tetrameter</em> (4 beats) and <em>iambic trimeter</em> (3 beats) — which is shorter and tighter than our prevailing line. The visual indent below is meant to mark them as embedded, not native.
+  </aside>
+
+  <!-- ═══════════════════ TENNYSON STANZA ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">— from Tennyson —</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the creed that broke him</div>
+    </div>
+
+    <div class="tennyson-wrap">
+      <div class="tennyson-mark">✦ Sir Galahad, Tennyson, 1842 ✦</div>
+
+      <div class="line">
+        <div class="verse">"My good blade carves the casques of men,</div>
+        <div class="scan">my <strong>GOOD</strong> <span class="sep">·</span> <strong>BLADE</strong> <span class="sep">·</span> <strong>CARVES</strong> the <span class="sep">·</span> <strong>CASQUES</strong> of <span class="sep">·</span> <strong>MEN</strong></div>
+        <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter (4 beats)</span></div>
+        <div class="gloss"><b>casques</b> <span class="ph">KASKS</span> — helmets (from French <em>casque</em>). The line means: my sword cleaves the helmets of men.</div>
+      </div>
+
+      <div class="line">
+        <div class="verse">My tough lance thrusteth sure,</div>
+        <div class="scan">my <strong>TOUGH</strong> <span class="sep">·</span> <strong>LANCE</strong> <span class="sep">·</span> <strong>THRUST</strong>-eth <span class="sep">·</span> <strong>SURE</strong></div>
+        <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑</span><span class="tag">iambic trimeter (3 beats)</span></div>
+        <div class="gloss"><b>thrusteth</b> <span class="ph">THRUST-eth</span> — archaic 3rd-person singular ending, like <em>doeth</em>, <em>maketh</em>. The line shortens — three beats, not four — and lands harder for it.</div>
+      </div>
+
+      <div class="line">
+        <div class="verse">My strength is as the strength of ten,</div>
+        <div class="scan">my <strong>STRENGTH</strong> <span class="sep">·</span> is <strong>AS</strong> <span class="sep">·</span> the <strong>STRENGTH</strong> <span class="sep">·</span> of <strong>TEN</strong></div>
+        <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter (4 beats)</span></div>
+      </div>
+
+      <div class="line">
+        <div class="verse">Because my heart is pure" —</div>
+        <div class="scan">be-<strong>CAUSE</strong> <span class="sep">·</span> my <strong>HEART</strong> <span class="sep">·</span> is <strong>PURE</strong></div>
+        <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ —</span><span class="tag">iambic trimeter (3 beats)</span></div>
+        <div class="gloss">The promise the whole poem is grieving. Galahad has spent his life inside this line — and has just learned that the strength of ten doesn't fix anything if it serves the husbandry.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA X ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza X</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">at the table, alone</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And weeping fell across the board,</div>
+      <div class="scan">and <strong>WEEP</strong>-ing <span class="sep">·</span> <strong>FELL</strong> a-<strong>CROSS</strong> <span class="sep">·</span> the <strong>BOARD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>the board</b> — the table. The Round Table. He is the only one still sitting at it.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Alone among the cooling wine;</div>
+      <div class="scan">a-<strong>LONE</strong> <span class="sep">·</span> a-<strong>MONG</strong> <span class="sep">·</span> the <strong>COOL</strong>-ing <span class="sep">·</span> <strong>WINE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The Eucharist gone cold. The communion-wine left behind by people who got up and went.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">No seraph stooped, no heaven roared —</div>
+      <div class="scan">no <strong>SE</strong>-raph <span class="sep">·</span> <strong>STOOPED</strong> <span class="sep">·</span> no <strong>HEAV</strong>-en <span class="sep">·</span> <strong>ROARED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>seraph</b> <span class="ph">SEHR-uhf</span> — the highest order of angel. In the legend, Galahad ascends bodily into heaven at the Grail's revelation. Here, no one comes. The expected ending does not arrive.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Only the silence, line on line.</div>
+      <div class="scan"><strong>ON</strong>-ly the <span class="sep">·</span> <strong>SI</strong>-lence <span class="sep">·</span> <strong>LINE</strong> on <span class="sep">·</span> <strong>LINE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The scrolls keep their text — line on line — but there is no other voice in the room.</div>
+    </div>
+  </section>
+
+  <aside class="note">
+    <b>The Jabberwock undead.</b> The next two stanzas extend the central image you asked for: <em>the dragon was slain, but its appetite was never the dragon</em>. Each verb in stanzas XI–XII is a feeding verb — <em>chews, gnaws, gulps, rots, mocks, eats</em> — and each object is a virtue. The form does the work of the argument.
+  </aside>
+
+  <!-- ═══════════════════ STANZA XI ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XI</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the appetite that survives the beast</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">For though the Jabberwock lay slain,</div>
+      <div class="scan">for <strong>THOUGH</strong> <span class="sep">·</span> the <strong>JAB</strong>-ber-<strong>WOCK</strong> <span class="sep">·</span> lay <strong>SLAIN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>Jabberwock</b> <span class="ph">JAB-er-wok</span> — Carroll's monster. <em>Slain</em> in the original poem. Here, the slaying didn't take.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Its hunger walks upon the world:</div>
+      <div class="scan">its <strong>HUN</strong>-ger <span class="sep">·</span> <strong>WALKS</strong> up-<strong>ON</strong> <span class="sep">·</span> the <strong>WORLD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The thesis line: <em>the hunger, not the monster, is what wins.</em></div>
+    </div>
+
+    <div class="line">
+      <div class="verse">It chews at decency, at shame,</div>
+      <div class="scan">it <strong>CHEWS</strong> <span class="sep">·</span> at <strong>DE</strong>-cen-<strong>CY</strong> <span class="sep">·</span> at <strong>SHAME</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>shame</b> here is the <em>capacity</em> for shame — the moral wince. To lose that is not freedom, it's pasture.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">At dignity, with banner furled;</div>
+      <div class="scan">at <strong>DIG</strong>-ni-<strong>TY</strong> <span class="sep">·</span> with <strong>BAN</strong>-ner <span class="sep">·</span> <strong>FURLED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>furled</b> <span class="ph">FURLD</span> — rolled up; a banner taken down. Dignity is the standard no one is carrying anymore.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA XII ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XII</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">what else the hunger eats</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">It gnaws at greatness, gulps at love,</div>
+      <div class="scan">it <strong>GNAWS</strong> <span class="sep">·</span> at <strong>GREAT</strong>-ness <span class="sep">·</span> <strong>GULPS</strong> at <span class="sep">·</span> <strong>LOVE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>gnaws</b> <span class="ph">NAWZ</span> (silent <em>g</em>). The two verbs are different speeds: <em>gnaws</em> is slow attrition; <em>gulps</em> is one swallow.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">It rots the leader at the root,</div>
+      <div class="scan">it <strong>ROTS</strong> <span class="sep">·</span> the <strong>LEAD</strong>-er <span class="sep">·</span> <strong>AT</strong> the <span class="sep">·</span> <strong>ROOT</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">Leadership rotted <em>at the root</em> — i.e. in the soil it grows from — not in the visible part. The crown looks fine until it falls off.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">It mocks the nobleness above</div>
+      <div class="scan">it <strong>MOCKS</strong> <span class="sep">·</span> the <strong>NO</strong>-ble-<strong>NESS</strong> <span class="sep">·</span> a-<strong>BOVE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>nobleness</b> <span class="ph">NO-buhl-ness</span> — three syllables here, for the meter. Not class-nobility — the older sense: the quality of being noble in action.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And leaves the soul a hollow lute.</div>
+      <div class="scan">and <strong>LEAVES</strong> <span class="sep">·</span> the <strong>SOUL</strong> <span class="sep">·</span> a <strong>HOL</strong>-low <span class="sep">·</span> <strong>LUTE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>lute</b> <span class="ph">LOOT</span> — stringed instrument; here, a body that should resonate but has been emptied of its strings.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA XIII ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XIII</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the sweet small rewards</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">It feeds the uffish, fed and feared,</div>
+      <div class="scan">it <strong>FEEDS</strong> <span class="sep">·</span> the <strong>UFF</strong>-ish <span class="sep">·</span> <strong>FED</strong> and <span class="sep">·</span> <strong>FEARED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>uffish</b> <span class="ph">UFF-ish</span> — Carroll's word from <em>Jabberwocky</em>; sullen, gruff, snorting. Here: those who are <em>full</em>, and so easily made afraid of losing it.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">With slumber-sweets and gilded grub —</div>
+      <div class="scan">with <strong>SLUM</strong>-ber <span class="sep">·</span> <strong>SWEETS</strong> and <span class="sep">·</span> <strong>GIL</strong>-ded <span class="sep">·</span> <strong>GRUB</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>slumber-sweets</b> — candies that put you to sleep. The slumber-song of stanza V returns as snack.</span>
+        <span class="gloss-multi"><b>gilded grub</b> — gold-plated worms. Reward-food.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Short-sighted sugars, soft and cheered,</div>
+      <div class="scan">short-<strong>SIGHT</strong>-ed <span class="sep">·</span> <strong>SU</strong>-gars <span class="sep">·</span> <strong>SOFT</strong> and <span class="sep">·</span> <strong>CHEERED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">Your phrase, kept: <em>sweet shortsighted rewards</em>. Cheered <em>at</em>, not cheered <em>by</em> — the cheer is part of the husbandry.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">A kingdom shrunken to a club.</div>
+      <div class="scan">a <strong>KING</strong>-dom <span class="sep">·</span> <strong>SHRUNK</strong>-en <span class="sep">·</span> <strong>TO</strong> a <span class="sep">·</span> <strong>CLUB</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The realm — what was once a <em>kingdom</em> with farms and fields and a long view — has become a <em>club</em>: members only, in-group privileges, no responsibility for the outside.</div>
+    </div>
+  </section>
+
+  <aside class="note">
+    <b>The pivot.</b> Stanza XIV is where the poem turns from grief to act. Galahad does not <em>reject</em> his knighthood — he <em>reissues</em> it on different terms. The vows that follow are the same shape as Arthurian vows, but the loyalty is sworn to the question rather than to the crown.
+  </aside>
+
+  <!-- ═══════════════════ STANZA XIV ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XIV</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the call</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Then rose he, dry of tear and dread,</div>
+      <div class="scan">then <strong>ROSE</strong> <span class="sep">·</span> he <strong>DRY</strong> <span class="sep">·</span> of <strong>TEAR</strong> <span class="sep">·</span> and <strong>DREAD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>dry of tear and dread</b> — out of both. He has cried himself empty, and he is no longer afraid.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And turned to those who paused to know:</div>
+      <div class="scan">and <strong>TURNED</strong> <span class="sep">·</span> to <strong>THOSE</strong> <span class="sep">·</span> who <strong>PAUSED</strong> <span class="sep">·</span> to <strong>KNOW</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>paused to know</b> — those who stopped, instead of accepting the pre-filled answer. The pause itself is the qualification.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">"Come, doubters — come, the question-led —</div>
+      <div class="scan">come <strong>DOUBT</strong>-ers <span class="sep">·</span> <strong>COME</strong> the <span class="sep">·</span> <strong>QUES</strong>-tion <span class="sep">·</span> <strong>LED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>question-led</b> coined — those whom questions lead, rather than those who lead with answers. The inversion of stanza VIII's <em>answer-folk</em>.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Come, ye who ask before ye go.</div>
+      <div class="scan">come <strong>YE</strong> <span class="sep">·</span> who <strong>ASK</strong> <span class="sep">·</span> be-<strong>FORE</strong> <span class="sep">·</span> ye <strong>GO</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>ye</b> <span class="ph">YEE</span> — archaic plural <em>you</em>. The line is the qualifying test: <em>do you ask before you go?</em></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA XV ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XV</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the new oath</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Bend thou no knee unto the crown,</div>
+      <div class="scan"><strong>BEND</strong> thou <span class="sep">·</span> <strong>NO</strong> knee <span class="sep">·</span> un-<strong>TO</strong> <span class="sep">·</span> the <strong>CROWN</strong></div>
+      <div class="meter"><span class="beats">— ⏑ — ⏑ ⏑ — ⏑ —</span><span class="tag">tetrameter, with substitution</span></div>
+      <div class="gloss"><b>thou</b> <span class="ph">THOW</span> — archaic singular <em>you</em>. The first foot opens with a stress for force: <em>BEND</em>. The oath begins as a command.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Nor bow the head to chalice-lie;</div>
+      <div class="scan">nor <strong>BOW</strong> <span class="sep">·</span> the <strong>HEAD</strong> <span class="sep">·</span> to <strong>CHAL</strong>-ice <span class="sep">·</span> <strong>LIE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>chalice-lie</b> — the falsehood inside the cup. Echoes <em>shepherd-lie</em> from stanza II; the poem's two coined lies bracket the argument.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">I lay no holy garment down,</div>
+      <div class="scan">I <strong>LAY</strong> <span class="sep">·</span> no <strong>HO</strong>-ly <span class="sep">·</span> <strong>GAR</strong>-ment <span class="sep">·</span> <strong>DOWN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">Important: the new oath is <em>not</em> a robe being placed on the new knight. No sacred cloth is conferred. Wisdom is not a vestment.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">But name thee knight of wakened eye.</div>
+      <div class="scan">but <strong>NAME</strong> <span class="sep">·</span> thee <strong>KNIGHT</strong> <span class="sep">·</span> of <strong>WAK</strong>-ened <span class="sep">·</span> <strong>EYE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>thee</b> <span class="ph">THEE</span> — archaic singular <em>you</em>, object case. <b>wakened eye</b> — the eye that has been woken up: the formal title of the new order.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA XVI ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XVI</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the inheritances</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Take Lancelot's restless ranging blade,</div>
+      <div class="scan">take <strong>LANCE</strong>-lot's <span class="sep">·</span> <strong>REST</strong>-less <span class="sep">·</span> <strong>RANG</strong>-ing <span class="sep">·</span> <strong>BLADE</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>Lancelot</b> <span class="ph">LAN-suh-lot</span> — the wandering knight; the gift is his restlessness, the refusal to settle into easy answer.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Take Percival's unfinished quest,</div>
+      <div class="scan">take <strong>PER</strong>-ci-<strong>VAL'S</strong> <span class="sep">·</span> un-<strong>FIN</strong>-ished <span class="sep">·</span> <strong>QUEST</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>Percival</b> <span class="ph">PUR-suh-vuhl</span> — the knight who failed to ask the right question at the Grail castle, and so the quest stayed open. The gift is precisely that <em>unfinishedness</em> — a problem one keeps in mind.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Take Gawain's troth that never frayed,</div>
+      <div class="scan">take <strong>GA</strong>-wain's <span class="sep">·</span> <strong>TROTH</strong> that <span class="sep">·</span> <strong>NEV</strong>-er <span class="sep">·</span> <strong>FRAYED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">
+        <span class="gloss-multi"><b>Gawain</b> <span class="ph">GAH-wayn</span> or <span class="ph">GUH-wayn</span> — Arthur's nephew, known for keeping his word even at his own cost (see <em>Sir Gawain and the Green Knight</em>).</span>
+        <span class="gloss-multi"><b>troth</b> <span class="ph">TROHTH</span> — pledge, promise. The gift is steadfastness.</span>
+      </div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Take Arthur's dream, and Bedivere's rest.</div>
+      <div class="scan">take <strong>AR</strong>-thur's <span class="sep">·</span> <strong>DREAM</strong> and <span class="sep">·</span> <strong>BED</strong>-i-<strong>VERE'S</strong> <span class="sep">·</span> <strong>REST</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>Bedivere</b> <span class="ph">BED-uh-veer</span> — the last knight standing; the one who threw Excalibur back into the lake when Arthur was dying. <em>Bedivere's rest</em> is the gift of knowing when to lay the sword down.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA XVII ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XVII</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the charge</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">For wisdom is the only Grail,</div>
+      <div class="scan">for <strong>WIS</strong>-dom <span class="sep">·</span> <strong>IS</strong> the <span class="sep">·</span> <strong>ON</strong>-ly <span class="sep">·</span> <strong>GRAIL</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The plain declaration. The Grail of the scrolls — the husbandry — was a counterfeit. The real cup is the one you only find by asking after it.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And asking is the lance and shield —</div>
+      <div class="scan">and <strong>ASK</strong>-ing <span class="sep">·</span> <strong>IS</strong> the <span class="sep">·</span> <strong>LANCE</strong> and <span class="sep">·</span> <strong>SHIELD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The question is both weapon and defense — pierces falsehood, deflects the pre-filled answer.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">Go: snicker-snack through every tale</div>
+      <div class="scan"><strong>GO</strong> <span class="sep">·</span> <strong>SNICK</strong>-er <span class="sep">·</span> <strong>SNACK</strong> through <span class="sep">·</span> <strong>EV</strong>-ry <span class="sep">·</span> <strong>TALE</strong></div>
+      <div class="meter"><span class="beats">— — ⏑ — ⏑ — ⏑ —</span><span class="tag">tetrameter, opening on a spondee</span></div>
+      <div class="gloss"><b>snicker-snack</b> — Carroll's onomatopoeia for the vorpal sword from <em>Jabberwocky</em> (<em>one, two! one, two! and through and through / the vorpal blade went snicker-snack</em>). The blade is now the question.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">That bids thee kneel and never yield."</div>
+      <div class="scan">that <strong>BIDS</strong> <span class="sep">·</span> thee <strong>KNEEL</strong> <span class="sep">·</span> and <strong>NEV</strong>-er <span class="sep">·</span> <strong>YIELD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss"><b>bids thee kneel and never yield</b> — every story that demands kneeling and forbids change. Cut through it.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STANZA XVIII ═══════════════════ -->
+  <section class="stanza">
+    <div class="stanza-head">
+      <div class="stanza-num">Stanza XVIII</div>
+      <div class="stanza-rule"></div>
+      <div class="stanza-tag">the bookend — the pasture, after</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">'Twas grimling still — but in the fen</div>
+      <div class="scan">'twas <strong>GRIM</strong>-ling <span class="sep">·</span> <strong>STILL</strong> <span class="sep">·</span> but <strong>IN</strong> <span class="sep">·</span> the <strong>FEN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The opening returns word for word — <em>'Twas grimling</em> — and then the line pivots on <em>still — but</em>. Same dusk. Different fen.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">The thrallsome droves looked up, and stirred;</div>
+      <div class="scan">the <strong>THRALL</strong>-some <span class="sep">·</span> <strong>DROVES</strong> looked <span class="sep">·</span> <strong>UP</strong> and <span class="sep">·</span> <strong>STIRRED</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The herd from stanza I, now looking up. The smallest possible motion. The whole change is the <em>verb</em>: <em>stirred</em>.</div>
+    </div>
+
+    <div class="line">
+      <div class="verse">For one had spoken truth again,</div>
+      <div class="scan">for <strong>ONE</strong> <span class="sep">·</span> had <strong>SPO</strong>-ken <span class="sep">·</span> <strong>TRUTH</strong> a-<span class="sep">·</span> <strong>GAIN</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+    </div>
+
+    <div class="line">
+      <div class="verse">And one had given them the word.</div>
+      <div class="scan">and <strong>ONE</strong> <span class="sep">·</span> had <strong>GIV</strong>-en <span class="sep">·</span> <strong>THEM</strong> the <span class="sep">·</span> <strong>WORD</strong></div>
+      <div class="meter"><span class="beats">⏑ — ⏑ — ⏑ — ⏑ —</span><span class="tag">iambic tetrameter</span></div>
+      <div class="gloss">The closing chiasmus: <em>spoken truth</em> / <em>given the word</em>. The two halves of teaching — saying it, and handing it over to be carried.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ COLOPHON ═══════════════════ -->
+  <footer class="colophon">
+    <div class="ornament">❦ ❦ ❦</div>
+    <p>here ends <em>The Husbandry of the Grail</em>,</p>
+    <p>annotated for voice and meter.</p>
+    <div class="ornament">✦</div>
+    <p style="font-size: 0.82rem; color: var(--whisper); margin-top: 1.5rem;">read each line aloud once for the verse, once for the scansion,<br/>and a third time for what it costs to mean it.</p>
+  </footer>
+
+</div>
+</body>
+</html>

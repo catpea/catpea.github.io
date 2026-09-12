@@ -1,0 +1,456 @@
+class Signal {
+  #value;
+  #subscribers;
+
+  constructor(value) {
+    this.#value = value;
+    this.#subscribers = new Set();
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(newValue) {
+    this.#value = newValue;
+    for (const callback of this.#subscribers) {
+      callback(newValue);
+    }
+  }
+
+  subscribe(callback) {
+    if (this.#value) callback(this.#value);
+    if (this.#value) //console.info(this.#value);
+    this.#subscribers.add(callback);
+    return () => this.#subscribers.delete(callback);
+  }
+}
+
+
+class Record {
+
+  //TODO: convert to dynamic getters to save CPU cycles
+
+  #id; // internal id, rely on database
+  content; // payload, strings, objects, signals...
+  isTemplateVariable = true; // all records are template variables
+  unsubscribe = []; // functions to execute on destroy
+
+
+  constructor(id, content, intelligence){
+    this.#id = id;
+    this.content = content;
+    // context analysis/data
+    if(typeof intelligence === 'string') Object.assign(this, decodeAttribute(intelligence));
+    if(typeof intelligence === 'object') Object.assign(this, intelligence);
+    // dynamic content classification
+    Object.assign(this, classifyContent(content));
+
+    if(this.isNode){ // set by decodeAttribute
+      this.isNodeListType = content instanceof NodeList;
+      this.isHTMLCollectionType = content instanceof HTMLCollection;
+      this.isNodeType = content instanceof Node;
+    }
+  }
+}
+
+
+function html({ raw: strings }, ...values) {
+
+  const [stream, database] = createStream(strings, values);
+  // console.table(stream);
+  console.table([...database.entries()]);
+  const html = createIntermediateHtml(stream, database);
+  const template = document.createElement("template");
+  template.innerHTML = html;
+  const node = document.importNode(template.content, true);
+  upgradeIntermediate(node, database);
+  node.unsubscribe = () => [...database.values()] .filter((o) => o.isTemplateVariable) .filter((o) => o.unsubscribe.length > 0) .map((o) => o.unsubscribe) .flat() .map((bye) => bye());
+  return node;
+
+}
+
+// const output = myTag`That ${person} is a ${age}.`;
+const value1 = "world1";
+const value2 = "world2";
+
+const purple = new Signal("purple");
+const blue = new Signal("blue");
+
+const plue = new Signal({
+  background: blue,
+  color: purple,
+});
+
+setInterval(() => {
+  purple.value = purple.value == "purple" ? "white" : "purple";
+}, 11100);
+setInterval(() => {
+  blue.value = blue.value == "blue" ? "white" : "blue";
+}, 11130);
+
+const someName = new Signal("world");
+
+// const someHtml1 = html`<p>Wee!</p>`
+// const someHtml2 = html`<li>are unaffected by this style</li><li>will still show a bullet</li><li>and have appropriate left margin</li>`
+const createdElement = document.createElement("div");
+// const element = html`
+//   <font color=${"red"}>This text has color.</font>
+//   <font id=${69}>This text has color.</font>
+
+//   <font color=${purple}>This text has color.</font>
+//   <font color=${purple}>This text has color.</font>
+//   <button onclick=${() => alert("hello!")}>click me</button>
+
+//   <span style=${{ background: "red" }}>It’s all red!</span>
+//   <span style=${plue}>XXXXX It’s all blue!</span>
+//   <span ${{style: {background: "yellow", fontWeight: "bold"}}}>whoa</span>
+
+//   <span
+//     ${{
+//       onmouseover: function() {
+//         this.style.background = "yellow";
+//       },
+//       onmouseout: function() {
+//         this.style.background = "";
+//       },
+//     }}
+//     >hover me</span>
+
+//   <h1>GG ${value1}</h1>
+//   <h1>Hello ${someName}</h1>
+//   <h1>Hello ${someHtml1}</h1>
+//   <h1>Hello ${someHtml2}</h1>
+//   <h1>Hello ${createdElement}</h1>
+//   <button disabled=${true}>Can’t click me</button>
+// `;
+
+
+
+const element = html`
+  <p>
+    <h1>GG1 ${value1} ${value2}</h1>
+    <h1>GG2 ${value1} ${value2}</h1>
+  </p>
+`;
+
+
+
+document.body.appendChild(element);
+//console.log(document.body.innerHTML);
+
+setTimeout(() => {
+  //console.log(element.unsubscribe());
+}, 115_000);
+
+
+
+
+
+function createStream(strings, values) {
+  const stream = [];
+  const database = new Map();
+  for (const [index, string] of strings.entries()) {
+    const content = values[index];
+
+    // log the raw string in correct sequence
+    stream.push({ isTemplateChunk: true, content: string });
+
+    if(content === undefined) continue;
+
+    // store a record in the records database, this helps with subscription management, state, and debugging
+    const recordId = "::" + index;
+    database.set(recordId, new Record(recordId, content, string));
+
+    // keep the record reference in the stream
+    // This is a consistency kludge: we want to keep records in the database, and references in the stream. There will be more records to add to the database than what we find here, but we must still keep value references in order.
+    stream.push({ isReference: true, id: recordId });
+
+  }
+  return [stream, database];
+}
+
+/**
+ * identifyType - Identifies the JavaScript data type of a value, including object classes.
+ *
+ * @param {*} value - The value to identify.
+ * @returns {string} - The type or class name as a string.
+ */
+function classifyContent(value) {
+  if (value === null) return { isNullType: true, type: "null" };
+  if (value === undefined) return { isUndefinedType: true, type: "undefined" };
+
+  const primitiveType = typeof value;
+  if (primitiveType !== "object") {
+    const type = String(primitiveType).charAt(0).toUpperCase() + String(primitiveType).slice(1);
+    return { ["is" + type + "Type"]: true, type };
+  }
+
+  // Handle built-in objects and user-defined classes
+  if (Array.isArray(value)) return { isArrayType: true, type: "Array" };
+
+  // Try to get the constructor name
+  if (value.constructor && value.constructor.name) {
+    return {
+      ["is" + value.constructor.name + "Type"]: true,
+      type: value.constructor.name,
+    };
+  }
+
+  // Fallback for objects without a constructor
+  const fallback = Object.prototype.toString.call(value).slice(8, -1);
+  return { ["is" + fallback + "Type"]: true, type: fallback };
+}
+
+function decodeAttribute(htmlStr) {
+  const lastToken = htmlStr.trim().split(/\s+/).pop();
+  const tagState = htmlStr
+    .trim()
+    .split(/[^<>]/)
+    .filter((o) => o)
+    .pop();
+
+  if (lastToken.endsWith("=")) {
+    const attributeName = lastToken.substr(0, lastToken.length - 1);
+    const capitalizedName = String(attributeName).charAt(0).toUpperCase() + String(attributeName).slice(1);
+    const isAttributeValue = true;
+    return {
+      attributeName,
+      isAttributeValue,
+      ["is" + capitalizedName + "Attribute"]: true,
+    };
+  } else if (tagState == "<") {
+    const isAttributeObject = true;
+    return { isAttributeObject };
+  } else {
+    return {
+      isNode: true
+    };
+  }
+}
+
+function createIntermediateHtml(stream, database) {
+  const result = [];
+
+  for (const entry of stream) {
+
+    // Dereference
+    // NOTE: Raw html strings that are part of HTML are just strings and do not need dereferencing, Local Database Records/variables, there will bemore of them than are mentioned in the code, if HTML references an object, we will add properties of that object to the database
+    const fragment = entry.isReference?database.get(entry.id):entry;
+
+    // //console.log(fragment)
+
+    // Primary
+    const { isTemplateChunk, isTemplateVariable } = fragment;
+    // Secondary
+    const { isAttributeValue, isAttributeObject, isNode } = fragment;
+
+    // Soecial markers to process when HTML becomes a Document
+    if (isTemplateChunk) {
+      // Just output the HTML
+      result.push(fragment.content);
+    } else if (isTemplateVariable && isAttributeValue) {
+      result.push(entry.id);
+    } else if (isTemplateVariable && isAttributeObject) {
+      result.push(entry.id + '=""');
+    } else if (isTemplateVariable && isNode) {
+      result.push("<!--" + entry.id + "-->");
+    }
+  }
+
+  ////console.dir(result)
+  return result.join("");
+}
+
+function upgradeIntermediate(root, database) {
+  let nodeFilter = undefined; // A callback function or an object with an acceptNode() method, which returns NodeFilter.FILTER_ACCEPT, NodeFilter.FILTER_REJECT, or NodeFilter.FILTER_SKIP.
+
+  const elementWalker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, nodeFilter);
+
+  while (elementWalker.nextNode()) {
+    for (const attribute of elementWalker.currentNode.attributes) {
+
+      // Gather attributes for injection
+      // NOTE: attributes are injected from two sites
+      const attributeList = [];
+
+      // ::4=""
+      if (attribute.name.startsWith("::")) {
+        const packet = database.get(attribute.name);
+        for (const [attributeName, content] of Object.entries(packet.content)) {
+          //NOTE: here the name is the object property
+          const capitalizedName = String(attributeName).charAt(0).toUpperCase() + String(attributeName).slice(1);
+          const recordId = attribute.name+'-'+attributeName;
+          const intelligence = { isAttributeValue: true, ["is" + capitalizedName + "Attribute"]: true };
+          const attributePayload = new Record(recordId, content, intelligence)
+          database.set(recordId, attributePayload);
+          attributeList.push({attributeName, attributePayload});
+        }
+        // Remove the [now malformed] marker as we will apply separate values
+        elementWalker.currentNode.attributes.removeNamedItem(attribute.name);
+      }
+
+      console.info(attributeList)
+
+
+      // color="::6"
+      // NOTE: Here the attributeName is set by node attribute that startsWith("::")
+      if (attribute.value.startsWith("::")){
+        const attributeName = attribute.name;
+        const recordId = attribute.value;
+        const attributePayload = database.get(recordId);
+        attributeList.push({attributeName, attributePayload});
+        elementWalker.currentNode.attributes.removeNamedItem(attribute.name); // remove the signal installation triggering attribute
+      }
+
+
+      for (const {attributeName, attributePayload} of attributeList){
+        // NOTE: Required because elementWalker will keep updating...
+        const currentNode = elementWalker.currentNode;
+
+
+        if (attributePayload.isSignalType && attributePayload.isStyleAttribute) {
+          const signal = attributePayload.content;
+          const unsubscribe = signal.subscribe((v) => {
+            for (const [cssProperty, cssValue] of Object.entries(v)) {
+              if (cssValue.subscribe) {
+                const unsubscribe = cssValue.subscribe(v=>currentNode.style[cssProperty] = v);
+                attributePayload.unsubscribe.push(unsubscribe);
+              } else {
+                // not a signal
+                currentNode.style[cssProperty] = cssValue;
+              }
+            }
+          });
+          attributePayload.unsubscribe.push(unsubscribe);
+        } else if (attributePayload.isSignalType) {
+          // NOTE: Signals are a special case as they require a subscription
+          const signal = attributePayload.content;
+
+          const unsubscribe = signal.subscribe((v) => currentNode.setAttribute(attributeName, v));
+          attributePayload.unsubscribe.push(unsubscribe);
+
+        } else if (attributePayload.isObjectType && attributePayload.isStyleAttribute) {
+          // NOTE: Styles are super special case as they require special handling
+          for (const [cssProperty, cssValue] of Object.entries(attributePayload.content)) {
+            currentNode.style[cssProperty] = cssValue;
+          }
+        } else if (attributePayload.isFunctionType) {
+          // NOTE: Functions are a special case because the node attribute must be removed, since we are adding a method
+          currentNode[attributeName] = attributePayload.content;
+
+
+
+        // TODO: Cover other cases, but without using generic/reusable functions, approach this on case by case basis.
+
+
+
+
+
+
+
+        } else if (attributePayload.isStringType) {
+          // NOTE: Example of how simple things work * example of how to add support for other objects
+          currentNode.setAttribute(attributeName, attributePayload.content)
+        } else if (attributePayload.isNumberType) {
+          // NOTE: Example of how simple things work
+          currentNode.setAttribute(attributeName, String(attributePayload.content))
+        } else {
+          // allow plain old value coercion
+          currentNode.setAttribute(attributeName, attributePayload.content)
+        }
+
+
+      }
+
+
+
+
+
+
+    }
+
+    const markerNodesNodes = [];
+    const commentWalker = document.createTreeWalker(root, NodeFilter.SHOW_COMMENT, nodeFilter);
+
+    while (commentWalker.nextNode()) {
+        const currentNode = commentWalker.currentNode;
+
+      if (/^::/.test(currentNode.data)) {
+        console.log(currentNode.data)
+
+        const parentNode = currentNode.parentNode;
+        const record = database.get(currentNode.data);
+        const content = record.content;
+
+
+        // TODO: Accumulator Pattern
+
+
+        if (record.isStringType) {
+          console.log(content)
+          const textNode = document.createTextNode(content + 'after');
+
+          // parentNode.insertAfter(textNode, currentNode);
+          currentNode.after(textNode );
+          markerNodesNodes.push(currentNode);
+
+        } else if (record.isNodeType) {
+          parentNode.insertAfter(content, currentNode);
+          markerNodesNodes.push(currentNode);
+
+        } else if (record.isStringType) {
+          const textNode = document.createTextNode(content);
+
+          // parentNode.insertAfter(textNode, currentNode);
+          currentNode.after(textNode);
+          markerNodesNodes.push(currentNode);
+
+        } else if (record.isNumberType) {
+          const textNode = document.createTextNode(content);
+          parentNode.insertAfter(textNode, currentNode);
+          markerNodesNodes.push(currentNode);
+
+        } else if (record.isSignalType) {
+          const signal = record.content;
+          const textNode = document.createTextNode(signal.value);
+          parentNode.insertAfter(textNode, currentNode);
+          const unsubscribe = signal.subscribe((v) => textNode.nodeValue = v);
+          record.unsubscribe.push(unsubscribe);
+          markerNodesNodes.push(currentNode);
+
+        } else if (record.isNodeListType) {
+          let target = currentNode;
+          content.forEach(node => {
+            target = parentNode.insertAfter(node, target);
+          });
+          markerNodesNodes.push(currentNode);
+
+        } else if (record.isHTMLCollectionType) {
+          let target = currentNode;
+          content.forEach(node => {
+            target = parentNode.insertAfter(node, target);
+          });
+          markerNodesNodes.push(currentNode);
+
+        } else {
+          const textNode = document.createTextNode(content);
+          parentNode.insertAfter(textNode, currentNode);
+          markerNodesNodes.push(currentNode);
+        }
+
+      } // walker
+
+      for (const node of markerNodesNodes) {
+        node.parentNode.removeChild(node);
+      }
+
+
+
+
+
+
+    }
+
+  }
+}

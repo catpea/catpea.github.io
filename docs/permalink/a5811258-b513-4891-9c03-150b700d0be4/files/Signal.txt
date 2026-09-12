@@ -1,0 +1,99 @@
+// This code is tested
+// install node.js and you can run it on command line with: node Signal.js
+// it will just say: Hello Alice // see the main() function on the bottom
+
+export class Pulse {
+  #value;
+  #subscribers;
+  #disposables;
+
+  constructor(value) {
+    this.#value = value;
+    this.#subscribers = new Set();
+    this.#disposables = new Set();
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(newValue) {
+    if (newValue == this.#value) return; // IMPORTANT FEATURE: if value is the same, exit early, don't disturb if you don't need to
+    this.#value = newValue;
+    this.notify(); // all observers
+  }
+
+  subscribe(subscriber) {
+    if (this.#value !== null) subscriber(this.#value); // IMPORTANT FEATURE: instant notification (initialization on subscribe), but don't notify on null/undefined, predicate functions will look simpler, less error prone
+    this.#subscribers.add(subscriber);
+    return () => this.#subscribers.delete(subscriber); // IMPORTANT FEATURE: return unsubscribe function, execute this to stop getting notifications.
+  }
+
+  notify() {
+    for (const subscriber of this.#subscribers) subscriber(this.#value);
+  }
+
+  clear() { // shutdown procedure
+    this.#subscribers.clear(); // destroy subscribers
+    this.#disposables.forEach((disposable) => disposable());
+    this.#disposables.clear(); // execute and clear disposables
+  }
+
+  // add related trash that makes sense to clean when the signal is shutdown
+  dispose(disposable) {
+    this.#disposables.add(disposable);
+  }
+}
+
+export class Signal extends Pulse { // we are making the pulse into a Signal
+  map(mapFunctionPredicate) { // here we are wrapping the function with the method
+    return map(this, mapFunctionPredicate);
+  }
+
+  // HOMEWORK, use AI to implement other operators (remember first as function, then as method that submits this as the source signal, so that we can say mySignal.debounce() instead of debouce(mySignal, 1_000) which looks clunky)
+
+  filter(filterFunction){}
+  scan(accumulator, seed){}
+
+  debounce(ms){}
+  delay(ms){}
+  throttle(ms){}
+
+  merge(signal){}
+  combineLatest(...signals){}
+
+}
+
+// THIS IS THE MAP FUNCTION, it can be used standalone as map(usernameSignal, v=>`Hello ${v}`),
+// but it looks nicer when you use the method: usernameSignal.map(v=>`Hello ${v}`).subscribe(v=>console.log(v))
+
+export function map(parentSignal, mapFunctionPredicate) {
+  // start a blank signal
+  const mappedSignal = new Signal(undefined);
+
+  // when we change, or initialization can run
+  // note how the predicate is used here, this wisely notifies subscribers if value is changed
+  const subscription = parentSignal.subscribe((parentSignalValue) => (mappedSignal.value = mapFunctionPredicate(parentSignalValue)));
+
+  // the subscription to the parent is added to the response signal disposables and is cleared on mappedSignal.clear()
+  mappedSignal.dispose(subscription);
+
+  // we return a signal,
+  return mappedSignal;
+
+}
+
+// THIS IS OUR PROGRAM
+
+function main(){
+
+  const usernameSignal = new Signal();
+  usernameSignal.value = "Alice";
+
+  const mappedSignal = usernameSignal.map(v=>`Hello ${v}`);
+  mappedSignal.subscribe(console.log)
+
+  // You can also say: usernameSignal .map(v=>`Hello ${v}`) .subscribe(console.log)
+}
+
+main(); // run program

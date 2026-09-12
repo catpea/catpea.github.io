@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xmvc name="windows-blueprint-demo" version="0.1.0">
+
+  <!--
+    VIEW
+    The view does not own application state.
+    It explains how model nodes become visible interface components.
+  -->
+  <view name="BootstrapDesktopView" library="bootstrap" icons="bootstrap-icons">
+
+    <decorators>
+      <component match="System" use="xmvc-system-shell" />
+      <component match="Desktop" use="xmvc-desktop" />
+      <component match="WindowArea" use="xmvc-window-area" />
+      <component match="Window" use="xmvc-window" />
+      <component match="MenuBar" use="xmvc-menu-bar" />
+      <component match="Menu" use="xmvc-menu" />
+      <component match="ClientArea" use="xmvc-client-area" />
+
+      <component match="TaskBar" use="xmvc-taskbar" />
+      <component match="StartButton" use="xmvc-start-button" />
+      <component match="StartMenu" use="xmvc-start-menu" />
+      <component match="MenuItem" use="xmvc-menu-item" />
+      <component match="Separator" use="xmvc-separator" />
+      <component match="TaskBarButtons" use="xmvc-taskbar-buttons" />
+      <component match="TaskButton" use="xmvc-task-button" />
+      <component match="SystemTray" use="xmvc-system-tray" />
+      <component match="TrayIcon" use="xmvc-tray-icon" />
+      <component match="Clock" use="xmvc-clock" />
+    </decorators>
+
+    <!--
+      Event bindings connect rendered UI events to controller actions.
+      The view says: "when this model-backed UI node is clicked, invoke this action."
+    -->
+    <events>
+      <on event="click"
+          target="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']"
+          action="OpenMenu">
+        <param name="menuPath"
+               value="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']/StartMenu[@id='startMenu']" />
+      </on>
+
+      <on event="click"
+          target="/xmvc/model/System/Desktop/TaskBar/StartButton/StartMenu/MenuItem[@name='Run...']"
+          action="OpenWindow">
+        <param name="windowId" value="hello-world" />
+        <param name="title" value="Hello World" />
+      </on>
+    </events>
+
+  </view>
+
+
+  <!--
+    MODEL
+    This is the application blueprint and the saved application state.
+    Saving this model saves the desktop state.
+  -->
+  <model>
+
+    <System name="Windows">
+
+      <!-- Whole screen container -->
+      <Desktop id="desktop" background="/images/win-bg.bmp" activeWindow="explorer">
+
+        <!-- Area where application windows appear -->
+        <WindowArea id="desktopPane">
+
+          <!-- state: normal|minimized|maximized -->
+          <Window id="explorer"
+                  title="My Computer"
+                  x="40"
+                  y="80"
+                  width="480"
+                  height="320"
+                  state="normal"
+                  visible="true"
+                  focused="true">
+
+            <MenuBar>
+              <Menu name="File" />
+              <Menu name="Edit" />
+              <Menu name="View" />
+              <Menu name="Help" />
+            </MenuBar>
+
+            <ClientArea>
+              <IconGrid>
+                <Icon id="drive-c" src="/icons/drive.bmp" label="C:" />
+                <Icon id="control-panel" src="/icons/control-panel.bmp" label="Control Panel" />
+                <Icon id="printers" src="/icons/printer.bmp" label="Printers" />
+              </IconGrid>
+            </ClientArea>
+
+          </Window>
+
+        </WindowArea>
+
+
+        <!-- Taskbar stretched across the bottom -->
+        <TaskBar id="taskbar"
+                 position="bottom"
+                 height="30"
+                 background="/images/taskbar-bg.bmp">
+
+          <!-- Start button on the left -->
+          <StartButton id="startBtn" width="70" height="30" pressed="false">
+            <Icon src="/icons/start.bmp" />
+            <Label text="Start" />
+
+            <!-- When opened, the Start menu appears -->
+            <StartMenu id="startMenu" visible="false">
+              <MenuItem name="Programs" />
+              <MenuItem name="Documents" />
+              <MenuItem name="Settings" />
+              <MenuItem name="Find" />
+              <MenuItem name="Help" />
+              <Separator />
+              <MenuItem name="Run..." />
+              <Separator />
+              <MenuItem name="Shut Down..." />
+            </StartMenu>
+          </StartButton>
+
+
+          <!-- Taskbar button area shows running windows -->
+          <TaskBarButtons>
+            <TaskButton windowId="explorer" title="My Computer" active="true" />
+          </TaskBarButtons>
+
+
+          <!-- System tray on the right -->
+          <SystemTray align="right">
+            <TrayIcon id="network" src="/icons/network.bmp" tooltip="Network" />
+            <TrayIcon id="volume" src="/icons/volume.bmp" tooltip="Volume" />
+            <TrayIcon id="message" src="/icons/message.bmp" tooltip="No new messages" />
+            <Clock format="hh:mm AM/PM" />
+          </SystemTray>
+
+        </TaskBar>
+
+      </Desktop>
+
+    </System>
+
+  </model>
+
+
+  <!--
+    CONTROLLER
+    The controller is made of named actions.
+    Actions are made of small tree commands.
+    Commands mutate the model.
+  -->
+  <controller>
+
+    <!--
+      Primitive command vocabulary.
+      Keep this small. Application behavior comes from actions composed from these.
+    -->
+    <commands>
+      <command name="read" description="Read a node, attribute, or subtree." />
+      <command name="create" description="Create a node or subtree." />
+      <command name="update" description="Update an attribute or text value." />
+      <command name="delete" description="Delete a node, attribute, or subtree." />
+      <command name="copy" description="Copy a node or subtree." />
+      <command name="move" description="Move a node or subtree." />
+      <command name="rename" description="Rename a node or attribute." />
+    </commands>
+
+
+    <actions>
+
+      <!--
+        OpenMenu:
+        Shows the Start menu by mutating model state.
+        The view will notice visible='true' and render it.
+      -->
+      <action name="OpenMenu" title="Open Start Menu">
+
+        <param name="menuPath"
+               default="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']/StartMenu[@id='startMenu']" />
+
+        <update path="{menuPath}"
+                attribute="visible"
+                value="true" />
+
+        <update path="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']"
+                attribute="pressed"
+                value="true" />
+
+      </action>
+
+
+      <!--
+        CloseMenu:
+        Useful because most UIs need the inverse action.
+      -->
+      <action name="CloseMenu" title="Close Start Menu">
+
+        <update path="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']/StartMenu[@id='startMenu']"
+                attribute="visible"
+                value="false" />
+
+        <update path="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']"
+                attribute="pressed"
+                value="false" />
+
+      </action>
+
+
+      <!--
+        OpenWindow:
+        Creates a window node in the desktop model.
+        Also creates the taskbar button representing that window.
+      -->
+      <action name="OpenWindow" title="Open Window">
+
+        <param name="windowId" default="hello-world" />
+        <param name="title" default="Hello World" />
+
+        <!-- Unfocus existing windows -->
+        <update path="/xmvc/model/System/Desktop/WindowArea/Window"
+                attribute="focused"
+                value="false" />
+
+        <update path="/xmvc/model/System/Desktop/TaskBar/TaskBarButtons/TaskButton"
+                attribute="active"
+                value="false" />
+
+        <!-- Create the new window in the desktop model -->
+        <create path="/xmvc/model/System/Desktop/WindowArea[@id='desktopPane']"
+                position="last-child">
+
+          <Window id="{windowId}"
+                  title="{title}"
+                  x="120"
+                  y="96"
+                  width="420"
+                  height="260"
+                  state="normal"
+                  visible="true"
+                  focused="true">
+
+            <MenuBar>
+              <Menu name="File" />
+              <Menu name="Edit" />
+              <Menu name="View" />
+              <Menu name="Help" />
+            </MenuBar>
+
+            <ClientArea>
+              <Panel kind="card" padding="3">
+                <Heading level="1" text="Hello World" />
+                <Paragraph text="This window was created by an XML MVC controller action." />
+                <Button action="CloseWindow" text="Close" />
+              </Panel>
+            </ClientArea>
+
+          </Window>
+
+        </create>
+
+        <!-- Create the corresponding taskbar button -->
+        <create path="/xmvc/model/System/Desktop/TaskBar/TaskBarButtons"
+                position="last-child">
+
+          <TaskButton windowId="{windowId}"
+                      title="{title}"
+                      active="true" />
+
+        </create>
+
+        <!-- Mark the new window as active desktop state -->
+        <update path="/xmvc/model/System/Desktop"
+                attribute="activeWindow"
+                value="{windowId}" />
+
+        <!-- Opening a window from the menu should close the menu -->
+        <update path="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']/StartMenu[@id='startMenu']"
+                attribute="visible"
+                value="false" />
+
+        <update path="/xmvc/model/System/Desktop/TaskBar/StartButton[@id='startBtn']"
+                attribute="pressed"
+                value="false" />
+
+      </action>
+
+
+      <action name="CloseWindow" title="Close Window">
+
+        <param name="windowId" required="true" />
+
+        <delete path="/xmvc/model/System/Desktop/WindowArea/Window[@id='{windowId}']" />
+
+        <delete path="/xmvc/model/System/Desktop/TaskBar/TaskBarButtons/TaskButton[@windowId='{windowId}']" />
+
+      </action>
+
+    </actions>
+
+  </controller>
+
+</xmvc>
