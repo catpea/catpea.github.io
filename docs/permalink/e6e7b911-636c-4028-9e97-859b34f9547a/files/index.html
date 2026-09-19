@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#142b2a"><meta name="description" content="A tiny, offline Canvas hex world for related code. Beside and inside; a place for every piece.">
+<title>Beside / Inside — The little workshop</title>
+<style>
+:root{color-scheme:dark;--ink:#203a34;--cream:#eee4ca;--gold:#dbbd80;--muted:#aebbaa;--line:#ffffff18;--paper:#e8dfc9;--paper-line:#8d987844;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px}
+*{box-sizing:border-box}body{margin:0;background:#18322e;color:var(--cream);height:100dvh;min-height:480px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.42}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:2px solid #e5ba66;outline-offset:3px}button{transition:background .12s}header{min-height:66px;padding:12px 25px;display:flex;align-items:center;gap:24px;background:#142b2a;border-bottom:1px solid #dfc79630;z-index:2}.brand{display:flex;align-items:center;gap:12px;white-space:nowrap;font-weight:550;letter-spacing:.18em;font-size:12px}.brand svg{width:30px;height:34px;color:var(--gold)}.brand small{display:block;color:#98af9e;font-size:9px;letter-spacing:.21em;margin-top:4px;font-weight:400}.mode-switch{display:flex;gap:3px;background:#071d1b66;border:1px solid var(--line);padding:3px;border-radius:6px}.mode-switch button{border:0;background:none;color:#aebead;padding:8px 14px;font-size:12px;border-radius:3px}.mode-switch button[aria-pressed=true]{background:#345045;color:#f1e4c4}.top-actions{display:flex;align-items:center;gap:7px;margin-left:auto}.quiet{color:#c0cbb8;background:#203b33;border:1px solid #9cac8238;border-radius:4px;min-height:33px;padding:6px 10px;font-size:12px}.quiet:hover{background:#304e40}.icon-button{width:33px;padding:6px}.top-actions .primary-small{background:#d3bb83;color:#213c31;border-color:#d3bb83}.layout{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 306px}.stage{position:relative;min-width:0;min-height:0;overflow:hidden;background:#233f37}#world-canvas{display:block;width:100%;height:100%;image-rendering:pixelated;touch-action:none;cursor:grab}#world-canvas:active{cursor:grabbing}#world-canvas.building{cursor:crosshair}.scene-heading{position:absolute;left:33px;top:27px;pointer-events:none;text-shadow:0 2px 10px #142a2b}.eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#b6c7ac;font-weight:650}.scene-heading h1{font-family:Georgia,"Times New Roman",serif;font-size:33px;line-height:1.13;font-weight:400;letter-spacing:-.025em;margin:11px 0 8px;color:#f0e6ca}.scene-heading p{font-size:11px;color:#aec1a9;margin:0;max-width:310px;line-height:1.6}.breadcrumbs{pointer-events:auto;display:flex;gap:5px;align-items:center;max-width:60vw;overflow-x:auto;scrollbar-width:thin}.breadcrumbs button{color:#c8d5be;font-size:10px;border:0;padding:3px 0;background:transparent;white-space:nowrap}.breadcrumbs button:hover{color:#fff0c2}.breadcrumbs span{font-size:10px;color:#7f9a82}.view-tools{position:absolute;right:20px;top:23px;display:flex;align-items:center;gap:2px;padding:3px;border:1px solid #becba22a;background:#142c28cc;border-radius:5px}.view-tools button{background:none;color:#e6ddbe;border:0;width:29px;height:28px;font-size:17px}.view-tools output{font-size:10px;color:#b8c5ac;min-width:37px;text-align:center}.view-tools .fit{font-size:16px;border-left:1px solid #a5bb8d33;margin-left:3px;width:34px}.legend{position:absolute;bottom:21px;left:24px;display:flex;gap:14px;flex-wrap:wrap;max-width:calc(100% - 145px);pointer-events:none}.legend span{display:flex;align-items:center;gap:5px;font-size:9px;color:#c5d0b7;letter-spacing:.025em}.legend i{width:5px;height:5px;display:inline-block;background:var(--mark);box-shadow:1px 1px #132e29}.terrain-caption{position:absolute;bottom:18px;right:20px;font-size:9px;color:#92ad93;text-align:right;line-height:1.6}.stage-note{position:absolute;left:50%;bottom:61px;transform:translateX(-50%);max-width:88%;padding:10px 15px;background:#122b27ee;color:#ecddac;border:1px solid #b6b68366;font-size:12px;border-radius:5px;text-align:center;pointer-events:none;box-shadow:0 4px 20px #11242255}.stage-note[hidden]{display:none}.inspector{background:var(--paper);color:var(--ink);padding:25px 22px 16px;overflow-y:auto;border-left:1px solid #c9c0a8;scrollbar-color:#acb69c transparent;scrollbar-width:thin}.inspector .eyebrow{color:#697d66;font-size:9px;display:flex;justify-content:space-between}.inspector h2{font-family:Georgia,"Times New Roman",serif;font-size:27px;font-weight:400;letter-spacing:-.02em;margin:10px 0 4px;line-height:1.1}.tile-portrait{display:flex;align-items:center;justify-content:space-between;gap:4px;min-height:89px}.tile-portrait img{width:86px;height:86px;image-rendering:pixelated;flex-shrink:0;margin-right:-6px}.tile-subtitle{font-size:10px;color:#74826d;margin-top:6px}.address{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:#4a6859;display:block;word-break:break-word;line-height:1.6;background:#d8d7be80;padding:8px 10px;border-left:2px solid #95a180;margin:3px 0 12px}.interior-note{font-size:11px;line-height:1.6;color:#6b7964;margin:0 0 13px}.action{width:100%;border:1px solid #254738;background:#254738;color:#f1e8cc;border-radius:4px;padding:10px 12px;font-size:12px;text-align:left;display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;min-height:37px}.action:hover{background:#345a43}.action.secondary{background:transparent;color:#34533e;border-color:#9aa488}.action.secondary:hover{background:#d7dbc2}.action kbd{font:9px monospace;opacity:.6}.section{border-top:1px solid var(--paper-line);padding-top:16px;margin-top:16px}.section h3{font-size:9px;text-transform:uppercase;letter-spacing:.17em;font-weight:650;margin:0 0 10px;color:#63775f;display:flex;justify-content:space-between}.section h3 span{letter-spacing:0;font-weight:400;color:#8a947c}.neighbors{display:grid;grid-template-columns:1fr 1fr;gap:5px}.neighbors button{display:flex;align-items:center;gap:7px;min-height:27px;text-align:left;background:#ffffff18;border:1px solid #acb49866;border-radius:3px;padding:5px 6px;color:#446047;font-size:10px;min-width:0}.neighbors button:hover{background:#d3dabf}.neighbors b{font:9px monospace;color:#879379;min-width:15px}.neighbors span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.neighbors .empty{border-style:dashed;color:#919b82}.marks{display:flex;flex-wrap:wrap;gap:5px}.mark-toggle{border:1px solid #a2ae9044;background:#d9dbc66b;color:#77886b;border-radius:3px;padding:5px 7px;font-size:9px;display:flex;align-items:center;gap:5px}.mark-toggle[aria-pressed=true]{border-color:#829c7377;color:#304f3c;background:#cbd6b899}.mark-toggle i{height:5px;width:5px;background:#a6af96}.mark-toggle[aria-pressed=true] i{background:#486d4b}.fine-print{font-size:10px;line-height:1.6;color:#839077;margin:8px 0 0}.source{font:10px ui-monospace,monospace;color:#617956;word-break:break-word;margin:9px 0 0}.agents{display:flex;flex-direction:column;gap:5px}.agent{display:flex;align-items:center;gap:9px;background:#e1dfc8;border:1px solid #a5af9044;border-radius:4px;padding:6px 8px}.agent img{width:24px;height:33px;image-rendering:pixelated;flex-shrink:0}.agent .identity{flex:1;min-width:0}.agent strong{font-size:11px;font-weight:550}.agent small{display:block;font-size:9px;color:#7e8b70;margin-top:2px}.agent button{font-size:9px;color:#385e43;background:transparent;border:1px solid #a1b08e88;border-radius:3px;padding:5px 7px}.agent button[aria-pressed=true]{background:#355b43;color:#efebd2;border-color:#355b43}.empty-copy{font-size:11px;color:#7e8b70;margin:3px 0 10px}.process-panel{font-size:11px}.process-panel p{color:#72846c;line-height:1.6;margin:0 0 11px}.process-steps{list-style:none;padding:0;margin:8px 0 11px;display:flex;gap:4px;flex-wrap:wrap}.process-steps li{font-size:9px;padding:5px 6px;background:#d6dac2;color:#7c8b6b;border:1px solid transparent;border-radius:3px}.process-steps li.active{border-color:#9fa06a;background:#d8c990;color:#41573a}.history{display:flex;gap:5px;margin-top:15px;align-items:center}.history button{padding:5px 8px;background:transparent;color:#718168;font-size:10px;border:1px solid #a4ae9044;border-radius:3px}.history span{font-size:9px;margin-left:auto;color:#8a967a}.tile-select{width:100%;margin-top:10px;color:#456446;background:#e3e1cc;border:1px solid #adb79a;padding:7px 6px;border-radius:3px;font-size:10px}footer{min-height:29px;display:flex;justify-content:space-between;gap:12px;align-items:center;background:#142c29;border-top:1px solid #9fb18b22;padding:6px 24px;font-size:9px;letter-spacing:.025em;color:#9eb394}footer strong{font-weight:400;color:#c3cbaa}footer #save-state{color:#bdcba9}.status-dot{display:inline-block;background:#8fad83;width:4px;height:4px;margin-right:6px;vertical-align:middle}dialog{border:1px solid #829572;background:#e8dfc9;color:#294b37;border-radius:7px;padding:25px;max-width:460px;width:calc(100vw - 32px);box-shadow:0 22px 90px #081b2299}dialog::backdrop{background:#102721b8;backdrop-filter:blur(3px)}dialog h2{font:30px Georgia,serif;font-weight:400;margin:0 0 10px}dialog p{font-size:12px;line-height:1.7;color:#61775b}dialog label{display:block;font-size:11px;margin:15px 0 5px;color:#4b6749}dialog input,dialog select{width:100%;background:#f2ebd9;color:#294b37;border:1px solid #aab69a;border-radius:4px;padding:10px;font-size:12px}dialog .row{display:flex;gap:8px;margin-top:20px}dialog .row button{flex:1;justify-content:center;margin:0}.error{font-size:12px;color:#923f49;line-height:1.6;min-height:0}dialog dl{display:grid;grid-template-columns:145px 1fr;gap:8px;font-size:11px;line-height:1.5}dialog dt{color:#466344}dialog dd{margin:0;color:#79876a}dialog code{font-size:10px}dialog .help-note{border-top:1px solid #9baa8255;padding-top:12px}.hidden{display:none!important}[hidden]{display:none!important}
+@media(min-width:1450px){.layout{grid-template-columns:minmax(0,1fr) 333px}.inspector{padding:27px 26px}.scene-heading{left:39px;top:31px}.scene-heading h1{font-size:38px}}
+@media(max-width:1000px){header{padding:11px 16px;gap:16px}.brand{font-size:10px;gap:8px}.brand small{font-size:8px}.mode-switch button{padding:7px 10px}.top-actions{gap:4px}.quiet{padding:6px 8px}.layout{grid-template-columns:minmax(0,1fr) 278px}.inspector{padding:22px 17px}.scene-heading{left:23px;top:25px}.scene-heading h1{font-size:29px}.scene-heading p{max-width:190px;font-size:10px}.legend{gap:9px;left:18px}.legend span{font-size:8px}.terrain-caption{display:none}.view-tools{right:15px}.top-actions .word{display:none}}
+@media(max-width:680px){body{min-height:620px}header{gap:10px;flex-wrap:wrap;padding:10px 14px}.brand{flex:1}.top-actions{gap:4px}.mode-switch{order:3}.mode-switch button{padding:5px 12px}.top-actions .import-label{display:none}.layout{grid-template-columns:1fr;grid-template-rows:minmax(310px,1fr) 225px}.inspector{border-left:0;border-top:1px solid #c0c7a7;padding:15px 19px}.tile-portrait{min-height:76px}.tile-portrait img{height:76px;width:76px}.inspector .action{max-width:100%}.scene-heading{top:19px;left:18px}.scene-heading h1{font-size:24px;margin-top:9px}.scene-heading p{display:none}.view-tools{top:17px;right:12px}.legend{bottom:13px;left:16px;max-width:95%;gap:12px}.legend span{font-size:8px}.stage-note{bottom:40px;font-size:10px}.breadcrumbs{max-width:58vw}.section{margin-top:15px}footer{padding:6px 14px;font-size:8px}footer .desktop-help{display:none}dialog dl{grid-template-columns:125px 1fr}.brand small{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}dialog::backdrop{backdrop-filter:none}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><svg viewBox="0 0 30 34" fill="none" aria-hidden="true"><path d="M15 1 29 9v16l-14 8L1 25V9Z" stroke="currentColor"/><path d="m15 8 8 5v9l-8 5-8-5v-9Z" stroke="currentColor" opacity=".5"/><path d="M15 13v10m-5-7 5-3 5 3" stroke="currentColor"/></svg><div>BESIDE / INSIDE<small>A PLACE FOR EVERY PIECE</small></div></div>
+  <nav class="mode-switch" aria-label="World layers"><button id="explore" aria-pressed="true">Explore</button><button id="politics" aria-pressed="false">Politics</button></nav>
+  <div class="top-actions"><button id="pause" class="quiet icon-button" title="Pause animation (Space)" aria-label="Pause animation">Ⅱ</button><button id="import" class="quiet" title="Import a world XML file">↥ <span class="import-label">Import</span></button><button id="export" class="quiet primary-small">↧ <span class="word">Export</span> XML</button><button id="help" class="quiet icon-button" title="Controls and scope" aria-label="Help">?</button></div>
+</header>
+<main class="layout">
+  <section class="stage" aria-label="Hex world">
+    <canvas id="world-canvas" tabindex="0" aria-label="Interactive hex world. Use Q W E A S D for neighboring tiles, Enter to go inside, Escape to go outside. Equivalent buttons are available in the inspector.">Your browser needs Canvas 2D. Use the tile selector and inspector for text navigation.</canvas>
+    <div class="scene-heading"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Interior path"></nav><h1 id="scene-title">The little workshop</h1><p id="scene-subtitle">Small pieces. A world of their own.</p></div>
+    <div class="view-tools" aria-label="View controls"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-value">100%</output><button id="zoom-in" aria-label="Zoom in">+</button><button id="fit" class="fit" title="Frame the island (Home)" aria-label="Frame the island">⌖</button></div>
+    <div class="legend" aria-label="Heuristic legend"><span style="--mark:#b4b5e5"><i></i>ASYNC</span><span style="--mark:#7dc8cf"><i></i>GENERATOR</span><span style="--mark:#a9ca8d"><i></i>ENV</span><span style="--mark:#e6c87d"><i></i>HTTP</span><span style="--mark:#dda3b7"><i></i>UNCHECKED</span></div>
+    <div class="terrain-caption">CANVAS 2D<br>NO RUNTIME ATTACHED</div>
+    <div id="notice" class="stage-note" role="status" aria-live="polite" hidden></div>
+  </section>
+  <aside class="inspector" aria-label="Selected tile inspector">
+    <div class="eyebrow"><span>Selected tile</span><span id="coordinates">0 / 0</span></div>
+    <div class="tile-portrait"><div><h2 id="tile-title">Workshop</h2><div id="tile-subtitle" class="tile-subtitle">The main tile</div></div><img id="portrait" alt="" width="86" height="86"></div>
+    <code id="address" class="address">#workshop</code>
+    <p id="interior-note" class="interior-note"></p>
+    <button id="enter" class="action">Go inside <kbd>ENTER ↘</kbd></button>
+    <button id="leave" class="action secondary">Go outside <kbd>ESC ↖</kbd></button>
+    <button id="build" class="action secondary">Build beside <kbd>B ＋</kbd></button>
+    <select id="tile-select" class="tile-select" aria-label="Select a tile in this interior"></select>
+    <section class="section"><h3>Beside <span>six sides, no more</span></h3><div id="neighbors" class="neighbors"></div></section>
+    <section class="section"><h3>Code heuristics <span>explicit metadata</span></h3><div id="marks" class="marks"></div><div id="source" class="source"></div><p class="fine-print">The artwork expresses these marks. They are declarations, not an analysis or a safety verdict.</p></section>
+    <section class="section"><h3>Inhabitants <span id="agent-count"></span></h3><div id="agents" class="agents"></div><button id="walk" class="action secondary" style="margin-top:9px">Walk to this tile <kbd>G</kbd></button></section>
+    <section id="process-panel" class="section process-panel" hidden><h3>World politics <span>process overlay</span></h3><p>A rehearsal of responsibilities. This sequence does not run code and does not create extra tile neighbors.</p><ol id="process-steps" class="process-steps"></ol><button id="rehearse" class="action secondary">Rehearse process <span>▷</span></button></section>
+    <div class="history"><button id="undo" title="Undo (Ctrl+Z)">↶ Undo</button><button id="redo" title="Redo (Ctrl+Shift+Z)">↷ Redo</button><span>LOCAL WORLD · v0.1</span></div>
+  </aside>
+</main>
+<footer><span class="desktop-help">DRAG <strong>pan</strong> &nbsp;·&nbsp; WHEEL <strong>zoom</strong> &nbsp;·&nbsp; DOUBLE-CLICK <strong>inside</strong> &nbsp;·&nbsp; ESC <strong>outside</strong></span><span id="world-stats">Loading world…</span><span id="save-state"><i class="status-dot"></i>Local only</span></footer>
+<input id="file-input" type="file" accept=".xml,application/xml,text/xml" hidden>
+<dialog id="build-dialog" aria-labelledby="build-title">
+  <form id="build-form"><div class="eyebrow">BESIDE / CONSTRUCTION</div><h2 id="build-title">A new piece.</h2><p id="build-context"></p><label for="new-name">Name / path segment</label><input id="new-name" name="name" pattern="[a-z][a-z0-9\-]{0,47}" title="Start with a lowercase letter; use lowercase letters, digits and hyphens." maxlength="48" placeholder="process-record" required autocomplete="off"><label for="new-label">Human-readable label</label><input id="new-label" name="label" maxlength="48" placeholder="Process a record" required autocomplete="off"><label for="new-mark">First code heuristic</label><select id="new-mark" name="mark"><option value="">Ordinary code · workshop</option><option value="async">Async · clock tower</option><option value="generator">Generator · waterwheel</option><option value="env">Environment · glasshouse</option><option value="http">HTTP · beacon</option><option value="untrusted">Unchecked input · cordon</option></select><p id="build-error" class="error" role="alert"></p><div class="row"><button type="button" id="cancel-build" class="action secondary">Cancel</button><button type="submit" class="action">Build this tile</button></div></form>
+</dialog>
+<dialog id="help-dialog" aria-labelledby="help-title"><div class="eyebrow">A SMALL GAME, FIRST</div><h2 id="help-title">Beside. Inside.</h2><p>Every occupied hex holds related code. Enter it and the very same tile remains at the centre, surrounded by its parts. Empty ground is available for construction.</p><dl><dt>Click / tap</dt><dd>Select a tile.</dd><dt>Double-click / Enter</dt><dd>Go inside the selected tile.</dd><dt>Escape / Outside</dt><dd>Return to the previous view.</dd><dt>Drag / pinch / wheel</dt><dd>Pan or zoom the map.</dd><dt>Q W E / A S D</dt><dd>NW, NE, E / W, SW, SE.</dd><dt>B / Build beside</dt><dd>Choose one of six adjacent spaces.</dd><dt>Inhabit, then G</dt><dd>Walk an agent to the selected tile.</dd><dt>P / Politics</dt><dd>Show the process overlay.</dd><dt>Space / Home</dt><dd>Pause animation / frame the island.</dd><dt>Ctrl+Z / Ctrl+Shift+Z</dt><dd>Undo / redo world edits.</dd></dl><p class="help-note">Heuristics and source paths are illustrative metadata. This game neither analyzes nor executes code. Politics is a small sequence rehearsal, not a BPM engine. XML imports never fetch linked files.</p><p>Edits are saved locally when browser storage is available. Export XML for a portable copy. Source code, tests, and the unchanged supplied XML parser accompany the downloadable source package.</p><form method="dialog"><button class="action" style="justify-content:center">Back to the world</button></form></dialog>
+<noscript><p>This local game requires JavaScript.</p></noscript>
+<script type="module">
+
+// ── xml-parser.js ──
+// Gizmosis compiler: tiny dependency-free XML parser.
+// It intentionally supports the XML subset used by Gizmo source files:
+// elements, attributes, comments, CDATA, processing instructions, text, and self-closing tags.
+
+class XmlParseError extends Error {
+  constructor(message, { index = 0, source = '' } = {}) {
+    const { line, column } = locate(source, index);
+    super(`${message} at ${line}:${column}`);
+    this.name = 'XmlParseError';
+    this.index = index;
+    this.line = line;
+    this.column = column;
+  }
+}
+
+function parseXml(source, { filename = '<xml>' } = {}) {
+  const parser = new Parser(String(source), filename);
+  return parser.parseDocument();
+}
+
+function serializeXml(node, { indent = '  ', level = 0 } = {}) {
+  if (!node) return '';
+  if (node.type === 'document') return node.children.map(child => serializeXml(child, { indent, level })).join('\n');
+  if (node.type === 'text') return node.value;
+  if (node.type === 'comment') return `<!--${node.value}-->`;
+  if (node.type === 'cdata') return `<![CDATA[${node.value}]]>`;
+  const pad = indent.repeat(level);
+  const attrs = Object.entries(node.attrs || {})
+    .map(([name, value]) => ` ${name}="${escapeXmlAttr(value)}"`)
+    .join('');
+  const children = node.children || [];
+  if (!children.length) return `${pad}<${node.name}${attrs}/>`;
+  const textOnly = children.every(child => child.type === 'text' || child.type === 'cdata');
+  if (textOnly) return `${pad}<${node.name}${attrs}>${children.map(child => serializeXml(child, { indent, level: 0 })).join('')}</${node.name}>`;
+  return `${pad}<${node.name}${attrs}>\n${children.map(child => serializeXml(child, { indent, level: level + 1 })).join('\n')}\n${pad}</${node.name}>`;
+}
+
+function textContent(node) {
+  if (!node) return '';
+  if (node.type === 'text' || node.type === 'cdata') return node.value;
+  return (node.children || []).map(textContent).join('');
+}
+
+function elementChildren(node, name = null) {
+  const children = (node?.children || []).filter(child => child.type === 'element');
+  return name ? children.filter(child => child.name === name) : children;
+}
+
+function firstChild(node, name) {
+  return elementChildren(node, name)[0] || null;
+}
+
+function cloneNode(node) {
+  return JSON.parse(JSON.stringify(node));
+}
+
+class Parser {
+  constructor(source, filename) {
+    this.source = source;
+    this.filename = filename;
+    this.i = 0;
+  }
+
+  parseDocument() {
+    const document = { type: 'document', name: '#document', attrs: {}, children: [], filename: this.filename };
+    this.skipBom();
+    while (!this.eof()) {
+      if (this.startsWith('<?')) {
+        this.readUntil('?>', 'Unclosed processing instruction');
+        continue;
+      }
+      const node = this.parseNode();
+      if (node) document.children.push(node);
+    }
+    const roots = document.children.filter(child => child.type === 'element');
+    if (roots.length !== 1) throw this.error(`Expected exactly one root element, found ${roots.length}`);
+    document.root = roots[0];
+    return document;
+  }
+
+  parseNode() {
+    if (this.eof()) return null;
+    if (this.startsWith('<!--')) return this.parseComment();
+    if (this.startsWith('<![CDATA[')) return this.parseCdata();
+    if (this.peek() === '<') return this.parseElement();
+    return this.parseText();
+  }
+
+  parseComment() {
+    this.expect('<!--');
+    const value = this.readUntil('-->', 'Unclosed comment');
+    return { type: 'comment', value };
+  }
+
+  parseCdata() {
+    this.expect('<![CDATA[');
+    const value = this.readUntil(']]>', 'Unclosed CDATA');
+    return { type: 'cdata', value };
+  }
+
+  parseText() {
+    const start = this.i;
+    while (!this.eof() && this.peek() !== '<') this.i += 1;
+    return { type: 'text', value: this.source.slice(start, this.i) };
+  }
+
+  parseElement() {
+    this.expect('<');
+    if (this.peek() === '/') throw this.error('Unexpected closing tag');
+    const name = this.readName();
+    if (!name) throw this.error('Expected element name');
+    const attrs = {};
+    while (!this.eof()) {
+      this.skipWhitespace();
+      if (this.startsWith('/>')) {
+        this.i += 2;
+        return { type: 'element', name, attrs, children: [] };
+      }
+      if (this.startsWith('>')) {
+        this.i += 1;
+        break;
+      }
+      const attrName = this.readName();
+      if (!attrName) throw this.error(`Expected attribute name in <${name}>`);
+      this.skipWhitespace();
+      let value = '';
+      if (this.startsWith('=')) {
+        this.i += 1;
+        this.skipWhitespace();
+        value = this.readAttributeValue();
+      }
+      attrs[attrName] = decodeXml(value);
+    }
+
+    const children = [];
+    while (!this.eof()) {
+      if (this.startsWith(`</`)) {
+        this.i += 2;
+        const closeName = this.readName();
+        this.skipWhitespace();
+        this.expect('>');
+        if (closeName !== name) throw this.error(`Expected closing </${name}>, got </${closeName}>`);
+        return { type: 'element', name, attrs, children };
+      }
+      const child = this.parseNode();
+      if (child) children.push(child);
+    }
+    throw this.error(`Unclosed <${name}>`);
+  }
+
+  readName() {
+    const start = this.i;
+    while (!this.eof() && /[A-Za-z0-9_:\-.]/.test(this.peek())) this.i += 1;
+    return this.source.slice(start, this.i);
+  }
+
+  readAttributeValue() {
+    const quote = this.peek();
+    if (quote !== '"' && quote !== "'") throw this.error('Expected quoted attribute value');
+    this.i += 1;
+    const start = this.i;
+    while (!this.eof() && this.peek() !== quote) this.i += 1;
+    if (this.eof()) throw this.error('Unclosed attribute value');
+    const value = this.source.slice(start, this.i);
+    this.i += 1;
+    return value;
+  }
+
+  readUntil(marker, errorMessage) {
+    const start = this.i;
+    const end = this.source.indexOf(marker, this.i);
+    if (end < 0) throw this.error(errorMessage);
+    this.i = end + marker.length;
+    return this.source.slice(start, end);
+  }
+
+  skipBom() {
+    if (this.source.charCodeAt(0) === 0xfeff) this.i = 1;
+  }
+
+  skipWhitespace() {
+    while (!this.eof() && /\s/.test(this.peek())) this.i += 1;
+  }
+
+  expect(text) {
+    if (!this.startsWith(text)) throw this.error(`Expected ${text}`);
+    this.i += text.length;
+  }
+
+  startsWith(text) { return this.source.startsWith(text, this.i); }
+  peek() { return this.source[this.i]; }
+  eof() { return this.i >= this.source.length; }
+  error(message) { return new XmlParseError(`${message} in ${this.filename}`, { index: this.i, source: this.source }); }
+}
+
+function locate(source, index) {
+  const before = source.slice(0, index);
+  const lines = before.split(/\r\n|\r|\n/);
+  return { line: lines.length, column: lines[lines.length - 1].length + 1 };
+}
+
+function decodeXml(value) {
+  return String(value)
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+}
+
+function escapeXmlAttr(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+
+// ── hex.mjs ──
+/** Pointy-top axial coordinates. Only the presentation is vertically compressed.
+ * Reference: redblobgames.com/grids/hexagons/ (algorithms, not copied artwork).
+ */
+const HEX_SIZE = 27;
+const HEX_SQUASH = 0.74;
+const DIRECTIONS = Object.freeze([
+  { name: 'E', q: 1, r: 0 }, { name: 'NE', q: 1, r: -1 },
+  { name: 'NW', q: 0, r: -1 }, { name: 'W', q: -1, r: 0 },
+  { name: 'SW', q: -1, r: 1 }, { name: 'SE', q: 0, r: 1 }
+].map(Object.freeze));
+const hexKey = (q, r) => `${q},${r}`;
+const distance = (a, b) => Math.max(Math.abs(a.q-b.q), Math.abs(a.r-b.r), Math.abs(a.q+a.r-b.q-b.r));
+function neighbor(hex, direction) {
+  const d = typeof direction === 'number' ? DIRECTIONS[direction] : DIRECTIONS.find(d => d.name === direction);
+  if (!d) throw new Error('Unknown hex direction.');
+  return { q: hex.q + d.q, r: hex.r + d.r };
+}
+function toPixel(q, r) {
+  return { x: HEX_SIZE * Math.sqrt(3) * (q + r/2), y: HEX_SIZE * 1.5 * r * HEX_SQUASH };
+}
+function fromPixel(x, y) {
+  y /= HEX_SQUASH;
+  const q = (Math.sqrt(3)/3*x - y/3)/HEX_SIZE;
+  const r = (2*y/3)/HEX_SIZE;
+  let rq = Math.round(q), rr = Math.round(r), rs = Math.round(-q-r);
+  const dq = Math.abs(rq-q), dr = Math.abs(rr-r), ds = Math.abs(rs+q+r);
+  if (dq > dr && dq > ds) rq = -rr-rs;
+  else if (dr > ds) rr = -rq-rs;
+  return { q: rq || 0, r: rr || 0 };
+}
+function disk(radius) {
+  const result = [];
+  for (let q=-radius; q<=radius; q++) {
+    for (let r=Math.max(-radius,-q-radius); r<=Math.min(radius,-q+radius); r++) result.push({q,r});
+  }
+  return result;
+}
+/** Breadth-first search, appropriate for a small board with uniform movement cost. */
+function findPath(start, end, allowed) {
+  const target = hexKey(end.q,end.r), first = hexKey(start.q,start.r);
+  if (!allowed.has(first) || !allowed.has(target)) return null;
+  const queue = [start], seen = new Map([[first, null]]);
+  for (let i=0; i<queue.length; i++) {
+    const p=queue[i], key=hexKey(p.q,p.r);
+    if (key===target) {
+      const path=[];
+      for (let k=key; k!==null; k=seen.get(k)) {
+        const [q,r]=k.split(',').map(Number); path.push({q,r});
+      }
+      return path.reverse();
+    }
+    for (let d=0; d<6; d++) {
+      const n=neighbor(p,d), k=hexKey(n.q,n.r);
+      if (allowed.has(k) && !seen.has(k)) { seen.set(k,key); queue.push(n); }
+    }
+  }
+  return null;
+}
+
+
+// ── world.mjs ──
+
+
+const MARKS = Object.freeze(['async','generator','env','http','untrusted']);
+const LIMITS = Object.freeze({ bytes: 1048576, tiles: 256, depth: 12, extent: 12 });
+const namePattern = /^[a-z][a-z0-9-]{0,47}$/;
+const textOK = (s,limit) => typeof s==='string' && s.length<=limit && /^[\u0020-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}]*$/u.test(s);
+const fail = message => { throw new Error(message); };
+const requireThat = (test, message) => { if (!test) fail(message); };
+const xmlElement = (name, attrs={}, children=[]) => ({ type:'element', name, attrs, children });
+const refId = value => typeof value==='string' && value.startsWith('#') ? value.slice(1) : fail('References must begin with #.');
+
+/** Guard the deliberately small supplied parser; this is a world format, not a general XML validator.
+ * Only the five named XML entities, comments, quoted attributes and elements are accepted.
+ */
+function preflight(source) {
+  requireThat(typeof source==='string' && new TextEncoder().encode(source).length<=LIMITS.bytes, 'World XML exceeds the 1 MiB limit.');
+  requireThat(!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/u.test(source), 'Invalid XML control character.');
+  const clean=source.replace(/<!--[\s\S]*?-->/g,'');
+  requireThat(!/<!|<\?/.test(clean), 'Declarations, processing instructions and CDATA are not part of this world format.');
+  requireThat(!/&(?!amp;|lt;|gt;|quot;|apos;)/.test(clean), 'Use only the five named XML entities.');
+  const token=/<\/?[a-z][a-z0-9-]*(?:\s+[a-z][a-z0-9-]*\s*=\s*(?:"[^"<]*"|'[^'<]*'))*\s*\/?>/gy;
+  let at=0, depth=0;
+  while (at<clean.length) {
+    if (/\s/.test(clean[at])) { at++; continue; }
+    token.lastIndex=at;
+    const match=token.exec(clean);
+    requireThat(match, `Invalid or unsupported XML near character ${at}.`);
+    const tag=match[0], attrs=[...tag.matchAll(/\s([a-z][a-z0-9-]*)\s*=\s*(?:"[^"]*"|'[^']*')/g)].map(m=>m[1]);
+    requireThat(new Set(attrs).size===attrs.length, 'Duplicate XML attribute.');
+    if (tag.startsWith('</')) depth--;
+    else if (!tag.endsWith('/>')) depth++;
+    requireThat(depth>=0 && depth<=LIMITS.depth*2+6, 'XML nesting exceeds the world limit.');
+    at=token.lastIndex;
+  }
+}
+function shape(node, name, attributes, childNames) {
+  requireThat(node?.name===name, `Expected <${name}>.`);
+  for (const a of Object.keys(node.attrs)) requireThat(attributes.includes(a), `Unknown ${name} attribute: ${a}.`);
+  for (const c of node.children || []) {
+    if (c.type==='comment' || (c.type==='text' && !c.value.trim())) continue;
+    requireThat(c.type==='element' && childNames.includes(c.name), `Unsupported content in <${name}>.`);
+  }
+}
+function one(node, name) {
+  const all=elementChildren(node,name);
+  requireThat(all.length===1, `Expected one <${name}> in <${node.name}>.`);
+  return all[0];
+}
+function parseWorld(source) {
+  preflight(source);
+  const root=parseXml(source).root;
+  shape(root,'world',['version','title'],['tile','agents','process']);
+  requireThat(root.attrs.version==='1', 'Unsupported world version.');
+  const world={version:1,title:root.attrs.title || 'The workshop',root:null,tiles:{},agents:[],steps:[]};
+  function readTile(node,parent,depth) {
+    requireThat(depth<=LIMITS.depth && Object.keys(world.tiles).length<LIMITS.tiles, 'World is too large or too deeply nested.');
+    shape(node,'tile',['id','name','label','q','r','kind','marks','src'],['inside']);
+    const a=node.attrs, id=a.id;
+    requireThat(namePattern.test(id || '') && !Object.hasOwn(world.tiles,id), 'Tile IDs must be unique lowercase names.');
+    const tile={id,name:a.name,label:a.label,q:Number(a.q),r:Number(a.r),kind:a.kind || 'cottage',marks:(a.marks || '').split(' ').filter(Boolean),src:a.src || '',parent,children:[]};
+    world.tiles[id]=tile;
+    const inside=one(node,'inside'); shape(inside,'inside',[],['main','tile']);
+    const main=one(inside,'main'); shape(main,'main',['ref'],[]);
+    requireThat(main.attrs.ref===`#${id}`, 'An interior main tile must reference its exterior owner.');
+    for (const child of elementChildren(inside,'tile')) tile.children.push(readTile(child,id,depth+1));
+    return id;
+  }
+  world.root=readTile(one(root,'tile'),null,0);
+  const agents=one(root,'agents'); shape(agents,'agents',[],['agent']);
+  for (const node of elementChildren(agents)) {
+    shape(node,'agent',['id','name','role','scene','tile','coat'],[]);
+    const a=node.attrs; world.agents.push({id:a.id,name:a.name,role:a.role,scene:refId(a.scene),tile:refId(a.tile),coat:a.coat});
+  }
+  const process=one(root,'process'); shape(process,'process',['name'],['step']);
+  world.processName=process.attrs.name || 'Rehearsal';
+  for (const node of elementChildren(process)) {
+    shape(node,'step',['name','tile','agent'],[]);
+    world.steps.push({name:node.attrs.name,tile:refId(node.attrs.tile),agent:refId(node.attrs.agent)});
+  }
+  validateWorld(world);
+  return world;
+}
+function sceneTiles(world, owner) {
+  const t=Object.hasOwn(world.tiles,owner)?world.tiles[owner]:null;
+  if (!t) fail('Unknown interior.');
+  // Projection, not duplication: the main tile resolves to the exact same ID and record.
+  return [{...t,q:0,r:0,main:true},...t.children.map(id=>({...world.tiles[id],main:false}))];
+}
+function validateWorld(world) {
+  requireThat(world.tiles[world.root]?.parent===null,'World needs one root tile.');
+  requireThat(world.tiles[world.root].q===0 && world.tiles[world.root].r===0,'The root tile belongs at 0,0.');
+  requireThat(textOK(world.title,96),'Invalid world title.');
+  const visited=new Set();
+  function visit(id,depth) {
+    requireThat(!visited.has(id) && depth<=LIMITS.depth,'Containment must be a finite tree.'); visited.add(id);
+    const t=world.tiles[id]; requireThat(t,'Missing tile.');
+    requireThat(namePattern.test(t.id) && namePattern.test(t.name || ''),'Use lowercase names with letters, numbers and hyphens.');
+    requireThat(textOK(t.label,48) && t.label.length>0,'Tile labels need 1–48 characters.');
+    requireThat(['hall','cottage'].includes(t.kind),'Unknown building kind.');
+    requireThat(Array.isArray(t.marks) && t.marks.every(m=>MARKS.includes(m)) && new Set(t.marks).size===t.marks.length,'Unknown or duplicate heuristic.');
+    requireThat(typeof t.src==='string' && t.src.length<=180 && (!t.src || /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[a-zA-Z0-9_./-]+$/.test(t.src)),'Source references must be relative paths, without .. or URL schemes.');
+    requireThat(Number.isSafeInteger(t.q) && Number.isSafeInteger(t.r) && distance(t,{q:0,r:0})<=LIMITS.extent,'Invalid or out-of-range tile coordinates.');
+    const positions=new Set(['0,0']), names=new Set();
+    for (const child of t.children) {
+      const c=world.tiles[child]; requireThat(c && c.parent===id,'Broken parent relation.');
+      requireThat(!positions.has(hexKey(c.q,c.r)),'Two tiles cannot occupy the same hex; the centre belongs to main.');
+      requireThat(!names.has(c.name),'Sibling names must be unique.');
+      positions.add(hexKey(c.q,c.r)); names.add(c.name); visit(child,depth+1);
+    }
+    // Every piece must be reachable through BESIDE from main, not float as an orphan.
+    const reached=new Set(['0,0']), queue=[{q:0,r:0}];
+    for (const p of queue) for (const d of DIRECTIONS) {
+      const n=neighbor(p,d.name), key=hexKey(n.q,n.r);
+      if (positions.has(key) && !reached.has(key)) {reached.add(key);queue.push(n);}
+    }
+    requireThat(reached.size===positions.size,'Every code tile must be connected to main through beside relations.');
+  }
+  visit(world.root,0);
+  requireThat(visited.size===Object.keys(world.tiles).length && visited.size<=LIMITS.tiles,'Orphan tiles or too many tiles.');
+  requireThat(world.agents.length<=16,'Too many agents.');
+  const ids=new Set();
+  for (const a of world.agents) {
+    requireThat(namePattern.test(a.id || '') && !ids.has(a.id),'Agent IDs must be unique.'); ids.add(a.id);
+    requireThat(textOK(a.name,32) && a.name.length>0 && textOK(a.role,48),'Invalid agent name or role.');
+    requireThat(['ochre','teal','rose'].includes(a.coat),'Unknown agent coat.');
+    requireThat(world.tiles[a.scene] && sceneTiles(world,a.scene).some(t=>t.id===a.tile),'Agent must occupy a tile in its current interior.');
+  }
+  requireThat(world.steps.length<=32 && textOK(world.processName,64),'Invalid rehearsal.');
+  for (const s of world.steps) requireThat(textOK(s.name,32) && world.tiles[s.tile] && ids.has(s.agent),'Process step references a missing tile or agent.');
+  return world;
+}
+function printWorld(world) {
+  validateWorld(world);
+  function writeTile(id) {
+    const t=world.tiles[id];
+    const attrs={id:t.id,name:t.name,label:t.label,q:t.q,r:t.r,kind:t.kind};
+    if (t.marks.length) attrs.marks=t.marks.join(' ');
+    if (t.src) attrs.src=t.src;
+    return xmlElement('tile',attrs,[xmlElement('inside',{},[
+      xmlElement('main',{ref:`#${id}`}),...t.children.map(writeTile)
+    ])]);
+  }
+  return serializeXml(xmlElement('world',{version:'1',title:world.title},[
+    writeTile(world.root),xmlElement('agents',{},world.agents.map(a=>xmlElement('agent',{
+      id:a.id,name:a.name,role:a.role,scene:`#${a.scene}`,tile:`#${a.tile}`,coat:a.coat
+    }))),xmlElement('process',{name:world.processName},world.steps.map(s=>xmlElement('step',{
+      name:s.name,tile:`#${s.tile}`,agent:`#${s.agent}`
+    })))
+  ]))+'\n';
+}
+/** An edit is atomic: mutate a candidate, validate it, then publish it. */
+function changeWorld(world,command) {
+  const next=structuredClone(world);
+  if (command.type==='tile.add') {
+    const owner=next.tiles[command.owner], origin=sceneTiles(next,command.owner).find(t=>t.id===command.beside);
+    requireThat(owner && origin,'Choose a tile in this interior.');
+    const {q,r}=neighbor(origin,command.direction);
+    requireThat(namePattern.test(command.id || '') && !Object.hasOwn(next.tiles,command.id),'Tile ID is invalid or already used.');
+    next.tiles[command.id]={id:command.id,name:command.name,label:command.label,q,r,kind:'cottage',marks:command.marks || [],src:command.src || '',parent:owner.id,children:[]};
+    owner.children.push(command.id);
+  } else if (command.type==='tile.mark') {
+    requireThat(Object.hasOwn(next.tiles,command.id) && MARKS.includes(command.mark),'Choose an existing tile and a known heuristic.');
+    const t=next.tiles[command.id];
+    t.marks=t.marks.includes(command.mark)?t.marks.filter(m=>m!==command.mark):[...t.marks,command.mark];
+  } else if (command.type==='agent.move') {
+    const a=next.agents.find(a=>a.id===command.id); requireThat(a,'Unknown agent.');
+    a.scene=command.scene; a.tile=command.tile;
+  } else fail('Unknown world command.');
+  return validateWorld(next);
+}
+function pathOf(world,id) {
+  const parts=[];
+  for (let t=world.tiles[id];t;t=t.parent===null?null:world.tiles[t.parent]) parts.unshift(t.name);
+  return '/'+parts.join('/');
+}
+function resolveTile(world,address,owner=world.root) {
+  let segments=String(address).split('/'),id=owner;
+  if (segments[0].startsWith('#')) {id=segments.shift().slice(1);}
+  else if (segments[0]==='') {
+    segments.shift(); id=world.root;
+    if (segments.shift()!==world.tiles[id].name) return null;
+  }
+  for (const name of segments) {
+    if (!Object.hasOwn(world.tiles,id)) return null;
+    if (!name || name==='.') continue;
+    if (name==='..') {id=world.tiles[id].parent || id;continue;}
+    id=world.tiles[id].children.find(c=>world.tiles[c].name===name);
+  }
+  return Object.hasOwn(world.tiles,id)?world.tiles[id]:null;
+}
+
+
+// ── clock.mjs ──
+/** Fixed simulation steps; capped debt prevents a resumed tab causing a catch-up storm.
+ * Rendering interpolates two simulation snapshots. No per-agent timers.
+ */
+class FixedClock {
+  constructor(step=1/30,maxSteps=5) {this.step=step;this.maxSteps=maxSteps;this.reset();}
+  reset() {this.last=null;this.accumulator=0;}
+  advance(timestamp,update) {
+    if(this.last===null) {this.last=timestamp;return 0;}
+    const elapsed=Math.max(0,Math.min((timestamp-this.last)/1000,this.step*this.maxSteps));
+    this.last=timestamp;this.accumulator+=elapsed;
+    let count=0;
+    while(this.accumulator+1e-10>=this.step && count<this.maxSteps) {
+      update(this.step);this.accumulator=Math.max(0,this.accumulator-this.step);count++;
+    }
+    return this.accumulator/this.step;
+  }
+}
+class Camera {
+  constructor() {this.x=0;this.y=0;this.zoom=1.45;}
+  screen(x,y,width,height) {return {x:(x-width/2)/this.zoom-this.x,y:(y-height/2)/this.zoom-this.y};}
+  project(x,y,width,height) {return {x:width/2+(x+this.x)*this.zoom,y:height/2+(y+this.y)*this.zoom};}
+  zoomAt(factor,x,y,width,height) {
+    const before=this.screen(x,y,width,height);
+    this.zoom=Math.max(0.35,Math.min(3.5,this.zoom*factor));
+    const after=this.screen(x,y,width,height);
+    this.x+=after.x-before.x;this.y+=after.y-before.y;
+  }
+  snapshot() {return {x:this.x,y:this.y,zoom:this.zoom};}
+  restore(value) {this.x=value.x;this.y=value.y;this.zoom=value.zoom;}
+}
+
+
+// ── art.mjs ──
+/** Original procedural pixel sprites. Paint once, blit thereafter; no network assets.
+ * Coordinates below are deliberately whole pixels. Artwork has no world authority.
+ */
+const INK={cream:'#f0dfb6',gold:'#e4b962',teal:'#80cbbb',rose:'#dc9eac',ink:'#10272a'};
+const MARK_INFO={
+  async:{title:'Async',color:'#b4b5e5',detail:'Clock tower · work may suspend and resume.'},
+  generator:{title:'Generator',color:'#7dc8cf',detail:'Waterwheel · values arrive one at a time.'},
+  env:{title:'Environment',color:'#a9ca8d',detail:'Glasshouse · depends on the surrounding environment.'},
+  http:{title:'HTTP',color:'#e6c87d',detail:'Beacon · communicates across a network boundary.'},
+  untrusted:{title:'Unchecked input',color:'#dda3b7',detail:'Cordon · input has an explicitly marked trust boundary.'}
+};
+const hashText=text=>{let h=2166136261;for(const c of String(text))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
+function paint(width,height,draw) {
+  const image=document.createElement('canvas');image.width=width;image.height=height;
+  const c=image.getContext('2d');c.imageSmoothingEnabled=false;draw(c);return image;
+}
+function rect(c,color,x,y,w,h) {c.fillStyle=color;c.fillRect(Math.round(x),Math.round(y),w,h);}
+function poly(c,color,points) {c.fillStyle=color;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fill();}
+function line(c,color,points,width=1) {c.strokeStyle=color;c.lineWidth=width;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.stroke();}
+function windowPane(c,x,y) {rect(c,'#284b4a',x-1,y-1,6,8);rect(c,'#f4cc74',x,y,4,6);rect(c,'#a9793f',x+2,y,1,6);rect(c,'#fff0b1',x,y,1,4);}
+function roof(c,x,y,w,h,color='#a7544e') {
+  poly(c,'#302f31',[[x-2,y+h+2],[x+w/2,y-2],[x+w+2,y+h+2]]);
+  poly(c,color,[[x,y+h],[x+w/2,y],[x+w,y+h]]);
+  for(let k=4;k<h;k+=4)line(c,'#c87963',[[x+w/2-k*w/(2*h),y+k],[x+w/2+k*w/(2*h),y+k]]);
+  line(c,'#edaa7c',[[x,y+h],[x+w/2,y],[x+w,y+h]]);
+}
+function cottage(c,variant=0) {
+  rect(c,'#203c34',11,48,42,6);rect(c,'#847b62',13,43,38,7);
+  rect(c,'#756151',17,25,31,23);rect(c,'#e1bf8b',17,26,21,20);rect(c,'#b8936b',38,27,10,20);
+  rect(c,'#a17556',17,43,21,3);rect(c,'#735b48',38,43,10,4);
+  rect(c,'#544e44',18,29,2,15);rect(c,'#544e44',35,29,2,15);
+  roof(c,12,10,41,18,variant?'#607c7a':'#a6534d');
+  rect(c,'#c9ba94',43,10,5,13);rect(c,'#756151',42,9,7,3);
+  rect(c,'#394744',27,34,7,13);rect(c,'#cc975a',28,35,5,11);rect(c,'#f7d077',32,39,1,2);
+  windowPane(c,21,31);windowPane(c,41,32);
+  rect(c,'#c8b795',26,46,10,3);rect(c,'#a39473',24,49,14,2);
+  rect(c,'#314f38',13,42,5,5);rect(c,'#759d56',12,40,7,4);rect(c,'#e8bb79',13,40,2,2);
+  rect(c,'#614e3d',48,44,5,5);rect(c,'#b58255',48,43,5,2);
+}
+function hall(c) {
+  rect(c,'#1e3731',5,48,54,8);rect(c,'#898570',7,43,50,10);
+  rect(c,'#d7bc89',10,23,44,24);rect(c,'#a58f6a',42,24,12,24);
+  rect(c,'#7b6950',10,43,44,5);rect(c,'#9e825e',11,27,42,2);
+  roof(c,6,8,52,18);roof(c,21,4,23,17,'#af6250');
+  rect(c,'#45493c',28,30,10,19);rect(c,'#8e6848',30,32,6,16);rect(c,'#e0b866',31,33,1,13);
+  windowPane(c,15,31);windowPane(c,23,31);windowPane(c,44,31);
+  rect(c,'#ebe2b7',31,19,4,5);rect(c,'#44554d',32,20,2,3);
+  rect(c,'#ccc3a0',25,47,16,3);rect(c,'#b4a98a',22,50,22,3);rect(c,'#918b72',19,53,28,2);
+  rect(c,'#675e45',9,14,2,32);rect(c,'#d4ad58',7,16,7,9);rect(c,'#ffe2a0',8,17,2,6);
+  rect(c,'#695b45',53,14,2,32);rect(c,'#80bda6',51,16,7,9);rect(c,'#b8dac0',52,17,2,6);
+}
+function lighthouse(c) {
+  rect(c,'#203c36',15,48,37,6);poly(c,'#8a8571',[[15,47],[22,42],[44,42],[51,48],[43,53],[20,53]]);
+  poly(c,'#d7d5b5',[[24,21],[39,21],[43,47],[20,47]]);poly(c,'#a4b6a3',[[34,21],[39,21],[43,47],[34,47]]);
+  rect(c,'#4f7974',22,36,19,5);rect(c,'#477370',23,24,17,4);
+  rect(c,'#364c47',22,12,20,11);rect(c,'#ebca71',24,13,16,8);rect(c,'#fff2ae',28,13,7,8);
+  for(let x=24;x<=40;x+=4)rect(c,'#7c805b',x,12,1,10);
+  roof(c,18,3,28,10,'#4d7978');rect(c,'#e4bf70',31,0,2,5);
+  rect(c,'#263e3b',27,40,6,8);rect(c,'#ceb288',26,48,9,3);
+  rect(c,'#71775e',48,28,1,21);poly(c,'#e8c576',[[49,28],[58,31],[49,35]]);
+  rect(c,'#a78b61',12,45,7,5);rect(c,'#dac99d',11,44,9,2);
+}
+function clocktower(c) {
+  rect(c,'#1f3939',15,48,36,6);rect(c,'#8c8b80',19,43,27,9);
+  rect(c,'#b8b1bd',23,17,20,29);rect(c,'#8c91a5',36,17,7,29);
+  roof(c,18,1,30,17,'#6b6c93');rect(c,'#ecd499',32,0,2,5);
+  rect(c,'#5b6973',22,22,22,13);rect(c,'#dcd6b1',27,23,12,11);
+  rect(c,'#333f50',32,25,2,5);rect(c,'#333f50',29,29,5,2);
+  rect(c,'#655f76',28,39,7,9);rect(c,'#dbbd84',29,40,5,7);
+  rect(c,'#c2b9a8',19,47,28,3);rect(c,'#9e99a1',17,50,32,3);
+  rect(c,'#5e655f',14,27,1,19);rect(c,'#a6b9cf',10,28,10,5);rect(c,'#ecd9a3',13,33,2,2);
+}
+function mill(c) {
+  cottage(c,1);
+  rect(c,'#466f70',3,49,53,5);rect(c,'#6fabb0',5,50,49,2);rect(c,'#b1d4ce',8,50,7,1);
+  rect(c,'#425755',44,33,18,17);rect(c,'#725744',46,30,14,20);
+  rect(c,'#b58d58',47,32,12,16);rect(c,'#514d40',49,34,8,12);
+  rect(c,'#af8958',45,38,17,4);rect(c,'#b69a67',51,29,4,22);rect(c,'#e8c990',50,37,6,6);
+  rect(c,'#4b716b',2,52,59,3);rect(c,'#7dac9c',4,53,10,1);rect(c,'#87bab0',42,53,10,1);
+}
+function greenhouse(c) {
+  rect(c,'#234336',9,47,46,8);rect(c,'#8b9474',12,42,41,9);
+  poly(c,'#80b8a8',[[13,27],[33,12],[53,27],[53,45],[13,45]]);
+  poly(c,'#527f76',[[33,13],[53,27],[53,45],[33,45]]);
+  poly(c,'#b9d6b3',[[15,27],[33,14],[33,25]]);
+  rect(c,'#679f7d',16,32,31,11);rect(c,'#3e6d4b',18,37,28,7);
+  for(let x=19;x<47;x+=6){rect(c,'#b3c882',x,32-(x%3),3,10);rect(c,'#628a52',x+2,36,3,6);}
+  for(let x=14;x<=53;x+=9)line(c,'#e0ce99',[[x,27],[x,45]]);
+  line(c,'#d8c28b',[[13,35],[53,35]]);line(c,'#efdcac',[[12,27],[33,11],[54,27]]);
+  line(c,'#d7c592',[[33,12],[33,45]]);line(c,'#e1cf9b',[[23,20],[23,45]]);
+  rect(c,'#25483d',29,35,8,12);rect(c,'#a2be93',30,36,6,10);
+  rect(c,'#a8ac86',27,47,12,4);rect(c,'#7b7150',7,43,5,6);rect(c,'#8faf62',6,39,7,5);
+}
+function quarantine(c) {
+  rect(c,'#2b3439',9,48,47,6);rect(c,'#8a7982',14,27,37,21);
+  rect(c,'#b49caf',15,28,24,19);rect(c,'#817990',39,28,11,19);
+  roof(c,9,11,47,17,'#7e617f');rect(c,'#3d394b',27,35,9,13);
+  rect(c,'#d2b483',27,38,9,3);rect(c,'#66566a',29,38,2,3);rect(c,'#66566a',33,38,2,3);
+  for(let x=8;x<59;x+=10){rect(c,'#b9a88d',x,42,2,12);rect(c,'#e0c392',x-1,42,4,2);}
+  line(c,'#d2c18b',[[9,45],[59,45]]);line(c,'#847569',[[9,50],[59,50]]);
+  rect(c,'#615467',45,19,1,16);poly(c,'#e4adba',[[46,20],[57,23],[46,27]]);
+  rect(c,'#725064',49,22,2,3);windowPane(c,19,32);windowPane(c,41,32);
+}
+function pine(c,x,y,shade=0) {
+  rect(c,'#48503b',x-1,y-2,3,8);
+  poly(c,shade?'#416b50':'#365e49',[[x,y-25],[x-10,y],[x+11,y]]);
+  poly(c,shade?'#759967':'#5a8458',[[x,y-25],[x-9,y-4],[x+2,y-6]]);
+  poly(c,'#87a779',[[x,y-25],[x-5,y-13],[x,y-15]]);
+}
+function spriteKind(tile) {
+  return tile.kind==='hall'?'hall':['untrusted','http','generator','env','async'].find(m=>tile.marks.includes(m)) || 'cottage';
+}
+class Art {
+  constructor() {
+    this.buildings=new Map(Object.entries({hall,cottage,http:lighthouse,async:clocktower,generator:mill,env:greenhouse,untrusted:quarantine}).map(([id,fn])=>[id,paint(64,64,fn)]));
+    this.grounds=new Map();this.masks=new Map();
+    this.trees=[0,1,2].map(i=>paint(64,64,c=>{rect(c,'#304b3b',12,46,39,5);pine(c,25,42,i%2);pine(c,42,47,1);if(i===2)pine(c,14,47);}));
+    this.agents=new Map();
+    for(const coat of ['ochre','teal','rose'])for(let frame=0;frame<3;frame++)this.agents.set(`${coat}-${frame}`,paint(16,22,c=>{
+      const dark={ochre:'#937145',teal:'#416b6b',rose:'#865d74'}[coat],light={ochre:'#e1b85d',teal:'#8ac2b2',rose:'#d79fb3'}[coat];
+      rect(c,'#243e38',3,19,11,2);rect(c,'#393d3b',5,16,3,4);rect(c,'#393d3b',10,16,3,4);
+      if(frame){rect(c,'#d2b38a',frame===1?4:11,19,3,1);}
+      rect(c,dark,4,10,10,8);rect(c,light,5,9,7,7);rect(c,'#efd0a0',6,4,6,6);
+      rect(c,'#9e7155',5,4,1,5);rect(c,'#35473f',11,6,1,2);rect(c,dark,4,2,10,4);rect(c,light,6,0,7,4);rect(c,light,2,4,13,2);
+      rect(c,'#f1d4a4',3,11,2,4);rect(c,'#f1d4a4',13,11,2,3);rect(c,'#e2c184',6,14,2,1);
+    }));
+    for(const [id,image] of this.buildings)this.masks.set(id,image.getContext('2d').getImageData(0,0,64,64).data);
+  }
+  building(tile) {return this.buildings.get(spriteKind(tile));}
+  opaque(tile,x,y) {return x>=0 && y>=0 && x<64 && y<64 && this.masks.get(spriteKind(tile))[(Math.floor(y)*64+Math.floor(x))*4+3]>64;}
+  ground(seed,occupied=false) {
+    const variant=seed%8,key=`${variant}-${occupied}`;
+    if(this.grounds.has(key))return this.grounds.get(key);
+    const image=paint(60,64,c=>{
+      const top=[[30,5],[53,15],[53,35],[30,45],[7,35],[7,15]];
+      poly(c,'#263e38',top.map(([x,y])=>[x,y+13]));
+      poly(c,'#716f50',[[7,25],[30,34],[30,56],[7,47]]);poly(c,'#535f49',[[30,34],[53,25],[53,47],[30,56]]);
+      line(c,'#9a9566',[[8,42],[29,52]]);line(c,'#3c5241',[[31,52],[52,43]]);
+      rect(c,'#a29c6b',13,44,5,2);rect(c,'#7f8558',39,47,5,2);
+      poly(c,['#789267','#81976b','#758f65','#7d9569'][variant%4],top);
+      line(c,'#a1b381',[[7,15],[30,5],[53,15]]);line(c,'#5b7954',[[7,35],[30,45],[53,35]]);
+      let s=seed;
+      for(let i=0;i<24;i++){s=(Math.imul(s,1664525)+1013904223)>>>0;const x=12+s%36,y=14+(s>>>8)%19;rect(c,i%3?'#91a878':'#68815b',x,y,2,1);}
+      if(occupied) {
+        poly(c,'#92a280',[[17,21],[30,16],[43,21],[44,31],[30,37],[16,31]]);
+        for(let y=22;y<=31;y+=4)for(let x=19;x<=40;x+=5)rect(c,(x+y)%2?'#bdbaa0':'#acb099',x+(y%3),y,4,2);
+      } else if(variant===3 || variant===6) {
+        for(const [x,y] of [[18,27],[37,21],[28,34]]){rect(c,'#607c51',x,y,1,4);rect(c,variant===3?'#dfc794':'#cba8a6',x-1,y-1,3,2);}
+      }
+    });
+    this.grounds.set(key,image);return image;
+  }
+  iconURL(kind) {return this.buildings.get(kind).toDataURL();}
+}
+
+
+// ── render.mjs ──
+
+
+
+function canvasOf(w,h) {const c=document.createElement('canvas');c.width=Math.ceil(w);c.height=Math.ceil(h);return c;}
+function hexOutline(c,x,y,scale=1) {
+  c.beginPath();
+  for(let i=0;i<6;i++) {
+    const a=(60*i-90)*Math.PI/180,px=x+Math.cos(a)*HEX_SIZE*scale,py=y+Math.sin(a)*HEX_SIZE*HEX_SQUASH*scale;
+    i?c.lineTo(px,py):c.moveTo(px,py);
+  }
+  c.closePath();
+}
+function drawLabel(c,text,x,y,color=INK.cream) {
+  c.font='6px monospace';c.textAlign='center';c.textBaseline='middle';
+  const width=c.measureText(text).width+9;
+  c.fillStyle='#172f2bee';c.fillRect(Math.round(x-width/2),Math.round(y-5),Math.ceil(width),10);
+  c.fillStyle=color;c.fillText(text,Math.round(x),Math.round(y));
+}
+class Renderer {
+  constructor(canvas,camera) {
+    this.canvas=canvas;this.camera=camera;this.art=new Art();
+    this.context=canvas.getContext('2d',{alpha:false});
+    if(!this.context)throw new Error('Canvas 2D is not available in this browser.');
+    this.width=1;this.height=1;this.objects=[];this.frames=0;this.pixelScale=2;
+  }
+  resize(width,height) {
+    // One logical pixel per two CSS pixels: bounded fill-rate even on HiDPI screens.
+    this.width=Math.max(1,Math.ceil(width/this.pixelScale));this.height=Math.max(1,Math.ceil(height/this.pixelScale));
+    this.canvas.width=this.width;this.canvas.height=this.height;
+    this.context.imageSmoothingEnabled=false;
+    this.backdrop=canvasOf(this.width,this.height);
+    const c=this.backdrop.getContext('2d'),w=this.width,h=this.height;
+    const gradient=c.createLinearGradient(0,0,0,h);gradient.addColorStop(0,'#142d30');gradient.addColorStop(.55,'#29443c');gradient.addColorStop(1,'#37554a');
+    c.fillStyle=gradient;c.fillRect(0,0,w,h);
+    // Distant silhouettes and quiet water: generated once on resize, not each frame.
+    for(let layer=0;layer<3;layer++) {
+      c.fillStyle=['#2d463e','#304c40','#355247'][layer];
+      for(let i=0;i<12;i++) {
+        const x=(i*71+layer*27)%w, y=h*(.55+layer*.16)+(i%3)*6;
+        c.beginPath();c.moveTo(x-37,y+12);c.lineTo(x-19,y+2);c.lineTo(x-11,y+2);c.lineTo(x-4,y-5);c.lineTo(x+8,y-5);c.lineTo(x+22,y+4);c.lineTo(x+34,y+5);c.lineTo(x+48,y+17);c.closePath();c.fill();
+      }
+    }
+    for(let i=0;i<85;i++) {
+      const v=hashText(`sky-${i}`),x=v%w,y=(v>>>9)%Math.max(1,Math.floor(h*.65));
+      c.fillStyle=i%5===0?'#768878':'#405f53';c.fillRect(x,y,1,1);
+    }
+    for(let i=0;i<25;i++) {const v=hashText(`water-${i}`);c.fillStyle='#426151';c.fillRect(v%w,h*.8+(v>>>9)%Math.max(1,Math.floor(h*.2)),5+v%16,1);}
+  }
+  rebuild(world,owner) {
+    this.world=world;this.owner=owner;this.tiles=sceneTiles(world,owner);
+    this.byPosition=new Map(this.tiles.map(t=>[hexKey(t.q,t.r),t]));
+    this.radius=Math.max(2,...this.tiles.map(t=>distance(t,{q:0,r:0})+1));
+    this.cells=disk(this.radius);this.allowed=new Set(this.cells.map(p=>hexKey(p.q,p.r)));
+    const coords=this.cells.map(p=>toPixel(p.q,p.r));
+    this.bounds={minX:Math.min(...coords.map(p=>p.x))-42,maxX:Math.max(...coords.map(p=>p.x))+42,minY:Math.min(...coords.map(p=>p.y))-66,maxY:Math.max(...coords.map(p=>p.y))+45};
+    const b=this.bounds;this.terrain=canvasOf(b.maxX-b.minX,b.maxY-b.minY);
+    const c=this.terrain.getContext('2d');c.imageSmoothingEnabled=false;c.translate(-b.minX,-b.minY);
+    const ordered=[...this.cells].sort((a,b)=>toPixel(a.q,a.r).y-toPixel(b.q,b.r).y || a.q-b.q);
+    for(const p of ordered) {const v=toPixel(p.q,p.r);c.drawImage(this.art.ground(hashText(`${owner}-${p.q}-${p.r}`),this.byPosition.has(hexKey(p.q,p.r))),Math.round(v.x-30),Math.round(v.y-25));}
+    // Roads describe adjacency only, never a hidden call graph.
+    c.lineCap='round';
+    for(const tile of this.tiles)for(let d=0;d<3;d++) {
+      const n=neighbor(tile,d),other=this.byPosition.get(hexKey(n.q,n.r));if(!other)continue;
+      const a=toPixel(tile.q,tile.r),b=toPixel(n.q,n.r);
+      c.strokeStyle='#91a080';c.lineWidth=5;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();
+      c.strokeStyle='#c1bfa0';c.lineWidth=2;c.setLineDash([2,3]);c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();c.setLineDash([]);
+    }
+    this.objects=[];
+    for(const p of ordered) {
+      const tile=this.byPosition.get(hexKey(p.q,p.r)),v=toPixel(p.q,p.r),seed=hashText(`${owner}-${p.q}-${p.r}`);
+      if(tile)this.objects.push({type:'building',tile,x:v.x,y:v.y});
+      else if(distance(p,{q:0,r:0})>1 && seed%4!==0)this.objects.push({type:'trees',image:this.art.trees[seed%3],x:v.x,y:v.y});
+    }
+    this.objects.sort((a,b)=>a.y-b.y || a.x-b.x);
+  }
+  fit() {
+    const b=this.bounds;
+    this.camera.zoom=Math.max(.35,Math.min(1.8,(this.width-46)/(b.maxX-b.minX),(this.height-78)/(b.maxY-b.minY)));
+    this.camera.x=-(b.minX+b.maxX)/2;
+    this.camera.y=-(b.minY+b.maxY)/2+12;
+  }
+  point(clientX,clientY) {
+    const r=this.canvas.getBoundingClientRect();
+    return {x:(clientX-r.left)*this.width/r.width,y:(clientY-r.top)*this.height/r.height};
+  }
+  pick(clientX,clientY,groundOnly=false) {
+    const screen=this.point(clientX,clientY),p=this.camera.screen(screen.x,screen.y,this.width,this.height);
+    if(!groundOnly) for(let i=this.objects.length-1;i>=0;i--) {
+      const o=this.objects[i];
+      if(o.type==='building' && this.art.opaque(o.tile,p.x-(Math.round(o.x)-32),p.y-(Math.round(o.y)-50)))return {tile:o.tile,hex:{q:o.tile.q,r:o.tile.r}};
+    }
+    const hex=fromPixel(p.x,p.y);return {hex,tile:this.byPosition.get(hexKey(hex.q,hex.r)) || null};
+  }
+  render(state,time,alpha) {
+    this.frames++;
+    const c=this.context,camera=this.camera;
+    c.setTransform(1,0,0,1,0,0);c.drawImage(this.backdrop,0,0);
+    c.translate(Math.round(this.width/2+camera.x*camera.zoom),Math.round(this.height/2+camera.y*camera.zoom));
+    c.scale(camera.zoom,camera.zoom);c.imageSmoothingEnabled=false;
+    c.drawImage(this.terrain,Math.round(this.bounds.minX),Math.round(this.bounds.minY));
+    const ghosts=[];
+    if(state.buildOrigin) {
+      const origin=this.tiles.find(t=>t.id===state.buildOrigin);
+      if(origin)for(let d=0;d<6;d++){const n=neighbor(origin,d);if(!this.byPosition.has(hexKey(n.q,n.r)))ghosts.push({...n,d});}
+    }
+    for(const ghost of ghosts) {
+      const p=toPixel(ghost.q,ghost.r);hexOutline(c,p.x,p.y,.92);
+      c.fillStyle='#aecba644';c.fill();c.strokeStyle='#dcdfac';c.lineWidth=1;c.setLineDash([2,2]);c.stroke();c.setLineDash([]);
+      c.fillStyle='#f5eac2';c.fillRect(Math.round(p.x)-4,Math.round(p.y)-1,9,2);c.fillRect(Math.round(p.x)-1,Math.round(p.y)-4,2,9);
+    }
+    for(const t of this.tiles) {
+      if(t.id!==state.selected && t.id!==state.hovered)continue;
+      const p=toPixel(t.q,t.r);hexOutline(c,p.x,p.y,.94);
+      c.fillStyle=t.id===state.selected?'#f5d98622':'#dfeac222';c.fill();
+      c.strokeStyle=t.id===state.selected?'#f2d388':'#b8d5bd';c.lineWidth=t.id===state.selected?1.4:1;c.stroke();
+    }
+    if(state.politics)this.drawPolitics(c,state,time);
+    const ghostPixels=ghosts.map(g=>toPixel(g.q,g.r));
+    const objects=this.objects.filter(o=>o.type!=='trees' || !ghostPixels.some(p=>p.x===o.x && p.y===o.y));
+    for(const a of this.world.agents.filter(a=>a.scene===this.owner)) {
+      const tile=this.tiles.find(t=>t.id===a.tile);if(!tile)continue;
+      const v=toPixel(tile.q,tile.r),m=state.motions.get(a.id);
+      const p=m?{x:m.previous.x+(m.position.x-m.previous.x)*alpha,y:m.previous.y+(m.position.y-m.previous.y)*alpha}:v;
+      objects.push({type:'agent',a,x:p.x+(a.coat==='teal'?-12:12),y:p.y+12,moving:!!m});
+    }
+    objects.sort((a,b)=>a.y-b.y || a.x-b.x);
+    for(const o of objects) {
+      if(o.type==='building') {
+        c.drawImage(this.art.building(o.tile),Math.round(o.x)-32,Math.round(o.y)-50);
+        // Secondary traits are visible pennants; primary trait supplies the building.
+        o.tile.marks.forEach((mark,i)=>{c.fillStyle=MARK_INFO[mark].color;c.fillRect(Math.round(o.x)+13+i*4,Math.round(o.y)-27,3,3);});
+      } else if(o.type==='trees')c.drawImage(o.image,Math.round(o.x)-32,Math.round(o.y)-50);
+      else {
+        const frame=o.moving?1+Math.floor(time*8)%2:0;
+        if(o.a.id===state.inhabited){c.strokeStyle='#f5dda0';c.lineWidth=1;c.beginPath();c.ellipse(o.x,o.y+1,8,3,0,0,Math.PI*2);c.stroke();}
+        c.drawImage(this.art.agents.get(`${o.a.coat}-${frame}`),Math.round(o.x)-8,Math.round(o.y)-19);
+        if(o.a.id===state.inhabited){c.fillStyle='#f2dba2';c.fillRect(Math.round(o.x)-1,Math.round(o.y)-24,3,2);}
+      }
+    }
+    const selected=this.tiles.find(t=>t.id===state.selected),hover=this.tiles.find(t=>t.id===state.hovered);
+    if(selected){const p=toPixel(selected.q,selected.r);drawLabel(c,selected.main?`${selected.name} · main`:selected.name,p.x,p.y+22,INK.gold);}
+    if(hover && hover.id!==selected?.id){const p=toPixel(hover.q,hover.r);drawLabel(c,hover.name,p.x,p.y+22);}
+    if(state.politics) {
+      this.world.steps.forEach((s,i)=>{const t=this.tiles.find(t=>t.id===s.tile);if(t){const p=toPixel(t.q,t.r);drawLabel(c,`${i+1} ${s.name}`,p.x,p.y-53,i===state.processIndex?INK.gold:INK.cream);}});
+    }
+    // Soft-firefly motion is illustrative atmosphere, unrelated to program execution.
+    if(!state.reducedMotion)for(let i=0;i<9;i++) {
+      const h=hashText(`${this.owner}-firefly-${i}`),x=(h%230)-115+Math.sin(time*.45+i)*3,y=((h>>>8)%130)-45+Math.cos(time*.3+i)*2;
+      if(Math.sin(time*.7+i)>.6){c.fillStyle='#d3d49e';c.fillRect(Math.round(x),Math.round(y),1,1);}
+    }
+    c.setTransform(1,0,0,1,0,0);
+  }
+  drawPolitics(c,state,time) {
+    const points=this.world.steps.map(s=>this.tiles.find(t=>t.id===s.tile)).map(t=>t?toPixel(t.q,t.r):null);
+    for(let i=1;i<points.length;i++) {
+      const a=points[i-1],b=points[i];if(!a || !b)continue;
+      const active=i===state.processIndex;
+      c.strokeStyle=active?'#f4d78d':'#d3b69ba8';c.lineWidth=active?1.6:1;c.setLineDash([3,3]);c.lineDashOffset=state.rehearsal?-time*5:0;
+      c.beginPath();c.moveTo(a.x,a.y+7);c.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2+31,b.x,b.y+7);c.stroke();c.setLineDash([]);
+      const dx=b.x-a.x,dy=b.y-a.y-35,angle=Math.atan2(dy,dx);
+      c.fillStyle=active?'#f4d78d':'#d3b69b';c.beginPath();c.moveTo(b.x,b.y+7);c.lineTo(b.x-6*Math.cos(angle-.5),b.y+7-6*Math.sin(angle-.5));c.lineTo(b.x-6*Math.cos(angle+.5),b.y+7-6*Math.sin(angle+.5));c.closePath();c.fill();
+    }
+    c.lineDashOffset=0;
+  }
+}
+
+
+// ── demo.mjs ──
+// Generated from world.xml by tools/build.mjs. Do not edit.
+const DEMO_XML="<world version=\"1\" title=\"The little workshop\">\n  <tile id=\"workshop\" name=\"workshop\" label=\"Workshop\" q=\"0\" r=\"0\" kind=\"hall\" src=\"src/main.mjs\">\n    <inside>\n      <main ref=\"#workshop\"/>\n      <tile id=\"read-args\" name=\"read-args\" label=\"Read arguments\" q=\"-1\" r=\"0\" kind=\"cottage\" src=\"src/cli/args.mjs\">\n        <inside>\n          <main ref=\"#read-args\"/>\n          <tile id=\"options\" name=\"options\" label=\"Parse options\" q=\"1\" r=\"0\" kind=\"cottage\" src=\"src/cli/options.mjs\">\n            <inside>\n              <main ref=\"#options\"/>\n            </inside>\n          </tile>\n          <tile id=\"stdin\" name=\"stdin\" label=\"Read stdin\" q=\"0\" r=\"1\" kind=\"cottage\" marks=\"untrusted\" src=\"src/cli/stdin.mjs\">\n            <inside>\n              <main ref=\"#stdin\"/>\n            </inside>\n          </tile>\n          <tile id=\"help\" name=\"help\" label=\"Show help\" q=\"0\" r=\"-1\" kind=\"cottage\" src=\"src/cli/help.mjs\">\n            <inside>\n              <main ref=\"#help\"/>\n            </inside>\n          </tile>\n        </inside>\n      </tile>\n      <tile id=\"validate\" name=\"validate\" label=\"Validate input\" q=\"0\" r=\"-1\" kind=\"cottage\" src=\"src/input/validate.mjs\">\n        <inside>\n          <main ref=\"#validate\"/>\n        </inside>\n      </tile>\n      <tile id=\"stream\" name=\"stream\" label=\"Stream records\" q=\"1\" r=\"-1\" kind=\"cottage\" marks=\"generator\" src=\"src/records.mjs\">\n        <inside>\n          <main ref=\"#stream\"/>\n          <tile id=\"yield\" name=\"yield\" label=\"Yield one record\" q=\"1\" r=\"0\" kind=\"cottage\" marks=\"generator\" src=\"src/stream/yield.mjs\">\n            <inside>\n              <main ref=\"#yield\"/>\n            </inside>\n          </tile>\n          <tile id=\"cancel\" name=\"cancel\" label=\"Handle cancellation\" q=\"0\" r=\"1\" kind=\"cottage\" marks=\"async\" src=\"src/stream/cancel.mjs\">\n            <inside>\n              <main ref=\"#cancel\"/>\n            </inside>\n          </tile>\n        </inside>\n      </tile>\n      <tile id=\"fetch\" name=\"fetch\" label=\"Fetch resource\" q=\"1\" r=\"0\" kind=\"cottage\" marks=\"http async\" src=\"src/fetch.mjs\">\n        <inside>\n          <main ref=\"#fetch\"/>\n          <tile id=\"request\" name=\"request\" label=\"Make request\" q=\"1\" r=\"0\" kind=\"cottage\" marks=\"http async\" src=\"src/fetch/request.mjs\">\n            <inside>\n              <main ref=\"#request\"/>\n              <tile id=\"headers\" name=\"headers\" label=\"Prepare headers\" q=\"-1\" r=\"0\" kind=\"cottage\" src=\"src/fetch/headers.mjs\">\n                <inside>\n                  <main ref=\"#headers\"/>\n                </inside>\n              </tile>\n              <tile id=\"body\" name=\"body\" label=\"Encode body\" q=\"0\" r=\"1\" kind=\"cottage\" src=\"src/fetch/body.mjs\">\n                <inside>\n                  <main ref=\"#body\"/>\n                </inside>\n              </tile>\n            </inside>\n          </tile>\n          <tile id=\"response\" name=\"response\" label=\"Read response\" q=\"0\" r=\"1\" kind=\"cottage\" marks=\"untrusted\" src=\"src/fetch/response.mjs\">\n            <inside>\n              <main ref=\"#response\"/>\n            </inside>\n          </tile>\n          <tile id=\"retry\" name=\"retry\" label=\"Retry later\" q=\"0\" r=\"-1\" kind=\"cottage\" marks=\"async\" src=\"src/fetch/retry.mjs\">\n            <inside>\n              <main ref=\"#retry\"/>\n            </inside>\n          </tile>\n        </inside>\n      </tile>\n      <tile id=\"format\" name=\"format\" label=\"Format output\" q=\"0\" r=\"1\" kind=\"cottage\" src=\"src/format.mjs\">\n        <inside>\n          <main ref=\"#format\"/>\n        </inside>\n      </tile>\n      <tile id=\"config\" name=\"config\" label=\"Read environment\" q=\"-1\" r=\"1\" kind=\"cottage\" marks=\"env\" src=\"src/config.mjs\">\n        <inside>\n          <main ref=\"#config\"/>\n          <tile id=\"defaults\" name=\"defaults\" label=\"Defaults\" q=\"1\" r=\"0\" kind=\"cottage\" src=\"src/config/defaults.mjs\">\n            <inside>\n              <main ref=\"#defaults\"/>\n            </inside>\n          </tile>\n          <tile id=\"env\" name=\"env\" label=\"Read variables\" q=\"0\" r=\"1\" kind=\"cottage\" marks=\"env untrusted\" src=\"src/config/env.mjs\">\n            <inside>\n              <main ref=\"#env\"/>\n            </inside>\n          </tile>\n        </inside>\n      </tile>\n      <tile id=\"schedule\" name=\"schedule\" label=\"Schedule work\" q=\"2\" r=\"-1\" kind=\"cottage\" marks=\"async\" src=\"src/schedule.mjs\">\n        <inside>\n          <main ref=\"#schedule\"/>\n        </inside>\n      </tile>\n      <tile id=\"foreign\" name=\"foreign\" label=\"External input\" q=\"2\" r=\"0\" kind=\"cottage\" marks=\"untrusted\" src=\"src/input/external.mjs\">\n        <inside>\n          <main ref=\"#foreign\"/>\n        </inside>\n      </tile>\n      <tile id=\"write\" name=\"write\" label=\"Write result\" q=\"1\" r=\"1\" kind=\"cottage\" src=\"src/write.mjs\">\n        <inside>\n          <main ref=\"#write\"/>\n        </inside>\n      </tile>\n      <tile id=\"logging\" name=\"logging\" label=\"Diagnostics\" q=\"-1\" r=\"2\" kind=\"cottage\" src=\"src/logging.mjs\">\n        <inside>\n          <main ref=\"#logging\"/>\n        </inside>\n      </tile>\n    </inside>\n  </tile>\n  <agents>\n    <agent id=\"moss\" name=\"Moss\" role=\"Builder\" scene=\"#workshop\" tile=\"#workshop\" coat=\"ochre\"/>\n    <agent id=\"iris\" name=\"Iris\" role=\"Scout\" scene=\"#workshop\" tile=\"#read-args\" coat=\"teal\"/>\n    <agent id=\"pip\" name=\"Pip\" role=\"Reviewer\" scene=\"#workshop\" tile=\"#validate\" coat=\"rose\"/>\n  </agents>\n  <process name=\"Inspect → assemble → review → release\">\n    <step name=\"Inspect\" tile=\"#read-args\" agent=\"#iris\"/>\n    <step name=\"Assemble\" tile=\"#workshop\" agent=\"#moss\"/>\n    <step name=\"Review\" tile=\"#validate\" agent=\"#pip\"/>\n    <step name=\"Release\" tile=\"#write\" agent=\"#moss\"/>\n  </process>\n</world>\n";
+
+
+// ── app.mjs ──
+
+
+
+
+
+
+const $=id=>document.getElementById(id);
+const STORAGE_KEY='beside-inside.world.v1';
+function element(tag,text,className) {
+  const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;
+}
+function startGame() {
+  let world=parseWorld(DEMO_XML),startupNote='';
+  try {
+    const saved=localStorage.getItem(STORAGE_KEY);
+    if(saved) {try {world=parseWorld(saved);}catch {startupNote='The saved world could not be read. The example is open; the saved copy has not been overwritten.';}}
+  } catch {startupNote='Browser storage is unavailable. Export XML to keep your changes.';}
+  const camera=new Camera(),renderer=new Renderer($('world-canvas'),camera),clock=new FixedClock();
+  const media=matchMedia('(prefers-reduced-motion: reduce)'),scope=new AbortController();
+  const state={scene:world.root,selected:world.root,hovered:null,buildOrigin:null,politics:false,inhabited:null,motions:new Map(),paused:media.matches,reducedMotion:media.matches,rehearsal:false,processIndex:-1};
+  const history=[],future=[],stack=[],pointers=new Map();
+  let raf=0,time=0,noticeTimer=0,disposed=false,firstResize=true,buildDirection=null,processHold=0,lastTap=null,gesture=null;
+  const on=(target,type,fn,options={})=>target.addEventListener(type,fn,{...options,signal:scope.signal});
+  function notice(text) {
+    clearTimeout(noticeTimer);$('notice').textContent=text;$('notice').hidden=false;
+    noticeTimer=setTimeout(()=>{$('notice').hidden=true;},5400);
+  }
+  function save() {
+    try {localStorage.setItem(STORAGE_KEY,printWorld(world));$('save-state').textContent='● Saved in this browser';}
+    catch {$('save-state').textContent='Export XML to keep changes';}
+  }
+  function invalidate() {if(!disposed && !raf && !document.hidden)raf=requestAnimationFrame(frame);}
+  function refresh(rebuild=true) {
+    if(rebuild)renderer.rebuild(world,state.scene);else renderer.world=world;
+    updateUI();invalidate();
+  }
+  function commit(command,label,record=true) {
+    const candidate=changeWorld(world,command);
+    if(record) {history.push(printWorld(world));if(history.length>40)history.shift();future.length=0;}
+    world=candidate;save();refresh(command.type!=='agent.move');
+    if(label)notice(label);
+  }
+  function stopTransient() {state.motions.clear();state.rehearsal=false;state.processIndex=-1;processHold=0;}
+  function select(id) {
+    if(!sceneTiles(world,state.scene).some(t=>t.id===id))throw new Error('That tile is not in this interior.');
+    state.selected=id;state.buildOrigin=null;refresh(false);
+  }
+  function enter(id=state.selected) {
+    if(id===state.scene){notice('This is already the main tile. Choose one of its parts to go further inside.');return;}
+    if(!sceneTiles(world,state.scene).some(t=>t.id===id))throw new Error('Enter an adjacent-level tile, not an unrelated interior.');
+    stopTransient();stack.push({scene:state.scene,selected:id,camera:camera.snapshot()});
+    state.scene=id;state.selected=id;state.hovered=null;state.buildOrigin=null;
+    if(state.inhabited)world=changeWorld(world,{type:'agent.move',id:state.inhabited,scene:id,tile:id});
+    renderer.rebuild(world,id);renderer.fit();save();refresh(false);
+    notice(`Inside ${world.tiles[id].label}. #${id} is the same tile, now at the centre.`);
+  }
+  function leave() {
+    if(!stack.length){notice('This is the outermost interior.');return;}
+    stopTransient();const previous=stack.pop();
+    state.scene=previous.scene;state.selected=previous.selected;state.hovered=null;state.buildOrigin=null;
+    if(state.inhabited)world=changeWorld(world,{type:'agent.move',id:state.inhabited,scene:state.scene,tile:state.selected});
+    renderer.rebuild(world,state.scene);camera.restore(previous.camera);save();refresh(false);
+  }
+  function undo(redo=false) {
+    const from=redo?future:history,to=redo?history:future;if(!from.length)return;
+    const candidate=parseWorld(from.at(-1));to.push(printWorld(world));from.pop();stopTransient();world=candidate;
+    if(!world.tiles[state.scene]){state.scene=world.root;stack.length=0;}
+    if(!sceneTiles(world,state.scene).some(t=>t.id===state.selected))state.selected=state.scene;
+    if(!world.agents.some(a=>a.id===state.inhabited))state.inhabited=null;
+    state.buildOrigin=null;save();refresh();notice(redo?'World edit restored.':'World edit undone.');
+  }
+  function beginBuild(direction=null) {
+    stopTransient();
+    if(direction===null) {
+      const origin=renderer.tiles.find(t=>t.id===state.selected);
+      if(!DIRECTIONS.some((_,i)=>{const n=neighbor(origin,i);return !renderer.byPosition.has(hexKey(n.q,n.r));})) {
+        notice('All six sides are occupied. Select an outer tile, or go inside a tile.');return;
+      }
+      state.buildOrigin=state.buildOrigin?null:state.selected;
+      if(state.buildOrigin)notice('Choose a highlighted side, or an empty side in the inspector.');
+      refresh(false);return;
+    }
+    const origin=sceneTiles(world,state.scene).find(t=>t.id===state.selected),target=neighbor(origin,direction);
+    if(renderer.byPosition.has(hexKey(target.q,target.r)))throw new Error('That side is occupied.');
+    buildDirection=direction;state.buildOrigin=state.selected;
+    $('build-form').reset();$('build-error').textContent='';
+    $('build-context').textContent=`${DIRECTIONS[direction].name} of ${origin.label}, inside ${world.tiles[state.scene].label}.`;
+    $('build-dialog').showModal();$('new-name').focus();refresh(false);
+  }
+  function walk(agentId=state.inhabited,targetId=state.selected) {
+    if(!agentId){notice('Choose an inhabitant first.');return false;}
+    const a=world.agents.find(a=>a.id===agentId),tiles=sceneTiles(world,state.scene);
+    if(!a || a.scene!==state.scene)throw new Error('That agent is in another interior.');
+    const start=tiles.find(t=>t.id===a.tile),target=tiles.find(t=>t.id===targetId);
+    if(!target)throw new Error('Choose a tile in this interior.');
+    const path=findPath(start,target,new Set(tiles.map(t=>hexKey(t.q,t.r))));
+    if(!path)throw new Error('No beside-only walking route exists.');
+    if(path.length===1)return true;
+    if(state.paused || state.reducedMotion) {
+      commit({type:'agent.move',id:agentId,scene:state.scene,tile:targetId},null,false);return true;
+    }
+    const points=path.map(p=>toPixel(p.q,p.r));
+    state.motions.set(agentId,{path:points,segment:0,position:{...points[0]},previous:{...points[0]},target:targetId,scene:state.scene});
+    invalidate();return true;
+  }
+  function rehearse() {
+    if(state.rehearsal){stopTransient();refresh(false);return;}
+    if(!world.steps.length)throw new Error('This world has no rehearsal steps.');
+    if(!world.steps.every(s=>renderer.tiles.some(t=>t.id===s.tile)))throw new Error('This small rehearsal requires all steps in the current interior.');
+    if(!world.steps.every(s=>world.agents.find(a=>a.id===s.agent)?.scene===state.scene))throw new Error('A required agent is in another interior. Bring it back first.');
+    stopTransient();state.politics=true;state.rehearsal=true;state.paused=false;state.processIndex=0;processHold=0;clock.reset();
+    walk(world.steps[0].agent,world.steps[0].tile);refresh(false);notice('Rehearsing responsibilities only. No code is being executed.');
+  }
+  function tick(dt) {
+    time+=dt;
+    for(const [id,m] of [...state.motions]) {
+      m.previous={...m.position};let remaining=dt*32;
+      while(remaining>0 && m.segment<m.path.length-1) {
+        const target=m.path[m.segment+1],dx=target.x-m.position.x,dy=target.y-m.position.y,len=Math.hypot(dx,dy);
+        if(len<=remaining+.00001){m.position={...target};m.segment++;remaining-=len;}
+        else {m.position.x+=dx/len*remaining;m.position.y+=dy/len*remaining;remaining=0;}
+      }
+      if(m.segment===m.path.length-1) {
+        state.motions.delete(id);commit({type:'agent.move',id,scene:m.scene,tile:m.target},null,false);
+      }
+    }
+    if(state.rehearsal) {
+      const step=world.steps[state.processIndex];
+      if(!state.motions.has(step.agent))processHold+=dt;
+      if(processHold>1.4) {
+        processHold=0;
+        if(state.processIndex===world.steps.length-1){state.rehearsal=false;notice('Rehearsal complete. No code was executed.');}
+        else {state.processIndex++;const s=world.steps[state.processIndex];walk(s.agent,s.tile);}
+        updateUI();
+      }
+    }
+  }
+  function frame(timestamp) {
+    raf=0;if(disposed || document.hidden)return;
+    try {
+      const alpha=state.paused?1:clock.advance(timestamp,tick);
+      renderer.render(state,time,alpha);
+      if(!state.paused && (!state.reducedMotion || state.motions.size || state.rehearsal))invalidate();
+    } catch(error) {state.paused=true;console.error(error);notice(`The game paused safely: ${error.message}`);}
+  }
+  function updateUI() {
+    const tiles=sceneTiles(world,state.scene),tile=tiles.find(t=>t.id===state.selected) || tiles[0];
+    state.selected=tile.id;
+    $('tile-title').textContent=tile.label;$('coordinates').textContent=`${tile.q} / ${tile.r}`;
+    $('tile-subtitle').textContent=tile.main?'Main tile · same identity':`${tile.children.length} part${tile.children.length===1?'':'s'} inside`;
+    $('portrait').src=renderer.art.iconURL(spriteKind(tile));
+    $('address').textContent=`#${tile.id}\n${pathOf(world,tile.id)}`;$('address').style.whiteSpace='pre-wrap';
+    $('interior-note').textContent=tile.main?'You are inside this tile. Its main tile is not a copy: it is the same piece of code.':'Go inside to reveal its related parts. This building remains the main tile at the centre.';
+    $('enter').disabled=tile.main;$('leave').disabled=!stack.length;
+    $('build').firstChild.textContent=state.buildOrigin?'Cancel construction ':'Build beside ';
+    $('world-canvas').classList.toggle('building',!!state.buildOrigin);
+    $('scene-title').textContent=state.scene===world.root?world.title:`Inside ${world.tiles[state.scene].label}`;
+    $('scene-subtitle').textContent=state.scene===world.root?'Small pieces. A world of their own.':`Same identity. A closer look. ${world.tiles[state.scene].children.length} related parts.`;
+    const ancestors=[...stack.map(s=>s.scene),state.scene];
+    $('breadcrumbs').replaceChildren();
+    ancestors.forEach((id,i)=>{
+      if(i)$('breadcrumbs').append(element('span','/'));
+      const b=element('button',world.tiles[id]?.name || id);
+      b.type='button';on(b,'click',()=>{while(state.scene!==id && stack.length)leave();});$('breadcrumbs').append(b);
+    });
+    $('tile-select').replaceChildren(...tiles.map(t=>{const o=element('option',`${t.main?'⌂ ':''}${t.label}`);o.value=t.id;return o;}));$('tile-select').value=tile.id;
+    $('neighbors').replaceChildren();
+    for(const index of [2,1,3,0,4,5]) {
+      const n=neighbor(tile,index),other=tiles.find(t=>t.q===n.q && t.r===n.r),button=element('button',undefined,other?'':'empty');
+      button.type='button';button.append(element('b',DIRECTIONS[index].name),element('span',other?other.name:'＋ open ground'));
+      button.title=other?`Select ${other.label}`:`Build ${DIRECTIONS[index].name} of ${tile.label}`;
+      on(button,'click',()=>guard(()=>other?select(other.id):beginBuild(index)));$('neighbors').append(button);
+    }
+    $('marks').replaceChildren(...MARKS.map(mark=>{
+      const b=element('button',undefined,'mark-toggle');b.type='button';b.dataset.mark=mark;b.setAttribute('aria-pressed',String(tile.marks.includes(mark)));b.title=MARK_INFO[mark].detail;
+      b.append(element('i'),element('span',MARK_INFO[mark].title));
+      on(b,'click',()=>guard(()=>{stopTransient();commit({type:'tile.mark',id:tile.id,mark},`${MARK_INFO[mark].title} marking updated.`);document.querySelector(`[data-mark="${mark}"]`)?.focus();}));return b;
+    }));
+    $('source').textContent=tile.src?`${tile.src} · reference only`:'No source attached. Execution is undecided.';
+    const locals=world.agents.filter(a=>a.scene===state.scene);$('agent-count').textContent=String(locals.length);$('agents').replaceChildren();
+    if(!locals.length)$('agents').append(element('p','No inhabitants here. Inhabit someone outside and bring them in.','empty-copy'));
+    for(const a of locals) {
+      const row=element('div',undefined,'agent'),img=element('img');img.src=renderer.art.agents.get(`${a.coat}-0`).toDataURL();img.alt='';
+      const identity=element('div',undefined,'identity');identity.append(element('strong',a.name),element('small',`${a.role} · ${world.tiles[a.tile].name}`));
+      const button=element('button',state.inhabited===a.id?'Release':'Inhabit');button.setAttribute('aria-pressed',String(state.inhabited===a.id));
+      on(button,'click',()=>{stopTransient();state.inhabited=state.inhabited===a.id?null:a.id;refresh(false);if(state.inhabited)notice(`Inhabiting ${a.name}. Select a tile and press G to walk there.`);});
+      row.append(img,identity,button);$('agents').append(row);
+    }
+    $('walk').disabled=!locals.some(a=>a.id===state.inhabited);
+    $('process-panel').hidden=!state.politics;
+    $('process-steps').replaceChildren(...world.steps.map((s,i)=>element('li',`${i+1} ${s.name}`,i===state.processIndex?'active':'')));
+    $('rehearse').firstChild.textContent=state.rehearsal?'Stop rehearsal ':'Rehearse process ';
+    $('explore').setAttribute('aria-pressed',String(!state.politics));$('politics').setAttribute('aria-pressed',String(state.politics));
+    $('pause').textContent=state.paused?'▷':'Ⅱ';$('pause').title=state.paused?'Resume animation (Space)':'Pause animation (Space)';$('pause').setAttribute('aria-label',$('pause').title);
+    $('zoom-value').textContent=`${Math.round(camera.zoom*100)}%`;
+    $('undo').disabled=!history.length;$('redo').disabled=!future.length;
+    $('world-stats').textContent=`${Object.keys(world.tiles).length} code tiles · ${stack.length+1} level${stack.length?'s':''} deep · ${state.paused?'paused':'local world'}`;
+  }
+  function guard(fn) {try{return fn();}catch(error){notice(error.message);return false;}}
+  function setPolitics(value) {state.politics=value;refresh(false);}
+  function togglePause() {state.paused=!state.paused;clock.reset();refresh(false);}
+  function zoom(factor,x=renderer.width/2,y=renderer.height/2) {camera.zoomAt(factor,x,y,renderer.width,renderer.height);$('zoom-value').textContent=`${Math.round(camera.zoom*100)}%`;invalidate();}
+  const callbacks={enter:()=>enter(),leave,build:()=>beginBuild(),undo:()=>undo(),redo:()=>undo(true),walk:()=>{stopTransient();walk();refresh(false);},rehearse,explore:()=>setPolitics(false),politics:()=>setPolitics(!state.politics),pause:togglePause,fit:()=>{renderer.fit();refresh(false);},'zoom-in':()=>zoom(1.18),'zoom-out':()=>zoom(1/1.18),help:()=>{$('help-dialog').showModal();}};
+  for(const [id,fn] of Object.entries(callbacks))on($(id),'click',()=>guard(fn));
+  on($('tile-select'),'change',event=>guard(()=>select(event.target.value)));
+  on($('build-form'),'submit',event=>{
+    event.preventDefault();
+    try {
+      const name=$('new-name').value.trim(),label=$('new-label').value.trim(),mark=$('new-mark').value;
+      let id=name,n=2;while(Object.hasOwn(world.tiles,id))id=`${name.slice(0,40)}-${n++}`;
+      commit({type:'tile.add',owner:state.scene,beside:state.selected,direction:DIRECTIONS[buildDirection].name,id,name,label,marks:mark?[mark]:[]},`Built ${label}.`);
+      state.selected=id;state.buildOrigin=null;$('build-dialog').close();refresh(false);
+    } catch(error){$('build-error').textContent=error.message;}
+  });
+  on($('cancel-build'),'click',()=>{$('build-dialog').close();state.buildOrigin=null;refresh(false);});
+  on($('build-dialog'),'cancel',()=>{state.buildOrigin=null;refresh(false);});
+  on($('export'),'click',()=>{
+    const blob=new Blob([printWorld(world)],{type:'application/xml'}),url=URL.createObjectURL(blob),a=element('a');
+    a.href=url;a.download='beside-inside.world.xml';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);notice('Exported this world as XML.');
+  });
+  on($('import'),'click',()=>$('file-input').click());
+  on($('file-input'),'change',async event=>{
+    const file=event.target.files[0];event.target.value='';if(!file)return;
+    try {
+      if(file.size>LIMITS.bytes)throw new Error('World XML exceeds the 1 MiB limit.');
+      const candidate=parseWorld(await file.text());if(disposed)return;
+      stopTransient();history.push(printWorld(world));if(history.length>40)history.shift();future.length=0;world=candidate;
+      stack.length=0;state.scene=world.root;state.selected=world.root;state.hovered=null;state.buildOrigin=null;state.inhabited=null;
+      renderer.rebuild(world,state.scene);renderer.fit();save();refresh(false);notice('World imported. No linked source was fetched or executed.');
+    }catch(error){notice(`Import refused: ${error.message}`);}
+  });
+  function activatePointer(event,pointer) {
+    if(pointer.moved)return;
+    const hit=renderer.pick(event.clientX,event.clientY,!!state.buildOrigin);
+    if(state.buildOrigin) {
+      const origin=renderer.tiles.find(t=>t.id===state.buildOrigin),d=DIRECTIONS.findIndex((_,i)=>{const n=neighbor(origin,i);return n.q===hit.hex.q && n.r===hit.hex.r;});
+      if(d>=0 && !hit.tile){state.selected=state.buildOrigin;beginBuild(d);}else if(hit.tile){select(hit.tile.id);}
+      return;
+    }
+    if(!hit.tile)return;
+    const double=lastTap?.id===hit.tile.id && performance.now()-lastTap.time<330;
+    select(hit.tile.id);
+    if(double){lastTap=null;enter(hit.tile.id);}else lastTap={id:hit.tile.id,time:performance.now()};
+  }
+  const canvas=$('world-canvas');
+  on(canvas,'pointerdown',event=>{
+    if(event.button!==0 && event.button!==1)return;
+    canvas.focus({preventScroll:true});canvas.setPointerCapture(event.pointerId);
+    pointers.set(event.pointerId,{x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY,moved:event.button===1});
+    if(pointers.size>1){for(const p of pointers.values())p.moved=true;gesture=null;lastTap=null;}
+  });
+  on(canvas,'pointermove',event=>{
+    const p=pointers.get(event.pointerId);
+    if(!p) {
+      const hit=renderer.pick(event.clientX,event.clientY);const hovered=hit.tile?.id || null;
+      if(state.hovered!==hovered){state.hovered=hovered;invalidate();}return;
+    }
+    const dx=event.clientX-p.x,dy=event.clientY-p.y;p.x=event.clientX;p.y=event.clientY;
+    if(Math.hypot(p.x-p.startX,p.y-p.startY)>5)p.moved=true;
+    if(pointers.size===2) {
+      const [a,b]=[...pointers.values()],mid={x:(a.x+b.x)/2,y:(a.y+b.y)/2},length=Math.hypot(a.x-b.x,a.y-b.y);
+      if(gesture) {
+        const point=renderer.point(mid.x,mid.y);zoom(length/Math.max(1,gesture.length),point.x,point.y);
+        camera.x+=(mid.x-gesture.x)/renderer.pixelScale/camera.zoom;camera.y+=(mid.y-gesture.y)/renderer.pixelScale/camera.zoom;
+      }
+      gesture={...mid,length};invalidate();
+    } else if(p.moved) {
+      camera.x+=dx/renderer.pixelScale/camera.zoom;camera.y+=dy/renderer.pixelScale/camera.zoom;lastTap=null;invalidate();
+    }
+  });
+  on(canvas,'pointerup',event=>{
+    const p=pointers.get(event.pointerId);pointers.delete(event.pointerId);gesture=null;
+    if(canvas.hasPointerCapture(event.pointerId))canvas.releasePointerCapture(event.pointerId);
+    if(p)guard(()=>activatePointer(event,p));
+  });
+  on(canvas,'pointercancel',event=>{pointers.delete(event.pointerId);gesture=null;lastTap=null;});
+  on(canvas,'lostpointercapture',event=>{pointers.delete(event.pointerId);gesture=null;});
+  on(canvas,'pointerleave',()=>{if(!pointers.size){state.hovered=null;invalidate();}});
+  on(canvas,'wheel',event=>{event.preventDefault();const p=renderer.point(event.clientX,event.clientY);const unit=event.deltaMode===1?16:event.deltaMode===2?renderer.height:1;zoom(Math.exp(-Math.max(-150,Math.min(150,event.deltaY*unit))*.002),p.x,p.y);},{passive:false});
+  on(window,'keydown',event=>{
+    if(document.querySelector('dialog[open]') || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName) || event.target.isContentEditable)return;
+    if(event.altKey || (event.target.tagName==='BUTTON' && ['Enter',' '].includes(event.key)))return;
+    const key=event.key.toLowerCase();
+    const command={enter:()=>enter(),escape:()=>state.buildOrigin?(state.buildOrigin=null,refresh(false)):leave(),b:()=>beginBuild(),g:()=>{stopTransient();walk();refresh(false);},p:()=>setPolitics(!state.politics),' ':togglePause,home:()=>{renderer.fit();refresh(false);},'+':()=>zoom(1.18),'=':()=>zoom(1.18),'-':()=>zoom(1/1.18)};
+    if((event.ctrlKey || event.metaKey) && key==='z'){event.preventDefault();guard(()=>undo(event.shiftKey));return;}
+    if(event.ctrlKey || event.metaKey)return;
+    const d={q:2,w:1,e:0,a:3,s:4,d:5,arrowleft:3,arrowright:0,arrowup:1,arrowdown:4}[key];
+    if(d!==undefined){event.preventDefault();guard(()=>{const t=renderer.tiles.find(t=>t.id===state.selected),n=neighbor(t,d),other=renderer.byPosition.get(hexKey(n.q,n.r));if(other)select(other.id);else notice(`${DIRECTIONS[d].name} is empty. Press B to build beside.`);});}
+    else if(command[key]){event.preventDefault();if(!event.repeat)guard(command[key]);}
+  });
+  on(document,'visibilitychange',()=>{clock.reset();if(document.hidden){cancelAnimationFrame(raf);raf=0;pointers.clear();gesture=null;}else invalidate();});
+  on(window,'blur',()=>{pointers.clear();gesture=null;lastTap=null;});
+  on(media,'change',event=>{state.reducedMotion=event.matches;if(event.matches)state.paused=true;clock.reset();refresh(false);});
+  const observer=new ResizeObserver(entries=>{
+    const r=entries[0].contentRect;renderer.resize(r.width,r.height);
+    if(firstResize){renderer.fit();firstResize=false;}refresh(false);
+  });
+  renderer.rebuild(world,state.scene);
+  const initialRect=document.querySelector('.stage').getBoundingClientRect();
+  renderer.resize(initialRect.width,initialRect.height);renderer.fit();firstResize=false;
+  observer.observe(document.querySelector('.stage'));
+  updateUI();if(startupNote)notice(startupNote);invalidate();
+
+  // Small semantic seam for a future MUD adapter. Returns copies, never mutable internals.
+  window.lattice=Object.freeze({
+    version:'0.1.0',
+    inspect(address) {
+      if(address){const t=resolveTile(world,address,state.scene);return t?structuredClone({...t,path:pathOf(world,t.id)}):null;}
+      return {scene:state.scene,selected:state.selected,main:world.tiles[state.scene].id,depth:stack.length,tiles:sceneTiles(world,state.scene).map(t=>({id:t.id,q:t.q,r:t.r,main:t.main,marks:[...t.marks]})),agents:structuredClone(world.agents),tileCount:Object.keys(world.tiles).length,paused:state.paused,politics:state.politics,rehearsal:state.rehearsal,processIndex:state.processIndex,motions:state.motions.size,frames:renderer.frames,camera:camera.snapshot()};
+    },
+    command(command) {
+      if(disposed)throw new Error('The game has been disposed.');
+      if(command.type==='select')select(command.id);
+      else if(command.type==='enter')enter(command.id || state.selected);
+      else if(command.type==='leave')leave();
+      else if(command.type==='inhabit') {
+        if(!world.agents.some(a=>a.id===command.id && a.scene===state.scene))throw new Error('Choose an inhabitant in the current interior.');
+        stopTransient();state.inhabited=command.id;refresh(false);
+      } else if(command.type==='walk')walk(command.id || state.inhabited,command.tile || state.selected);
+      else if(command.type==='politics')setPolitics(Boolean(command.enabled));
+      else if(command.type==='rehearse')rehearse();
+      else if(command.type==='pause'){state.paused=Boolean(command.enabled);clock.reset();refresh(false);}
+      else if(command.type==='undo')undo();
+      else if(command.type==='redo')undo(true);
+      else if(command.type==='tile.add' || command.type==='tile.mark'){stopTransient();commit(command,'World updated.');}
+      else throw new Error('Unknown command.');
+      return this.inspect();
+    },
+    destroy(){disposed=true;scope.abort();observer.disconnect();clearTimeout(noticeTimer);cancelAnimationFrame(raf);state.motions.clear();}
+  });
+}
+try {startGame();}catch(error){console.error(error);$('notice').hidden=false;$('notice').textContent=`Unable to open this world: ${error.message}`;$('world-stats').textContent='Initialization failed';}
+
+</script>
+</body>
+</html>
