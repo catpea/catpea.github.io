@@ -1,0 +1,949 @@
+# Old-school AI for modern JavaScript applications
+
+There is a surprisingly powerful family of AI techniques from the 1960s–1990s that are still extremely useful today.
+
+They don't require neural networks, cloud services, embeddings, or enormous dependencies. They can run entirely in the browser, execute very quickly, and be configured using XML.
+
+The interesting idea is this:
+
+Instead of programming every possible situation, you give your application a small collection of knowledge, rules, relationships, and behaviors. The system figures out what to do.
+
+These are often called symbolic AI, rule-based AI, expert systems, and classical AI.
+
+For JavaScript application development, I particularly like the following.
+
+## 1. The classics worth rediscovering
+
+The Evolution of AI: From Theory to Business Transformation | Professionals Lobby
+
+1. Expert Systems / Production Rules
+
+My first choiceIF something happens AND certain conditions are true, THEN perform an action.
+
+Excellent for contextual colors, validation, permissions, UI behavior, notifications, and application policies.
+
+Introduction to Finite State Machines | Intro to Computer Engineering
+
+2. Finite State Machines
+
+An object has a state, receives an event, and transitions into another state.
+
+Excellent for forms, dialogs, loading indicators, workflows, and components. Can replace substantial amounts of state-management code.
+
+How to create and optimize decision trees
+
+3. Decision Trees
+
+A sequence of questions leads to a decision.
+
+Excellent for choosing themes, layouts, component variants, responsive behavior, and application configuration.
+
+PPT - Blackboard System Applications PowerPoint Presentation, free download - ID:3303151
+
+4. Blackboard Systems
+
+Multiple independent specialists observe and contribute to a shared knowledge space.
+
+Excellent for coordinating plugins, application modules, UI updates, and independent business logic.
+
+Case-Based Reasoning : A comprehensive Guide
+
+5. Case-Based Reasoning
+
+Find a previously solved situation similar to the current one and reuse its solution.
+
+Excellent for intelligent defaults, configuration selection, error recovery, and reusable application behavior.
+
+Features of Apache Drools and Apache KIE | by Yangli | Medium
+
+6. RETE / Production Rule Matching
+
+An efficient technique for matching many rules against changing facts without repeatedly evaluating everything.
+
+Excellent for applications with hundreds or thousands of business and UI rules.
+
+## 2. The really interesting opportunity: replace frameworks with small AI engines
+
+Imagine replacing several conventional libraries with a few composable mechanisms.
+
+| Conventional solution | Classical AI alternative |
+| --- | --- |
+| Large conditional statements | Expert system |
+| Complicated UI state management | Finite state machine |
+| Theme and variant logic | Decision tree / rule engine |
+| Event coordination framework | Blackboard + EventEmitter |
+| Configuration merging utilities | Property inheritance and precedence |
+| Form validation framework | Production rules |
+| Plugin orchestration | Blackboard architecture |
+| Complex default-selection logic | Case-based reasoning |
+
+The point isn't that these techniques can replace every framework. It's that many frameworks solve problems that can be addressed with considerably smaller, more understandable systems.
+
+I would build a small browser-based AI kernel around five primitives:
+
+1. Facts: What the application currently knows.
+2. Rules: What should happen when certain facts are true.
+3. Actions: What the application can do.
+4. Events: What has changed.
+5. Memory: What decisions and previous states are available.
+
+XML describes the knowledge. JavaScript executes it.
+
+Let's build some examples.
+
+## 3. Example: An expert system for contextual Bootstrap colors
+
+Let's start with something practical.
+
+Suppose your application has notifications, forms, buttons, and status indicators. You want the application to determine whether something should be `danger`, `warning`, `info`, or `success`.
+
+A conventional implementation might scatter `if/else` statements throughout the application.
+
+An expert system puts the knowledge in one place.
+
+### XML: describe the knowledge
+
+xml
+
+```xml
+<knowledge-base>
+
+  <rule id="invalid-form" priority="100">
+    <when event="form:validated">
+      <all>
+        <equals field="valid" value="false"/>
+      </all>
+    </when>
+    <then action="set-context">
+      <param name="target" value="formStatus"/>
+      <param name="context" value="danger"/>
+      <param name="message" value="Please correct the errors."/>
+    </then>
+  </rule>
+
+  <rule id="valid-form" priority="90">
+    <when event="form:validated">
+      <all>
+        <equals field="valid" value="true"/>
+      </all>
+    </when>
+    <then action="set-context">
+      <param name="target" value="formStatus"/>
+      <param name="context" value="success"/>
+      <param name="message" value="Everything looks good!"/>
+    </then>
+  </rule>
+
+  <rule id="slow-operation" priority="80">
+    <when event="operation:updated">
+      <all>
+        <equals field="slow" value="true"/>
+      </all>
+    </when>
+    <then action="set-context">
+      <param name="target" value="operationStatus"/>
+      <param name="context" value="warning"/>
+      <param name="message" value="This operation is taking longer than expected."/>
+    </then>
+  </rule>
+
+</knowledge-base>
+```
+
+Notice something important: the XML contains no JavaScript.
+
+It describes what the application knows and what should happen. You can change the behavior without changing the engine.
+
+### JavaScript: the tiny inference engine
+
+javascript
+
+```javascript
+class ExpertSystem {
+
+  constructor(xml, actions = {}) {
+    this.rules = [
+      ...xml.querySelectorAll("rule")
+    ].map(rule => ({
+      id: rule.getAttribute("id"),
+      priority: Number(rule.getAttribute("priority") || 0),
+      event: rule.querySelector("when").getAttribute("event"),
+      conditions: [
+        ...rule.querySelectorAll("when > all > *")
+      ],
+      action: rule.querySelector("then").getAttribute("action"),
+      params: Object.fromEntries(
+        [...rule.querySelectorAll("then > param")]
+          .map(p => [p.getAttribute("name"), p.getAttribute("value")])
+      )
+    })).sort((a, b) => b.priority - a.priority);
+
+    this.actions = actions;
+  }
+
+  matches(condition, facts) {
+    const field = condition.getAttribute("field");
+    const expected = condition.getAttribute("value");
+    const actual = facts[field];
+
+    switch (condition.tagName) {
+      case "equals":
+        return String(actual) === expected;
+
+      case "exists":
+        return actual !== undefined && actual !== null;
+
+      default:
+        return false;
+    }
+  }
+
+  process(event, facts) {
+    const results = [];
+
+    for (const rule of this.rules) {
+      if (rule.event !== event) continue;
+
+      if (!rule.conditions.every(c => this.matches(c, facts))) {
+        continue;
+      }
+
+      const action = this.actions[rule.action];
+
+      if (!action) {
+        throw new Error(`Unknown action: ${rule.action}`);
+      }
+
+      action(rule.params, facts);
+
+      results.push(rule.id);
+    }
+
+    return results;
+  }
+}
+```
+
+### Connect it to your application
+
+javascript
+
+```javascript
+const xml = new DOMParser().parseFromString(
+  configuration,
+  "application/xml"
+);
+
+const ui = {
+  setContext({ target, context, message }) {
+    const element = document.getElementById(target);
+
+    if (!element) return;
+
+    element.className = `alert alert-${context}`;
+    element.textContent = message;
+  }
+};
+
+const ai = new ExpertSystem(xml, {
+  "set-context": ui.setContext
+});
+
+// The application produces facts.
+ai.process("form:validated", {
+  valid: false
+});
+```
+
+Your application doesn't need to know which color to choose.
+
+It simply reports what happened. The expert system determines the appropriate response.
+
+Why this is interestingYou now have a reusable decision-making engine. The same engine can govern notifications, button states, form feedback, accessibility indicators, and application policies.
+
+You could add new rules without modifying the JavaScript engine.
+
+## 4. Example: Property inheritance and intelligent merging
+
+This is another particularly useful old-school AI concept.
+
+Imagine a component has several layers of configuration:
+
+- Global application defaults.
+- Theme defaults.
+- Component defaults.
+- Page-specific properties.
+- Properties supplied by the user.
+
+Instead of writing merging logic everywhere, create a small property-resolution engine.
+
+The idea is similar to inheritance, but with explicit precedence.
+
+### XML configuration
+
+xml
+
+```xml
+<properties>
+
+  <layer name="global">
+    <property name="size" value="medium"/>
+    <property name="rounded" value="true"/>
+    <property name="disabled" value="false"/>
+  </layer>
+
+  <layer name="theme">
+    <property name="size" value="large"/>
+    <property name="rounded" value="true"/>
+  </layer>
+
+  <layer name="component">
+    <property name="variant" value="primary"/>
+    <property name="size" value="small"/>
+  </layer>
+
+  <layer name="page">
+    <property name="variant" value="success"/>
+  </layer>
+
+</properties>
+```
+
+### JavaScript
+
+javascript
+
+```javascript
+class PropertyResolver {
+
+  resolve(xml, overrides = {}) {
+    const result = {};
+
+    for (const layer of xml.querySelectorAll("layer")) {
+      for (const property of layer.querySelectorAll("property")) {
+        const name = property.getAttribute("name");
+        const value = property.getAttribute("value");
+
+        result[name] = this.convert(value);
+      }
+    }
+
+    return {
+      ...result,
+      ...overrides
+    };
+  }
+
+  convert(value) {
+    if (value === "true") return true;
+    if (value === "false") return false;
+
+    return value;
+  }
+}
+
+const resolver = new PropertyResolver();
+
+const properties = resolver.resolve(xml, {
+  disabled: true,
+  variant: "danger"
+});
+
+console.log(properties);
+```
+
+Result:
+
+javascript
+
+```javascript
+{
+  size: "small",
+  rounded: true,
+  disabled: true,
+  variant: "danger"
+}
+```
+
+The clever part is that configuration becomes composable.
+
+You could use exactly the same engine for:
+
+- Bootstrap component properties.
+- Application-wide theme inheritance.
+- Plugin configuration.
+- API request defaults.
+- Form field definitions.
+- Component templates.
+
+You could even introduce special merge strategies:
+
+xml
+
+```xml
+<property name="classes" merge="append"/>
+<property name="styles" merge="deep"/>
+<property name="permissions" merge="union"/>
+<property name="items" merge="replace"/>
+```
+
+That starts becoming a general-purpose configuration intelligence system.
+
+## 5. Example: Finite State Machine instead of a state-management framework
+
+Finite state machines are one of my favorite classical computing techniques.
+
+A state machine doesn't need a complicated subscription architecture. It needs:
+
+- A current state.
+- A collection of permitted transitions.
+- An event.
+- A transition engine.
+
+Consider a save operation.
+
+Save operation state machine
+
+idle
+
+SAVE
+
+saving
+
+SUCCESSsaved
+
+FAILUREerror
+
+### XML
+
+xml
+
+```xml
+<machine initial="idle">
+
+  <state name="idle">
+    <transition event="SAVE" to="saving"/>
+  </state>
+
+  <state name="saving">
+    <transition event="SUCCESS" to="saved"/>
+    <transition event="FAILURE" to="error"/>
+    <transition event="CANCEL" to="idle"/>
+  </state>
+
+  <state name="error">
+    <transition event="RETRY" to="saving"/>
+    <transition event="RESET" to="idle"/>
+  </state>
+
+  <state name="saved">
+    <transition event="RESET" to="idle"/>
+  </state>
+
+</machine>
+```
+
+### JavaScript engine
+
+javascript
+
+```javascript
+class StateMachine {
+
+  constructor(xml) {
+    this.states = new Map();
+
+    this.state = xml.documentElement.getAttribute("initial");
+
+    for (const node of xml.querySelectorAll("state")) {
+      this.states.set(
+        node.getAttribute("name"),
+        new Map(
+          [...node.querySelectorAll("transition")].map(t => [
+            t.getAttribute("event"),
+            t.getAttribute("to")
+          ])
+        )
+      );
+    }
+  }
+
+  send(event) {
+    const transitions = this.states.get(this.state);
+    const next = transitions?.get(event);
+
+    if (!next) return false;
+
+    const previous = this.state;
+    this.state = next;
+
+    this.onChange?.({
+      previous,
+      current: next,
+      event
+    });
+
+    return true;
+  }
+
+  onChange(callback) {
+    this.onChange = callback;
+  }
+}
+```
+
+One small correction to the naming above: in production, I'd call the callback `onTransition` to avoid colliding with the registration method. Here's the cleaner implementation:
+
+javascript
+
+```javascript
+class StateMachine {
+
+  constructor(xml) {
+    this.states = new Map();
+    this.state = xml.documentElement.getAttribute("initial");
+    this.listeners = new Set();
+
+    for (const node of xml.querySelectorAll("state")) {
+      this.states.set(node.getAttribute("name"),
+        new Map(
+          [...node.querySelectorAll("transition")].map(t => [
+            t.getAttribute("event"),
+            t.getAttribute("to")
+          ])
+        )
+      );
+    }
+  }
+
+  subscribe(callback) {
+    this.listeners.add(callback);
+    return () => this.listeners.delete(callback);
+  }
+
+  send(event) {
+    const next = this.states.get(this.state)?.get(event);
+
+    if (!next) return false;
+
+    const previous = this.state;
+    this.state = next;
+
+    for (const callback of this.listeners) {
+      callback({ previous, current: next, event });
+    }
+
+    return true;
+  }
+}
+```
+
+Now:
+
+javascript
+
+```javascript
+const machine = new StateMachine(machineXml);
+
+machine.subscribe(({ current }) => {
+  console.log("New state:", current);
+});
+
+machine.send("SAVE");
+machine.send("SUCCESS");
+```
+
+This is a tiny state-management system. No Redux, no external dependency, no complicated application architecture.
+
+It also gives you something that conventional state variables often lack: a clear definition of which transitions are actually allowed.
+
+## 6. Example: EventEmitter meets a Blackboard AI
+
+This is where things get really interesting.
+
+A Blackboard system is an old AI architecture where independent specialists communicate through shared knowledge.
+
+Imagine an application with:
+
+- A form validator.
+- A theme manager.
+- A notification manager.
+- A permissions manager.
+- A component renderer.
+
+None of these needs to know about the others.
+
+They publish information to a shared event system. Other modules react when information becomes available.
+
+### A tiny EventEmitter
+
+javascript
+
+```javascript
+class EventEmitter {
+
+  constructor() {
+    this.events = new Map();
+  }
+
+  on(name, callback) {
+    if (!this.events.has(name)) {
+      this.events.set(name, new Set());
+    }
+
+    this.events.get(name).add(callback);
+
+    return () => this.off(name, callback);
+  }
+
+  off(name, callback) {
+    this.events.get(name)?.delete(callback);
+  }
+
+  emit(name, data) {
+    for (const callback of this.events.get(name) ?? []) {
+      callback(data);
+    }
+  }
+}
+```
+
+### Blackboard
+
+javascript
+
+```javascript
+class Blackboard {
+
+  constructor() {
+    this.facts = new Map();
+    this.events = new EventEmitter();
+  }
+
+  set(name, value) {
+    const previous = this.facts.get(name);
+
+    this.facts.set(name, value);
+
+    this.events.emit("fact:changed", {
+      name,
+      value,
+      previous
+    });
+  }
+
+  get(name) {
+    return this.facts.get(name);
+  }
+
+  has(name) {
+    return this.facts.has(name);
+  }
+
+  subscribe(name, callback) {
+    return this.events.on("fact:changed", fact => {
+      if (fact.name === name) callback(fact);
+    });
+  }
+}
+```
+
+### Independent application specialists
+
+javascript
+
+```javascript
+const board = new Blackboard();
+
+// Specialist 1: Theme manager
+board.subscribe("application.status", ({ value }) => {
+  document.body.dataset.status = value;
+});
+
+// Specialist 2: Notification manager
+board.subscribe("application.error", ({ value }) => {
+  console.error("Application error:", value);
+});
+
+// Specialist 3: Loading manager
+board.subscribe("application.loading", ({ value }) => {
+  document.body.classList.toggle("loading", value);
+});
+
+// Application code
+board.set("application.status", "success");
+board.set("application.loading", true);
+board.set("application.error", "Connection interrupted");
+```
+
+This architecture has a lovely property: specialists don't need to know who produces the information or who consumes it.
+
+You can add new specialists without rewriting existing ones.
+
+You can even have the expert system listen to Blackboard changes and automatically trigger its rules.
+
+That gives you a genuinely extensible browser application architecture.
+
+## 7\. Example: Decision trees for component selection
+
+Decision trees are particularly useful for replacing deeply nested conditionals.
+
+Imagine an application that selects a Bootstrap button variant based on its purpose and state.
+
+### XML
+
+xml
+
+```xml
+<decision-tree>
+
+  <decision field="purpose">
+
+    <case value="delete">
+      <result value="danger"/>
+    </case>
+
+    <case value="save">
+      <decision field="dirty">
+        <case value="true">
+          <result value="success"/>
+        </case>
+        <case value="false">
+          <result value="secondary"/>
+        </case>
+      </decision>
+    </case>
+
+    <case value="help">
+      <result value="info"/>
+    </case>
+
+    <default>
+      <result value="primary"/>
+    </default>
+
+  </decision>
+
+</decision-tree>
+```
+
+### JavaScript interpreter
+
+javascript
+
+```javascript
+function decide(node, facts) {
+  if (node.tagName === "result") {
+    return node.getAttribute("value");
+  }
+
+  if (node.tagName === "default") {
+    return decide(node.querySelector("result"), facts);
+  }
+
+  const field = node.getAttribute("field");
+  const value = String(facts[field]);
+
+  const cases = [...node.children]
+    .filter(child => child.tagName === "case");
+
+  const match = cases.find(
+    child => child.getAttribute("value") === value
+  );
+
+  if (match) {
+    return decide(match.querySelector("*"), facts);
+  }
+
+  const fallback = [...node.children]
+    .find(child => child.tagName === "default");
+
+  return fallback
+    ? decide(fallback, facts)
+    : null;
+}
+```
+
+Usage:
+
+javascript
+
+```javascript
+const variant = decide(tree, {
+  purpose: "save",
+  dirty: true
+});
+
+console.log(variant); // success
+```
+
+This is essentially a small configurable decision-making language.
+
+It can select:
+
+- Bootstrap variants.
+- Component templates.
+- Page layouts.
+- Icons.
+- Validation strategies.
+- Responsive behavior.
+- Application workflows.
+
+## 8\. A more ambitious idea: Combine everything into a tiny browser AI framework
+
+Personally, I think this is the most interesting direction.
+
+Rather than building separate utilities, combine the classical AI approaches into one small architecture.
+
+## Browser AI Kernel
+
+A proposed architecture using XML knowledge and JavaScript execution
+
+XML Knowledge Base
+
+Rules · States · Decisions · Properties · Actions
+
+XML Interpreter
+
+Parse and validate application knowledge
+
+Rule Engine
+
+Expert system
+
+State Engine
+
+State machines
+
+Decision Engine
+
+Decision trees
+
+Property Engine
+
+Inheritance and merging
+
+Blackboard + EventEmitter
+
+Shared facts and application events
+
+Browser Application
+
+DOM · Bootstrap · Web Components · JavaScript APIs
+
+### What could this replace?
+
+| Existing dependency category | Potential replacement |
+| --- | --- |
+| General-purpose UI state library | State engine |
+| Large rules/validation library | Expert system |
+| Configuration library | Property engine |
+| Component variant utilities | Decision engine |
+| Event orchestration library | Blackboard |
+| Workflow library | State machines |
+| Plugin coordination | Blackboard + rules |
+
+You could have a remarkably small framework that makes decisions dynamically, with almost all application-specific behavior described in XML.
+
+## 9\. Some additional old-school AI techniques worth exploring
+
+These are also excellent candidates for JavaScript implementations.
+
+| Technique | Interesting application |
+| --- | --- |
+| Forward chaining | Facts trigger rules, which produce new facts |
+| Backward chaining | Work backward from a desired outcome |
+| Truth maintenance systems | Reconsider decisions when underlying facts change |
+| Constraint satisfaction | Find valid combinations of component properties |
+| Semantic networks | Model relationships between application objects |
+| Frames and slots | Describe reusable component structures |
+| Case-based reasoning | Reuse solutions from previous application situations |
+| Fuzzy logic | Interpret approximate conditions such as low, medium, and high |
+| Genetic algorithms | Experiment with combinations of configuration parameters |
+
+One particularly powerful combination is forward chaining + truth maintenance.
+
+For example:
+
+1. A user changes a form field.
+2. The validator publishes a new fact.
+3. A rule determines that the form is invalid.
+4. Another rule changes the submit button.
+5. Another rule updates the contextual alert.
+6. When the user corrects the field, the previous conclusions are reconsidered.
+
+That is a small expert system behaving like an intelligent application.
+
+## 10\. My recommendation: Build these in this order
+
+I'd resist the temptation to build a huge framework immediately.
+
+Start with these components:
+
+| Priority | Component | Why |
+| --- | --- | --- |
+| 1 | EventEmitter | Foundation for communication |
+| 2 | Blackboard | Shared application knowledge |
+| 3 | PropertyResolver | Reusable configuration |
+| 4 | ExpertSystem | Actual inference and decision-making |
+| 5 | StateMachine | Reliable application behavior |
+| 6 | DecisionTree | Configurable nested decisions |
+| 7 | ForwardChainer | Automatic multi-step reasoning |
+| 8 | RETE engine | Optimize large rule collections |
+
+A few engineering principles I'd insist on:
+
+- XML should contain configuration and declarative knowledge, not executable JavaScript.
+- JavaScript actions should come from a trusted, explicitly registered action dictionary.
+- Never use `eval()` to execute XML-defined expressions.
+- Support rule priorities, tracing, and explanations of why a rule fired.
+- Make state changes observable.
+- Keep the kernel independent of Bootstrap so it can work with any UI framework.
+- Use `DOMParser` in the browser and validate the XML structure before executing rules.
+
+The most important distinction: these systems aren't really trying to imitate human intelligence. They're giving applications a structured way to represent knowledge, make decisions, and respond to changing circumstances.
+
+That's an extremely useful kind of intelligence for JavaScript applications.
+
+## My favorite idea for your project
+
+I'd call it something like MicroMind: a tiny XML-driven browser intelligence engine.
+
+Its defining feature would be that an application developer could write:
+
+xml
+
+```xml
+<application>
+
+  <rules>
+    <rule id="show-save-success">
+      <when event="document:saved">
+        <then>
+          <set target="notification.context" value="success"/>
+          <set target="notification.message" value="Document saved!"/>
+          <emit event="notification:show"/>
+        </then>
+      </when>
+    </rule>
+  </rules>
+
+  <components>
+    <button id="save"
+            variant="primary"
+            state="idle"/>
+  </components>
+
+</application>
+```
+
+And the JavaScript engine would interpret the configuration, monitor events, evaluate rules, update properties, and coordinate the UI.
+
+No React required. No Redux required. No large rule engine required.
+
+Just JavaScript, XML, and a handful of well-designed classical AI algorithms.
+
+The next particularly worthwhile step would be implementing a complete, reusable forward-chaining expert system with XML-defined conditions, nested AND/OR logic, rule priorities, automatic fact updates, and an explanation trace. That would be the foundation capable of making the other components work together.
+
+
+
