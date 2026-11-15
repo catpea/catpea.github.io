@@ -1,294 +1,532 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence · Cat Pea</title>
+  <meta name="description" content="The post outlines a vision for creating ultra‑lightweight UI libraries in JavaScript powered by AI: from simple accordion components built on the native `&lt;details&gt;` element to fully functional off‑canvas panels that can be positioned anywhere on the screen and reused as modal or console windows. It stresses minimal code, modern ES2025 syntax, and accessibility (e.g., screen‑reader support), while noting the benefits of dual licensing, community maintenance, and AI‑generated documentation. By leveraging AI for both coding and upkeep, developers can quickly prototype reusable web components—mirroring Bootstrap’s popularity yet delivering fewer lines of code—and ultimately build a portfolio that showcases mastery over modern UI patterns.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/0c3ba247-19da-433b-b1bb-706a4147a9b2/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence · Cat Pea">
+  <meta property="og:description" content="The post outlines a vision for creating ultra‑lightweight UI libraries in JavaScript powered by AI: from simple accordion components built on the native `&lt;details&gt;` element to fully functional off‑canvas panels that can be positioned anywhere on the screen and reused as modal or console windows. It stresses minimal code, modern ES2025 syntax, and accessibility (e.g., screen‑reader support), while noting the benefits of dual licensing, community maintenance, and AI‑generated documentation. By leveraging AI for both coding and upkeep, developers can quickly prototype reusable web components—mirroring Bootstrap’s popularity yet delivering fewer lines of code—and ultimately build a portfolio that showcases mastery over modern UI patterns.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1992.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1992</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1992.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1992.avif" alt="The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1992.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1992</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-08-14">8/14/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">We start, at the center of your powers,
-Artificial Intelligence, Relevant Authentic Education…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And above all by revealing a problem everybody has,
-and no one has time to repair.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Artificial Intelligence is good at programming,
-JavaScript is the friendliest and most popular language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning JavaScript worth your time,
-not a lesson here will ever be a waste of time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the problem that everybody has,
-is something you can sink into for decades even.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is the User Interface, we will make you dominate the area,
-and learn invaluable lessons, while AI does the programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By creating a User Interface Library,
-defined by fewest possible lines of code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Bootstrap currently, the top UI Framework,
-can make a hundred claim about their usefulness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Including powerful things like accessibility and screen reader support,
-for people with visual impairments.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will only make a single claim,
-my components with wisdom in mind have the fewest possible lines of code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One of your challenges will be writing extensive documentation,
-for massive components that just run on 15 lines of code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A library like this,
-is only as powerful as it is community.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Therefore, you will employ artificial intelligence,
-for maintenance – and unbelievably, more importantly – customization.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This project will use dual licensing,
-open source license that demands customers make their code available.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a proprietary commercial license, available for purchase,
-for projects that do not wish to disclose modifications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will also accept donations,
-and research what others are doing to monetize.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example you can sell themes,
-mountains of snippets and graphic styles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Under the watchful eye of the same AI,
-that performs the maintenance on the components.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is an important rule that you must never break:
-“If it can’t be done simply, don’t do it.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The IBM carbon design system for example features an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://carbondesignsystem.com/components/accordion/usage/">accordion</a>,
-that <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://web-components.carbondesignsystem.com/?path=/docs/components-accordion--overview">consists of two web components</a>:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">cds-accordion and cds-accordion-item,
-I consider this a wrong that makes perfect sense.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You should study this example,
-as you progress in your education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The simplest <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/">accordion solution is the use of details and summary</a>,
-a set of standard HTML elements that already work in the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can use details with name attribute,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/#using_details_name_to_create_exclusive_accordions">to create exclusive accordions, that unfold just one pane</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you go from here, will set you apart from other programmers,
-who are looking to solve the same problem.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now,
-let us talk about the artificial intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ever since the discovery of artificial intelligence,
-most inauthentic professionals have been embarrassing themselves.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just had to recover from a movement of cringe,
-as a powerful CEO, paraded their useless language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Explained that there must be something better,
-where you don’t have to write your app three times.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is known JavaScript, but he blocked that out,
-and then he pivoted into insanity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hallucinating himself into a language based on English,
-that controls objects, I am sure that will make their stock go up.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Of course, in his madness, he did not take wisdom into consideration,
-and the very fact that all he described only limits AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">His dreams are small,
-like the future of his company.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are already beginning with an unrestrained AI,
-and beyond unnecessary accordions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With a sharp edge, because you know to add to your AI prompts,
-“simple and lightweight”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“With as fewer lines of code as it is possible,
-without making the code obfuscated.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Ensuring that the code is modern ES2025 JavaScript and beyond,
-and beautiful, and outstanding.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you are,
-on top of the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Watching babbling CEOs hallucinate,
-that they re still relevant in the age of AI.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us take a closer look at the creating of an Offcanvas Panel,
-basically a menu that slides in from the side of the screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I used accordion,
-as an example of excess.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Offcanvas Panel,
-is a piece of screen real estate that comes out of nowhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You only call it when you need it,
-it can be a hamburger icon, or three vertical dots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or a cute little arrow tab,
-that sits at the side of your screen.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think of the standard Offcanvas Panel as not being part,
-of the standard workflow on an application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But rather serving as an escape hatch to higher functions,
-a new game menu, a project management menu.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, when you put a Offcanvas Panel on your right hand side,
-it becomes the opposite.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It can be seen as a properties panel,
-a thing that drills even deeper into application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An Offcanvas Panel that opens on top of the screen,
-can serve as a console, or a heads up display.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An Offcanvas Panel on the bottom of the screen,
-can show history, a terminal, a debugger or logger.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or all of the above, if you nest a tabbed control in it,
-something you will also have to create eventually.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But nesting, under our lightweight architecture,
-means web components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have created a test project named <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://catpea.github.io/webkin/">webkin</a>,
-and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/webkin/tree/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/offcanvas-panel">provide a 180 line Offcanvas Panel component</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is AI generated, it is way too big,
-and it is missing, the backdrop that should cover a page when it is open.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a focus manager, that traps your tab key,
-to tab through the user interface controls in the Offcanvas Panel.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The backdrop should be a standalone component, that will be useful,
-for alerts popups, and modal windows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the focus trap manager is reusable,
-for whatever popup type thing Offcanvas or Modal is on the screen.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/webkin/blob/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/index.html">The demo page or index.html in the root of the project</a>,
-has some extra CSS that should fall under the umbrella of a UI reboot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reboot,
-is about making consistent choices for all the browsers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before AI, this would be an amazing project to learn from,
-with AI … this is something else.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Yes. AI can help you manage such a project in its entirety,
-it can fix bugs, and provide custom components for your customers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI is giving you a way to learn, to become a professional,
-to have an amazing portfolio, to build your won companies or get a nice job.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">High School, will not do any of that,
-you will learn Biology or Chemistry faster, by working on related software.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you don’t even have an argument here,
-the subjects are part of your learning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This code that you see, here,
-is some of the most powerful stuff ever coded.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.jsdelivr.com/statistics">Jsdeliver stats reveal that bootstrap is the top download</a>,
-downloaded fourteen billion, nine hundred sixty-nine million, eight hundred thirty-five thousand, seven hundred forty-three in the past month.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those 180 lines of code, represent the future for a programmer,
-the singe most useful web project tin the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you build your won bootstrap,
-you will become one of the worlds top programmers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you keep memorizing for quizzes in high school,
-in the age of AI …</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Well,
-I’ll let you figure that one out on your own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But please remember,
-you are tasked with growing all the way up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that means,
-art, knowledge, mastery, wisdom, philosophy, joy of life, and greatness.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-08-14T23:23:09.854Z">August 14, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>13:20<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1992.avif" aria-label="Cover for The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1992.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 13:20
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1992.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1992.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1992.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>We start, at the center of your powers,<br>Artificial Intelligence, Relevant Authentic Education…</p>
+<p>And above all by revealing a problem everybody has,<br>and no one has time to repair.</p>
+<p>Artificial Intelligence is good at programming,<br>JavaScript is the friendliest and most popular language.</p>
+<p>Learning JavaScript worth your time,<br>not a lesson here will ever be a waste of time.</p>
+<p>And the problem that everybody has,<br>is something you can sink into for decades even.</p>
+<p>Is the User Interface, we will make you dominate the area,<br>and learn invaluable lessons, while AI does the programming.</p>
+<p>By creating a User Interface Library,<br>defined by fewest possible lines of code.</p>
+<hr>
+<p>Bootstrap currently, the top UI Framework,<br>can make a hundred claim about their usefulness.</p>
+<p>Including powerful things like accessibility and screen reader support,<br>for people with visual impairments.</p>
+<p>You will only make a single claim,<br>my components with wisdom in mind have the fewest possible lines of code.</p>
+<p>One of your challenges will be writing extensive documentation,<br>for massive components that just run on 15 lines of code.</p>
+<hr>
+<p>A library like this,<br>is only as powerful as it is community.</p>
+<p>Therefore, you will employ artificial intelligence,<br>for maintenance – and unbelievably, more importantly – customization.</p>
+<p>This project will use dual licensing,<br>open source license that demands customers make their code available.</p>
+<p>And a proprietary commercial license, available for purchase,<br>for projects that do not wish to disclose modifications.</p>
+<p>You will also accept donations,<br>and research what others are doing to monetize.</p>
+<p>For example you can sell themes,<br>mountains of snippets and graphic styles.</p>
+<p>Under the watchful eye of the same AI,<br>that performs the maintenance on the components.</p>
+<hr>
+<p>There is an important rule that you must never break:<br>“If it can’t be done simply, don’t do it.”</p>
+<p>The IBM carbon design system for example features an <a href="https://carbondesignsystem.com/components/accordion/usage/">accordion</a>,<br>that <a href="https://web-components.carbondesignsystem.com/?path=/docs/components-accordion--overview">consists of two web components</a>:</p>
+<p>cds-accordion and cds-accordion-item,<br>I consider this a wrong that makes perfect sense.</p>
+<p>You should study this example,<br>as you progress in your education.</p>
+<p>The simplest <a href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/">accordion solution is the use of details and summary</a>,<br>a set of standard HTML elements that already work in the browser.</p>
+<p>You can use details with name attribute,<br><a href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/#using_details_name_to_create_exclusive_accordions">to create exclusive accordions, that unfold just one pane</a>.</p>
+<p>Where you go from here, will set you apart from other programmers,<br>who are looking to solve the same problem.</p>
+<hr>
+<p>Now,<br>let us talk about the artificial intelligence.</p>
+<p>Ever since the discovery of artificial intelligence,<br>most inauthentic professionals have been embarrassing themselves.</p>
+<p>I just had to recover from a movement of cringe,<br>as a powerful CEO, paraded their useless language.</p>
+<p>Explained that there must be something better,<br>where you don’t have to write your app three times.</p>
+<p>Which is known JavaScript, but he blocked that out,<br>and then he pivoted into insanity.</p>
+<p>Hallucinating himself into a language based on English,<br>that controls objects, I am sure that will make their stock go up.</p>
+<hr>
+<p>Of course, in his madness, he did not take wisdom into consideration,<br>and the very fact that all he described only limits AI.</p>
+<p>His dreams are small,<br>like the future of his company.</p>
+<hr>
+<p>You are already beginning with an unrestrained AI,<br>and beyond unnecessary accordions.</p>
+<p>With a sharp edge, because you know to add to your AI prompts,<br>“simple and lightweight”.</p>
+<p>“With as fewer lines of code as it is possible,<br>without making the code obfuscated.”</p>
+<p>“Ensuring that the code is modern ES2025 JavaScript and beyond,<br>and beautiful, and outstanding.”</p>
+<p>Here you are,<br>on top of the world.</p>
+<p>Watching babbling CEOs hallucinate,<br>that they re still relevant in the age of AI.</p>
+<hr>
+<p>Let us take a closer look at the creating of an Offcanvas Panel,<br>basically a menu that slides in from the side of the screen.</p>
+<p>I used accordion,<br>as an example of excess.</p>
+<p>The Offcanvas Panel,<br>is a piece of screen real estate that comes out of nowhere.</p>
+<p>You only call it when you need it,<br>it can be a hamburger icon, or three vertical dots.</p>
+<p>Or a cute little arrow tab,<br>that sits at the side of your screen.</p>
+<hr>
+<p>Think of the standard Offcanvas Panel as not being part,<br>of the standard workflow on an application.</p>
+<p>But rather serving as an escape hatch to higher functions,<br>a new game menu, a project management menu.</p>
+<p>Now, when you put a Offcanvas Panel on your right hand side,<br>it becomes the opposite.</p>
+<p>It can be seen as a properties panel,<br>a thing that drills even deeper into application.</p>
+<p>An Offcanvas Panel that opens on top of the screen,<br>can serve as a console, or a heads up display.</p>
+<p>An Offcanvas Panel on the bottom of the screen,<br>can show history, a terminal, a debugger or logger.</p>
+<p>Or all of the above, if you nest a tabbed control in it,<br>something you will also have to create eventually.</p>
+<hr>
+<p>But nesting, under our lightweight architecture,<br>means web components.</p>
+<p>I have created a test project named <a href="https://catpea.github.io/webkin/">webkin</a>,<br>and <a href="https://github.com/catpea/webkin/tree/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/offcanvas-panel">provide a 180 line Offcanvas Panel component</a>.</p>
+<p>It is AI generated, it is way too big,<br>and it is missing, the backdrop that should cover a page when it is open.</p>
+<p>And a focus manager, that traps your tab key,<br>to tab through the user interface controls in the Offcanvas Panel.</p>
+<p>The backdrop should be a standalone component, that will be useful,<br>for alerts popups, and modal windows.</p>
+<p>And the focus trap manager is reusable,<br>for whatever popup type thing Offcanvas or Modal is on the screen.</p>
+<hr>
+<p><a href="https://github.com/catpea/webkin/blob/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/index.html">The demo page or index.html in the root of the project</a>,<br>has some extra CSS that should fall under the umbrella of a UI reboot.</p>
+<p>The reboot,<br>is about making consistent choices for all the browsers.</p>
+<hr>
+<p>Before AI, this would be an amazing project to learn from,<br>with AI … this is something else.</p>
+<p>Yes. AI can help you manage such a project in its entirety,<br>it can fix bugs, and provide custom components for your customers.</p>
+<hr>
+<p>The AI is giving you a way to learn, to become a professional,<br>to have an amazing portfolio, to build your won companies or get a nice job.</p>
+<p>High School, will not do any of that,<br>you will learn Biology or Chemistry faster, by working on related software.</p>
+<p>So you don’t even have an argument here,<br>the subjects are part of your learning.</p>
+<p>This code that you see, here,<br>is some of the most powerful stuff ever coded.</p>
+<p><a href="https://www.jsdelivr.com/statistics">Jsdeliver stats reveal that bootstrap is the top download</a>,<br>downloaded fourteen billion, nine hundred sixty-nine million, eight hundred thirty-five thousand, seven hundred forty-three in the past month.</p>
+<p>Those 180 lines of code, represent the future for a programmer,<br>the singe most useful web project tin the world.</p>
+<p>If you build your won bootstrap,<br>you will become one of the worlds top programmers.</p>
+<p>If you keep memorizing for quizzes in high school,<br>in the age of AI …</p>
+<p>Well,<br>I’ll let you figure that one out on your own.</p>
+<p>But please remember,<br>you are tasked with growing all the way up.</p>
+<p>And that means,<br>art, knowledge, mastery, wisdom, philosophy, joy of life, and greatness.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://carbondesignsystem.com/components/accordion/usage/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>accordion</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://carbondesignsystem.com/components/accordion/usage/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://web-components.carbondesignsystem.com/?path=/docs/components-accordion--overview">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>consists of two web components</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://web-components.carbondesignsystem.com/?path=/docs/components-accordion--overview</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>accordion solution is the use of details and summary</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/#using_details_name_to_create_exclusive_accordions">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>to create exclusive accordions, that unfold just one pane</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/#using_details_name_to_create_exclusive_accordions</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://catpea.github.io/webkin/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>webkin</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://catpea.github.io/webkin/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/webkin/tree/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/offcanvas-panel">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>provide a 180 line Offcanvas Panel component</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/webkin/tree/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/offcanvas-panel</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/webkin/blob/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/index.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The demo page or index.html in the root of the project</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/webkin/blob/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/index.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.jsdelivr.com/statistics">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Jsdeliver stats reveal that bootstrap is the top download</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.jsdelivr.com/statistics</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">web-components</span><span class="chip">offcanvas</span><span class="chip">bootstrap</span><span class="chip">ai</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://carbondesignsystem.com/components/accordion/usage/">
+              <span class="text-truncate">accordion</span>
+              <span class="fg-3 fs-xs flex-shrink-0">carbondesignsystem.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://web-components.carbondesignsystem.com/?path=/docs/components-accordion--overview">
+              <span class="text-truncate">consists of two web components</span>
+              <span class="fg-3 fs-xs flex-shrink-0">web-components.carbondesignsystem.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/">
+              <span class="text-truncate">accordion solution is the use of details and summary</span>
+              <span class="fg-3 fs-xs flex-shrink-0">developer.mozilla.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/#using_details_name_to_create_exclusive_accordions">
+              <span class="text-truncate">to create exclusive accordions, that unfold just one pane</span>
+              <span class="fg-3 fs-xs flex-shrink-0">developer.mozilla.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://catpea.github.io/webkin/">
+              <span class="text-truncate">webkin</span>
+              <span class="fg-3 fs-xs flex-shrink-0">catpea.github.io</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/webkin/tree/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/offcanvas-panel">
+              <span class="text-truncate">provide a 180 line Offcanvas Panel component</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/webkin/blob/f18c9f15c9ffbfd7536664c0b59da6e0bcb6c322/index.html">
+              <span class="text-truncate">The demo page or index.html in the root of the project</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.jsdelivr.com/statistics">
+              <span class="text-truncate">Jsdeliver stats reveal that bootstrap is the top download</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.jsdelivr.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/2b243e97-9b87-4153-9f84-9ce78ce5ce75/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Humanity Made Three Tiny Steps Before It Fell</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/5c18c9f7-0624-4d25-9342-e9fdaf85fcce/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">No More Homework, Mother!</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5c18c9f7-0624-4d25-9342-e9fdaf85fcce/">
+              <img src="https://catpea.github.io/chapter-13/poem-1993.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">No More Homework, Mother!</span>
+                <span class="fg-3 fs-xs">August 15, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c90e867e-4f74-409e-a6de-f5ffc819c342/">
+              <img src="https://catpea.github.io/chapter-13/poem-1989.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">JS-DQD; Or, God Mode Interestato Potato?</span>
+                <span class="fg-3 fs-xs">August 11, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0995356b-16a7-4b99-a795-83339059a675/">
+              <img src="https://catpea.github.io/chapter-13/poem-1996.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Beyond Learning Programming: You Have To Keep Up A Little Bit</span>
+                <span class="fg-3 fs-xs">August 18, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ef34727d-80fa-4b61-bc91-ae9399aa634b/">
+              <img src="https://catpea.github.io/chapter-13/poem-1988.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Emergence Of A Complete JavaScript Module: The Terrifyingly Swift End Of Make-Believe Education</span>
+                <span class="fg-3 fs-xs">August 10, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

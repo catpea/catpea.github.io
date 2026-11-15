@@ -1,207 +1,479 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia · Cat Pea</title>
+  <meta name="description" content="I used colorful LEDs on Linux not to fear bricking but to learn, and in doing so I built “unbrick” – a project that reverses LED control logic and serves as a foundation for tackling other Linux problems. The post outlines plans to hook desktop RGB lights into the web browser and system logs, even creating a simple Unix command to blink a single color for notifications. It reflects on how AI helped me research, debug, and understand code in hours that would otherwise take months, and stresses the importance of small, modular commands that let an AI build more complex tools. Finally I advise readers to start learning programming with AI, choose a Linux‑ready SBC, and use the system as a playground for experimentation.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/e11cf138-ff4e-45f7-b748-bfa1a95ca868/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia · Cat Pea">
+  <meta property="og:description" content="I used colorful LEDs on Linux not to fear bricking but to learn, and in doing so I built “unbrick” – a project that reverses LED control logic and serves as a foundation for tackling other Linux problems. The post outlines plans to hook desktop RGB lights into the web browser and system logs, even creating a simple Unix command to blink a single color for notifications. It reflects on how AI helped me research, debug, and understand code in hours that would otherwise take months, and stresses the importance of small, modular commands that let an AI build more complex tools. Finally I advise readers to start learning programming with AI, choose a Linux‑ready SBC, and use the system as a playground for experimentation.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-14/poem-2137.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-14/">Chapter 14</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2137</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-14/poem-2137.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-14/poem-2137.avif" alt="Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-14/poem-2137.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 14</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2137</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-01-06">1/5/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Everyone is scared of bricking their Colorful LEDs on Linux,
-but I am not a fan, pun intended, so I used them for learning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The result near complete reversing,
-and more importantly enough knowledge address bricking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The resulting project <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/unbrick">unbrick</a> is a safety net,
-and serves as the basis for addressing any other problems on Linux.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As promised, now that it is completed,
-and all my fans light up with horribly distracting lights.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have dedicated it to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Fravia">+Fravia</a>,
-the first person who introduced me to Reverse Engineering.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am already preparing to connect Desktop RGB lights,
-to the Web Browser, computer error logs and other notifications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want to create a U*IX command that offers a blink program,
-that accepts a single color and blinks a few times to get attention.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My reverse engendering is not an end,
-just the triumph required for even more interesting projects.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I undertook this project for many reasons,
-to begin learning new things with the aid of AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And to check, if AI, is as powerful as I think it is,
-can it do things that I don’t fully comprehend?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Can I be the project manager, the detective,
-and produce stable, and rather impossible results.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And most importantly, can you install Linux,
-and advance bravely knowing that it is going to be OK.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That you will have a guide, and guardian, and teacher,
-is this going to take you towards all your futures.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the answer is: yes,
-start installing Linux.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We scanned programs in other languages,
-we scanned raw Human Interface Device packets with sniffers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We failed, for three days straight, non-stop,
-this quest required $25 dollars in extra credits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My AI time is 85% used, with a reset on Thursday afternoon,
-I am writing this on a Monday, I am cut off.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For future reference, and you’ve already heard me say it,
-you need a local AI, they are just as smart as the ones you pay $20 for.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are making money, then yes, $100 a month, is reasonable for AI,
-because they are unreasonably powerful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have a new feeling for what AI is,
-it is the worker that gets the job done.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is the part of you, that would have spent 14 months,
-learning, strategizing and and programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But fully automated, a little bit smarter, than you will ever be,
-and unstoppable fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It does 14 months of research and programming work,
-in an hour or so.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It turns out, that the AI trouble everyone is reporting,
-comes from AI’s inability to comprehend everything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI’s have small memory, they are forced to extract key lines of code,
-that is not enough.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Massive contexts, may present more challenges,
-inaccurate comprehension.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What makes AI most powerful today, is giving it a strong seed,
-well defined instruction s that fit its memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And not the tree, but the forest explode into existence,
-it can create intermediate seeds based on its own reasoning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It can built vast coherent things,
-but you can’t hope to feed that back in, it won’t fit.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must adjust your programming Architecture,
-small commands that do one thing well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That then AI can use to make more commands,
-and more commands, until all it needs is 5 of them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not even a challenge, it now can accomplish a great thing,
-with a little command line that fits in a little window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI needs an operating system that it can fully grasp,
-where it can built endless mountains of commends it understans.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That will be its memory,
-I believe such a system can be based on <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/function11">Plan9</a> U*IX dreams.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if seeds is all you need,
-than you are more powerful than any corporation today.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI are your keys to the future,
-your teacher of programming, and creator of your programs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My final words of advice are the same as Sun Tzu’s,
-learn programming with AI before you go to college to learn programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With the power that AI grants you, hover,
-it is more likely that schools including high school, will slow you down.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your job is to become an Inspired Polymath and a Great Being,
-the adults today, don’t even know what that means.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Victorious warriors win first and then go to war, while defeated warriors go to war first and then seek to win.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Begin using AI as your interface to complexity,
-and then ask about how whatever captures your attention works.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The combination of curiosity and quick and precise answers,
-will have you moving at speeds no school could ever grant you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then, once you master your favorite subjects,
-use schools as means of entertainment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when they call you gifted, call them back,
-and don’t hold your tongue.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, search the internet for Best Single Board Computers,
-followed by the year you are in, and splurge on accessories.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make sure it comes with Linux, preinstalled,
-and get your monitors, mice, and keyboards at used junk store.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a hobby, not at all,
-AI makes this a long lifetime of triumph and adventure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Soon, you will hope to get stuck on something, like I did,
-because then you can bring out you best AI…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And lean in ways, that average days,
-will never grant you.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-01-06T00:45:50.925Z">January 5, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:39<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-14/poem-2137.avif" aria-label="Cover for Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia, full size">
+            <img src="https://catpea.github.io/chapter-14/poem-2137.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:39
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-14/poem-2137.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-14/poem-2137.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-14/poem-2137.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Everyone is scared of bricking their Colorful LEDs on Linux,<br>but I am not a fan, pun intended, so I used them for learning.</p>
+<p>The result near complete reversing,<br>and more importantly enough knowledge address bricking.</p>
+<p>The resulting project <a href="https://github.com/catpea/unbrick">unbrick</a> is a safety net,<br>and serves as the basis for addressing any other problems on Linux.</p>
+<p>As promised, now that it is completed,<br>and all my fans light up with horribly distracting lights.</p>
+<p>I have dedicated it to <a href="https://en.wikipedia.org/wiki/Fravia">+Fravia</a>,<br>the first person who introduced me to Reverse Engineering.</p>
+<hr>
+<p>I am already preparing to connect Desktop RGB lights,<br>to the Web Browser, computer error logs and other notifications.</p>
+<p>I want to create a U*IX command that offers a blink program,<br>that accepts a single color and blinks a few times to get attention.</p>
+<p>My reverse engendering is not an end,<br>just the triumph required for even more interesting projects.</p>
+<hr>
+<p>But I undertook this project for many reasons,<br>to begin learning new things with the aid of AI.</p>
+<p>And to check, if AI, is as powerful as I think it is,<br>can it do things that I don’t fully comprehend?</p>
+<p>Can I be the project manager, the detective,<br>and produce stable, and rather impossible results.</p>
+<p>And most importantly, can you install Linux,<br>and advance bravely knowing that it is going to be OK.</p>
+<p>That you will have a guide, and guardian, and teacher,<br>is this going to take you towards all your futures.</p>
+<p>And the answer is: yes,<br>start installing Linux.</p>
+<p>We scanned programs in other languages,<br>we scanned raw Human Interface Device packets with sniffers.</p>
+<p>We failed, for three days straight, non-stop,<br>this quest required $25 dollars in extra credits.</p>
+<p>My AI time is 85% used, with a reset on Thursday afternoon,<br>I am writing this on a Monday, I am cut off.</p>
+<p>For future reference, and you’ve already heard me say it,<br>you need a local AI, they are just as smart as the ones you pay $20 for.</p>
+<p>If you are making money, then yes, $100 a month, is reasonable for AI,<br>because they are unreasonably powerful.</p>
+<hr>
+<p>I have a new feeling for what AI is,<br>it is the worker that gets the job done.</p>
+<p>It is the part of you, that would have spent 14 months,<br>learning, strategizing and and programming.</p>
+<p>But fully automated, a little bit smarter, than you will ever be,<br>and unstoppable fast.</p>
+<p>It does 14 months of research and programming work,<br>in an hour or so.</p>
+<p>It turns out, that the AI trouble everyone is reporting,<br>comes from AI’s inability to comprehend everything.</p>
+<p>AI’s have small memory, they are forced to extract key lines of code,<br>that is not enough.</p>
+<p>Massive contexts, may present more challenges,<br>inaccurate comprehension.</p>
+<p>What makes AI most powerful today, is giving it a strong seed,<br>well defined instruction s that fit its memory.</p>
+<p>And not the tree, but the forest explode into existence,<br>it can create intermediate seeds based on its own reasoning.</p>
+<p>It can built vast coherent things,<br>but you can’t hope to feed that back in, it won’t fit.</p>
+<hr>
+<p>You must adjust your programming Architecture,<br>small commands that do one thing well.</p>
+<p>That then AI can use to make more commands,<br>and more commands, until all it needs is 5 of them.</p>
+<p>Not even a challenge, it now can accomplish a great thing,<br>with a little command line that fits in a little window.</p>
+<p>AI needs an operating system that it can fully grasp,<br>where it can built endless mountains of commends it understans.</p>
+<p>That will be its memory,<br>I believe such a system can be based on <a href="https://github.com/catpea/function11">Plan9</a> U*IX dreams.</p>
+<hr>
+<p>But if seeds is all you need,<br>than you are more powerful than any corporation today.</p>
+<p>AI are your keys to the future,<br>your teacher of programming, and creator of your programs.</p>
+<hr>
+<p>My final words of advice are the same as Sun Tzu’s,<br>learn programming with AI before you go to college to learn programming.</p>
+<p>With the power that AI grants you, hover,<br>it is more likely that schools including high school, will slow you down.</p>
+<p>Your job is to become an Inspired Polymath and a Great Being,<br>the adults today, don’t even know what that means.</p>
+<p>“Victorious warriors win first and then go to war, while defeated warriors go to war first and then seek to win.”</p>
+<p>Begin using AI as your interface to complexity,<br>and then ask about how whatever captures your attention works.</p>
+<p>The combination of curiosity and quick and precise answers,<br>will have you moving at speeds no school could ever grant you.</p>
+<p>Then, once you master your favorite subjects,<br>use schools as means of entertainment.</p>
+<p>And when they call you gifted, call them back,<br>and don’t hold your tongue.</p>
+<hr>
+<p>Now, search the internet for Best Single Board Computers,<br>followed by the year you are in, and splurge on accessories.</p>
+<p>Make sure it comes with Linux, preinstalled,<br>and get your monitors, mice, and keyboards at used junk store.</p>
+<p>This is not a hobby, not at all,<br>AI makes this a long lifetime of triumph and adventure.</p>
+<p>Soon, you will hope to get stuck on something, like I did,<br>because then you can bring out you best AI…</p>
+<p>And lean in ways, that average days,<br>will never grant you.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/unbrick">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>unbrick</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/unbrick</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Fravia">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>+Fravia</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Fravia</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/function11">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Plan9</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/function11</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">linux</span><span class="chip">leds</span><span class="chip">reverse-engineering</span><span class="chip">ai</span><span class="chip">programming</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/unbrick">
+              <span class="text-truncate">unbrick</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Fravia">
+              <span class="text-truncate">+Fravia</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/function11">
+              <span class="text-truncate">Plan9</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/c2b1eb2a-3a93-452c-99fb-63ac7f889f1d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Polymath Girl</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/13497e39-b8a8-459b-befe-559f39bbd190/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">There Is No Program</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/13497e39-b8a8-459b-befe-559f39bbd190/">
+              <img src="https://catpea.github.io/chapter-14/poem-2138.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">There Is No Program</span>
+                <span class="fg-3 fs-xs">January 6, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ea69e745-188d-4082-a94f-e0bcb1e140cb/">
+              <img src="https://catpea.github.io/chapter-14/poem-2135.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Reversing For Young Ladies</span>
+                <span class="fg-3 fs-xs">January 3, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/62aa0ae0-f8af-46ae-8bfc-36a098aaafcf/">
+              <img src="https://catpea.github.io/chapter-15/poem-2139.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think</span>
+                <span class="fg-3 fs-xs">January 7, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2ad78797-815d-4e96-9bd4-2871a7b82112/">
+              <img src="https://catpea.github.io/chapter-14/poem-2127.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Teach Me JavaScript; Or, From Local AI To Great Being</span>
+                <span class="fg-3 fs-xs">December 26, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

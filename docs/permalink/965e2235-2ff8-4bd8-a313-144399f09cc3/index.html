@@ -1,166 +1,482 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cicada Nights: Adventures In Self Education</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Cicada Nights: Adventures In Self Education · Cat Pea</title>
+  <meta name="description" content="The author recounts the joy of hearing cicadas in New York and then details their latest project: a compact Raspberry‑Pi MP3 player that can adjust playback speed for workout tempos while monitoring Bluetooth devices on Linux. They describe how they use simple code to handle device sleep, tune music tempo for three distinct workout speeds (140, 150, 160 BPM), and experiment with background noise and reverb in their song compositions. The post then turns to the physical case design—an aluminum enclosure built with CNC milling and 3‑D printing—to house a small battery, custom buttons, and USB ports. Finally, they reflect on how this hands‑on build has opened new learning pathways in electronics, software, and fabrication, illustrating their ongoing self‑education journey.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/965e2235-2ff8-4bd8-a313-144399f09cc3/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Cicada Nights: Adventures In Self Education · Cat Pea">
+  <meta property="og:description" content="The author recounts the joy of hearing cicadas in New York and then details their latest project: a compact Raspberry‑Pi MP3 player that can adjust playback speed for workout tempos while monitoring Bluetooth devices on Linux. They describe how they use simple code to handle device sleep, tune music tempo for three distinct workout speeds (140, 150, 160 BPM), and experiment with background noise and reverb in their song compositions. The post then turns to the physical case design—an aluminum enclosure built with CNC milling and 3‑D printing—to house a small battery, custom buttons, and USB ports. Finally, they reflect on how this hands‑on build has opened new learning pathways in electronics, software, and fabrication, illustrating their ongoing self‑education journey.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0522.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/education/">Education</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0522</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0522.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0522.avif" alt="Cicada Nights: Adventures In Self Education"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Cicada Nights: Adventures In Self Education</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0522.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/education/">
+              <i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0522</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Cicada Nights: Adventures In Self Education</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-08-05">8/4/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I finally heard that fancy long sound Cicadas make,<br>I&#39;ve been waiting forever.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the years that I was settling down in New York,<br>they were up and about, and it was really nice to hear them again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has been a big day for my inventions as well,<br>I&#39;ve been able to minimize my mp3 player to a reasonable size.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though the smaller battery runs out in hours,<br>not days, but that is to be expected.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have to tidy up some software,<br>I have to re-write monitoring of Bluetooth devices...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because the files that represent them on Linux,<br>are actually deleted when the Bluetooth device goes to sleep.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I have to close the file-handle,<br>and go back into <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/isir/blob/bd355ff8af700836463c4c524cf4a36e50da7c10/device.js#L29">waiting for input device mode, which I recently coded-in</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It all just takes,<br>3 lines of code,</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At the gym,<br>I realized that <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ffmpeg.org/ffmpeg-filters.html#atempo">all my songs have to come in three speeds</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">140 beats per minute for lateral footwork,<br>where I twist my feet left and right, which isn&#39;t as fast as classical dance moves.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">150 beats per minute,<br>which should be my standard 2.5 hour workout.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(But isn&#39;t as I halved my workout time,<br>due to the Pandemic.)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then the upper speed of 160 beats,<br>which is for dancing without dumbbells.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am still working on my posture, so right now the little dumbbells,<br>and the mask, are making breathing more difficult.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wanted to spend this year mostly on cardio,<br>and my goodness...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just couple of weeks ago, I had to look back on my bicycle,<br>to check for traffic...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And instead of getting a 120 degree view,<br>I caught 190 degree in the corner of my eye, so cardio is working out for me.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just tried it again standing up, with my feet pointed forward,<br>I can see 190 degrees behind me by turning my knees torso, upper body and head - this can&#39;t be normal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, my music player, you see, is capable of manipulating the speed of music,<br>giving me rest, proper workout or high speed workout.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a computation performed live,<br>the little Raspberry Pi computer can&#39;t handle that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But a desktop computer can process 100 songs,<br>probably in 20 minutes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which brings me to my song composition,<br>this is another thing that I figured out today.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am able to enrich the background of the songs I compose,<br>by actually adding standard sea-like noise, and then adding some reverb, and filtering it down a little bit.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is very strange for me, I expected that background noise is best created with blended drums, base guitar,<br>but standard wet noise works very well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://splice.com/Pro-Alemaker/alan-walker---faded-full-remake">I first noticed use of noise in a re-make of Alan Walkers Faded, it is refereed to as uplifter and downlifter</a>,<br>and though those samples are richer and actually fade-in/fade-away, as far as my lightweight EDM goes, noise is noise.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made a sample project, not really a song,<br>that show how the noise fills-in the background, I play that now;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(SAMPLE PLAYS)</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I left my favorite discovery, and milestone for last,<br>because as small as my Raspberry PI mp3 player is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It needs a purpose made case that can house the smaller battery,<br>that will take under account all the ports and a customizable push button that comes with the battery module.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which in the current Mark-II prototype serves as the play and shuffle button,<br>double press being a stop button, and long press being a sleep button.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is nothing I can create out of a stock <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.amazon.com/aluminum-project-box/s?k=aluminum+project+box">Aluminum Project Box/Enclosure</a>,<br>and while this takes me to the 3D printed cased realms.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first thing that comes to my mind is a CNC milling machine,<br>I am just crazy about aluminum, and how it dissipates heat, and how it looks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But this is something that is many months away,<br>as first I need to learn how to use Open Source CNC software.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just want to see simulated tool-paths on my screen,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://all3dp.com/2/raspberry-pi-zero-case-3d-print-update/">I already have an SVG model of a case, there are many online</a> - but I know a huge tangent when I see one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I have built my MP3 player invention, I even went from Car Player to Workout Player,<br>but I got stopped by the world of 3D printers and CNC milling machines, as that is a whole new adventure, for another year.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is great though,<br>I went to the local hardware store today.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I held Aluminum stock in my hands,<br>I searched for a nibbling tool, sheet metal tools...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I traced the micro-usb ports of an existing case I have,<br>I stared intently at my Dremel tool.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To me all of this represents another semester of self education,<br>there are dozens of new things to learn here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is how it has always worked for me,<br>finish the little MP3 player and a great new world of CNC milling and 3D printing opens its gateways.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is really hard to start watching lectures or tutorials about programming CNC machinery,<br>until there is that need, to finish a little project.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no education like self education, it is never about finishing some one thing,<br>but about all the branching things that we visit learn, along the way.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-08-05T03:01:20.667Z">August 4, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:43<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0522.avif" aria-label="Cover for Cicada Nights: Adventures In Self Education, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0522.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Cicada Nights: Adventures In Self Education" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:43
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0522.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0522.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0522.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I finally heard that fancy long sound Cicadas make,<br>I&#39;ve been waiting forever.</p>
+<p>In the years that I was settling down in New York,<br>they were up and about, and it was really nice to hear them again.</p>
+<p>It has been a big day for my inventions as well,<br>I&#39;ve been able to minimize my mp3 player to a reasonable size.</p>
+<p>Though the smaller battery runs out in hours,<br>not days, but that is to be expected.</p>
+<hr>
+<p>I have to tidy up some software,<br>I have to re-write monitoring of Bluetooth devices...</p>
+<p>Because the files that represent them on Linux,<br>are actually deleted when the Bluetooth device goes to sleep.</p>
+<p>So I have to close the file-handle,<br>and go back into <a href="https://github.com/catpea/isir/blob/bd355ff8af700836463c4c524cf4a36e50da7c10/device.js#L29">waiting for input device mode, which I recently coded-in</a></p>
+<p>It all just takes,<br>3 lines of code,</p>
+<hr>
+<p>At the gym,<br>I realized that <a href="https://ffmpeg.org/ffmpeg-filters.html#atempo">all my songs have to come in three speeds</a>.</p>
+<p>140 beats per minute for lateral footwork,<br>where I twist my feet left and right, which isn&#39;t as fast as classical dance moves.</p>
+<p>150 beats per minute,<br>which should be my standard 2.5 hour workout.</p>
+<p>(But isn&#39;t as I halved my workout time,<br>due to the Pandemic.)</p>
+<p>And then the upper speed of 160 beats,<br>which is for dancing without dumbbells.</p>
+<p>I am still working on my posture, so right now the little dumbbells,<br>and the mask, are making breathing more difficult.</p>
+<p>I wanted to spend this year mostly on cardio,<br>and my goodness...</p>
+<p>Just couple of weeks ago, I had to look back on my bicycle,<br>to check for traffic...</p>
+<p>And instead of getting a 120 degree view,<br>I caught 190 degree in the corner of my eye, so cardio is working out for me.</p>
+<p>I just tried it again standing up, with my feet pointed forward,<br>I can see 190 degrees behind me by turning my knees torso, upper body and head - this can&#39;t be normal.</p>
+<p>But, my music player, you see, is capable of manipulating the speed of music,<br>giving me rest, proper workout or high speed workout.</p>
+<p>This is not a computation performed live,<br>the little Raspberry Pi computer can&#39;t handle that.</p>
+<p>But a desktop computer can process 100 songs,<br>probably in 20 minutes.</p>
+<hr>
+<p>Which brings me to my song composition,<br>this is another thing that I figured out today.</p>
+<p>I am able to enrich the background of the songs I compose,<br>by actually adding standard sea-like noise, and then adding some reverb, and filtering it down a little bit.</p>
+<p>This is very strange for me, I expected that background noise is best created with blended drums, base guitar,<br>but standard wet noise works very well.</p>
+<p><a href="https://splice.com/Pro-Alemaker/alan-walker---faded-full-remake">I first noticed use of noise in a re-make of Alan Walkers Faded, it is refereed to as uplifter and downlifter</a>,<br>and though those samples are richer and actually fade-in/fade-away, as far as my lightweight EDM goes, noise is noise.</p>
+<p>I made a sample project, not really a song,<br>that show how the noise fills-in the background, I play that now;</p>
+<p>(SAMPLE PLAYS)</p>
+<hr>
+<p>I left my favorite discovery, and milestone for last,<br>because as small as my Raspberry PI mp3 player is.</p>
+<p>It needs a purpose made case that can house the smaller battery,<br>that will take under account all the ports and a customizable push button that comes with the battery module.</p>
+<p>Which in the current Mark-II prototype serves as the play and shuffle button,<br>double press being a stop button, and long press being a sleep button.</p>
+<p>This is nothing I can create out of a stock <a href="https://www.amazon.com/aluminum-project-box/s?k=aluminum+project+box">Aluminum Project Box/Enclosure</a>,<br>and while this takes me to the 3D printed cased realms.</p>
+<p>The first thing that comes to my mind is a CNC milling machine,<br>I am just crazy about aluminum, and how it dissipates heat, and how it looks.</p>
+<p>But this is something that is many months away,<br>as first I need to learn how to use Open Source CNC software.</p>
+<p>I just want to see simulated tool-paths on my screen,<br><a href="https://all3dp.com/2/raspberry-pi-zero-case-3d-print-update/">I already have an SVG model of a case, there are many online</a> - but I know a huge tangent when I see one.</p>
+<p>So I have built my MP3 player invention, I even went from Car Player to Workout Player,<br>but I got stopped by the world of 3D printers and CNC milling machines, as that is a whole new adventure, for another year.</p>
+<hr>
+<p>It is great though,<br>I went to the local hardware store today.</p>
+<p>I held Aluminum stock in my hands,<br>I searched for a nibbling tool, sheet metal tools...</p>
+<p>I traced the micro-usb ports of an existing case I have,<br>I stared intently at my Dremel tool.</p>
+<hr>
+<p>To me all of this represents another semester of self education,<br>there are dozens of new things to learn here.</p>
+<p>It is how it has always worked for me,<br>finish the little MP3 player and a great new world of CNC milling and 3D printing opens its gateways.</p>
+<p>It is really hard to start watching lectures or tutorials about programming CNC machinery,<br>until there is that need, to finish a little project.</p>
+<hr>
+<p>There is no education like self education, it is never about finishing some one thing,<br>but about all the branching things that we visit learn, along the way.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/isir/blob/bd355ff8af700836463c4c524cf4a36e50da7c10/device.js#L29">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>waiting for input device mode, which I recently coded-in</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/isir/blob/bd355ff8af700836463c4c524cf4a36e50da7c10/device.js#L29</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ffmpeg.org/ffmpeg-filters.html#atempo">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>all my songs have to come in three speeds</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ffmpeg.org/ffmpeg-filters.html#atempo</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://splice.com/Pro-Alemaker/alan-walker---faded-full-remake">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I first noticed use of noise in a re-make of Alan Walkers Faded, it is refereed to as uplifter and downlifter</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://splice.com/Pro-Alemaker/alan-walker---faded-full-remake</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.amazon.com/aluminum-project-box/s?k=aluminum+project+box">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Aluminum Project Box/Enclosure</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.amazon.com/aluminum-project-box/s?k=aluminum+project+box</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://all3dp.com/2/raspberry-pi-zero-case-3d-print-update/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I already have an SVG model of a case, there are many online</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://all3dp.com/2/raspberry-pi-zero-case-3d-print-update/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">raspberry-pi</span><span class="chip">mp3-player</span><span class="chip">bluetooth-monitoring</span><span class="chip">javascript</span><span class="chip">3d-printing</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/3kAjIDlg0Ng"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/3kAjIDlg0Ng</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/isir/blob/bd355ff8af700836463c4c524cf4a36e50da7c10/device.js#L29">
+              <span class="text-truncate">waiting for input device mode, which I recently coded-in</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ffmpeg.org/ffmpeg-filters.html#atempo">
+              <span class="text-truncate">all my songs have to come in three speeds</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ffmpeg.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://splice.com/Pro-Alemaker/alan-walker---faded-full-remake">
+              <span class="text-truncate">I first noticed use of noise in a re-make of Alan Walkers Faded, it is refereed to as uplifter and downlifter</span>
+              <span class="fg-3 fs-xs flex-shrink-0">splice.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.amazon.com/aluminum-project-box/s?k=aluminum+project+box">
+              <span class="text-truncate">Aluminum Project Box/Enclosure</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.amazon.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://all3dp.com/2/raspberry-pi-zero-case-3d-print-update/">
+              <span class="text-truncate">I already have an SVG model of a case, there are many online</span>
+              <span class="fg-3 fs-xs flex-shrink-0">all3dp.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/e93de215-04b7-4d58-b509-5a28d322900a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">A Strange Little List Of Artsy Things</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b693c2ac-876e-4874-9af0-52b5c49f6454/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Passport, The Card, And The New Universal Bill Of Rights: Instructions On The Subject Of Uniting The World</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Education</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0733b036-6a56-40f9-98a5-b6008e6eee6a/">
+              <img src="https://catpea.github.io/chapter-03/poem-0525.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning For Real: A Little Daydream About Real Schools And Real Results</span>
+                <span class="fg-3 fs-xs">August 7, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f8cc06bd-0903-42f0-b25c-fbb5a49d68f9/">
+              <img src="https://catpea.github.io/chapter-03/poem-0509.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Self Education At A Glance</span>
+                <span class="fg-3 fs-xs">July 22, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/85c29e2d-cb40-4cff-b81f-c9f42b63636f/">
+              <img src="https://catpea.github.io/chapter-03/poem-0526.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Real Education, Real World</span>
+                <span class="fg-3 fs-xs">August 8, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/19685889-a6e7-449f-a93e-dfb9bddeeb7e/">
+              <img src="https://catpea.github.io/chapter-03/poem-0506.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">History and Politics</span>
+                <span class="fg-3 fs-xs">July 19, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/education/">All of Education<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

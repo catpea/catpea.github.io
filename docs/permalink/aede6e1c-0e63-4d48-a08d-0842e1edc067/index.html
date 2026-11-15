@@ -1,162 +1,441 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation · Cat Pea</title>
+  <meta name="description" content="The post presents two creative strategies: first, a graphics tip that encourages adding maximum complexity—by starting with simple, oddly shaped subjects such as “naked cats” or “blob fish”—and intentionally making the result ugly to test an artist’s effort; second, a text‑generation tip that suggests building poems by first generating structured lists of steps and details (e.g., five steps toward wisdom, world peace, or personal growth) and then weaving those into a rhyming poem, illustrated with sample prompts and finished verses.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/aede6e1c-0e63-4d48-a08d-0842e1edc067/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation · Cat Pea">
+  <meta property="og:description" content="The post presents two creative strategies: first, a graphics tip that encourages adding maximum complexity—by starting with simple, oddly shaped subjects such as “naked cats” or “blob fish”—and intentionally making the result ugly to test an artist’s effort; second, a text‑generation tip that suggests building poems by first generating structured lists of steps and details (e.g., five steps toward wisdom, world peace, or personal growth) and then weaving those into a rhyming poem, illustrated with sample prompts and finished verses.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1330.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1330</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1330.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1330.avif" alt="Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1330.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1330</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-10-23">10/22/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">First tip deals with graphics generation,
-and is about adding the maximum complexity into your creation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whatever you want to create, be it from a fresh prompt,
-or by building on top of an existing prompt, which I recommend doing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Do not make it perfect, symmetrical, smooth and beautiful,
-make it ugly, really ugly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a really good way to think about this,
-is imagining how much work an artist would need to do to recreate your work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You want wrinkles, you glitches, you want age,
-and better yet, you don’t want to start with a perfectly beautiful subject.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Start with one of those naked cats, or a blob fish,
-not nasty, but fascinating, uncommon, brutal but elegant.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another good way of thinking about this,
-is walking into a gallery on a sunny vacation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Would you want to see pretty faces that are all over magazines,
-or faces so full of character…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I personally feel that this is great for Anthropomorphic Animals,
-Bored Ancient Goats, Powerful Yakuza Shrimp, Ancient Ape Philosophers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My second tip is for smarter text generation,
-and I’ve learned it from the GPT4 programming demo.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, it works with Poetry in the free GPT 3.5 program as well,
-and probably others too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t just ask the machine to create a poem for you,
-ask it to make a list of steps, and then convert it to a poem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you want to say, make a list of 5 steps to become wise,
-add three sections to each step, and then convert it to a rhyming poem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can feel a strong structure in the poem,
-a progression, it becomes an intelligent poem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By giving it that structure first,
-the poem actually becomes well thought out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now a couple of examples, I&#39;ll give you the prompt I used,
-but skip over the intermediate list the AI makes and get straight to the poem.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">List 5 steps towards wisdom. Then list 3 major points for each of the steps.
-Rewrite the list as a short, content rich, cheerful, inspirational poem that rhymes.
-Do not mention the steps just make them flow together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On the path to wisdom, let&#39;s brightly shine,
-A journey through life, one that&#39;s so divine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With self-reflection, we&#39;ll deeply know,
-Our strengths and our weaknesses, let the wisdom flow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the quest for learning, we&#39;ll seek and explore,
-Through knowledge and experience, our wisdom will soar.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With compassion and empathy, our hearts will sing,
-Kindness, forgiveness, and understanding we&#39;ll bring.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In our decision-making, we&#39;ll choose with care,
-Aligning with values, the world we&#39;ll repair.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With humility and adaptability, we&#39;ll embrace the change,
-Seek feedback, show gratitude, life rearranged.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So let&#39;s walk this path, hand in hand,
-In the pursuit of wisdom, together we&#39;ll stand.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">List 5 steps towards world peace. Then list 3 major points for each of the steps.
-Rewrite the list as a short, content rich, cheerful, inspirational poem that rhymes.
-Do not mention the steps just make them flow together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a world of turmoil and strife, we strive for peace in our life,
-Through dialogue and compromise, we&#39;ll mend the rifts, remove the knives.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Economic growth, a hand to lend, we&#39;ll lift the poor and be a friend,
-With equal shares, compassion&#39;s trend, together, we&#39;ll reach the end.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Human rights, a shining light, we&#39;ll stand for justice, do what&#39;s right,
-For all are equal, day and night, let love and tolerance ignite.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our Earth, a gift, a precious jewel, let&#39;s safeguard it, each girl and boy,
-With clean, green dreams, we&#39;ll never be cruel, preserve our planet, bring it joy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From weapons, let&#39;s turn and face the sun, with unity, we&#39;ll overcome,
-A peaceful world, for everyone, together, we&#39;ll become as one.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">List 5 steps towards growing all the way up and becoming a great being.
-Rewrite the list as a short, content rich, cheerful, inspirational poem that rhymes.
-Do not mention the steps just make them flow together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On life&#39;s grand canvas, we paint our own scene,
-A path to greatness, a joyful routine.
-In self-discovery, we find what&#39;s true,
-Embracing the strengths, and our limits too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We set our goals, in personal delight,
-With a thirst for learning, we shine so bright.
-Mentors guide us, wisdom&#39;s sweet embrace,
-In this journey of growth, we find our place.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With kindness and love, we light the way,
-Listening and caring, day by day.
-Compassion&#39;s embrace, in each action and word,
-Connects us to hearts, like a melodious bird.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In times of change, we stand strong and bold,
-Resilience and balance, our treasures unfold.
-Adapting with grace, we weather the storm,
-With a heart full of hope, we transform.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our legacy&#39;s the story, that we&#39;re meant to tell,
-Purpose and integrity, within us dwell.
-Responsibility and inspiration, we share our creed,
-Becoming great beings, fulfilling our need.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-10-23T02:57:35.384Z">October 22, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:55<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1330.avif" aria-label="Cover for Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1330.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Beginning Generative AI: Two Tiny Tips For Graphics And Text Generation" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:55
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1330.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1330.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1330.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>First tip deals with graphics generation,<br>and is about adding the maximum complexity into your creation.</p>
+<p>Whatever you want to create, be it from a fresh prompt,<br>or by building on top of an existing prompt, which I recommend doing.</p>
+<p>Do not make it perfect, symmetrical, smooth and beautiful,<br>make it ugly, really ugly.</p>
+<p>And a really good way to think about this,<br>is imagining how much work an artist would need to do to recreate your work.</p>
+<p>You want wrinkles, you glitches, you want age,<br>and better yet, you don’t want to start with a perfectly beautiful subject.</p>
+<p>Start with one of those naked cats, or a blob fish,<br>not nasty, but fascinating, uncommon, brutal but elegant.</p>
+<p>Another good way of thinking about this,<br>is walking into a gallery on a sunny vacation.</p>
+<p>Would you want to see pretty faces that are all over magazines,<br>or faces so full of character…</p>
+<p>And I personally feel that this is great for Anthropomorphic Animals,<br>Bored Ancient Goats, Powerful Yakuza Shrimp, Ancient Ape Philosophers.</p>
+<hr>
+<p>My second tip is for smarter text generation,<br>and I’ve learned it from the GPT4 programming demo.</p>
+<p>But, it works with Poetry in the free GPT 3.5 program as well,<br>and probably others too.</p>
+<p>Don’t just ask the machine to create a poem for you,<br>ask it to make a list of steps, and then convert it to a poem.</p>
+<p>So you want to say, make a list of 5 steps to become wise,<br>add three sections to each step, and then convert it to a rhyming poem.</p>
+<p>You can feel a strong structure in the poem,<br>a progression, it becomes an intelligent poem.</p>
+<p>By giving it that structure first,<br>the poem actually becomes well thought out.</p>
+<p>Now a couple of examples, I&#39;ll give you the prompt I used,<br>but skip over the intermediate list the AI makes and get straight to the poem.</p>
+<hr>
+<p>List 5 steps towards wisdom. Then list 3 major points for each of the steps.<br>Rewrite the list as a short, content rich, cheerful, inspirational poem that rhymes.<br>Do not mention the steps just make them flow together.</p>
+<p>On the path to wisdom, let&#39;s brightly shine,<br>A journey through life, one that&#39;s so divine.</p>
+<p>With self-reflection, we&#39;ll deeply know,<br>Our strengths and our weaknesses, let the wisdom flow.</p>
+<p>In the quest for learning, we&#39;ll seek and explore,<br>Through knowledge and experience, our wisdom will soar.</p>
+<p>With compassion and empathy, our hearts will sing,<br>Kindness, forgiveness, and understanding we&#39;ll bring.</p>
+<p>In our decision-making, we&#39;ll choose with care,<br>Aligning with values, the world we&#39;ll repair.</p>
+<p>With humility and adaptability, we&#39;ll embrace the change,<br>Seek feedback, show gratitude, life rearranged.</p>
+<p>So let&#39;s walk this path, hand in hand,<br>In the pursuit of wisdom, together we&#39;ll stand.</p>
+<hr>
+<p>List 5 steps towards world peace. Then list 3 major points for each of the steps.<br>Rewrite the list as a short, content rich, cheerful, inspirational poem that rhymes.<br>Do not mention the steps just make them flow together.</p>
+<p>In a world of turmoil and strife, we strive for peace in our life,<br>Through dialogue and compromise, we&#39;ll mend the rifts, remove the knives.</p>
+<p>Economic growth, a hand to lend, we&#39;ll lift the poor and be a friend,<br>With equal shares, compassion&#39;s trend, together, we&#39;ll reach the end.</p>
+<p>Human rights, a shining light, we&#39;ll stand for justice, do what&#39;s right,<br>For all are equal, day and night, let love and tolerance ignite.</p>
+<p>Our Earth, a gift, a precious jewel, let&#39;s safeguard it, each girl and boy,<br>With clean, green dreams, we&#39;ll never be cruel, preserve our planet, bring it joy.</p>
+<p>From weapons, let&#39;s turn and face the sun, with unity, we&#39;ll overcome,<br>A peaceful world, for everyone, together, we&#39;ll become as one.</p>
+<hr>
+<p>List 5 steps towards growing all the way up and becoming a great being.<br>Rewrite the list as a short, content rich, cheerful, inspirational poem that rhymes.<br>Do not mention the steps just make them flow together.</p>
+<p>On life&#39;s grand canvas, we paint our own scene,<br>A path to greatness, a joyful routine.<br>In self-discovery, we find what&#39;s true,<br>Embracing the strengths, and our limits too.</p>
+<p>We set our goals, in personal delight,<br>With a thirst for learning, we shine so bright.<br>Mentors guide us, wisdom&#39;s sweet embrace,<br>In this journey of growth, we find our place.</p>
+<p>With kindness and love, we light the way,<br>Listening and caring, day by day.<br>Compassion&#39;s embrace, in each action and word,<br>Connects us to hearts, like a melodious bird.</p>
+<p>In times of change, we stand strong and bold,<br>Resilience and balance, our treasures unfold.<br>Adapting with grace, we weather the storm,<br>With a heart full of hope, we transform.</p>
+<p>Our legacy&#39;s the story, that we&#39;re meant to tell,<br>Purpose and integrity, within us dwell.<br>Responsibility and inspiration, we share our creed,<br>Becoming great beings, fulfilling our need.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">prompting</span><span class="chip">gpt4</span><span class="chip">gpt3.5</span><span class="chip">ai-generated-graphics</span><span class="chip">text-generation</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/0220b147-d771-4383-a64e-d99c40eec325/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Wisdom; Or, All The Right Humanity Has Ever Had</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/f1964485-45ba-46f5-a5d7-66ae7a950a95/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Flight Of The Mocking Birds</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f05d527d-ee03-40fe-82ee-9fb74ad6e733/">
+              <img src="https://catpea.github.io/chapter-08/poem-1333.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Tiny Look At Generative Art</span>
+                <span class="fg-3 fs-xs">October 25, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/09bf16f8-24e5-4d14-888e-6a95942aad55/">
+              <img src="https://catpea.github.io/chapter-08/poem-1325.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Uptime; Or, What Will Self Aware Artificial General Intelligence Want From Us?</span>
+                <span class="fg-3 fs-xs">October 17, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/df14835d-71e2-4746-a7fb-3df01cb8aa9e/">
+              <img src="https://catpea.github.io/chapter-08/poem-1338.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Turning Generative Art Into A Super Tiny Little Business</span>
+                <span class="fg-3 fs-xs">October 30, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b80e5d70-dfe5-4fc2-8044-79c44893a4e6/">
+              <img src="https://catpea.github.io/chapter-06/poem-1175.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">New Internet</span>
+                <span class="fg-3 fs-xs">May 20, 2023</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

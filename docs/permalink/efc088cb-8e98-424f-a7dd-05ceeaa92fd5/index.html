@@ -1,207 +1,531 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bling: Thinking In Geometry Nodes</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Bling: Thinking In Geometry Nodes · Cat Pea</title>
+  <meta name="description" content="Blender’s Geometry Nodes let you procedurally build a decorated ring by turning a basic curve into points, applying math‑based scaling, and using modifier nodes to place and size the decorations.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/efc088cb-8e98-424f-a7dd-05ceeaa92fd5/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bling: Thinking In Geometry Nodes · Cat Pea">
+  <meta property="og:description" content="Blender’s Geometry Nodes let you procedurally build a decorated ring by turning a basic curve into points, applying math‑based scaling, and using modifier nodes to place and size the decorations.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0832.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0832</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0832.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0832.avif" alt="Bling: Thinking In Geometry Nodes"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Bling: Thinking In Geometry Nodes</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0832.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0832</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Bling: Thinking In Geometry Nodes</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-06-10">6/10/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Blender is a program for making 3D things,<br>3D game characters, and everything else.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The way things are done in the 3D world,<br>is that you start with a 3D primitive like a cube or a sphere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you apply modifications,<br>for example you can extrude faces of a cube with your mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or you can apply an automatic modifier,<br>such as solidify.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which for an unknown reason,<br>will go inside your cube, and make a little home.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will give the inside of a cube, walls,<br>perhaps it sees the faces of a solid cube as a thing to solidify.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can mix and match modifiers,<br>you can send a solidified cube into some other modifier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a side note, nobody yet knows,<br>what happens when you solidify a solidified cube - you get a second floor maybe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is maybe 50 modifiers that do odd,<br>but useful things like that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then there is this really crazy one,<br>called Geometry Nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you select your cube,<br>and apply a geometry node modifier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You get to see this beam of geometric information,<br>flowing from the input of the modifier to the output.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These beams or node connections, or node trees,<br>or geometry node blocks are not a new idea.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a drag and drop programming language,<br>not quite a proper user interface, and not a boring old programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is like a subway map,<br>you can follow the connections, to get a good picture of where things are happening.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hollywood uses a similar language for advanced computer based scenes,<br>and previously Blender used something similar to color 3D objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A language called pure data allows for music creation,<br>and a program called node red can help you program web servers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To return to our cube with,<br>a geometry nodes modifier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you cut the stream of the geometric information,<br>inside your Geometry nodes Modifier, the cube simply disappears.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That input no longer reaches the output, the geometric information is cut,<br>and it won’t reach your screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here in this visual programming language,<br>you can also modify geometry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you don’t get something for nothing,<br>like with the solidify modifier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now you have to really sit down,<br>with a pencil, and try to figure things out.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where this poem,<br>becomes a little bit unhinged, so better grab onto something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This sub modifier world,<br>this world of sub primitive things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Does not aim to speak the human language,<br>it won’t try to say solidify.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you can sort of kind of hope to try, to imagine,<br>that something is about to become solid, somehow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here if you want to do something,<br>you have to look at other people doing stuff, and remember it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may have to read documentation,<br>which will for example seem to try to help you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For one it will break down long pages into section,<br>and sure as heck, they will start with a title, that someone careful highlighted, and made bold.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But often just to mock you, to try to break you,<br>to try to make the documentation writers look special.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But after a while,<br>you will be able to do stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can make your own solidify thingine, sort of,<br>if you take a cube, and and add a delete geometry node, and set it to delete faces.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then convert the resulting lines into a curve,<br>which is more important than a line, and has a whole lot of tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then you will find yourself, with a new starting point,<br>and lots of little tools for curve operations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here you can dress-up your curve (that was once a cube without faces),<br>with another curve, which will gently trace all the lines, and thus solidify your main curve.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I did just that to create the decoration for a ring,<br>except that instead of a cube I used a low resolution sphere.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you see, there is functionality in here,<br>but you have to know to delete some geometry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you have to remember that curves,<br>are treated with extra care and respect, and have lots of little functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Such as dressing up one curve with another,<br>a process that I have repeated, to create the main body of the ring.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, the curve that I was using to dress up my ring or curve-circle,<br>is something I manually created with my mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wanted total control over how the ring feels,<br>and I actually repeated this step one more time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that I could fuse into the main body,<br>a much more geometric looking dress-up curve.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way the inside of the ring will be very smooth,<br>while the outside will have an interesting polygonal pattern.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally I had to pause,<br>because when yo dress up a curve, it is a whole operation, all at once.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to position, the main decoration of the ring,<br>I only needed one spot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I didn’t want to slide around a ring, or dress up anything,<br>I just needed the correct coordinate on the top of this ring.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Asking for top was too much,<br>I could have done it, but it would have added extra math.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is a good idea to keep everything inside Geometry Nodes,<br>as simple as possible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, any addition to a ring,<br>is just about the size of a borough on a New York subway map.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So by the time you add five non-trivial things,<br>your program looks like the NYC Subway Map.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it turned out that I wouldn&#39;t get a coordinate for my ring decoration,<br>that is way too much to ask.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to gently build up information as you work with your curves,<br>and by the way curves are so special because they are simple.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A mesh such as that of a small smooth torus,<br>can have hundreds of thousands of vectors of geometric information.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where if you start with a curve circle,<br>you will have 10 units of information.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In computer world everything starts at zero,<br>including bugs, called <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="http://www.catb.org/jargon/html/F/fencepost-error.html">Fence Post Problems</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because, when you start at zero,<br>your number of cats is two, but you actually have a third cat...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or possibly you only have one cat,<br>or four.... maybe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Anywho... zero is a really special number, because it is weird,<br>and in the beginning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So it is a really good spot,<br>to weld the decoration of a ring to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in geometry nodes you would say,<br>convert a copy of my curve to points.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another useful tool, a point, is a reference point,<br>it has XYZ, but also a radius, and you can attach custom calculations to it as of the recent Blender 3.2</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So here, to place that decoration at spot zero,<br>wherever it may be.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We say, distribute decorations to point,<br>and this will immediate do what we are trying to avoid.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will create as many copies of our decoration,<br>as there are points.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Blender, and operations in-general are at their simplest when they are complete,<br>because you never have to wonder what you got, you got all of it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now that the decoration has been distributed to all the points,<br>and we have the most uncomfortable ring int he world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We say, “Hey, distribute on point node”,<br>“I am going to select point zero”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whenever something is doing all it can,<br>there is usually a section option.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is a way of saying,<br>select only those part of a thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we select the part numbered zero by connecting boolean math node,<br>in the A filed we attach we attach INDEX, which holds index numbers of points.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then in the B field,<br>we enter our magical number zero.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now the decorations are no longer distributed around the ring,<br>they are just at the point with index zero.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But now it gets worse,<br>because you want to have smaller supporting decorations on each side.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you want them to grow smaller and smaller as they move away,<br>from the main decoration.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no easy solution for this,<br>there is no trick you can pull of here.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Right after we converted our curve to reference points,<br>we have to start doing math, with the cheerful little chipper math geometry nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which are the ultimate proof,<br>that math is fun and easy, when it is done right.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us say we have ten reference points that we converted out cure into,<br>and no we will not call it N points, none of that nonsense.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We need to take this ten,<br>and make the center special.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because that is where the smaller decorations,<br>will pop up and start getting even smaller.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So to crack number 10 in half,<br>we have to position it over zero.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then just throw it down,<br>as if the zero was the top of a pyramid.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So to pull it back on a number scale,<br>so that the middle of the ten numbers is over zero, or becomes zero.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We need to know the half of ten,<br>and then subtract it from ten.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we are pulling the ten,<br>back into the minus world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now our numbers go from -5 to +5.<br>and here things get really easy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because we can just map -5 to +5,<br>with a map numbers node.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This node will ask us, what is the minimum from,<br>what is the maximum from, and we enter -5 and 5.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then it asks what is the minimum to,<br>and maximum to, and here we say -1 to 1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This will create a series of 10 floating point numbers, doubles,<br>that are now squished between -1 and 1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And since we want things to be uniform on both sides of the ring,<br>we want to run the numbers through an absolute function - to get rid of that minus.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is an inversion that you have to perform here,<br>so that zeros become ones and ones become zeros.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because we didn’t start at zero, we started at one, what was once minus one,<br>and then went over to one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means the zero that was the top of the pyramid,<br>is where index five is, not where index zero is, we want to keep the zeros together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which in the world of rings means, at the beginning and at the end,<br>at index 0 and also at index 9.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here finally we assign this number to the radius,<br>of our 3D reference point for safe keeping.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now as we instantiate decorations on the surface of our ring,<br>we have all the information we need to have a center decoration.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And side decorations,<br>that gently get smaller, and smaller, and smaller.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What can I say,<br>if something is uniform like rings.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then it is almost certainly,<br>programmable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And with a little bit of patience,<br>a bunch of naps, and sunny days.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can create a generator of rings,<br>generator of all kinds of blings.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The details on such a ring,<br>are almost too much for today’s technology.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We may not have rocket packs,<br>but, lets face it, flying with a rocket on your back, is silly and weird.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But what we have, is visual programming languages,<br>that are just enough to open a whole new world of creativity and invention, and bling.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Procedural Modeling,<br>is here to stay...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From procedural jewelry to furniture, shoes and maybe haircuts,<br>and hats that perfectly match your haircuts so that everything has purrfect geometry.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-06-10T22:38:07.143Z">June 10, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>19:31<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>10 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0832.avif" aria-label="Cover for Bling: Thinking In Geometry Nodes, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0832.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Bling: Thinking In Geometry Nodes" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 19:31
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0832.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0832.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0832.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Blender is a program for making 3D things,<br>3D game characters, and everything else.</p>
+<p>The way things are done in the 3D world,<br>is that you start with a 3D primitive like a cube or a sphere.</p>
+<p>And then you apply modifications,<br>for example you can extrude faces of a cube with your mouse.</p>
+<p>Or you can apply an automatic modifier,<br>such as solidify.</p>
+<p>Which for an unknown reason,<br>will go inside your cube, and make a little home.</p>
+<p>It will give the inside of a cube, walls,<br>perhaps it sees the faces of a solid cube as a thing to solidify.</p>
+<p>You can mix and match modifiers,<br>you can send a solidified cube into some other modifier.</p>
+<p>As a side note, nobody yet knows,<br>what happens when you solidify a solidified cube - you get a second floor maybe.</p>
+<p>There is maybe 50 modifiers that do odd,<br>but useful things like that.</p>
+<p>And then there is this really crazy one,<br>called Geometry Nodes.</p>
+<p>When you select your cube,<br>and apply a geometry node modifier.</p>
+<p>You get to see this beam of geometric information,<br>flowing from the input of the modifier to the output.</p>
+<p>These beams or node connections, or node trees,<br>or geometry node blocks are not a new idea.</p>
+<p>It is a drag and drop programming language,<br>not quite a proper user interface, and not a boring old programming language.</p>
+<p>It is like a subway map,<br>you can follow the connections, to get a good picture of where things are happening.</p>
+<p>Hollywood uses a similar language for advanced computer based scenes,<br>and previously Blender used something similar to color 3D objects.</p>
+<p>A language called pure data allows for music creation,<br>and a program called node red can help you program web servers.</p>
+<hr>
+<p>To return to our cube with,<br>a geometry nodes modifier.</p>
+<p>If you cut the stream of the geometric information,<br>inside your Geometry nodes Modifier, the cube simply disappears.</p>
+<p>That input no longer reaches the output, the geometric information is cut,<br>and it won’t reach your screen.</p>
+<p>Here in this visual programming language,<br>you can also modify geometry.</p>
+<p>But you don’t get something for nothing,<br>like with the solidify modifier.</p>
+<p>Now you have to really sit down,<br>with a pencil, and try to figure things out.</p>
+<hr>
+<p>This is where this poem,<br>becomes a little bit unhinged, so better grab onto something.</p>
+<p>This sub modifier world,<br>this world of sub primitive things.</p>
+<p>Does not aim to speak the human language,<br>it won’t try to say solidify.</p>
+<p>Where you can sort of kind of hope to try, to imagine,<br>that something is about to become solid, somehow.</p>
+<p>Here if you want to do something,<br>you have to look at other people doing stuff, and remember it.</p>
+<p>You may have to read documentation,<br>which will for example seem to try to help you.</p>
+<p>For one it will break down long pages into section,<br>and sure as heck, they will start with a title, that someone careful highlighted, and made bold.</p>
+<p>But often just to mock you, to try to break you,<br>to try to make the documentation writers look special.</p>
+<p>But after a while,<br>you will be able to do stuff.</p>
+<p>You can make your own solidify thingine, sort of,<br>if you take a cube, and and add a delete geometry node, and set it to delete faces.</p>
+<p>And then convert the resulting lines into a curve,<br>which is more important than a line, and has a whole lot of tools.</p>
+<p>Then you will find yourself, with a new starting point,<br>and lots of little tools for curve operations.</p>
+<p>And here you can dress-up your curve (that was once a cube without faces),<br>with another curve, which will gently trace all the lines, and thus solidify your main curve.</p>
+<p>And I did just that to create the decoration for a ring,<br>except that instead of a cube I used a low resolution sphere.</p>
+<hr>
+<p>So you see, there is functionality in here,<br>but you have to know to delete some geometry.</p>
+<p>And you have to remember that curves,<br>are treated with extra care and respect, and have lots of little functions.</p>
+<p>Such as dressing up one curve with another,<br>a process that I have repeated, to create the main body of the ring.</p>
+<hr>
+<p>Here, the curve that I was using to dress up my ring or curve-circle,<br>is something I manually created with my mouse.</p>
+<p>I wanted total control over how the ring feels,<br>and I actually repeated this step one more time.</p>
+<p>So that I could fuse into the main body,<br>a much more geometric looking dress-up curve.</p>
+<p>This way the inside of the ring will be very smooth,<br>while the outside will have an interesting polygonal pattern.</p>
+<hr>
+<p>And finally I had to pause,<br>because when yo dress up a curve, it is a whole operation, all at once.</p>
+<p>But to position, the main decoration of the ring,<br>I only needed one spot.</p>
+<p>I didn’t want to slide around a ring, or dress up anything,<br>I just needed the correct coordinate on the top of this ring.</p>
+<p>Asking for top was too much,<br>I could have done it, but it would have added extra math.</p>
+<p>And it is a good idea to keep everything inside Geometry Nodes,<br>as simple as possible.</p>
+<p>For example, any addition to a ring,<br>is just about the size of a borough on a New York subway map.</p>
+<p>So by the time you add five non-trivial things,<br>your program looks like the NYC Subway Map.</p>
+<hr>
+<p>And it turned out that I wouldn&#39;t get a coordinate for my ring decoration,<br>that is way too much to ask.</p>
+<p>You have to gently build up information as you work with your curves,<br>and by the way curves are so special because they are simple.</p>
+<p>A mesh such as that of a small smooth torus,<br>can have hundreds of thousands of vectors of geometric information.</p>
+<p>Where if you start with a curve circle,<br>you will have 10 units of information.</p>
+<p>In computer world everything starts at zero,<br>including bugs, called <a href="http://www.catb.org/jargon/html/F/fencepost-error.html">Fence Post Problems</a>.</p>
+<p>Because, when you start at zero,<br>your number of cats is two, but you actually have a third cat...</p>
+<p>Or possibly you only have one cat,<br>or four.... maybe.</p>
+<p>Anywho... zero is a really special number, because it is weird,<br>and in the beginning.</p>
+<p>So it is a really good spot,<br>to weld the decoration of a ring to.</p>
+<p>And in geometry nodes you would say,<br>convert a copy of my curve to points.</p>
+<p>Another useful tool, a point, is a reference point,<br>it has XYZ, but also a radius, and you can attach custom calculations to it as of the recent Blender 3.2</p>
+<p>So here, to place that decoration at spot zero,<br>wherever it may be.</p>
+<p>We say, distribute decorations to point,<br>and this will immediate do what we are trying to avoid.</p>
+<p>It will create as many copies of our decoration,<br>as there are points.</p>
+<p>Blender, and operations in-general are at their simplest when they are complete,<br>because you never have to wonder what you got, you got all of it.</p>
+<p>So now that the decoration has been distributed to all the points,<br>and we have the most uncomfortable ring int he world.</p>
+<p>We say, “Hey, distribute on point node”,<br>“I am going to select point zero”.</p>
+<p>Whenever something is doing all it can,<br>there is usually a section option.</p>
+<p>Which is a way of saying,<br>select only those part of a thing.</p>
+<p>So we select the part numbered zero by connecting boolean math node,<br>in the A filed we attach we attach INDEX, which holds index numbers of points.</p>
+<p>And then in the B field,<br>we enter our magical number zero.</p>
+<p>And now the decorations are no longer distributed around the ring,<br>they are just at the point with index zero.</p>
+<hr>
+<p>But now it gets worse,<br>because you want to have smaller supporting decorations on each side.</p>
+<p>And you want them to grow smaller and smaller as they move away,<br>from the main decoration.</p>
+<p>There is no easy solution for this,<br>there is no trick you can pull of here.</p>
+<hr>
+<p>Right after we converted our curve to reference points,<br>we have to start doing math, with the cheerful little chipper math geometry nodes.</p>
+<p>Which are the ultimate proof,<br>that math is fun and easy, when it is done right.</p>
+<p>Let us say we have ten reference points that we converted out cure into,<br>and no we will not call it N points, none of that nonsense.</p>
+<p>We need to take this ten,<br>and make the center special.</p>
+<p>Because that is where the smaller decorations,<br>will pop up and start getting even smaller.</p>
+<p>So to crack number 10 in half,<br>we have to position it over zero.</p>
+<p>And then just throw it down,<br>as if the zero was the top of a pyramid.</p>
+<p>So to pull it back on a number scale,<br>so that the middle of the ten numbers is over zero, or becomes zero.</p>
+<p>We need to know the half of ten,<br>and then subtract it from ten.</p>
+<p>So we are pulling the ten,<br>back into the minus world.</p>
+<p>Now our numbers go from -5 to +5.<br>and here things get really easy.</p>
+<p>Because we can just map -5 to +5,<br>with a map numbers node.</p>
+<p>This node will ask us, what is the minimum from,<br>what is the maximum from, and we enter -5 and 5.</p>
+<p>And then it asks what is the minimum to,<br>and maximum to, and here we say -1 to 1.</p>
+<p>This will create a series of 10 floating point numbers, doubles,<br>that are now squished between -1 and 1.</p>
+<p>And since we want things to be uniform on both sides of the ring,<br>we want to run the numbers through an absolute function - to get rid of that minus.</p>
+<p>There is an inversion that you have to perform here,<br>so that zeros become ones and ones become zeros.</p>
+<p>Because we didn’t start at zero, we started at one, what was once minus one,<br>and then went over to one.</p>
+<p>That means the zero that was the top of the pyramid,<br>is where index five is, not where index zero is, we want to keep the zeros together.</p>
+<p>Which in the world of rings means, at the beginning and at the end,<br>at index 0 and also at index 9.</p>
+<p>And here finally we assign this number to the radius,<br>of our 3D reference point for safe keeping.</p>
+<p>And now as we instantiate decorations on the surface of our ring,<br>we have all the information we need to have a center decoration.</p>
+<p>And side decorations,<br>that gently get smaller, and smaller, and smaller.</p>
+<hr>
+<p>What can I say,<br>if something is uniform like rings.</p>
+<p>Then it is almost certainly,<br>programmable.</p>
+<p>And with a little bit of patience,<br>a bunch of naps, and sunny days.</p>
+<p>You can create a generator of rings,<br>generator of all kinds of blings.</p>
+<p>The details on such a ring,<br>are almost too much for today’s technology.</p>
+<hr>
+<p>We may not have rocket packs,<br>but, lets face it, flying with a rocket on your back, is silly and weird.</p>
+<p>But what we have, is visual programming languages,<br>that are just enough to open a whole new world of creativity and invention, and bling.</p>
+<p>Procedural Modeling,<br>is here to stay...</p>
+<p>From procedural jewelry to furniture, shoes and maybe haircuts,<br>and hats that perfectly match your haircuts so that everything has purrfect geometry.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="http://www.catb.org/jargon/html/F/fencepost-error.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Fence Post Problems</span>
-                      <small class="d-block text-muted fw-lighter mt-2">http://www.catb.org/jargon/html/F/fencepost-error.html</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">blender</span><span class="chip">geometry-nodes</span><span class="chip">modifiers</span><span class="chip">cube</span><span class="chip">sphere</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="http://www.catb.org/jargon/html/F/fencepost-error.html">
+              <span class="text-truncate">Fence Post Problems</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.catb.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/20b51e43-683a-45df-a564-c58ddf2c22d5/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Far Future; And The Whole, Greater Than Its Parts</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/dae59056-bf54-4a39-a517-67e657b0a1d9/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Enchanted Ring Of The Little Froggies; Or, Hopping Around Ancient And Modern Jewelry Ideas</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b01188e2-6381-4a6e-9d85-80008c77d63a/">
+              <img src="https://catpea.github.io/chapter-04/poem-0835.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem</span>
+                <span class="fg-3 fs-xs">June 13, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/97b0a742-3aab-4ba0-97af-7c0b442cf530/">
+              <img src="https://catpea.github.io/chapter-04/poem-0820.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Design In Blender Print On An Ender: Easy To Read Visual Programming For The Purpose Of 3D Printing</span>
+                <span class="fg-3 fs-xs">May 29, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fd258f3d-6344-4df6-b172-a5e06ce354ae/">
+              <img src="https://catpea.github.io/chapter-04/poem-0839.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Super Tiny Poem About Building Your First Visual Programming Company</span>
+                <span class="fg-3 fs-xs">June 17, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0732f031-cdf3-47f5-bb9a-e80b51167024/">
+              <img src="https://catpea.github.io/chapter-04/poem-0818.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">3D Cubes; Or, Programmatically Selecting Parts Of A Cube In Blender’s Geometry Nodes</span>
+                <span class="fg-3 fs-xs">May 27, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

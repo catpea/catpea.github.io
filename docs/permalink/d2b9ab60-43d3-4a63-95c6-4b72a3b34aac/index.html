@@ -1,221 +1,531 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Weird Poem About Visual Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Weird Poem About Visual Programming · Cat Pea</title>
+  <meta name="description" content="The post explores the promise and pitfalls of visual programming, arguing that while it can make program flows more visible, its current implementations—especially those built on wire‑based frameworks like Rete.js—often end up with tangled connections, hard‑to‑read layouts, and poor mobile support. It">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/d2b9ab60-43d3-4a63-95c6-4b72a3b34aac/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Weird Poem About Visual Programming · Cat Pea">
+  <meta property="og:description" content="The post explores the promise and pitfalls of visual programming, arguing that while it can make program flows more visible, its current implementations—especially those built on wire‑based frameworks like Rete.js—often end up with tangled connections, hard‑to‑read layouts, and poor mobile support. It">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0845.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0845</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0845.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0845.avif" alt="A Weird Poem About Visual Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Weird Poem About Visual Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0845.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0845</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Weird Poem About Visual Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-06-23">6/23/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">In a way Visual programming is new,<br>and hardly anyone has a clue.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It does not come with a guarantee,<br>that is the biggest problem I see.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the world of programming,<br>which is a loving, and funny, and wonderfully challenging world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is this huge question,<br>and even a huge-er problem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The question is:<br>&quot;Does your program fix problems that people actually have?&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the huge-er problem, is,<br>that everything is broken.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Phone are missing functionality, operating systems keep crashing,<br>new products need firmware upgrades...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you are thrifty or cheap,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://youtu.be/uhyM-bhzFsI?t=674">hackers have access to a detailed map of your home</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So what does a visual programming language fix?<br>and is it really broken?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The file structure of a program,<br>does not represent what the program does.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming languages,<br>can create maps of the program flow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if we sprinkle in <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://yeoman.io/authoring/">yeoman templates</a>,<br>we can eat the cake and have the files properly structured too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is it a problem people have,<br>yeah, programmers have to jump hoops to bridge concepts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here is an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://rete.js.org/#/docs/controls">example of a confusing adapter in Rete.js</a>,<br>that is needed to connect an input box to the node in the programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It makes code neat, it makes sense,<br>but it also crushes Rete.js programs under their own weight and non-portable code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is potential here to create a nicer front-end,<br>but unless it comes from the developer then things will get proken pretty soon.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nobackend.org/dreamcode.html">A really neat example of pretty code, is Dream Code</a>,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=TRKRg1O3H0s">but the world took a completely different path than this creating even more complexity</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then the pink elephant that nobody talks about,<br>the web is about text, and maybe navigation maps, not really about connecting boxes together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And beyond that you need a team of developers to create a visual programming language in a reasonable stretch of time,<br>and you may need multiple and unique prototypes to get it right.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even if you request that everything works exactly like Blender&#39;s Geometry Nodes,<br>there are no guarantees here, everything is new, and you may end up trying to fix problems that people don&#39;t have, anyway.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The web has a wisdom about it self,<br>for one, when a program is written correctly...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In as little as one hour,<br>it will already work on big and small screens.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no guarantee that visual programming on a phone,<br>will be fixing the problems that people actually have.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All the screen pinching,<br>and messing around with little wires...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And trying to connect an output of some math node that is literally two feet away on a smartphone,<br>seems like trouble, and quite a development risk to take.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a pretty terrible thing to receive a fully functional program after a some months,<br>and then end up not using it for anything.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Imagine hiring a team of developers,<br>and the program just can&#39;t work on a little screen, or can&#39;t really help anybody with anything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The pink elephant,<br>is a mean creature.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The big problem with visual programming,<br>is passing information to nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may have a play song or sound node,<br>and then you want the user to pick what sound to play.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the play sound node is just a beautiful square box, neat and simple,<br>and it is part of a reasonably readable chain of actions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example open window, let user pick song, verify something, or make a song purchase,<br>and then you arrive at he play song/sound node and now there is trouble.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because you have to drag something from pick a song node,<br>to play a song node, and after a while you have all these wires everywhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And no making the wires of the nodes that are not in the view-port transparent,<br>does not help, because we have a mess here, it is a mess.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We tried to escape from a mess of files,<br>of from the mess of arbitrary GraphQL queries with random data quota, and we just created a mess of wires.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And no you can&#39;t just group program functions together in to a single node,<br>because the input of that node will still require the wires.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual Programming the way we have it today,<br>does not yet fix much.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the elephant is not the only animal in the room,<br>I don&#39;t know what animal this is, but it has to do with time travel.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because a programmer, should be allowed to create a node,<br>in behavior description only.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the visual programming language, will complain,<br>that he program cannot run because this node does not yet exist.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That the programmer has to create it,<br>and that the created node must pass the behavior test.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, we say we want an UPPERCASE node,<br>that makes all the letters upercase.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we describe that, the test is to fail until,<br>the word &#39;cat&#39; (in lowercase) comes out of the node in uppercase.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a simple test, and a simple mechanism,<br>that allows the creation of large programs, that are yet to be programmed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There can be a bounty back-end where programmers will get bounties,<br>for programming those nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here the developer or a clever company armed with this program,<br>will watch it bubble up into reality.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At the very least, the programmer will get a decent todo list,<br>and the project lead, perhaps a reasonable time estimate.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To add insult to injury,<br>these wire based programs, can sometimes branch creating large trees.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here there maybe a large reuse of variables,<br>as the program takes different routes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now we triple, or quintuple,<br>the number of wires.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, trying to fix a quirk that potentially exists on multiple unreadable branches,<br>makes visual programming a real problem, and the whole effort becomes pointless.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I just want to throw this one last thing in there,<br>aligning nodes to make them more visually appealing, or to make them go around come cluster of nodes - is a huge waste of time, and quite a distraction.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While I continue testing <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://rete.js.org/#/examples/basic">Rete.js</a>,<br>and now <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://jerosoler.github.io/Drawflow/">Dataflow</a>...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Given the complexity on the visual programming language implementation end,<br>and the potential readability or lost variable issues...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It seem to me that the first principle of Visual Programming,<br>should be Smartphones and Tablets first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://js.cytoscape.org/">Cytoscape.js</a> maybe a better visualization library,<br>as it serves as a map and has automated layout, and the library is complete very little programming is required here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once a node which here is more abstract, is clicked,<br>then the smartphone will enter a web-page for that node, perhaps even open it in a new tab.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All the operations will be performed by a wizard, or a step by step interface,<br>where if someone is trying to add a new node, the page will just list all the available nodes with just standard web technologies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The cytoscape map is a map of flows within the program,<br>they are simple and readable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The node configuration values, all the wires that create an unreadable mess,<br>are replaced with values that are injected into the entire flow control stream.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When the program is ran, all the unused values are automatically removed,<br>but creating a verbose linter is a great option too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will complain that, &quot;Hey, you have a song name in the flow control stream,<br>but the last time you used it was in the play node, do you want me to remove it from the stream at that point?&quot;</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, does this fix a problem that people actually have,<br>yes, it shows the flow control of programs graphically.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And allows even the novice user, to inject variables into the stream,<br>such as email by asking &quot;What is your email Address&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then it allows to use that value later on in the flow control stream,<br>or branching streams, in an alert when computer running out of disk-space or when water detected in the basement node.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here there is room for a node to suggest to the user what it needs,<br>and perhaps even go as far as to offer injecting an input node that asks for email.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual Programming is a great idea,<br>but this does not mean, we need to create visual nodes with little input boxes and property sockets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though it does require that we need to think in streams or flows, and nodes,<br>so that the end result is just bunch of easy to comprehend boxes (or nodes) connected together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual Programming just means,<br>that we have to help the user see how the entire program flows.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-06-23T22:09:28.846Z">June 23, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>17:25<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>7 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0845.avif" aria-label="Cover for A Weird Poem About Visual Programming, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0845.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Weird Poem About Visual Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 17:25
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0845.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0845.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0845.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>In a way Visual programming is new,<br>and hardly anyone has a clue.</p>
+<p>It does not come with a guarantee,<br>that is the biggest problem I see.</p>
+<hr>
+<p>In the world of programming,<br>which is a loving, and funny, and wonderfully challenging world.</p>
+<p>There is this huge question,<br>and even a huge-er problem.</p>
+<p>The question is:<br>&quot;Does your program fix problems that people actually have?&quot;</p>
+<p>And the huge-er problem, is,<br>that everything is broken.</p>
+<p>Phone are missing functionality, operating systems keep crashing,<br>new products need firmware upgrades...</p>
+<p>And if you are thrifty or cheap,<br><a href="https://youtu.be/uhyM-bhzFsI?t=674">hackers have access to a detailed map of your home</a>.</p>
+<hr>
+<p>So what does a visual programming language fix?<br>and is it really broken?</p>
+<p>The file structure of a program,<br>does not represent what the program does.</p>
+<p>Visual programming languages,<br>can create maps of the program flow.</p>
+<p>And if we sprinkle in <a href="https://yeoman.io/authoring/">yeoman templates</a>,<br>we can eat the cake and have the files properly structured too.</p>
+<p>Is it a problem people have,<br>yeah, programmers have to jump hoops to bridge concepts.</p>
+<p>Here is an <a href="https://rete.js.org/#/docs/controls">example of a confusing adapter in Rete.js</a>,<br>that is needed to connect an input box to the node in the programming language.</p>
+<p>It makes code neat, it makes sense,<br>but it also crushes Rete.js programs under their own weight and non-portable code.</p>
+<p>There is potential here to create a nicer front-end,<br>but unless it comes from the developer then things will get proken pretty soon.</p>
+<p><a href="https://nobackend.org/dreamcode.html">A really neat example of pretty code, is Dream Code</a>,<br><a href="https://www.youtube.com/watch?v=TRKRg1O3H0s">but the world took a completely different path than this creating even more complexity</a>.</p>
+<hr>
+<p>And then the pink elephant that nobody talks about,<br>the web is about text, and maybe navigation maps, not really about connecting boxes together.</p>
+<p>And beyond that you need a team of developers to create a visual programming language in a reasonable stretch of time,<br>and you may need multiple and unique prototypes to get it right.</p>
+<p>Even if you request that everything works exactly like Blender&#39;s Geometry Nodes,<br>there are no guarantees here, everything is new, and you may end up trying to fix problems that people don&#39;t have, anyway.</p>
+<hr>
+<p>The web has a wisdom about it self,<br>for one, when a program is written correctly...</p>
+<p>In as little as one hour,<br>it will already work on big and small screens.</p>
+<hr>
+<p>There is no guarantee that visual programming on a phone,<br>will be fixing the problems that people actually have.</p>
+<p>All the screen pinching,<br>and messing around with little wires...</p>
+<p>And trying to connect an output of some math node that is literally two feet away on a smartphone,<br>seems like trouble, and quite a development risk to take.</p>
+<p>It is a pretty terrible thing to receive a fully functional program after a some months,<br>and then end up not using it for anything.</p>
+<hr>
+<p>Imagine hiring a team of developers,<br>and the program just can&#39;t work on a little screen, or can&#39;t really help anybody with anything.</p>
+<p>The pink elephant,<br>is a mean creature.</p>
+<hr>
+<p>The big problem with visual programming,<br>is passing information to nodes.</p>
+<p>You may have a play song or sound node,<br>and then you want the user to pick what sound to play.</p>
+<p>So the play sound node is just a beautiful square box, neat and simple,<br>and it is part of a reasonably readable chain of actions.</p>
+<p>For example open window, let user pick song, verify something, or make a song purchase,<br>and then you arrive at he play song/sound node and now there is trouble.</p>
+<p>Because you have to drag something from pick a song node,<br>to play a song node, and after a while you have all these wires everywhere.</p>
+<p>And no making the wires of the nodes that are not in the view-port transparent,<br>does not help, because we have a mess here, it is a mess.</p>
+<hr>
+<p>We tried to escape from a mess of files,<br>of from the mess of arbitrary GraphQL queries with random data quota, and we just created a mess of wires.</p>
+<p>And no you can&#39;t just group program functions together in to a single node,<br>because the input of that node will still require the wires.</p>
+<p>Visual Programming the way we have it today,<br>does not yet fix much.</p>
+<hr>
+<p>And the elephant is not the only animal in the room,<br>I don&#39;t know what animal this is, but it has to do with time travel.</p>
+<p>Because a programmer, should be allowed to create a node,<br>in behavior description only.</p>
+<p>And the visual programming language, will complain,<br>that he program cannot run because this node does not yet exist.</p>
+<p>That the programmer has to create it,<br>and that the created node must pass the behavior test.</p>
+<p>For example, we say we want an UPPERCASE node,<br>that makes all the letters upercase.</p>
+<p>And we describe that, the test is to fail until,<br>the word &#39;cat&#39; (in lowercase) comes out of the node in uppercase.</p>
+<p>It is a simple test, and a simple mechanism,<br>that allows the creation of large programs, that are yet to be programmed.</p>
+<p>There can be a bounty back-end where programmers will get bounties,<br>for programming those nodes.</p>
+<p>Here the developer or a clever company armed with this program,<br>will watch it bubble up into reality.</p>
+<p>At the very least, the programmer will get a decent todo list,<br>and the project lead, perhaps a reasonable time estimate.</p>
+<hr>
+<p>To add insult to injury,<br>these wire based programs, can sometimes branch creating large trees.</p>
+<p>Here there maybe a large reuse of variables,<br>as the program takes different routes.</p>
+<p>And now we triple, or quintuple,<br>the number of wires.</p>
+<p>Here, trying to fix a quirk that potentially exists on multiple unreadable branches,<br>makes visual programming a real problem, and the whole effort becomes pointless.</p>
+<hr>
+<p>And I just want to throw this one last thing in there,<br>aligning nodes to make them more visually appealing, or to make them go around come cluster of nodes - is a huge waste of time, and quite a distraction.</p>
+<hr>
+<p>While I continue testing <a href="https://rete.js.org/#/examples/basic">Rete.js</a>,<br>and now <a href="https://jerosoler.github.io/Drawflow/">Dataflow</a>...</p>
+<p>Given the complexity on the visual programming language implementation end,<br>and the potential readability or lost variable issues...</p>
+<p>It seem to me that the first principle of Visual Programming,<br>should be Smartphones and Tablets first.</p>
+<p>And here <a href="https://js.cytoscape.org/">Cytoscape.js</a> maybe a better visualization library,<br>as it serves as a map and has automated layout, and the library is complete very little programming is required here.</p>
+<p>Once a node which here is more abstract, is clicked,<br>then the smartphone will enter a web-page for that node, perhaps even open it in a new tab.</p>
+<p>All the operations will be performed by a wizard, or a step by step interface,<br>where if someone is trying to add a new node, the page will just list all the available nodes with just standard web technologies.</p>
+<p>The cytoscape map is a map of flows within the program,<br>they are simple and readable.</p>
+<p>The node configuration values, all the wires that create an unreadable mess,<br>are replaced with values that are injected into the entire flow control stream.</p>
+<p>When the program is ran, all the unused values are automatically removed,<br>but creating a verbose linter is a great option too.</p>
+<p>It will complain that, &quot;Hey, you have a song name in the flow control stream,<br>but the last time you used it was in the play node, do you want me to remove it from the stream at that point?&quot;</p>
+<hr>
+<p>Finally, does this fix a problem that people actually have,<br>yes, it shows the flow control of programs graphically.</p>
+<p>And allows even the novice user, to inject variables into the stream,<br>such as email by asking &quot;What is your email Address&quot;.</p>
+<p>And then it allows to use that value later on in the flow control stream,<br>or branching streams, in an alert when computer running out of disk-space or when water detected in the basement node.</p>
+<p>Here there is room for a node to suggest to the user what it needs,<br>and perhaps even go as far as to offer injecting an input node that asks for email.</p>
+<hr>
+<p>Visual Programming is a great idea,<br>but this does not mean, we need to create visual nodes with little input boxes and property sockets.</p>
+<p>Though it does require that we need to think in streams or flows, and nodes,<br>so that the end result is just bunch of easy to comprehend boxes (or nodes) connected together.</p>
+<p>Visual Programming just means,<br>that we have to help the user see how the entire program flows.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://youtu.be/uhyM-bhzFsI?t=674">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>hackers have access to a detailed map of your home</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://youtu.be/uhyM-bhzFsI?t=674</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://yeoman.io/authoring/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>yeoman templates</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://yeoman.io/authoring/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://rete.js.org/#/docs/controls">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>example of a confusing adapter in Rete.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://rete.js.org/#/docs/controls</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nobackend.org/dreamcode.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>A really neat example of pretty code, is Dream Code</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nobackend.org/dreamcode.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=TRKRg1O3H0s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>but the world took a completely different path than this creating even more complexity</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=TRKRg1O3H0s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://rete.js.org/#/examples/basic">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Rete.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://rete.js.org/#/examples/basic</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://jerosoler.github.io/Drawflow/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Dataflow</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://jerosoler.github.io/Drawflow/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://js.cytoscape.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Cytoscape.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://js.cytoscape.org/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual programming</span><span class="chip">node editor</span><span class="chip">rete.js</span><span class="chip">dataflow</span><span class="chip">cytoscape.js</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://youtu.be/uhyM-bhzFsI?t=674">
+              <span class="text-truncate">hackers have access to a detailed map of your home</span>
+              <span class="fg-3 fs-xs flex-shrink-0">youtu.be</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://yeoman.io/authoring/">
+              <span class="text-truncate">yeoman templates</span>
+              <span class="fg-3 fs-xs flex-shrink-0">yeoman.io</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://rete.js.org/#/docs/controls">
+              <span class="text-truncate">example of a confusing adapter in Rete.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">rete.js.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nobackend.org/dreamcode.html">
+              <span class="text-truncate">A really neat example of pretty code, is Dream Code</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nobackend.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=TRKRg1O3H0s">
+              <span class="text-truncate">but the world took a completely different path than this creating even more complexity</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://rete.js.org/#/examples/basic">
+              <span class="text-truncate">Rete.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">rete.js.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://jerosoler.github.io/Drawflow/">
+              <span class="text-truncate">Dataflow</span>
+              <span class="fg-3 fs-xs flex-shrink-0">jerosoler.github.io</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://js.cytoscape.org/">
+              <span class="text-truncate">Cytoscape.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">js.cytoscape.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/0334aba3-1cd0-4d7d-ba65-746aab0bfc2c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">How Can School Be Fake? Or, How Can Mirrors Be Real If Our Eyes Aren&#39;t Real?</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/07a8b5a0-6764-4cd7-88f5-f7580c95c462/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Write Right</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/07a8b5a0-6764-4cd7-88f5-f7580c95c462/">
+              <img src="https://catpea.github.io/chapter-04/poem-0846.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Write Right</span>
+                <span class="fg-3 fs-xs">June 24, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ebdd842b-7cb8-4e74-8f8b-fea2eb73aed1/">
+              <img src="https://catpea.github.io/chapter-04/poem-0842.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Tiny Music Programming Idea</span>
+                <span class="fg-3 fs-xs">June 20, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d9777465-8218-4df3-b13e-da92c3b0b49b/">
+              <img src="https://catpea.github.io/chapter-04/poem-0850.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming By Describing Actions In Plain Text</span>
+                <span class="fg-3 fs-xs">June 28, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fd258f3d-6344-4df6-b172-a5e06ce354ae/">
+              <img src="https://catpea.github.io/chapter-04/poem-0839.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Super Tiny Poem About Building Your First Visual Programming Company</span>
+                <span class="fg-3 fs-xs">June 17, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

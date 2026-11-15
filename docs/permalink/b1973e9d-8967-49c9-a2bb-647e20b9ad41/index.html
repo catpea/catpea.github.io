@@ -1,201 +1,476 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dare To Create Magnificent Confusion</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Dare To Create Magnificent Confusion · Cat Pea</title>
+  <meta name="description" content="The post introduces how everyday symbols in URLs—slashes, question marks, hashes, equals signs, colons and at‑signs—form a language that lets you pass data to a server and keep information on the client side; it then explains how visual programming with Node‑RED uses tiny boxes connected by lines so that the output of one box becomes the input of another, giving examples such as an “http in” node listening on localhost/hello, a template node that can read query parameters like ?name=alice and display “Hello {{payload.name}}”, and an “http response” node that sends the result back to the browser. The article also touches on other visual‑style tools (gmic for image filters, ffmpeg’s filtergraphs) that rely on imagined layers or chains of operations, and ends by encouraging readers to install Node‑RED, use language‑model help to generate code, and discover how easy it is to build programs once you understand these symbolic building blocks.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/b1973e9d-8967-49c9-a2bb-647e20b9ad41/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dare To Create Magnificent Confusion · Cat Pea">
+  <meta property="og:description" content="The post introduces how everyday symbols in URLs—slashes, question marks, hashes, equals signs, colons and at‑signs—form a language that lets you pass data to a server and keep information on the client side; it then explains how visual programming with Node‑RED uses tiny boxes connected by lines so that the output of one box becomes the input of another, giving examples such as an “http in” node listening on localhost/hello, a template node that can read query parameters like ?name=alice and display “Hello {{payload.name}}”, and an “http response” node that sends the result back to the browser. The article also touches on other visual‑style tools (gmic for image filters, ffmpeg’s filtergraphs) that rely on imagined layers or chains of operations, and ends by encouraging readers to install Node‑RED, use language‑model help to generate code, and discover how easy it is to build programs once you understand these symbolic building blocks.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-1090.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1090</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-1090.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-1090.avif" alt="Dare To Create Magnificent Confusion"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Dare To Create Magnificent Confusion</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-1090.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1090</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Dare To Create Magnificent Confusion</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-02-24">2/23/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">You are surrounded by secret symbols,
-networks of boxes, and above all imagined structures.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is of some note, that indigo in Roy G. Biv,
-was added to because Newton wan unhappy with just 6 colors of the rainbow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Number 7 holds a mystical meaning, 7 days, in his time 7 planets,
-and seven notes in the western major scale.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">He plopped indigo in there, in fact,
-in fact he observed only five colors, he already added orange by that time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are browsing the internet, you can see that a forward slash is a divider,
-but there is also a question mark, a hash or a pound sign, and key vale pairs with an equal sign in between.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The question mark and the hash mark are the opposites,
-the question mark marks the beginning of sending data to the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But what follows the hash sign,
-stays in your browser window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a language, a very tiny one, there is colon that was once used for usernames and passwords,
-the at sigh in an emil address that divides username from server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And of course the dot before the dot com, which divides a domain name,
-from a top level domain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All addresses are supposed to end with a dot but it has been made optional,
-they still work though, now in the age of https causing really interesting errors, and sometimes even crippling ads on websites.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The networks of boxes is what gets me, I always liked the idea of visual programming,
-which puts programming code into tiny boxes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Boxes are then connected by lines, which mark,
-that the output of one box becomes the input of the next.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What is special about this, is that a box can represent a hugely complex thing,
-in a program called <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=1afsCWLcccE">chaiNNer</a>...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just two boxes upscaler and model can use AI to inject detail into your art,
-if you have the computer for it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Node-RED">Node-Red</a> three boxes,
-is all it takes to create a dynamic web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">&quot;http in&quot; asks for what path it shold listen on,
-for example, localhost/hello, where hello is the path name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you connect it to a template,
-where you can enter the text hello world...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which you then connect to http response,
-terminating the flow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now when you go to localhost/hello,
-http in will match that, trigger the template, which will deliver data into http response.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which your browser,
-will print on your screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can do that question mark trick here and say,
-localhost/hello?name=alice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a result a variable named name, with the value alice,
-becomes available inside your template node as .</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now by changing your template to Hello ,
-the webpage will now say &quot;Hello alice&quot; and you are writing web server code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Getting over the discomfort of getting Node-RED all setup and figured aout,
-is well worth it, especially now in the age of language models.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you can talk to them about writing a funcion that does something you need,
-the JavaScript funcion node in Node-RED, is probably the prettiest invitation to learning JavaScript.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A lot of programmers, prefer to imagine lines between their program parts,
-who needs graphics when you have imagination.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A very pretty example of that is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://gmic.eu/">gmic</a>,
-it is basically the filter part of a proper graphics editing program, it comes with ton of good filters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While it has a GUI, there are plugins for it for Krita and GIMP,
-on the command line, you have to imagine layers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Layers are a stack of images that when all merged together create the final artwork,
-artists often keep backgrounds, characters, text, and even collor variations on separate layers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In gmic, you can&#39;t see them, you have to imagine them,
-remember that you put the text on the second layer, and the background is still sitting on layer 0.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In ffmpeg, where the first f may just be the f word, and the second f stands for fast,
-you actually build graphs, called filtergraphs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To paraphrase the documentation: &quot;audio/video filters in a chain are separated by commas &quot;,&quot; chains are separated by a semicolon &quot;;&quot; and that if an input or output is not specified it is assumed to come from the preceding or sent to the following item in the chain.&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By by specifying input and outputs you can snap them together,
-a to b, b to c, c to a, and route audio video data through various filters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the video version of this audio,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/antwerp/blob/e95aebdf57fbfd87ed3e518f90893f82e41abaf7/lib/video.js#L49">I actually use a graph to loop the title image as a video frame</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All of this has to be kept in your working memory,
-and on a piece of paper, if you want to remember it later.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This sounds confusing to everyone,
-it takes a couple of hours to warm up to strange syntax or patters to understand it, it is like reading your own code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are surrounded by these strange symbols,
-they are most magical when you are just starting programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a million new paths to a gazillion of new adventures,
-especially if you use a program like the Open Source Node-RED which allows you to just invent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a language model for help,
-and you&#39;ll have programming and Node-RED figured out in no time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While learning programming is like learning how to use a new tool,
-you immediately gain the ability to invent even more new tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally here I dare you, to install Node-RED and view it as your first step into programming,
-you have a whole Summer ahead of you, or Winter depending which hemisphere you are on...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just imagine that next year,
-you&#39;ll know how top program, all it takes is a sturdy program that gets you going.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And an inviting code box,
-where you can enter whatever the language model printed out in response to your request.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming is really simple, it is just that until the availability of language model AI,
-all we had was pre-written books, now you can request the code you need, and thus see how simple it all is that much faster.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-02-24T02:38:34.670Z">February 23, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>12:40<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-1090.avif" aria-label="Cover for Dare To Create Magnificent Confusion, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-1090.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Dare To Create Magnificent Confusion" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 12:40
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-1090.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-1090.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-1090.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>You are surrounded by secret symbols,<br>networks of boxes, and above all imagined structures.</p>
+<p>It is of some note, that indigo in Roy G. Biv,<br>was added to because Newton wan unhappy with just 6 colors of the rainbow.</p>
+<p>Number 7 holds a mystical meaning, 7 days, in his time 7 planets,<br>and seven notes in the western major scale.</p>
+<p>He plopped indigo in there, in fact,<br>in fact he observed only five colors, he already added orange by that time.</p>
+<hr>
+<p>When you are browsing the internet, you can see that a forward slash is a divider,<br>but there is also a question mark, a hash or a pound sign, and key vale pairs with an equal sign in between.</p>
+<p>The question mark and the hash mark are the opposites,<br>the question mark marks the beginning of sending data to the server.</p>
+<p>But what follows the hash sign,<br>stays in your browser window.</p>
+<p>It is a language, a very tiny one, there is colon that was once used for usernames and passwords,<br>the at sigh in an emil address that divides username from server.</p>
+<p>And of course the dot before the dot com, which divides a domain name,<br>from a top level domain.</p>
+<p>All addresses are supposed to end with a dot but it has been made optional,<br>they still work though, now in the age of https causing really interesting errors, and sometimes even crippling ads on websites.</p>
+<hr>
+<p>The networks of boxes is what gets me, I always liked the idea of visual programming,<br>which puts programming code into tiny boxes.</p>
+<p>Boxes are then connected by lines, which mark,<br>that the output of one box becomes the input of the next.</p>
+<p>What is special about this, is that a box can represent a hugely complex thing,<br>in a program called <a href="https://www.youtube.com/watch?v=1afsCWLcccE">chaiNNer</a>...</p>
+<p>Just two boxes upscaler and model can use AI to inject detail into your art,<br>if you have the computer for it.</p>
+<p>In <a href="https://www.youtube.com/results?search_query=Node-RED">Node-Red</a> three boxes,<br>is all it takes to create a dynamic web page.</p>
+<p>&quot;http in&quot; asks for what path it shold listen on,<br>for example, localhost/hello, where hello is the path name.</p>
+<p>Here you connect it to a template,<br>where you can enter the text hello world...</p>
+<p>Which you then connect to http response,<br>terminating the flow.</p>
+<p>So now when you go to localhost/hello,<br>http in will match that, trigger the template, which will deliver data into http response.</p>
+<p>Which your browser,<br>will print on your screen.</p>
+<p>You can do that question mark trick here and say,<br>localhost/hello?name=alice.</p>
+<p>As a result a variable named name, with the value alice,<br>becomes available inside your template node as {{payload.name}}.</p>
+<p>Now by changing your template to Hello {{payload.name}},<br>the webpage will now say &quot;Hello alice&quot; and you are writing web server code.</p>
+<p>Getting over the discomfort of getting Node-RED all setup and figured aout,<br>is well worth it, especially now in the age of language models.</p>
+<p>Where you can talk to them about writing a funcion that does something you need,<br>the JavaScript funcion node in Node-RED, is probably the prettiest invitation to learning JavaScript.</p>
+<hr>
+<p>A lot of programmers, prefer to imagine lines between their program parts,<br>who needs graphics when you have imagination.</p>
+<p>A very pretty example of that is <a href="https://gmic.eu/">gmic</a>,<br>it is basically the filter part of a proper graphics editing program, it comes with ton of good filters.</p>
+<p>While it has a GUI, there are plugins for it for Krita and GIMP,<br>on the command line, you have to imagine layers.</p>
+<p>Layers are a stack of images that when all merged together create the final artwork,<br>artists often keep backgrounds, characters, text, and even collor variations on separate layers.</p>
+<p>In gmic, you can&#39;t see them, you have to imagine them,<br>remember that you put the text on the second layer, and the background is still sitting on layer 0.</p>
+<p>In ffmpeg, where the first f may just be the f word, and the second f stands for fast,<br>you actually build graphs, called filtergraphs.</p>
+<p>To paraphrase the documentation: &quot;audio/video filters in a chain are separated by commas &quot;,&quot; chains are separated by a semicolon &quot;;&quot; and that if an input or output is not specified it is assumed to come from the preceding or sent to the following item in the chain.&quot;</p>
+<p>By by specifying input and outputs you can snap them together,<br>a to b, b to c, c to a, and route audio video data through various filters.</p>
+<p>In the video version of this audio,<br><a href="https://github.com/catpea/antwerp/blob/e95aebdf57fbfd87ed3e518f90893f82e41abaf7/lib/video.js#L49">I actually use a graph to loop the title image as a video frame</a>.</p>
+<p>All of this has to be kept in your working memory,<br>and on a piece of paper, if you want to remember it later.</p>
+<p>This sounds confusing to everyone,<br>it takes a couple of hours to warm up to strange syntax or patters to understand it, it is like reading your own code.</p>
+<hr>
+<p>We are surrounded by these strange symbols,<br>they are most magical when you are just starting programming.</p>
+<p>There is a million new paths to a gazillion of new adventures,<br>especially if you use a program like the Open Source Node-RED which allows you to just invent.</p>
+<p>As a language model for help,<br>and you&#39;ll have programming and Node-RED figured out in no time.</p>
+<p>While learning programming is like learning how to use a new tool,<br>you immediately gain the ability to invent even more new tools.</p>
+<p>Finally here I dare you, to install Node-RED and view it as your first step into programming,<br>you have a whole Summer ahead of you, or Winter depending which hemisphere you are on...</p>
+<p>And just imagine that next year,<br>you&#39;ll know how top program, all it takes is a sturdy program that gets you going.</p>
+<p>And an inviting code box,<br>where you can enter whatever the language model printed out in response to your request.</p>
+<p>Programming is really simple, it is just that until the availability of language model AI,<br>all we had was pre-written books, now you can request the code you need, and thus see how simple it all is that much faster.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=1afsCWLcccE">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>chaiNNer</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=1afsCWLcccE</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Node-RED">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Node-Red</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Node-RED</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://gmic.eu/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>gmic</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://gmic.eu/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/antwerp/blob/e95aebdf57fbfd87ed3e518f90893f82e41abaf7/lib/video.js#L49">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I actually use a graph to loop the title image as a video frame</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/antwerp/blob/e95aebdf57fbfd87ed3e518f90893f82e41abaf7/lib/video.js#L49</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">node-red</span><span class="chip">visual-programming</span><span class="chip">http-endpoints</span><span class="chip">template-nodes</span><span class="chip">javascript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=1afsCWLcccE">
+              <span class="text-truncate">chaiNNer</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Node-RED">
+              <span class="text-truncate">Node-Red</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://gmic.eu/">
+              <span class="text-truncate">gmic</span>
+              <span class="fg-3 fs-xs flex-shrink-0">gmic.eu</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/antwerp/blob/e95aebdf57fbfd87ed3e518f90893f82e41abaf7/lib/video.js#L49">
+              <span class="text-truncate">I actually use a graph to loop the title image as a video frame</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/cab33311-70ca-493b-a1ea-65aa231ba31d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Asking Artificial Intelligence To Explain Life</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b40ba3b7-fd14-4fd6-8381-488c8b7f330a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">El Chuppacabra De Miou</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a9a0f3f2-86c9-4e10-af81-583719c06232/">
+              <img src="https://catpea.github.io/chapter-06/poem-1101.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Programming; Or, Notes On Making Program Structure More Informative</span>
+                <span class="fg-3 fs-xs">March 7, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5144d85e-3644-42cc-8457-35b7775dfe55/">
+              <img src="https://catpea.github.io/chapter-05/poem-1082.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Call To Learn Programming; Or, A Quick Look At E-Commerce Platforms</span>
+                <span class="fg-3 fs-xs">February 15, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d34aabf3-042f-4bcf-bd29-bd09195bf148/">
+              <img src="https://catpea.github.io/chapter-06/poem-1105.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Game Of Chess With Infinite Complexity; Or, Return To Antwerp</span>
+                <span class="fg-3 fs-xs">March 11, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/62c31907-0e6a-4fd5-b3af-9e5b70585c06/">
+              <img src="https://catpea.github.io/chapter-05/poem-1081.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Like Learning To Write, It Is Not Just Another Class</span>
+                <span class="fg-3 fs-xs">February 14, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

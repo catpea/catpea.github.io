@@ -1,166 +1,454 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way · Cat Pea</title>
+  <meta name="description" content="The post paints a picture of today’s programming landscape—first‑hand tools feel clunky, especially on smartphones where you’re stuck with browsers and ad‑laden apps, yet JavaScript (with its server‑side runtimes) remains the de‑facto stack for web‑based projects. It proposes building an app by treating each feature like a wiki page: write a BDD description, then hand it off to other developers who can code the part for pay—essentially creating a marketplace of small modules that can be assembled into a full application. The writer suggests using modern front‑end frameworks (Bootstrap or Svelte) and offline support via PouchDB, while noting this “meta‑programming” model could help entrepreneurs pitch ideas to investors before anyone actually writes the code. In short, it’s an invitation to treat app development as a collaborative, feature‑by‑feature BDD process in a Wild West of programming.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/feaa6892-0259-4f5a-a5ac-bce940d488d0/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way · Cat Pea">
+  <meta property="og:description" content="The post paints a picture of today’s programming landscape—first‑hand tools feel clunky, especially on smartphones where you’re stuck with browsers and ad‑laden apps, yet JavaScript (with its server‑side runtimes) remains the de‑facto stack for web‑based projects. It proposes building an app by treating each feature like a wiki page: write a BDD description, then hand it off to other developers who can code the part for pay—essentially creating a marketplace of small modules that can be assembled into a full application. The writer suggests using modern front‑end frameworks (Bootstrap or Svelte) and offline support via PouchDB, while noting this “meta‑programming” model could help entrepreneurs pitch ideas to investors before anyone actually writes the code. In short, it’s an invitation to treat app development as a collaborative, feature‑by‑feature BDD process in a Wild West of programming.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-0960.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0960</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-0960.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-0960.avif" alt="Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-0960.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0960</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-10-17">10/16/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">At the moment the most popular code editor,
-is worse than an ad infested 1998 website.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When the first thing you touch in the world of programming,
-is insanely broken, and irreversibly unusable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This means, you are NOT entering the bright and shiny future,
-but rather; wild, wild, west...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With gold still scattered,
-among all the streams.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You should understand that programming is starting just now,
-JavaScript has multiple server-side run times...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the only thing that is any good on a smartphone,
-is the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For the app lovers out there,
-soon you will have to wait 10 minutes for the ads to finish.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just about as much in your paid apps too,
-start making your way back tot the browser.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The technology stack is JavaScript, HTML, CSS,
-it has been like this for a long time, and it is going to stay that way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not too bad to venture into modern Perl, or Java,
-and even stare at some python, ruby, rust, and go.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if you want your app to have users,
-it needs to be on the internet the first day you think about it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If it is any good,
-the first day.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you can only achieve that with programming,
-ABOVE programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that means, the process of building an application,
-is similar to creating a series of articles on a WikiWiki or the Wikipedia.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You type in your application name,
-you get a pretty blue link, just like on WikiWiki.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You click on it,
-and it says, &quot;This application interface does not yet exist, do you want to create it?&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You click create, and you will have to define what the user must have,
-email, and membership up until the end of the month.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you describe the first component on this page,
-you speak the basic <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=ydddSkVz_a8">Behavior Driven Development</a> and move on to the next page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may describe a homepage, product catalog, checkout,
-or giving the user half an article to read, and then asking them to sign up to get at the rest.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or you maybe independently inventing,
-this very program, to which I say use Bootstrap and Svelte and make it mobile first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just a simple wiki, and if you use lite Open Source PouchDb,
-then it will work offline too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don&#39;t worry about programming, yet,
-focus on describing your invention.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">See, the most powerful version of meta-programming,
-is a BDD description of a program, where you can set small bounties for every feature.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And have other programmers,
-do the programming for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is good to learn programming,
-but to program large applications you will need many programmers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a meta-program, helps other programmers,
-program the application you describe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They may receive $9 per feature,
-and $90 per day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Having mapped everything out,
-sometimes even attached pencil drawings of the interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can help investors understand,
-what it is that you are trying to create.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is very unfortunate,
-that this simple program does not yet exist.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But maybe you, perhaps along with your classmates,
-can learn programming, and program it the old way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You&#39;d create a new market for custom program components,
-many can submit the code to get at the $9, but only one will take it home.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though others will be recognized as active users,
-and rise in ranking.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a Wild Wild West out here,
-the bright new world of programming, the sky scrapers, and highways, and tele-commuting...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Has not yet arrived, it won&#39;t get here,
-for another hundred, of digital years, which are shorter than real years.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Git your programming hat on,
-stake your clam, (Hi Yo Silver, Hoyyy!) and start inventing.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-10-17T01:56:44.497Z">October 16, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>7:13<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-0960.avif" aria-label="Cover for Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-0960.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Your First Programming Business; Or, Learning Programming The Easy Breezy Peasy Wheezy Way" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 7:13
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-0960.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-0960.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-0960.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>At the moment the most popular code editor,<br>is worse than an ad infested 1998 website.</p>
+<p>When the first thing you touch in the world of programming,<br>is insanely broken, and irreversibly unusable.</p>
+<p>This means, you are NOT entering the bright and shiny future,<br>but rather; wild, wild, west...</p>
+<p>With gold still scattered,<br>among all the streams.</p>
+<p>You should understand that programming is starting just now,<br>JavaScript has multiple server-side run times...</p>
+<p>And the only thing that is any good on a smartphone,<br>is the browser.</p>
+<p>For the app lovers out there,<br>soon you will have to wait 10 minutes for the ads to finish.</p>
+<p>And just about as much in your paid apps too,<br>start making your way back tot the browser.</p>
+<hr>
+<p>The technology stack is JavaScript, HTML, CSS,<br>it has been like this for a long time, and it is going to stay that way.</p>
+<p>It is not too bad to venture into modern Perl, or Java,<br>and even stare at some python, ruby, rust, and go.</p>
+<p>But if you want your app to have users,<br>it needs to be on the internet the first day you think about it.</p>
+<p>If it is any good,<br>the first day.</p>
+<hr>
+<p>And you can only achieve that with programming,<br>ABOVE programming.</p>
+<p>And that means, the process of building an application,<br>is similar to creating a series of articles on a WikiWiki or the Wikipedia.</p>
+<p>You type in your application name,<br>you get a pretty blue link, just like on WikiWiki.</p>
+<p>You click on it,<br>and it says, &quot;This application interface does not yet exist, do you want to create it?&quot;</p>
+<p>You click create, and you will have to define what the user must have,<br>email, and membership up until the end of the month.</p>
+<p>And then you describe the first component on this page,<br>you speak the basic <a href="https://www.youtube.com/watch?v=ydddSkVz_a8">Behavior Driven Development</a> and move on to the next page.</p>
+<p>You may describe a homepage, product catalog, checkout,<br>or giving the user half an article to read, and then asking them to sign up to get at the rest.</p>
+<p>Or you maybe independently inventing,<br>this very program, to which I say use Bootstrap and Svelte and make it mobile first.</p>
+<p>It is just a simple wiki, and if you use lite Open Source PouchDb,<br>then it will work offline too.</p>
+<p>Don&#39;t worry about programming, yet,<br>focus on describing your invention.</p>
+<hr>
+<p>See, the most powerful version of meta-programming,<br>is a BDD description of a program, where you can set small bounties for every feature.</p>
+<p>And have other programmers,<br>do the programming for you.</p>
+<p>It is good to learn programming,<br>but to program large applications you will need many programmers.</p>
+<p>So a meta-program, helps other programmers,<br>program the application you describe.</p>
+<p>They may receive $9 per feature,<br>and $90 per day.</p>
+<p>Having mapped everything out,<br>sometimes even attached pencil drawings of the interface.</p>
+<p>You can help investors understand,<br>what it is that you are trying to create.</p>
+<hr>
+<p>It is very unfortunate,<br>that this simple program does not yet exist.</p>
+<p>But maybe you, perhaps along with your classmates,<br>can learn programming, and program it the old way.</p>
+<p>You&#39;d create a new market for custom program components,<br>many can submit the code to get at the $9, but only one will take it home.</p>
+<p>Though others will be recognized as active users,<br>and rise in ranking.</p>
+<hr>
+<p>It is a Wild Wild West out here,<br>the bright new world of programming, the sky scrapers, and highways, and tele-commuting...</p>
+<p>Has not yet arrived, it won&#39;t get here,<br>for another hundred, of digital years, which are shorter than real years.</p>
+<p>Git your programming hat on,<br>stake your clam, (Hi Yo Silver, Hoyyy!) and start inventing.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=ydddSkVz_a8">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Behavior Driven Development</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=ydddSkVz_a8</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">html</span><span class="chip">css</span><span class="chip">webdev</span><span class="chip">pouchdb</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://www.pexels.com/photo/woman-wearing-white-cowboy-hat-and-red-top-riding-on-horse-2986105/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://www.pexels.com/photo/woman-wearing-white-cowboy-hat-and-red-top-riding-on-horse-2986105/</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=ydddSkVz_a8">
+              <span class="text-truncate">Behavior Driven Development</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/5d338c70-4848-4247-8a81-b474b4626f4a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Superpowers Are Real</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/5e8ec4c5-9f56-4638-8501-8bd4e12b9430/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">A Handful Of Observations On The Subject Of Writing Books</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9c340683-d8d9-412b-96c0-b6aae0928bf2/">
+              <img src="https://catpea.github.io/chapter-05/poem-0966.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Whole Cybernetic Digital Enchilada; Or, Entry Into The World Of Programming</span>
+                <span class="fg-3 fs-xs">October 22, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a838c384-07ba-4aae-877b-f55ab635333f/">
+              <img src="https://catpea.github.io/chapter-05/poem-0958.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Very Brief Introduction To User Interface Design</span>
+                <span class="fg-3 fs-xs">October 14, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/34f9ca30-0bdf-47f0-b39a-1978c651923a/">
+              <img src="https://catpea.github.io/chapter-05/poem-0969.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Become A Powerful Programmer</span>
+                <span class="fg-3 fs-xs">October 25, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d1b35994-8807-4260-8630-a2d5e264173b/">
+              <img src="https://catpea.github.io/chapter-05/poem-0953.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Portable Distributed Code Editor</span>
+                <span class="fg-3 fs-xs">October 9, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

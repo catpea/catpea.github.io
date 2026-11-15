@@ -1,189 +1,499 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Writing Programs</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Writing Programs · Cat Pea</title>
+  <meta name="description" content="The post recounts the author’s journey through multiple programming languages—starting with PHP and Perl, moving into Java and JavaScript—and culminates in their current full‑stack workflow using modern JavaScript tools. They explain how the evolution of web technologies—from early UI frameworks like Flex and Flash to today’s responsive libraries such as Bootstrap—has shaped their development style. The author highlights the convenience of JavaScript for rapid prototyping, the power of Babel for transpiling next‑generation syntax, and the event‑driven nature of engine.io that simplifies server communication. They also showcase how tools like Svelte automate UI updates, while Gulp and Vinyl provide a lightweight build system, allowing them to create custom code editors on the fly. Overall, the piece celebrates the synergy of these technologies in enabling a single developer to design and maintain both client‑side interfaces and server logic with minimal boilerplate.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/7ffbc734-86d8-4c13-9e19-f497ca0630c1/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Writing Programs · Cat Pea">
+  <meta property="og:description" content="The post recounts the author’s journey through multiple programming languages—starting with PHP and Perl, moving into Java and JavaScript—and culminates in their current full‑stack workflow using modern JavaScript tools. They explain how the evolution of web technologies—from early UI frameworks like Flex and Flash to today’s responsive libraries such as Bootstrap—has shaped their development style. The author highlights the convenience of JavaScript for rapid prototyping, the power of Babel for transpiling next‑generation syntax, and the event‑driven nature of engine.io that simplifies server communication. They also showcase how tools like Svelte automate UI updates, while Gulp and Vinyl provide a lightweight build system, allowing them to create custom code editors on the fly. Overall, the piece celebrates the synergy of these technologies in enabling a single developer to design and maintain both client‑side interfaces and server logic with minimal boilerplate.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0869.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0869</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0869.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0869.avif" alt="Writing Programs"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Writing Programs</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0869.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0869</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Writing Programs</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-07-18">7/17/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I always write computer programs,<br>I am always trying to write something neat.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has been quite a journey,<br>long enough to observe technology change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I also learned a bunch of languages I don’t use,<br>I use JavaScript now but it used to be slow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Back then I wrote in PHP and Perl,<br>I liked them both.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am too busy with JavaScript to miss them,<br>there is so much to learn here.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is this strange joke<br>that a full stack developer can’t exist.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">People who do everything are either,<br>Unicorns or Crazy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are serious technology limitations that,<br>make the name “Full Stack Developer” sound ridiculous.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They exist, but they are smart enough,<br>to never tell their employer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And writing User Interface, Server,<br>Command, and Design Principles all at once.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Would make a programmer,<br>a slowpoke.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Personally, I enjoy the whole round trip,<br>from user interface to server and back.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But only with JavaScript, as other languages,<br>are just not mature enough.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In my Java days, dynamic user interface was hard, and it may still be frowned upon,<br>the lovely user interface technology called JavaSwing needed to grow up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">PHP and Perl could create a user interface,<br>but it would be a bad idea to build something serious.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Flash; that old web games were coded in,<br>made a leap forward, once.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before it all fizzled out, their Action Script language,<br>was very powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Their UI framework, called Flex,<br>was a decade ahead in prettiness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Flash and Flex was amazing,<br>but the Flash Player had bugs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And one company wouldn&#39;t allow it on their phone,<br>in part because it drained battery.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also because it was somebody else code,<br>and that would be the thing that people would write apps in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t want some other company,<br>to own the language that your apps are written in.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to the bugs Flash was probably written,<br>in a a low level programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That usually means,<br>humans manage the memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That often means that a person can <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=AD-iXWANggo">inject program instructions</a>,<br>and may get access to the OS.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Low level languages are fast for lack of bounds checking,<br>but they are also hard, dangerous, and slow to code in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript takes care of everything,<br>you just say a = “hello” and it will take care of it for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In C you have to make an array, or a list,<br>and then put letters in it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You also have to specify how big the array is,<br>and you can’t go over that number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you do, then you may damage memory,<br>for some other thing, or allow code injection.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Full Stack developers avoid slow things,<br>and this gives them superpowers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just a moment ago, I generated code files on my disk,<br>using <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=yLrNwo4wXOs">babel</a> which allowed me to use syntax that is not yet part of JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I triggered this generation, on the server,<br>under the control of a sweet event Emitter by means of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=ZKEqqIO7n-k">engine.io</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I actually don’t really see a difference,<br>between talking to a program component or a server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is all event emitters, I don’t have to manage web sockets,<br>and they are so helpful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that is just the server magic,<br>my user interface, allows for complex automatic layouts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My programs and website work on large screens, and tiny ones,<br>as I use <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=O_9u1P5YjVc&list=PL4cUxeGkcC9joIM91nLzd_qaH_AimmdAR">Bootstrap</a>, it took some getting used to .</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But more than that, I use <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=043h4ugAj4c">svelte</a>,<br>so my program automatically reacts to me making assignments to variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t have to remember to call userInterfaceUpdate(),<br>nor do I have to pollute my code with it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But even more than that,<br>I can build my own code editor in a singe afternoon.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I can inject a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=GRxiFiHZ_lg">code editing area</a>,<br>anywhere in my user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual Basic, C, Perl, PHP, ActionScript, Java,<br>just don’t do this kind of thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They can each do one thing,<br>but not everything at once like I can do in an afternoon.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you know, I used <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=oRoy1fJbMls">gulp</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=R9ZZT2m58yo">vinyl</a> for my virtual file system,<br>and my server code is less than 10 lines and I have access to all gulp plugins.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not any one thing that makes this kind of programming so mighty,<br>it is all the things combined together in simple harmony.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-07-18T01:52:59.188Z">July 17, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:30<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0869.avif" aria-label="Cover for Writing Programs, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0869.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Writing Programs" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:30
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0869.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0869.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0869.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I always write computer programs,<br>I am always trying to write something neat.</p>
+<p>It has been quite a journey,<br>long enough to observe technology change.</p>
+<p>I also learned a bunch of languages I don’t use,<br>I use JavaScript now but it used to be slow.</p>
+<p>Back then I wrote in PHP and Perl,<br>I liked them both.</p>
+<p>I am too busy with JavaScript to miss them,<br>there is so much to learn here.</p>
+<hr>
+<p>There is this strange joke<br>that a full stack developer can’t exist.</p>
+<p>People who do everything are either,<br>Unicorns or Crazy.</p>
+<p>There are serious technology limitations that,<br>make the name “Full Stack Developer” sound ridiculous.</p>
+<p>They exist, but they are smart enough,<br>to never tell their employer.</p>
+<p>And writing User Interface, Server,<br>Command, and Design Principles all at once.</p>
+<p>Would make a programmer,<br>a slowpoke.</p>
+<p>Personally, I enjoy the whole round trip,<br>from user interface to server and back.</p>
+<p>But only with JavaScript, as other languages,<br>are just not mature enough.</p>
+<hr>
+<p>In my Java days, dynamic user interface was hard, and it may still be frowned upon,<br>the lovely user interface technology called JavaSwing needed to grow up.</p>
+<p>PHP and Perl could create a user interface,<br>but it would be a bad idea to build something serious.</p>
+<p>Flash; that old web games were coded in,<br>made a leap forward, once.</p>
+<p>Before it all fizzled out, their Action Script language,<br>was very powerful.</p>
+<p>Their UI framework, called Flex,<br>was a decade ahead in prettiness.</p>
+<p>Flash and Flex was amazing,<br>but the Flash Player had bugs.</p>
+<p>And one company wouldn&#39;t allow it on their phone,<br>in part because it drained battery.</p>
+<p>But also because it was somebody else code,<br>and that would be the thing that people would write apps in.</p>
+<p>You don’t want some other company,<br>to own the language that your apps are written in.</p>
+<hr>
+<p>As to the bugs Flash was probably written,<br>in a a low level programming language.</p>
+<p>That usually means,<br>humans manage the memory.</p>
+<p>That often means that a person can <a href="https://www.youtube.com/watch?v=AD-iXWANggo">inject program instructions</a>,<br>and may get access to the OS.</p>
+<p>Low level languages are fast for lack of bounds checking,<br>but they are also hard, dangerous, and slow to code in.</p>
+<p>JavaScript takes care of everything,<br>you just say a = “hello” and it will take care of it for you.</p>
+<p>In C you have to make an array, or a list,<br>and then put letters in it.</p>
+<p>You also have to specify how big the array is,<br>and you can’t go over that number.</p>
+<p>If you do, then you may damage memory,<br>for some other thing, or allow code injection.</p>
+<hr>
+<p>Full Stack developers avoid slow things,<br>and this gives them superpowers.</p>
+<hr>
+<p>Just a moment ago, I generated code files on my disk,<br>using <a href="https://www.youtube.com/watch?v=yLrNwo4wXOs">babel</a> which allowed me to use syntax that is not yet part of JavaScript.</p>
+<p>I triggered this generation, on the server,<br>under the control of a sweet event Emitter by means of <a href="https://www.youtube.com/watch?v=ZKEqqIO7n-k">engine.io</a>.</p>
+<p>I actually don’t really see a difference,<br>between talking to a program component or a server.</p>
+<p>It is all event emitters, I don’t have to manage web sockets,<br>and they are so helpful.</p>
+<p>But that is just the server magic,<br>my user interface, allows for complex automatic layouts.</p>
+<p>My programs and website work on large screens, and tiny ones,<br>as I use <a href="https://www.youtube.com/watch?v=O_9u1P5YjVc&list=PL4cUxeGkcC9joIM91nLzd_qaH_AimmdAR">Bootstrap</a>, it took some getting used to .</p>
+<p>But more than that, I use <a href="https://www.youtube.com/watch?v=043h4ugAj4c">svelte</a>,<br>so my program automatically reacts to me making assignments to variables.</p>
+<p>I don’t have to remember to call userInterfaceUpdate(),<br>nor do I have to pollute my code with it.</p>
+<p>But even more than that,<br>I can build my own code editor in a singe afternoon.</p>
+<p>And I can inject a <a href="https://www.youtube.com/watch?v=GRxiFiHZ_lg">code editing area</a>,<br>anywhere in my user interface.</p>
+<p>Visual Basic, C, Perl, PHP, ActionScript, Java,<br>just don’t do this kind of thing.</p>
+<p>They can each do one thing,<br>but not everything at once like I can do in an afternoon.</p>
+<hr>
+<p>And you know, I used <a href="https://www.youtube.com/watch?v=oRoy1fJbMls">gulp</a> and <a href="https://www.youtube.com/watch?v=R9ZZT2m58yo">vinyl</a> for my virtual file system,<br>and my server code is less than 10 lines and I have access to all gulp plugins.</p>
+<p>It is not any one thing that makes this kind of programming so mighty,<br>it is all the things combined together in simple harmony.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=AD-iXWANggo">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>inject program instructions</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=AD-iXWANggo</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=yLrNwo4wXOs">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>babel</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=yLrNwo4wXOs</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=ZKEqqIO7n-k">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>engine.io</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=ZKEqqIO7n-k</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=O_9u1P5YjVc&amp;list=PL4cUxeGkcC9joIM91nLzd_qaH_AimmdAR">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bootstrap</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=O_9u1P5YjVc&amp;list=PL4cUxeGkcC9joIM91nLzd_qaH_AimmdAR</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=043h4ugAj4c">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>svelte</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=043h4ugAj4c</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=GRxiFiHZ_lg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>code editing area</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=GRxiFiHZ_lg</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=oRoy1fJbMls">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>gulp</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=oRoy1fJbMls</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=R9ZZT2m58yo">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>vinyl</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=R9ZZT2m58yo</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">full-stack</span><span class="chip">programming</span><span class="chip">web-development</span><span class="chip">frameworks</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=AD-iXWANggo">
+              <span class="text-truncate">inject program instructions</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=yLrNwo4wXOs">
+              <span class="text-truncate">babel</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=ZKEqqIO7n-k">
+              <span class="text-truncate">engine.io</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=O_9u1P5YjVc&amp;list=PL4cUxeGkcC9joIM91nLzd_qaH_AimmdAR">
+              <span class="text-truncate">Bootstrap</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=043h4ugAj4c">
+              <span class="text-truncate">svelte</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=GRxiFiHZ_lg">
+              <span class="text-truncate">code editing area</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=oRoy1fJbMls">
+              <span class="text-truncate">gulp</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=R9ZZT2m58yo">
+              <span class="text-truncate">vinyl</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/b6683f7e-258f-48bf-9146-f8a532d7be6d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Modern Luxury Source Code Editors; Or, Where The Heck, To Put The Darn Source Code?</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/12dec0a3-cd4e-4f43-8757-90c72ce2fb4c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Convergence On Wisdom And World Peace</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c32c23f5-5a9f-4184-adbc-64948d0c0c76/">
+              <img src="https://catpea.github.io/chapter-05/poem-0916.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Is Computer Programming Fun; Or, Should I Learn Programming?</span>
+                <span class="fg-3 fs-xs">September 2, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b6683f7e-258f-48bf-9146-f8a532d7be6d/">
+              <img src="https://catpea.github.io/chapter-04/poem-0868.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Modern Luxury Source Code Editors; Or, Where The Heck, To Put The Darn Source Code?</span>
+                <span class="fg-3 fs-xs">July 16, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/47129ed7-7edb-40ff-a343-474c372b391d/">
+              <img src="https://catpea.github.io/chapter-05/poem-0921.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Zero Is A Number: The JavaScript For Loop And A Fence Post Problem</span>
+                <span class="fg-3 fs-xs">September 7, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fdc88791-19b7-4375-8c2c-4aeaa7ecb4c3/">
+              <img src="https://catpea.github.io/chapter-04/poem-0866.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Fanciful Event Emitter: A Super Strange Programming Poem</span>
+                <span class="fg-3 fs-xs">July 14, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

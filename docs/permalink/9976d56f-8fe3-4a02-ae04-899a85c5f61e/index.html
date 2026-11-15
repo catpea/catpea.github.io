@@ -1,254 +1,498 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong · Cat Pea</title>
+  <meta name="description" content="A post describing how to build a tree‑like data structure in JavaScript that emits simple “changed” events from tables (e.g., a people list) and folders so that a UI framework such as Svelte can efficiently re‑render only the affected parts, and it ends by inviting readers to ask an AI for a minimal signals implementation.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/9976d56f-8fe3-4a02-ae04-899a85c5f61e/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong · Cat Pea">
+  <meta property="og:description" content="A post describing how to build a tree‑like data structure in JavaScript that emits simple “changed” events from tables (e.g., a people list) and folders so that a UI framework such as Svelte can efficiently re‑render only the affected parts, and it ends by inviting readers to ask an AI for a minimal signals implementation.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1616.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1616</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1616.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1616.avif" alt="Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1616.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1616</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-08-04">8/3/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I recall some expert giving his opinion on the work of a young researcher,
-that went something like:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“All the new breakthroughs they claimed to have made are old,
-and everything else has already been proven wrong.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think this is lovely,
-and I am sure the expert was wrong, and off his head.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the loveliness comes from the fact that the young researcher,
-was independently re-inventing things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Becoming as wise as the original inventors,
-and becoming able to see all the paths they didn’t take.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The old guy was wrong,
-the young researcher probably changed the world.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets jump right into it, as the introduction would take hours,
-and I primary want you to know what a data structure feels like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, programmers have variables of type number and text (called strings of letters),
-and then many of them don’t realize they have bucket variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those are objects and lists (called arrays),
-and I call them buckets, because they can hold other variables of any type.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In low level programming languages like C a string variable is almost a bucket,
-because it is an array of numbers that represent letters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we are working with JavaScript, on a higher level,
-where we can just put some text in quotes and we get a string variable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not some array,
-of whatever.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now this being the modern world,
-we want arrays to announce when they change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is why we are using a High Level language,
-we don’t want to be tripping over type definitions and low level concepts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because what we are doing is already messy,
-lets say our array holds a list of people.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that list can be updated by the server,
-or from the user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are many crazy ways that programmers try to tame this,
-event emitters with wildcards, immutable data structures, alcohol.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we want to be revolutionary,
-our array will emit a singe message when something is added or removed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will tell all the things interested in it,
-I changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we tracked added or removed, which seems efficient,
-our user interface would need to do two different things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we are not going to be efficient, and send out only a notification of change,
-and that will mean our user interface will have to re-run it self to update.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is room for optimization here,
-because our list will always mark entries with a unique ID.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when the UI is re-rendering, it can compare ID numbers,
-and see what has been removed or added.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But computers are fast, and we want to keep our code clean,
-and encourage our coder to use a templating engine like Svelte.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which will look at the ID,
-and automatically optimize re-rendering of the UI.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now when we add or remove person,
-the array announces I changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets us call our array a table,
-to make it sound special and friendly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And give our table columns for integrity,
-id, first, last, age.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We want to keep the same ID at all times,
-but first last and age <strong>can</strong> change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just like with the array, we want to emit a single message,
-I changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are not going to emit, filed empty, or error in filed,
-just changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So with three users in our table,
-we have 12 fields, containing id, first, last, age.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The id field does not support changes,
-so we only have nine fields that announce their updates.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And all of them just emit,
-changed.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets say we have Alice Smith, 101, Bob Smith, 99, and Carol Smith, 50,
-where the number is their age.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now we create a report, with people over 100 years old,
-in our case that will be Alice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this is a toll order, because we have to monitor the table,
-for when it changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we also have to monitor age column.
-because that will get updated as well, (think typo rather than yearly)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we are monitoring three fields and the array,
-and then, to make our report, we re-run it at any of the four changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our filter for creating the report simply says:
-report.filter = table.filter( person.age gt 100 );</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is pseudo code, but a special part of our system,
-because the person object here, is not the perron in our table.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are using an object proxy, to intercept,
-what is being used in a filter, and now we will know to subscribe to age.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To listen to age for changes,
-and automatically update the report, we are already listening to the table.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So our old and wrong, and inefficient, software machine,
-creates a report, that updates it self, whenever its sources change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And as with everything else,
-the report will emit a change event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now we can use this report as a source for a new report,
-and return all the last names of old people.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can chain,
-reports.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is just about 10 lines of code,
-but we get automatic dependencies and updates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hidden here is a mechanism,
-for un-listening, to free up memory, a stop function for every report and table.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, we tables that create and update other tables,
-let us give them order.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets do something crazy and say,
-object folder has an array called folders.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this creates a tree, we make a root folder called application,
-and a folder called users, and add the users folder to application’s folder array.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can nest things like this to no end,
-creating an entire application hierarchy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To which we can attach tables,
-we can make a new array or throw them into the folders array.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Very similar to how files work,
-in a file system.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now we can sort our reports,
-we can talk about people and users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And call tables from other places in the tree,
-but which is more, we can map put the user interface with the tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Application folder, would have a window, window would have a side pane,
-and a main pane, main pane would have a list.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A UI system like svelte, can crawl data structures like trees,
-with a for each loop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So our window having a side pane, and a main pane,
-means we have two entries in the window’s folder array.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the for each loop would scan window.folders,
-and first render a component for side pane, and then main pane.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can change the folder array to a report,
-and the for each loop would re-run making the UI dynamic.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But out aim is to use the for each loop,
-with the users over 100 report.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our one line tree,
-and 10 line data machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will alert the for each loop, when the report changes,
-efficiently updating the UI representing a person.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also at the same time,
-if only the person’s age changes, in the original table.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The UI will just update that number alone,
-without re-running the for loop.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unfortunately it is not possible to go into greater detail,
-but there really inst much more to add.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have a tree with tables and reports that self update,
-and use svelte to efficiently decorate our data tree with user interface components.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Svelte programmers would notice here,
-that components don’t have to extract data because that happens in the table.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way user interface components can just deal with clicks,
-and filed and list updates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Low level and low-ish leveler programmers would notice scary things here,
-because their programs demand discipline and force them away from dynamic UI stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And for the rest of us, we shouldn&#39;t feel bad that we only emit change events,
-these tables never hold more than a screenful of stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My precise use case is color gradient creation for a fantasy user interface,
-my tables will have five items on average.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my tree, does use tables for other baches,
-so in my case the very structure of my tree also announces change.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming only gets complex, when programmers don’t know the vision of a program,
-imagine someone quote optimizing unquote our report to emit more than change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We lose that pretty simplicity, and if someone removes the tree,
-thinking that was useless.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can no longer decorate the tree with user interface,
-which in svelte is quite simple and readable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Few programmers optimizing, would complexity the application,
-and then code would become unreadable and need unit tests and an office of old men.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Re-inventing, what people tell you has already proven to be wrong,
-or has been done better is a magnificent way to learn and become an expert.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And being inefficient, is quite the powerful act during re-invention,
-because those are the path that original inventors omitted thinking they are sub-optimal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But as the case is with rendering you can calculate if you are adding, or removing,
-based on whether the ID is there or not, it is a quick check, not at all inefficient.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I invite you all now, to ask your favorite AI,
-to create a minimalist JavaScript Signals implementation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And ask it about Object Oriented version,
-and how Signals help, and their subscribe/unsubscribe life-cycle.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-08-04T03:28:51.080Z">August 3, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>16:07<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>8 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1616.avif" aria-label="Cover for Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1616.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 16:07
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1616.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1616.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1616.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I recall some expert giving his opinion on the work of a young researcher,<br>that went something like:</p>
+<p>“All the new breakthroughs they claimed to have made are old,<br>and everything else has already been proven wrong.”</p>
+<p>I think this is lovely,<br>and I am sure the expert was wrong, and off his head.</p>
+<p>And the loveliness comes from the fact that the young researcher,<br>was independently re-inventing things.</p>
+<p>Becoming as wise as the original inventors,<br>and becoming able to see all the paths they didn’t take.</p>
+<p>The old guy was wrong,<br>the young researcher probably changed the world.</p>
+<hr>
+<p>Lets jump right into it, as the introduction would take hours,<br>and I primary want you to know what a data structure feels like.</p>
+<p>So, programmers have variables of type number and text (called strings of letters),<br>and then many of them don’t realize they have bucket variables.</p>
+<p>Those are objects and lists (called arrays),<br>and I call them buckets, because they can hold other variables of any type.</p>
+<p>In low level programming languages like C a string variable is almost a bucket,<br>because it is an array of numbers that represent letters.</p>
+<p>But we are working with JavaScript, on a higher level,<br>where we can just put some text in quotes and we get a string variable.</p>
+<p>Not some array,<br>of whatever.</p>
+<hr>
+<p>Now this being the modern world,<br>we want arrays to announce when they change.</p>
+<p>This is why we are using a High Level language,<br>we don’t want to be tripping over type definitions and low level concepts.</p>
+<p>Because what we are doing is already messy,<br>lets say our array holds a list of people.</p>
+<p>And that list can be updated by the server,<br>or from the user interface.</p>
+<p>There are many crazy ways that programmers try to tame this,<br>event emitters with wildcards, immutable data structures, alcohol.</p>
+<p>But we want to be revolutionary,<br>our array will emit a singe message when something is added or removed.</p>
+<p>It will tell all the things interested in it,<br>I changed.</p>
+<p>If we tracked added or removed, which seems efficient,<br>our user interface would need to do two different things.</p>
+<p>But we are not going to be efficient, and send out only a notification of change,<br>and that will mean our user interface will have to re-run it self to update.</p>
+<p>There is room for optimization here,<br>because our list will always mark entries with a unique ID.</p>
+<p>So when the UI is re-rendering, it can compare ID numbers,<br>and see what has been removed or added.</p>
+<p>But computers are fast, and we want to keep our code clean,<br>and encourage our coder to use a templating engine like Svelte.</p>
+<p>Which will look at the ID,<br>and automatically optimize re-rendering of the UI.</p>
+<hr>
+<p>Now when we add or remove person,<br>the array announces I changed.</p>
+<p>Lets us call our array a table,<br>to make it sound special and friendly.</p>
+<p>And give our table columns for integrity,<br>id, first, last, age.</p>
+<p>We want to keep the same ID at all times,<br>but first last and age <strong>can</strong> change.</p>
+<p>And just like with the array, we want to emit a single message,<br>I changed.</p>
+<p>We are not going to emit, filed empty, or error in filed,<br>just changed.</p>
+<p>So with three users in our table,<br>we have 12 fields, containing id, first, last, age.</p>
+<p>The id field does not support changes,<br>so we only have nine fields that announce their updates.</p>
+<hr>
+<p>And all of them just emit,<br>changed.</p>
+<hr>
+<p>Lets say we have Alice Smith, 101, Bob Smith, 99, and Carol Smith, 50,<br>where the number is their age.</p>
+<p>And now we create a report, with people over 100 years old,<br>in our case that will be Alice.</p>
+<p>And this is a toll order, because we have to monitor the table,<br>for when it changes.</p>
+<p>And we also have to monitor age column.<br>because that will get updated as well, (think typo rather than yearly)</p>
+<p>So we are monitoring three fields and the array,<br>and then, to make our report, we re-run it at any of the four changes.</p>
+<p>Our filter for creating the report simply says:<br>report.filter = table.filter( person.age gt 100 );</p>
+<p>This is pseudo code, but a special part of our system,<br>because the person object here, is not the perron in our table.</p>
+<p>We are using an object proxy, to intercept,<br>what is being used in a filter, and now we will know to subscribe to age.</p>
+<p>To listen to age for changes,<br>and automatically update the report, we are already listening to the table.</p>
+<hr>
+<p>So our old and wrong, and inefficient, software machine,<br>creates a report, that updates it self, whenever its sources change.</p>
+<p>And as with everything else,<br>the report will emit a change event.</p>
+<p>So now we can use this report as a source for a new report,<br>and return all the last names of old people.</p>
+<p>We can chain,<br>reports.</p>
+<p>This is just about 10 lines of code,<br>but we get automatic dependencies and updates.</p>
+<p>Hidden here is a mechanism,<br>for un-listening, to free up memory, a stop function for every report and table.</p>
+<hr>
+<p>Now, we tables that create and update other tables,<br>let us give them order.</p>
+<p>Lets do something crazy and say,<br>object folder has an array called folders.</p>
+<p>And this creates a tree, we make a root folder called application,<br>and a folder called users, and add the users folder to application’s folder array.</p>
+<p>We can nest things like this to no end,<br>creating an entire application hierarchy.</p>
+<p>To which we can attach tables,<br>we can make a new array or throw them into the folders array.</p>
+<p>Very similar to how files work,<br>in a file system.</p>
+<hr>
+<p>Now we can sort our reports,<br>we can talk about people and users.</p>
+<p>And call tables from other places in the tree,<br>but which is more, we can map put the user interface with the tree.</p>
+<p>Application folder, would have a window, window would have a side pane,<br>and a main pane, main pane would have a list.</p>
+<p>A UI system like svelte, can crawl data structures like trees,<br>with a for each loop.</p>
+<p>So our window having a side pane, and a main pane,<br>means we have two entries in the window’s folder array.</p>
+<p>And the for each loop would scan window.folders,<br>and first render a component for side pane, and then main pane.</p>
+<p>We can change the folder array to a report,<br>and the for each loop would re-run making the UI dynamic.</p>
+<p>But out aim is to use the for each loop,<br>with the users over 100 report.</p>
+<p>Our one line tree,<br>and 10 line data machine.</p>
+<p>Will alert the for each loop, when the report changes,<br>efficiently updating the UI representing a person.</p>
+<p>But also at the same time,<br>if only the person’s age changes, in the original table.</p>
+<p>The UI will just update that number alone,<br>without re-running the for loop.</p>
+<hr>
+<p>Unfortunately it is not possible to go into greater detail,<br>but there really inst much more to add.</p>
+<p>We have a tree with tables and reports that self update,<br>and use svelte to efficiently decorate our data tree with user interface components.</p>
+<hr>
+<p>Svelte programmers would notice here,<br>that components don’t have to extract data because that happens in the table.</p>
+<p>This way user interface components can just deal with clicks,<br>and filed and list updates.</p>
+<p>Low level and low-ish leveler programmers would notice scary things here,<br>because their programs demand discipline and force them away from dynamic UI stuff.</p>
+<p>And for the rest of us, we shouldn&#39;t feel bad that we only emit change events,<br>these tables never hold more than a screenful of stuff.</p>
+<p>My precise use case is color gradient creation for a fantasy user interface,<br>my tables will have five items on average.</p>
+<p>And my tree, does use tables for other baches,<br>so in my case the very structure of my tree also announces change.</p>
+<hr>
+<p>Programming only gets complex, when programmers don’t know the vision of a program,<br>imagine someone quote optimizing unquote our report to emit more than change.</p>
+<p>We lose that pretty simplicity, and if someone removes the tree,<br>thinking that was useless.</p>
+<p>We can no longer decorate the tree with user interface,<br>which in svelte is quite simple and readable.</p>
+<p>Few programmers optimizing, would complexity the application,<br>and then code would become unreadable and need unit tests and an office of old men.</p>
+<hr>
+<p>Re-inventing, what people tell you has already proven to be wrong,<br>or has been done better is a magnificent way to learn and become an expert.</p>
+<p>And being inefficient, is quite the powerful act during re-invention,<br>because those are the path that original inventors omitted thinking they are sub-optimal.</p>
+<p>But as the case is with rendering you can calculate if you are adding, or removing,<br>based on whether the ID is there or not, it is a quick check, not at all inefficient.</p>
+<hr>
+<p>I invite you all now, to ask your favorite AI,<br>to create a minimalist JavaScript Signals implementation.</p>
+<p>And ask it about Object Oriented version,<br>and how Signals help, and their subscribe/unsubscribe life-cycle.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">svelte</span><span class="chip">signals</span><span class="chip">reactive</span><span class="chip">data-structures</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/f1ab2e82-bb8f-4ad7-ab21-9140bcf875df/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Food, Body, And Mind; A Picture Of A Simple Integrated Workout</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/917468a6-0270-4a17-9c64-dfba54ee881a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Hominus Noctrurna; Or, What Is Late Night Programming, Anywho?</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/917468a6-0270-4a17-9c64-dfba54ee881a/">
+              <img src="https://catpea.github.io/chapter-11/poem-1617.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Hominus Noctrurna; Or, What Is Late Night Programming, Anywho?</span>
+                <span class="fg-3 fs-xs">August 4, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d4f19a32-083b-4623-996c-8d14928af403/">
+              <img src="https://catpea.github.io/chapter-10/poem-1610.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Has Teeth</span>
+                <span class="fg-3 fs-xs">July 29, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/57ce16d9-dca9-4459-ae35-2bb706f0120c/">
+              <img src="https://catpea.github.io/chapter-11/poem-1619.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Multiversal Travel; Or, Life After A Neat Nap</span>
+                <span class="fg-3 fs-xs">August 6, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0bdcdb0e-2bb3-4848-96f5-9451a0635fa2/">
+              <img src="https://catpea.github.io/chapter-10/poem-1608.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Future Of Programming, Where Everyone Can Create Beautiful Applications</span>
+                <span class="fg-3 fs-xs">July 26, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

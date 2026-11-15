@@ -1,195 +1,505 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs · Cat Pea</title>
+  <meta name="description" content="The post is a beginner’s guide to building a low‑cost Linux machine on a Raspberry Pi (400 or 4) for learning web design and programming. It explains how to set up the Pi with a cheap monitor (or two), install Debian, and use the terminal as a “textual graphic” interface where you can pipe commands together—illustrated with simple `echo`/`tr` examples—to create programs. The author suggests using the i3 tiling window manager for later efficiency, VS Code (or an open‑source fork) for editing, and Node.js for running JavaScript, while noting the advantages of keyboard muscle memory over mouse use. Personal touches include a childhood Commodore 64 anecdote and links to kits, videos, and tutorials that help you get started with your own “laboratory” setup.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/1494074e-1591-4a12-a82e-7aab60ec6c23/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs · Cat Pea">
+  <meta property="og:description" content="The post is a beginner’s guide to building a low‑cost Linux machine on a Raspberry Pi (400 or 4) for learning web design and programming. It explains how to set up the Pi with a cheap monitor (or two), install Debian, and use the terminal as a “textual graphic” interface where you can pipe commands together—illustrated with simple `echo`/`tr` examples—to create programs. The author suggests using the i3 tiling window manager for later efficiency, VS Code (or an open‑source fork) for editing, and Node.js for running JavaScript, while noting the advantages of keyboard muscle memory over mouse use. Personal touches include a childhood Commodore 64 anecdote and links to kits, videos, and tutorials that help you get started with your own “laboratory” setup.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0802.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0802</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0802.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0802.avif" alt="Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0802.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0802</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-05-11">5/11/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">You may already have a computer,<br>but that is not good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need a computer for learning,<br>you can get the pre-assembled $100 <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.raspberrypi.com/products/raspberry-pi-400/">Raspberry PI 400</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.canakit.com/raspberry-pi-400-desktop-computer-kit.html?cid=usd&src=raspberrypi">some extras you can get</a>,<br>and you will need a cheap $70 monitor, I recommend you get two cheap monitors.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or you can get the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=n-4IxW9cgN4">some assembly required 8GB version</a>,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.canakit.com/raspberry-pi/pi-4-kits">Raspberry PI 4</a> (not 400).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Note to parents: When I was 10 or 12, I got a Commodore 64, that looked similar to the Raspberry PI 400,<br>I wouldn&#39;t know how to assemble a Raspberry PI 4, I would need someone else to do it for me.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a slow computer, You Tube takes half a minute to load,<br>but that is very good for learning web design and programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Raspberry PI will work too slow,<br>when the programs are written wrong.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a windows computer,<br>windows is a closed source commercial product.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The money culture propagates through the programmers,<br>and programs that are written for windows often cost too much.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The money culture, misleads the programmers,<br>to places that bring them nothing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a Linux based computer,<br>it uses the Debian Operating System.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Debian wraps Linux providing commands,<br>a proper graphic environment and ability to run all the programs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The most important program is the terminal,<br>just as soon as you get the computer setup.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Go to the terminal that you will recognize from hacker scenes in movies,<br>and prepare to write your first program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will join two commands together,<br>that is how you create a new program, by wrapping two commands.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you connect commands,<br>you are connecting two boxes with a wire.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Most commands have a configuration,<br>for example you can configure the echo command to say hello.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Open up your terminal and say <code>echo hello</code>,<br>and you will see the word hello printed on the screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now we are going to connect it to another command,<br>to make hello upper case.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the other command is tr short for translate,<br>it will accept two configuration arguments from you:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What to convert ... to what, so first you will say the lowercase letters a-z,<br>and then the uppercase letters A-Z.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Enter in your terminal: <code>echo hello | tr a-z A-Z</code>,<br>and press enter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just sent the data hello from the echo command,<br>through the tr command, which barfed it to the screen, because it wasn&#39;t connected to anything else.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you want to say hello world, use double quotes,<br>it would work without it, but only because the echo command loves you, and is trying to be cute.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The convention here is SPACE is a sacred separator of arguments,<br>that is how the terminal command line can understand you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please think of the command line as a graphical program,<br>that has been reduced to text, by a very angry nerd who got tired of clicking a mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Why should you drag a fancy cute wire between two shiny boxes on your screen,<br>named echo and tr, that have a little drop shadow maybe little flowers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you can just enter echo-hello-tr-az-az on the command line,<br>the command line is a reduction of the user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a user interface,<br>reduced to its lowest terms.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are programming for a while,<br>the mouse kind of gets in the way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just want to keep your hands on your keyboard,<br>so the quickest way to program something is opening up a terminal and typing up a command.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Raspberry PI window, that your terminal is in,<br>is for normal users, and all the cats who like mice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It can be reduced to a power Grrr interface with the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=RaP7sNCJYV0&t=208s">i3 tiling window manager</a>,<br>but that is something you do later as it would be too overwhelming at first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Still, efficiently using i3,<br>is a sign that you are a powerful creator (it can help you get a strange but fun job).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you get bonus points,<br>for using a reduced key mechanical keyboard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I mention this because years into programming,<br>people often regret not having this muscle memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not something you should seriously consider at first,<br>but powerful programmer muscle memory, it is something you need to be aware of.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is similar to when a pianist plays the piano,<br>the notes is not something they translate anymore.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The notes are in their hands,<br>they come automatically.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Raspberry PI ships with an option to install,<br>Visual Studio Code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I&#39;ve noticed that people already made copies of it to remove Microsoft proprietary stuff,<br>and get rid of their custom open license.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Microsoft has enabled Telemetry by default,<br>so you may wish to disable that, on principle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">VSCode is a very popular editor,<br>but once a true open-source-version fork gains in popularity you should hop onto that.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Executing your first command, and poking at a proper code editor,<br>in a little laboratory corner of your room is a big deal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don&#39;t have to write any programs,<br>just have your code lab ready.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when you feel like you want to test out some things,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=oFdlRcRl5aQ">Install Node and create and run your first JavaScript program</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=javascript+tutorial+for+beginners">take a look at some JavaScript tutorials</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, whether or not your laboratory is secret,<br>it is always a good idea to practice saying &quot;<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=AkY3BjEQ9mI&t=4s">Deedee get out of my laboratory!</a>&quot;</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-05-11T17:27:05.263Z">May 11, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:56<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0802.avif" aria-label="Cover for Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0802.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Easy Peasy Meow: Setting Up Your Code Laboratory And Running Your First Programmer Programs" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:56
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0802.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0802.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0802.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>You may already have a computer,<br>but that is not good.</p>
+<p>You need a computer for learning,<br>you can get the pre-assembled $100 <a href="https://www.raspberrypi.com/products/raspberry-pi-400/">Raspberry PI 400</a>.</p>
+<p>There are <a href="https://www.canakit.com/raspberry-pi-400-desktop-computer-kit.html?cid=usd&src=raspberrypi">some extras you can get</a>,<br>and you will need a cheap $70 monitor, I recommend you get two cheap monitors.</p>
+<p>Or you can get the <a href="https://www.youtube.com/watch?v=n-4IxW9cgN4">some assembly required 8GB version</a>,<br><a href="https://www.canakit.com/raspberry-pi/pi-4-kits">Raspberry PI 4</a> (not 400).</p>
+<p>Note to parents: When I was 10 or 12, I got a Commodore 64, that looked similar to the Raspberry PI 400,<br>I wouldn&#39;t know how to assemble a Raspberry PI 4, I would need someone else to do it for me.</p>
+<p>This is a slow computer, You Tube takes half a minute to load,<br>but that is very good for learning web design and programming.</p>
+<p>The Raspberry PI will work too slow,<br>when the programs are written wrong.</p>
+<hr>
+<p>This is not a windows computer,<br>windows is a closed source commercial product.</p>
+<p>The money culture propagates through the programmers,<br>and programs that are written for windows often cost too much.</p>
+<p>The money culture, misleads the programmers,<br>to places that bring them nothing.</p>
+<hr>
+<p>This is a Linux based computer,<br>it uses the Debian Operating System.</p>
+<p>Debian wraps Linux providing commands,<br>a proper graphic environment and ability to run all the programs.</p>
+<hr>
+<p>The most important program is the terminal,<br>just as soon as you get the computer setup.</p>
+<p>Go to the terminal that you will recognize from hacker scenes in movies,<br>and prepare to write your first program.</p>
+<p>You will join two commands together,<br>that is how you create a new program, by wrapping two commands.</p>
+<hr>
+<p>When you connect commands,<br>you are connecting two boxes with a wire.</p>
+<p>Most commands have a configuration,<br>for example you can configure the echo command to say hello.</p>
+<p>Open up your terminal and say <code>echo hello</code>,<br>and you will see the word hello printed on the screen.</p>
+<p>Now we are going to connect it to another command,<br>to make hello upper case.</p>
+<p>the other command is tr short for translate,<br>it will accept two configuration arguments from you:</p>
+<p>What to convert ... to what, so first you will say the lowercase letters a-z,<br>and then the uppercase letters A-Z.</p>
+<p>Enter in your terminal: <code>echo hello | tr a-z A-Z</code>,<br>and press enter.</p>
+<p>You just sent the data hello from the echo command,<br>through the tr command, which barfed it to the screen, because it wasn&#39;t connected to anything else.</p>
+<p>If you want to say hello world, use double quotes,<br>it would work without it, but only because the echo command loves you, and is trying to be cute.</p>
+<p>The convention here is SPACE is a sacred separator of arguments,<br>that is how the terminal command line can understand you.</p>
+<hr>
+<p>Please think of the command line as a graphical program,<br>that has been reduced to text, by a very angry nerd who got tired of clicking a mouse.</p>
+<p>Why should you drag a fancy cute wire between two shiny boxes on your screen,<br>named echo and tr, that have a little drop shadow maybe little flowers.</p>
+<p>When you can just enter echo-hello-tr-az-az on the command line,<br>the command line is a reduction of the user interface.</p>
+<p>It is a user interface,<br>reduced to its lowest terms.</p>
+<hr>
+<p>When you are programming for a while,<br>the mouse kind of gets in the way.</p>
+<p>You just want to keep your hands on your keyboard,<br>so the quickest way to program something is opening up a terminal and typing up a command.</p>
+<hr>
+<p>The Raspberry PI window, that your terminal is in,<br>is for normal users, and all the cats who like mice.</p>
+<p>It can be reduced to a power Grrr interface with the <a href="https://www.youtube.com/watch?v=RaP7sNCJYV0&t=208s">i3 tiling window manager</a>,<br>but that is something you do later as it would be too overwhelming at first.</p>
+<p>Still, efficiently using i3,<br>is a sign that you are a powerful creator (it can help you get a strange but fun job).</p>
+<p>And you get bonus points,<br>for using a reduced key mechanical keyboard.</p>
+<p>I mention this because years into programming,<br>people often regret not having this muscle memory.</p>
+<p>This is not something you should seriously consider at first,<br>but powerful programmer muscle memory, it is something you need to be aware of.</p>
+<p>It is similar to when a pianist plays the piano,<br>the notes is not something they translate anymore.</p>
+<p>The notes are in their hands,<br>they come automatically.</p>
+<hr>
+<p>The Raspberry PI ships with an option to install,<br>Visual Studio Code.</p>
+<p>I&#39;ve noticed that people already made copies of it to remove Microsoft proprietary stuff,<br>and get rid of their custom open license.</p>
+<p>Microsoft has enabled Telemetry by default,<br>so you may wish to disable that, on principle.</p>
+<p>VSCode is a very popular editor,<br>but once a true open-source-version fork gains in popularity you should hop onto that.</p>
+<hr>
+<p>Executing your first command, and poking at a proper code editor,<br>in a little laboratory corner of your room is a big deal.</p>
+<p>You don&#39;t have to write any programs,<br>just have your code lab ready.</p>
+<p>And when you feel like you want to test out some things,<br><a href="https://www.youtube.com/watch?v=oFdlRcRl5aQ">Install Node and create and run your first JavaScript program</a> and <a href="https://www.youtube.com/results?search_query=javascript+tutorial+for+beginners">take a look at some JavaScript tutorials</a>.</p>
+<hr>
+<p>Finally, whether or not your laboratory is secret,<br>it is always a good idea to practice saying &quot;<a href="https://www.youtube.com/watch?v=AkY3BjEQ9mI&t=4s">Deedee get out of my laboratory!</a>&quot;</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.raspberrypi.com/products/raspberry-pi-400/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Raspberry PI 400</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.raspberrypi.com/products/raspberry-pi-400/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.canakit.com/raspberry-pi-400-desktop-computer-kit.html?cid=usd&amp;src=raspberrypi">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>some extras you can get</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.canakit.com/raspberry-pi-400-desktop-computer-kit.html?cid=usd&amp;src=raspberrypi</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=n-4IxW9cgN4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>some assembly required 8GB version</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=n-4IxW9cgN4</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.canakit.com/raspberry-pi/pi-4-kits">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Raspberry PI 4</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.canakit.com/raspberry-pi/pi-4-kits</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=RaP7sNCJYV0&amp;t=208s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>i3 tiling window manager</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=RaP7sNCJYV0&amp;t=208s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=oFdlRcRl5aQ">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Install Node and create and run your first JavaScript program</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=oFdlRcRl5aQ</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=javascript+tutorial+for+beginners">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>take a look at some JavaScript tutorials</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=javascript+tutorial+for+beginners</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=AkY3BjEQ9mI&amp;t=4s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Deedee get out of my laboratory!</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=AkY3BjEQ9mI&amp;t=4s</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">raspberry pi</span><span class="chip">linux</span><span class="chip">terminal</span><span class="chip">shell</span><span class="chip">command line</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/ZAtM1enV0KY"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/ZAtM1enV0KY</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.raspberrypi.com/products/raspberry-pi-400/">
+              <span class="text-truncate">Raspberry PI 400</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.raspberrypi.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.canakit.com/raspberry-pi-400-desktop-computer-kit.html?cid=usd&amp;src=raspberrypi">
+              <span class="text-truncate">some extras you can get</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.canakit.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=n-4IxW9cgN4">
+              <span class="text-truncate">some assembly required 8GB version</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.canakit.com/raspberry-pi/pi-4-kits">
+              <span class="text-truncate">Raspberry PI 4</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.canakit.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=RaP7sNCJYV0&amp;t=208s">
+              <span class="text-truncate">i3 tiling window manager</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=oFdlRcRl5aQ">
+              <span class="text-truncate">Install Node and create and run your first JavaScript program</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=javascript+tutorial+for+beginners">
+              <span class="text-truncate">take a look at some JavaScript tutorials</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=AkY3BjEQ9mI&amp;t=4s">
+              <span class="text-truncate">Deedee get out of my laboratory!</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/bfe40476-a2cb-4e6d-a53e-0f5d815a4eb1/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">This Poem Is Not For Students</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/e4ed7af4-f077-4be7-916d-616a27e8946e/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">You Are A Natural Born Genius</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1295286d-b1f0-4531-8998-6fefa86db679/">
+              <img src="https://catpea.github.io/chapter-04/poem-0807.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Jewelry Explained</span>
+                <span class="fg-3 fs-xs">May 16, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/96559910-7f99-465a-b8f0-1bd0129dd948/">
+              <img src="https://catpea.github.io/chapter-04/poem-0800.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Baroque</span>
+                <span class="fg-3 fs-xs">May 9, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/84868b7b-08e2-4b44-98b4-265797cce910/">
+              <img src="https://catpea.github.io/chapter-04/poem-0812.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Procedurally Generated Superhero Belts And Superhero Belt Accessories</span>
+                <span class="fg-3 fs-xs">May 21, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bf8c1271-3c31-4a66-802e-1615191697aa/">
+              <img src="https://catpea.github.io/chapter-04/poem-0796.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Robot Chicken Camping: A New Kind Of European Invention</span>
+                <span class="fg-3 fs-xs">May 5, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

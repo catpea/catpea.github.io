@@ -1,205 +1,526 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My First Homemade Portable Music Player</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>My First Homemade Portable Music Player · Cat Pea</title>
+  <meta name="description" content="I’ve been tinkering with a Raspberry Pi Zero W since I switched to Linux in 1998, and recently built a compact music‑player for my bike by powering the Pi from a 15 k mAh Energizer power bank, streaming audio through an external USB SoundBLASTER card and headphones. After setting up ALSA so that `cvlc *.mp3` plays all my workout tracks on boot, I mounted the Pi, sound card, and power bank on the frame of my bicycle; the system runs headlessly in the background and resumes playback automatically when I reconnect to Wi‑Fi after a 10‑mile ride. The project has sparked ideas for adding a small keypad or wireless keyboard for control, a custom enclosure, and eventually a fully networked “Bicycle Linux Server” that could be managed from my phone via Termux. This experiment illustrates how a modest Pi setup can become a portable media hub with minimal wiring and command‑line operation, while keeping the learning curve low and the hardware simple.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/318fe2b0-7c84-4658-82cd-c00f529e0348/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My First Homemade Portable Music Player · Cat Pea">
+  <meta property="og:description" content="I’ve been tinkering with a Raspberry Pi Zero W since I switched to Linux in 1998, and recently built a compact music‑player for my bike by powering the Pi from a 15 k mAh Energizer power bank, streaming audio through an external USB SoundBLASTER card and headphones. After setting up ALSA so that `cvlc *.mp3` plays all my workout tracks on boot, I mounted the Pi, sound card, and power bank on the frame of my bicycle; the system runs headlessly in the background and resumes playback automatically when I reconnect to Wi‑Fi after a 10‑mile ride. The project has sparked ideas for adding a small keypad or wireless keyboard for control, a custom enclosure, and eventually a fully networked “Bicycle Linux Server” that could be managed from my phone via Termux. This experiment illustrates how a modest Pi setup can become a portable media hub with minimal wiring and command‑line operation, while keeping the learning curve low and the hardware simple.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0508.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0508</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0508.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0508.avif" alt="My First Homemade Portable Music Player"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">My First Homemade Portable Music Player</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0508.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0508</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">My First Homemade Portable Music Player</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-07-22">7/21/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">What I discovered is that sometimes, inventors,<br>just got to shake a leg.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where would I be today,<br>if I didn&#39;t switch to Linux in 1998 or so.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And what would my invention be today,<br>if I didn&#39;t buy my inexpensive little Raspberry Pi Zero W.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today,<br>I made another tiny leap forward.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of continuing my search for a high quality,<br>good review Uninterrupted Power Supply board and safe batteries to go along with it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I simply plugged in my Raspberry Zero Computer into a standard 15,000mAh Energizer power bank,<br>that is used for recharging mobile phones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Pi immediately started going through the boot process,<br>and by the time I sat down by my desktop I was able to connect to it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am also using an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://us.creative.com/p/sound-blaster/sound-blaster-play-3">external USB SoundBLASTER audio card</a>,<br>and I had to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config">update my ALSA config</a> to send the sound through it by setting the card value to &quot;1&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I copied today&#39;s workout music to it,<br>and then used the <code>cvlc</code> command, which is a very simple command line version of the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=XHprwDJ0-fU">VLC Media Player</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just said cvlc *.mp3 which means play all files that end with .mp3,<br>and the moment I hit enter I could hear it playing through my headphones.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where things get really weird,<br>because I strapped the Raspberry to my the Power Bank, and then attached it to my bicycle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><img src="files/poetry-0508-unit.jpg" alt="Photo Of My Player"></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But here is the thing, there is no keyboard there is no screen.<br>it is just a power-bank that I connected to Raspberry PI, and then to the sound card dongle, and my headphones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a fully featured computer with proper Linux,<br>even a Desktop GUI, but all it does is play music through the headphones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just in case, I put the running cvlc program into the background,<br>and then disowned it, so that when I bicycle away from my WIFI, and lose the login session my music will still be playing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It turned out that was not necessary, after a 10 mile bicycle run,<br>with a long stop to adjust my new wide bicycle seat, drink a bottle of water and snap a photo, (with the unit mounted on my bicycle) it simply reconnected when I got back.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then I had to end the process, using my desktop computer,<br>to stop the music on - what has now become - my Bicycle Linux Server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><img src="files/poetry-0508-home.jpg" alt="Turning Off Songs"></p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don&#39;t have any buttons attached to it,<br>the only way I can control music, is to bicycle home, which is like 15 minutes from the highway.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let me tell you, as much as I love Sid,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=uMuJxd2Gpxo">there are only so many times that you can listen to Continental Drift while bicycling</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I strapped on a Raspberry Pi onto a huge battery,<br>and then strapped that on to my bicycle, and had a heck of a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are so many possibilities now,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://play.google.com/store/apps/details?id=com.termux&hl=en_US&gl=US">I can connect with my phone to it, and access it using the command line</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or I can buy a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.adafruit.com/product/1332">$3 four-key keypad</a>,<br>and attach it to the battery next to the Pi.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then use the keys as previous, play, pause, next,<br>which would be pretty fun.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I can also attach a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.amazon.com/Rii-Wireless-Keyboard-Lightweight-Controller/dp/B00I5SW8MC">Mini Wireless Keyboard</a>,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&field-keywords=Raspberry+OLED">and then ponder what to to about the screen</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">None of these little wonderful questions would exist,<br>if I kept trying to find more circuit boards.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Plus I really like using a brand name battery bank,<br>as <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=CUgbmCSmSNY">cheap batteries can be dangerous</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From the look of things if I do end up 3D printing an enclosure,<br>it will have to contain the battery bank and the PI, some buttons and a screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is neither going to be small,<br>not light.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But,<br>this is 2021.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am not sure,<br>if it is a good idea for any device, not to be a full blown Linux.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don&#39;t want to plug wires and USB things in the morning,<br>to copy my workout music onto the gym audio player.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is a ridiculous thing to do,<br>my desktop should automatically shuffle some songs, adjust the tempo to my current routine...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">...and then connect to my audio player,<br>and get everything prepared for my workout.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is how computers are supposed to work,<br>they are supposed to be networked together, and require minimal interaction.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I know most people would mention the phone here,<br>but phones have bad UI, you can&#39;t feel the buttons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At the moment of writing there are only two or three,<br>that have a proper Linux OS.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And all the rest of the phones have their OS pretty much closed,<br>they don&#39;t want to let people into the operating system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you can&#39;t install your favorite desktop programs on your Phone,<br>then it is not really a computer, it is just a cheap toy, that exposes private information to the internet.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning Linux can be easy,<br>and writing command line programs is not very confusing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Graphic User Interfaces require too much clicking,<br>too much context switching, and they can&#39;t be connected together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Taking some time to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=UW3UxK4Tiqg">figure out how the command line works</a>,<br>and then building or splicing a range of custom electronics, is a fantastic experience.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a very educational experience,<br>that presents great many technological adventures and lessons along the way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The shortest path to knowledge,<br>is taking that little leap forward, and exploring all the interesting things.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-07-22T02:15:16.078Z">July 21, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>7:43<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0508.avif" aria-label="Cover for My First Homemade Portable Music Player, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0508.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for My First Homemade Portable Music Player" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 7:43
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0508.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0508.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0508.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>What I discovered is that sometimes, inventors,<br>just got to shake a leg.</p>
+<p>Where would I be today,<br>if I didn&#39;t switch to Linux in 1998 or so.</p>
+<p>And what would my invention be today,<br>if I didn&#39;t buy my inexpensive little Raspberry Pi Zero W.</p>
+<p>Today,<br>I made another tiny leap forward.</p>
+<hr>
+<p>Instead of continuing my search for a high quality,<br>good review Uninterrupted Power Supply board and safe batteries to go along with it.</p>
+<p>I simply plugged in my Raspberry Zero Computer into a standard 15,000mAh Energizer power bank,<br>that is used for recharging mobile phones.</p>
+<p>The Pi immediately started going through the boot process,<br>and by the time I sat down by my desktop I was able to connect to it.</p>
+<hr>
+<p>I am also using an <a href="https://us.creative.com/p/sound-blaster/sound-blaster-play-3">external USB SoundBLASTER audio card</a>,<br>and I had to <a href="https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config">update my ALSA config</a> to send the sound through it by setting the card value to &quot;1&quot;.</p>
+<p>I copied today&#39;s workout music to it,<br>and then used the <code>cvlc</code> command, which is a very simple command line version of the <a href="https://www.youtube.com/watch?v=XHprwDJ0-fU">VLC Media Player</a>.</p>
+<p>I just said cvlc *.mp3 which means play all files that end with .mp3,<br>and the moment I hit enter I could hear it playing through my headphones.</p>
+<hr>
+<p>This is where things get really weird,<br>because I strapped the Raspberry to my the Power Bank, and then attached it to my bicycle.</p>
+<p><img loading="lazy" decoding="async" src="files/poetry-0508-unit.jpg" alt="Photo Of My Player"></p>
+<p>But here is the thing, there is no keyboard there is no screen.<br>it is just a power-bank that I connected to Raspberry PI, and then to the sound card dongle, and my headphones.</p>
+<p>It is a fully featured computer with proper Linux,<br>even a Desktop GUI, but all it does is play music through the headphones.</p>
+<p>Just in case, I put the running cvlc program into the background,<br>and then disowned it, so that when I bicycle away from my WIFI, and lose the login session my music will still be playing.</p>
+<p>It turned out that was not necessary, after a 10 mile bicycle run,<br>with a long stop to adjust my new wide bicycle seat, drink a bottle of water and snap a photo, (with the unit mounted on my bicycle) it simply reconnected when I got back.</p>
+<p>And then I had to end the process, using my desktop computer,<br>to stop the music on - what has now become - my Bicycle Linux Server.</p>
+<p><img loading="lazy" decoding="async" src="files/poetry-0508-home.jpg" alt="Turning Off Songs"></p>
+<hr>
+<p>I don&#39;t have any buttons attached to it,<br>the only way I can control music, is to bicycle home, which is like 15 minutes from the highway.</p>
+<p>Let me tell you, as much as I love Sid,<br><a href="https://www.youtube.com/watch?v=uMuJxd2Gpxo">there are only so many times that you can listen to Continental Drift while bicycling</a>.</p>
+<hr>
+<p>So I strapped on a Raspberry Pi onto a huge battery,<br>and then strapped that on to my bicycle, and had a heck of a time.</p>
+<p>There are so many possibilities now,<br><a href="https://play.google.com/store/apps/details?id=com.termux&hl=en_US&gl=US">I can connect with my phone to it, and access it using the command line</a>.</p>
+<p>Or I can buy a <a href="https://www.adafruit.com/product/1332">$3 four-key keypad</a>,<br>and attach it to the battery next to the Pi.</p>
+<p>And then use the keys as previous, play, pause, next,<br>which would be pretty fun.</p>
+<p>I can also attach a <a href="https://www.amazon.com/Rii-Wireless-Keyboard-Lightweight-Controller/dp/B00I5SW8MC">Mini Wireless Keyboard</a>,<br><a href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&field-keywords=Raspberry+OLED">and then ponder what to to about the screen</a>.</p>
+<hr>
+<p>None of these little wonderful questions would exist,<br>if I kept trying to find more circuit boards.</p>
+<p>Plus I really like using a brand name battery bank,<br>as <a href="https://www.youtube.com/watch?v=CUgbmCSmSNY">cheap batteries can be dangerous</a>.</p>
+<p>From the look of things if I do end up 3D printing an enclosure,<br>it will have to contain the battery bank and the PI, some buttons and a screen.</p>
+<p>It is neither going to be small,<br>not light.</p>
+<hr>
+<p>But,<br>this is 2021.</p>
+<p>I am not sure,<br>if it is a good idea for any device, not to be a full blown Linux.</p>
+<p>I don&#39;t want to plug wires and USB things in the morning,<br>to copy my workout music onto the gym audio player.</p>
+<p>That is a ridiculous thing to do,<br>my desktop should automatically shuffle some songs, adjust the tempo to my current routine...</p>
+<p>...and then connect to my audio player,<br>and get everything prepared for my workout.</p>
+<p>That is how computers are supposed to work,<br>they are supposed to be networked together, and require minimal interaction.</p>
+<hr>
+<p>I know most people would mention the phone here,<br>but phones have bad UI, you can&#39;t feel the buttons.</p>
+<p>At the moment of writing there are only two or three,<br>that have a proper Linux OS.</p>
+<p>And all the rest of the phones have their OS pretty much closed,<br>they don&#39;t want to let people into the operating system.</p>
+<p>If you can&#39;t install your favorite desktop programs on your Phone,<br>then it is not really a computer, it is just a cheap toy, that exposes private information to the internet.</p>
+<hr>
+<p>Learning Linux can be easy,<br>and writing command line programs is not very confusing.</p>
+<p>Graphic User Interfaces require too much clicking,<br>too much context switching, and they can&#39;t be connected together.</p>
+<p>Taking some time to <a href="https://www.youtube.com/watch?v=UW3UxK4Tiqg">figure out how the command line works</a>,<br>and then building or splicing a range of custom electronics, is a fantastic experience.</p>
+<p>It is a very educational experience,<br>that presents great many technological adventures and lessons along the way.</p>
+<p>The shortest path to knowledge,<br>is taking that little leap forward, and exploring all the interesting things.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://us.creative.com/p/sound-blaster/sound-blaster-play-3">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>external USB SoundBLASTER audio card</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://us.creative.com/p/sound-blaster/sound-blaster-play-3</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>update my ALSA config</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=XHprwDJ0-fU">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>VLC Media Player</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=XHprwDJ0-fU</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=uMuJxd2Gpxo">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>there are only so many times that you can listen to Continental Drift while bicycling</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=uMuJxd2Gpxo</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://play.google.com/store/apps/details?id=com.termux&amp;hl=en_US&amp;gl=US">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I can connect with my phone to it, and access it using the command line</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://play.google.com/store/apps/details?id=com.termux&amp;hl=en_US&amp;gl=US</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.adafruit.com/product/1332">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>$3 four-key keypad</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.adafruit.com/product/1332</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.amazon.com/Rii-Wireless-Keyboard-Lightweight-Controller/dp/B00I5SW8MC">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Mini Wireless Keyboard</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.amazon.com/Rii-Wireless-Keyboard-Lightweight-Controller/dp/B00I5SW8MC</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&amp;field-keywords=Raspberry+OLED">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>and then ponder what to to about the screen</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&amp;field-keywords=Raspberry+OLED</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=CUgbmCSmSNY">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>cheap batteries can be dangerous</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=CUgbmCSmSNY</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=UW3UxK4Tiqg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>figure out how the command line works</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=UW3UxK4Tiqg</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">raspberry-pi</span><span class="chip">usb-audio-card</span><span class="chip">alsa-config</span><span class="chip">cvlc</span><span class="chip">command-line</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://us.creative.com/p/sound-blaster/sound-blaster-play-3">
+              <span class="text-truncate">external USB SoundBLASTER audio card</span>
+              <span class="fg-3 fs-xs flex-shrink-0">us.creative.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config">
+              <span class="text-truncate">update my ALSA config</span>
+              <span class="fg-3 fs-xs flex-shrink-0">learn.adafruit.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=XHprwDJ0-fU">
+              <span class="text-truncate">VLC Media Player</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=uMuJxd2Gpxo">
+              <span class="text-truncate">there are only so many times that you can listen to Continental Drift while bicycling</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://play.google.com/store/apps/details?id=com.termux&amp;hl=en_US&amp;gl=US">
+              <span class="text-truncate">I can connect with my phone to it, and access it using the command line</span>
+              <span class="fg-3 fs-xs flex-shrink-0">play.google.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.adafruit.com/product/1332">
+              <span class="text-truncate">$3 four-key keypad</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.adafruit.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.amazon.com/Rii-Wireless-Keyboard-Lightweight-Controller/dp/B00I5SW8MC">
+              <span class="text-truncate">Mini Wireless Keyboard</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.amazon.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&amp;field-keywords=Raspberry+OLED">
+              <span class="text-truncate">and then ponder what to to about the screen</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.amazon.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=CUgbmCSmSNY">
+              <span class="text-truncate">cheap batteries can be dangerous</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=UW3UxK4Tiqg">
+              <span class="text-truncate">figure out how the command line works</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/poetry-0508-home.jpg" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>poetry-0508-home.jpg
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/poetry-0508-unit.jpg" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>poetry-0508-unit.jpg
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/96e9dbea-7c5e-4a44-9171-5d8e8c2eb049/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Self Education: In Hot Pursuit Of Curiosities</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/f8cc06bd-0903-42f0-b25c-fbb5a49d68f9/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Self Education At A Glance</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3e9b73ec-b6aa-46ba-bd81-8ebd2ed8901c/">
+              <img src="https://catpea.github.io/chapter-03/poem-0510.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Very Brief Overview Of Linux</span>
+                <span class="fg-3 fs-xs">July 23, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/96e9dbea-7c5e-4a44-9171-5d8e8c2eb049/">
+              <img src="https://catpea.github.io/chapter-03/poem-0507.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Self Education: In Hot Pursuit Of Curiosities</span>
+                <span class="fg-3 fs-xs">July 20, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/aff797ea-13e2-43e4-b67f-9105754f4f4e/">
+              <img src="https://catpea.github.io/chapter-03/poem-0511.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Why And How Do Hackers Use Those Black Screens?</span>
+                <span class="fg-3 fs-xs">July 24, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5e73c433-abdd-40a2-9d97-1533d24dde92/">
+              <img src="https://catpea.github.io/chapter-03/poem-0487.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial</span>
+                <span class="fg-3 fs-xs">June 30, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

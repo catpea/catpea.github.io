@@ -1,166 +1,468 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Before Learning Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Before Learning Programming · Cat Pea</title>
+  <meta name="description" content="The post explains how the author has built a visual programming workflow that turns AI‑generated XML documents into live web components: a two‑step process where the user first writes a requirements document describing the desired nodes and wires, then feeds it to an AI that outputs a 4 000‑line code base and corresponding XML structure. The XML tags become actual HTML elements, making the system diagram itself the application state. While the AI handles most of the coding, the author emphasizes the importance of user validation for the UI, and concludes by noting how such visual tools—akin to Blender Geometry Nodes or ComfyUI—can be packaged into commercial licenses or subscription services, citing examples like Rete.js and Comfy’s hosting plans.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/0281e093-474d-4802-9dc9-6c9112aa143a/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Before Learning Programming · Cat Pea">
+  <meta property="og:description" content="The post explains how the author has built a visual programming workflow that turns AI‑generated XML documents into live web components: a two‑step process where the user first writes a requirements document describing the desired nodes and wires, then feeds it to an AI that outputs a 4 000‑line code base and corresponding XML structure. The XML tags become actual HTML elements, making the system diagram itself the application state. While the AI handles most of the coding, the author emphasizes the importance of user validation for the UI, and concludes by noting how such visual tools—akin to Blender Geometry Nodes or ComfyUI—can be packaged into commercial licenses or subscription services, citing examples like Rete.js and Comfy’s hosting plans.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2141.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2141</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2141.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2141.avif" alt="Programming Before Learning Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Before Learning Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2141.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2141</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Before Learning Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-01-10">1/9/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I am certain, that any two step process on your computer,
-can not only be swiftly automated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But desperately calls for a custom visual programming language,
-actions that you connect with wires.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have created many visual programming languages,
-and I can assure you it does not matter where you start.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can do something like Apple Automator,
-or Blender Geometry Nodes / ComfyUI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The code for it, is not the code the AI writes,
-but the text that describes your needs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I recommend, you always remind AI,
-to update your program requirements as you create new clones.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you ever discover a new patter, like I did recently,
-you put aside your old texts, and begin writing new requirements.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My discovery has the AI creating XML documents,
-that describe application structure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my punchline is that, every XML node/tag,
-is an actual web component in my web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So my XML document that represents application state,
-is actually an HTML application state.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But its most valuable feature is clarity,
-the XML triples as the system diagram.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And AI and I focus on keeping that perfect,
-the nearly 4,000 lines of code the AI has written thus far.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is just implementation, functionality, it is AI managed,
-and even more importantly, it is not liability, it is needed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is needed for a single and clear purpose,
-make the web components XML describes come to life.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To give you a little overview of my process,
-just so you know where the start is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I simply asked my AI to describe a visual programming language
-with features that I understand and like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/example.md">save that as a requirements document</a>,
-and then asked it to break it down into implementation stages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(I include the original 4000 line document,
-in the original version of text.)</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI is amazing at programming, it has trouble seeing user interfaces,
-that is where it will need your eyes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you just tell it what is broken,
-and it will track it down in code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now,
-let me close by explaining the value of this beast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once you look at some Blender Geometry Nodes and ComfyUI tutorials,
-you will totally grasp how visual programming works.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just ports and wires,
-and the function that you tie together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, the true value is in you selling a commercial license,
-or premium access to some build of your sustem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you can <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://retejs.org/examples">see an example of moneymaking in rete.js</a>,
-when you go to their documentation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Some very important code examples are locked behind a pro tag,
-and while it is annoying, after a while it makes sense.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is just on the library end,
-beyond this are web apps you create.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here you do <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.comfy.org/cloud/pricing">ask for a monthly membership</a>,
-for premium hosting and features, exactly the way comfy does.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a wonderful thing to sit down to programming,
-before you know much about it.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-01-10T02:01:18.210Z">January 9, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:45<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2141.avif" aria-label="Cover for Programming Before Learning Programming, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2141.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Before Learning Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:45
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2141.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2141.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2141.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I am certain, that any two step process on your computer,<br>can not only be swiftly automated.</p>
+<p>But desperately calls for a custom visual programming language,<br>actions that you connect with wires.</p>
+<p>I have created many visual programming languages,<br>and I can assure you it does not matter where you start.</p>
+<p>You can do something like Apple Automator,<br>or Blender Geometry Nodes / ComfyUI.</p>
+<p>The code for it, is not the code the AI writes,<br>but the text that describes your needs.</p>
+<p>And I recommend, you always remind AI,<br>to update your program requirements as you create new clones.</p>
+<hr>
+<p>If you ever discover a new patter, like I did recently,<br>you put aside your old texts, and begin writing new requirements.</p>
+<p>My discovery has the AI creating XML documents,<br>that describe application structure.</p>
+<p>And my punchline is that, every XML node/tag,<br>is an actual web component in my web page.</p>
+<p>So my XML document that represents application state,<br>is actually an HTML application state.</p>
+<p>But its most valuable feature is clarity,<br>the XML triples as the system diagram.</p>
+<p>And AI and I focus on keeping that perfect,<br>the nearly 4,000 lines of code the AI has written thus far.</p>
+<p>Is just implementation, functionality, it is AI managed,<br>and even more importantly, it is not liability, it is needed.</p>
+<p>It is needed for a single and clear purpose,<br>make the web components XML describes come to life.</p>
+<hr>
+<p>To give you a little overview of my process,<br>just so you know where the start is.</p>
+<p>I simply asked my AI to describe a visual programming language<br>with features that I understand and like.</p>
+<p>And <a href="files/example.md">save that as a requirements document</a>,<br>and then asked it to break it down into implementation stages.</p>
+<p>(I include the original 4000 line document,<br>in the original version of text.)</p>
+<hr>
+<p>AI is amazing at programming, it has trouble seeing user interfaces,<br>that is where it will need your eyes.</p>
+<p>But you just tell it what is broken,<br>and it will track it down in code.</p>
+<hr>
+<p>Now,<br>let me close by explaining the value of this beast.</p>
+<p>Once you look at some Blender Geometry Nodes and ComfyUI tutorials,<br>you will totally grasp how visual programming works.</p>
+<p>It is just ports and wires,<br>and the function that you tie together.</p>
+<p>But, the true value is in you selling a commercial license,<br>or premium access to some build of your sustem.</p>
+<p>And you can <a href="https://retejs.org/examples">see an example of moneymaking in rete.js</a>,<br>when you go to their documentation.</p>
+<p>Some very important code examples are locked behind a pro tag,<br>and while it is annoying, after a while it makes sense.</p>
+<p>And that is just on the library end,<br>beyond this are web apps you create.</p>
+<p>And here you do <a href="https://www.comfy.org/cloud/pricing">ask for a monthly membership</a>,<br>for premium hosting and features, exactly the way comfy does.</p>
+<hr>
+<p>It is a wonderful thing to sit down to programming,<br>before you know much about it.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/example.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>save that as a requirements document</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/example.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://retejs.org/examples">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>see an example of moneymaking in rete.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://retejs.org/examples</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.comfy.org/cloud/pricing">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>ask for a monthly membership</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.comfy.org/cloud/pricing</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual programming</span><span class="chip">automation</span><span class="chip">ai code generation</span><span class="chip">xml</span><span class="chip">web components</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/example.md">
+              <span class="text-truncate">save that as a requirements document</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://retejs.org/examples">
+              <span class="text-truncate">see an example of moneymaking in rete.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">retejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.comfy.org/cloud/pricing">
+              <span class="text-truncate">ask for a monthly membership</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.comfy.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/example.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>example.md
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/41e00707-be0c-4515-a5db-9ef264740f77/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">School Is Out And AI Is In; Or, Learning With Artificial Intelligence</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/74a8cdb9-19fe-4e9d-9bf0-7ee775591613/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Programming With AI: Fight Like A Butterfly Or Die Like A Fly</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/74a8cdb9-19fe-4e9d-9bf0-7ee775591613/">
+              <img src="https://catpea.github.io/chapter-15/poem-2142.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming With AI: Fight Like A Butterfly Or Die Like A Fly</span>
+                <span class="fg-3 fs-xs">January 10, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/62aa0ae0-f8af-46ae-8bfc-36a098aaafcf/">
+              <img src="https://catpea.github.io/chapter-15/poem-2139.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think</span>
+                <span class="fg-3 fs-xs">January 7, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/05cdfeea-541c-4284-b299-b353b9d78e4e/">
+              <img src="https://catpea.github.io/chapter-15/poem-2143.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Flow Based Programming: Push And Pull - Super Easy JavaScript</span>
+                <span class="fg-3 fs-xs">January 11, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/13497e39-b8a8-459b-befe-559f39bbd190/">
+              <img src="https://catpea.github.io/chapter-14/poem-2138.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">There Is No Program</span>
+                <span class="fg-3 fs-xs">January 6, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

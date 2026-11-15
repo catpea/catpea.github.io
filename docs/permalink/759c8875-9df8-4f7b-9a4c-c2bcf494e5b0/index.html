@@ -1,260 +1,525 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Are Programmers Scientists Or Just Really Weird Wizards?</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Are Programmers Scientists Or Just Really Weird Wizards? · Cat Pea</title>
+  <meta name="description" content="I attended a company “swag” event that handed out free pens and other trinkets while watching salespeople in cubicles act friendly; this sparked my interest in programming, which I’ve been doing since childhood. After experimenting with HTML, Svelte, and React—seeing how even simple loops can build reactive interfaces—I decided to create my own visual programming framework where components are dragged and dropped into a data‑flow graph that automatically updates the UI when variables change. My design envisions a minimalist, zooming interface without taskbars, instead using connected windows like lab equipment so developers can repurpose tools at each stage. I conclude that learning JavaScript and open‑source web tech is essential, as it lets anyone build small applications or even a desktop environment capable of deploying web services.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/759c8875-9df8-4f7b-9a4c-c2bcf494e5b0/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Are Programmers Scientists Or Just Really Weird Wizards? · Cat Pea">
+  <meta property="og:description" content="I attended a company “swag” event that handed out free pens and other trinkets while watching salespeople in cubicles act friendly; this sparked my interest in programming, which I’ve been doing since childhood. After experimenting with HTML, Svelte, and React—seeing how even simple loops can build reactive interfaces—I decided to create my own visual programming framework where components are dragged and dropped into a data‑flow graph that automatically updates the UI when variables change. My design envisions a minimalist, zooming interface without taskbars, instead using connected windows like lab equipment so developers can repurpose tools at each stage. I conclude that learning JavaScript and open‑source web tech is essential, as it lets anyone build small applications or even a desktop environment capable of deploying web services.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1623.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1623</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1623.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1623.avif" alt="Are Programmers Scientists Or Just Really Weird Wizards?"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Are Programmers Scientists Or Just Really Weird Wizards?</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1623.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1623</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Are Programmers Scientists Or Just Really Weird Wizards?</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-08-11">8/10/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I was once tricked into going to swag plundering event,
-opening of a carpet store or some such.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where they gave away free pens,
-and staplers, or coasters, and other useless junk.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t know what this company was thinking,
-I didn’t know people kept track of such events.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it was interesting, and I discovered,
-the sales people imprisoned in the cubicles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Who had to act nice,
-as not to ruin their lives.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Enjoyed asking the swag scavengers
-what they do for living.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Computer Scientist,
-I said before I could stop myself.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The man released a puff of air through his mouth,
-and murmured something about his printer.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t think I am an actual computer scientist,
-bu I have been programming since I was a child.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I don’t know what it is called,
-and yet scientific principle is what I use all the time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I personally believe,
-that programming belongs to young people.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not a chore,
-but a necessity like reading, writing, and arithmetic.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And because,
-shool are profit oriented.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whether the little teacher wants an easy paycheck,
-or the big university wants profit optimization.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Functional and authentic education,
-it not the top priority.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, I’ve been working on making HTML,
-which is a way to layout text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Into a programming language,
-which is often a joke.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where kids put HTML under programming languages,
-on their resume.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With frameworks like Svelte and React,
-HTML is all about programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I normally work on Visual Programming languages,
-where you drag and drop program components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then connect them with lines,
-so that you can see…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where the output of one component,
-becomes input of another.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To make this visually simple,
-I need a simple application framework.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And while I was examining <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+Svelte">Svelte</a> application building framework,
-I realized I don’t need it – I can make my own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And so I set down to ask,
-what is a framework, compiler, programming language in 2024.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the answer I came up with is a loop,
-a loop that iterates over lists of things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But when not fed a list, it will still work,
-pretending to it self that it just received a list with one item</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">250 lines of code and a good chunk of a Saturday later,
-all my tests turned out to be successful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just the loop was enough to create a complex user interface,
-that automatically updates as its data changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve decided, that in this experiment,
-all variables in the data structure I was looping over, were reactive.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meaning whetter it is a list of things, or a thing,
-such as user, or the user’s name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whenever altered, it will announced a change,
-and the user interface I create with the loop will automatically update.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The procedure for such a thing is,
-find user named Alice in list of users change phone to 555-1212.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that change, automatically propagates,
-to all the UI components showing information about Alice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That could include the database on the server,
-as it is a tiny and flexible mechanism.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now in my visual programming language,
-I can just visually create trees of data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And they will be displayed, automatically,
-in the application builder and preview windows.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is always a possibility I will encounter some big problem,
-but since this is a programming world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is always a way to rebuild some fundamental layer,
-and tip it in my favor again, so it is only ever a delay.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Scientist, a Hacker, a Cool Cat, whatever it is,
-it is my jam – it has always been fun – and never frustrating.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I suspect, plowing through complexity,
-keep the mind really sharp, so it is a healthy challenge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It takes a while to learn everything,
-but the results are like you see here - tiny little brilliant programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Building components that can create larger things,
-in my case a tiny operating system with a fun little application builder.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I expect that as my experiments draw to a close,
-it will be a desktop application that will build web applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A home laboratory, capable of deploying applications and service networks,
-for whatever reason the user needs them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have very unusual design principles in mind,
-the operating system, or development environment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is a zooming user interface, no taskbar, not even a mini map,
-just windows with useful tools and lines that connect them together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Much the same way that various electronic equipment,
-is connected together in a laboratory setting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where things can be repurposed as needed,
-during each development stage.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Minimalism is a great power,
-and though code wisdom changes with decades.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The constant pursuit of code minimalism,
-is a reliable way to keep an application going.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">People adore the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">Command Line Interface</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=pd+PureData+Tutorial">PureData</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=HyperCard+Tutorial">HyperCard</a>,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+A+WikiWiki">WikiWiki</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Visual+Basic+6+Tutorial">Visual Basic 6</a>, and today’s <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Apple+Automator+Tutorial">Automator</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is because it is easy to wrap the mind around their ideas,
-it is easy to see the full picture.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once again I recommend learning programming,
-and starting with JavaScript and open source web technologies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For all the broken schools in the world,
-programming will always be something that anyone can learn on their own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By just searching the internet,
-for <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=JavaScript+Tutorials">programming tutorials</a>.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-08-11T03:33:40.274Z">August 10, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:52<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1623.avif" aria-label="Cover for Are Programmers Scientists Or Just Really Weird Wizards?, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1623.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Are Programmers Scientists Or Just Really Weird Wizards?" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:52
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1623.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1623.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1623.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I was once tricked into going to swag plundering event,<br>opening of a carpet store or some such.</p>
+<p>Where they gave away free pens,<br>and staplers, or coasters, and other useless junk.</p>
+<p>I don’t know what this company was thinking,<br>I didn’t know people kept track of such events.</p>
+<p>But it was interesting, and I discovered,<br>the sales people imprisoned in the cubicles.</p>
+<p>Who had to act nice,<br>as not to ruin their lives.</p>
+<p>Enjoyed asking the swag scavengers<br>what they do for living.</p>
+<p>Computer Scientist,<br>I said before I could stop myself.</p>
+<p>The man released a puff of air through his mouth,<br>and murmured something about his printer.</p>
+<hr>
+<p>I don’t think I am an actual computer scientist,<br>bu I have been programming since I was a child.</p>
+<p>And I don’t know what it is called,<br>and yet scientific principle is what I use all the time.</p>
+<hr>
+<p>I personally believe,<br>that programming belongs to young people.</p>
+<p>It is not a chore,<br>but a necessity like reading, writing, and arithmetic.</p>
+<p>And because,<br>shool are profit oriented.</p>
+<p>Whether the little teacher wants an easy paycheck,<br>or the big university wants profit optimization.</p>
+<p>Functional and authentic education,<br>it not the top priority.</p>
+<hr>
+<p>Today, I’ve been working on making HTML,<br>which is a way to layout text.</p>
+<p>Into a programming language,<br>which is often a joke.</p>
+<p>Where kids put HTML under programming languages,<br>on their resume.</p>
+<p>With frameworks like Svelte and React,<br>HTML is all about programming.</p>
+<p>I normally work on Visual Programming languages,<br>where you drag and drop program components.</p>
+<p>And then connect them with lines,<br>so that you can see…</p>
+<p>Where the output of one component,<br>becomes input of another.</p>
+<p>To make this visually simple,<br>I need a simple application framework.</p>
+<p>And while I was examining <a href="https://www.youtube.com/results?search_query=What+Is+Svelte">Svelte</a> application building framework,<br>I realized I don’t need it – I can make my own.</p>
+<p>And so I set down to ask,<br>what is a framework, compiler, programming language in 2024.</p>
+<p>And the answer I came up with is a loop,<br>a loop that iterates over lists of things.</p>
+<p>But when not fed a list, it will still work,<br>pretending to it self that it just received a list with one item</p>
+<p>250 lines of code and a good chunk of a Saturday later,<br>all my tests turned out to be successful.</p>
+<p>Just the loop was enough to create a complex user interface,<br>that automatically updates as its data changes.</p>
+<p>I’ve decided, that in this experiment,<br>all variables in the data structure I was looping over, were reactive.</p>
+<p>Meaning whetter it is a list of things, or a thing,<br>such as user, or the user’s name.</p>
+<p>Whenever altered, it will announced a change,<br>and the user interface I create with the loop will automatically update.</p>
+<hr>
+<p>The procedure for such a thing is,<br>find user named Alice in list of users change phone to 555-1212.</p>
+<p>And that change, automatically propagates,<br>to all the UI components showing information about Alice.</p>
+<p>That could include the database on the server,<br>as it is a tiny and flexible mechanism.</p>
+<hr>
+<p>Now in my visual programming language,<br>I can just visually create trees of data.</p>
+<p>And they will be displayed, automatically,<br>in the application builder and preview windows.</p>
+<hr>
+<p>There is always a possibility I will encounter some big problem,<br>but since this is a programming world.</p>
+<p>There is always a way to rebuild some fundamental layer,<br>and tip it in my favor again, so it is only ever a delay.</p>
+<hr>
+<p>Scientist, a Hacker, a Cool Cat, whatever it is,<br>it is my jam – it has always been fun – and never frustrating.</p>
+<p>And I suspect, plowing through complexity,<br>keep the mind really sharp, so it is a healthy challenge.</p>
+<p>It takes a while to learn everything,<br>but the results are like you see here - tiny little brilliant programs.</p>
+<p>Building components that can create larger things,<br>in my case a tiny operating system with a fun little application builder.</p>
+<p>I expect that as my experiments draw to a close,<br>it will be a desktop application that will build web applications.</p>
+<p>A home laboratory, capable of deploying applications and service networks,<br>for whatever reason the user needs them.</p>
+<hr>
+<p>I have very unusual design principles in mind,<br>the operating system, or development environment.</p>
+<p>Is a zooming user interface, no taskbar, not even a mini map,<br>just windows with useful tools and lines that connect them together.</p>
+<p>Much the same way that various electronic equipment,<br>is connected together in a laboratory setting.</p>
+<p>Where things can be repurposed as needed,<br>during each development stage.</p>
+<hr>
+<p>Minimalism is a great power,<br>and though code wisdom changes with decades.</p>
+<p>The constant pursuit of code minimalism,<br>is a reliable way to keep an application going.</p>
+<p>People adore the <a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">Command Line Interface</a>, <a href="https://www.youtube.com/results?search_query=pd+PureData+Tutorial">PureData</a>, <a href="https://www.youtube.com/results?search_query=HyperCard+Tutorial">HyperCard</a>,<br><a href="https://www.youtube.com/results?search_query=What+Is+A+WikiWiki">WikiWiki</a>, <a href="https://www.youtube.com/results?search_query=Visual+Basic+6+Tutorial">Visual Basic 6</a>, and today’s <a href="https://www.youtube.com/results?search_query=Apple+Automator+Tutorial">Automator</a>.</p>
+<p>It is because it is easy to wrap the mind around their ideas,<br>it is easy to see the full picture.</p>
+<hr>
+<p>Once again I recommend learning programming,<br>and starting with JavaScript and open source web technologies.</p>
+<p>For all the broken schools in the world,<br>programming will always be something that anyone can learn on their own.</p>
+<p>By just searching the internet,<br>for <a href="https://www.youtube.com/results?search_query=JavaScript+Tutorials">programming tutorials</a>.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+Svelte">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Svelte</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+Svelte</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Command Line Interface</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=tc4ROCJYbm0</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=pd+PureData+Tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>PureData</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=pd+PureData+Tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=HyperCard+Tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>HyperCard</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=HyperCard+Tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+A+WikiWiki">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>WikiWiki</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+A+WikiWiki</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Visual+Basic+6+Tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Visual Basic 6</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Visual+Basic+6+Tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Apple+Automator+Tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Automator</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Apple+Automator+Tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=JavaScript+Tutorials">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>programming tutorials</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=JavaScript+Tutorials</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">swag</span><span class="chip">event</span><span class="chip">programming</span><span class="chip">visual-programming</span><span class="chip">svelte</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+Svelte">
+              <span class="text-truncate">Svelte</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">
+              <span class="text-truncate">Command Line Interface</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=pd+PureData+Tutorial">
+              <span class="text-truncate">PureData</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=HyperCard+Tutorial">
+              <span class="text-truncate">HyperCard</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+A+WikiWiki">
+              <span class="text-truncate">WikiWiki</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Visual+Basic+6+Tutorial">
+              <span class="text-truncate">Visual Basic 6</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Apple+Automator+Tutorial">
+              <span class="text-truncate">Automator</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=JavaScript+Tutorials">
+              <span class="text-truncate">programming tutorials</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/lg-poem-1623-illustration-gui.jpg" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>lg-poem-1623-illustration-gui.jpg
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/d98296e4-a4b4-49d4-8752-d42b934b55a3/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Gym Problem; Or, The Lift Heavy For Big Muscle Myth</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/fe3fb8c5-7a73-4746-b31d-b0428a30a9ea/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Golden Books</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4b1b5ca3-e87d-4b1f-9e39-4e5525de2ed2/">
+              <img src="https://catpea.github.io/chapter-11/poem-1627.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Why Is Learning Programming So Unfriendly?</span>
+                <span class="fg-3 fs-xs">August 14, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9c558241-124c-46f7-b4db-375bfdf4884b/">
+              <img src="https://catpea.github.io/chapter-11/poem-1621.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Svelte, Vue, React, Angular Considered Evil: Just Loop Over Signals With A Signal Loop Web Component</span>
+                <span class="fg-3 fs-xs">August 8, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/54bb3b6a-f48c-4383-b2c3-f1fce5ae36bc/">
+              <img src="https://catpea.github.io/chapter-11/poem-1631.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Codename Mephistopheles; Or, How Computer Programming Changes Everything</span>
+                <span class="fg-3 fs-xs">August 18, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/57ce16d9-dca9-4459-ae35-2bb706f0120c/">
+              <img src="https://catpea.github.io/chapter-11/poem-1619.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Multiversal Travel; Or, Life After A Neat Nap</span>
+                <span class="fg-3 fs-xs">August 6, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

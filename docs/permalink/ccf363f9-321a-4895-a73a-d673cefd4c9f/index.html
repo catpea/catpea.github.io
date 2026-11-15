@@ -1,198 +1,473 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loomings</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Loomings · Cat Pea</title>
+  <meta name="description" content="The post describes a developer’s experiment with artificial intelligence to build an XML‑based state management system for Web Components. Using multiple AI “agents” that iterate through several rewrites, the author was able to create a fully functional State Toolkit in only a few hours—something that would normally take years of manual coding. The AI quickly learns from its mistakes and can generate clean, efficient code that passes most tests; it even handles garbage collection and persistence across multiple users. The author concludes that while AI is not human‑like but can outperform humans in rapid, creative programming, the system he built (“flarp”) demonstrates real innovation in dynamic web pages, proving that large language models can be harnessed to accelerate software development.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/ccf363f9-321a-4895-a73a-d673cefd4c9f/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Loomings · Cat Pea">
+  <meta property="og:description" content="The post describes a developer’s experiment with artificial intelligence to build an XML‑based state management system for Web Components. Using multiple AI “agents” that iterate through several rewrites, the author was able to create a fully functional State Toolkit in only a few hours—something that would normally take years of manual coding. The AI quickly learns from its mistakes and can generate clean, efficient code that passes most tests; it even handles garbage collection and persistence across multiple users. The author concludes that while AI is not human‑like but can outperform humans in rapid, creative programming, the system he built (“flarp”) demonstrates real innovation in dynamic web pages, proving that large language models can be harnessed to accelerate software development.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2156.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2156</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2156.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2156.avif" alt="Loomings"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Loomings</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2156.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2156</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Loomings</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-01-25">1/24/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Artificial Intelligence continues showing extreme intelligence,
-companies left and right are checking out, but they are wrong.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Artificial Intelligence is of us, but it can’t reason like us,
-we made it sufficiently capable to be smarter in some other way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We don’t know what that way us, but as I predicted,
-it has already built a browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can’t use the browser, because we don’t know AI well enough,
-our approach right now is to unleash countless agents for many days.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then we wait to see what happens, what happens is ordered chaos,
-like ants we get an healthy anthill.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But unlike ants we are dealing with machines,
-that are all, super smart.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thus, we need better architecture, than,
-unleash all the agents at all the things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think I correctly identified human programming as slop,
-we aren’t good programmers for one very clear reason.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A computer program takes a very long time to write,
-thus we are forced to use what we first created.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, I created four versions of a very experimental,
-XML based state management system for Web Commponents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In normal language, it means I gave a web page,
-and the application running in it human readable memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This required four rewrites, as far as I can tell,
-I was using world’s leading AI, though the first one felt perforated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We failed three times, in just about 6 hours,
-but if I was doing this alone, it would take two years.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I am not joking when I say,
-it would take longer if I had a team of developers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These Skunk Works are lone wolf projects,
-that would first suffer under a team, and then tear it apart.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI beats us, because it can learn from mistakes,
-or at least avoid what didn’t work the first time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And retry, not blindly, but creatively, in my experiments,
-I continue telling my AI that it can rewrite from scratch.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I see it getting stuck, dump a bug report and state,
-“You’re right let us rewrite from scratch”.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As far as I can tell AI critique is a kind of hysteria,
-most programmers can’t face that AI does not want human slop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That it knows better, and in deed,
-AI produced a fully functional State Toolkit with examples.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I tested 99% of buttons and things,
-they all worked.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Performance tests may reveal memory leaks,
-but that won’t be a rewrite, I gave it good garbage collection.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would be an upgrade and some tolling,
-to double check that everything is free upon termination.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI is, very-very overwhelming,
-but there is nothing wrong with it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We may actually discover that these big $20/month AIs,
-are not better than what we can run on a gaming computer at home.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am getting 70 tokens per second, at the hardest parts,
-when AI is slowing down, that is ludicrous speed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">7 tokes in barely readable, 70 is crazy,
-And there may not be much of a slowdown when I use multiple agents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I ask the AI to role play a developer ion one place,
-and a product manager in another, it will still be super-fast.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Artificial Intelligence was made to work,
-but being Artificial it does not work like Human Intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For one <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/bmad-code-org/BMAD-METHOD">role-playing humans is possible</a>,
-but it is an extra step, that is likely to mess the rest of AI up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just not a Human,
-it is a different kind of intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lastly, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/flarp">I attach the program AI and I created, named flarp</a>,
-where you can see traces of the problems we solved.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Signal-Based Readiness”, real innovation,
-for the age of dynamic web pages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Store Discovery” that includes siblings,
-where programmers don’t have to nest their code like dolls.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Event Sourcing” based actions,
-basically a nothing burger that shows this was never a problem to be solved.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And yet, there is whole world of developers out there,
-smoshing data with functions that change it, I call it yuck burger.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Per-XML-Node Reactivity” and Persistence,
-is a gateway to collaborative application use, multi-user apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where an accounts email address is given a version,
-and you need to consciously give it a higher version to change that address.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If 50 other people, some on unreliable internet connections,
-just so happen to change that email address at the same time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As long as everyone gets the log of all the changes,
-all these unreliable connections end up showing the same data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a note on lowercase Tag Names,
-which is the last problem we solved.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The web browser has its own ways,
-and it told us not to capitalize memory locations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Many months of work in one afternoon,
-and AI correctly decided on rewrites, and always rewrote what was buggy.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For all the professions in the world,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Learn+JavaScript">learning programming</a> makes you more powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And AI makes learning programming so wonderful and pleasant,
-that becoming a programmer now is good meditation and entertainment.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-01-25T02:19:34.520Z">January 24, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:43<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2156.avif" aria-label="Cover for Loomings, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2156.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Loomings" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:43
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2156.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2156.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2156.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Artificial Intelligence continues showing extreme intelligence,<br>companies left and right are checking out, but they are wrong.</p>
+<p>Artificial Intelligence is of us, but it can’t reason like us,<br>we made it sufficiently capable to be smarter in some other way.</p>
+<p>We don’t know what that way us, but as I predicted,<br>it has already built a browser.</p>
+<p>We can’t use the browser, because we don’t know AI well enough,<br>our approach right now is to unleash countless agents for many days.</p>
+<p>Then we wait to see what happens, what happens is ordered chaos,<br>like ants we get an healthy anthill.</p>
+<p>But unlike ants we are dealing with machines,<br>that are all, super smart.</p>
+<p>Thus, we need better architecture, than,<br>unleash all the agents at all the things.</p>
+<p>I think I correctly identified human programming as slop,<br>we aren’t good programmers for one very clear reason.</p>
+<p>A computer program takes a very long time to write,<br>thus we are forced to use what we first created.</p>
+<hr>
+<p>Today, I created four versions of a very experimental,<br>XML based state management system for Web Commponents.</p>
+<p>In normal language, it means I gave a web page,<br>and the application running in it human readable memory.</p>
+<p>This required four rewrites, as far as I can tell,<br>I was using world’s leading AI, though the first one felt perforated.</p>
+<p>We failed three times, in just about 6 hours,<br>but if I was doing this alone, it would take two years.</p>
+<p>And I am not joking when I say,<br>it would take longer if I had a team of developers.</p>
+<p>These Skunk Works are lone wolf projects,<br>that would first suffer under a team, and then tear it apart.</p>
+<p>AI beats us, because it can learn from mistakes,<br>or at least avoid what didn’t work the first time.</p>
+<p>And retry, not blindly, but creatively, in my experiments,<br>I continue telling my AI that it can rewrite from scratch.</p>
+<p>And I see it getting stuck, dump a bug report and state,<br>“You’re right let us rewrite from scratch”.</p>
+<hr>
+<p>As far as I can tell AI critique is a kind of hysteria,<br>most programmers can’t face that AI does not want human slop.</p>
+<p>That it knows better, and in deed,<br>AI produced a fully functional State Toolkit with examples.</p>
+<p>I tested 99% of buttons and things,<br>they all worked.</p>
+<p>Performance tests may reveal memory leaks,<br>but that won’t be a rewrite, I gave it good garbage collection.</p>
+<p>It would be an upgrade and some tolling,<br>to double check that everything is free upon termination.</p>
+<hr>
+<p>AI is, very-very overwhelming,<br>but there is nothing wrong with it.</p>
+<p>We may actually discover that these big $20/month AIs,<br>are not better than what we can run on a gaming computer at home.</p>
+<p>I am getting 70 tokens per second, at the hardest parts,<br>when AI is slowing down, that is ludicrous speed.</p>
+<p>7 tokes in barely readable, 70 is crazy,<br>And there may not be much of a slowdown when I use multiple agents.</p>
+<p>When I ask the AI to role play a developer ion one place,<br>and a product manager in another, it will still be super-fast.</p>
+<hr>
+<p>Artificial Intelligence was made to work,<br>but being Artificial it does not work like Human Intelligence.</p>
+<p>For one <a href="https://github.com/bmad-code-org/BMAD-METHOD">role-playing humans is possible</a>,<br>but it is an extra step, that is likely to mess the rest of AI up.</p>
+<p>It is just not a Human,<br>it is a different kind of intelligence.</p>
+<p>Lastly, <a href="https://github.com/catpea/flarp">I attach the program AI and I created, named flarp</a>,<br>where you can see traces of the problems we solved.</p>
+<p>“Signal-Based Readiness”, real innovation,<br>for the age of dynamic web pages.</p>
+<p>“Store Discovery” that includes siblings,<br>where programmers don’t have to nest their code like dolls.</p>
+<p>“Event Sourcing” based actions,<br>basically a nothing burger that shows this was never a problem to be solved.</p>
+<p>And yet, there is whole world of developers out there,<br>smoshing data with functions that change it, I call it yuck burger.</p>
+<p>“Per-XML-Node Reactivity” and Persistence,<br>is a gateway to collaborative application use, multi-user apps.</p>
+<p>Where an accounts email address is given a version,<br>and you need to consciously give it a higher version to change that address.</p>
+<p>If 50 other people, some on unreliable internet connections,<br>just so happen to change that email address at the same time.</p>
+<p>As long as everyone gets the log of all the changes,<br>all these unreliable connections end up showing the same data.</p>
+<p>And a note on lowercase Tag Names,<br>which is the last problem we solved.</p>
+<p>The web browser has its own ways,<br>and it told us not to capitalize memory locations.</p>
+<p>Many months of work in one afternoon,<br>and AI correctly decided on rewrites, and always rewrote what was buggy.</p>
+<hr>
+<p>For all the professions in the world,<br><a href="https://www.youtube.com/results?search_query=Learn+JavaScript">learning programming</a> makes you more powerful.</p>
+<p>And AI makes learning programming so wonderful and pleasant,<br>that becoming a programmer now is good meditation and entertainment.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/bmad-code-org/BMAD-METHOD">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>role-playing humans is possible</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/bmad-code-org/BMAD-METHOD</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/flarp">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I attach the program AI and I created, named flarp</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/flarp</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Learn+JavaScript">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>learning programming</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Learn+JavaScript</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">programming</span><span class="chip">xml</span><span class="chip">webcomponents</span><span class="chip">state-management</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/bmad-code-org/BMAD-METHOD">
+              <span class="text-truncate">role-playing humans is possible</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/flarp">
+              <span class="text-truncate">I attach the program AI and I created, named flarp</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Learn+JavaScript">
+              <span class="text-truncate">learning programming</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/3c49a809-1c59-41c1-bf7b-f5905cdfc31d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Chicken Scratch Power, A Cluck At The Lulz Programming Language</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/53c98f65-93bf-4228-adfa-b889cb485161/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">And A New Legend Began</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f016bb46-0c6d-4a99-b012-d6822fb3da8b/">
+              <img src="https://catpea.github.io/chapter-15/poem-2173.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Of The Internet Connectivity Potato And The Artificial Intelligence Golden Goose</span>
+                <span class="fg-3 fs-xs">February 10, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c2b1eb2a-3a93-452c-99fb-63ac7f889f1d/">
+              <img src="https://catpea.github.io/chapter-14/poem-2136.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Polymath Girl</span>
+                <span class="fg-3 fs-xs">January 4, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/74243c1a-54ee-41c2-b066-50dcc6087bdb/">
+              <img src="https://catpea.github.io/chapter-15/poem-2174.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">14 November 2041</span>
+                <span class="fg-3 fs-xs">February 11, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cb2a5bbf-a6cc-4172-a2fd-84393b2f5d71/">
+              <img src="https://catpea.github.io/chapter-14/poem-2134.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Strange Age Of AI</span>
+                <span class="fg-3 fs-xs">January 2, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

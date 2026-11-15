@@ -1,137 +1,435 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications · Cat Pea</title>
+  <meta name="description" content="The author argues that applications become truly useful when they specialize into domain‑specific tools such as code editors or spreadsheet builders, rather than remaining general‑purpose; he cites Excel’s inevitable formulas and other legacy systems to show how users always need to learn a language, then introduces a song‑builder app that auto‑generates tracks with randomize settings, album covers, etc., proving that quick generation plus easy customization creates powerful tools—finally concluding that building specialized, customizable apps like a nature‑noise machine with recorded sounds and a simple web interface is the winning path to success.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/ce777fe2-49b2-425a-b037-17de3da3f80a/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications · Cat Pea">
+  <meta property="og:description" content="The author argues that applications become truly useful when they specialize into domain‑specific tools such as code editors or spreadsheet builders, rather than remaining general‑purpose; he cites Excel’s inevitable formulas and other legacy systems to show how users always need to learn a language, then introduces a song‑builder app that auto‑generates tracks with randomize settings, album covers, etc., proving that quick generation plus easy customization creates powerful tools—finally concluding that building specialized, customizable apps like a nature‑noise machine with recorded sounds and a simple web interface is the winning path to success.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-0978.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0978</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-0978.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-0978.avif" alt="Don&apos;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-0978.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0978</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-11-04">11/3/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">An application taken to its ultimate generic general purpose form,
-is a code editor, where the user interface becomes a programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can try to stop part way, like Access, Crystal Reports, HyperCard, Excel,
-or even Blender’s Geometry Nodes, but it won’t work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will always need a code editor,
-the user will always be forced into learning a language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">People only Lean Visual Basic for Applications,
-because those application are a requirement to do their job.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Excel, should be all the proof you need,
-there is just no way to create a spreadsheet without Cell Formulas.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Do not move towards general purpose applications,
-to be useful move in the opposite direction.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are a composer, because you have rhythm,
-and if you listen to a song on repeat you will flow with it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are a musical genius, but there are no programs,
-that allow you to compose by opening a finished song customizer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you change the beats per minute, chords, drums, hats, bass, and vocals,
-and adjust the song intro out-tro and other section and you get a unique song.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a Digital Audio Workstation, that’s too much,
-this is a Song Builder.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let me tell you why it is even more powerful, than you can imagine right now,
-because it has a randomize settings button.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One click, gets you a unique song,
-boom, in 3 seconds flat, you just generated a new workout song for the morning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Right next to it, you have a generate album button,
-it will randomly reshuffle ten out of a thousand song presets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You even get a unique album cover,
-generated or pre-generated with that machine learning stuff.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell me now,
-what took you longer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning how to create a while new album,
-or unlearning this idea that you will need a Digital Audio Workstation, or a Tracker?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you learn how to use a program faster,
-than unlearning complex ideas, you have a winning Application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Give away one song per day for free,
-make the albums cost as much as you want.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A button, be it generate song, or generate album,
-is a sign of a useful application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of creating excel, create what people usually make with Excel,
-and let them customize it with a few clicks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thus, to create useful applications,
-you must move away from general purpose programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Towards specialized programs,
-that they can customize.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To test this idea out, I challenge you,
-to create a premium nature oriented noise machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This requires recording equipment, adventure, and patience,
-record rain, ocean, lake, birds, a thousand unique thunder sounds.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Create a website that randomly picks what plays,
-and let them click on icons to turn it down or up, or off.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While you are at it, record 12 hour long,
-high quality videos, as some people prefer an authentic symphony.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you are not interested in running such a tiny business,
-then auction it off the moment you put it together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And start working on the next little thing,
-for auction, and if they don’t sell for much…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Know that it is a priceless portfolio item and success story,
-a portfolio of ten such lite things is priceless.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Specialize,
-don’t generalize.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-11-04T03:03:54.766Z">November 3, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:16<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-0978.avif" aria-label="Cover for Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-0978.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:16
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-0978.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-0978.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-0978.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>An application taken to its ultimate generic general purpose form,<br>is a code editor, where the user interface becomes a programming language.</p>
+<p>You can try to stop part way, like Access, Crystal Reports, HyperCard, Excel,<br>or even Blender’s Geometry Nodes, but it won’t work.</p>
+<p>You will always need a code editor,<br>the user will always be forced into learning a language.</p>
+<p>People only Lean Visual Basic for Applications,<br>because those application are a requirement to do their job.</p>
+<p>Excel, should be all the proof you need,<br>there is just no way to create a spreadsheet without Cell Formulas.</p>
+<hr>
+<p>Do not move towards general purpose applications,<br>to be useful move in the opposite direction.</p>
+<hr>
+<p>You are a composer, because you have rhythm,<br>and if you listen to a song on repeat you will flow with it.</p>
+<p>You are a musical genius, but there are no programs,<br>that allow you to compose by opening a finished song customizer.</p>
+<p>Here you change the beats per minute, chords, drums, hats, bass, and vocals,<br>and adjust the song intro out-tro and other section and you get a unique song.</p>
+<p>This is not a Digital Audio Workstation, that’s too much,<br>this is a Song Builder.</p>
+<p>Let me tell you why it is even more powerful, than you can imagine right now,<br>because it has a randomize settings button.</p>
+<p>One click, gets you a unique song,<br>boom, in 3 seconds flat, you just generated a new workout song for the morning.</p>
+<p>Right next to it, you have a generate album button,<br>it will randomly reshuffle ten out of a thousand song presets.</p>
+<p>You even get a unique album cover,<br>generated or pre-generated with that machine learning stuff.</p>
+<hr>
+<p>Tell me now,<br>what took you longer.</p>
+<p>Learning how to create a while new album,<br>or unlearning this idea that you will need a Digital Audio Workstation, or a Tracker?</p>
+<p>When you learn how to use a program faster,<br>than unlearning complex ideas, you have a winning Application.</p>
+<p>Give away one song per day for free,<br>make the albums cost as much as you want.</p>
+<p>A button, be it generate song, or generate album,<br>is a sign of a useful application.</p>
+<p>Instead of creating excel, create what people usually make with Excel,<br>and let them customize it with a few clicks.</p>
+<p>Thus, to create useful applications,<br>you must move away from general purpose programs.</p>
+<p>Towards specialized programs,<br>that they can customize.</p>
+<hr>
+<p>To test this idea out, I challenge you,<br>to create a premium nature oriented noise machine.</p>
+<p>This requires recording equipment, adventure, and patience,<br>record rain, ocean, lake, birds, a thousand unique thunder sounds.</p>
+<p>Create a website that randomly picks what plays,<br>and let them click on icons to turn it down or up, or off.</p>
+<p>While you are at it, record 12 hour long,<br>high quality videos, as some people prefer an authentic symphony.</p>
+<p>And if you are not interested in running such a tiny business,<br>then auction it off the moment you put it together.</p>
+<p>And start working on the next little thing,<br>for auction, and if they don’t sell for much…</p>
+<p>Know that it is a priceless portfolio item and success story,<br>a portfolio of ten such lite things is priceless.</p>
+<p>Specialize,<br>don’t generalize.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">application-design</span><span class="chip">ui</span><span class="chip">code-editor</span><span class="chip">excel</span><span class="chip">song-builder</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/cqFKhqv6Ong"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/cqFKhqv6Ong</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/cadf3d38-bff0-478e-94c7-194bee806eae/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">How To Learn Big Programming With Little Programming</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/2698cebe-3069-4028-ab7c-c8496962fe70/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Super Culture; Or The Road To Wisdom, Fairness, And World Peace</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c93d5572-b614-48db-9c80-46a94870398c/">
+              <img src="https://catpea.github.io/chapter-05/poem-0980.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Introduction To Programming: The Heck Is A State Machine?</span>
+                <span class="fg-3 fs-xs">November 5, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cadf3d38-bff0-478e-94c7-194bee806eae/">
+              <img src="https://catpea.github.io/chapter-05/poem-0977.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Learn Big Programming With Little Programming</span>
+                <span class="fg-3 fs-xs">November 2, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ab3365b3-b15a-45d8-b312-e56248cdaa17/">
+              <img src="https://catpea.github.io/chapter-05/poem-0981.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Potatoes; Or, The Biggest Problem In Application Programming</span>
+                <span class="fg-3 fs-xs">November 6, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/83bca2eb-c645-42c3-a0bf-f55e48599497/">
+              <img src="https://catpea.github.io/chapter-05/poem-0974.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Social Application Development; Or, Self Editable Applications In The Twenty Twenty-Something</span>
+                <span class="fg-3 fs-xs">October 30, 2022</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

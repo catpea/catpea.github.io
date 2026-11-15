@@ -1,209 +1,478 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pardon My Turkey; Or, An XML Thanksgiving</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Pardon My Turkey; Or, An XML Thanksgiving · Cat Pea</title>
+  <meta name="description" content="I’m a lifelong coder who enjoys writing small programs in my free time and recently built a compact 50‑line XML parser that demonstrates how easy it is to handle nested tags once you understand the basic pattern of open/close lines and attribute extraction. I then turned to the emerging world of low‑code visual programming languages, arguing they lower the barrier for beginners by letting them connect boxes instead of typing boilerplate, while still supporting powerful concepts such as event emitters, queues, buffers, and automatic routing. By pre‑building UI builders, HTTP libraries, and server proxies into these visual tools, developers can focus on solving problems rather than repeating grunt work—making the whole process faster, more intuitive, and ultimately more impactful for both creators and users.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/2965e5ed-e3c7-49e8-8931-a6459baaec05/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Pardon My Turkey; Or, An XML Thanksgiving · Cat Pea">
+  <meta property="og:description" content="I’m a lifelong coder who enjoys writing small programs in my free time and recently built a compact 50‑line XML parser that demonstrates how easy it is to handle nested tags once you understand the basic pattern of open/close lines and attribute extraction. I then turned to the emerging world of low‑code visual programming languages, arguing they lower the barrier for beginners by letting them connect boxes instead of typing boilerplate, while still supporting powerful concepts such as event emitters, queues, buffers, and automatic routing. By pre‑building UI builders, HTTP libraries, and server proxies into these visual tools, developers can focus on solving problems rather than repeating grunt work—making the whole process faster, more intuitive, and ultimately more impactful for both creators and users.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-12/poem-1733.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-12/">Chapter 12</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1733</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-12/poem-1733.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1733.avif" alt="Pardon My Turkey; Or, An XML Thanksgiving"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Pardon My Turkey; Or, An XML Thanksgiving</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1733.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1733</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Pardon My Turkey; Or, An XML Thanksgiving</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-11-29">11/29/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Preface</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a sad thing,
-it is a triumphant thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve been programming since I was a child,
-It is my hobby and profession.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve never been able to find respectful employment,
-un-education has robbed people of class.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So like a proper scientists, I have retreated,
-to work on my contributions in private.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To me fitness is more important than work,
-so I am well proportioned.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But when the gym is over,
-I just sit down to work on my program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Over multiple decades, I learned,
-that I can make Holidays my own…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By challenging myself,
-to writing little programming gems.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Rarely complete, or even related to my work,
-I program on holidays.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And today was just such a Holiday,
-I have enjoyed myself immensely.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve learned a precious thing,
-and will remember it for life.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a way my private little holidays never end,
-and always add.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An XML Thanksgiving</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Earlier this year, being a hecking curious cat,
-I asked Artificial Intelligence about writing an XML parser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">XML is a way to represent objects such as Cat, Image, or Link,
-in plain old text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can efficently say, the webpage object has a link object,
-and the link object has an attribute that holds a web address.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you can nest objects,
-as in webpage has a link.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you can give objects attributes,
-as in link has a web address.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will not bother you with the actual syntax,
-but to make nesting possible you open an object.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Put a bunch of objects inside it,
-and then you have to remember to close an object.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In other words two lines of text are required per object,
-an opening line and a closing line.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is scary, infinities, multiple tags,
-and don’t know what you are opening and what is closing where.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it seems like, it is a terrible idea,
-to even think about writing a program to tame this complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, shockingly, shockingly I say,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/config-parser/XmlParser.js#L1-L45">parsing XML is so easy, that the parse is only 50 lines of code</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And conceptually speaking,
-it has only 3 concerns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Detect the object, get attributes,
-and detect the objects nested inside it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This inner detection repeats the process,
-it is a recursive process.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What I have learned that XML is not only special,
-because it is a wonderful way to create object hierarchies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also because it takes just a few lines of code,
-to write the parser – due to the extreme self similarity of the syntax, and processor.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Aftwerword</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I work on the much despised next generation of programming languages,
-today they are called Visual Programming Languages or Low Code Inventions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am to ease the entry bar into complex programming,
-and my focus is on young people who refuse to pretend to learn in school.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Who want to learn for real,
-and want every piece of their effort to be clear to comprehend powerful and meaningful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The current generation of programming languages,
-serves as a good starting point, but is riddled with mnemonics and code management tricks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Models, Inversion, Patterns, all existing,
-because we have monkey brains, that are good at navigation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And not so good at writing programs,
-for computers only.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The human friendly front-end human interface in a visual programming language,
-is just about connecting boxes together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A process made even more friendly,
-with the use of AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The result, that actually runs on the server is a data network,
-in its basic implementation an Event Emitter netwok.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the visual program adds in special data routing instructions,
-allowing programs to self heal from failures, to smartly reroute.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And introduce hidden concepts of queues that make execution efficient,
-and buffers that ensure the program does not overwhelm the sytem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These concepts are not new, but they are hard to implement,
-and even harder to comprehend by multiple programmers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a visual programming world,
-they are easily tucked away behind a easy to grasp drop-down menu.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lastly to the hordes of Visual Programming critics,
-to understand the power of Visual Programming…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to give up grunt work,
-all the stuff that yo always repeat.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And focus on producing results,
-and getting stuff done.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are no User Interface Builders in Visual Programming,
-there are no HTTP libraries you use to make servers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All these things are already done, you have a reverse proxy box,
-that you can connect to several http server boxes that each expose a routes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which are just more lines, streams of requests,
-carrying a response object that you modify.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All the big ideas from ORM and Access/PageMaker like Uis,
-all the way up to Dashboards, backends and Websites, all ship with a VPL.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are boring, predictable, and each performs one large taks,
-and it performs it well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For those who need customization, there is a bounty back-end,
-where programmers can collaborate with customers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And network owners take a small percent,
-of the final payments.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please don’t just critique Visual Programming,
-build your own service, where you can teach and prosper.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t leave yourself behind,
-advance, challenge, innovate!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And above all let your contributions be meaningful, visible, whole,
-grand, and life changing – stand up, and stand out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t let decades pass you by at the office,
-make your beautiful art count for more.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-11-29T05:08:00.673Z">November 29, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>11:18<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-12/poem-1733.avif" aria-label="Cover for Pardon My Turkey; Or, An XML Thanksgiving, full size">
+            <img src="https://catpea.github.io/chapter-12/poem-1733.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Pardon My Turkey; Or, An XML Thanksgiving" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 11:18
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-12/poem-1733.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-12/poem-1733.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-12/poem-1733.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Preface</p>
+<p>This is not a sad thing,<br>it is a triumphant thing.</p>
+<p>I’ve been programming since I was a child,<br>It is my hobby and profession.</p>
+<p>I’ve never been able to find respectful employment,<br>un-education has robbed people of class.</p>
+<p>So like a proper scientists, I have retreated,<br>to work on my contributions in private.</p>
+<p>To me fitness is more important than work,<br>so I am well proportioned.</p>
+<p>But when the gym is over,<br>I just sit down to work on my program.</p>
+<p>Over multiple decades, I learned,<br>that I can make Holidays my own…</p>
+<p>By challenging myself,<br>to writing little programming gems.</p>
+<p>Rarely complete, or even related to my work,<br>I program on holidays.</p>
+<p>And today was just such a Holiday,<br>I have enjoyed myself immensely.</p>
+<p>I’ve learned a precious thing,<br>and will remember it for life.</p>
+<p>In a way my private little holidays never end,<br>and always add.</p>
+<hr>
+<p>An XML Thanksgiving</p>
+<p>Earlier this year, being a hecking curious cat,<br>I asked Artificial Intelligence about writing an XML parser.</p>
+<p>XML is a way to represent objects such as Cat, Image, or Link,<br>in plain old text.</p>
+<p>You can efficently say, the webpage object has a link object,<br>and the link object has an attribute that holds a web address.</p>
+<p>So you can nest objects,<br>as in webpage has a link.</p>
+<p>And you can give objects attributes,<br>as in link has a web address.</p>
+<p>I will not bother you with the actual syntax,<br>but to make nesting possible you open an object.</p>
+<p>Put a bunch of objects inside it,<br>and then you have to remember to close an object.</p>
+<p>In other words two lines of text are required per object,<br>an opening line and a closing line.</p>
+<hr>
+<p>This is scary, infinities, multiple tags,<br>and don’t know what you are opening and what is closing where.</p>
+<p>And it seems like, it is a terrible idea,<br>to even think about writing a program to tame this complexity.</p>
+<p>But, shockingly, shockingly I say,<br><a href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/config-parser/XmlParser.js#L1-L45">parsing XML is so easy, that the parse is only 50 lines of code</a>.</p>
+<p>And conceptually speaking,<br>it has only 3 concerns.</p>
+<p>Detect the object, get attributes,<br>and detect the objects nested inside it.</p>
+<p>This inner detection repeats the process,<br>it is a recursive process.</p>
+<hr>
+<p>What I have learned that XML is not only special,<br>because it is a wonderful way to create object hierarchies.</p>
+<p>But also because it takes just a few lines of code,<br>to write the parser – due to the extreme self similarity of the syntax, and processor.</p>
+<hr>
+<p>Aftwerword</p>
+<p>I work on the much despised next generation of programming languages,<br>today they are called Visual Programming Languages or Low Code Inventions.</p>
+<p>I am to ease the entry bar into complex programming,<br>and my focus is on young people who refuse to pretend to learn in school.</p>
+<p>Who want to learn for real,<br>and want every piece of their effort to be clear to comprehend powerful and meaningful.</p>
+<p>The current generation of programming languages,<br>serves as a good starting point, but is riddled with mnemonics and code management tricks.</p>
+<p>Models, Inversion, Patterns, all existing,<br>because we have monkey brains, that are good at navigation.</p>
+<p>And not so good at writing programs,<br>for computers only.</p>
+<hr>
+<p>The human friendly front-end human interface in a visual programming language,<br>is just about connecting boxes together.</p>
+<p>A process made even more friendly,<br>with the use of AI.</p>
+<p>The result, that actually runs on the server is a data network,<br>in its basic implementation an Event Emitter netwok.</p>
+<p>But the visual program adds in special data routing instructions,<br>allowing programs to self heal from failures, to smartly reroute.</p>
+<p>And introduce hidden concepts of queues that make execution efficient,<br>and buffers that ensure the program does not overwhelm the sytem.</p>
+<p>These concepts are not new, but they are hard to implement,<br>and even harder to comprehend by multiple programmers.</p>
+<p>In a visual programming world,<br>they are easily tucked away behind a easy to grasp drop-down menu.</p>
+<hr>
+<p>Lastly to the hordes of Visual Programming critics,<br>to understand the power of Visual Programming…</p>
+<p>You have to give up grunt work,<br>all the stuff that yo always repeat.</p>
+<p>And focus on producing results,<br>and getting stuff done.</p>
+<p>There are no User Interface Builders in Visual Programming,<br>there are no HTTP libraries you use to make servers.</p>
+<p>All these things are already done, you have a reverse proxy box,<br>that you can connect to several http server boxes that each expose a routes.</p>
+<p>Which are just more lines, streams of requests,<br>carrying a response object that you modify.</p>
+<p>All the big ideas from ORM and Access/PageMaker like Uis,<br>all the way up to Dashboards, backends and Websites, all ship with a VPL.</p>
+<p>They are boring, predictable, and each performs one large taks,<br>and it performs it well.</p>
+<p>For those who need customization, there is a bounty back-end,<br>where programmers can collaborate with customers.</p>
+<p>And network owners take a small percent,<br>of the final payments.</p>
+<hr>
+<p>Please don’t just critique Visual Programming,<br>build your own service, where you can teach and prosper.</p>
+<p>Don’t leave yourself behind,<br>advance, challenge, innovate!</p>
+<p>And above all let your contributions be meaningful, visible, whole,<br>grand, and life changing – stand up, and stand out.</p>
+<p>Don’t let decades pass you by at the office,<br>make your beautiful art count for more.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/config-parser/XmlParser.js#L1-L45">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>parsing XML is so easy, that the parse is only 50 lines of code</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/config-parser/XmlParser.js#L1-L45</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">xml</span><span class="chip">parser</span><span class="chip">programming</span><span class="chip">hobbyist</span><span class="chip">visual-programming</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/sweetpea/blob/50e12ccf2ddc53881607f7efb39ad7d97e5c139b/src/plug-ins/config-parser/XmlParser.js#L1-L45">
+              <span class="text-truncate">parsing XML is so easy, that the parse is only 50 lines of code</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/0b8b56c6-5ff9-4499-8c83-2869a44746ea/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Gym Machines Are Just Not That Good For You</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/02199693-2214-41f9-b55a-bede7d8772e8/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/02199693-2214-41f9-b55a-bede7d8772e8/">
+              <img src="https://catpea.github.io/chapter-12/poem-1734.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</span>
+                <span class="fg-3 fs-xs">November 29, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ea1b27e4-353f-471c-8e9c-dbf7968f5ca2/">
+              <img src="https://catpea.github.io/chapter-11/poem-1724.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">JavaScript Gods</span>
+                <span class="fg-3 fs-xs">November 19, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b9c1beab-6cb5-4396-95d8-dcb407f00b3a/">
+              <img src="https://catpea.github.io/chapter-12/poem-1741.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Programming Story</span>
+                <span class="fg-3 fs-xs">December 6, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/dafb9170-4014-456a-8049-6e46c077acbd/">
+              <img src="https://catpea.github.io/chapter-11/poem-1714.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Visual Programming === Future Of Programming</span>
+                <span class="fg-3 fs-xs">November 10, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

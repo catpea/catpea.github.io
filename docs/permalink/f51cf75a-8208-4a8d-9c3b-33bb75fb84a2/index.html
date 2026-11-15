@@ -1,145 +1,440 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finishing Your Software, For Young Ladies</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Finishing Your Software, For Young Ladies · Cat Pea</title>
+  <meta name="description" content="Discover the triumvirate of Desktop, Market, and Workbench—three interconnected concepts that solve the complete puzzle of shipping production-ready applications. This post reveals how to build a finished, scalable platform from Linux foundations upward, with every user owning their own secure account and data. Learn why an internal abstract machine must precede your UI, how 3D workbenches empower AI to build better applications, and why this trinity eliminates the confusion of deployment, security, and data ownership. If you&#39;ve ever felt stuck between &#39;working app&#39; and &#39;complete product,&#39; this architecture answers every lingering question.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/f51cf75a-8208-4a8d-9c3b-33bb75fb84a2/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Finishing Your Software, For Young Ladies · Cat Pea">
+  <meta property="og:description" content="Discover the triumvirate of Desktop, Market, and Workbench—three interconnected concepts that solve the complete puzzle of shipping production-ready applications. This post reveals how to build a finished, scalable platform from Linux foundations upward, with every user owning their own secure account and data. Learn why an internal abstract machine must precede your UI, how 3D workbenches empower AI to build better applications, and why this trinity eliminates the confusion of deployment, security, and data ownership. If you&#39;ve ever felt stuck between &#39;working app&#39; and &#39;complete product,&#39; this architecture answers every lingering question.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-17/poem-2432.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-17/">Chapter 17</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2432</li>
+        </ol>
+      </nav>
 
-          <a href="files/zoom.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-17/poem-2432.avif" alt="Finishing Your Software, For Young Ladies"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Finishing Your Software, For Young Ladies</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-17/poem-2432.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 17</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2432</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Finishing Your Software, For Young Ladies</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-10-31">10/31/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">This is easy, you just need three ideas, that you are already familiar with,
-Desktop, Market, and Workbench.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To truly finish your application, and make it make sense to multiple users,
-on a server accessible from the internet, potentially selling it and memberships even.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need to use Linux user accounts,
-similar to how you have multiple accounts on your devices.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And upon subscription and login, your user needs to be shown a Web Desktop,
-with the first icon being Marker, and app store where your apps can be installed from.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way your programming AI has a clear mission, and none of your users,
-will be confused, they already know how login, desktop and app store works.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can of course pre-install applications,
-that make sense for whatever business you are running.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then there is the workbench, developing applications for your desktop,
-has to happen within that desktop, convenience, clarity, simplicity.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before we begin let me warn you, all your computer programs,
-need an internal model, an abstract machine that comes first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When that machine or model changes, your UI updates,
-creating applications without an internal model may confuse AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Everybody thinks they know what that model is, but AI needs to operate it,
-and some of your applications may need to work in VR using WebXR.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I believe the model, the machine, the application heart,
-is described by you and shaped by AI in a 3D workbench.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Discovering internal applications models that work for you,
-will be a pleasant journey, because the model must be simple to understand.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Be aware of the model,
-with that said let us continue.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to mange the model, and have your AI program everything as you monitor,
-it needs to be a 3D application, because you are making a lot of stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">UI components are listening to the model,
-buttons send actions that change the model.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may have a tree of objects like world, country, state, city,
-or maybe tiny database tables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where for example one user id exists twice in email table,
-meaning that they have two emails in their private profiles, or many something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or spreadsheets where a formula declares dependency on cells,
-and monitors all cells for change to update its output and emit change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Maybe a tiny virtual file system, easy to inspect with a file manager,
-and it makes managing files of a project painless.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To see all the connections you need some kind of a futuristic user interface,
-plus, you need to start thinking about developing 3D applicaions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI is great at creating 3D software, you may ask it to create a futuristic UI,
-and then have good success with it reproducing that image with real 3D graphics.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally, when you click Build or Publish,
-the application you have been working on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Simply appears in the Market or App Store.
-that all of your users already have access to.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see what I am trying to show you, Desktop, Market, Workbench,
-all combine to create a system that lets you finish.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without Desktop, Market, Workbench, even if you have a complete app,
-there are questions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where do you put it, how do you privately save files for multiple users,
-how do you make sure security is strong.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And even something as simple as: can the user download all their files?
-Maybe they are closing their account, maybe it is required by law where they live.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All of these questions,
-are very strongly answered.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You put it on a linux server you rent for less than 20 dollars,
-sometimes a lot less, you just ask your AI where you can get at linux.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You privately and securley,
-save files in normal Linux user accounts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when the user wants their files,
-you just zip up their home directory and let them download it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the age of AI, your AI will take care of everything here,
-it just needs to know what you intended.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Copy and paste this text,
-and let it take it from there.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-10-31T04:09:08.072Z">October 31, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:57<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="/permalink/f51cf75a-8208-4a8d-9c3b-33bb75fb84a2/files/zoom.avif" aria-label="Cover for Finishing Your Software, For Young Ladies, full size">
+            <img src="https://catpea.github.io/chapter-17/poem-2432.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Finishing Your Software, For Young Ladies" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:57
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-17/poem-2432.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-17/poem-2432.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-17/poem-2432.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>This is easy, you just need three ideas, that you are already familiar with,<br>Desktop, Market, and Workbench.</p>
+<p>To truly finish your application, and make it make sense to multiple users,<br>on a server accessible from the internet, potentially selling it and memberships even.</p>
+<p>You need to use Linux user accounts,<br>similar to how you have multiple accounts on your devices.</p>
+<p>And upon subscription and login, your user needs to be shown a Web Desktop,<br>with the first icon being Marker, and app store where your apps can be installed from.</p>
+<p>This way your programming AI has a clear mission, and none of your users,<br>will be confused, they already know how login, desktop and app store works.</p>
+<p>You can of course pre-install applications,<br>that make sense for whatever business you are running.</p>
+<hr>
+<p>And then there is the workbench, developing applications for your desktop,<br>has to happen within that desktop, convenience, clarity, simplicity.</p>
+<hr>
+<p>Before we begin let me warn you, all your computer programs,<br>need an internal model, an abstract machine that comes first.</p>
+<p>When that machine or model changes, your UI updates,<br>creating applications without an internal model may confuse AI.</p>
+<p>Everybody thinks they know what that model is, but AI needs to operate it,<br>and some of your applications may need to work in VR using WebXR.</p>
+<p>And I believe the model, the machine, the application heart,<br>is described by you and shaped by AI in a 3D workbench.</p>
+<p>Discovering internal applications models that work for you,<br>will be a pleasant journey, because the model must be simple to understand.</p>
+<p>Be aware of the model,<br>with that said let us continue.</p>
+<hr>
+<p>But to mange the model, and have your AI program everything as you monitor,<br>it needs to be a 3D application, because you are making a lot of stuff.</p>
+<p>UI components are listening to the model,<br>buttons send actions that change the model.</p>
+<p>You may have a tree of objects like world, country, state, city,<br>or maybe tiny database tables.</p>
+<p>Where for example one user id exists twice in email table,<br>meaning that they have two emails in their private profiles, or many something.</p>
+<p>Or spreadsheets where a formula declares dependency on cells,<br>and monitors all cells for change to update its output and emit change.</p>
+<p>Maybe a tiny virtual file system, easy to inspect with a file manager,<br>and it makes managing files of a project painless.</p>
+<p>To see all the connections you need some kind of a futuristic user interface,<br>plus, you need to start thinking about developing 3D applicaions.</p>
+<p>AI is great at creating 3D software, you may ask it to create a futuristic UI,<br>and then have good success with it reproducing that image with real 3D graphics.</p>
+<hr>
+<p>And finally, when you click Build or Publish,<br>the application you have been working on.</p>
+<p>Simply appears in the Market or App Store.<br>that all of your users already have access to.</p>
+<hr>
+<p>You see what I am trying to show you, Desktop, Market, Workbench,<br>all combine to create a system that lets you finish.</p>
+<p>Without Desktop, Market, Workbench, even if you have a complete app,<br>there are questions.</p>
+<p>Where do you put it, how do you privately save files for multiple users,<br>how do you make sure security is strong.</p>
+<p>And even something as simple as: can the user download all their files?<br>Maybe they are closing their account, maybe it is required by law where they live.</p>
+<p>All of these questions,<br>are very strongly answered.</p>
+<p>You put it on a linux server you rent for less than 20 dollars,<br>sometimes a lot less, you just ask your AI where you can get at linux.</p>
+<p>You privately and securley,<br>save files in normal Linux user accounts.</p>
+<p>And when the user wants their files,<br>you just zip up their home directory and let them download it.</p>
+<hr>
+<p>In the age of AI, your AI will take care of everything here,<br>it just needs to know what you intended.</p>
+<p>Copy and paste this text,<br>and let it take it from there.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">Desktop Computing Architecture</span><span class="chip">AI-Assisted Application Development</span><span class="chip">3D Workbench Design</span><span class="chip">Internal Data Models</span><span class="chip">Web App Marketplace</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/a5a876b4-0437-4766-ba8a-60bd4760cf67/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Don’t Lift Heavy</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/e885f5dc-7a3a-4f4c-a078-43ae28bdbdc6/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Understanding Your Software, For Young Ladies</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e885f5dc-7a3a-4f4c-a078-43ae28bdbdc6/">
+              <img src="https://catpea.github.io/chapter-17/poem-2433.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Understanding Your Software, For Young Ladies</span>
+                <span class="fg-3 fs-xs">November 1, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/eff93d51-4c7d-4d16-8192-cd041f0b99cb/">
+              <img src="https://catpea.github.io/chapter-17/poem-2430.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Modern Metaprogramming For Young Ladies</span>
+                <span class="fg-3 fs-xs">October 28, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/54161f5d-50c9-40d3-abdd-d9238e365f42/">
+              <img src="https://catpea.github.io/chapter-17/poem-2440.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Web Desktops For Young Ladies</span>
+                <span class="fg-3 fs-xs">November 8, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/08ea8a88-cf06-4430-a48f-c965a59b9c98/">
+              <img src="https://catpea.github.io/chapter-16/poem-2429.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Programming In The Era Of Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">October 28, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

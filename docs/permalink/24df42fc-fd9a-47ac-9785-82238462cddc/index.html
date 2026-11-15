@@ -1,227 +1,533 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What Is In A Programming Language Anyway?</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>What Is In A Programming Language Anyway? · Cat Pea</title>
+  <meta name="description" content="The post explains that programming boils down to organizing data and behavior into a coherent structure using the core building blocks of variables, functions, if‑statements, loops, and objects—each grouping the others in a natural hierarchy. Variables hold values (like “serverAddress = &#39;example.com&#39;”), functions perform actions or return new variables, if‑statements branch logic, loops iterate over collections, and objects bundle related variables and methods together (e.g., `player.go(&#39;north&#39;)` or `room.connect(&#39;north&#39;, createRoom(&#39;Bathroom&#39;))`). The author illustrates this with a MUD example where rooms, players, and inventory items are all objects that expose methods such as `.go()` and `.drop()`. He further notes that HTML tags can be seen as dehydrated object hierarchies, and templating engines like Svelte hydrate them back into live objects. In short, the article shows how to think of a program as a nested set of objects whose properties (variables) and methods (functions) are orchestrated by control flow (if/loop), making JavaScript an ideal language for building such structures.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/24df42fc-fd9a-47ac-9785-82238462cddc/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Is In A Programming Language Anyway? · Cat Pea">
+  <meta property="og:description" content="The post explains that programming boils down to organizing data and behavior into a coherent structure using the core building blocks of variables, functions, if‑statements, loops, and objects—each grouping the others in a natural hierarchy. Variables hold values (like “serverAddress = &#39;example.com&#39;”), functions perform actions or return new variables, if‑statements branch logic, loops iterate over collections, and objects bundle related variables and methods together (e.g., `player.go(&#39;north&#39;)` or `room.connect(&#39;north&#39;, createRoom(&#39;Bathroom&#39;))`). The author illustrates this with a MUD example where rooms, players, and inventory items are all objects that expose methods such as `.go()` and `.drop()`. He further notes that HTML tags can be seen as dehydrated object hierarchies, and templating engines like Svelte hydrate them back into live objects. In short, the article shows how to think of a program as a nested set of objects whose properties (variables) and methods (functions) are orchestrated by control flow (if/loop), making JavaScript an ideal language for building such structures.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0860.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0860</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0860.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0860.avif" alt="What Is In A Programming Language Anyway?"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">What Is In A Programming Language Anyway?</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0860.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0860</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">What Is In A Programming Language Anyway?</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-07-08">7/8/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=J0y6XXdm4KI">Variables</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=bOkuPo5VbTg">functions</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=IsG4Xd6LlsM">if statements</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=6Hb0qZ3PVWI">loops</a>,<br>and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=X0ipw1k7ygU">objects</a> to group variables and functions together into a structure that makes sense to you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, my if(app.user.loggedIn()){app.navigation.signOutButton.visible = true}</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So computer programming,<br>is super simple.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you stick to one programming language,<br>like latest modern JavaScript it is even simpler.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming is just about variables that you define,<br>which hold things that yo use, like serverAddress = “example.com”;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If statements that you use on your variables,<br>like if user.loggedIn then redirect(‘/home’);</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">functions that you call,<br>which most often return variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You usually create a lot of function for yourself,<br>and they represent the shape of the program you are writing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are building a virtual world or a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/MUD">MUD</a>,<br>then you will have a function that says player.go(‘north’);</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or better yet, room.connect(‘north’, universe.createRoom(‘Bathroom’));</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Many of the tiny functions come from your operating system,<br>so like open(‘letter.txt’) is something that the programming language creators let you have.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a wrapper function, for the operating system’s,<br>open file call.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The programming language it self will bring in a lot of functions,<br>one of the coolest and most forbidden functions in JavaScript is eval().</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is often said that it is evil,<br>so I am not going to tell you about it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Some variables are actually groups of variables,<br>groups are a big deal in programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can use a group variable to store,<br>a bunch of urls that you then download and convert to plain text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way you can simplify your news,<br>and just get the plain text version.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If statements have a sister, that comes in useful here,<br>and that is the loop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you can say, I will loop over my list of urls,<br>and call some functions like downloadUrl(), and then convertToText().</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Functions can also be grouped,<br>and that is where you hear this “dot” a lot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It does not make sense to put functions in a sequence,<br>like a list of news adresses for download...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you throw them in a bag,<br>like a generic group.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The word bag is something I just use here,<br>to show you that it is just this generic thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this would just be another variable,<br>in your program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The correct name for bag or generic group,<br>is object.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Things get pretty fuzzy here,<br>because why stop at putting functions in a bag...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Why not say:<br>user.name = “Alice”;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The dot actually comes from the world of<br>Object Oriented Programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In JavaScript you can have a ban like object,<br>where you don’t have to define it first or create a new instance of.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that is just the short hand notation,<br>for the underlying object.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you would want to use it so that you can have two variables names user1 and user2,<br>and user1 can be alice, and user2 can be bob - without overriding anything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A more realistic example is where,<br>you have a list of users like in a spreadsheet, which is what a database is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a spreadsheet your data automatically updates,<br>in a database, you create lots and lots of sheets and then join some of them when needed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here rather than thinking sheets,<br>you think in rows of data, where each row represents a user.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Often people go extra step,<br>and setup a useful user object for each row.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can have a databaseRows.find(‘username’, ‘alice’);<br>which then returns a user object that would have some useful functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So databaseRows, for more often database.query(),<br>fills the user object out for you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you were programming a MUD, or a virtual world,<br>you would define an object named room.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then dream up what your room objects should be about,<br>do you want your rooms to have a .go() function which moves the player through some door.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or do you want your user to have a user.go() function,<br>what sounds better for you?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What if you want to move a chair,<br>do you want to write a go function for a chair.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or move function for the room,<br>or an inventory bag or object, that you attach to the user.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where they can put their chair in their inventory,<br>then say player.go(‘living room’), and player.inventory.drop(‘chair’)?</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Building out Objects with functions,<br>can be like building a universe.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So objects and lists, are like a higher level grouping mechanism,<br>for variables and functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where functions can call other functions,<br>often based on if statements testing some variable,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you do have a list then you use a loop,<br>to apply some function to each of the items in the list.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And often in that function you have lots of if statements,<br>and call other functions, maybe do some more looping.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is this funny thing where people call HTML a programming language,<br>technically it isn’t, but those people don’t usually understand why.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So HTML has these nested tags, and each tag can have attributes,<br>and in most cases you close the tag.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So all this actually represents a hierarchy of objects,<br>all the tags have corresponding object, and tag attributes are applied to those objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You could create a tag named user,<br>with attributes name and email.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the reason why HTML is not a programming language,<br>is that it is used to create a deeply nested hierarchy of variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just like the variable creation part of a language,<br>converting tags to objects my be sometimes called hydration.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because tags in their text form,<br>are like this dehydrated object hierarchy.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Inventions like <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://svelte.dev/">svelte</a> mix logic and loops with HTML,<br>so svelte’s markup is almost almost a language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=4HuAnM6b2d8">templating language</a>, because templating HTML,<br>is not really thought of as programming, templating often does not understand tags and sees text instead.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are going to learn a language learn JavaScript,<br>because it helps you program windowed applications with electron, on the server with node.js, and in the browser alongside HTML and SVG.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">HTML allows you to include a code editor in your program,<br>and SVG and canvas allow you to manipulate graphics, including <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://threejs.org/">3D graphics</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To pull in all those technologies together in C, Java, or Python, or PHP,<br>may not only represent a lot of work, but outdated or old libraries.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to whether or not you should consider learning programming,<br>knowing programming is like having a smartphone, it is the new standard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All the young people will eventually know it,<br>but the previous generations still can be <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=lFdnQlA4ucM">Hip Hop!</a>, without the damn thing.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-07-08T19:43:19.171Z">July 8, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>16:29<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0860.avif" aria-label="Cover for What Is In A Programming Language Anyway?, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0860.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for What Is In A Programming Language Anyway?" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 16:29
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0860.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0860.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0860.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p><a href="https://www.youtube.com/watch?v=J0y6XXdm4KI">Variables</a>, <a href="https://www.youtube.com/watch?v=bOkuPo5VbTg">functions</a>, <a href="https://www.youtube.com/watch?v=IsG4Xd6LlsM">if statements</a>, <a href="https://www.youtube.com/watch?v=6Hb0qZ3PVWI">loops</a>,<br>and <a href="https://www.youtube.com/watch?v=X0ipw1k7ygU">objects</a> to group variables and functions together into a structure that makes sense to you.</p>
+<p>For example, my if(app.user.loggedIn()){app.navigation.signOutButton.visible = true}</p>
+<hr>
+<p>So computer programming,<br>is super simple.</p>
+<p>If you stick to one programming language,<br>like latest modern JavaScript it is even simpler.</p>
+<p>Programming is just about variables that you define,<br>which hold things that yo use, like serverAddress = “example.com”;</p>
+<p>If statements that you use on your variables,<br>like if user.loggedIn then redirect(‘/home’);</p>
+<p>functions that you call,<br>which most often return variables.</p>
+<p>You usually create a lot of function for yourself,<br>and they represent the shape of the program you are writing.</p>
+<hr>
+<p>If you are building a virtual world or a <a href="https://en.wikipedia.org/wiki/MUD">MUD</a>,<br>then you will have a function that says player.go(‘north’);</p>
+<p>Or better yet, room.connect(‘north’, universe.createRoom(‘Bathroom’));</p>
+<p>Many of the tiny functions come from your operating system,<br>so like open(‘letter.txt’) is something that the programming language creators let you have.</p>
+<p>It is a wrapper function, for the operating system’s,<br>open file call.</p>
+<p>The programming language it self will bring in a lot of functions,<br>one of the coolest and most forbidden functions in JavaScript is eval().</p>
+<p>It is often said that it is evil,<br>so I am not going to tell you about it.</p>
+<hr>
+<p>Some variables are actually groups of variables,<br>groups are a big deal in programming.</p>
+<p>You can use a group variable to store,<br>a bunch of urls that you then download and convert to plain text.</p>
+<p>This way you can simplify your news,<br>and just get the plain text version.</p>
+<p>If statements have a sister, that comes in useful here,<br>and that is the loop.</p>
+<p>Here you can say, I will loop over my list of urls,<br>and call some functions like downloadUrl(), and then convertToText().</p>
+<hr>
+<p>Functions can also be grouped,<br>and that is where you hear this “dot” a lot.</p>
+<p>It does not make sense to put functions in a sequence,<br>like a list of news adresses for download...</p>
+<p>So you throw them in a bag,<br>like a generic group.</p>
+<p>The word bag is something I just use here,<br>to show you that it is just this generic thing.</p>
+<p>And this would just be another variable,<br>in your program.</p>
+<p>The correct name for bag or generic group,<br>is object.</p>
+<hr>
+<p>Things get pretty fuzzy here,<br>because why stop at putting functions in a bag...</p>
+<p>Why not say:<br>user.name = “Alice”;</p>
+<p>The dot actually comes from the world of<br>Object Oriented Programming.</p>
+<p>In JavaScript you can have a ban like object,<br>where you don’t have to define it first or create a new instance of.</p>
+<p>But that is just the short hand notation,<br>for the underlying object.</p>
+<hr>
+<p>And you would want to use it so that you can have two variables names user1 and user2,<br>and user1 can be alice, and user2 can be bob - without overriding anything.</p>
+<p>A more realistic example is where,<br>you have a list of users like in a spreadsheet, which is what a database is.</p>
+<p>In a spreadsheet your data automatically updates,<br>in a database, you create lots and lots of sheets and then join some of them when needed.</p>
+<p>Here rather than thinking sheets,<br>you think in rows of data, where each row represents a user.</p>
+<p>Often people go extra step,<br>and setup a useful user object for each row.</p>
+<p>You can have a databaseRows.find(‘username’, ‘alice’);<br>which then returns a user object that would have some useful functions.</p>
+<p>So databaseRows, for more often database.query(),<br>fills the user object out for you.</p>
+<hr>
+<p>If you were programming a MUD, or a virtual world,<br>you would define an object named room.</p>
+<p>And then dream up what your room objects should be about,<br>do you want your rooms to have a .go() function which moves the player through some door.</p>
+<p>Or do you want your user to have a user.go() function,<br>what sounds better for you?</p>
+<p>What if you want to move a chair,<br>do you want to write a go function for a chair.</p>
+<p>Or move function for the room,<br>or an inventory bag or object, that you attach to the user.</p>
+<p>Where they can put their chair in their inventory,<br>then say player.go(‘living room’), and player.inventory.drop(‘chair’)?</p>
+<hr>
+<p>Building out Objects with functions,<br>can be like building a universe.</p>
+<hr>
+<p>So objects and lists, are like a higher level grouping mechanism,<br>for variables and functions.</p>
+<p>Where functions can call other functions,<br>often based on if statements testing some variable,</p>
+<p>And if you do have a list then you use a loop,<br>to apply some function to each of the items in the list.</p>
+<p>And often in that function you have lots of if statements,<br>and call other functions, maybe do some more looping.</p>
+<hr>
+<p>There is this funny thing where people call HTML a programming language,<br>technically it isn’t, but those people don’t usually understand why.</p>
+<p>So HTML has these nested tags, and each tag can have attributes,<br>and in most cases you close the tag.</p>
+<p>So all this actually represents a hierarchy of objects,<br>all the tags have corresponding object, and tag attributes are applied to those objects.</p>
+<p>You could create a tag named user,<br>with attributes name and email.</p>
+<p>But the reason why HTML is not a programming language,<br>is that it is used to create a deeply nested hierarchy of variables.</p>
+<p>It is just like the variable creation part of a language,<br>converting tags to objects my be sometimes called hydration.</p>
+<p>Because tags in their text form,<br>are like this dehydrated object hierarchy.</p>
+<hr>
+<p>Inventions like <a href="https://svelte.dev/">svelte</a> mix logic and loops with HTML,<br>so svelte’s markup is almost almost a language.</p>
+<p>It is a <a href="https://www.youtube.com/watch?v=4HuAnM6b2d8">templating language</a>, because templating HTML,<br>is not really thought of as programming, templating often does not understand tags and sees text instead.</p>
+<hr>
+<p>If you are going to learn a language learn JavaScript,<br>because it helps you program windowed applications with electron, on the server with node.js, and in the browser alongside HTML and SVG.</p>
+<p>HTML allows you to include a code editor in your program,<br>and SVG and canvas allow you to manipulate graphics, including <a href="https://threejs.org/">3D graphics</a>.</p>
+<p>To pull in all those technologies together in C, Java, or Python, or PHP,<br>may not only represent a lot of work, but outdated or old libraries.</p>
+<hr>
+<p>As to whether or not you should consider learning programming,<br>knowing programming is like having a smartphone, it is the new standard.</p>
+<p>All the young people will eventually know it,<br>but the previous generations still can be <a href="https://www.youtube.com/watch?v=lFdnQlA4ucM">Hip Hop!</a>, without the damn thing.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=J0y6XXdm4KI">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Variables</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=J0y6XXdm4KI</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=bOkuPo5VbTg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>functions</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=bOkuPo5VbTg</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=IsG4Xd6LlsM">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>if statements</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=IsG4Xd6LlsM</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=6Hb0qZ3PVWI">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>loops</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=6Hb0qZ3PVWI</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=X0ipw1k7ygU">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>objects</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=X0ipw1k7ygU</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/MUD">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>MUD</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/MUD</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://svelte.dev/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>svelte</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://svelte.dev/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=4HuAnM6b2d8">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>templating language</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=4HuAnM6b2d8</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://threejs.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>3D graphics</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://threejs.org/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=lFdnQlA4ucM">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Hip Hop!</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=lFdnQlA4ucM</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">variables</span><span class="chip">functions</span><span class="chip">if statements</span><span class="chip">loops</span><span class="chip">objects</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/AS80CJTzM5Q"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/AS80CJTzM5Q</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=J0y6XXdm4KI">
+              <span class="text-truncate">Variables</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=bOkuPo5VbTg">
+              <span class="text-truncate">functions</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=IsG4Xd6LlsM">
+              <span class="text-truncate">if statements</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=6Hb0qZ3PVWI">
+              <span class="text-truncate">loops</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=X0ipw1k7ygU">
+              <span class="text-truncate">objects</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/MUD">
+              <span class="text-truncate">MUD</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://svelte.dev/">
+              <span class="text-truncate">svelte</span>
+              <span class="fg-3 fs-xs flex-shrink-0">svelte.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=4HuAnM6b2d8">
+              <span class="text-truncate">templating language</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://threejs.org/">
+              <span class="text-truncate">3D graphics</span>
+              <span class="fg-3 fs-xs flex-shrink-0">threejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=lFdnQlA4ucM">
+              <span class="text-truncate">Hip Hop!</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/ad1e59fd-bfb2-4385-b6ab-7423dc650545/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The High School Cookbook</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/3d219033-919c-49f8-8ab8-828d6e6975f8/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">I Went To The Woods; Or, Don’t Let Broken Schools Frighten You</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bd0bc3fc-d3ac-41df-a52f-f08c6a3f0c1b/">
+              <img src="https://catpea.github.io/chapter-04/poem-0862.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Into The Fray; Or, Code Generation And The Search For Motivation To Learn Programming</span>
+                <span class="fg-3 fs-xs">July 10, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2ee52d32-f660-4da1-ae28-24a6941f8516/">
+              <img src="https://catpea.github.io/chapter-04/poem-0854.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The User As A Programmer</span>
+                <span class="fg-3 fs-xs">July 2, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fdc88791-19b7-4375-8c2c-4aeaa7ecb4c3/">
+              <img src="https://catpea.github.io/chapter-04/poem-0866.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Fanciful Event Emitter: A Super Strange Programming Poem</span>
+                <span class="fg-3 fs-xs">July 14, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ff6b7d99-f0a5-41f5-888e-e9b60af9c1ea/">
+              <img src="https://catpea.github.io/chapter-04/poem-0852.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Fun</span>
+                <span class="fg-3 fs-xs">June 30, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,171 +1,451 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lol! How You Just Became A Powerful Programmer</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Lol! How You Just Became A Powerful Programmer · Cat Pea</title>
+  <meta name="description" content="The post introduces an AI‑powered visual programming framework that lets developers build programs incrementally by having the AI generate small code snippets and orchestrate them with a supervisor‑worker architecture inspired by the actor model. In this system, each “box” represents a program component whose inputs and outputs are connected by pipes, while supervisors manage queues of tasks, handle retries, scale workers across CPU cores or cloud resources, and automatically rebuild parts when data sources change. The visual language provides a GUI with drag‑and‑drop boxes styled after classic dashboards, enabling non‑experts to compose pipelines for tasks such as web scraping, data transformation, or concurrent downloads—all while the AI generates code, monitors execution, and refines the workflow without manual documentation.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/bd32eae2-4b0c-4b5d-858f-810d299244e3/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lol! How You Just Became A Powerful Programmer · Cat Pea">
+  <meta property="og:description" content="The post introduces an AI‑powered visual programming framework that lets developers build programs incrementally by having the AI generate small code snippets and orchestrate them with a supervisor‑worker architecture inspired by the actor model. In this system, each “box” represents a program component whose inputs and outputs are connected by pipes, while supervisors manage queues of tasks, handle retries, scale workers across CPU cores or cloud resources, and automatically rebuild parts when data sources change. The visual language provides a GUI with drag‑and‑drop boxes styled after classic dashboards, enabling non‑experts to compose pipelines for tasks such as web scraping, data transformation, or concurrent downloads—all while the AI generates code, monitors execution, and refines the workflow without manual documentation.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1678.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1678</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1678.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1678.avif" alt="Lol! How You Just Became A Powerful Programmer"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Lol! How You Just Became A Powerful Programmer</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1678.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1678</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Lol! How You Just Became A Powerful Programmer</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-10-05">10/4/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">“If you can&#39;t explain it simply, you don&#39;t understand it well enough.”
---- Einstein</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We all know by now that AI can write programs,
-and it works best on small well defined parts of a program, or little bits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So what I bring you here, is a framework around just that,
-that helps you create programs a little bit at a time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The novice does not need as much help as it would seem,
-for one the AI can explain how a program can be structured.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as we tell it what architecture to use,
-and the simplest one is a pipeline or a tree for envelopes of data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Old banks and office building used to have that,
-you jam an envelope into a shuttle, and send it to a specific department.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That department will do something with it,
-and either pass it on, of sends something else in its place.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So here a department or a person in that department,
-transforms the data in the envelope or shuttle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We replace that person,
-with a program that is written by AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The network of pipes, is just a visual programming language,
-boxes that represent programs, box ports that represent input and outpus.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And pipes, that connect output ports from one box,
-to input port or another.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This would work, already, but it would not be impressive,
-programmers that do coding by hand, would out-code you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we can’t have that,
-because just, who do they think they are.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are going to upgrade our box, to the concept of a supervisor,
-that uses a worker, in supremely clever ways.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are downloading a file, your supervisor will manage failed downloads,
-but if you are downloading many files…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The supervisor will manage multiple simultaneous downloads,
-and another supervisor that ensures that file is downloaded.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nothing too special, but there are many kinds of supervisors,
-one of them is a self provisioning remote program runner.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meaning you can automatically scale to handle extreme workloads,
-but temporarily renting more computers to execute our little bits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Some supervisors will be meant for executing code on CPU cores,
-others as standard web browser workers, as UNIX processes, etc.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I wouldn&#39;t call this self healing program architecture yet,
-and you might have guessed, yes, Artificial Intelligence Supervisors.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Adaptive, intelligent, program execution,
-and very high self healing potential.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, out standard, average coder,
-is a little worried, as there is a lot of moving parts here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would be hard to make all this go,
-without a Visual Programming Language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we got something here, you are becoming powerful,
-beautiful and a little bit scary.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The beauty comes from design standards of the Visual Programming Language,
-one of the visual themes will be inspired by the now retired Apple Dashboard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Except Generative Art AI will make the widgets even more beautiful,
-The visual programming language will have a Ninja mode as well, so it is OK.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So AI tells you how to structure a program, write your little bits or functions,
-supervises their execution within safe constraints, and generates a beautiful GUI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is important to know that the concept of a supervisor,
-comes from the Actor Model of programming, a well researched beast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And one of its strengths is the Queue,
-meaning all the shuttles or envelopes sent to the supervisor, go on the queue.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is where the worker(s) get their jobs from,
-they scan the queue, sometimes local, sometimes a remote database for jobs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This in turn translates to a wonderful development experience,
-as you don’t need to have the full program, to do the first part!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, you are tired of crappy User Interfaces,
-and decided to scrape your favorite websites for news and smart comments.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will run everything through AI, to to expand, maybe research,
-and pinpoint important comments, and perhaps summarize.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But all you need to get started, is to create a Smart Supervisor,
-and tell it to scrape a web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you add a test to see if the article content is extracted in full,
-the AI will keep the queue of raw data to be parsed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And will probably do the scrape on the first try,
-but you will still run the test, and AI will retry, and refine, if it fails.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With one little shiny box, the AI extracted and formatted the data for you,
-and will keep it in the queue while you are building your program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until you save that data,
-to where it needs to go.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until then, you can relax, reason about the data,
-think about your next move now that you completed your first, that is rare.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even more importantly than that, the AI, will have no trouble,
-noticing a parsing failure when your website changes…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it will automatically know,
-to rebuild parts of the scraper.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, our manual programmer, still unpressed,
-feels a heat sensation in the back of their head, it is a hard worry bubbling up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here, we will finish them off, with one final trick,
-now a psychological move, that they are incapable of.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because, now you get up from your desk, without documenting anything,
-and without even a singe thought about the program for another two weeks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just get up,
-and leave to do more interesting things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when you return, you will instantly visually understand the program,
-and the AI will be there to assist you, with all your needs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The supervisor architecture ensuring that you can efficiently scrape 5 websites,
-or 10,000,000 if you can afford the self provisioning network bills.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now our programmer, witnesses how very human the design is,
-and defeated, it leaves, and I for one hope they get some rest.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-10-05T02:21:19.848Z">October 4, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>13:00<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1678.avif" aria-label="Cover for Lol! How You Just Became A Powerful Programmer, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1678.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Lol! How You Just Became A Powerful Programmer" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 13:00
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1678.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1678.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1678.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>“If you can&#39;t explain it simply, you don&#39;t understand it well enough.”<br>--- Einstein</p>
+<p>We all know by now that AI can write programs,<br>and it works best on small well defined parts of a program, or little bits.</p>
+<p>So what I bring you here, is a framework around just that,<br>that helps you create programs a little bit at a time.</p>
+<hr>
+<p>The novice does not need as much help as it would seem,<br>for one the AI can explain how a program can be structured.</p>
+<p>So as long as we tell it what architecture to use,<br>and the simplest one is a pipeline or a tree for envelopes of data.</p>
+<p>Old banks and office building used to have that,<br>you jam an envelope into a shuttle, and send it to a specific department.</p>
+<p>That department will do something with it,<br>and either pass it on, of sends something else in its place.</p>
+<p>So here a department or a person in that department,<br>transforms the data in the envelope or shuttle.</p>
+<p>We replace that person,<br>with a program that is written by AI.</p>
+<p>The network of pipes, is just a visual programming language,<br>boxes that represent programs, box ports that represent input and outpus.</p>
+<p>And pipes, that connect output ports from one box,<br>to input port or another.</p>
+<hr>
+<p>This would work, already, but it would not be impressive,<br>programmers that do coding by hand, would out-code you.</p>
+<p>And we can’t have that,<br>because just, who do they think they are.</p>
+<p>We are going to upgrade our box, to the concept of a supervisor,<br>that uses a worker, in supremely clever ways.</p>
+<p>If you are downloading a file, your supervisor will manage failed downloads,<br>but if you are downloading many files…</p>
+<p>The supervisor will manage multiple simultaneous downloads,<br>and another supervisor that ensures that file is downloaded.</p>
+<p>Nothing too special, but there are many kinds of supervisors,<br>one of them is a self provisioning remote program runner.</p>
+<p>Meaning you can automatically scale to handle extreme workloads,<br>but temporarily renting more computers to execute our little bits.</p>
+<p>Some supervisors will be meant for executing code on CPU cores,<br>others as standard web browser workers, as UNIX processes, etc.</p>
+<p>But I wouldn&#39;t call this self healing program architecture yet,<br>and you might have guessed, yes, Artificial Intelligence Supervisors.</p>
+<p>Adaptive, intelligent, program execution,<br>and very high self healing potential.</p>
+<p>Now, out standard, average coder,<br>is a little worried, as there is a lot of moving parts here.</p>
+<p>It would be hard to make all this go,<br>without a Visual Programming Language.</p>
+<p>So we got something here, you are becoming powerful,<br>beautiful and a little bit scary.</p>
+<p>The beauty comes from design standards of the Visual Programming Language,<br>one of the visual themes will be inspired by the now retired Apple Dashboard.</p>
+<p>Except Generative Art AI will make the widgets even more beautiful,<br>The visual programming language will have a Ninja mode as well, so it is OK.</p>
+<p>So AI tells you how to structure a program, write your little bits or functions,<br>supervises their execution within safe constraints, and generates a beautiful GUI.</p>
+<p>It is important to know that the concept of a supervisor,<br>comes from the Actor Model of programming, a well researched beast.</p>
+<p>And one of its strengths is the Queue,<br>meaning all the shuttles or envelopes sent to the supervisor, go on the queue.</p>
+<p>That is where the worker(s) get their jobs from,<br>they scan the queue, sometimes local, sometimes a remote database for jobs.</p>
+<p>This in turn translates to a wonderful development experience,<br>as you don’t need to have the full program, to do the first part!</p>
+<p>For example, you are tired of crappy User Interfaces,<br>and decided to scrape your favorite websites for news and smart comments.</p>
+<p>You will run everything through AI, to to expand, maybe research,<br>and pinpoint important comments, and perhaps summarize.</p>
+<p>But all you need to get started, is to create a Smart Supervisor,<br>and tell it to scrape a web page.</p>
+<p>Here you add a test to see if the article content is extracted in full,<br>the AI will keep the queue of raw data to be parsed.</p>
+<p>And will probably do the scrape on the first try,<br>but you will still run the test, and AI will retry, and refine, if it fails.</p>
+<p>With one little shiny box, the AI extracted and formatted the data for you,<br>and will keep it in the queue while you are building your program.</p>
+<p>Until you save that data,<br>to where it needs to go.</p>
+<p>Until then, you can relax, reason about the data,<br>think about your next move now that you completed your first, that is rare.</p>
+<p>Even more importantly than that, the AI, will have no trouble,<br>noticing a parsing failure when your website changes…</p>
+<p>And it will automatically know,<br>to rebuild parts of the scraper.</p>
+<p>Now, our manual programmer, still unpressed,<br>feels a heat sensation in the back of their head, it is a hard worry bubbling up.</p>
+<p>And here, we will finish them off, with one final trick,<br>now a psychological move, that they are incapable of.</p>
+<p>Because, now you get up from your desk, without documenting anything,<br>and without even a singe thought about the program for another two weeks.</p>
+<p>You just get up,<br>and leave to do more interesting things.</p>
+<p>And when you return, you will instantly visually understand the program,<br>and the AI will be there to assist you, with all your needs.</p>
+<p>The supervisor architecture ensuring that you can efficiently scrape 5 websites,<br>or 10,000,000 if you can afford the self provisioning network bills.</p>
+<p>Now our programmer, witnesses how very human the design is,<br>and defeated, it leaves, and I for one hope they get some rest.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">programming</span><span class="chip">visual programming</span><span class="chip">actor model</span><span class="chip">supervisor pattern</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/d5decd44-f339-4b08-be29-6dd1ab0c05dd/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Upgrade Your Fitness By Replacing Rest With Light Dumbbells</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/d9746199-65ab-45fe-b586-bb85ef4a224b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Individuality And The End Of The Dark Ages</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/89f2ae8b-3931-42c8-8e7e-4046a0bb3375/">
+              <img src="https://catpea.github.io/chapter-11/poem-1687.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Are Your Programmers Even Programming?</span>
+                <span class="fg-3 fs-xs">October 13, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3b536ba1-c4f3-44ce-807d-bcc25fe32e51/">
+              <img src="https://catpea.github.io/chapter-11/poem-1675.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Good Starter Project For Learning JavaScript, Is A Primitive WikiWiki – A Tiny High Level Overview</span>
+                <span class="fg-3 fs-xs">October 1, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/84e0e0cd-2176-4970-ac4f-f50fd1d39fed/">
+              <img src="https://catpea.github.io/chapter-11/poem-1700.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">This Halloween Become A Real Wizard</span>
+                <span class="fg-3 fs-xs">October 27, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1542d609-b2e1-4d6f-b27c-49a5a4fc2174/">
+              <img src="https://catpea.github.io/chapter-11/poem-1667.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Supervisor Programming Model</span>
+                <span class="fg-3 fs-xs">September 23, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

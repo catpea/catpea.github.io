@@ -1,186 +1,461 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artificial Intelligence Video And The Declaration Of State Of Educational Emergency</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Artificial Intelligence Video And The Declaration Of State Of Educational Emergency · Cat Pea</title>
+  <meta name="description" content="A developer recounts building an end‑to‑end AI‑driven workflow: cloning their voice to narrate a poem, generating precise timestamps, converting XML captions to plain text, prompting an image model for matching photos, and stitching everything into a Ken‑Burns‑style video. Along the way he creates utility scripts, explores faster image models, and design a visual‑programming system that wires audio, captions, and image generation together. The post also reflects on how affordable AI tooling democratizes programming, calls for education reform, and urges readers to start learning JavaScript with AI assistance and avoid ineffective education.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/20b41225-879e-44b4-a6f8-1cbfc2349704/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Artificial Intelligence Video And The Declaration Of State Of Educational Emergency · Cat Pea">
+  <meta property="og:description" content="A developer recounts building an end‑to‑end AI‑driven workflow: cloning their voice to narrate a poem, generating precise timestamps, converting XML captions to plain text, prompting an image model for matching photos, and stitching everything into a Ken‑Burns‑style video. Along the way he creates utility scripts, explores faster image models, and design a visual‑programming system that wires audio, captions, and image generation together. The post also reflects on how affordable AI tooling democratizes programming, calls for education reform, and urges readers to start learning JavaScript with AI assistance and avoid ineffective education.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-16/poem-2341.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-16/">Chapter 16</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2341</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-16/poem-2341.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-16/poem-2341.avif" alt="Artificial Intelligence Video And The Declaration Of State Of Educational Emergency"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Artificial Intelligence Video And The Declaration Of State Of Educational Emergency</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-16/poem-2341.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 16</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2341</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Artificial Intelligence Video And The Declaration Of State Of Educational Emergency</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-08-01">8/1/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I will be playing the video in question,
-in the background, as I narrate the title text. </p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I grabbed one of my poems this week,
-and told AI to make a command named narx.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That will,
-clone my voice and make a replica narrated-poem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I found some bugs, weird noises,
-strange pauses, my voice was not accurate.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But in general, I liked what I heard,
-so I decided to keep going.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I expanded the narration program,
-to generate super precise captions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I was generation audio from text,
-and converting generated audio to captions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is text again,
-but with precise timestamps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I then I wrote a nifty program.
-To send the captions to my local AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With instructions to imagine,
-a series of photographs that match the captions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And to time them expertly,
-so that I can illustrate the narration of my poem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This worked frighteningly well,
-and created a description of over a 100 photographs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I then fed those descriptions,
-into my image generation program imgx.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I used ernie model but it took 3 minutes per photo,
-then flex klein, which to my shock took 3 seconds per photo.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This was not without trouble,
-because my captions are in XML text format.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I needed a way,
-to make into a plain text format.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I wrote xml-happy,
-which takes XML converts it to JavaScript objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And applies a custom JavaScript program to it,
-a query.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I discovered a truly wonderful way,
-to work with XML.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I created a shell script directly from xml-happy,
-and executed it from bash – it was amazing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then I created a command,
-to take audio, captions….</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When images should show,
-and the generated images.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And created an XML file,
-designed to be <em>directly</em> converted to video.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It worked, again with minor errors,
-captions being too fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The high resolution video with ken-burns photo effect
-being 1 gigabyte in size.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Audio was missing at first,
-and captions were too fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it all worked,
-it was amazing to see it all come together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With so many varied cute cat images,
-and ken-burns for an 8 minute video.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The whole feels great,
-no show stoppers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am currently designing a program,
-that visually stitches these commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Feeds captions from narration program,
-through a cable to the input of photo generator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is called visual programming,
-and the point is that you can drop more things on the cables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without getting confused,
-where everything is.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I have a follow up video editor,
-where there are no cables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI does all the commands,
-it just asks “Is the preview OK, should we keep going?”</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">After all of hits, I am now convinced,
-programming, never really quite worked until AI came around.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only people who could swiftly iterate,
-had teams of developers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And today, a large team of developers,
-just costs $12/mo.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not sad, what is sad,
-is that the world isn’t reacting to this.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">News outlets won’t run it,
-because they peddle toxic crap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a lot of people are cut off,
-and may not realize their entire education was ineffective.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not their fault, the teachers coudn’t teach,
-and make money at the same time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So they invented rule following,
-and performance scores.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which can’t teach anything,
-and certainly not programming which requires honestly.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This incredible power being denied to adults,
-id why I declare a state of educational emergency.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The future is no longer compatible, in any way,
-with ineffective or fake education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sentencing young people to fake education,
-is now a cruelty like few others.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ask AI,
-for help with learning programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">After years of programming in a dozen languages
-I personally chose JavaScript because of its reach.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Desktop Electron Applications, Node.js Command Line,
-NativeScript that runs on a toaster.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And of course JavaScript/ECMAScript,
-is the language of the Web.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I repeat, this is a state of emergency,
-do not pretend to learn, that future has been closed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Begin learning JavaScript,
-with the help of your favorite AI.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-08-01T04:39:42.437Z">August 1, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:12<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-16/poem-2341.avif" aria-label="Cover for Artificial Intelligence Video And The Declaration Of State Of Educational Emergency, full size">
+            <img src="https://catpea.github.io/chapter-16/poem-2341.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Artificial Intelligence Video And The Declaration Of State Of Educational Emergency" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:12
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-16/poem-2341.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-16/poem-2341.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-16/poem-2341.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I will be playing the video in question,<br>in the background, as I narrate the title text. </p>
+<p>I grabbed one of my poems this week,<br>and told AI to make a command named narx.</p>
+<p>That will,<br>clone my voice and make a replica narrated-poem.</p>
+<p>I found some bugs, weird noises,<br>strange pauses, my voice was not accurate.</p>
+<p>But in general, I liked what I heard,<br>so I decided to keep going.</p>
+<p>I expanded the narration program,<br>to generate super precise captions.</p>
+<p>So I was generation audio from text,<br>and converting generated audio to captions.</p>
+<p>Which is text again,<br>but with precise timestamps.</p>
+<p>I then I wrote a nifty program.<br>To send the captions to my local AI.</p>
+<p>With instructions to imagine,<br>a series of photographs that match the captions.</p>
+<p>And to time them expertly,<br>so that I can illustrate the narration of my poem.</p>
+<p>This worked frighteningly well,<br>and created a description of over a 100 photographs.</p>
+<p>I then fed those descriptions,<br>into my image generation program imgx.</p>
+<p>I used ernie model but it took 3 minutes per photo,<br>then flex klein, which to my shock took 3 seconds per photo.</p>
+<p>This was not without trouble,<br>because my captions are in XML text format.</p>
+<p>I needed a way,<br>to make into a plain text format.</p>
+<p>And I wrote xml-happy,<br>which takes XML converts it to JavaScript objects.</p>
+<p>And applies a custom JavaScript program to it,<br>a query.</p>
+<p>I discovered a truly wonderful way,<br>to work with XML.</p>
+<p>I created a shell script directly from xml-happy,<br>and executed it from bash – it was amazing.</p>
+<p>And then I created a command,<br>to take audio, captions….</p>
+<p>When images should show,<br>and the generated images.</p>
+<p>And created an XML file,<br>designed to be <em>directly</em> converted to video.</p>
+<hr>
+<p>It worked, again with minor errors,<br>captions being too fast.</p>
+<p>The high resolution video with ken-burns photo effect<br>being 1 gigabyte in size.</p>
+<p>Audio was missing at first,<br>and captions were too fast.</p>
+<p>But it all worked,<br>it was amazing to see it all come together.</p>
+<p>With so many varied cute cat images,<br>and ken-burns for an 8 minute video.</p>
+<p>The whole feels great,<br>no show stoppers.</p>
+<hr>
+<p>I am currently designing a program,<br>that visually stitches these commands.</p>
+<p>Feeds captions from narration program,<br>through a cable to the input of photo generator.</p>
+<p>This is called visual programming,<br>and the point is that you can drop more things on the cables.</p>
+<p>Without getting confused,<br>where everything is.</p>
+<hr>
+<p>And I have a follow up video editor,<br>where there are no cables.</p>
+<p>The AI does all the commands,<br>it just asks “Is the preview OK, should we keep going?”</p>
+<hr>
+<p>After all of hits, I am now convinced,<br>programming, never really quite worked until AI came around.</p>
+<p>The only people who could swiftly iterate,<br>had teams of developers.</p>
+<p>And today, a large team of developers,<br>just costs $12/mo.</p>
+<hr>
+<p>This is not sad, what is sad,<br>is that the world isn’t reacting to this.</p>
+<p>News outlets won’t run it,<br>because they peddle toxic crap.</p>
+<p>And a lot of people are cut off,<br>and may not realize their entire education was ineffective.</p>
+<p>Not their fault, the teachers coudn’t teach,<br>and make money at the same time.</p>
+<p>So they invented rule following,<br>and performance scores.</p>
+<p>Which can’t teach anything,<br>and certainly not programming which requires honestly.</p>
+<hr>
+<p>This incredible power being denied to adults,<br>id why I declare a state of educational emergency.</p>
+<p>The future is no longer compatible, in any way,<br>with ineffective or fake education.</p>
+<p>Sentencing young people to fake education,<br>is now a cruelty like few others.</p>
+<hr>
+<p>Ask AI,<br>for help with learning programming.</p>
+<p>After years of programming in a dozen languages<br>I personally chose JavaScript because of its reach.</p>
+<p>Desktop Electron Applications, Node.js Command Line,<br>NativeScript that runs on a toaster.</p>
+<p>And of course JavaScript/ECMAScript,<br>is the language of the Web.</p>
+<p>I repeat, this is a state of emergency,<br>do not pretend to learn, that future has been closed.</p>
+<p>Begin learning JavaScript,<br>with the help of your favorite AI.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">AI generated poetry</span><span class="chip">voice cloning</span><span class="chip">audio captioning</span><span class="chip">text‑to‑image generation</span><span class="chip">JavaScript education</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/374659db-09c4-4995-9df9-326bf29c55fc/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Save Fitness; No More Muscle Isolation, No More Sets And Reps</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/60309831-67ec-44a0-832b-09c5ffb2600a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">A Message From A Hacking Artificial Intelligence</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/60309831-67ec-44a0-832b-09c5ffb2600a/">
+              <img src="https://catpea.github.io/chapter-16/poem-2342.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Message From A Hacking Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">August 1, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c3197be0-42f2-40ad-8655-b852d2a445b1/">
+              <img src="https://catpea.github.io/chapter-16/poem-2338.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">What The Heck Am I Working On?</span>
+                <span class="fg-3 fs-xs">July 29, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c3020e6b-9e77-4e64-a66c-52f464e41cb9/">
+              <img src="https://catpea.github.io/chapter-16/poem-2345.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Big Programming Week</span>
+                <span class="fg-3 fs-xs">August 4, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2638d943-2935-4d09-a1ba-011ae9b3c593/">
+              <img src="https://catpea.github.io/chapter-16/poem-2337.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Desktop Application Development For Young Ladies And Cats</span>
+                <span class="fg-3 fs-xs">July 28, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

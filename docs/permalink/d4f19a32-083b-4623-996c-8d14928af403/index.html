@@ -1,177 +1,464 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Has Teeth</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Has Teeth · Cat Pea</title>
+  <meta name="description" content="The post argues that all teenagers should learn programming—especially JavaScript—and highlights beginner-friendly tools such as Node‑RED, p5.js, and Electron Fiddle to provide a powerful web‑based introduction. The author then describes their own visual programming language, which uses draggable windows, wires, gradient manipulation, and an automatic “bubbling signal tree” that updates UI elements when files are added or removed; they envision a lightweight file system within the browser that enables rapid prototyping on single‑board computers. Finally, they claim that mastering programming gives intellectual independence, accelerates learning, and offers a fast route out of poverty, making it a vital tool for personal empowerment and creative problem solving.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/d4f19a32-083b-4623-996c-8d14928af403/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Has Teeth · Cat Pea">
+  <meta property="og:description" content="The post argues that all teenagers should learn programming—especially JavaScript—and highlights beginner-friendly tools such as Node‑RED, p5.js, and Electron Fiddle to provide a powerful web‑based introduction. The author then describes their own visual programming language, which uses draggable windows, wires, gradient manipulation, and an automatic “bubbling signal tree” that updates UI elements when files are added or removed; they envision a lightweight file system within the browser that enables rapid prototyping on single‑board computers. Finally, they claim that mastering programming gives intellectual independence, accelerates learning, and offers a fast route out of poverty, making it a vital tool for personal empowerment and creative problem solving.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1610.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1610</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1610.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1610.avif" alt="Programming Has Teeth"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Has Teeth</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1610.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1610</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Has Teeth</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-07-29">7/29/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I think, that all teenagers must learn programming,
-and their first language should be JavaScript, the language of the web.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programs like <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Node-RED+Tutorial">Node-RED</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=8j0UDiN7my4&list=PLglp04UYZK_PrN6xWo_nJ-8kzyXDyFUwi">p5.js</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.electronjs.org/fiddle">electronjs fiddle</a> (<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=electronjs+fiddle+tutorial">fiddle tutorial</a>),
-make for a really powerful introduction to programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is rare,
-to have such a beautiful start.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wrote a neat program today that allows for manipulating gradients,
-to gently shape the look and feel of windows, captions, status and menu bars, and buttons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is for my own visual programming language,
-which is similar to desktop operating systems.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Except in my program, you can pan and zoom in or out,
-and applications can be connected together with wires.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is nothing new, nothing revolutionary,
-but it is necessary for many reasons.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I once had this really cool day dream,
-where upon clicking a PI symbol on a web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The web page shrank, revealing it self to be just a window,
-and behind it sit many other windows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Revealing the mechanism behind the now minimized website,
-neat little windows showing how data is loaded.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Connections to other services,
-and even a more capable program to manage user’s own profile.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have since create many such meta-programming environments,
-learning what to do, and what to navigate around.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, my program will have a mode where windows can’t be dragged live,
-instead, a much faster outline, or just a circle will be dragged.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And once dropped, the window will then jump there,
-this should allow a snappy UI, on cheap single board computers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I am constantly being pulled towards creating a file system in the web page,
-almost with directories and files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though here for the purpose of manipulating data structures,
-and generating a kind of a report, when things change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a button in a window would be represented by a folder with some files,
-and if that button folder gets deleted, the tree comes to life to update a bunch of stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will update a UI editor, a preview of that window,
-and even the incomplete but running application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I call it a bubbling signal tree, for now,
-meaning, that a lot of stuff will happen automatically, bubble from the button up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Automatic behavior is a big deal here,
-because tree recursion is hard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In other areas of programming automatic behaviors are seen,
-as a form of intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is so much to inspire here,
-so much to explore.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t mean to make lives more complicated,
-programming replacement for ineffective education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming, is not a hobby like star gazing, or 3D printing,
-it is a super fast way out of the worst of poverty, if not all of it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Equipped with knowledge of programming,
-makes a person unafraid of poverty, makes them stronger.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And unlike all the other pursuits,
-results in the world of programming are instant.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You learn every day, you dream up ideas all the time,
-and before you know it…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are purring all the building blocks together,
-to create something new.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The politicians are not going to repair the world,
-but learning for real can go around that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is perhaps even better than relying on other peoples honesty,
-programming leads towards a great intellectual independence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And eventually even becomes a tool for learning and research,
-allowing for simulation and automation, and so much more.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-07-29T05:00:28.384Z">July 29, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:33<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1610.avif" aria-label="Cover for Programming Has Teeth, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1610.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Has Teeth" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:33
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1610.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1610.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1610.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I think, that all teenagers must learn programming,<br>and their first language should be JavaScript, the language of the web.</p>
+<p>Programs like <a href="https://www.youtube.com/results?search_query=Node-RED+Tutorial">Node-RED</a>, <a href="https://www.youtube.com/watch?v=8j0UDiN7my4&list=PLglp04UYZK_PrN6xWo_nJ-8kzyXDyFUwi">p5.js</a> and <a href="https://www.electronjs.org/fiddle">electronjs fiddle</a> (<a href="https://www.youtube.com/results?search_query=electronjs+fiddle+tutorial">fiddle tutorial</a>),<br>make for a really powerful introduction to programming.</p>
+<p>It is rare,<br>to have such a beautiful start.</p>
+<hr>
+<p>I wrote a neat program today that allows for manipulating gradients,<br>to gently shape the look and feel of windows, captions, status and menu bars, and buttons.</p>
+<p>It is for my own visual programming language,<br>which is similar to desktop operating systems.</p>
+<p>Except in my program, you can pan and zoom in or out,<br>and applications can be connected together with wires.</p>
+<p>It is nothing new, nothing revolutionary,<br>but it is necessary for many reasons.</p>
+<hr>
+<p>I once had this really cool day dream,<br>where upon clicking a PI symbol on a web page.</p>
+<p>The web page shrank, revealing it self to be just a window,<br>and behind it sit many other windows.</p>
+<p>Revealing the mechanism behind the now minimized website,<br>neat little windows showing how data is loaded.</p>
+<p>Connections to other services,<br>and even a more capable program to manage user’s own profile.</p>
+<p>I have since create many such meta-programming environments,<br>learning what to do, and what to navigate around.</p>
+<hr>
+<p>For example, my program will have a mode where windows can’t be dragged live,<br>instead, a much faster outline, or just a circle will be dragged.</p>
+<p>And once dropped, the window will then jump there,<br>this should allow a snappy UI, on cheap single board computers.</p>
+<p>And I am constantly being pulled towards creating a file system in the web page,<br>almost with directories and files.</p>
+<p>Though here for the purpose of manipulating data structures,<br>and generating a kind of a report, when things change.</p>
+<p>So a button in a window would be represented by a folder with some files,<br>and if that button folder gets deleted, the tree comes to life to update a bunch of stuff.</p>
+<p>It will update a UI editor, a preview of that window,<br>and even the incomplete but running application.</p>
+<p>I call it a bubbling signal tree, for now,<br>meaning, that a lot of stuff will happen automatically, bubble from the button up.</p>
+<p>Automatic behavior is a big deal here,<br>because tree recursion is hard.</p>
+<p>In other areas of programming automatic behaviors are seen,<br>as a form of intelligence.</p>
+<p>There is so much to inspire here,<br>so much to explore.</p>
+<hr>
+<p>I don’t mean to make lives more complicated,<br>programming replacement for ineffective education.</p>
+<p>Programming, is not a hobby like star gazing, or 3D printing,<br>it is a super fast way out of the worst of poverty, if not all of it.</p>
+<p>Equipped with knowledge of programming,<br>makes a person unafraid of poverty, makes them stronger.</p>
+<p>And unlike all the other pursuits,<br>results in the world of programming are instant.</p>
+<p>You learn every day, you dream up ideas all the time,<br>and before you know it…</p>
+<p>You are purring all the building blocks together,<br>to create something new.</p>
+<hr>
+<p>The politicians are not going to repair the world,<br>but learning for real can go around that.</p>
+<p>It is perhaps even better than relying on other peoples honesty,<br>programming leads towards a great intellectual independence.</p>
+<p>And eventually even becomes a tool for learning and research,<br>allowing for simulation and automation, and so much more.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Node-RED+Tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Node-RED</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Node-RED+Tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=8j0UDiN7my4&amp;list=PLglp04UYZK_PrN6xWo_nJ-8kzyXDyFUwi">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>p5.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=8j0UDiN7my4&amp;list=PLglp04UYZK_PrN6xWo_nJ-8kzyXDyFUwi</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.electronjs.org/fiddle">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>electronjs fiddle</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.electronjs.org/fiddle</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=electronjs+fiddle+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>fiddle tutorial</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=electronjs+fiddle+tutorial</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">node-red</span><span class="chip">p5js</span><span class="chip">electron</span><span class="chip">visual-programming</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Node-RED+Tutorial">
+              <span class="text-truncate">Node-RED</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=8j0UDiN7my4&amp;list=PLglp04UYZK_PrN6xWo_nJ-8kzyXDyFUwi">
+              <span class="text-truncate">p5.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.electronjs.org/fiddle">
+              <span class="text-truncate">electronjs fiddle</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.electronjs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=electronjs+fiddle+tutorial">
+              <span class="text-truncate">fiddle tutorial</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/cb0ceb0d-a31c-42ac-957f-06efd4587294/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Adventure And Wisdom</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/d9c4cc87-11cb-42d5-b6ec-e07cd5b19fd2/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Above The Common Levels Of Life</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9976d56f-8fe3-4a02-ae04-899a85c5f61e/">
+              <img src="https://catpea.github.io/chapter-10/poem-1616.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Data Structures; Or, Inventing A Machine That Is Already Old And Wrong</span>
+                <span class="fg-3 fs-xs">August 3, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0bdcdb0e-2bb3-4848-96f5-9451a0635fa2/">
+              <img src="https://catpea.github.io/chapter-10/poem-1608.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Future Of Programming, Where Everyone Can Create Beautiful Applications</span>
+                <span class="fg-3 fs-xs">July 26, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/917468a6-0270-4a17-9c64-dfba54ee881a/">
+              <img src="https://catpea.github.io/chapter-11/poem-1617.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Hominus Noctrurna; Or, What Is Late Night Programming, Anywho?</span>
+                <span class="fg-3 fs-xs">August 4, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/6a994cee-bf55-4ae3-85bd-f96c17ca0039/">
+              <img src="https://catpea.github.io/chapter-10/poem-1603.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming All The Things</span>
+                <span class="fg-3 fs-xs">July 21, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

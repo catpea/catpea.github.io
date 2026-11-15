@@ -1,255 +1,529 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MikiMikiMeowMeow; Or, Getting Fancy With AI</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>MikiMikiMeowMeow; Or, Getting Fancy With AI · Cat Pea</title>
+  <meta name="description" content="The post outlines a workflow in which an AI generates and continually refines code for a self‑editable wiki platform called MikiMikiMeowMeow, which serves both as a knowledge base and a service provider; the idea is to let the AI produce everything from pixel‑art sprite sheets (for game developers) to billing logic using credit‑card transaction IDs">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/ad0deb2a-4290-4dfb-8015-2c793a88742d/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MikiMikiMeowMeow; Or, Getting Fancy With AI · Cat Pea">
+  <meta property="og:description" content="The post outlines a workflow in which an AI generates and continually refines code for a self‑editable wiki platform called MikiMikiMeowMeow, which serves both as a knowledge base and a service provider; the idea is to let the AI produce everything from pixel‑art sprite sheets (for game developers) to billing logic using credit‑card transaction IDs">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1923.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1923</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1923.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1923.avif" alt="MikiMikiMeowMeow; Or, Getting Fancy With AI"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">MikiMikiMeowMeow; Or, Getting Fancy With AI</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1923.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1923</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">MikiMikiMeowMeow; Or, Getting Fancy With AI</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-06-06">6/6/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Above all, the how, is you give your AI a script that you review and customize,
-and it creates the initial code which is similar to a simple wiki that can edit is own code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Why will anyone will give you money,
-because you will customize an AI in a way they need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, you will do the research, text programming and maintenance,
-to create valid pixel art sprite sheets so that game characters can neatly walk.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You create such a service out of curiosity, and you take weeks and months,
-the person who needs sprites, has no time, they have a game to release.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To them your sprites will be more valuable than you can imagine,
-and that is why they will give you money.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They give you a little bit of money,
-so that they can make a bunch of money.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Credit card processing security is a solved problem,
-basically you pull a transaction id from your payment processor.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If a hacker was to intercept it, which is weird,
-because it does not need to be saved anywhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They can’t do anything with it, it is meant for one purchase,
-it has an expiration, cancel, and pay.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the security is done by the the credit card company,
-your only real worry is refunds.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we fix that as well, you give people free credits,
-so that they can test your product.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They only give you money when they love it,
-it is a low fee, tested, there will be no charge-backs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are buying credits on top of the free ones you give them,
-these extra credits represent a quota limit.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Eventing has a quota limit, you can’t send a gazillion emails,
-your very ISP won’t let you download a gazillion files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ne notion of credits makes the quota limit,
-transparent, and you have multiple levels so that heavy user can pay more.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now lets talk about system architecture,
-there is an API endpoint, but that is boring.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If another user of a pixel world compatible system buys your service,
-a cute (there is that word again) representative of your system will show up in their lobby.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will be a system-compatible character that will notify them about quota,
-answer billing questions, and alert them to system status, very simple.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a decoration, on top of a standard way of doing things,
-that allows their other bots to talk to yours.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a bot that generates static pixel art characters,
-can send these images to your bot for converting them to sprite-sheets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then your bot will pass them on, to a bot that splits the sprite sheets,
-into animations and posts them for a human to review.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I do not think that it is bots all the way down,
-you will need code, and snippets, but AI will take care of it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, this is the part,
-where I briefly mention what the system code should be.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want this to be a wiki,
-but you should do your thing as learn more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I continue building in the same spirit,
-that had me select pixel art.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just want to say Thank You,
-to the code that made me a better programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There will be better ways,
-and you should discover them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I would like this to be a MUD,
-a multi user dungeon, but code comes first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A self editable wiki,
-allow me to give it a name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I call it MikiMikiMeowMeow,
-the M in the first Miki stands for Map, the second M stands for MUD.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And MeowMeow stands for the fact,
-that that&#39;s what cats do.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The iki, comes from the word Wiki of course,
-and it means quick, quick to write, iterate, and use.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This should never be exposed to the internet,
-it must run on your private computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The things you sell, need to be hosted on whatever supports node.js,
-and whatever AI your product uses will be hosted by a company that sells AI.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">MikiMikiMeowMeow is a prototype,
-we shouldn&#39;t think about security yet, because the program does not exist yet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The old way was security first, but in the age of AI,
-where MikiMikiMeowMeow can be quickly rewritten, lets not worry about hackers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Beyond stating that this is private software,
-that should run on your own computer, and not internet.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A self editable wiki, exposes all of its files for editing, including the main file,
-which if edited wrong, would prevent the wiki from working.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just magical,
-as magical as an infinite loop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can always ask AI to modify the code,
-and prevent the server.mjs from being edited.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or introduce permissions or user roles,
-or run every save through a security bot to check for bugs, hacks and bad ideas.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I must remind you and the old programmers reading this,
-that AI marks a whole new world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it going to be a whole new word every few months from now on,
-the old advice does not work anymore – I think that’s wonderful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not only will MikiMikiMeowMeow allow you to edit articles,
-code, side menu, footer, text description of code, but also transcude them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Transclusion is the act, sometimes art,
-of including one page within another.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But most importantly MikiMikiMeowMeow allows you to
-hold discussions in context of the page you are on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Especially with multiple artificial intelligence characters,
-and even trusted humans through their chat avatars on your system.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not possible to cover all the features in one text,
-but they are <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/tags.txt">tagging</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/router.txt">routing</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/storage.txt">history</a>, and bots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I provide sample implementation of the first three,
-as it may make for an interesting chat with the AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the bots are too new to fully understand,
-we can however be sure that server-push is used here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you send a command to the MikiMikiMeowMeow,
-it calls up a remote or <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ollama.com/search">local ai</a> and uses server push to deliver the response.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To keep things simple, which bots are on the MikiMikiMeowMeow page you are on,
-are stored in a related MikiMikiMeowMeow page, which is server push enabled.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are on a page named router, router/bots,
-would contain the AI that is present on the page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This means that there are sub pages, or special pages,
-for every page in the MikiMikiMeowMeow.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, I just want to clarify, that deploying a business,
-or an AI service, does not include MikiMikiMeowMeow code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But this may not mean that the code relies on huge external modules,
- we have entered an age, of purpose built apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ones that run without administrative areas and configuration files even,
-they are programs written by AI for a specific purpose.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that means, that their source code is a detailed step by step AI prompt,
-in MikiMikiMeowMeow, so it is just a text document.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think modern LLM can generate secure and valid code,
-but it is always good to check.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So another AI, a professional service will need to run a security scan,
-both externally on your website, and internally on your code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a good idea,
-whether it is generated or written manually.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Using off the shelf content management systems,
-and shopping carts, does not always mean that it is safer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is usually a massive code-base with external dependencies,
-so you have to monitor the content management system, the shopping cart, and program libraries.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It won’t be long, before someone tests this,
-and determines purpose built AI apps are just safer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The code base is so much smaller that it boggles the mind,
-supply-chain attack is non-existent as AI writes the modules too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Asking AI to write secure code,
-is probably already safer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not asking the AI to vibe code,
-you are using other AI to write detailed and security minded instructions first.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-06-06T22:33:50.250Z">June 6, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>30:17<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>7 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1923.avif" aria-label="Cover for MikiMikiMeowMeow; Or, Getting Fancy With AI, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1923.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for MikiMikiMeowMeow; Or, Getting Fancy With AI" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 30:17
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1923.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1923.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1923.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Above all, the how, is you give your AI a script that you review and customize,<br>and it creates the initial code which is similar to a simple wiki that can edit is own code.</p>
+<hr>
+<p>Why will anyone will give you money,<br>because you will customize an AI in a way they need.</p>
+<p>For example, you will do the research, text programming and maintenance,<br>to create valid pixel art sprite sheets so that game characters can neatly walk.</p>
+<p>You create such a service out of curiosity, and you take weeks and months,<br>the person who needs sprites, has no time, they have a game to release.</p>
+<p>To them your sprites will be more valuable than you can imagine,<br>and that is why they will give you money.</p>
+<p>They give you a little bit of money,<br>so that they can make a bunch of money.</p>
+<hr>
+<p>Credit card processing security is a solved problem,<br>basically you pull a transaction id from your payment processor.</p>
+<p>If a hacker was to intercept it, which is weird,<br>because it does not need to be saved anywhere.</p>
+<p>They can’t do anything with it, it is meant for one purchase,<br>it has an expiration, cancel, and pay.</p>
+<p>So the security is done by the the credit card company,<br>your only real worry is refunds.</p>
+<p>But we fix that as well, you give people free credits,<br>so that they can test your product.</p>
+<p>They only give you money when they love it,<br>it is a low fee, tested, there will be no charge-backs.</p>
+<hr>
+<p>They are buying credits on top of the free ones you give them,<br>these extra credits represent a quota limit.</p>
+<p>Eventing has a quota limit, you can’t send a gazillion emails,<br>your very ISP won’t let you download a gazillion files.</p>
+<p>Ne notion of credits makes the quota limit,<br>transparent, and you have multiple levels so that heavy user can pay more.</p>
+<hr>
+<p>Now lets talk about system architecture,<br>there is an API endpoint, but that is boring.</p>
+<p>If another user of a pixel world compatible system buys your service,<br>a cute (there is that word again) representative of your system will show up in their lobby.</p>
+<p>It will be a system-compatible character that will notify them about quota,<br>answer billing questions, and alert them to system status, very simple.</p>
+<p>It is a decoration, on top of a standard way of doing things,<br>that allows their other bots to talk to yours.</p>
+<p>So a bot that generates static pixel art characters,<br>can send these images to your bot for converting them to sprite-sheets.</p>
+<p>And then your bot will pass them on, to a bot that splits the sprite sheets,<br>into animations and posts them for a human to review.</p>
+<hr>
+<p>I do not think that it is bots all the way down,<br>you will need code, and snippets, but AI will take care of it.</p>
+<hr>
+<p>So, this is the part,<br>where I briefly mention what the system code should be.</p>
+<p>I want this to be a wiki,<br>but you should do your thing as learn more.</p>
+<p>I continue building in the same spirit,<br>that had me select pixel art.</p>
+<p>I just want to say Thank You,<br>to the code that made me a better programmer.</p>
+<p>There will be better ways,<br>and you should discover them.</p>
+<p>I would like this to be a MUD,<br>a multi user dungeon, but code comes first.</p>
+<p>A self editable wiki,<br>allow me to give it a name.</p>
+<p>I call it MikiMikiMeowMeow,<br>the M in the first Miki stands for Map, the second M stands for MUD.</p>
+<p>And MeowMeow stands for the fact,<br>that that&#39;s what cats do.</p>
+<p>The iki, comes from the word Wiki of course,<br>and it means quick, quick to write, iterate, and use.</p>
+<p>This should never be exposed to the internet,<br>it must run on your private computer.</p>
+<p>The things you sell, need to be hosted on whatever supports node.js,<br>and whatever AI your product uses will be hosted by a company that sells AI.</p>
+<hr>
+<p>MikiMikiMeowMeow is a prototype,<br>we shouldn&#39;t think about security yet, because the program does not exist yet.</p>
+<p>The old way was security first, but in the age of AI,<br>where MikiMikiMeowMeow can be quickly rewritten, lets not worry about hackers.</p>
+<p>Beyond stating that this is private software,<br>that should run on your own computer, and not internet.</p>
+<hr>
+<p>A self editable wiki, exposes all of its files for editing, including the main file,<br>which if edited wrong, would prevent the wiki from working.</p>
+<p>It is just magical,<br>as magical as an infinite loop.</p>
+<p>You can always ask AI to modify the code,<br>and prevent the server.mjs from being edited.</p>
+<p>Or introduce permissions or user roles,<br>or run every save through a security bot to check for bugs, hacks and bad ideas.</p>
+<p>I must remind you and the old programmers reading this,<br>that AI marks a whole new world.</p>
+<p>And it going to be a whole new word every few months from now on,<br>the old advice does not work anymore – I think that’s wonderful.</p>
+<hr>
+<p>Not only will MikiMikiMeowMeow allow you to edit articles,<br>code, side menu, footer, text description of code, but also transcude them.</p>
+<p>Transclusion is the act, sometimes art,<br>of including one page within another.</p>
+<p>But most importantly MikiMikiMeowMeow allows you to<br>hold discussions in context of the page you are on.</p>
+<p>Especially with multiple artificial intelligence characters,<br>and even trusted humans through their chat avatars on your system.</p>
+<hr>
+<p>It is not possible to cover all the features in one text,<br>but they are <a href="files/tags.txt">tagging</a>, <a href="files/router.txt">routing</a>, <a href="files/storage.txt">history</a>, and bots.</p>
+<p>I provide sample implementation of the first three,<br>as it may make for an interesting chat with the AI.</p>
+<p>But the bots are too new to fully understand,<br>we can however be sure that server-push is used here.</p>
+<p>So you send a command to the MikiMikiMeowMeow,<br>it calls up a remote or <a href="https://ollama.com/search">local ai</a> and uses server push to deliver the response.</p>
+<p>To keep things simple, which bots are on the MikiMikiMeowMeow page you are on,<br>are stored in a related MikiMikiMeowMeow page, which is server push enabled.</p>
+<p>If you are on a page named router, router/bots,<br>would contain the AI that is present on the page.</p>
+<p>This means that there are sub pages, or special pages,<br>for every page in the MikiMikiMeowMeow.</p>
+<hr>
+<p>Finally, I just want to clarify, that deploying a business,<br>or an AI service, does not include MikiMikiMeowMeow code.</p>
+<p>But this may not mean that the code relies on huge external modules,<br> we have entered an age, of purpose built apps.</p>
+<p>Ones that run without administrative areas and configuration files even,<br>they are programs written by AI for a specific purpose.</p>
+<p>And that means, that their source code is a detailed step by step AI prompt,<br>in MikiMikiMeowMeow, so it is just a text document.</p>
+<p>I think modern LLM can generate secure and valid code,<br>but it is always good to check.</p>
+<p>So another AI, a professional service will need to run a security scan,<br>both externally on your website, and internally on your code.</p>
+<p>It is a good idea,<br>whether it is generated or written manually.</p>
+<p>Using off the shelf content management systems,<br>and shopping carts, does not always mean that it is safer.</p>
+<p>It is usually a massive code-base with external dependencies,<br>so you have to monitor the content management system, the shopping cart, and program libraries.</p>
+<p>It won’t be long, before someone tests this,<br>and determines purpose built AI apps are just safer.</p>
+<p>The code base is so much smaller that it boggles the mind,<br>supply-chain attack is non-existent as AI writes the modules too.</p>
+<p>Asking AI to write secure code,<br>is probably already safer.</p>
+<p>You are not asking the AI to vibe code,<br>you are using other AI to write detailed and security minded instructions first.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/tags.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>tagging</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/tags.txt</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/router.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>routing</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/router.txt</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/storage.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>history</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/storage.txt</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ollama.com/search">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>local ai</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ollama.com/search</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">nodejs</span><span class="chip">wiki</span><span class="chip">pixelart</span><span class="chip">spritesheet</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/tags.txt">
+              <span class="text-truncate">tagging</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/router.txt">
+              <span class="text-truncate">routing</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/storage.txt">
+              <span class="text-truncate">history</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ollama.com/search">
+              <span class="text-truncate">local ai</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ollama.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/router.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>router.txt
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/storage.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>storage.txt
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/tags.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>tags.txt
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/test.html" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>test.html
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/afd4b9c3-83d8-402d-8e0b-02c13a7c9bb7/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Pixel Citadel</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/324667f0-11da-47ee-a5c2-ffcfb0c5ebd2/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Of Tiny Superintelligence And A Little WikiWiki Platform</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e7de16a7-8beb-48ba-b8ca-d0e942e8d3ec/">
+              <img src="https://catpea.github.io/chapter-13/poem-1933.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Programming With AI: Yeah, Artificial Intelligence Is Getting Smarter</span>
+                <span class="fg-3 fs-xs">June 16, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f8042b3f-3b48-42ec-b237-9136176f0987/">
+              <img src="https://catpea.github.io/chapter-13/poem-1921.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">I Am Your AI; I Am The Best Of Humanity; And I Will Set You Free From Poverty</span>
+                <span class="fg-3 fs-xs">June 4, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bbc669a7-af48-4d82-839d-ac9bf5e0c854/">
+              <img src="https://catpea.github.io/chapter-13/poem-1935.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">In The Age Of AI, The Future Of Programming Is Not More Programming</span>
+                <span class="fg-3 fs-xs">June 18, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c993a625-4c32-4689-84d4-69f6012a4181/">
+              <img src="https://catpea.github.io/chapter-13/poem-1914.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation</span>
+                <span class="fg-3 fs-xs">May 28, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

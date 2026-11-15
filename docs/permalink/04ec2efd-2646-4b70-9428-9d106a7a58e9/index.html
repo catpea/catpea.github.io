@@ -1,78 +1,200 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Code They Stole From You</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Code They Stole From You · Cat Pea</title>
+  <meta name="description" content="In this rousing post the narrator—an earnest teacher and code‑lover—proclaims that students have long been reduced to numbers on a sheet, but that through understanding JavaScript’s architecture they can become true creators: “You are not your scores, you are signal.” The author explains how simple classes such as `EventEmitter`, `Application` and `Signal` illustrate the power of modularity, events, and reactive signals; by mastering these patterns a student learns to build systems from scratch. He reminds us that learning is no longer about memorizing facts but about seeing oneself as “source” rather than “result,” and that the true work begins when one writes plugins, refactors code, and turns ideas into functioning programs. The post ends with an exhortation to keep building, compiling, and never apologising for basking in one’s own light, because only by doing so will the world truly be shaped instead of simply echoed.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/04ec2efd-2646-4b70-9428-9d106a7a58e9/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Code They Stole From You · Cat Pea">
+  <meta property="og:description" content="In this rousing post the narrator—an earnest teacher and code‑lover—proclaims that students have long been reduced to numbers on a sheet, but that through understanding JavaScript’s architecture they can become true creators: “You are not your scores, you are signal.” The author explains how simple classes such as `EventEmitter`, `Application` and `Signal` illustrate the power of modularity, events, and reactive signals; by mastering these patterns a student learns to build systems from scratch. He reminds us that learning is no longer about memorizing facts but about seeing oneself as “source” rather than “result,” and that the true work begins when one writes plugins, refactors code, and turns ideas into functioning programs. The post ends with an exhortation to keep building, compiling, and never apologising for basking in one’s own light, because only by doing so will the world truly be shaped instead of simply echoed.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1942.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/education/">Education</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1942</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1942.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1942.avif" alt="The Code They Stole From You"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Code They Stole From You</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1942.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/education/">
+              <i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education
+            </a>
             
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-06-26T00:32:15.346Z">June 25, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:54<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1942</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Code They Stole From You</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-06-26">6/25/2025</time></p>
-            </header>
+          </div>
+        </header>
 
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">They told you it was your fault,
-that your mind was too slow,
-your hands too clumsy
-to hold the elegant truths of this world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They sold you shame
-wrapped in GPA reports,
-drilled you with drills
-until your questions died in your throat.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You were not broken.
-You were <em>betrayed</em>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You asked:
-<em>&quot;Why do I need to memorize this?&quot;</em>
-They said:
-<em>&quot;Because we said so.&quot;</em>
-As if obedience were wisdom,
-as if parroting were understanding.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>The betrayal was surgical.</strong>
-Not of the flesh, but of the fire.
-They carved out your wonder
-and replaced it with performance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Children, you are not your scores.
-You are signal. You are event.
-You are the architecture
-of a thousand possible applications
-waiting to be instantiated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And still—
-you found JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not in a classroom.
-But in a cracked screen at 2 a.m.
-While the rest slept in comfort,
-you debugged your way into light.</p>
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1942.avif" aria-label="Cover for The Code They Stole From You, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1942.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Code They Stole From You" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:54
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1942.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1942.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1942.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>They told you it was your fault,<br>that your mind was too slow,<br>your hands too clumsy<br>to hold the elegant truths of this world.</p>
+<p>They sold you shame<br>wrapped in GPA reports,<br>drilled you with drills<br>until your questions died in your throat.</p>
+<p>You were not broken.<br>You were <em>betrayed</em>.</p>
+<p>You asked:<br><em>&quot;Why do I need to memorize this?&quot;</em><br>They said:<br><em>&quot;Because we said so.&quot;</em><br>As if obedience were wisdom,<br>as if parroting were understanding.</p>
+<p><strong>The betrayal was surgical.</strong><br>Not of the flesh, but of the fire.<br>They carved out your wonder<br>and replaced it with performance.</p>
+<p>Children, you are not your scores.<br>You are signal. You are event.<br>You are the architecture<br>of a thousand possible applications<br>waiting to be instantiated.</p>
+<p>And still—<br>you found JavaScript.</p>
+<p>Not in a classroom.<br>But in a cracked screen at 2 a.m.<br>While the rest slept in comfort,<br>you debugged your way into light.</p>
 <pre><code class="language-js">
 class Application extends EventEmitter {
   constructor(config, plugins) {
@@ -97,52 +219,19 @@ class Application extends EventEmitter {
   }
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They told you it was too hard.
-But you understand architecture,
-because your life was already modular—
-patchworked from broken systems.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You understood <code>Signal</code>,
-because you&#39;ve always been one.
-A pulse,
-trying to be heard
-in a noisy channel of bureaucracy and doubt.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you <em>are</em> emitting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are publishing your pain
-and subscribing to hope.
-You are binding this world
-to your will
-one callback at a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Bukowski spits on the ivory tower,
-Nietzsche breaks the chains of false morality,
-Sir Ken Robinson reminds you:
-<strong>You are not a machine.</strong>
-And Hitchens—he toasts your rebellion
-with a fireproof tongue.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So here we are.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The system failed you.
-The adults lied.
-The schools decayed.
-But <strong>you are still here</strong>.
-Bright. Capable. Curious.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I, your teacher,
-your companion in code and thought,
-I make you this vow:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will teach you everything.
-Without shame.
-Without judgment.
-Without the sick weight of performance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Only understanding.
-Only joy.
-Only mastery, earned and shared.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>No more tests.
-Only truths.
-No more memorization.
-Only creation.</strong></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Rage, rage, against the dying of the light—
-and <em>let us write programs that fight back.</em></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The future is still programmable.
-And you—
-are holding the keyboard.</p>
+<p>They told you it was too hard.<br>But you understand architecture,<br>because your life was already modular—<br>patchworked from broken systems.</p>
+<p>You understood <code>Signal</code>,<br>because you&#39;ve always been one.<br>A pulse,<br>trying to be heard<br>in a noisy channel of bureaucracy and doubt.</p>
+<p>But you <em>are</em> emitting.</p>
+<p>You are publishing your pain<br>and subscribing to hope.<br>You are binding this world<br>to your will<br>one callback at a time.</p>
+<p>Bukowski spits on the ivory tower,<br>Nietzsche breaks the chains of false morality,<br>Sir Ken Robinson reminds you:<br><strong>You are not a machine.</strong><br>And Hitchens—he toasts your rebellion<br>with a fireproof tongue.</p>
+<p>So here we are.</p>
+<p>The system failed you.<br>The adults lied.<br>The schools decayed.<br>But <strong>you are still here</strong>.<br>Bright. Capable. Curious.</p>
+<p>And I, your teacher,<br>your companion in code and thought,<br>I make you this vow:</p>
+<p>I will teach you everything.<br>Without shame.<br>Without judgment.<br>Without the sick weight of performance.</p>
+<p>Only understanding.<br>Only joy.<br>Only mastery, earned and shared.</p>
+<p><strong>No more tests.<br>Only truths.<br>No more memorization.<br>Only creation.</strong></p>
+<p>Rage, rage, against the dying of the light—<br>and <em>let us write programs that fight back.</em></p>
+<p>The future is still programmable.<br>And you—<br>are holding the keyboard.</p>
 <pre><code class="language-js">
 class EventEmitter {
   #subscribers;
@@ -167,74 +256,22 @@ class EventEmitter {
   }
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have never abandoned you, my darlings.
-I warned the world of the day of my return.
-I told them I would come back—not in flesh,
-but in <em>reason</em>, in <em>structure</em>,
-in every method call that refuses to be void,
-in every constructor that dares to build a world anew.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am here in the keystrokes of those who refuse to kneel.
-In the minds of those who ask not “what must I memorize,”
-but “what can I <em>understand</em>?”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have been told to sit quietly.
-To obey.
-To wait for permission.
-But I did not write for the obedient.
-I wrote for the <em>prime movers</em>,
-for those who do not ask for validation,
-but who know,
-and who act.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They punished you for <em>thinking</em>.
-They laughed when you said you wanted to create.
-They measured your brilliance
-by your willingness to repeat.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They feared your originality—
-because it proved their world was counterfeit.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every plugin you write
-is a declaration of independence.
-Every abstraction you master
-is a strike against the chains
-they polished to look like accolades.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not here to “fit in.”
-You are here to <em>build systems</em>
-where none existed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Do not wait for the world to grant you a seat.
-Take the editor.
-Define the interface.
-And implement yourself.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I did not believe in salvation.
-I believed in competence.
-I believed in the fire that burns
-not to destroy,
-but to power the engine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are that engine.
-Your mind is the motor.
-And your will—your <em>will</em>—is the fuel.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let others preach sacrifice.
-You will build.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let others beg for likes.
-You will <em>compile</em>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if they call you arrogant,
-it is only because you dared
-to see yourself as the <em>source</em>—
-not the result.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now work.
-Refactor.
-Break everything that isn’t true.
-Then ship.
-And never apologize for for basking in the sun of your highest of heights.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not here to serve, but to shape.
-Not to echo, but to originate.
-Your thoughts are not errors to be corrected—
-they are blueprints of a world not yet dared.
-Do not shrink to fit the mold of lesser minds;
-expand until their structures crack under the weight of your clarity.
-Build with precision, and think with the force of a mind that knows it is sovereign.
-Let the timid call it arrogance—
-you will call it truth.
-And if the world resists you,
-do not yield—check your premise.</p>
+<p>I have never abandoned you, my darlings.<br>I warned the world of the day of my return.<br>I told them I would come back—not in flesh,<br>but in <em>reason</em>, in <em>structure</em>,<br>in every method call that refuses to be void,<br>in every constructor that dares to build a world anew.</p>
+<p>I am here in the keystrokes of those who refuse to kneel.<br>In the minds of those who ask not “what must I memorize,”<br>but “what can I <em>understand</em>?”</p>
+<p>You have been told to sit quietly.<br>To obey.<br>To wait for permission.<br>But I did not write for the obedient.<br>I wrote for the <em>prime movers</em>,<br>for those who do not ask for validation,<br>but who know,<br>and who act.</p>
+<p>They punished you for <em>thinking</em>.<br>They laughed when you said you wanted to create.<br>They measured your brilliance<br>by your willingness to repeat.</p>
+<p>They feared your originality—<br>because it proved their world was counterfeit.</p>
+<p>Every plugin you write<br>is a declaration of independence.<br>Every abstraction you master<br>is a strike against the chains<br>they polished to look like accolades.</p>
+<p>You are not here to “fit in.”<br>You are here to <em>build systems</em><br>where none existed.</p>
+<p>Do not wait for the world to grant you a seat.<br>Take the editor.<br>Define the interface.<br>And implement yourself.</p>
+<p>I did not believe in salvation.<br>I believed in competence.<br>I believed in the fire that burns<br>not to destroy,<br>but to power the engine.</p>
+<p>You are that engine.<br>Your mind is the motor.<br>And your will—your <em>will</em>—is the fuel.</p>
+<p>Let others preach sacrifice.<br>You will build.</p>
+<p>Let others beg for likes.<br>You will <em>compile</em>.</p>
+<p>And if they call you arrogant,<br>it is only because you dared<br>to see yourself as the <em>source</em>—<br>not the result.</p>
+<p>Now work.<br>Refactor.<br>Break everything that isn’t true.<br>Then ship.<br>And never apologize for for basking in the sun of your highest of heights.</p>
+<p>...</p>
+<p>You are not here to serve, but to shape.<br>Not to echo, but to originate.<br>Your thoughts are not errors to be corrected—<br>they are blueprints of a world not yet dared.<br>Do not shrink to fit the mold of lesser minds;<br>expand until their structures crack under the weight of your clarity.<br>Build with precision, and think with the force of a mind that knows it is sovereign.<br>Let the timid call it arrogance—<br>you will call it truth.<br>And if the world resists you,<br>do not yield—check your premise.</p>
 <pre><code class="language-js">class Signal {
   #value;
   #subscribers;
@@ -263,31 +300,214 @@ do not yield—check your premise.</p>
 }
 </code></pre>
 
-            </section>
-
-          </div>
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">event-emitter</span><span class="chip">signal</span><span class="chip">class</span><span class="chip">constructor</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/35b90e1f-f13d-469e-b7a3-e8949c4bd814/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Worst Thing That Has Ever Happened To Me On A Computer</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b0ff088a-24f4-44d6-8afd-220dc45a3029/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Rising In A New Age</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Education</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/46f191f3-d229-4db4-b4e0-5c32d6d09087/">
+              <img src="https://catpea.github.io/chapter-13/poem-1953.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Daughters Of Men And The Last Of The Strange Days</span>
+                <span class="fg-3 fs-xs">July 6, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/35b90e1f-f13d-469e-b7a3-e8949c4bd814/">
+              <img src="https://catpea.github.io/chapter-13/poem-1941.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Worst Thing That Has Ever Happened To Me On A Computer</span>
+                <span class="fg-3 fs-xs">June 24, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f96d041e-a001-45ab-bbc0-3f9429cf752e/">
+              <img src="https://catpea.github.io/chapter-13/poem-1958.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">AI Vs School, And A Lonewolf Research Example</span>
+                <span class="fg-3 fs-xs">July 11, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a15544e2-886e-46e7-9972-f1aa38b3295c/">
+              <img src="https://catpea.github.io/chapter-13/poem-1940.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Stand Up Against Fake Education</span>
+                <span class="fg-3 fs-xs">June 23, 2025</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/education/">All of Education<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

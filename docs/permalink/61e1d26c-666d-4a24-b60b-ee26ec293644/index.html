@@ -1,282 +1,523 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>An Escape From The Dark Ages Of Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>An Escape From The Dark Ages Of Programming · Cat Pea</title>
+  <meta name="description" content="The post explores the long‑standing quest for visualizing program structure and argues that existing approaches—directory trees, documentation, static analysis, GraphViz graphs, node‑based systems like Blender’s Geometry Nodes or Node‑RED, and even Apple Automator—all fall short because they either expose low‑level details (if/foreach/filter) or rely on generic high‑level concepts that can’t capture a specific application’s architecture. It proposes instead to build a code‑management system whose UI is explicitly designed around the unique, high‑level constructs of the project at hand, rather than being generic; the interface would act as a concept map, exposing the internal architecture and serving both as documentation and as an editor (e.g., a Bootstrap‑theme builder that lets you drag‑and‑drop dashboards, cards, forms, etc. while automatically generating code behind them).">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/61e1d26c-666d-4a24-b60b-ee26ec293644/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="An Escape From The Dark Ages Of Programming · Cat Pea">
+  <meta property="og:description" content="The post explores the long‑standing quest for visualizing program structure and argues that existing approaches—directory trees, documentation, static analysis, GraphViz graphs, node‑based systems like Blender’s Geometry Nodes or Node‑RED, and even Apple Automator—all fall short because they either expose low‑level details (if/foreach/filter) or rely on generic high‑level concepts that can’t capture a specific application’s architecture. It proposes instead to build a code‑management system whose UI is explicitly designed around the unique, high‑level constructs of the project at hand, rather than being generic; the interface would act as a concept map, exposing the internal architecture and serving both as documentation and as an editor (e.g., a Bootstrap‑theme builder that lets you drag‑and‑drop dashboards, cards, forms, etc. while automatically generating code behind them).">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-06/poem-1128.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-06/">Chapter 06</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1128</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-06/poem-1128.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-06/poem-1128.avif" alt="An Escape From The Dark Ages Of Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">An Escape From The Dark Ages Of Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-06/poem-1128.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 06</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1128</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">An Escape From The Dark Ages Of Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-04-04">4/3/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Programmers have been trying to visualize their programs,
-their internal micro-architecture for ages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Only two things have worked,
-and both are very primitive.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">First is the actual directory layout,
-where program files are kept.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a primitive way of categorizing things,
-sometimes concepts like input forms or user interface themes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Other times more generic concepts like,
-plugins, where plugins can hook into all kinds of things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The second is the obvious thing,
-the documentation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, it takes forever,
-it needs updates when code changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it better have examples, diagrams,
-maybe even an occasional tutorial.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Great for a group of programmers,
-insane to attempt, for just one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a slight shortcut here,
-as sometimes text for documentation…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Can be pulled out of well structured code comments,
-this is sometimes driven by static code analysis.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here code is parsed by computer,
-but rather than being executed…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is queried for the purpose of generating,
-a lot of the documentation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But now the lone programmer,
-needs to comment code…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is, yet again, writing documentation,
-though not as detached from code and only a bit at a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I once ran an experiment,
-where I embedded instructions to create a visual code graph, using <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=YL260-A5r2U">GraphViz</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I embedded the instructions directly into comments,
-it worked, a large, high level, graph of the concepts within the program emerged.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Problem here is, the moment you see a pretty graph of your program,
-you want it to be interactive.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where visual programming comes in,
-as demonstrated by <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=kMDB7c0ZiKA">Geometry Nodes in Blender</a>, and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=3AR432bguOY">Node Red</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This works, but there is a flaw,
-to program with just visual nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A visual programming language is required,
-we hoist things like if statements into the visualization.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The result is a tangled graph mess,
-because we hoist low level concepts like if, each, filter, we make a mess.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To contain the mess, we make a bigger mess,
-by adding a third dimension, of grouping of nodes to create custom nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where custom nodes will hide all the each, and if, and filter statements,
-the program structure becomes so rigid here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That the only way to address it,
-is to retire as a programmer.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There once was a promising attempt to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=8CBnAmYnwk0">visualize object oriented programming</a>,
-but again, here we hoist objects methods properties.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And on top of that, Object Oriented Programming,
-is just a tool, it shouldn&#39;t attempt to contain entire applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not everything,
-should be an object.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another promising attempt is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=BTmZOh1GI3U">Apple Automator</a>,
-here, you don’t branch, at all.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You arrange a column of <strong>High Level</strong> actions,
-such as resize image, upload file – and that is it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There seems to be an unexplored area here,
-where allowing to create custom high level action actions…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">May allow for creation of applications,
-and they maybe very readable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, at the same time,
-we could just do the same in code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just create a list of high level functions,
-and hide all the logic beneath.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is possible to create an Automator in code,
-the UI is not that helpful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Everything that has been tried,
-everything showing promise has basically failed to impress.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Either high level concepts are burred, blurred,
-or don’t deliver enough.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I suspect, there is one more thing let to try,
-and here we borrow the user interface from <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=deqX0gMeUVc">content management systems</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And create a high level code management system,
-and let the user interface, guide the programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a huge problem here,
-but it is fixable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Keeping things generic, as in “click button to add new plugin module”,
-and enter code for UI, and action handlers to receive UI commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is a huge mistake,
-it will create a mess.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What needs to be done, and this may shock you,
-is the UI of the code management system, has to be written around the application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each programming project, will have pretty,
-but unique user interface, aimed at the concepts within the application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t be reusable, or generic,
-be specific.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will close with an example, and keep it simple,
-a code management system for the creation of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=7QT7EMsQyjg">Bootstrap Themes</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a deceptively complex challenge,
-for those of yo who are still sad I said bad things about OOP.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can see, that UML, or universal modeling language,
-can’t work here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming, could just come to a crawl here,
-for all the nodes that need to be on the screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But a code management system,
-that operates around concepts specific to theme development…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Well, at least in theory, would keep everything,
-in check.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us make a simplistic dashboard,
-with some interesting cards.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We click new project, add page, call it dashboard 4,
-a side-pane, showing all existing components in the system would show on the side.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Dragging the dashboard into the design area in the center of the screen,
-would create UI to configure a Dashboard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a generic container,
-but an administrative component specifically crafted for creating dashboards.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We point to a data source, or code a function that creates test data,
-and point to a card component to use.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Clicking save, and build will create a new sample dashboard,
-which we can now go back and customize further.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason why this kind of thing could work,
-is because there is a toner part of the program…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where a new dashboard container can be created,
-or an existing one can be edited, came goes for cards, menus, alert boxes etc.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A simple context menu, or clippy even, will allow jumping,
-between the different parts of the application.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A code management system crafted for a specific purpose,
-must not deal with generic concepts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Rather that adding a new UI container,
-we have use specific high level concepts, dashboard, card group, Input Form.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here the application it self, serves as a diagram of the system,
-the buttons, and UI, are a kind of self documentation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When time comes to update some dashboard code,
-you look under components dashboards, edit code, and get a CodeMirror code editor to edit the code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the convention here is to use high level concepts,
-because it is the easy to navigate all the complex ideas.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The User Interface,
-becomes a concept map.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I think it is pretty safe to say,
-it would be easy to return to a particular Bootstrap theme and figure out where everything is at.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remember this is a code editor, where we replace the concept of documentation, or even folder structure, with an informative user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So it looks like a builder of Bootstrap Themes,
-bit it is actually visual programming done correctly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The UI is mapping important concepts,
-it is NOT a UI made specifically for making bootstrap theme editing easier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a concept map for a programmer,
-made with Graphic user Interface Concepts, to help them navigate themes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Code management systems are not for making things user friendly,
-but exposing the internal architecture of complex projects.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-04-04T03:02:08.504Z">April 3, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>15:58<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-06/poem-1128.avif" aria-label="Cover for An Escape From The Dark Ages Of Programming, full size">
+            <img src="https://catpea.github.io/chapter-06/poem-1128.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for An Escape From The Dark Ages Of Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 15:58
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-06/poem-1128.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-06/poem-1128.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-06/poem-1128.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Programmers have been trying to visualize their programs,<br>their internal micro-architecture for ages.</p>
+<p>Only two things have worked,<br>and both are very primitive.</p>
+<p>First is the actual directory layout,<br>where program files are kept.</p>
+<p>It is a primitive way of categorizing things,<br>sometimes concepts like input forms or user interface themes.</p>
+<p>Other times more generic concepts like,<br>plugins, where plugins can hook into all kinds of things.</p>
+<p>The second is the obvious thing,<br>the documentation.</p>
+<p>But, it takes forever,<br>it needs updates when code changes.</p>
+<p>And it better have examples, diagrams,<br>maybe even an occasional tutorial.</p>
+<p>Great for a group of programmers,<br>insane to attempt, for just one.</p>
+<p>There is a slight shortcut here,<br>as sometimes text for documentation…</p>
+<p>Can be pulled out of well structured code comments,<br>this is sometimes driven by static code analysis.</p>
+<p>Here code is parsed by computer,<br>but rather than being executed…</p>
+<p>It is queried for the purpose of generating,<br>a lot of the documentation.</p>
+<p>But now the lone programmer,<br>needs to comment code…</p>
+<p>Which is, yet again, writing documentation,<br>though not as detached from code and only a bit at a time.</p>
+<p>I once ran an experiment,<br>where I embedded instructions to create a visual code graph, using <a href="https://www.youtube.com/watch?v=YL260-A5r2U">GraphViz</a>.</p>
+<p>I embedded the instructions directly into comments,<br>it worked, a large, high level, graph of the concepts within the program emerged.</p>
+<p>Problem here is, the moment you see a pretty graph of your program,<br>you want it to be interactive.</p>
+<p>This is where visual programming comes in,<br>as demonstrated by <a href="https://www.youtube.com/watch?v=kMDB7c0ZiKA">Geometry Nodes in Blender</a>, and <a href="https://www.youtube.com/watch?v=3AR432bguOY">Node Red</a>.</p>
+<p>This works, but there is a flaw,<br>to program with just visual nodes.</p>
+<p>A visual programming language is required,<br>we hoist things like if statements into the visualization.</p>
+<p>The result is a tangled graph mess,<br>because we hoist low level concepts like if, each, filter, we make a mess.</p>
+<p>To contain the mess, we make a bigger mess,<br>by adding a third dimension, of grouping of nodes to create custom nodes.</p>
+<p>Where custom nodes will hide all the each, and if, and filter statements,<br>the program structure becomes so rigid here.</p>
+<p>That the only way to address it,<br>is to retire as a programmer.</p>
+<hr>
+<p>There once was a promising attempt to <a href="https://www.youtube.com/watch?v=8CBnAmYnwk0">visualize object oriented programming</a>,<br>but again, here we hoist objects methods properties.</p>
+<p>And on top of that, Object Oriented Programming,<br>is just a tool, it shouldn&#39;t attempt to contain entire applications.</p>
+<p>Not everything,<br>should be an object.</p>
+<hr>
+<p>Another promising attempt is <a href="https://www.youtube.com/watch?v=BTmZOh1GI3U">Apple Automator</a>,<br>here, you don’t branch, at all.</p>
+<p>You arrange a column of <strong>High Level</strong> actions,<br>such as resize image, upload file – and that is it.</p>
+<p>There seems to be an unexplored area here,<br>where allowing to create custom high level action actions…</p>
+<p>May allow for creation of applications,<br>and they maybe very readable.</p>
+<p>But, at the same time,<br>we could just do the same in code.</p>
+<p>Just create a list of high level functions,<br>and hide all the logic beneath.</p>
+<p>It is possible to create an Automator in code,<br>the UI is not that helpful.</p>
+<hr>
+<p>Everything that has been tried,<br>everything showing promise has basically failed to impress.</p>
+<p>Either high level concepts are burred, blurred,<br>or don’t deliver enough.</p>
+<hr>
+<p>I suspect, there is one more thing let to try,<br>and here we borrow the user interface from <a href="https://www.youtube.com/watch?v=deqX0gMeUVc">content management systems</a>.</p>
+<p>And create a high level code management system,<br>and let the user interface, guide the programmer.</p>
+<p>There is a huge problem here,<br>but it is fixable.</p>
+<p>Keeping things generic, as in “click button to add new plugin module”,<br>and enter code for UI, and action handlers to receive UI commands.</p>
+<p>Is a huge mistake,<br>it will create a mess.</p>
+<p>What needs to be done, and this may shock you,<br>is the UI of the code management system, has to be written around the application.</p>
+<p>Each programming project, will have pretty,<br>but unique user interface, aimed at the concepts within the application.</p>
+<p>Don’t be reusable, or generic,<br>be specific.</p>
+<hr>
+<p>I will close with an example, and keep it simple,<br>a code management system for the creation of <a href="https://www.youtube.com/watch?v=7QT7EMsQyjg">Bootstrap Themes</a>.</p>
+<p>This is a deceptively complex challenge,<br>for those of yo who are still sad I said bad things about OOP.</p>
+<p>You can see, that UML, or universal modeling language,<br>can’t work here.</p>
+<p>Visual programming, could just come to a crawl here,<br>for all the nodes that need to be on the screen.</p>
+<p>But a code management system,<br>that operates around concepts specific to theme development…</p>
+<p>Well, at least in theory, would keep everything,<br>in check.</p>
+<p>Let us make a simplistic dashboard,<br>with some interesting cards.</p>
+<p>We click new project, add page, call it dashboard 4,<br>a side-pane, showing all existing components in the system would show on the side.</p>
+<p>Dragging the dashboard into the design area in the center of the screen,<br>would create UI to configure a Dashboard.</p>
+<p>This is not a generic container,<br>but an administrative component specifically crafted for creating dashboards.</p>
+<p>We point to a data source, or code a function that creates test data,<br>and point to a card component to use.</p>
+<p>Clicking save, and build will create a new sample dashboard,<br>which we can now go back and customize further.</p>
+<hr>
+<p>The reason why this kind of thing could work,<br>is because there is a toner part of the program…</p>
+<p>Where a new dashboard container can be created,<br>or an existing one can be edited, came goes for cards, menus, alert boxes etc.</p>
+<p>A simple context menu, or clippy even, will allow jumping,<br>between the different parts of the application.</p>
+<hr>
+<p>A code management system crafted for a specific purpose,<br>must not deal with generic concepts.</p>
+<p>Rather that adding a new UI container,<br>we have use specific high level concepts, dashboard, card group, Input Form.</p>
+<hr>
+<p>Here the application it self, serves as a diagram of the system,<br>the buttons, and UI, are a kind of self documentation.</p>
+<p>When time comes to update some dashboard code,<br>you look under components dashboards, edit code, and get a CodeMirror code editor to edit the code.</p>
+<p>So the convention here is to use high level concepts,<br>because it is the easy to navigate all the complex ideas.</p>
+<p>The User Interface,<br>becomes a concept map.</p>
+<p>And I think it is pretty safe to say,<br>it would be easy to return to a particular Bootstrap theme and figure out where everything is at.</p>
+<p>Remember this is a code editor, where we replace the concept of documentation, or even folder structure, with an informative user interface.</p>
+<p>So it looks like a builder of Bootstrap Themes,<br>bit it is actually visual programming done correctly.</p>
+<p>The UI is mapping important concepts,<br>it is NOT a UI made specifically for making bootstrap theme editing easier.</p>
+<p>It is a concept map for a programmer,<br>made with Graphic user Interface Concepts, to help them navigate themes.</p>
+<p>Code management systems are not for making things user friendly,<br>but exposing the internal architecture of complex projects.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=YL260-A5r2U">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>GraphViz</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=YL260-A5r2U</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=kMDB7c0ZiKA">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Geometry Nodes in Blender</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=kMDB7c0ZiKA</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=3AR432bguOY">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Node Red</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=3AR432bguOY</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=8CBnAmYnwk0">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>visualize object oriented programming</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=8CBnAmYnwk0</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=BTmZOh1GI3U">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Apple Automator</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=BTmZOh1GI3U</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=deqX0gMeUVc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>content management systems</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=deqX0gMeUVc</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=7QT7EMsQyjg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bootstrap Themes</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=7QT7EMsQyjg</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual programming</span><span class="chip">code management system</span><span class="chip">graphviz</span><span class="chip">node-red</span><span class="chip">geometry nodes</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/59yRYIHWtzY"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/59yRYIHWtzY</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=YL260-A5r2U">
+              <span class="text-truncate">GraphViz</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=kMDB7c0ZiKA">
+              <span class="text-truncate">Geometry Nodes in Blender</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=3AR432bguOY">
+              <span class="text-truncate">Node Red</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=8CBnAmYnwk0">
+              <span class="text-truncate">visualize object oriented programming</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=BTmZOh1GI3U">
+              <span class="text-truncate">Apple Automator</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=deqX0gMeUVc">
+              <span class="text-truncate">content management systems</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=7QT7EMsQyjg">
+              <span class="text-truncate">Bootstrap Themes</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/d1c94329-820d-495d-afbc-206e8bc40e4d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Beyond Conspiracy Theories</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/d1c5f69f-56ca-47b4-aef4-e78bcd7c0552/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Importance Of Self Education</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9a153794-42fc-4683-b06b-297572e357d2/">
+              <img src="https://catpea.github.io/chapter-06/poem-1135.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">I Don’t Even; Or, Rebellious Web Design Is Super Fine</span>
+                <span class="fg-3 fs-xs">April 10, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d89f34b1-7ae7-45a9-ac49-b9164889915f/">
+              <img src="https://catpea.github.io/chapter-06/poem-1123.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Simple And Lightweight Code</span>
+                <span class="fg-3 fs-xs">March 29, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e180a7ec-9b03-4f76-9595-592c6a90c742/">
+              <img src="https://catpea.github.io/chapter-06/poem-1137.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Really Neat</span>
+                <span class="fg-3 fs-xs">April 12, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fe757b50-3dc8-44ad-a096-b94e4087fa59/">
+              <img src="https://catpea.github.io/chapter-06/poem-1107.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Quirkedy Quirks</span>
+                <span class="fg-3 fs-xs">March 13, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,218 +1,487 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming · Cat Pea</title>
+  <meta name="description" content="A beginner’s guide to learning web‑development tools—HTML, CSS and JavaScript—is framed as a series of game‑making experiments that illustrate the power of these languages. The author starts with simple clicker ideas based on video snippets or side‑scrolling scenes whose graphics can be generated on the fly, then moves to a choose‑your‑own‑adventure style where AI writes text and creates unique images for each playthrough. Alongside personal anecdotes that trace the writer’s early fascination with pixel art on a C64 back to modern generative AI, the post shows how straightforward HTML files can evolve into full HTTP applications (e.g., a tiny WikiWiki using Node.js/Express) while keeping coding simple and creatively engaging.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/79586754-903d-4dea-ac24-5fc506413dac/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming · Cat Pea">
+  <meta property="og:description" content="A beginner’s guide to learning web‑development tools—HTML, CSS and JavaScript—is framed as a series of game‑making experiments that illustrate the power of these languages. The author starts with simple clicker ideas based on video snippets or side‑scrolling scenes whose graphics can be generated on the fly, then moves to a choose‑your‑own‑adventure style where AI writes text and creates unique images for each playthrough. Alongside personal anecdotes that trace the writer’s early fascination with pixel art on a C64 back to modern generative AI, the post shows how straightforward HTML files can evolve into full HTTP applications (e.g., a tiny WikiWiki using Node.js/Express) while keeping coding simple and creatively engaging.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1517.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1517</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1517.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1517.avif" alt="Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1517.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1517</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-04-27">4/27/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I won’t get too technical,
-but I must ask you to begin learning <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=HTML+full+course">HTML</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=CSS+full+course">CSS</a>, and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=JavaScript+full+course">JavaScript</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">HTML is just nested object notation,
-CSS just applies some properties to the objects that deal with their layout.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And JavaScript, is a language in the powerful C family,
-that does not burden you with defining the structure of your variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And yes, there are other languages, but when you finish programs in those,
-you still have to learn JavaScript, to so stuff with them on the web.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now,
-let us set technical things aside,.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And talk about easy game making,
-that will inspire you, towards learning HTML, CSS, and JavaScript.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This idea is the most dangerous of them all,
-it is inspired by <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=LgTSh2LAalc">Mad Dog McCree a 1993 title for the PC</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Take a look at the full walk-though video,
-and note how this game is just a collection of video snippets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has proper actors in costumes,
-and even impressive stunt work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you would create a series of videos,
-and monitor for coordinates of clicks via the on click event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You stage a scene where some bad guys, or aliens, pop up,
-and give the user 3 seconds to start shooting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If they miss, or fail to shoot,
-you play a gave over version of the scene.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Otherwise your actors fall or run away,
-and you continue with the game.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let me take you to a much simpler clicker,
-that rather than videos uses just a side scrolling wall.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Incredibly simple, but with AI generated graphics,
-maybe pixel art, maybe some kind of a backroom door madness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Simplicity can become captivating,
-take a look at the still quite scary <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=efolLO2zcpc">Aliens: The Computer Game (UK Version)
-</a> released in 1986</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here we are entering a strange new zone,
-a lick of undiscovered country.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because some objects, doors, creatures,
-in this type of side scroller can either be randomized.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or flat out created by an AI, while the user is playing,
-based on the choices they have made.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Take a look at the [game map][7] as well,
-it is not simple or linear at all, it is beautiful and comlex.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the programming that you would do here,
-could use the horizontal scroll-bar alone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You could be showing off some beautiful and detailed graphics,
-along with real photos, or you may even generate AI Pizel Art is you wish.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just like above, you grab x and y coordinates,
-but you can also put click logic in things you show on top of the background.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A monster that pops up,
-can just handle its own on click event, cool beans.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My final idea is inspired by choose your own adventure books,
-rather than relying on hot zones or x/y coordinates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are clicking links, in narrated text,
-don’t burden your user with reading, tell the story with an audio file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let AI write the text, you can just edit it down,
-to what you need and ask for more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You still need images here,
-and they should be interesting and unique.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Preferably generated on the fly,
-based on the choices the user is making.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to the story line,
-there is something unexplored about AI art generators.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can ask them to generate unique images,
-for every paying user, images never seen before.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ancient robots deep inside pyramids,
-huge monsters deep inside woods.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By making pictures look all very authentic looking,
-and generating text on the fly, you will pull the user in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in fact, the game will transform from,
-choose your own adventure…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To more like <strong>build</strong> your own adventure,
-without the user noticing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can make the programming as simple as a bunch of HTML files,
-but this is a good candidate for creating a tiny WikiWiki.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which only really has a page view mode, a page edit mode,
-and accepts edited version via a post to a save route.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This would take you towards learning node.js,
-and using express.js, effectively programming your own HTTP application.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I learned programming when I was little,
-by dreaming about being able to draw pixels on my C64 screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I discovered a Simon’s BASIC cartridge, (basic is a programming language)
-and inhaled the entire BASIC programming language manual.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My parents were chasing me away from the computer,
-my bullies were freaking out I was smarter they were.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my teachers were grading me down,
-but I was absorbing programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With just that one simple – frankly god-like - wish.
-let me draw a pixel, on my TV.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Later in High Scool I had the same wish,
-but now, wanted to create a window on my desktop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I prepared for the worse, just to discover,
-that it was more BASIC, a language called Visual Basic.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning programming is a wonderful experience,
-and now with generative AI, it is even more fun.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As you get to script an intelligence; however faint it may be,
-it will still deliver the unexpected and wonderful.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-04-27T04:44:36.398Z">April 27, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:11<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1517.avif" aria-label="Cover for Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1517.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:11
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1517.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1517.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1517.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I won’t get too technical,<br>but I must ask you to begin learning <a href="https://www.youtube.com/results?search_query=HTML+full+course">HTML</a>, <a href="https://www.youtube.com/results?search_query=CSS+full+course">CSS</a>, and <a href="https://www.youtube.com/results?search_query=JavaScript+full+course">JavaScript</a>.</p>
+<p>HTML is just nested object notation,<br>CSS just applies some properties to the objects that deal with their layout.</p>
+<p>And JavaScript, is a language in the powerful C family,<br>that does not burden you with defining the structure of your variables.</p>
+<p>And yes, there are other languages, but when you finish programs in those,<br>you still have to learn JavaScript, to so stuff with them on the web.</p>
+<hr>
+<p>Now,<br>let us set technical things aside,.</p>
+<p>And talk about easy game making,<br>that will inspire you, towards learning HTML, CSS, and JavaScript.</p>
+<hr>
+<p>This idea is the most dangerous of them all,<br>it is inspired by <a href="https://www.youtube.com/watch?v=LgTSh2LAalc">Mad Dog McCree a 1993 title for the PC</a>.</p>
+<p>Take a look at the full walk-though video,<br>and note how this game is just a collection of video snippets.</p>
+<p>It has proper actors in costumes,<br>and even impressive stunt work.</p>
+<p>Here you would create a series of videos,<br>and monitor for coordinates of clicks via the on click event.</p>
+<p>You stage a scene where some bad guys, or aliens, pop up,<br>and give the user 3 seconds to start shooting.</p>
+<p>If they miss, or fail to shoot,<br>you play a gave over version of the scene.</p>
+<p>Otherwise your actors fall or run away,<br>and you continue with the game.</p>
+<hr>
+<p>Now let me take you to a much simpler clicker,<br>that rather than videos uses just a side scrolling wall.</p>
+<p>Incredibly simple, but with AI generated graphics,<br>maybe pixel art, maybe some kind of a backroom door madness.</p>
+<p>Simplicity can become captivating,<br>take a look at the still quite scary <a href="https://www.youtube.com/watch?v=efolLO2zcpc">Aliens: The Computer Game (UK Version)
+</a> released in 1986</p>
+<p>Here we are entering a strange new zone,<br>a lick of undiscovered country.</p>
+<p>Because some objects, doors, creatures,<br>in this type of side scroller can either be randomized.</p>
+<p>Or flat out created by an AI, while the user is playing,<br>based on the choices they have made.</p>
+<p>Take a look at the [game map][7] as well,<br>it is not simple or linear at all, it is beautiful and comlex.</p>
+<p>And the programming that you would do here,<br>could use the horizontal scroll-bar alone.</p>
+<p>You could be showing off some beautiful and detailed graphics,<br>along with real photos, or you may even generate AI Pizel Art is you wish.</p>
+<p>And just like above, you grab x and y coordinates,<br>but you can also put click logic in things you show on top of the background.</p>
+<p>A monster that pops up,<br>can just handle its own on click event, cool beans.</p>
+<hr>
+<p>My final idea is inspired by choose your own adventure books,<br>rather than relying on hot zones or x/y coordinates.</p>
+<p>You are clicking links, in narrated text,<br>don’t burden your user with reading, tell the story with an audio file.</p>
+<p>Let AI write the text, you can just edit it down,<br>to what you need and ask for more.</p>
+<p>You still need images here,<br>and they should be interesting and unique.</p>
+<p>Preferably generated on the fly,<br>based on the choices the user is making.</p>
+<p>As to the story line,<br>there is something unexplored about AI art generators.</p>
+<p>You can ask them to generate unique images,<br>for every paying user, images never seen before.</p>
+<p>Ancient robots deep inside pyramids,<br>huge monsters deep inside woods.</p>
+<p>By making pictures look all very authentic looking,<br>and generating text on the fly, you will pull the user in.</p>
+<p>And in fact, the game will transform from,<br>choose your own adventure…</p>
+<p>To more like <strong>build</strong> your own adventure,<br>without the user noticing.</p>
+<p>You can make the programming as simple as a bunch of HTML files,<br>but this is a good candidate for creating a tiny WikiWiki.</p>
+<p>Which only really has a page view mode, a page edit mode,<br>and accepts edited version via a post to a save route.</p>
+<p>This would take you towards learning node.js,<br>and using express.js, effectively programming your own HTTP application.</p>
+<hr>
+<p>I learned programming when I was little,<br>by dreaming about being able to draw pixels on my C64 screen.</p>
+<p>I discovered a Simon’s BASIC cartridge, (basic is a programming language)<br>and inhaled the entire BASIC programming language manual.</p>
+<p>My parents were chasing me away from the computer,<br>my bullies were freaking out I was smarter they were.</p>
+<p>And my teachers were grading me down,<br>but I was absorbing programming.</p>
+<p>With just that one simple – frankly god-like - wish.<br>let me draw a pixel, on my TV.</p>
+<p>Later in High Scool I had the same wish,<br>but now, wanted to create a window on my desktop.</p>
+<p>I prepared for the worse, just to discover,<br>that it was more BASIC, a language called Visual Basic.</p>
+<hr>
+<p>Learning programming is a wonderful experience,<br>and now with generative AI, it is even more fun.</p>
+<p>As you get to script an intelligence; however faint it may be,<br>it will still deliver the unexpected and wonderful.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=HTML+full+course">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>HTML</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=HTML+full+course</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=CSS+full+course">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>CSS</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=CSS+full+course</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=JavaScript+full+course">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>JavaScript</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=JavaScript+full+course</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=LgTSh2LAalc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Mad Dog McCree a 1993 title for the PC</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=LgTSh2LAalc</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=efolLO2zcpc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Aliens: The Computer Game (UK Version)</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=efolLO2zcpc</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">html</span><span class="chip">css</span><span class="chip">javascript</span><span class="chip">nodejs</span><span class="chip">expressjs</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=HTML+full+course">
+              <span class="text-truncate">HTML</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=CSS+full+course">
+              <span class="text-truncate">CSS</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=JavaScript+full+course">
+              <span class="text-truncate">JavaScript</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=LgTSh2LAalc">
+              <span class="text-truncate">Mad Dog McCree a 1993 title for the PC</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=efolLO2zcpc">
+              <span class="text-truncate">Aliens: The Computer Game (UK Version)</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/31c777e8-0644-42ab-af70-99571dd10f28/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Great Michigan Ice Age</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/9b9e734a-720c-45e7-b026-5cac5a483b52/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bodybuilding; So You Got Yourself An Interval Timer...</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/732b0a40-83e1-4ac4-931b-e5345ca077c5/">
+              <img src="https://catpea.github.io/chapter-10/poem-1544.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Don&#39;t Ignore Programming</span>
+                <span class="fg-3 fs-xs">May 23, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/94deda74-5e28-417b-875d-5d6e7cf6accf/">
+              <img src="https://catpea.github.io/chapter-09/poem-1495.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie</span>
+                <span class="fg-3 fs-xs">April 4, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fc9d0d00-5e2d-4c84-b218-b3a6aee2e402/">
+              <img src="https://catpea.github.io/chapter-10/poem-1548.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Visual Programming Language; A Strange Cyber-Poem About Catfooding Your Own Unicorn</span>
+                <span class="fg-3 fs-xs">May 28, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/59571fcf-5346-4810-b1af-b17420bfa034/">
+              <img src="https://catpea.github.io/chapter-09/poem-1493.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Artificial Intelligence Means It Is Time To Learn Programming; Or; The Call Of Interactive Fiction</span>
+                <span class="fg-3 fs-xs">April 2, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,184 +1,464 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded · Cat Pea</title>
+  <meta name="description" content="The post lays out a personal multi‑device backup‑and‑reset plan with virtual machines and containers, then proposes building an AI‑driven, JavaScript‑free, text‑only web service as part of a security business—ending with a tongue‑in‑cheek app idea that lets users upload grandma’s photos to spice-up her past identity.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/c7f04e82-429e-4e35-84ca-2f39492bc130/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded · Cat Pea">
+  <meta property="og:description" content="The post lays out a personal multi‑device backup‑and‑reset plan with virtual machines and containers, then proposes building an AI‑driven, JavaScript‑free, text‑only web service as part of a security business—ending with a tongue‑in‑cheek app idea that lets users upload grandma’s photos to spice-up her past identity.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2230.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/education/">Education</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2230</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2230.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2230.avif" alt="Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2230.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/education/">
+              <i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2230</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-04-12">4/11/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Do not install things that have not been installed by other users,
-do not be the first, do not install software that has only been around for weeks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Do not use your normal phone for internet browsing and app installation,
-get a second phone, or use your old phone via the internet hotspot feature.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Get ready to own multiple devices, some meant for general internet,
-some just for billing, some just for government stuff like medical insurance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Backup your photos to memory sticks, get a USB hub for your phone,
-so that you can stick memory sticks in there good luck figuring out the UI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Use generated passwords, and save passwords in such a way,
-that you can reset your phone and still mostly log back in to everything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t get attached to online services, they are not attached to you,
-you may trigger security alerts and your account maybe banned.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your online accounts are not a safe place to store data,
-you may get banned before you get hacked.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I repeat, save your data,
-because you must be able to reset your devices.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not reboot, but actually factory reset your phone,
-because you will not know what is infected where.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is especially true, for phones that chose to close their operating systems,
-and there are usually a couple there.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reset, isn’t even guaranteed to work, obviously,
-powerful AI is working hard to write viruses that survive resets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remember: multiple devices, so that once you get hacked in one place,
-you go to a machine that you are reasonably sure isn’t infected.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Use virtual machines, this is the path I chose for whoever needs a login,
-I never do anything on there, I never look something up on there.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It helps that a full viral machine is a little bit slower,
-and I use VirtualBox, as a bonus you rarely have to log into everything.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are a more advanced user, Containerize everything,
-give yourself a combustion sandbox where you can freely run npm if you must.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, for the hard part, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://hackingpassion.com/telnetd-root-exploit-cve-2026-24061/">you are going to build a business out of security</a>,
-this is especially important if you are young.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your finest, and best feature will be an online e-mail services,
-that you can vibe code over the weekend.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you can sign up your relatives, and begin monitoring access,
-this is a honey pot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you find grandma has checked her email,
-that means she got hacked, credentials got leaked, and she needs to reset.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your most challenging service,
-will be most useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a set-top box, a small router, that filters things so hard,
-almost nothing works – and forget about logging in anywhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you configure a computer to use it,
-you will only get text, images, video, audio, and maybe downloads.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is basically internet in reader more,
-it is a markdown internet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This will be a starting point for your company,
-and here you will add services.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can login via API somewhere extract raw data,
-convert it to text, and present that instead of the real website.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are no ads, no third party content, just text, just simplicity,
-and you should definitely offer no JavaScript mode.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My own website is JavaScript free,
-and there are very few limiting factors when creating apps like that.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please, invest most of your development in logging tools that use AI,
-that help to catch infections, either on a dashboard or via AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Imagine a dentist’s office getting hacked, their private room just turns read,
-from alerts on a large screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There they see honey pot access alerts, deep packet inspection,
-revealing at least unusual traffic or downright password transfer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will close,
-with a prediction of how I will get hacked.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Encrypted JavaScript will be stored and executed from an icon,
-that my ad blocker uses, nobody will notice for days.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I am ready, I have nothing worth stealing, even outside of my computers,
-and the few passwords I have to get email and access to AI are on a memory stick.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is my final series advice for to you,
-delete everything you are not using, sign up for the gym.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And for the love of Lizard People,
-don’t install their app.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not the end of this text, because I saved the best for last,
-I will close with the following question and app idea:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Why should Grandma only leak her social security and boring old 401K plan,
-when you can help her leak <em>quote</em> her real IDENTITY! <em>unquote</em>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was your grand ma a classy hussy in the 80s,
-is she interested in becoming one, back then (not today)?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because that should be a checkbox in your killer app,
-she just need to upload picture of her face, and boom, in-deed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was grandpa a secret agent in the 60s,
-yeah baby.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was dad involved in the moon-lading cover ups in the 70s,
-is that why he so weird and seemingly from Mars?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was uncle, working hard,
-to provide for his family in the 80s, yup nothing to see there?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was your aunt a famous belly dancer,
-in Bolivia in the 90s, does she still practice today?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Has 2020 took a toal on you, when you discovered that the governments,
-have been in really-weird contact with lizard people?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Checkbox, checkbook, checkbox, please keep grandmas’ photos from the 80s, private, but do remind her, that it does not take an actual hack to leak them.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-04-12T02:09:47.360Z">April 11, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>13:46<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2230.avif" aria-label="Cover for Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2230.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Don’t Get Hacked Too Hard; or, Cheerful Advice for the Security Minded" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 13:46
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2230.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2230.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2230.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Do not install things that have not been installed by other users,<br>do not be the first, do not install software that has only been around for weeks.</p>
+<p>Do not use your normal phone for internet browsing and app installation,<br>get a second phone, or use your old phone via the internet hotspot feature.</p>
+<p>Get ready to own multiple devices, some meant for general internet,<br>some just for billing, some just for government stuff like medical insurance.</p>
+<p>Backup your photos to memory sticks, get a USB hub for your phone,<br>so that you can stick memory sticks in there good luck figuring out the UI.</p>
+<p>Use generated passwords, and save passwords in such a way,<br>that you can reset your phone and still mostly log back in to everything.</p>
+<p>Don’t get attached to online services, they are not attached to you,<br>you may trigger security alerts and your account maybe banned.</p>
+<p>Your online accounts are not a safe place to store data,<br>you may get banned before you get hacked.</p>
+<hr>
+<p>I repeat, save your data,<br>because you must be able to reset your devices.</p>
+<p>Not reboot, but actually factory reset your phone,<br>because you will not know what is infected where.</p>
+<p>This is especially true, for phones that chose to close their operating systems,<br>and there are usually a couple there.</p>
+<p>Reset, isn’t even guaranteed to work, obviously,<br>powerful AI is working hard to write viruses that survive resets.</p>
+<p>Remember: multiple devices, so that once you get hacked in one place,<br>you go to a machine that you are reasonably sure isn’t infected.</p>
+<hr>
+<p>Use virtual machines, this is the path I chose for whoever needs a login,<br>I never do anything on there, I never look something up on there.</p>
+<p>It helps that a full viral machine is a little bit slower,<br>and I use VirtualBox, as a bonus you rarely have to log into everything.</p>
+<hr>
+<p>If you are a more advanced user, Containerize everything,<br>give yourself a combustion sandbox where you can freely run npm if you must.</p>
+<hr>
+<p>Now, for the hard part, <a href="https://hackingpassion.com/telnetd-root-exploit-cve-2026-24061/">you are going to build a business out of security</a>,<br>this is especially important if you are young.</p>
+<p>Your finest, and best feature will be an online e-mail services,<br>that you can vibe code over the weekend.</p>
+<p>Here you can sign up your relatives, and begin monitoring access,<br>this is a honey pot.</p>
+<p>If you find grandma has checked her email,<br>that means she got hacked, credentials got leaked, and she needs to reset.</p>
+<hr>
+<p>Your most challenging service,<br>will be most useful.</p>
+<p>It is a set-top box, a small router, that filters things so hard,<br>almost nothing works – and forget about logging in anywhere.</p>
+<p>When you configure a computer to use it,<br>you will only get text, images, video, audio, and maybe downloads.</p>
+<p>It is basically internet in reader more,<br>it is a markdown internet.</p>
+<p>This will be a starting point for your company,<br>and here you will add services.</p>
+<p>You can login via API somewhere extract raw data,<br>convert it to text, and present that instead of the real website.</p>
+<p>There are no ads, no third party content, just text, just simplicity,<br>and you should definitely offer no JavaScript mode.</p>
+<p>My own website is JavaScript free,<br>and there are very few limiting factors when creating apps like that.</p>
+<hr>
+<p>Please, invest most of your development in logging tools that use AI,<br>that help to catch infections, either on a dashboard or via AI.</p>
+<p>Imagine a dentist’s office getting hacked, their private room just turns read,<br>from alerts on a large screen.</p>
+<p>There they see honey pot access alerts, deep packet inspection,<br>revealing at least unusual traffic or downright password transfer.</p>
+<p>I will close,<br>with a prediction of how I will get hacked.</p>
+<p>Encrypted JavaScript will be stored and executed from an icon,<br>that my ad blocker uses, nobody will notice for days.</p>
+<p>But I am ready, I have nothing worth stealing, even outside of my computers,<br>and the few passwords I have to get email and access to AI are on a memory stick.</p>
+<p>And that is my final series advice for to you,<br>delete everything you are not using, sign up for the gym.</p>
+<p>And for the love of Lizard People,<br>don’t install their app.</p>
+<p>This is not the end of this text, because I saved the best for last,<br>I will close with the following question and app idea:</p>
+<p>Why should Grandma only leak her social security and boring old 401K plan,<br>when you can help her leak <em>quote</em> her real IDENTITY! <em>unquote</em>.</p>
+<p>Was your grand ma a classy hussy in the 80s,<br>is she interested in becoming one, back then (not today)?</p>
+<p>Because that should be a checkbox in your killer app,<br>she just need to upload picture of her face, and boom, in-deed.</p>
+<p>Was grandpa a secret agent in the 60s,<br>yeah baby.</p>
+<p>Was dad involved in the moon-lading cover ups in the 70s,<br>is that why he so weird and seemingly from Mars?</p>
+<p>Was uncle, working hard,<br>to provide for his family in the 80s, yup nothing to see there?</p>
+<p>Was your aunt a famous belly dancer,<br>in Bolivia in the 90s, does she still practice today?</p>
+<p>Has 2020 took a toal on you, when you discovered that the governments,<br>have been in really-weird contact with lizard people?</p>
+<p>Checkbox, checkbook, checkbox, please keep grandmas’ photos from the 80s, private, but do remind her, that it does not take an actual hack to leak them.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://hackingpassion.com/telnetd-root-exploit-cve-2026-24061/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>you are going to build a business out of security</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://hackingpassion.com/telnetd-root-exploit-cve-2026-24061/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">backup</span><span class="chip">memory-stick</span><span class="chip">hotspot</span><span class="chip">virtualbox</span><span class="chip">containers</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://hackingpassion.com/telnetd-root-exploit-cve-2026-24061/">
+              <span class="text-truncate">you are going to build a business out of security</span>
+              <span class="fg-3 fs-xs flex-shrink-0">hackingpassion.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/5b8fb9ac-417f-4f37-a70e-73ed0b6e1339/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Still Human; or, Artificial Intelligence and Software Architecture</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b4f74cac-bbf6-4281-b227-ca6681d634ad/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">This Is The Age Of Thinking Machines: You Were Born Into A Strange And Wonderful Time</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Education</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c0d93cd6-91c0-44a5-81a1-fd25f6cb8e65/">
+              <img src="https://catpea.github.io/chapter-15/poem-2253.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Fake Education Is A Dead End</span>
+                <span class="fg-3 fs-xs">May 4, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4e8d9946-b9b0-451d-b360-4cfe96d88f6b/">
+              <img src="https://catpea.github.io/chapter-15/poem-2222.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">SHIFT</span>
+                <span class="fg-3 fs-xs">April 1, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b77152d2-05b4-44d1-9adb-286b7204a9ae/">
+              <img src="https://catpea.github.io/chapter-15/poem-2274.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Close Encounters</span>
+                <span class="fg-3 fs-xs">May 25, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/7e4f2b39-6943-442c-8798-3197373cc86a/">
+              <img src="https://catpea.github.io/chapter-15/poem-2218.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Do Not Let Teachers Trick You Into Pretending To Learn</span>
+                <span class="fg-3 fs-xs">March 28, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/education/">All of Education<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

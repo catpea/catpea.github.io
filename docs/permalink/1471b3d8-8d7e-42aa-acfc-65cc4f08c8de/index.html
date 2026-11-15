@@ -1,177 +1,457 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What Is It Like Inside A Computer Program?</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>What Is It Like Inside A Computer Program? · Cat Pea</title>
+  <meta name="description" content="The post explains how to tame program complexity by treating code as a hierarchy of “rooms” or hollow spaces that can be nested and compartmentalized. It illustrates this idea first with a video‑sharpening pipeline that breaks a movie into frames, sharpens each frame separately, and then recombines them—showing how processing in small chunks saves memory and speeds execution. Next it introduces the metaphor of a `Room` object containing a list of sub‑rooms, which can be generalized to a recursive `Location` structure, enabling models like maps or text adventures. Finally it describes an actual UI example: a pannable/zoomable desktop with windows that contain title bars, each having a selectable feature; clicking and Ctrl‑click logic is encapsulated inside this nested structure. The key point is that the language need not prescribe the layout—developers should consciously build these recursive, self‑similar layers so that new ideas stay within their appropriate “room” and don’t leak into unrelated parts of the program.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/1471b3d8-8d7e-42aa-acfc-65cc4f08c8de/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Is It Like Inside A Computer Program? · Cat Pea">
+  <meta property="og:description" content="The post explains how to tame program complexity by treating code as a hierarchy of “rooms” or hollow spaces that can be nested and compartmentalized. It illustrates this idea first with a video‑sharpening pipeline that breaks a movie into frames, sharpens each frame separately, and then recombines them—showing how processing in small chunks saves memory and speeds execution. Next it introduces the metaphor of a `Room` object containing a list of sub‑rooms, which can be generalized to a recursive `Location` structure, enabling models like maps or text adventures. Finally it describes an actual UI example: a pannable/zoomable desktop with windows that contain title bars, each having a selectable feature; clicking and Ctrl‑click logic is encapsulated inside this nested structure. The key point is that the language need not prescribe the layout—developers should consciously build these recursive, self‑similar layers so that new ideas stay within their appropriate “room” and don’t leak into unrelated parts of the program.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1588.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1588</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1588.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1588.avif" alt="What Is It Like Inside A Computer Program?"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">What Is It Like Inside A Computer Program?</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1588.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1588</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">What Is It Like Inside A Computer Program?</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-07-07">7/6/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Not all programs have a hollow inside,
-some powerful programs are more like a wall.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You get input, transform it,
-and output it, so that another program can receive it as input.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An example of such a program would be a video sharpener,
-here the video is broken down to separate image files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where each file is a movie frame,
-then each image file is processed with a sharpening algorithms.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That removes blur,
-and makes edges more pronounced.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then each of those images is sent as output,
-it could be another program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or just a file,
-where each frame is appended to the previous.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Again,
-creating a big video file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason why you convert everything into frames,
-is conserving computer memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You never load the entire move at the same time,
-just as many frames as you have CPU cores.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To perform all the transformations,
-as soon as possible.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, as to more creative programs,
-not necessarily more powerful, but more capacious.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You kind of sit down, and decide,
-that your program is going to have room.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though it may look ordinary to other programmers,
-your vision will reveal a structure.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason why you would want rooms,
-or hollow space in your application, is compartmentalization.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You want to put all the big things,
-that rooms always require in the same place, that they all inherit from.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And unusual things, such as the window title-bar,
-atop a desktop window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that you will never encounter any code,
-outside of the place where it is relevant.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Only windows have window title-bars,
-so you only encounter it when you are inside your window code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a big deal, because programs get big,
-and all the little sorting that you do along the way, really helps.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">First, lets talk about room,
-what does it mean.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Image an object called Room,
-that contains a list called rooms.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now understand that you can add Room objects,
-to the list called rooms, all the way down.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a recursive nested data structure,
-you can even generalize it into...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A Location object,
-that contains a list named locations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can create a map of the universe,
-a text game, or multi user dungeon here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Location names universe,
-contains locations named Milky Way and Andromeda.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Both contain some inhabited planets,
-and a super massive black hole.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, a more down to earth example,
-I am working on a Pannable and Zommable Desktop that has Windows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I naturally think of them as having an inside,
-as in inside the desktop you have windows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And inside the window you have a title bar,
-you attach a Selectable feature to the title bar.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And inside the Selectable feature,
-you have the following.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On Click, if selected,
-deselectAll, so it is a toggle mechanic.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Else, If not selected,
-select.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then there is a second part,
-OnClick while Control key is pressed,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If selected, deselectOne,
-else if not selected, addOneToExistingSelection()</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you hold Control key
-you can select multiple windows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you don&#39;t everything gets deselected,
-and whatever window you are clicking on has selection toggled.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So selectable has an inside,
-but it is not as pronounced as Window or Desktop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And once we start talking about Clicking and Control key,
-there is no sense of location, it is more like events and simple logic.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But look how beautifully organized the logic is,
-it is inside a Selectable feature, or trait.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is attached to a title-bar,
-which lives inside a window, which it self is inside a desktop.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You would be wrong to think,
-that your programming language should tell you how to structure your programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If your language tells you how to write programs,
-find a better language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is you, who when facing a feeling of impending complexity,
-decides to create a hierarchy of rooms.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you can compartmentalize everything,
-so that complex ideas from once concepts don&#39;t leak out and trespass onto another.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So what is inside a computer program,
-some kind of a nested, recursive, self similar, minimalist structure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Capable of compartmentalization,
-while providing a clear and uniform road to navigate the complexity of a program.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-07-07T03:48:29.311Z">July 6, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:12<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1588.avif" aria-label="Cover for What Is It Like Inside A Computer Program?, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1588.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for What Is It Like Inside A Computer Program?" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:12
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1588.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1588.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1588.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Not all programs have a hollow inside,<br>some powerful programs are more like a wall.</p>
+<p>You get input, transform it,<br>and output it, so that another program can receive it as input.</p>
+<p>An example of such a program would be a video sharpener,<br>here the video is broken down to separate image files.</p>
+<p>Where each file is a movie frame,<br>then each image file is processed with a sharpening algorithms.</p>
+<p>That removes blur,<br>and makes edges more pronounced.</p>
+<p>And then each of those images is sent as output,<br>it could be another program.</p>
+<p>Or just a file,<br>where each frame is appended to the previous.</p>
+<p>Again,<br>creating a big video file.</p>
+<p>The reason why you convert everything into frames,<br>is conserving computer memory.</p>
+<p>You never load the entire move at the same time,<br>just as many frames as you have CPU cores.</p>
+<p>To perform all the transformations,<br>as soon as possible.</p>
+<hr>
+<p>Now, as to more creative programs,<br>not necessarily more powerful, but more capacious.</p>
+<p>You kind of sit down, and decide,<br>that your program is going to have room.</p>
+<p>Though it may look ordinary to other programmers,<br>your vision will reveal a structure.</p>
+<hr>
+<p>The reason why you would want rooms,<br>or hollow space in your application, is compartmentalization.</p>
+<p>You want to put all the big things,<br>that rooms always require in the same place, that they all inherit from.</p>
+<p>And unusual things, such as the window title-bar,<br>atop a desktop window.</p>
+<p>So that you will never encounter any code,<br>outside of the place where it is relevant.</p>
+<p>Only windows have window title-bars,<br>so you only encounter it when you are inside your window code.</p>
+<p>This is a big deal, because programs get big,<br>and all the little sorting that you do along the way, really helps.</p>
+<hr>
+<p>First, lets talk about room,<br>what does it mean.</p>
+<p>Image an object called Room,<br>that contains a list called rooms.</p>
+<p>And now understand that you can add Room objects,<br>to the list called rooms, all the way down.</p>
+<p>It is a recursive nested data structure,<br>you can even generalize it into...</p>
+<p>A Location object,<br>that contains a list named locations.</p>
+<p>You can create a map of the universe,<br>a text game, or multi user dungeon here.</p>
+<p>Location names universe,<br>contains locations named Milky Way and Andromeda.</p>
+<p>Both contain some inhabited planets,<br>and a super massive black hole.</p>
+<hr>
+<p>Finally, a more down to earth example,<br>I am working on a Pannable and Zommable Desktop that has Windows.</p>
+<p>And I naturally think of them as having an inside,<br>as in inside the desktop you have windows.</p>
+<p>And inside the window you have a title bar,<br>you attach a Selectable feature to the title bar.</p>
+<p>And inside the Selectable feature,<br>you have the following.</p>
+<p>On Click, if selected,<br>deselectAll, so it is a toggle mechanic.</p>
+<p>Else, If not selected,<br>select.</p>
+<p>And then there is a second part,<br>OnClick while Control key is pressed,</p>
+<p>If selected, deselectOne,<br>else if not selected, addOneToExistingSelection()</p>
+<p>When you hold Control key<br>you can select multiple windows.</p>
+<p>And if you don&#39;t everything gets deselected,<br>and whatever window you are clicking on has selection toggled.</p>
+<hr>
+<p>So selectable has an inside,<br>but it is not as pronounced as Window or Desktop.</p>
+<p>And once we start talking about Clicking and Control key,<br>there is no sense of location, it is more like events and simple logic.</p>
+<hr>
+<p>But look how beautifully organized the logic is,<br>it is inside a Selectable feature, or trait.</p>
+<p>Which is attached to a title-bar,<br>which lives inside a window, which it self is inside a desktop.</p>
+<hr>
+<p>You would be wrong to think,<br>that your programming language should tell you how to structure your programs.</p>
+<p>If your language tells you how to write programs,<br>find a better language.</p>
+<p>It is you, who when facing a feeling of impending complexity,<br>decides to create a hierarchy of rooms.</p>
+<p>Where you can compartmentalize everything,<br>so that complex ideas from once concepts don&#39;t leak out and trespass onto another.</p>
+<hr>
+<p>So what is inside a computer program,<br>some kind of a nested, recursive, self similar, minimalist structure.</p>
+<p>Capable of compartmentalization,<br>while providing a clear and uniform road to navigate the complexity of a program.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">object-oriented-programming</span><span class="chip">design-patterns</span><span class="chip">composition</span><span class="chip">recursion</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/361502d6-869f-415f-8668-bb167835275b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Avoid The Fitness Myths: It Is Not About How Heavy You Lift, But How Long You Lift Your Heavy For</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/47c4d15a-442d-4bdb-9bca-29c95e2784b3/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">TOP SECRET: Cat Installation Agency, Cataclysm Avoidance Plan: C</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/72fe19af-6b7d-4153-bc86-660b061703ab/">
+              <img src="https://catpea.github.io/chapter-10/poem-1597.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">JavaScript Starting Points; Or, Before You Program Your First Hello World</span>
+                <span class="fg-3 fs-xs">July 15, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a9a7999e-3a1e-46f2-a728-a583750f6668/">
+              <img src="https://catpea.github.io/chapter-10/poem-1584.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Easy PZ And The Kludge; Or, The Big Mistake That Programmers Should Unmake</span>
+                <span class="fg-3 fs-xs">July 2, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/66fdd6a8-6395-4c4e-83a6-141beead8c5a/">
+              <img src="https://catpea.github.io/chapter-10/poem-1598.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programmers, Inventors, and Wizards; Or, Life After Learning Programming</span>
+                <span class="fg-3 fs-xs">July 16, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d20469b1-fbbc-4346-aae6-a29c29545a7c/">
+              <img src="https://catpea.github.io/chapter-10/poem-1582.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Day Of Debugging</span>
+                <span class="fg-3 fs-xs">July 1, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

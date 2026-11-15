@@ -1,157 +1,448 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Day Of Debugging</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Day Of Debugging · Cat Pea</title>
+  <meta name="description" content="The author argues that even simple command‑line tools can benefit from an explicit life‑cycle when they are built with object‑oriented programming, but the real advantage shows up in GUI applications where widgets need clear initialize‑open‑close‑destroy stages to manage event listeners and avoid memory leaks. He explains how attaching a click listener on every open creates dozens of duplicates unless it is removed on close, and that a well‑structured life‑cycle makes debugging and refactoring easier. The post recounts his own experience adding custom properties (zoom, scroll, etc.) via proxies, noticing repeated code, and introducing long‑named life‑cycle functions to improve readability. He then describes a bug caused by initializing UI elements before the UI is ready, illustrating how improper ordering can break the cycle. Overall, he stresses that a consistent object‑oriented approach, even if unconventional, keeps complex GUI systems manageable and reduces bugs.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/d20469b1-fbbc-4346-aae6-a29c29545a7c/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Day Of Debugging · Cat Pea">
+  <meta property="og:description" content="The author argues that even simple command‑line tools can benefit from an explicit life‑cycle when they are built with object‑oriented programming, but the real advantage shows up in GUI applications where widgets need clear initialize‑open‑close‑destroy stages to manage event listeners and avoid memory leaks. He explains how attaching a click listener on every open creates dozens of duplicates unless it is removed on close, and that a well‑structured life‑cycle makes debugging and refactoring easier. The post recounts his own experience adding custom properties (zoom, scroll, etc.) via proxies, noticing repeated code, and introducing long‑named life‑cycle functions to improve readability. He then describes a bug caused by initializing UI elements before the UI is ready, illustrating how improper ordering can break the cycle. Overall, he stresses that a consistent object‑oriented approach, even if unconventional, keeps complex GUI systems manageable and reduces bugs.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1582.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1582</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1582.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1582.avif" alt="A Day Of Debugging"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Day Of Debugging</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1582.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1582</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Day Of Debugging</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-07-01">7/1/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Once your computer program has something that closes and opens,
-it makes sense to use Object Oriented Programming and give it a life cycle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Command line programs usually don’t have a need for it,
-they are too simple, they don’t have anything inside that persists.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">User interface programs, can have the notion of a draggable widget,
-where it makes sense to have an initialize, open, close, destroy cycle.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a massive shift away from following procedures,
-or merely transforming data.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Everything in your GUI application will demand starting and stopping,
-a simple button even.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In order to cleanly respond to button clicks,
-you attach a mouse click listener, that listens for clicks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But guess what you need to do when you close something in your program,
-you have to stop listening for clicks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you reopen that something 50 times, you will have 50 click listeners,
-they will clog up your memory, and may even slow your program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you have to stop listening to the button clicks,
-an you add that to your widget.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now when your user closes it,
-it automatically cleans up after it self.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In such applications, you have to be loud and use clear roads,
-loud pipes save lives, or days of debugging in this case.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A life cycle is a little state machine similar to traffic lights,
-and a listener belongs to an event emitter that works like a radio.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All those mighty developers, are just making clear little machines,
-knowing that things get complicated sometimes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is better,
-when you program a large assembly of clear to understand machinery.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not just about bugs, or clarity of code,
-but refactoring also.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every once in a while,
-you come up with an idea that can improve one of your machines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you keep everything nice and bold,
-and without any twists and turns, you can make your program more fun.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, I came up with an idea to give myself object properties,
-such as ZOOM, SCROLL, or STOP and START even…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where it is not possible to make a typo,
-I used a proxy that throws errors if the target object is missing a property.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And having noticed that I repeat somethings a lot more than others,
-I added new life-cycle functions with really long names.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am finishing up this part of the program,
-and I want to remember it better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Keeping things consistent,
-allowed me to make my code more redable.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I did end up with a bug, it is likely somewhere within the life-cycle,
-it is hard sometimes to initialize things as they may use the UI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the UI is not yet available during that initialization phase,
-it is hard to say what it is, exactly, but moving some initialization up to start.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will likely reveal what is causing the issue, and it is not that,
-then it is my OOP, as I created my own flavor – which is a bin no-no.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But sometimes necessary, my language is a tiny bit behind,
-on efficient reactive programming, they have the bottom right.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But they may not want to touch Object Oriented Programming,
-because it is about objects, not reactivity, and keeping things simple is good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Cats like me, who build up large trees of nested components,
-need their own take on OOP to keep the machines simple looking.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I got to witness a window closing,
-and cleaning up after it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though my windows can connect with wires, and the pads the wires connect to,
-have a bug where they don’t yet get automatically cleaned up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is where the bug is at,
-it is very loud and clear territory where I can map out what is going on.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only time you ever get stuck when programming,
-is when you have a dead line - It is a terrible idea.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Good programming demands time, relaxation and imagination,
-setting a stressful deadline that prevents imagination, is silly.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">More than that, programmers aren’t just machine makers,
-in fact, they are tool makers first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On one end they create libraries that hasten development,
-and on the other tools for analyzing or debugging their programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the machinery of the program is padded by various pillows,
-and surrounded by scopes, and microscopes and all kinds of tests gadgets.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If the world only knew what incredible fun awaits them,
-after they learn how to program.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-07-01T05:10:04.743Z">July 1, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:16<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1582.avif" aria-label="Cover for A Day Of Debugging, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1582.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Day Of Debugging" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:16
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1582.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1582.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1582.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Once your computer program has something that closes and opens,<br>it makes sense to use Object Oriented Programming and give it a life cycle.</p>
+<p>Command line programs usually don’t have a need for it,<br>they are too simple, they don’t have anything inside that persists.</p>
+<p>User interface programs, can have the notion of a draggable widget,<br>where it makes sense to have an initialize, open, close, destroy cycle.</p>
+<hr>
+<p>It is a massive shift away from following procedures,<br>or merely transforming data.</p>
+<hr>
+<p>Everything in your GUI application will demand starting and stopping,<br>a simple button even.</p>
+<p>In order to cleanly respond to button clicks,<br>you attach a mouse click listener, that listens for clicks.</p>
+<p>But guess what you need to do when you close something in your program,<br>you have to stop listening for clicks.</p>
+<p>If you reopen that something 50 times, you will have 50 click listeners,<br>they will clog up your memory, and may even slow your program.</p>
+<p>So you have to stop listening to the button clicks,<br>an you add that to your widget.</p>
+<p>So now when your user closes it,<br>it automatically cleans up after it self.</p>
+<hr>
+<p>In such applications, you have to be loud and use clear roads,<br>loud pipes save lives, or days of debugging in this case.</p>
+<p>A life cycle is a little state machine similar to traffic lights,<br>and a listener belongs to an event emitter that works like a radio.</p>
+<p>All those mighty developers, are just making clear little machines,<br>knowing that things get complicated sometimes.</p>
+<p>And it is better,<br>when you program a large assembly of clear to understand machinery.</p>
+<hr>
+<p>It is not just about bugs, or clarity of code,<br>but refactoring also.</p>
+<p>Every once in a while,<br>you come up with an idea that can improve one of your machines.</p>
+<p>And if you keep everything nice and bold,<br>and without any twists and turns, you can make your program more fun.</p>
+<hr>
+<p>Today, I came up with an idea to give myself object properties,<br>such as ZOOM, SCROLL, or STOP and START even…</p>
+<p>Where it is not possible to make a typo,<br>I used a proxy that throws errors if the target object is missing a property.</p>
+<p>And having noticed that I repeat somethings a lot more than others,<br>I added new life-cycle functions with really long names.</p>
+<p>I am finishing up this part of the program,<br>and I want to remember it better.</p>
+<p>Keeping things consistent,<br>allowed me to make my code more redable.</p>
+<hr>
+<p>And I did end up with a bug, it is likely somewhere within the life-cycle,<br>it is hard sometimes to initialize things as they may use the UI.</p>
+<p>And the UI is not yet available during that initialization phase,<br>it is hard to say what it is, exactly, but moving some initialization up to start.</p>
+<p>Will likely reveal what is causing the issue, and it is not that,<br>then it is my OOP, as I created my own flavor – which is a bin no-no.</p>
+<p>But sometimes necessary, my language is a tiny bit behind,<br>on efficient reactive programming, they have the bottom right.</p>
+<p>But they may not want to touch Object Oriented Programming,<br>because it is about objects, not reactivity, and keeping things simple is good.</p>
+<p>Cats like me, who build up large trees of nested components,<br>need their own take on OOP to keep the machines simple looking.</p>
+<hr>
+<p>But I got to witness a window closing,<br>and cleaning up after it self.</p>
+<p>Though my windows can connect with wires, and the pads the wires connect to,<br>have a bug where they don’t yet get automatically cleaned up.</p>
+<p>That is where the bug is at,<br>it is very loud and clear territory where I can map out what is going on.</p>
+<hr>
+<p>The only time you ever get stuck when programming,<br>is when you have a dead line - It is a terrible idea.</p>
+<p>Good programming demands time, relaxation and imagination,<br>setting a stressful deadline that prevents imagination, is silly.</p>
+<hr>
+<p>More than that, programmers aren’t just machine makers,<br>in fact, they are tool makers first.</p>
+<p>On one end they create libraries that hasten development,<br>and on the other tools for analyzing or debugging their programs.</p>
+<p>So the machinery of the program is padded by various pillows,<br>and surrounded by scopes, and microscopes and all kinds of tests gadgets.</p>
+<hr>
+<p>If the world only knew what incredible fun awaits them,<br>after they learn how to program.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">oop</span><span class="chip">gui</span><span class="chip">event-listeners</span><span class="chip">lifecycle</span><span class="chip">state-machine</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/1d6f0280-f79e-425c-9dda-362bac437086/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Michigan Under Attack By Extra Itchy Mosquitoes</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/9cfa3230-5242-4a56-b448-2e87801622e5/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">A Warrior Meal To Fix Fatigue, Brain Fog, Muscle Weakness, Body Aches, And Afternoon Naps</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a9a7999e-3a1e-46f2-a728-a583750f6668/">
+              <img src="https://catpea.github.io/chapter-10/poem-1584.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Easy PZ And The Kludge; Or, The Big Mistake That Programmers Should Unmake</span>
+                <span class="fg-3 fs-xs">July 2, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/59458eea-38f0-44aa-a024-4f0e1db0a066/">
+              <img src="https://catpea.github.io/chapter-10/poem-1570.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Quo Vadis; Or, Learn For Real Because Your Teacher Isn’t Really Trying To Teach You</span>
+                <span class="fg-3 fs-xs">June 19, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1471b3d8-8d7e-42aa-acfc-65cc4f08c8de/">
+              <img src="https://catpea.github.io/chapter-10/poem-1588.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">What Is It Like Inside A Computer Program?</span>
+                <span class="fg-3 fs-xs">July 6, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4357d9ff-9762-4175-806d-2c7454ca611c/">
+              <img src="https://catpea.github.io/chapter-10/poem-1569.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Helping New Programmers Code Big; Or, The Aim Of Visual Programming</span>
+                <span class="fg-3 fs-xs">June 18, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

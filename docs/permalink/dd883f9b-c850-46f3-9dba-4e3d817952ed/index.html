@@ -1,297 +1,589 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mastering Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Mastering Programming · Cat Pea</title>
+  <meta name="description" content="The post argues that becoming a good programmer is straightforward once you view code as a collection of “machines” that pass and transform objects—like User emails or login packets—through well‑ordered stages, handling errors and state changes in the same way you would orchestrate physical machines. Mastery comes not from memorizing interview questions but by repeatedly building such object‑passing pipelines, learning OOP concepts through hands‑on practice rather than textbook definitions, and designing simple yet robust data stores (in‑memory indices plus file‑based append‑only logs). The author celebrates the programmer’s self‑made world, likening it to a Rōnin Samurai or magician who creates, tests, and expands systems—illustrated by examples such as WikiWikiWeb, HyperCard links, or simple node/electron projects—showing that true programming is about constructing coherent, reusable machines rather than fitting into corporate molds.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/dd883f9b-c850-46f3-9dba-4e3d817952ed/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mastering Programming · Cat Pea">
+  <meta property="og:description" content="The post argues that becoming a good programmer is straightforward once you view code as a collection of “machines” that pass and transform objects—like User emails or login packets—through well‑ordered stages, handling errors and state changes in the same way you would orchestrate physical machines. Mastery comes not from memorizing interview questions but by repeatedly building such object‑passing pipelines, learning OOP concepts through hands‑on practice rather than textbook definitions, and designing simple yet robust data stores (in‑memory indices plus file‑based append‑only logs). The author celebrates the programmer’s self‑made world, likening it to a Rōnin Samurai or magician who creates, tests, and expands systems—illustrated by examples such as WikiWikiWeb, HyperCard links, or simple node/electron projects—showing that true programming is about constructing coherent, reusable machines rather than fitting into corporate molds.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-02/poem-0392.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-02/">Chapter 02</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0392</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-02/poem-0392.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-02/poem-0392.avif" alt="Mastering Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Mastering Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-02/poem-0392.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 02</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0392</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Mastering Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-03-27">3/27/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Being a good programmer is very easy,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if you keep everything in order.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It gets even easier when you program for yourself,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you become a master of your world of little machines.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Things get difficult when too many machines,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">start biting each other, this has been called <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=gRsyY0kzXfw">Leaky Abstractions</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can think of things inside a program as machines,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">some machines move objects that have named values.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Fox example a commonly used object is User,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the name of a commonly used value is email, and value of email is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="mailto:user@example.com">user@example.com</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Such an object can be passed through a machine that detects bad email addresses,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">example.com is a special fake domain name, so it is a bad email address.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When detected, the entire user object will be bounced, or sent, of copied over,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">to a program that suspends accounts, prevents the user with that email from longing in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you fill out a login form on a website,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you create a short lived login object, that goes into a system of such little machines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There could be a machine that has a list of bad emails that will CRUSH! this packet,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and sent an error object back to the login page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or there could be a machine that right before password verification,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">checks if the user is suspended, and will just say &quot;Invalid Password&quot; instead.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If all you ever do is deal with these little object-passing machines,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">then that means you are a pretty good programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But when you search for a job,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/DopplerHQ/awesome-interview-questions#javascript">people will try to force you to know 50 different things</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No one should tell you what you should excel at,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">or define what programming should consist of.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nor are you allowed to focus on memorizing answers to those questions,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">because to really know an answer you have to encounter and solve the problem yourself.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the course of you mastery of programming,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you will bump into every interview question there is inside out.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Interviews are strange things, because you can build your own Object Oriented Language,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and when asked about Polymorphism, Encapsulation, Abstraction, and Inheritance not recognize it as a definition of Object Oriented Programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A definition using those four beautiful words is found in a school text book,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if you don&#39;t associate those four words with OOP by having encountered them in a text book, you will fail the question.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even if you build you own OOP systems, and especially if you frequently employ Polymorphism, Encapsulation, Abstraction, and Inheritance</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">though other means, such as Event Oriented Programming, or Aspect Oriented Programming, Or Agent Oriented Programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Failing an interview does not make you a bad programmer,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it makes you an expert in things that they can&#39;t conceive of.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Do you understand what this means,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you can&#39;t expect schools to teach you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What schools teach will make a mess out of you,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you have to learn on your own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The machines have to be yours,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">to connect together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must become a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=XqxwwuUdsp4" title="Ward Cunningham a Rōnin Samurai">Rōnin Samurai</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">make people confused, embarrassed, maybe even angry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The point of programming is not to get a job,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it is to change the world.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The nay sayers will check me here,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">what good is a programmer that knows not how to operate DOM, or CouchDB or SQL.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the answers is, my dear critic,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">what good are you for knowing those things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No good at all,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it is all in your head.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are just two types of databases, in-memory, and on file system,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if you combine the two together and prefix it with a append only log, you&#39;ll have all you need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Keep your indexes in memory, name your directories after record id like in CouchDB,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and updates with a version-number and a UUID so that they may be saved into that folder without overwriting anything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Conflict resolution is achieved by looking at the UUID,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">just a simple sort on the UUID gives you the winner and thus eventual consistency.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then just sync servers with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=bfj3bh77XB0">rsync</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">remember all file names are named with a random UUID in it, no data will ever be overwritten, just updated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nay sayers, critics, benchmark sticklers, and ACID Database Test lovers,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">go home, eat your vegetables, and drink plenty of water.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the world of programming you are always correct,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">because it is a world of your own making.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are the creator of your software,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and you also the hacker, the tester, and the administrator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is easy to grasp what you have invented,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and use what you have invented to understand, reverse engineer, and infer other technologies.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your greatest power is simplicity and order,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">learn from <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/user/WardCunningham">Ward Cunningham</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Mr. Cunningham connected WikiWikiWeb pages by removing spaces between capitalized words,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if something was camel case, it would immediately become a link to a page named after those smushed words.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only thing you needed to link pages together was: capitalizing the words you wanted to make a link out of, and removing spaces between them,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">system would detect an uppercase letter in the middle of a word, and turn it into a hyperlink to another page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And best of all, if that page did not exist,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it would say &quot;Hey there, stranger, this page does not exist yet, why don&#39;t you create it.&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Mr. Cunningham mentions the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=tx_WCIAM4bA">HyperCard</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and yes, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=FquNpWdf9vg">HyperCard is a wonderful idea</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is what being a programmer means,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you start with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=uVwtVBpw7RQ">node</a> or <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=8YP_nOCO-4Q">electron</a> , and your first line of code, and then you move on to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=PFmuCDHHpwk">OOP</a> or <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=NtrnaTKqFPQ">EventEmitter</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Create your first <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=lhNdUVh3qCc">Game</a>, WikiWikiWeb, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=QzvqSVgc2t4">MUD</a>, or even <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=EXW1ts6tZh4">Interactive Fiction Adventure</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">or a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=CeId265HGnM&list=PLgNJO2hghbmiACV9v_sdBwRLnEdKUlZ1s">bot</a>, or a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=xBQef0fs-_Q">music programming environment</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as you create your own systems,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">within your own realm, you will never get lost, and you will never stop learning about everything else.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programmers are both Rōnin Samurai, and Real Magicians,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they are unafraid to cast spells and build worlds, and create universes.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-03-27T21:37:27.481Z">March 27, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:59<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-02/poem-0392.avif" aria-label="Cover for Mastering Programming, full size">
+            <img src="https://catpea.github.io/chapter-02/poem-0392.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Mastering Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:59
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-02/poem-0392.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-02/poem-0392.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-02/poem-0392.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Being a good programmer is very easy,</p>
+<p>if you keep everything in order.</p>
+<p>It gets even easier when you program for yourself,</p>
+<p>you become a master of your world of little machines.</p>
+<hr>
+<p>Things get difficult when too many machines,</p>
+<p>start biting each other, this has been called <a href="https://www.youtube.com/watch?v=gRsyY0kzXfw">Leaky Abstractions</a>.</p>
+<p>You can think of things inside a program as machines,</p>
+<p>some machines move objects that have named values.</p>
+<hr>
+<p>Fox example a commonly used object is User,</p>
+<p>the name of a commonly used value is email, and value of email is <a href="mailto:user@example.com">user@example.com</a></p>
+<p>Such an object can be passed through a machine that detects bad email addresses,</p>
+<p>example.com is a special fake domain name, so it is a bad email address.</p>
+<p>When detected, the entire user object will be bounced, or sent, of copied over,</p>
+<p>to a program that suspends accounts, prevents the user with that email from longing in.</p>
+<p>When you fill out a login form on a website,</p>
+<p>you create a short lived login object, that goes into a system of such little machines.</p>
+<p>There could be a machine that has a list of bad emails that will CRUSH! this packet,</p>
+<p>and sent an error object back to the login page.</p>
+<p>Or there could be a machine that right before password verification,</p>
+<p>checks if the user is suspended, and will just say &quot;Invalid Password&quot; instead.</p>
+<hr>
+<p>If all you ever do is deal with these little object-passing machines,</p>
+<p>then that means you are a pretty good programmer.</p>
+<p>But when you search for a job,</p>
+<p><a href="https://github.com/DopplerHQ/awesome-interview-questions#javascript">people will try to force you to know 50 different things</a>.</p>
+<p>No one should tell you what you should excel at,</p>
+<p>or define what programming should consist of.</p>
+<p>Nor are you allowed to focus on memorizing answers to those questions,</p>
+<p>because to really know an answer you have to encounter and solve the problem yourself.</p>
+<p>In the course of you mastery of programming,</p>
+<p>you will bump into every interview question there is inside out.</p>
+<hr>
+<p>Interviews are strange things, because you can build your own Object Oriented Language,</p>
+<p>and when asked about Polymorphism, Encapsulation, Abstraction, and Inheritance not recognize it as a definition of Object Oriented Programming.</p>
+<p>A definition using those four beautiful words is found in a school text book,</p>
+<p>if you don&#39;t associate those four words with OOP by having encountered them in a text book, you will fail the question.</p>
+<p>Even if you build you own OOP systems, and especially if you frequently employ Polymorphism, Encapsulation, Abstraction, and Inheritance</p>
+<p>though other means, such as Event Oriented Programming, or Aspect Oriented Programming, Or Agent Oriented Programming.</p>
+<p>Failing an interview does not make you a bad programmer,</p>
+<p>it makes you an expert in things that they can&#39;t conceive of.</p>
+<hr>
+<p>Do you understand what this means,</p>
+<p>you can&#39;t expect schools to teach you.</p>
+<p>What schools teach will make a mess out of you,</p>
+<p>you have to learn on your own.</p>
+<p>The machines have to be yours,</p>
+<p>to connect together.</p>
+<p>You must become a <a href="https://www.youtube.com/watch?v=XqxwwuUdsp4" title="Ward Cunningham a Rōnin Samurai">Rōnin Samurai</a>,</p>
+<p>make people confused, embarrassed, maybe even angry.</p>
+<p>The point of programming is not to get a job,</p>
+<p>it is to change the world.</p>
+<hr>
+<p>The nay sayers will check me here,</p>
+<p>what good is a programmer that knows not how to operate DOM, or CouchDB or SQL.</p>
+<p>But the answers is, my dear critic,</p>
+<p>what good are you for knowing those things.</p>
+<p>No good at all,</p>
+<p>it is all in your head.</p>
+<p>There are just two types of databases, in-memory, and on file system,</p>
+<p>if you combine the two together and prefix it with a append only log, you&#39;ll have all you need.</p>
+<p>Keep your indexes in memory, name your directories after record id like in CouchDB,</p>
+<p>and updates with a version-number and a UUID so that they may be saved into that folder without overwriting anything.</p>
+<p>Conflict resolution is achieved by looking at the UUID,</p>
+<p>just a simple sort on the UUID gives you the winner and thus eventual consistency.</p>
+<p>Then just sync servers with <a href="https://www.youtube.com/watch?v=bfj3bh77XB0">rsync</a>,</p>
+<p>remember all file names are named with a random UUID in it, no data will ever be overwritten, just updated.</p>
+<p>Nay sayers, critics, benchmark sticklers, and ACID Database Test lovers,</p>
+<p>go home, eat your vegetables, and drink plenty of water.</p>
+<hr>
+<p>In the world of programming you are always correct,</p>
+<p>because it is a world of your own making.</p>
+<p>You are the creator of your software,</p>
+<p>and you also the hacker, the tester, and the administrator.</p>
+<p>It is easy to grasp what you have invented,</p>
+<p>and use what you have invented to understand, reverse engineer, and infer other technologies.</p>
+<hr>
+<p>Your greatest power is simplicity and order,</p>
+<p>learn from <a href="https://www.youtube.com/user/WardCunningham">Ward Cunningham</a>.</p>
+<p>Mr. Cunningham connected WikiWikiWeb pages by removing spaces between capitalized words,</p>
+<p>if something was camel case, it would immediately become a link to a page named after those smushed words.</p>
+<p>The only thing you needed to link pages together was: capitalizing the words you wanted to make a link out of, and removing spaces between them,</p>
+<p>system would detect an uppercase letter in the middle of a word, and turn it into a hyperlink to another page.</p>
+<p>And best of all, if that page did not exist,</p>
+<p>it would say &quot;Hey there, stranger, this page does not exist yet, why don&#39;t you create it.&quot;</p>
+<p>Mr. Cunningham mentions the <a href="https://www.youtube.com/watch?v=tx_WCIAM4bA">HyperCard</a>,</p>
+<p>and yes, <a href="https://www.youtube.com/watch?v=FquNpWdf9vg">HyperCard is a wonderful idea</a>.</p>
+<p>This is what being a programmer means,</p>
+<p>you start with <a href="https://www.youtube.com/watch?v=uVwtVBpw7RQ">node</a> or <a href="https://www.youtube.com/watch?v=8YP_nOCO-4Q">electron</a> , and your first line of code, and then you move on to <a href="https://www.youtube.com/watch?v=PFmuCDHHpwk">OOP</a> or <a href="https://www.youtube.com/watch?v=NtrnaTKqFPQ">EventEmitter</a>.</p>
+<p>Create your first <a href="https://www.youtube.com/watch?v=lhNdUVh3qCc">Game</a>, WikiWikiWeb, <a href="https://www.youtube.com/watch?v=QzvqSVgc2t4">MUD</a>, or even <a href="https://www.youtube.com/watch?v=EXW1ts6tZh4">Interactive Fiction Adventure</a>,</p>
+<p>or a <a href="https://www.youtube.com/watch?v=CeId265HGnM&list=PLgNJO2hghbmiACV9v_sdBwRLnEdKUlZ1s">bot</a>, or a <a href="https://www.youtube.com/watch?v=xBQef0fs-_Q">music programming environment</a>.</p>
+<p>So as long as you create your own systems,</p>
+<p>within your own realm, you will never get lost, and you will never stop learning about everything else.</p>
+<p>Programmers are both Rōnin Samurai, and Real Magicians,</p>
+<p>they are unafraid to cast spells and build worlds, and create universes.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=gRsyY0kzXfw">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Leaky Abstractions</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=gRsyY0kzXfw</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="mailto:user@example.com">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>user@example.com</span>
-                      <small class="d-block text-muted fw-lighter mt-2">mailto:user@example.com</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/DopplerHQ/awesome-interview-questions#javascript">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>people will try to force you to know 50 different things</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/DopplerHQ/awesome-interview-questions#javascript</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=XqxwwuUdsp4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Rōnin Samurai</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=XqxwwuUdsp4</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=bfj3bh77XB0">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>rsync</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=bfj3bh77XB0</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/user/WardCunningham">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Ward Cunningham</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/user/WardCunningham</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=tx_WCIAM4bA">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>HyperCard</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=tx_WCIAM4bA</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=FquNpWdf9vg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>HyperCard is a wonderful idea</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=FquNpWdf9vg</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=uVwtVBpw7RQ">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>node</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=uVwtVBpw7RQ</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=8YP_nOCO-4Q">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>electron</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=8YP_nOCO-4Q</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=PFmuCDHHpwk">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>OOP</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=PFmuCDHHpwk</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=NtrnaTKqFPQ">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>EventEmitter</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=NtrnaTKqFPQ</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=lhNdUVh3qCc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Game</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=lhNdUVh3qCc</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=QzvqSVgc2t4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>MUD</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=QzvqSVgc2t4</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=EXW1ts6tZh4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Interactive Fiction Adventure</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=EXW1ts6tZh4</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=CeId265HGnM&amp;list=PLgNJO2hghbmiACV9v_sdBwRLnEdKUlZ1s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>bot</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=CeId265HGnM&amp;list=PLgNJO2hghbmiACV9v_sdBwRLnEdKUlZ1s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=xBQef0fs-_Q">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>music programming environment</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=xBQef0fs-_Q</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">object-oriented-programming</span><span class="chip">nodejs</span><span class="chip">electron</span><span class="chip">event-emitter</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://en.wikipedia.org/wiki/File:Ronin,_or_masterless_Samurai,_lunging_forward.jpg"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://en.wikipedia.org/wiki/File:Ronin,_or_masterless_Samurai,_lunging_forward.jpg</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=gRsyY0kzXfw">
+              <span class="text-truncate">Leaky Abstractions</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="mailto:user@example.com">
+              <span class="text-truncate">user@example.com</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/DopplerHQ/awesome-interview-questions#javascript">
+              <span class="text-truncate">people will try to force you to know 50 different things</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=XqxwwuUdsp4">
+              <span class="text-truncate">Rōnin Samurai</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=bfj3bh77XB0">
+              <span class="text-truncate">rsync</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/user/WardCunningham">
+              <span class="text-truncate">Ward Cunningham</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=tx_WCIAM4bA">
+              <span class="text-truncate">HyperCard</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=FquNpWdf9vg">
+              <span class="text-truncate">HyperCard is a wonderful idea</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=uVwtVBpw7RQ">
+              <span class="text-truncate">node</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=8YP_nOCO-4Q">
+              <span class="text-truncate">electron</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=PFmuCDHHpwk">
+              <span class="text-truncate">OOP</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=NtrnaTKqFPQ">
+              <span class="text-truncate">EventEmitter</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=lhNdUVh3qCc">
+              <span class="text-truncate">Game</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=QzvqSVgc2t4">
+              <span class="text-truncate">MUD</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=EXW1ts6tZh4">
+              <span class="text-truncate">Interactive Fiction Adventure</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=CeId265HGnM&amp;list=PLgNJO2hghbmiACV9v_sdBwRLnEdKUlZ1s">
+              <span class="text-truncate">bot</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=xBQef0fs-_Q">
+              <span class="text-truncate">music programming environment</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/abab7d6e-c646-439d-9701-afa18426fdbd/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">In The Year 3000</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/3f6f70b6-f814-4428-a00d-145914293615/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Heroic Courage: A Human Being Is To Grow All The Way Up</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e55496dc-e42c-4ba4-aef7-d58aa5f071c8/">
+              <img src="https://catpea.github.io/chapter-02/poem-0404.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The New Computer Revolution</span>
+                <span class="fg-3 fs-xs">April 8, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bb06eec2-2445-493a-ac00-b195600cd55d/">
+              <img src="https://catpea.github.io/chapter-02/poem-0384.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs</span>
+                <span class="fg-3 fs-xs">March 19, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/eafd07b0-9cf9-45fd-84a6-89cdb339837b/">
+              <img src="https://catpea.github.io/chapter-02/poem-0410.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is A Superpower</span>
+                <span class="fg-3 fs-xs">April 14, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e52882ae-f193-42f7-8ee5-b6a4d8b658d9/">
+              <img src="https://catpea.github.io/chapter-02/poem-0383.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Introduction To Programming: Workstation and Behavior Driven Development</span>
+                <span class="fg-3 fs-xs">March 18, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

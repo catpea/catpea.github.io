@@ -1,157 +1,481 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learning 3D Modeling In Blender: A Tiny Adventure In Self Education</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Learning 3D Modeling In Blender: A Tiny Adventure In Self Education · Cat Pea</title>
+  <meta name="description" content="I challenged myself to learn Blender for millimeter‑scale 3D printing, initially thinking it would be hard enough to build my own program. After two days of trial and error I discovered key shortcuts (Shift+S for statistics, Tab/Mode switch) and learned how to move objects precisely by axis with G, X/Y/Z, then typing a value in mm units; the confirmation box on the lower left lets me">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/7ec5f5d6-37cb-4dbc-bc46-4b7bcb8a7e04/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Learning 3D Modeling In Blender: A Tiny Adventure In Self Education · Cat Pea">
+  <meta property="og:description" content="I challenged myself to learn Blender for millimeter‑scale 3D printing, initially thinking it would be hard enough to build my own program. After two days of trial and error I discovered key shortcuts (Shift+S for statistics, Tab/Mode switch) and learned how to move objects precisely by axis with G, X/Y/Z, then typing a value in mm units; the confirmation box on the lower left lets me">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0538.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/education/">Education</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0538</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0538.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0538.avif" alt="Learning 3D Modeling In Blender: A Tiny Adventure In Self Education"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Learning 3D Modeling In Blender: A Tiny Adventure In Self Education</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0538.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/education/">
+              <i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0538</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Learning 3D Modeling In Blender: A Tiny Adventure In Self Education</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-08-21">8/20/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I have challenged myself to learning the free open source Blender 3D modeling program,<br>more than that, I wanted to create object for 3D printing on millimeter scale.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My initial assumption were,<br>that it is all impossible and too hard, and I might as well program my own program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I spent two days, just preparing for failure,<br>by the time I sat down to blender, I forgot all the key combinations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just remembers Shift + S,<br>which turned out not to be useful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I sat down in-front of my commuter,<br>and it felt like all I have done thus far is put on a helmet in expectation for failure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I remembers to right click on some numbers in the lower right corner to turn on statistics,<br>and this was useful when I was cloning objects, as I could see if the clone operation happened or not.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One time I pressed Control + S, it didn&#39;t work,<br>my own fault probably, but I like double checking things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I remember that Blender has multiple modes,<br>the initial mode is object selection, and when you have a selected object, you can hit TAB to edit it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I still ended up clicking on the user interface,<br>there is a drop-down box that says Object Mode, and you can switch that to edit mode.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first thing I searched the internet for, even before doing anything was:<br>&quot;Blender, how to move by one millimeter&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I discovered the craziest thing,<br>I&#39;ve never seen anything like it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Select part of the cube, with a mouse,<br>but then GO FULL KEYBOARD:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Press &quot;G&quot; to grab/move what you selected,<br>then press either X, Y, or Z, to pick the axis that you want to move the grabbed object on, and then enter the millimeters (once you setup Blender for milliliter scale)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is crazy how amazing that is,<br>you can grab the 3 fundamental things, a point in 3d space, like the corner of a cube, an edge or a line that connects points, or a face like the side of a cube.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Grabbing an edge, will affect the face and the vertices, grabbing a face affects the lines and the vertices,<br>and grabbing a vertex (a point) will move the lines in that part of the 3D model and the face will change too.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you hit W to go into select mode, and then 1, 2 or 3,<br>to pick selection mode, vertex, line, or face.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you have to pint or drag and select with the mouse,<br>the mouse is perfect for selecting little things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Holding down the middle mouse button,<br>rotates a camera angle so you can look around the cube.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once I did this couple of times,<br>grab a selected something, pick an axis, and move it on the unit scale, millimeters in my case.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Things got even easier,<br>they got insanely easier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because once you type in the number, an hit enter, and the object moves,<br>a little box pops up on the lower left, that not only tells you what you just did, but lets you change it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you specify how far you have to move something,<br>there is no input box, you are just typing at Blender, but here is a little input box, and you get to change or fix what you just did.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I almost jumped out of my chair,<br>because, I knew something else about 3D editing programs...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are clicking around on the screen,<br>select the move tool by clicking the pointy cross icon, that is like the universal icon for moving things in graphic programs....</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You get these red, green, blue arrows,<br>that look like this annoying extra feature, that announces where the 3D X, Y, Z dimensions are.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But see, ages ago, when I was pointlessly clicking at some other program,<br>I discovered that these arrows are not telling you which way is X, Y, and Z.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are not for informing you,<br>they are there to let you move the object that you just clicked on, but snapped to the axis that the arrow symbolizes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This, combined with the box that pops up on the lower left,<br>that lets me tweak the operation that just occurred, gives me millimeter precision to all my designs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I simply move a thing very crudely,<br>kind of ballpark just to get it in the right area, and then when the confirmation box pops up - my goodness - I set the precise value that I need.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a snap,<br>I created a new wallet design.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I design wallets for 3D printing,<br>to learn the tool chain, and experiment with everything.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was aware of a modifier menu, marked by a wrench icon,<br>that becomes available when a cube - for example - is selected.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I&#39;ve noticed a modified named Boolean,<br>that is the same crazy name for the most useful feature in 3D editing that I just groked in FreeCAD.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I added a cylinder to my scene, to create holes for my elastic paracord that makes the wallets go, and copied it a bunch of times,<br>positioning everything very precisely and somewhat trying to imagine where the para-cord needs to be to joint two halves of a wallet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then I added super low resolution spheres,<br>which only have six sides in that state, and when intersecting a wallet under the Boolean modifier create a hexagonal hole.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And added an array modifier to the spheres, that immediately created multiple copies,<br>this means I could create a pretty wallet face, and break up the solid plastic back.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I threw the carefully positioned cylinders and the array of hexagonal spheres,<br>into its own scene collection.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And told the boolean modifier to use all the shapes in the collection - I&#39;ve noticed that there was an option for that in a drop-down,<br>and selected the DIFFERENCE MODE, which combines the collection and my wallet in a substractive way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is something I figured out on my own,<br>by just looking at the different modifiers and options.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.tinkercad.com/things/iOcookFeG4o">And just like that, the mars wallet was born</a>,<br>there is a sample on TinkerCAD, and can be viewed in 3D.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I did make an error, and I didn&#39;t make the cylinders big enough to make a hole for my para-cord,<br>I&#39;ll have to work on that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I was using cylinders,<br>I didn&#39;t know how to use the array feature yet, now I can position everything in a minute, not an hour.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If I had to do all this back in high school,<br>it would take a week, as I would have to play around with a few programs to get an idea how things work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If I had a teacher standing over me,<br>telling me what not to do, or how to do things, or that it is time to go as other students need the computer, or threaten me with failing a class...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or force me to prepare for a quiz where I has to uselessly explain the difference between face, edge and a vertex,<br>or the side of a cube, lines that make a side, point that tell the vertices where to go.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I would fail another class,<br>teachers are something else.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My advice, is to learn at home,<br>is to learn for real at out own pace, and the sequence that matches our existing knowledge first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And learn things that are interesting to us,<br>that we are in context of - that we are into.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, get some cheap clip on lenses for your phone,<br>and start rebuilding all Indiana Jones Scenes to learn movie making.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or setup an online store that sells 3D models, or get a 3D printer,<br>and then get into learning 3D modeling.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Get a Pico Projector, or an office projector,<br>and trace your friend&#39;s photos, on a large drawing board, before you start learning portraits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learn programming, and P%.js to create generative art,<br>and then start learning the flimsy language of mathematics, is you still want to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Take a few lmms tutorials,<br>and begin composing your own music, it is only a matter of slowly moving around the scale, a nice kicker back beat in the bass line editor.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the real education,<br>creating things that we enjoy, that we are proud of, and that overtime make learning new things even easier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are all genius level smart, school grades and tests are fake,<br>it is just mostly a show to make money off of students, or make soundbites for re-election campaigns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With knowledge comes wisdom,<br>and with wisdom comes greatness.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-08-21T02:04:17.709Z">August 20, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>12:25<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>7 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0538.avif" aria-label="Cover for Learning 3D Modeling In Blender: A Tiny Adventure In Self Education, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0538.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Learning 3D Modeling In Blender: A Tiny Adventure In Self Education" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 12:25
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0538.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0538.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0538.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I have challenged myself to learning the free open source Blender 3D modeling program,<br>more than that, I wanted to create object for 3D printing on millimeter scale.</p>
+<p>My initial assumption were,<br>that it is all impossible and too hard, and I might as well program my own program.</p>
+<p>I spent two days, just preparing for failure,<br>by the time I sat down to blender, I forgot all the key combinations.</p>
+<p>I just remembers Shift + S,<br>which turned out not to be useful.</p>
+<hr>
+<p>I sat down in-front of my commuter,<br>and it felt like all I have done thus far is put on a helmet in expectation for failure.</p>
+<p>I remembers to right click on some numbers in the lower right corner to turn on statistics,<br>and this was useful when I was cloning objects, as I could see if the clone operation happened or not.</p>
+<p>One time I pressed Control + S, it didn&#39;t work,<br>my own fault probably, but I like double checking things.</p>
+<p>I remember that Blender has multiple modes,<br>the initial mode is object selection, and when you have a selected object, you can hit TAB to edit it.</p>
+<p>But I still ended up clicking on the user interface,<br>there is a drop-down box that says Object Mode, and you can switch that to edit mode.</p>
+<hr>
+<p>The first thing I searched the internet for, even before doing anything was:<br>&quot;Blender, how to move by one millimeter&quot;.</p>
+<p>And I discovered the craziest thing,<br>I&#39;ve never seen anything like it.</p>
+<p>Select part of the cube, with a mouse,<br>but then GO FULL KEYBOARD:</p>
+<p>Press &quot;G&quot; to grab/move what you selected,<br>then press either X, Y, or Z, to pick the axis that you want to move the grabbed object on, and then enter the millimeters (once you setup Blender for milliliter scale)</p>
+<p>It is crazy how amazing that is,<br>you can grab the 3 fundamental things, a point in 3d space, like the corner of a cube, an edge or a line that connects points, or a face like the side of a cube.</p>
+<p>Grabbing an edge, will affect the face and the vertices, grabbing a face affects the lines and the vertices,<br>and grabbing a vertex (a point) will move the lines in that part of the 3D model and the face will change too.</p>
+<hr>
+<p>So you hit W to go into select mode, and then 1, 2 or 3,<br>to pick selection mode, vertex, line, or face.</p>
+<p>And then you have to pint or drag and select with the mouse,<br>the mouse is perfect for selecting little things.</p>
+<p>Holding down the middle mouse button,<br>rotates a camera angle so you can look around the cube.</p>
+<p>Once I did this couple of times,<br>grab a selected something, pick an axis, and move it on the unit scale, millimeters in my case.</p>
+<p>Things got even easier,<br>they got insanely easier.</p>
+<p>Because once you type in the number, an hit enter, and the object moves,<br>a little box pops up on the lower left, that not only tells you what you just did, but lets you change it.</p>
+<p>When you specify how far you have to move something,<br>there is no input box, you are just typing at Blender, but here is a little input box, and you get to change or fix what you just did.</p>
+<hr>
+<p>I almost jumped out of my chair,<br>because, I knew something else about 3D editing programs...</p>
+<p>When you are clicking around on the screen,<br>select the move tool by clicking the pointy cross icon, that is like the universal icon for moving things in graphic programs....</p>
+<p>You get these red, green, blue arrows,<br>that look like this annoying extra feature, that announces where the 3D X, Y, Z dimensions are.</p>
+<p>But see, ages ago, when I was pointlessly clicking at some other program,<br>I discovered that these arrows are not telling you which way is X, Y, and Z.</p>
+<p>They are not for informing you,<br>they are there to let you move the object that you just clicked on, but snapped to the axis that the arrow symbolizes.</p>
+<p>This, combined with the box that pops up on the lower left,<br>that lets me tweak the operation that just occurred, gives me millimeter precision to all my designs.</p>
+<p>I simply move a thing very crudely,<br>kind of ballpark just to get it in the right area, and then when the confirmation box pops up - my goodness - I set the precise value that I need.</p>
+<hr>
+<p>In a snap,<br>I created a new wallet design.</p>
+<p>I design wallets for 3D printing,<br>to learn the tool chain, and experiment with everything.</p>
+<hr>
+<p>I was aware of a modifier menu, marked by a wrench icon,<br>that becomes available when a cube - for example - is selected.</p>
+<hr>
+<p>I&#39;ve noticed a modified named Boolean,<br>that is the same crazy name for the most useful feature in 3D editing that I just groked in FreeCAD.</p>
+<p>I added a cylinder to my scene, to create holes for my elastic paracord that makes the wallets go, and copied it a bunch of times,<br>positioning everything very precisely and somewhat trying to imagine where the para-cord needs to be to joint two halves of a wallet.</p>
+<p>Then I added super low resolution spheres,<br>which only have six sides in that state, and when intersecting a wallet under the Boolean modifier create a hexagonal hole.</p>
+<p>And added an array modifier to the spheres, that immediately created multiple copies,<br>this means I could create a pretty wallet face, and break up the solid plastic back.</p>
+<p>I threw the carefully positioned cylinders and the array of hexagonal spheres,<br>into its own scene collection.</p>
+<p>And told the boolean modifier to use all the shapes in the collection - I&#39;ve noticed that there was an option for that in a drop-down,<br>and selected the DIFFERENCE MODE, which combines the collection and my wallet in a substractive way.</p>
+<p>This is something I figured out on my own,<br>by just looking at the different modifiers and options.</p>
+<hr>
+<p><a href="https://www.tinkercad.com/things/iOcookFeG4o">And just like that, the mars wallet was born</a>,<br>there is a sample on TinkerCAD, and can be viewed in 3D.</p>
+<p>I did make an error, and I didn&#39;t make the cylinders big enough to make a hole for my para-cord,<br>I&#39;ll have to work on that.</p>
+<p>When I was using cylinders,<br>I didn&#39;t know how to use the array feature yet, now I can position everything in a minute, not an hour.</p>
+<hr>
+<p>If I had to do all this back in high school,<br>it would take a week, as I would have to play around with a few programs to get an idea how things work.</p>
+<p>If I had a teacher standing over me,<br>telling me what not to do, or how to do things, or that it is time to go as other students need the computer, or threaten me with failing a class...</p>
+<p>Or force me to prepare for a quiz where I has to uselessly explain the difference between face, edge and a vertex,<br>or the side of a cube, lines that make a side, point that tell the vertices where to go.</p>
+<p>I would fail another class,<br>teachers are something else.</p>
+<hr>
+<p>My advice, is to learn at home,<br>is to learn for real at out own pace, and the sequence that matches our existing knowledge first.</p>
+<p>And learn things that are interesting to us,<br>that we are in context of - that we are into.</p>
+<hr>
+<p>For example, get some cheap clip on lenses for your phone,<br>and start rebuilding all Indiana Jones Scenes to learn movie making.</p>
+<p>Or setup an online store that sells 3D models, or get a 3D printer,<br>and then get into learning 3D modeling.</p>
+<p>Get a Pico Projector, or an office projector,<br>and trace your friend&#39;s photos, on a large drawing board, before you start learning portraits.</p>
+<p>Learn programming, and P%.js to create generative art,<br>and then start learning the flimsy language of mathematics, is you still want to.</p>
+<p>Take a few lmms tutorials,<br>and begin composing your own music, it is only a matter of slowly moving around the scale, a nice kicker back beat in the bass line editor.</p>
+<hr>
+<p>This is the real education,<br>creating things that we enjoy, that we are proud of, and that overtime make learning new things even easier.</p>
+<p>We are all genius level smart, school grades and tests are fake,<br>it is just mostly a show to make money off of students, or make soundbites for re-election campaigns.</p>
+<p>With knowledge comes wisdom,<br>and with wisdom comes greatness.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.tinkercad.com/things/iOcookFeG4o">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>And just like that, the mars wallet was born</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.tinkercad.com/things/iOcookFeG4o</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">blender</span><span class="chip">3d modeling</span><span class="chip">3d printing</span><span class="chip">key combinations</span><span class="chip">selection modes</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/3ALW9V3jNkc"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/3ALW9V3jNkc</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.tinkercad.com/things/iOcookFeG4o">
+              <span class="text-truncate">And just like that, the mars wallet was born</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.tinkercad.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/b5c6fbfb-dd7e-481e-8c6a-def25e364067/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Transforming Fake Education Into Real Education</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/ad53fe91-06d5-4e3d-abbb-9557c0c26b9f/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Fistful Of Skwarkis: The Journey Up The Mountain</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Education</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a17514de-28aa-48d8-8d4e-c9f430a6017f/">
+              <img src="https://catpea.github.io/chapter-03/poem-0540.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">No Cookie Cutter Lives</span>
+                <span class="fg-3 fs-xs">August 22, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b5c6fbfb-dd7e-481e-8c6a-def25e364067/">
+              <img src="https://catpea.github.io/chapter-03/poem-0537.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Transforming Fake Education Into Real Education</span>
+                <span class="fg-3 fs-xs">August 19, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/984653eb-1466-4572-a262-dd8b86e441a0/">
+              <img src="https://catpea.github.io/chapter-03/poem-0543.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Reject Fake Education And Become A Real Teacher</span>
+                <span class="fg-3 fs-xs">August 25, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3f39f15f-86e3-46ce-b760-fe69741f142e/">
+              <img src="https://catpea.github.io/chapter-03/poem-0534.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Tiny Business Tutorial: Creating A Little Line Of Products</span>
+                <span class="fg-3 fs-xs">August 16, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/education/">All of Education<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

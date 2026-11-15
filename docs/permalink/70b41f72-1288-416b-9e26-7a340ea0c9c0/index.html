@@ -1,278 +1,512 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>High School Trouble</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>High School Trouble · Cat Pea</title>
+  <meta name="description" content="After reflecting on school’s shortcomings, the post argues that self‑directed learning in programming—beginning with p5.js, then Svelte and Node.js—and building small businesses are the real paths to personal growth and success.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/70b41f72-1288-416b-9e26-7a340ea0c9c0/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="High School Trouble · Cat Pea">
+  <meta property="og:description" content="After reflecting on school’s shortcomings, the post argues that self‑directed learning in programming—beginning with p5.js, then Svelte and Node.js—and building small businesses are the real paths to personal growth and success.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-06/poem-1166.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-06/">Chapter 06</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1166</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-06/poem-1166.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-06/poem-1166.avif" alt="High School Trouble"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">High School Trouble</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-06/poem-1166.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 06</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1166</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">High School Trouble</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-05-12">5/11/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to learn programming,
-and learn how to build <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://news.ycombinator.com/item?id=35902598">tiny companies</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We don&#39;t know exactly what happened with schools,
-no one aimed to betray you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you are being tricked,
-into an ineffective and useless education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you just keep following the directions you are given,
-you will spend the rest of your life in poverty and regret.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The politicians are wrong, your teachers are wrong,
-your parents have no idea what is going on...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the guidance counselor is always wrong,
-he may not even perceive you as a human being but an obstacle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Narrated books written by great beings,
-books loved by all the worlds intellectuals, are however the correct direction.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can see how the world&#39;s intellectuals,
-love to debate, but never hate or battle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They know which side is wrong,
-and they pull each other up with profound wisdom and greatness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The intellectuals are the best of humanity,
-and they are its future and peace.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you, are not to work yourself to madness,
-but to grow all the way up and become a great being.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that you can help others rise too,
-so that we can get to the future without anymore wars and errors.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is little evidence of schools failing,
-the teachers grade themselves with your collective GPA...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And state tests, just test state text books,
-which are optimized for memorization, to show great progress.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if you are lucky, you will catch the principal,
-giving preferential treatment to students marked as gifted.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are no gifted students,
-but some people lean something on their own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And some principals get a glimpse of how pretty that is,
-and they try to save it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because they know, schools can only destroy,
-betray, sell out, they can only take.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If someone already has something,
-some principals on the brink of unraveling.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will try to save it,
-in hopes of saving their own self respect.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In hopes of some kind of,
-forgiveness, for what they have done to everyone else.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Aside from most parent having received the same kind of education,
-that you are now going through...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And never really becoming educated because of school,
-sans some half memorized formulas...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And thus having earned whatever education they do have,
-on their own, in their own sequence, and at their own pace...</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is one little piece of evidence,
-that schools are giving you fake education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It happens when you start learning programming,
-and discover, that everything adds up and makes sense.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason it adds up, is because learning programming is self directed,
-so every step adds meaningful information to your existing body of knowledge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">High School is a theatrical play,
-where if everyone goes through the motions, everyone gets paid.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Including you, eventually after you get that useless diploma,
-but you see, real life is different from this.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In real life when you learn you learn for real,
-and with every new lesson you rise higher.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With ineffective education, you rise a step or two,
-then you lose your youth, your dreams, and a sense of being you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In real life, you grow in wisdom, in unbreakabily,
-you have a blinding sense of humor that obscures your colossal momentum.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are one with the oceans and the stars,
-you are part of the universe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In fake life, you doctor, eventually tells you,
-&quot;I have a pill for everything&quot;, and the betrayal is complete.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In real life, you feel the sun on your back,
-as you are bending over to clean off the seeds from your hiking boots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that you don&#39;t unnecessarily endanger the ecosystem,
-and you stand there transfixed by the green, by the most cheerful chipmunks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You take one programming book at a time,
-and instead of learning from it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You shake you head,
-at all the things the author missed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All the profound opportunities,
-that would turn a coder into a wizard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The best of your side project ideas are not written down,
-because they keep coming back to you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because what marks an idea as best,
-is that it is so necessary, it is always returning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your journal is not a story line,
-it is cybernetic enhancement.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It uses graphite and some cellulose fibers,
-to help to extend your trains of thoughts to their very ends.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The resulting diagrams are unreadable,
-the impact on your mind, profound.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By the time you start launching your businesses,
-you have done it tens of thousands of times with your pencil on paper.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All the years between your first ineffective class,
-all the way out to the moment you realize you&#39;ve been betrayed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will be the cause of obesity, regrets, anger, endless confusion,
-over-medication, a midlife crisis, premature aging, and aching body....</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And for some, the very unlucky,
-a series of tragedies that could have been avoided, had you received a real education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And though you will tell yourself that it was all worth it,
-and call it life...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In your constant brilliance,
-you will know, that this was just one of the lives you could have lived.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Begin connecting to your elder self,
-and asking her what her regrets are.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is already a wisdom in you,
-but the big stuff is in all the narrated books that are loved by the intellectuals.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are the life changing works,
-that helps a person rise to become a great being.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From this height,
-you will see the full picture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are each different,
-we are each moved and offended by different things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wanted to be a judge,
-to keep the bad apart from the good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But as I grew, the bad turned out to be just kids,
-wound up like spinning tops, perfectly unaware, and already punished.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are in need of education, therapy, deprogramming like addicts,
-punishment would only damage their minds further.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On my Jury Duty, I watched the judge misinterpreting reality,
-he was as disconnected as the man with a little kid mind who stole a car.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A friend, who suffered greatly,
-described his picture as this:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“How in the hell could a man enjoy being awakened at 8:30 a.m. by an alarm clock,
-leap out of bed, dress, force-feed, shit, piss, brush teeth and hair,
-and fight traffic to get to a place where essentially you made lots of money for somebody else and were asked to be grateful for the opportunity to do so?”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another one said this,
-“But we were born of risen apes, not fallen angels, and the apes were armed killers besides. And so what shall we wonder at? Our murders and massacres and missiles, and our irreconcilable regiments? Or our treaties whatever they may be worth; our symphonies however seldom they may be played; our peaceful acres, however frequently they may be converted into battlefields; our dreams however rarely they may be accomplished. The miracle of man is not how far he has sunk but how magnificently he has risen. We are known among the stars by our poems, not our corpses.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And anoter,
-“I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived. I did not wish to live what was not life, living is so dear; nor did I wish to practise resignation, unless it was quite necessary. I wanted to live deep and suck out all the marrow of life, to live so sturdily and Spartan-like as to put to rout all that was not life, to cut a broad swath and shave close, to drive life into a corner, and reduce it to its lowest terms...”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and anoter,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“What if a demon were to creep after you one night, in your loneliest loneliness, and say, &#39;This life which you live must be lived by you once again and innumerable times more; and every pain and joy and thought and sigh must come again to you, all in the same sequence. The eternal hourglass will again and again be turned and you with it, dust of the dust!&#39; Would you throw yourself down and gnash your teeth and curse that demon? Or would you answer, &#39;Never have I heard anything more divine&#39;? ”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and another,
-Who includes diversity and is Nature,
-Who is the amplitude of the earth, and the coarseness and sexuality of the earth, and the great charity of the earth and the equilibrium also,
-Who has not look’d forth from the windows the eyes for nothing, or whose brain held audience with messengers for nothing,
-Who contains believers and disbelievers, who is the most majestic lover,
-Who holds duly his or her triune proportion of realism, spiritualism, and of the æsthetic or intellectual,
-Who having consider’d the body finds all its organs and parts good,
-Who, out of the theory of the earth and of his or her body understands by subtle analogies all other theories,
-The theory of a city, a poem, and of the large politics of these States;
-Who believes not only in our globe with its sun and moon, but in other globes with their suns and moons,
-Who, constructing the house of himself or herself, not for a day but for all time, sees races, eras, dates, generations,
-The past, the future, dwelling there, like space, inseparable together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please understand, that programming and launching small businesses,
-is not an island that you have to get to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is the modern hammer and nails,
-that you keep in your drawer in your kitchen, when you need to repair something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Fake education is stealing your ability to use tools,
-and rise out of poverty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No one intended for things to be this way,
-they just wanted to make it look real.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please, start with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://p5js.org/">p5.js</a>, move onto <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://svelte.dev/tutorial/basics">svelte</a>,
-and then <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=learn+nodejs">node.js</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Begin keeping a backpack by the door,
-slowly start filling it up with what you may need in your adventures.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And get bug spray, and mosquitoes repellent sticks,
-and never, ever, do what you are told, because it easier when you are not being yelled at.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your stay here on Earth, is limited, to make your way towards your meaning,
-you have to begin rising profound book by profound book, until your grow all the way up, and become a great being.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will discover everything you will ever need,
-on your way there.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-05-12T02:56:14.578Z">May 11, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>22:58<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>9 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-06/poem-1166.avif" aria-label="Cover for High School Trouble, full size">
+            <img src="https://catpea.github.io/chapter-06/poem-1166.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for High School Trouble" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 22:58
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-06/poem-1166.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-06/poem-1166.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-06/poem-1166.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>You have to learn programming,<br>and learn how to build <a href="https://news.ycombinator.com/item?id=35902598">tiny companies</a>.</p>
+<p>We don&#39;t know exactly what happened with schools,<br>no one aimed to betray you.</p>
+<p>But you are being tricked,<br>into an ineffective and useless education.</p>
+<p>And if you just keep following the directions you are given,<br>you will spend the rest of your life in poverty and regret.</p>
+<hr>
+<p>The politicians are wrong, your teachers are wrong,<br>your parents have no idea what is going on...</p>
+<p>And the guidance counselor is always wrong,<br>he may not even perceive you as a human being but an obstacle.</p>
+<p>Narrated books written by great beings,<br>books loved by all the worlds intellectuals, are however the correct direction.</p>
+<p>You can see how the world&#39;s intellectuals,<br>love to debate, but never hate or battle.</p>
+<p>They know which side is wrong,<br>and they pull each other up with profound wisdom and greatness.</p>
+<p>The intellectuals are the best of humanity,<br>and they are its future and peace.</p>
+<p>And you, are not to work yourself to madness,<br>but to grow all the way up and become a great being.</p>
+<p>So that you can help others rise too,<br>so that we can get to the future without anymore wars and errors.</p>
+<hr>
+<p>There is little evidence of schools failing,<br>the teachers grade themselves with your collective GPA...</p>
+<p>And state tests, just test state text books,<br>which are optimized for memorization, to show great progress.</p>
+<hr>
+<p>But if you are lucky, you will catch the principal,<br>giving preferential treatment to students marked as gifted.</p>
+<p>There are no gifted students,<br>but some people lean something on their own.</p>
+<p>And some principals get a glimpse of how pretty that is,<br>and they try to save it.</p>
+<p>Because they know, schools can only destroy,<br>betray, sell out, they can only take.</p>
+<p>If someone already has something,<br>some principals on the brink of unraveling.</p>
+<p>Will try to save it,<br>in hopes of saving their own self respect.</p>
+<p>In hopes of some kind of,<br>forgiveness, for what they have done to everyone else.</p>
+<hr>
+<p>Aside from most parent having received the same kind of education,<br>that you are now going through...</p>
+<p>And never really becoming educated because of school,<br>sans some half memorized formulas...</p>
+<p>And thus having earned whatever education they do have,<br>on their own, in their own sequence, and at their own pace...</p>
+<hr>
+<p>There is one little piece of evidence,<br>that schools are giving you fake education.</p>
+<p>It happens when you start learning programming,<br>and discover, that everything adds up and makes sense.</p>
+<p>The reason it adds up, is because learning programming is self directed,<br>so every step adds meaningful information to your existing body of knowledge.</p>
+<p>High School is a theatrical play,<br>where if everyone goes through the motions, everyone gets paid.</p>
+<p>Including you, eventually after you get that useless diploma,<br>but you see, real life is different from this.</p>
+<p>In real life when you learn you learn for real,<br>and with every new lesson you rise higher.</p>
+<p>With ineffective education, you rise a step or two,<br>then you lose your youth, your dreams, and a sense of being you.</p>
+<p>In real life, you grow in wisdom, in unbreakabily,<br>you have a blinding sense of humor that obscures your colossal momentum.</p>
+<p>You are one with the oceans and the stars,<br>you are part of the universe.</p>
+<p>In fake life, you doctor, eventually tells you,<br>&quot;I have a pill for everything&quot;, and the betrayal is complete.</p>
+<hr>
+<p>In real life, you feel the sun on your back,<br>as you are bending over to clean off the seeds from your hiking boots.</p>
+<p>So that you don&#39;t unnecessarily endanger the ecosystem,<br>and you stand there transfixed by the green, by the most cheerful chipmunks.</p>
+<p>You take one programming book at a time,<br>and instead of learning from it.</p>
+<p>You shake you head,<br>at all the things the author missed.</p>
+<p>All the profound opportunities,<br>that would turn a coder into a wizard.</p>
+<p>The best of your side project ideas are not written down,<br>because they keep coming back to you.</p>
+<p>Because what marks an idea as best,<br>is that it is so necessary, it is always returning.</p>
+<p>Your journal is not a story line,<br>it is cybernetic enhancement.</p>
+<p>It uses graphite and some cellulose fibers,<br>to help to extend your trains of thoughts to their very ends.</p>
+<p>The resulting diagrams are unreadable,<br>the impact on your mind, profound.</p>
+<p>By the time you start launching your businesses,<br>you have done it tens of thousands of times with your pencil on paper.</p>
+<hr>
+<p>All the years between your first ineffective class,<br>all the way out to the moment you realize you&#39;ve been betrayed.</p>
+<p>Will be the cause of obesity, regrets, anger, endless confusion,<br>over-medication, a midlife crisis, premature aging, and aching body....</p>
+<p>And for some, the very unlucky,<br>a series of tragedies that could have been avoided, had you received a real education.</p>
+<p>And though you will tell yourself that it was all worth it,<br>and call it life...</p>
+<p>In your constant brilliance,<br>you will know, that this was just one of the lives you could have lived.</p>
+<hr>
+<p>Begin connecting to your elder self,<br>and asking her what her regrets are.</p>
+<p>There is already a wisdom in you,<br>but the big stuff is in all the narrated books that are loved by the intellectuals.</p>
+<p>They are the life changing works,<br>that helps a person rise to become a great being.</p>
+<p>From this height,<br>you will see the full picture.</p>
+<p>We are each different,<br>we are each moved and offended by different things.</p>
+<p>I wanted to be a judge,<br>to keep the bad apart from the good.</p>
+<p>But as I grew, the bad turned out to be just kids,<br>wound up like spinning tops, perfectly unaware, and already punished.</p>
+<p>They are in need of education, therapy, deprogramming like addicts,<br>punishment would only damage their minds further.</p>
+<p>On my Jury Duty, I watched the judge misinterpreting reality,<br>he was as disconnected as the man with a little kid mind who stole a car.</p>
+<hr>
+<p>A friend, who suffered greatly,<br>described his picture as this:</p>
+<p>“How in the hell could a man enjoy being awakened at 8:30 a.m. by an alarm clock,<br>leap out of bed, dress, force-feed, shit, piss, brush teeth and hair,<br>and fight traffic to get to a place where essentially you made lots of money for somebody else and were asked to be grateful for the opportunity to do so?”</p>
+<p>Another one said this,<br>“But we were born of risen apes, not fallen angels, and the apes were armed killers besides. And so what shall we wonder at? Our murders and massacres and missiles, and our irreconcilable regiments? Or our treaties whatever they may be worth; our symphonies however seldom they may be played; our peaceful acres, however frequently they may be converted into battlefields; our dreams however rarely they may be accomplished. The miracle of man is not how far he has sunk but how magnificently he has risen. We are known among the stars by our poems, not our corpses.”</p>
+<p>And anoter,<br>“I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived. I did not wish to live what was not life, living is so dear; nor did I wish to practise resignation, unless it was quite necessary. I wanted to live deep and suck out all the marrow of life, to live so sturdily and Spartan-like as to put to rout all that was not life, to cut a broad swath and shave close, to drive life into a corner, and reduce it to its lowest terms...”</p>
+<p>and anoter,</p>
+<p>“What if a demon were to creep after you one night, in your loneliest loneliness, and say, &#39;This life which you live must be lived by you once again and innumerable times more; and every pain and joy and thought and sigh must come again to you, all in the same sequence. The eternal hourglass will again and again be turned and you with it, dust of the dust!&#39; Would you throw yourself down and gnash your teeth and curse that demon? Or would you answer, &#39;Never have I heard anything more divine&#39;? ”</p>
+<p>and another,<br>Who includes diversity and is Nature,<br>Who is the amplitude of the earth, and the coarseness and sexuality of the earth, and the great charity of the earth and the equilibrium also,<br>Who has not look’d forth from the windows the eyes for nothing, or whose brain held audience with messengers for nothing,<br>Who contains believers and disbelievers, who is the most majestic lover,<br>Who holds duly his or her triune proportion of realism, spiritualism, and of the æsthetic or intellectual,<br>Who having consider’d the body finds all its organs and parts good,<br>Who, out of the theory of the earth and of his or her body understands by subtle analogies all other theories,<br>The theory of a city, a poem, and of the large politics of these States;<br>Who believes not only in our globe with its sun and moon, but in other globes with their suns and moons,<br>Who, constructing the house of himself or herself, not for a day but for all time, sees races, eras, dates, generations,<br>The past, the future, dwelling there, like space, inseparable together.</p>
+<p>Please understand, that programming and launching small businesses,<br>is not an island that you have to get to.</p>
+<p>It is the modern hammer and nails,<br>that you keep in your drawer in your kitchen, when you need to repair something.</p>
+<p>Fake education is stealing your ability to use tools,<br>and rise out of poverty.</p>
+<p>No one intended for things to be this way,<br>they just wanted to make it look real.</p>
+<p>Please, start with <a href="https://p5js.org/">p5.js</a>, move onto <a href="https://svelte.dev/tutorial/basics">svelte</a>,<br>and then <a href="https://www.youtube.com/results?search_query=learn+nodejs">node.js</a>.</p>
+<p>Begin keeping a backpack by the door,<br>slowly start filling it up with what you may need in your adventures.</p>
+<p>And get bug spray, and mosquitoes repellent sticks,<br>and never, ever, do what you are told, because it easier when you are not being yelled at.</p>
+<p>Your stay here on Earth, is limited, to make your way towards your meaning,<br>you have to begin rising profound book by profound book, until your grow all the way up, and become a great being.</p>
+<p>You will discover everything you will ever need,<br>on your way there.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://news.ycombinator.com/item?id=35902598">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>tiny companies</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://news.ycombinator.com/item?id=35902598</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://p5js.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>p5.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://p5js.org/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://svelte.dev/tutorial/basics">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>svelte</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://svelte.dev/tutorial/basics</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=learn+nodejs">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>node.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=learn+nodejs</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">p5.js</span><span class="chip">svelte</span><span class="chip">node.js</span><span class="chip">javascript</span><span class="chip">frontend</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/FAn-NWH8Bzw"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/FAn-NWH8Bzw</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://news.ycombinator.com/item?id=35902598">
+              <span class="text-truncate">tiny companies</span>
+              <span class="fg-3 fs-xs flex-shrink-0">news.ycombinator.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://p5js.org/">
+              <span class="text-truncate">p5.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">p5js.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://svelte.dev/tutorial/basics">
+              <span class="text-truncate">svelte</span>
+              <span class="fg-3 fs-xs flex-shrink-0">svelte.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=learn+nodejs">
+              <span class="text-truncate">node.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/f167d4e7-a235-4351-9b11-e62864e342ff/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Sweet And Fancy Allure Of Web Security</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/9cef4898-abe4-464b-b862-e9122eb0576a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Programming Patterns Are Your Happy Little Friends</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9cef4898-abe4-464b-b862-e9122eb0576a/">
+              <img src="https://catpea.github.io/chapter-06/poem-1167.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Patterns Are Your Happy Little Friends</span>
+                <span class="fg-3 fs-xs">May 12, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f167d4e7-a235-4351-9b11-e62864e342ff/">
+              <img src="https://catpea.github.io/chapter-06/poem-1165.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Sweet And Fancy Allure Of Web Security</span>
+                <span class="fg-3 fs-xs">May 10, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b9b3d615-6930-4979-8ef8-be739b9d19d9/">
+              <img src="https://catpea.github.io/chapter-06/poem-1168.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming, A Real Superpower</span>
+                <span class="fg-3 fs-xs">May 13, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b9489c19-59a1-486b-a156-443158391ce6/">
+              <img src="https://catpea.github.io/chapter-06/poem-1163.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Power Programming With One Way Programs, Metadata, And Application Models</span>
+                <span class="fg-3 fs-xs">May 8, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

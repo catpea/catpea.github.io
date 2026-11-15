@@ -1,157 +1,444 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs · Cat Pea</title>
+  <meta name="description" content="In this post the writer likens software bugs to “mambas”—snakes that always strike in pairs or more—and explains how a seemingly small fix can trigger a cascade of new errors. He recalls learning as a child that mambas appear together, then draws the parallel to programming: an end‑user sees a single bug, but for developers it often spawns additional ones when you patch it, just as a first mistake (e.g., a stray colon in YAML) can cause a generator crash and lead to further problems like missing audio files or IPv6 upgrades that require extra code. The post illustrates this cycle with examples of how one correction can rename directories, change timestamps, and ultimately leave the developer “mamba‑ridden,” highlighting the relentless, compounding nature of bugs in software projects.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/53143161-35ee-4d47-b04c-763ecdbdb9aa/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs · Cat Pea">
+  <meta property="og:description" content="In this post the writer likens software bugs to “mambas”—snakes that always strike in pairs or more—and explains how a seemingly small fix can trigger a cascade of new errors. He recalls learning as a child that mambas appear together, then draws the parallel to programming: an end‑user sees a single bug, but for developers it often spawns additional ones when you patch it, just as a first mistake (e.g., a stray colon in YAML) can cause a generator crash and lead to further problems like missing audio files or IPv6 upgrades that require extra code. The post illustrates this cycle with examples of how one correction can rename directories, change timestamps, and ultimately leave the developer “mamba‑ridden,” highlighting the relentless, compounding nature of bugs in software projects.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-1014.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1014</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-1014.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-1014.avif" alt="Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-1014.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1014</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-12-10">12/9/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">When I was a baby,
-one of my most important lessons, or so I thought.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was that Mambas, a kind of a cheerful, and cheerfully deadly snake,
-always try to get you in pairs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So once you fling one danger noodle away,
-you have to turn right around and chuck the other one too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I also learned that some islands float,
-and not to fidget too much when stuck in quicksand, just die calmly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These lessons came from my, now lost,
-but once fantastic library of extremely educational European comic books.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am yet to test out the quick sand,
-it is not as quick as it claims, I guess.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unless your mom is in the water, the islands, probably don’t actually float,
-but, rather move with tectonic plates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, you know what,
-the Mambas, freaking attack me on weekly basis.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From an end user perspective,
-when something is broken in a computer program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a little bug,
-you get the programmers to fix it and move on.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But from the programmers perspective,
-a bug is just a missed deadline, or an unfortunate moth.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The real problems, are only seen by program mangers,
-shortly before they mutter…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Are you forking kidding e right now”,
-and begin their secret search for the next job.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those are the Mambas,
-the deadly creatures in the code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And oh my gosh,
-they never come alone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And while most often they rip your code apart in pairs,
-they somethings come in threes, sometimes fours.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you can’t really fix that,
-once you have four layers of bugs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You really want to use the existing program for snippets and chastity,
-and just rewrite everything from scratch.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So how does a mamba strike occur, it is sharp, swift, hopped up on java,
-and there is nothing regular about it, that can be expressed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You run your program, you get a bug,
-a tiny little sting – it is just an unfinished thing, your can fix it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is where the other mamba gets you in the eye,
-I wasn’t a tiny bug at all, and your clever little fix didn’t matter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because something entirely different was happening,
-but, no, no, no, no, no, no you don’t know this yet… cause you&#39;re half blind.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because obviously your fix was small and perfect,
-but you need to see it in a broader context.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whatever broader context means in this context,
-just changed all the files on your website.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Including the audio files,
-which aren’t even generated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What is actually going on, is that  your little bug didn’t happen,
-you had a colon in your title, inside a YAML file…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The generator crashed as soon as it could,
-die early, is an amazing strategy for dealing with infinite complexity.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the Mambas, are clever,
-that is why they are so dangerous.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first snake, is squirming in your internet service provider,
-who is rolling out IPv6, totally invisible to you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a transparent upgrade to all the users,
-except you, the programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because your program, is using an older library,
-that requires extra code, several lines in fact, for IPv6 support.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is the second mamba,
-and now you are the third one, oh yes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your little fix changed all the timestamps,
-because in your wisdom…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your defensive programming,
-made you rename the distribution folder.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just regenerate a new website from scratch,
-just to be sure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, now, with the mambas firmly attached,
-you’ve lost your mind – and don’t even know what renaming a directory does.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because now, you too are a mamba,
-on the lookout for a byte.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-12-10T03:35:28.188Z">December 9, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>7:05<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-1014.avif" aria-label="Cover for Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-1014.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 7:05
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-1014.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-1014.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-1014.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>When I was a baby,<br>one of my most important lessons, or so I thought.</p>
+<p>Was that Mambas, a kind of a cheerful, and cheerfully deadly snake,<br>always try to get you in pairs.</p>
+<p>So once you fling one danger noodle away,<br>you have to turn right around and chuck the other one too.</p>
+<p>I also learned that some islands float,<br>and not to fidget too much when stuck in quicksand, just die calmly.</p>
+<p>These lessons came from my, now lost,<br>but once fantastic library of extremely educational European comic books.</p>
+<p>I am yet to test out the quick sand,<br>it is not as quick as it claims, I guess.</p>
+<p>Unless your mom is in the water, the islands, probably don’t actually float,<br>but, rather move with tectonic plates.</p>
+<p>But, you know what,<br>the Mambas, freaking attack me on weekly basis.</p>
+<hr>
+<p>From an end user perspective,<br>when something is broken in a computer program.</p>
+<p>It is a little bug,<br>you get the programmers to fix it and move on.</p>
+<hr>
+<p>But from the programmers perspective,<br>a bug is just a missed deadline, or an unfortunate moth.</p>
+<hr>
+<p>The real problems, are only seen by program mangers,<br>shortly before they mutter…</p>
+<p>“Are you forking kidding e right now”,<br>and begin their secret search for the next job.</p>
+<p>Those are the Mambas,<br>the deadly creatures in the code.</p>
+<hr>
+<p>And oh my gosh,<br>they never come alone.</p>
+<p>And while most often they rip your code apart in pairs,<br>they somethings come in threes, sometimes fours.</p>
+<p>But you can’t really fix that,<br>once you have four layers of bugs.</p>
+<p>You really want to use the existing program for snippets and chastity,<br>and just rewrite everything from scratch.</p>
+<hr>
+<p>So how does a mamba strike occur, it is sharp, swift, hopped up on java,<br>and there is nothing regular about it, that can be expressed.</p>
+<p>You run your program, you get a bug,<br>a tiny little sting – it is just an unfinished thing, your can fix it.</p>
+<p>And that is where the other mamba gets you in the eye,<br>I wasn’t a tiny bug at all, and your clever little fix didn’t matter.</p>
+<p>Because something entirely different was happening,<br>but, no, no, no, no, no, no you don’t know this yet… cause you&#39;re half blind.</p>
+<p>Because obviously your fix was small and perfect,<br>but you need to see it in a broader context.</p>
+<p>Whatever broader context means in this context,<br>just changed all the files on your website.</p>
+<p>Including the audio files,<br>which aren’t even generated.</p>
+<p>What is actually going on, is that  your little bug didn’t happen,<br>you had a colon in your title, inside a YAML file…</p>
+<p>The generator crashed as soon as it could,<br>die early, is an amazing strategy for dealing with infinite complexity.</p>
+<hr>
+<p>But the Mambas, are clever,<br>that is why they are so dangerous.</p>
+<p>The first snake, is squirming in your internet service provider,<br>who is rolling out IPv6, totally invisible to you.</p>
+<p>It is a transparent upgrade to all the users,<br>except you, the programmer.</p>
+<p>Because your program, is using an older library,<br>that requires extra code, several lines in fact, for IPv6 support.</p>
+<p>That is the second mamba,<br>and now you are the third one, oh yes.</p>
+<p>Your little fix changed all the timestamps,<br>because in your wisdom…</p>
+<p>Your defensive programming,<br>made you rename the distribution folder.</p>
+<p>And just regenerate a new website from scratch,<br>just to be sure.</p>
+<p>But, now, with the mambas firmly attached,<br>you’ve lost your mind – and don’t even know what renaming a directory does.</p>
+<p>Because now, you too are a mamba,<br>on the lookout for a byte.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">story</span><span class="chip">creative-writing</span><span class="chip">programming</span><span class="chip">bug</span><span class="chip">mamba</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/pPKWCCsA0rg"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/pPKWCCsA0rg</small></a>
-                </li>
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/VUr5nmC1IM4"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/VUr5nmC1IM4</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/dea51768-65ac-42ce-a6b8-19cebe16412c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Endurance And Such</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/8777d1af-4fa7-4f83-ae9a-90b4dd2d3740/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">High School And Future Generations</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2756f1a5-18b9-4b4b-a177-2c6c4182658d/">
+              <img src="https://catpea.github.io/chapter-05/poem-1016.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">My Education Is A Spectacular Disaster</span>
+                <span class="fg-3 fs-xs">December 11, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9c8176c0-8c0a-4aef-a613-e0a91d03e2a9/">
+              <img src="https://catpea.github.io/chapter-05/poem-1009.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Enhance Your Design or Programming Portfolio</span>
+                <span class="fg-3 fs-xs">December 4, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/700f536a-5b9d-4c99-aaa5-f1d47bd7bf15/">
+              <img src="https://catpea.github.io/chapter-05/poem-1018.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Algorithm</span>
+                <span class="fg-3 fs-xs">December 13, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/11df7d63-2f08-4fbb-92f7-a0e5dc4c1a4f/">
+              <img src="https://catpea.github.io/chapter-05/poem-1008.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Birds Of Programming</span>
+                <span class="fg-3 fs-xs">December 3, 2022</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

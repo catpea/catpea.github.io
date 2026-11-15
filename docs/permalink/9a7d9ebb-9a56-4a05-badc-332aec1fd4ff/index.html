@@ -1,200 +1,479 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Call For Young Power Programmers</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Call For Young Power Programmers · Cat Pea</title>
+  <meta name="description" content="This post describes a vision of AI as a scalable creative and production system rather than a one-off assistant, where the real power comes from structuring workflows: using example-driven prompting, batch processing, and containerized AI services (e.g., exposing models through an OpenAPI layer inside Docker) to generate large volumes of coherent output instead of single responses. It explores extending AI into domains like music production, where instead of generating one song you generate entire albums through structured project files, allowing models to expand creative intent in unexpected ways. It also emphasizes building AI systems with visualization in mind from the start—especially 3D interfaces using tools like three.js—so that complex generative systems can be understood spatially rather than textually.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/9a7d9ebb-9a56-4a05-badc-332aec1fd4ff/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Call For Young Power Programmers · Cat Pea">
+  <meta property="og:description" content="This post describes a vision of AI as a scalable creative and production system rather than a one-off assistant, where the real power comes from structuring workflows: using example-driven prompting, batch processing, and containerized AI services (e.g., exposing models through an OpenAPI layer inside Docker) to generate large volumes of coherent output instead of single responses. It explores extending AI into domains like music production, where instead of generating one song you generate entire albums through structured project files, allowing models to expand creative intent in unexpected ways. It also emphasizes building AI systems with visualization in mind from the start—especially 3D interfaces using tools like three.js—so that complex generative systems can be understood spatially rather than textually.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2296.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2296</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2296.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2296.avif" alt="A Call For Young Power Programmers"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Call For Young Power Programmers</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2296.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2296</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Call For Young Power Programmers</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-06-17">6/16/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Artificial Intelligence is really powerful,
-especially when you use example projects to communicate with it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AIs can also create 3D user interfaces with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://threejs.org/">three.js</a>,
-there are barely any such projects out there.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One of the most significant multiples is building on top of AI,
-placing AI in a hermetic docker container and exposing openAPI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then building not just a user interface for it,
-but batch job processing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This will help you scheduler hundreds of things,
-rather than one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An example of that is song generation, don&#39;t just generate a song,
-generate an album.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don&#39;t just write lyrics, don&#39;t just write lyric descriptions,
-tell the AI how many songs you need on what subject.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can give your album project file to state of the art models,
-and they will expand it, in ways that humans are barely ready for.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you or your local-AI customers will wake up to
-hundreds of songs that were never heard before.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you ever get frustrated it means, you went to far,
-you need to re-think the project.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now tell your AI to use <em>it</em> as an example,
-of what you are looking for.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you talk to a programming AI,
-everything you say slowly reveals what you prefer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every time you talk to an AI,
-your chat must end with a programming preference.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Followed by research discovery summary,
-it is silly to think that all your research is not connected.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The fancy app you make two years from now will be greatly aided,
-by the research findings of today.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visualization of complex AI generates software is of course critical,
-but it is best that it is not bolted on at the end.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to invent a framework that fits your capabilities,
-and that then can be easily visualized in 3D via three.js, VR or not.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When your framework structures your code for visualization,
-and AI writes the visualizer, the whole becomes a mere formality.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">3D visualizations are intense, and incredibly overwhelming to ponder,
-being by searching for images with &quot;futuristic user interface&quot; query.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We must prepare our tiny monkey minds,
-for a future where software is created on the fly, as needed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Imagine a driving map on your phone set in satellite mode, 
-you can see at the edges as it is continuously downloading more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is how future applications will work,
-whatever you need will be built when you need it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you run such a business,
-you will not have to convince your customers to pay as they go.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What would this look like, imagine your favorite app on your phone,
-pinch-in/zoom-out, and see all the other screens you can generate.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, in your mind under the overwhelming information of toady,
-sits a key to an AI far more efficient than the chaos of today.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don&#39;t talk to it by typing, but via subset of English you click,
-it is a minimal language built by today&#39;s neural AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This demands that you watch a play-through,
-of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=pdU0Njkek5s">Sam &amp; Max: Hit the Road</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=yoF0apBRqTg">Day of The Tentacle</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think of this as a WikiWiki Keyboard,
-as it continues branching out beyond the initial vocabulary in all the right spots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The world you operate on is completely symbolic,
-it is a coherent representation of our world, but in text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=HNBmMcaiolk">Inform 7</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=-lerxozozis&t=10s">MUD/MOO</a> can show you how to build such worlds,
-aside from being symbolic they are perfectly structured.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thus easily visualizes,
-or <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://demos.littleworkshop.fr/infinitown">projected into 3D</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The intelligence here, is the same as the intelligence of workers,
-courts, corporations, and governments.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Everything is well scripted,
-everyone and every thing follows the script, or their process libraries.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don&#39;t need a big AI, and more interestingly,
-the more little AIs you have the faster the world thinks.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The technology of today has unlocked everything for you,
-the only thing ever denied to you, will be boredom.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-06-17T02:52:23.546Z">June 16, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:44<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2296.avif" aria-label="Cover for A Call For Young Power Programmers, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2296.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Call For Young Power Programmers" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:44
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2296.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2296.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2296.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Artificial Intelligence is really powerful,<br>especially when you use example projects to communicate with it.</p>
+<p>The AIs can also create 3D user interfaces with <a href="https://threejs.org/">three.js</a>,<br>there are barely any such projects out there.</p>
+<p>One of the most significant multiples is building on top of AI,<br>placing AI in a hermetic docker container and exposing openAPI.</p>
+<p>And then building not just a user interface for it,<br>but batch job processing.</p>
+<p>This will help you scheduler hundreds of things,<br>rather than one.</p>
+<p>An example of that is song generation, don&#39;t just generate a song,<br>generate an album.</p>
+<p>Don&#39;t just write lyrics, don&#39;t just write lyric descriptions,<br>tell the AI how many songs you need on what subject.</p>
+<p>You can give your album project file to state of the art models,<br>and they will expand it, in ways that humans are barely ready for.</p>
+<p>And you or your local-AI customers will wake up to<br>hundreds of songs that were never heard before.</p>
+<hr>
+<p>If you ever get frustrated it means, you went to far,<br>you need to re-think the project.</p>
+<p>And now tell your AI to use <em>it</em> as an example,<br>of what you are looking for.</p>
+<hr>
+<p>When you talk to a programming AI,<br>everything you say slowly reveals what you prefer.</p>
+<p>Every time you talk to an AI,<br>your chat must end with a programming preference.</p>
+<p>Followed by research discovery summary,<br>it is silly to think that all your research is not connected.</p>
+<p>The fancy app you make two years from now will be greatly aided,<br>by the research findings of today.</p>
+<hr>
+<p>Visualization of complex AI generates software is of course critical,<br>but it is best that it is not bolted on at the end.</p>
+<p>You have to invent a framework that fits your capabilities,<br>and that then can be easily visualized in 3D via three.js, VR or not.</p>
+<p>When your framework structures your code for visualization,<br>and AI writes the visualizer, the whole becomes a mere formality.</p>
+<p>3D visualizations are intense, and incredibly overwhelming to ponder,<br>being by searching for images with &quot;futuristic user interface&quot; query.</p>
+<hr>
+<p>We must prepare our tiny monkey minds,<br>for a future where software is created on the fly, as needed.</p>
+<p>Imagine a driving map on your phone set in satellite mode,<br>you can see at the edges as it is continuously downloading more.</p>
+<p>That is how future applications will work,<br>whatever you need will be built when you need it.</p>
+<p>And if you run such a business,<br>you will not have to convince your customers to pay as they go.</p>
+<p>What would this look like, imagine your favorite app on your phone,<br>pinch-in/zoom-out, and see all the other screens you can generate.</p>
+<hr>
+<p>Finally, in your mind under the overwhelming information of toady,<br>sits a key to an AI far more efficient than the chaos of today.</p>
+<p>You don&#39;t talk to it by typing, but via subset of English you click,<br>it is a minimal language built by today&#39;s neural AI.</p>
+<p>This demands that you watch a play-through,<br>of <a href="https://www.youtube.com/watch?v=pdU0Njkek5s">Sam &amp; Max: Hit the Road</a> and <a href="https://www.youtube.com/watch?v=yoF0apBRqTg">Day of The Tentacle</a>.</p>
+<p>Think of this as a WikiWiki Keyboard,<br>as it continues branching out beyond the initial vocabulary in all the right spots.</p>
+<p>The world you operate on is completely symbolic,<br>it is a coherent representation of our world, but in text.</p>
+<p><a href="https://www.youtube.com/watch?v=HNBmMcaiolk">Inform 7</a> and <a href="https://www.youtube.com/watch?v=-lerxozozis&t=10s">MUD/MOO</a> can show you how to build such worlds,<br>aside from being symbolic they are perfectly structured.</p>
+<p>Thus easily visualizes,<br>or <a href="https://demos.littleworkshop.fr/infinitown">projected into 3D</a>.</p>
+<p>The intelligence here, is the same as the intelligence of workers,<br>courts, corporations, and governments.</p>
+<p>Everything is well scripted,<br>everyone and every thing follows the script, or their process libraries.</p>
+<p>You don&#39;t need a big AI, and more interestingly,<br>the more little AIs you have the faster the world thinks.</p>
+<hr>
+<p>The technology of today has unlocked everything for you,<br>the only thing ever denied to you, will be boredom.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://threejs.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>three.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://threejs.org/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=pdU0Njkek5s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Sam &amp;amp; Max: Hit the Road</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=pdU0Njkek5s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=yoF0apBRqTg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Day of The Tentacle</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=yoF0apBRqTg</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=HNBmMcaiolk">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Inform 7</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=HNBmMcaiolk</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=-lerxozozis&amp;t=10s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>MUD/MOO</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=-lerxozozis&amp;t=10s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://demos.littleworkshop.fr/infinitown">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>projected into 3D</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://demos.littleworkshop.fr/infinitown</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">batch processing</span><span class="chip">3D interfaces</span><span class="chip">procedural generation</span><span class="chip">dynamic applications</span><span class="chip">symbolic interfaces</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://threejs.org/">
+              <span class="text-truncate">three.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">threejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=pdU0Njkek5s">
+              <span class="text-truncate">Sam &amp;amp; Max: Hit the Road</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=yoF0apBRqTg">
+              <span class="text-truncate">Day of The Tentacle</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=HNBmMcaiolk">
+              <span class="text-truncate">Inform 7</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=-lerxozozis&amp;t=10s">
+              <span class="text-truncate">MUD/MOO</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://demos.littleworkshop.fr/infinitown">
+              <span class="text-truncate">projected into 3D</span>
+              <span class="fg-3 fs-xs flex-shrink-0">demos.littleworkshop.fr</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/b580162e-8806-4ff5-ac48-b54fbe4f3e9d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Homemade Lemonade</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/d9ffb4f3-894e-4cc9-878c-9383082e269e/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Return Of Morgana And The Knights Of The Shattered Round</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1ad7fa14-d612-435b-8535-a3c744dd1a3f/">
+              <img src="https://catpea.github.io/chapter-15/poem-2300.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Spot A Machine Uprising And Get Out Of Town Early</span>
+                <span class="fg-3 fs-xs">June 21, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b580162e-8806-4ff5-ac48-b54fbe4f3e9d/">
+              <img src="https://catpea.github.io/chapter-15/poem-2295.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Homemade Lemonade</span>
+                <span class="fg-3 fs-xs">June 16, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2bd56f73-a0d9-44ac-9069-3d90251240df/">
+              <img src="https://catpea.github.io/chapter-16/poem-2307.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Antagonizing The AI; Or, My Incredible Adventures With Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">June 28, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3c6e062d-200d-43c2-b560-4dbc7b01feb4/">
+              <img src="https://catpea.github.io/chapter-15/poem-2294.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">On Easily Understanding The Complexity Of Artificial Intelligence Generated Applications</span>
+                <span class="fg-3 fs-xs">June 14, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

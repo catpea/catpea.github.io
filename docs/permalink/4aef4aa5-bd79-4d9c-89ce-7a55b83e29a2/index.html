@@ -1,170 +1,471 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subscribable, Observable, Signal, Sugar and Whipflash</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Subscribable, Observable, Signal, Sugar and Whipflash · Cat Pea</title>
+  <meta name="description" content="A “Subscribable” is a simple container that holds an array of subscriber functions with `subscribe` and `unsubscribe` methods; `subscribe` returns a tiny anonymous function that will automatically call `unsubscribe`. An Observable builds on this by adding a single method `notify(data)` that pushes the given data to all subscribers. A Signal further extends an Observable by storing a value property: when a subscriber is added it immediately receives the current value (if defined), and the signal’s setter updates the stored value and calls `notify` so all listeners receive the new data; the getter simply returns the stored value. In this way, signals provide a lightweight reactive pattern similar to RxJS, where data changes are broadcasted to any interested callbacks.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/4aef4aa5-bd79-4d9c-89ce-7a55b83e29a2/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Subscribable, Observable, Signal, Sugar and Whipflash · Cat Pea">
+  <meta property="og:description" content="A “Subscribable” is a simple container that holds an array of subscriber functions with `subscribe` and `unsubscribe` methods; `subscribe` returns a tiny anonymous function that will automatically call `unsubscribe`. An Observable builds on this by adding a single method `notify(data)` that pushes the given data to all subscribers. A Signal further extends an Observable by storing a value property: when a subscriber is added it immediately receives the current value (if defined), and the signal’s setter updates the stored value and calls `notify` so all listeners receive the new data; the getter simply returns the stored value. In this way, signals provide a lightweight reactive pattern similar to RxJS, where data changes are broadcasted to any interested callbacks.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-12/poem-1800.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-12/">Chapter 12</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1800</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-12/poem-1800.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1800.avif" alt="Subscribable, Observable, Signal, Sugar and Whipflash"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Subscribable, Observable, Signal, Sugar and Whipflash</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1800.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1800</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Subscribable, Observable, Signal, Sugar and Whipflash</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-02-04">2/3/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">We are going to start,
-by building a Subscribable not exacly a real class but think of it that way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is an array or list of functions,
-called subscribers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And two functions,
-subscribe and unsubscribe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These two functions accept just one argument,
-it is the subscriber, which is a function that gets data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Subscribe puts the function into the subscribers list,
-and unsubscribe, gets rid of it – nice and easy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a very useful bonus, that you should always implement,
-the subscribe function, should return a tiny anonymous function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That when executed, automatically,
-calls unsubscribe with your function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is our Subscribable,
-the first layer is complete.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The next layer,
-is the massive huge Observables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our cute little Signals,
-are a superset of Observables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All an observable is,
-is one more function added to our Subscribable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that function is notify(),
-it accepts a singe argument, data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The notify function,
-iterates over the subscribers, delivering to each that data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is all an observable is,
-notify(data);</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you subscribe to an observable,
-and something somewhere in your applicaion will say:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">observable.notify(‘hello world!’);
-and all your subscribers are given that data.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Signals, are one more additional thing,
-just one! A data property.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So instead of using notify with data,
-signals send their data property to all the listeners.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are a couple of things that you must know,
-we will be modifying the Subscribable, customizing it for signals.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Fist of all, upon subscription,
-if the data value is <em>something</em>, as in not null or undefined;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must send it to the subscriber immediately,
-so you say if this.data subscriber(this.data);</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you gave to add a getter and a setter,
-some also add get and set functions but that is extra.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you have a set value(v) that if value is different from this.data,
-assigns to this.data, and calls notify, to update the subscribers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And and a get value that reads from this.data,
-for when you don’t want to subscribe to get the value.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made this sound way too complicated,
-but I wanted to show you all the details of a Signal(),</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now when you say mySignal.value = “My hovercraft is full of eels!”
-all the subscribers will be given that data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also that latest data is kept in the Signal under value,
-if you just need to grab it real quick.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Otherwise, you subscribe, and if it is not null,
-then your subscriber function will be given that value immediately.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And than at any point in time,
-that it changes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This part is for those of us,
-who looked at Observables but never understood them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I know the question that is on your mind,
-and that other sssstuff in Angular and Rx, that is just syntacting sugar.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please quote me on this one,
-&quot;Be it in code, or real life, sugar is poison&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sugar just means you handle data, and error seperatley,
-otherwise you would get function arguments (err, /<em>and</em>/ data), like in node.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now in your subscriber you have to check if there was an error,
-and only then process data, but sugar is bad, and extremly bad for learning.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, I will end this text,
-with a Whipflash.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can create an Observable that accepts a doStuffFuncion via constructor,
-that may send clicks of a mouse or the tick tocks of a clock.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without, a subscribers array, or the Subscribable layer,
-by simply giving every subscriber to the doStuffFuncion as an argument.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not counting method names,
-that is two lines of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="./files/code.txt">code</a>.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-02-04T02:32:55.035Z">February 3, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>7:02<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-12/poem-1800.avif" aria-label="Cover for Subscribable, Observable, Signal, Sugar and Whipflash, full size">
+            <img src="https://catpea.github.io/chapter-12/poem-1800.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Subscribable, Observable, Signal, Sugar and Whipflash" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 7:02
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-12/poem-1800.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-12/poem-1800.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-12/poem-1800.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>We are going to start,<br>by building a Subscribable not exacly a real class but think of it that way.</p>
+<p>It is an array or list of functions,<br>called subscribers.</p>
+<p>And two functions,<br>subscribe and unsubscribe.</p>
+<p>These two functions accept just one argument,<br>it is the subscriber, which is a function that gets data.</p>
+<p>Subscribe puts the function into the subscribers list,<br>and unsubscribe, gets rid of it – nice and easy.</p>
+<p>As a very useful bonus, that you should always implement,<br>the subscribe function, should return a tiny anonymous function.</p>
+<p>That when executed, automatically,<br>calls unsubscribe with your function.</p>
+<p>This is our Subscribable,<br>the first layer is complete.</p>
+<hr>
+<p>The next layer,<br>is the massive huge Observables.</p>
+<p>Our cute little Signals,<br>are a superset of Observables.</p>
+<p>All an observable is,<br>is one more function added to our Subscribable.</p>
+<p>And that function is notify(),<br>it accepts a singe argument, data.</p>
+<p>The notify function,<br>iterates over the subscribers, delivering to each that data.</p>
+<p>That is all an observable is,<br>notify(data);</p>
+<p>So you subscribe to an observable,<br>and something somewhere in your applicaion will say:</p>
+<p>observable.notify(‘hello world!’);<br>and all your subscribers are given that data.</p>
+<hr>
+<p>Signals, are one more additional thing,<br>just one! A data property.</p>
+<p>So instead of using notify with data,<br>signals send their data property to all the listeners.</p>
+<p>There are a couple of things that you must know,<br>we will be modifying the Subscribable, customizing it for signals.</p>
+<p>Fist of all, upon subscription,<br>if the data value is <em>something</em>, as in not null or undefined;</p>
+<p>You must send it to the subscriber immediately,<br>so you say if this.data subscriber(this.data);</p>
+<p>And you gave to add a getter and a setter,<br>some also add get and set functions but that is extra.</p>
+<p>So you have a set value(v) that if value is different from this.data,<br>assigns to this.data, and calls notify, to update the subscribers.</p>
+<p>And and a get value that reads from this.data,<br>for when you don’t want to subscribe to get the value.</p>
+<hr>
+<p>I made this sound way too complicated,<br>but I wanted to show you all the details of a Signal(),</p>
+<p>So now when you say mySignal.value = “My hovercraft is full of eels!”<br>all the subscribers will be given that data.</p>
+<p>But also that latest data is kept in the Signal under value,<br>if you just need to grab it real quick.</p>
+<p>Otherwise, you subscribe, and if it is not null,<br>then your subscriber function will be given that value immediately.</p>
+<p>And than at any point in time,<br>that it changes.</p>
+<hr>
+<p>This part is for those of us,<br>who looked at Observables but never understood them.</p>
+<p>I know the question that is on your mind,<br>and that other sssstuff in Angular and Rx, that is just syntacting sugar.</p>
+<p>Please quote me on this one,<br>&quot;Be it in code, or real life, sugar is poison&quot;</p>
+<p>Sugar just means you handle data, and error seperatley,<br>otherwise you would get function arguments (err, /<em>and</em>/ data), like in node.</p>
+<p>And now in your subscriber you have to check if there was an error,<br>and only then process data, but sugar is bad, and extremly bad for learning.</p>
+<hr>
+<p>Finally, I will end this text,<br>with a Whipflash.</p>
+<p>You can create an Observable that accepts a doStuffFuncion via constructor,<br>that may send clicks of a mouse or the tick tocks of a clock.</p>
+<p>Without, a subscribers array, or the Subscribable layer,<br>by simply giving every subscriber to the doStuffFuncion as an argument.</p>
+<p>Not counting method names,<br>that is two lines of <a href="./files/code.txt">code</a>.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="./files/code.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>code</span>
-                      <small class="d-block text-muted fw-lighter mt-2">./files/code.txt</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">typescript</span><span class="chip">observable</span><span class="chip">signal</span><span class="chip">design-patterns</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="./files/code.txt">
+              <span class="text-truncate">code</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/code.js" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>code.js
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/code.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>code.txt
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/258d5451-6bfe-4744-aee2-3251d82818e0/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Gerbil Trouble On The Double</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/004e90ec-3b66-454b-b17e-8ba4900e124b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Fitness And Bodybuilding For Girls</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/46ad8ccb-e2cd-44a7-818b-0fd824bdba70/">
+              <img src="https://catpea.github.io/chapter-12/poem-1802.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</span>
+                <span class="fg-3 fs-xs">February 5, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f0d16cbd-fd0f-4ed1-924c-30bf2a237a4c/">
+              <img src="https://catpea.github.io/chapter-12/poem-1796.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Asking AI About Learning Programming</span>
+                <span class="fg-3 fs-xs">January 30, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/250b3929-6aad-44c2-9d3a-91e56c05245f/">
+              <img src="https://catpea.github.io/chapter-12/poem-1809.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Slayer; A Programmer&#39;s Lament</span>
+                <span class="fg-3 fs-xs">February 12, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/23b40f77-24b5-4381-8d61-dd34d958756c/">
+              <img src="https://catpea.github.io/chapter-12/poem-1794.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Program Wild And Scary! Apologize For Nothing</span>
+                <span class="fg-3 fs-xs">January 29, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

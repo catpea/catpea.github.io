@@ -1,202 +1,500 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Holy Guacamole: Learn JavaScript Today!</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Holy Guacamole: Learn JavaScript Today! · Cat Pea</title>
+  <meta name="description" content="The post explains how modern AI tools can instantly turn a beginner into a “superhuman” programmer: by watching simple tutorials and using an IDE like Electron‑Fiddle, you can ask the model to add features with only Bootstrap Utility API calls, making the first two steps trivial and the third step surprisingly powerful. The author illustrates this power with a real‑world parsing problem—determining bracket and quote context in code—and shows that AI can propose five distinct strategies (state‑machine, quote‑bracket, regex‑based, token‑based, multi‑pass) for solving it; he even managed to implement three years’ worth of work in one afternoon. He concludes that the bigger the problem, the more effective AI becomes, positioning it as a personal code savant that opens wide doors to efficient programming.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/0a9b9eb7-aceb-4535-80e2-34045a715f95/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Holy Guacamole: Learn JavaScript Today! · Cat Pea">
+  <meta property="og:description" content="The post explains how modern AI tools can instantly turn a beginner into a “superhuman” programmer: by watching simple tutorials and using an IDE like Electron‑Fiddle, you can ask the model to add features with only Bootstrap Utility API calls, making the first two steps trivial and the third step surprisingly powerful. The author illustrates this power with a real‑world parsing problem—determining bracket and quote context in code—and shows that AI can propose five distinct strategies (state‑machine, quote‑bracket, regex‑based, token‑based, multi‑pass) for solving it; he even managed to implement three years’ worth of work in one afternoon. He concludes that the bigger the problem, the more effective AI becomes, positioning it as a personal code savant that opens wide doors to efficient programming.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1980.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1980</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1980.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1980.avif" alt="Holy Guacamole: Learn JavaScript Today!"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Holy Guacamole: Learn JavaScript Today!</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1980.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-08-03T02:19:43.892Z">August 2, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>5:12<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1980</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Holy Guacamole: Learn JavaScript Today!</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-08-03">8/2/2025</time></p>
-            </header>
+          </div>
+        </header>
 
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Everyone continues learning what AI can do,
-what is going on is that AI gives you massive superpowers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All you need to do is watch a few tutorials,
-maybe install <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.electronjs.org/fiddle">electron-fiddle</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And start asking AI what do you need to do to add this,
-and that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell it to use Bootstrap Utility API only,
-to get rid of all the CSS style fluff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first step is easy, because you aren’t doing much,
-and you just ask AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The second step is easy,
-because you ask AI not for applications you want.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But applications it can make beautifully,
-simple, elegant and lightweight.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can be publishing an app or two,
-in some app-store in a week or a month.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the third step,
-is just wild.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because when you get into programming,
-you instantly become superhuman super powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Allow me to show you,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/tree/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy">what that looks like</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I faced an annoying problem this morning,
-roughly speaking, when I was parsing code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I didn’t know if I was outside brackets,
-inside brackets, or quotes within brackets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/tagged-template-literal-parsing-strategies.md">The AI knew about the dilemma very well</a>,
-and even insulted a leading company for not doing it right.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are 5 solutions to the problem,
-AI encouraged me to use the simplest.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I asked for all five,
-and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/tree/main">in a singe afternoon, I did three years of programming</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I maybe a slowpoke,
-so any novice can do the same.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t want to bore you with code details,
-but in closing will read to you the incredibly sounding description.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Of each item, just to show you how incredible programming with AI is,
-how it will help you every step of the way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What I want you to understand, is that the bigger the problem,
-the better AI is at solving it for you, even in multiple ways.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI is your private personal code savant,
-the doors to the incredible world of programming are wide open to you.</p>
-<hr class="my-4">
-<ol class="list-group list-group-numbered list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/state-machine.md">The State-machine strategy</a> gives you a solid foundation for the XMLParser to process the markers and convert them into reactive DOM updates!</p>
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1980.avif" aria-label="Cover for Holy Guacamole: Learn JavaScript Today!, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1980.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Holy Guacamole: Learn JavaScript Today!" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 5:12
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1980.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1980.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1980.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Everyone continues learning what AI can do,<br>what is going on is that AI gives you massive superpowers.</p>
+<p>All you need to do is watch a few tutorials,<br>maybe install <a href="https://www.electronjs.org/fiddle">electron-fiddle</a>.</p>
+<p>And start asking AI what do you need to do to add this,<br>and that.</p>
+<p>Tell it to use Bootstrap Utility API only,<br>to get rid of all the CSS style fluff.</p>
+<p>The first step is easy, because you aren’t doing much,<br>and you just ask AI.</p>
+<p>The second step is easy,<br>because you ask AI not for applications you want.</p>
+<p>But applications it can make beautifully,<br>simple, elegant and lightweight.</p>
+<p>You can be publishing an app or two,<br>in some app-store in a week or a month.</p>
+<hr>
+<p>But the third step,<br>is just wild.</p>
+<p>Because when you get into programming,<br>you instantly become superhuman super powerful.</p>
+<p>Allow me to show you,<br><a href="https://github.com/catpea/heebiejeebies/tree/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy">what that looks like</a>.</p>
+<p>I faced an annoying problem this morning,<br>roughly speaking, when I was parsing code.</p>
+<p>I didn’t know if I was outside brackets,<br>inside brackets, or quotes within brackets.</p>
+<p><a href="files/tagged-template-literal-parsing-strategies.md">The AI knew about the dilemma very well</a>,<br>and even insulted a leading company for not doing it right.</p>
+<p>There are 5 solutions to the problem,<br>AI encouraged me to use the simplest.</p>
+<p>I asked for all five,<br>and <a href="https://github.com/catpea/heebiejeebies/tree/main">in a singe afternoon, I did three years of programming</a>.</p>
+<p>I maybe a slowpoke,<br>so any novice can do the same.</p>
+<hr>
+<p>I don’t want to bore you with code details,<br>but in closing will read to you the incredibly sounding description.</p>
+<p>Of each item, just to show you how incredible programming with AI is,<br>how it will help you every step of the way.</p>
+<p>What I want you to understand, is that the bigger the problem,<br>the better AI is at solving it for you, even in multiple ways.</p>
+<p>AI is your private personal code savant,<br>the doors to the incredible world of programming are wide open to you.</p>
+<hr>
+<ol>
+<li><p><a href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/state-machine.md">The State-machine strategy</a> gives you a solid foundation for the XMLParser to process the markers and convert them into reactive DOM updates!</p>
 </li>
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/quote-bracket.md">The Quote and Bracket approach</a> is ideal when you need <strong>absolute accuracy</strong> and <strong>comprehensive context information</strong>, especially for complex templates with mixed quote types and escaped sequences!</p>
+<li><p><a href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/quote-bracket.md">The Quote and Bracket approach</a> is ideal when you need <strong>absolute accuracy</strong> and <strong>comprehensive context information</strong>, especially for complex templates with mixed quote types and escaped sequences!</p>
 </li>
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/regex-based.md">Regular Expression strategy</a> gives you excellent performance for the 90% case while still being robust enough for production use!</p>
+<li><p><a href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/regex-based.md">Regular Expression strategy</a> gives you excellent performance for the 90% case while still being robust enough for production use!</p>
 </li>
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/token-based.md">Token based strategy</a> approach gives you the best balance of accuracy and maintainability, making it ideal for production template systems where correctness is paramount!</p>
+<li><p><a href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/token-based.md">Token based strategy</a> approach gives you the best balance of accuracy and maintainability, making it ideal for production template systems where correctness is paramount!</p>
 </li>
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/multi-pass.md">Multi-pass strategy</a> is the most sophisticated approach that provides maximum accuracy through systematic verification. This multi-pass strategy represents the <strong>gold standard</strong> for template parsing - when you absolutely need to get the context right every time, regardless of template complexity!</p>
+<li><p><a href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/multi-pass.md">Multi-pass strategy</a> is the most sophisticated approach that provides maximum accuracy through systematic verification. This multi-pass strategy represents the <strong>gold standard</strong> for template parsing - when you absolutely need to get the context right every time, regardless of template complexity!</p>
 </li>
 </ol>
 
-            </section>
-
-          </div>
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.electronjs.org/fiddle">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>electron-fiddle</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.electronjs.org/fiddle</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/tree/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>what that looks like</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/tree/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/tagged-template-literal-parsing-strategies.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The AI knew about the dilemma very well</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/tagged-template-literal-parsing-strategies.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/tree/main">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>in a singe afternoon, I did three years of programming</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/tree/main</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/state-machine.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The State-machine strategy</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/state-machine.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/quote-bracket.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The Quote and Bracket approach</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/quote-bracket.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/regex-based.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Regular Expression strategy</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/regex-based.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/token-based.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Token based strategy</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/token-based.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/multi-pass.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Multi-pass strategy</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/multi-pass.md</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">programming</span><span class="chip">javascript</span><span class="chip">electron</span><span class="chip">bootstrap</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.electronjs.org/fiddle">
+              <span class="text-truncate">electron-fiddle</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.electronjs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/tree/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy">
+              <span class="text-truncate">what that looks like</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/tagged-template-literal-parsing-strategies.md">
+              <span class="text-truncate">The AI knew about the dilemma very well</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/tree/main">
+              <span class="text-truncate">in a singe afternoon, I did three years of programming</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/state-machine.md">
+              <span class="text-truncate">The State-machine strategy</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/quote-bracket.md">
+              <span class="text-truncate">The Quote and Bracket approach</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/regex-based.md">
+              <span class="text-truncate">Regular Expression strategy</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/token-based.md">
+              <span class="text-truncate">Token based strategy</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/heebiejeebies/blob/992d5012b132df5f8bae8f0242bc2efb154dc394/src/strategy/multi-pass.md">
+              <span class="text-truncate">Multi-pass strategy</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/tagged-template-literal-parsing-strategies.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>tagged-template-literal-parsing-strategies.md
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/97aca434-3fe7-4333-97a8-4a9895586d6d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Wild Wild Days; Or, The Spooky Paths Of Artificial Intelligence</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/cc7f0f84-cb37-4655-bd5c-68a8ac5380cb/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">High School: JavaScript Is The Way Out</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cc7f0f84-cb37-4655-bd5c-68a8ac5380cb/">
+              <img src="https://catpea.github.io/chapter-13/poem-1981.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">High School: JavaScript Is The Way Out</span>
+                <span class="fg-3 fs-xs">August 3, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e49c98b3-432c-4653-9b1d-948c47ff79c7/">
+              <img src="https://catpea.github.io/chapter-13/poem-1970.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Application Design: You Will Lose Control, So Give Yourself Weapons First</span>
+                <span class="fg-3 fs-xs">July 23, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3150737d-000a-4243-9ed9-63be21376e03/">
+              <img src="https://catpea.github.io/chapter-13/poem-1982.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Color Mlue; Or The Reactive JavaScript Turtle</span>
+                <span class="fg-3 fs-xs">August 4, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/177c91bb-0f3c-43bb-9d55-c6aa6f431915/">
+              <img src="https://catpea.github.io/chapter-13/poem-1969.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Saga of Loki&#39;s Integers and the Valkyries&#39; Thunder</span>
+                <span class="fg-3 fs-xs">July 22, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

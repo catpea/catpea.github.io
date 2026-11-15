@@ -1,220 +1,493 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JavaScript Gods</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>JavaScript Gods · Cat Pea</title>
+  <meta name="description" content="The post recounts a “rebellion” between SQL and No‑SQL paradigms, arguing that the fixed structure of relational databases is not always optimal and that understanding key‑value stores, periodic syncs, and memory‑mapped disks gives developers deeper insight. It then shifts to advocating the actor model (inspired by Erlang/OTP) as a powerful way to architect programs, especially when combined with hot‑reloading so modules can be updated on the fly without restarting. The author encourages experimenting with concise JavaScript snippets that embody these concepts and suggests extending the same pattern to other languages, celebrating the freedom and creative power of “technology rebels.”">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/ea1b27e4-353f-471c-8e9c-dbf7968f5ca2/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="JavaScript Gods · Cat Pea">
+  <meta property="og:description" content="The post recounts a “rebellion” between SQL and No‑SQL paradigms, arguing that the fixed structure of relational databases is not always optimal and that understanding key‑value stores, periodic syncs, and memory‑mapped disks gives developers deeper insight. It then shifts to advocating the actor model (inspired by Erlang/OTP) as a powerful way to architect programs, especially when combined with hot‑reloading so modules can be updated on the fly without restarting. The author encourages experimenting with concise JavaScript snippets that embody these concepts and suggests extending the same pattern to other languages, celebrating the freedom and creative power of “technology rebels.”">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1724.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1724</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1724.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1724.avif" alt="JavaScript Gods"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">JavaScript Gods</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1724.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1724</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">JavaScript Gods</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-11-20">11/19/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">There was once an SQL rebellion,
-where many still lay slayed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nerds and professors scoffed themselves into an early grave,
-an on the other side <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://howfuckedismydatabase.com/nosql/">many fell to distributed map reduce functions</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Both sides had great casualties,
-but as it always in the programming word, there were no losers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It turned out that SQL databases,
-were not the only way, and may not be the best way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Arguing,
-that there is only one way to do things correctly...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a world where every program has unique constraints,
-and where initials conditions change…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where flush may not always flush data do disk,
-is not just silly, but kind of crazy.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">More than that, always using other peoples work,
-is boring, and does not teach about the fundamentals of their techologies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As I write this I am watching <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/DataExpert-io/data-engineer-handbook">The Data Engineer Handbook</a>,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/trending">trending</a> with 18k stars.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My occasional reader loves to argue with me,
-because they find mainstream easy to argue for, they want to follow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is why it will take them decades to learn,
-what they could master in their own unique way in months.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The mainstream lovers are in fact making the argument for SQL,
-and the damn dirty apes like me, I am on the noSQL end.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What the rebels get out of it, is knowing what a key value storage engine is,
-what periodic sync does, what memory mapped disk locations offer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am using SQL as an example here,
-I am showing that there is another, equally large side.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, finally, let me give you a gift,
-and a recipe for more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I give you hot reloading of modules,
-in a singe line of code, one function: upgrade.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are going to upgrade you first,
-we are going to change the way you program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will program with the Actor model from now on,
-it is powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not just actors, but also connections,
-as it appears that Erlang/OTP may not be perfect yet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we want compatibility with Visual Programming,
-where lines co-exist with the actors on a stage that is the context.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are armed with knowledge of connections,
-coming from other actors on your stage.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not able to route data the way RxJs does,
-knowing the connections allows you to make smart choices.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example wait, until all connections sent in data,
-as the case is with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://rxjs.dev/api/index/function/combineLatest">combineLatest</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But now you are the architect of your own operators,
-and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/sweetpea/blob/5deadfa7aa230ed5a1d8084c0f76bbb065a2dd4f/src/flow/queue-and-buffer/combine-latest/index.js#L31-L36">they are stupid simple to make</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now that you have actors that have a process function,
-where data from connections is smartly mangled into.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You give yourself an upgrade function,
-where you send in a new function to replace the process function.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is the hot reloading of modules,
-it means you can develop your program, without restarting it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Of upgrade, a live production version, like a maniac,
-without affecting anything else that is already running.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And no,
-you don’t need to read up on the actor model.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here is all you need,
-on one line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Generate several genius level JavaScript snippets inspired by Erlang/OTP. The snippet should utilize modern JavaScript/ES6+ syntax.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is something you send to your favorite free AI,
-and if you don’ like that, then <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ollama.com/search">install ollama</a> and maybe “<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ollama.com/library/qwen2.5-coder">qwen2.5-coder</a>”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(Please compare results with leading AI,
-to make sure you are getting the finest results.)</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, I have even a greater gift for you,
-I wan you to use the same of similar line, but with other programming languages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">C#/.NET, Golang, Swift, Kotlin, Haskell, Elm, Elixir, F#, Clojure, Ruby,
-PureScript, Dart, Java, Groovy, Julia, OCaml, and Rust, to name a few.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as you don’t follow,
-and stand a technology rebel.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=k6_QUhUPrF4">There is no other feeling like that. You will be alone with the gods, and the nights will flame with fire.
-You will ride life straight to perfect laughter. It&#39;s the only good fight there is.</a>”</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-11-20T04:54:56.127Z">November 19, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:03<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1724.avif" aria-label="Cover for JavaScript Gods, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1724.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for JavaScript Gods" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:03
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1724.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1724.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1724.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>There was once an SQL rebellion,<br>where many still lay slayed.</p>
+<p>Nerds and professors scoffed themselves into an early grave,<br>an on the other side <a href="https://howfuckedismydatabase.com/nosql/">many fell to distributed map reduce functions</a>.</p>
+<p>Both sides had great casualties,<br>but as it always in the programming word, there were no losers.</p>
+<hr>
+<p>It turned out that SQL databases,<br>were not the only way, and may not be the best way.</p>
+<p>Arguing,<br>that there is only one way to do things correctly...</p>
+<p>In a world where every program has unique constraints,<br>and where initials conditions change…</p>
+<p>Where flush may not always flush data do disk,<br>is not just silly, but kind of crazy.</p>
+<hr>
+<p>More than that, always using other peoples work,<br>is boring, and does not teach about the fundamentals of their techologies.</p>
+<p>As I write this I am watching <a href="https://github.com/DataExpert-io/data-engineer-handbook">The Data Engineer Handbook</a>,<br><a href="https://github.com/trending">trending</a> with 18k stars.</p>
+<p>My occasional reader loves to argue with me,<br>because they find mainstream easy to argue for, they want to follow.</p>
+<p>And that is why it will take them decades to learn,<br>what they could master in their own unique way in months.</p>
+<hr>
+<p>The mainstream lovers are in fact making the argument for SQL,<br>and the damn dirty apes like me, I am on the noSQL end.</p>
+<p>What the rebels get out of it, is knowing what a key value storage engine is,<br>what periodic sync does, what memory mapped disk locations offer.</p>
+<p>I am using SQL as an example here,<br>I am showing that there is another, equally large side.</p>
+<hr>
+<p>Now, finally, let me give you a gift,<br>and a recipe for more.</p>
+<p>I give you hot reloading of modules,<br>in a singe line of code, one function: upgrade.</p>
+<p>We are going to upgrade you first,<br>we are going to change the way you program.</p>
+<p>You will program with the Actor model from now on,<br>it is powerful.</p>
+<p>Not just actors, but also connections,<br>as it appears that Erlang/OTP may not be perfect yet.</p>
+<p>And we want compatibility with Visual Programming,<br>where lines co-exist with the actors on a stage that is the context.</p>
+<p>When you are armed with knowledge of connections,<br>coming from other actors on your stage.</p>
+<p>You are not able to route data the way RxJs does,<br>knowing the connections allows you to make smart choices.</p>
+<p>For example wait, until all connections sent in data,<br>as the case is with <a href="https://rxjs.dev/api/index/function/combineLatest">combineLatest</a>.</p>
+<p>But now you are the architect of your own operators,<br>and <a href="https://github.com/catpea/sweetpea/blob/5deadfa7aa230ed5a1d8084c0f76bbb065a2dd4f/src/flow/queue-and-buffer/combine-latest/index.js#L31-L36">they are stupid simple to make</a>.</p>
+<hr>
+<p>So now that you have actors that have a process function,<br>where data from connections is smartly mangled into.</p>
+<p>You give yourself an upgrade function,<br>where you send in a new function to replace the process function.</p>
+<hr>
+<p>That is the hot reloading of modules,<br>it means you can develop your program, without restarting it.</p>
+<p>Of upgrade, a live production version, like a maniac,<br>without affecting anything else that is already running.</p>
+<hr>
+<p>And no,<br>you don’t need to read up on the actor model.</p>
+<p>Here is all you need,<br>on one line.</p>
+<p>“Generate several genius level JavaScript snippets inspired by Erlang/OTP. The snippet should utilize modern JavaScript/ES6+ syntax.”</p>
+<p>This is something you send to your favorite free AI,<br>and if you don’ like that, then <a href="https://ollama.com/search">install ollama</a> and maybe “<a href="https://ollama.com/library/qwen2.5-coder">qwen2.5-coder</a>”</p>
+<p>(Please compare results with leading AI,<br>to make sure you are getting the finest results.)</p>
+<hr>
+<p>Finally, I have even a greater gift for you,<br>I wan you to use the same of similar line, but with other programming languages.</p>
+<p>C#/.NET, Golang, Swift, Kotlin, Haskell, Elm, Elixir, F#, Clojure, Ruby,<br>PureScript, Dart, Java, Groovy, Julia, OCaml, and Rust, to name a few.</p>
+<p>So as long as you don’t follow,<br>and stand a technology rebel.</p>
+<p>“<a href="https://www.youtube.com/watch?v=k6_QUhUPrF4">There is no other feeling like that. You will be alone with the gods, and the nights will flame with fire.<br>You will ride life straight to perfect laughter. It&#39;s the only good fight there is.</a>”</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://howfuckedismydatabase.com/nosql/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>many fell to distributed map reduce functions</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://howfuckedismydatabase.com/nosql/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/DataExpert-io/data-engineer-handbook">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The Data Engineer Handbook</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/DataExpert-io/data-engineer-handbook</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/trending">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>trending</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/trending</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://rxjs.dev/api/index/function/combineLatest">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>combineLatest</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://rxjs.dev/api/index/function/combineLatest</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/sweetpea/blob/5deadfa7aa230ed5a1d8084c0f76bbb065a2dd4f/src/flow/queue-and-buffer/combine-latest/index.js#L31-L36">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>they are stupid simple to make</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/sweetpea/blob/5deadfa7aa230ed5a1d8084c0f76bbb065a2dd4f/src/flow/queue-and-buffer/combine-latest/index.js#L31-L36</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ollama.com/search">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>install ollama</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ollama.com/search</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ollama.com/library/qwen2.5-coder">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>qwen2.5-coder</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ollama.com/library/qwen2.5-coder</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=k6_QUhUPrF4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>There is no other feeling like that. You will be alone with the gods, and the nights will flame with fire.
-You will ride life straight to perfect laughter. It&amp;#39;s the only good fight there is.</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=k6_QUhUPrF4</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">sql</span><span class="chip">nosql</span><span class="chip">elixir</span><span class="chip">actor-model</span><span class="chip">javascript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://howfuckedismydatabase.com/nosql/">
+              <span class="text-truncate">many fell to distributed map reduce functions</span>
+              <span class="fg-3 fs-xs flex-shrink-0">howfuckedismydatabase.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/DataExpert-io/data-engineer-handbook">
+              <span class="text-truncate">The Data Engineer Handbook</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/trending">
+              <span class="text-truncate">trending</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://rxjs.dev/api/index/function/combineLatest">
+              <span class="text-truncate">combineLatest</span>
+              <span class="fg-3 fs-xs flex-shrink-0">rxjs.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/sweetpea/blob/5deadfa7aa230ed5a1d8084c0f76bbb065a2dd4f/src/flow/queue-and-buffer/combine-latest/index.js#L31-L36">
+              <span class="text-truncate">they are stupid simple to make</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ollama.com/search">
+              <span class="text-truncate">install ollama</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ollama.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ollama.com/library/qwen2.5-coder">
+              <span class="text-truncate">qwen2.5-coder</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ollama.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=k6_QUhUPrF4">
+              <span class="text-truncate">There is no other feeling like that. You will be alone with the gods, and the nights will flame with fire.You will ride life straight to perfect laughter. It&amp;#39;s the only good fight there is.</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/2768dcf6-0959-4238-9b3c-9e3be18da112/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">An Eerie Little Poem About Two Eerie Places And A Strange Porcupine</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/a3d1d212-8a9c-40d3-ad07-397b2d6d52bf/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Children of the Future, Hear Me! - A Message From Friedrich Nietzsche</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2965e5ed-e3c7-49e8-8931-a6459baaec05/">
+              <img src="https://catpea.github.io/chapter-12/poem-1733.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Pardon My Turkey; Or, An XML Thanksgiving</span>
+                <span class="fg-3 fs-xs">November 29, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/dafb9170-4014-456a-8049-6e46c077acbd/">
+              <img src="https://catpea.github.io/chapter-11/poem-1714.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Visual Programming === Future Of Programming</span>
+                <span class="fg-3 fs-xs">November 10, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/02199693-2214-41f9-b55a-bede7d8772e8/">
+              <img src="https://catpea.github.io/chapter-12/poem-1734.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Tokenizer and Lexer Story; Or, A Closer Look At XML Shenanigans</span>
+                <span class="fg-3 fs-xs">November 29, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3b87a5fe-b183-4815-ba0e-4fff78ad02f5/">
+              <img src="https://catpea.github.io/chapter-11/poem-1713.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How I Successfully Used AI To Learn Important Programming Embarrassments</span>
+                <span class="fg-3 fs-xs">November 9, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

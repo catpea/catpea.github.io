@@ -1,166 +1,458 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree · Cat Pea</title>
+  <meta name="description" content="The author explains how “SwitchMap”—a term that combines “switch” (referring to observables) and “map” (the transformation of values)—is an idiom that feels natural only within the functional reactive programming community; they recount their own learning curve, from struggling with map/reduce/filter code in CouchDB queries to finally grasping the operator’s meaning after many weeks of practice, and conclude by recommending that beginners build their own FRP system or study the Observable proposal (WICG/Tc39) as a practical entry point into the world of observables and functional reactive programming.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/46ad8ccb-e2cd-44a7-818b-0fd824bdba70/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree · Cat Pea">
+  <meta property="og:description" content="The author explains how “SwitchMap”—a term that combines “switch” (referring to observables) and “map” (the transformation of values)—is an idiom that feels natural only within the functional reactive programming community; they recount their own learning curve, from struggling with map/reduce/filter code in CouchDB queries to finally grasping the operator’s meaning after many weeks of practice, and conclude by recommending that beginners build their own FRP system or study the Observable proposal (WICG/Tc39) as a practical entry point into the world of observables and functional reactive programming.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-12/poem-1802.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-12/">Chapter 12</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1802</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-12/poem-1802.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1802.avif" alt="switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1802.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1802</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-02-06">2/5/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Switch Map, is a strange name for anything,
-outside of the reactive programming community.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the reactive programming community,
-it is a combination of two meanings.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where switch refers to Observables,
-and Map means change on thing into another.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may not use, a correct name,
-which is Swap Observable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because, you will then fail to speak the same language,
-as the members of the Functional Reactive Programming Communities.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">How are you supposed to know the strange meanings,
-and the subset of language?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is illustrated by a quote,
-from the 1991 Pointbreak surfer movie:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Well, look. Look at &#39;em. They&#39;re like some kind of tribe.
-They got their own language.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You either have to practice a lot,
-or stalk your prey for long enough.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I once saw a piece of code I couldn&#39;t read,
-it contained map, reduce, and filter, and it to me it looked like jewelry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It took weeks of being mindful of existence of map and reduce,
-to finally click with it and in my case start writing CouchDB queries.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which some consider to be a fire-able offense,
-on par with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://howfuckedismydatabase.com/nosql/">speaking the f-word to the next upper ranking employee</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As beautiful as that map reduce code was,
-it hurt me, it told me I was left out, and not capable of higher beauty.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The word switch, gained it significance for me,
-when I saw that it only refers to observable under RxJs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are three operators there, switchMap, switchMapTo,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://rxjs.dev/api/index/function/switchAll">and switchAll, whose marble diagram is the f-Word illustrated</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Functional reactive programming, is not necessary,
-but it is the beautiful magic of a sorceress, or enchanters, or a wizard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is the escape from the mundane,
-it is how you rise above prestigious small minded men, who think they have it all.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, I will always recommens that you learn FRP,
-by building your own Functional Reactive Programming system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you can see how that eases you into the community,
-where you pickup the language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, if you are looking to learn Reactive Programming in JavaScript,
-right, real quick.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then I recommend looking at the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/WICG/observable">Observables Proposal</a>,
-from The Web Incubator Community Group (WICG).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They don’t carry the Observable it self,
-that you will find at the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/tc39/proposal-observable">Technical Committee 39 Observable Proposal</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Aside from The Web Incubator Community showing you nice code examples,
-along side their ugly imperative versions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They also name the 15 essential functions that you can start with,
-a familiar list that is nowhere as nearly overwhelming as Rx operators.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I will close this text,
-by naming them for you:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">from, map, flatMap, filter, reduce, take, takeUntil, drop,
-some, every, find, forEach, toArray, catch, and finally.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-02-06T04:55:06.446Z">February 5, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>5:10<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-12/poem-1802.avif" aria-label="Cover for switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree, full size">
+            <img src="https://catpea.github.io/chapter-12/poem-1802.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for switchMap? Why Not Restart Observable? - A Tiny Snark Free Jamboree" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 5:10
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-12/poem-1802.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-12/poem-1802.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-12/poem-1802.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Switch Map, is a strange name for anything,<br>outside of the reactive programming community.</p>
+<p>In the reactive programming community,<br>it is a combination of two meanings.</p>
+<p>Where switch refers to Observables,<br>and Map means change on thing into another.</p>
+<p>You may not use, a correct name,<br>which is Swap Observable.</p>
+<p>Because, you will then fail to speak the same language,<br>as the members of the Functional Reactive Programming Communities.</p>
+<p>How are you supposed to know the strange meanings,<br>and the subset of language?</p>
+<p>That is illustrated by a quote,<br>from the 1991 Pointbreak surfer movie:</p>
+<p>“Well, look. Look at &#39;em. They&#39;re like some kind of tribe.<br>They got their own language.”</p>
+<p>You either have to practice a lot,<br>or stalk your prey for long enough.</p>
+<hr>
+<p>I once saw a piece of code I couldn&#39;t read,<br>it contained map, reduce, and filter, and it to me it looked like jewelry.</p>
+<p>It took weeks of being mindful of existence of map and reduce,<br>to finally click with it and in my case start writing CouchDB queries.</p>
+<p>Which some consider to be a fire-able offense,<br>on par with <a href="https://howfuckedismydatabase.com/nosql/">speaking the f-word to the next upper ranking employee</a>.</p>
+<p>As beautiful as that map reduce code was,<br>it hurt me, it told me I was left out, and not capable of higher beauty.</p>
+<hr>
+<p>The word switch, gained it significance for me,<br>when I saw that it only refers to observable under RxJs.</p>
+<p>There are three operators there, switchMap, switchMapTo,<br><a href="https://rxjs.dev/api/index/function/switchAll">and switchAll, whose marble diagram is the f-Word illustrated</a>.</p>
+<hr>
+<p>Functional reactive programming, is not necessary,<br>but it is the beautiful magic of a sorceress, or enchanters, or a wizard.</p>
+<p>It is the escape from the mundane,<br>it is how you rise above prestigious small minded men, who think they have it all.</p>
+<hr>
+<p>Finally, I will always recommens that you learn FRP,<br>by building your own Functional Reactive Programming system.</p>
+<p>And you can see how that eases you into the community,<br>where you pickup the language.</p>
+<p>But, if you are looking to learn Reactive Programming in JavaScript,<br>right, real quick.</p>
+<p>Then I recommend looking at the <a href="https://github.com/WICG/observable">Observables Proposal</a>,<br>from The Web Incubator Community Group (WICG).</p>
+<p>They don’t carry the Observable it self,<br>that you will find at the <a href="https://github.com/tc39/proposal-observable">Technical Committee 39 Observable Proposal</a></p>
+<p>Aside from The Web Incubator Community showing you nice code examples,<br>along side their ugly imperative versions.</p>
+<p>They also name the 15 essential functions that you can start with,<br>a familiar list that is nowhere as nearly overwhelming as Rx operators.</p>
+<p>And I will close this text,<br>by naming them for you:</p>
+<p>from, map, flatMap, filter, reduce, take, takeUntil, drop,<br>some, every, find, forEach, toArray, catch, and finally.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://howfuckedismydatabase.com/nosql/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>speaking the f-word to the next upper ranking employee</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://howfuckedismydatabase.com/nosql/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://rxjs.dev/api/index/function/switchAll">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>and switchAll, whose marble diagram is the f-Word illustrated</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://rxjs.dev/api/index/function/switchAll</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/WICG/observable">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Observables Proposal</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/WICG/observable</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/tc39/proposal-observable">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Technical Committee 39 Observable Proposal</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/tc39/proposal-observable</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">reactive programming</span><span class="chip">rxjs</span><span class="chip">observable</span><span class="chip">functional reactive programming</span><span class="chip">javascript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://howfuckedismydatabase.com/nosql/">
+              <span class="text-truncate">speaking the f-word to the next upper ranking employee</span>
+              <span class="fg-3 fs-xs flex-shrink-0">howfuckedismydatabase.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://rxjs.dev/api/index/function/switchAll">
+              <span class="text-truncate">and switchAll, whose marble diagram is the f-Word illustrated</span>
+              <span class="fg-3 fs-xs flex-shrink-0">rxjs.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/WICG/observable">
+              <span class="text-truncate">Observables Proposal</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/tc39/proposal-observable">
+              <span class="text-truncate">Technical Committee 39 Observable Proposal</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/004e90ec-3b66-454b-b17e-8ba4900e124b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Fitness And Bodybuilding For Girls</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/e666f5d6-e83c-403d-8d61-ab09887b1b75/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">A Look Back at 2025</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/250b3929-6aad-44c2-9d3a-91e56c05245f/">
+              <img src="https://catpea.github.io/chapter-12/poem-1809.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Slayer; A Programmer&#39;s Lament</span>
+                <span class="fg-3 fs-xs">February 12, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4aef4aa5-bd79-4d9c-89ce-7a55b83e29a2/">
+              <img src="https://catpea.github.io/chapter-12/poem-1800.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Subscribable, Observable, Signal, Sugar and Whipflash</span>
+                <span class="fg-3 fs-xs">February 3, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/65adf3d0-893f-4a69-8470-2131fb3177d7/">
+              <img src="https://catpea.github.io/chapter-12/poem-1811.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning To Teach JavaScript In The Strangest Of Ways</span>
+                <span class="fg-3 fs-xs">February 14, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f0d16cbd-fd0f-4ed1-924c-30bf2a237a4c/">
+              <img src="https://catpea.github.io/chapter-12/poem-1796.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Asking AI About Learning Programming</span>
+                <span class="fg-3 fs-xs">January 30, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

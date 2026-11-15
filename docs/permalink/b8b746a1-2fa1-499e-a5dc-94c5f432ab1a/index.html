@@ -1,231 +1,488 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Future Is Always Bright, Once You Learn Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Future Is Always Bright, Once You Learn Programming · Cat Pea</title>
+  <meta name="description" content="The author recounts their journey through programming languages—starting with ActionScript to solve early browser quirks, then shifting to JavaScript when Node.js enabled server‑side scripting; they note how PHP and Perl fell behind while JavaScript gained dominance. They touch on learning other languages (Python, Rust, C/C++), remarking that each offers its own strengths, but JavaScript’s ubiquity remains key. The post also reflects on object‑oriented design in Java versus the more lightweight approach of JavaScript, and concludes with a practical suggestion: use Electron Fiddle to build a simple desktop environment (taskbar, windows, apps) as a learning exercise for combining HTML/CSS/JS into a cohesive UI.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/b8b746a1-2fa1-499e-a5dc-94c5f432ab1a/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Future Is Always Bright, Once You Learn Programming · Cat Pea">
+  <meta property="og:description" content="The author recounts their journey through programming languages—starting with ActionScript to solve early browser quirks, then shifting to JavaScript when Node.js enabled server‑side scripting; they note how PHP and Perl fell behind while JavaScript gained dominance. They touch on learning other languages (Python, Rust, C/C++), remarking that each offers its own strengths, but JavaScript’s ubiquity remains key. The post also reflects on object‑oriented design in Java versus the more lightweight approach of JavaScript, and concludes with a practical suggestion: use Electron Fiddle to build a simple desktop environment (taskbar, windows, apps) as a learning exercise for combining HTML/CSS/JS into a cohesive UI.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1643.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1643</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1643.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1643.avif" alt="The Future Is Always Bright, Once You Learn Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Future Is Always Bright, Once You Learn Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1643.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1643</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Future Is Always Bright, Once You Learn Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-08-31">8/31/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">But you have to navigate it right,
-you have to hit the right steps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to pick the right language,
-and choose the right battles.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I once had to strategically learn Action Script,
-to eliminate early browser compatibility issues.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It worked out too perfectly, as people started adding stuff,
-without consideration for the User Experience.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That was a beautiful problem to have,
-during an age where JavaScript was slow and browsers incompatible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">--</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then Steve Jobs decided that ActionScript,
-does not belong on the iPhone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Due to business reasons, efficiency, and security,
-conserving battery bower and the like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And ActionScript was no more,
-which was a huge mistake.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As it was basically modern JavaScript,
-a promise to write web apps and phone apps early on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">TypeScript and React in their mangling of JavaScript,
-will never catch up to what ActionScript was.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I personally didn’t trust ActionScript,
-because it was too corporate, it was tied to a company.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I did my server programming in Perl, and PHP,
-in contrast to PHP Serl fell behind on integrating with the web.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">PHP HTML was cleaner, think server side svelte,
-cats and dogs happily living together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While I enjoyed PHP OOP, the moment Node.js,
-or competent server-side JavvaScript happened I left PHP and Perl behind.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was silly to use JavaScript in the browser,
-and PHP on the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Node.js made it so that JavaScript could run on the server,
-and in the browser, I moved my entire practice into JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Both PHP, and Perl have suffered,
-they are not as popular anymore, but JavaScript is going strong as heck.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A lot of programmers got tricked into Python,
-due to a certain large company relying on it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Having watched Perl and PHP fade,
-using Python was silly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now it is being called slow,
-being phased out towards maybe Rust.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Torvals decided to rewrite Linux Kernel,
-in Rust, so it is a good bet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wouldn&#39;t recommend it,
-but it won’t be a regret like Python, Ruby, CoffeScript, J++, TypeScript, Swift.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I would still recommend C and C++,
-for low level stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If the future version of C++ wows everyone,
-then Torvalds will ask everyone to rewrite the Kernel again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which brings us to Java, having learned ActionScript,
-learning java only took me 48 hours.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is often the case, that though you may regret investing your soul,
-in a dead language, you can carry a lot of its power into a new one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The moment I made my first Java application,
-I went back to college to take a Java class.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Java has always been chained to large corporations,
-and it was annoying to install, and slow, the IDE was slow too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I missed one question on the final,
-in regards to similarly named nonsense that was long abandoned.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The college tests were patched to sound recent,
-but they were uneven, outdated, and quite an insult as they used trickery.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning a language is a noble and precise thing,
-bringing trickery to a test, is extremely inappropriate.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And tarnishes the teacher, lectures,
-and the college.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I loved programming in that class,
-as we were tasked with creating a gibberish window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A nonsensical application,
-to test our knowledge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made mine perfect, and enjoyed it,
-but only because I never took the class seriously.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was just entertain myself,
-with a new language I learned.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From a serious perspective,
-it was fraud, a real crime.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Overpriced outdated mangled text book,
-teacher who didn’t see anything wrong with gibberish.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the lectures were extremely costly,
-and from a serious perspective heartbreaking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The class didn’t teach programming,
-it taught the crappy textbook.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had no room in my life for Java,
-I just wanted to see the the famous Java Object Oriented Programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was on my todo list for ages,
-but there was a problem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In Java everything was Objects,
-in reality that just makes code unredable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As javaScript shows, object programming is an extra,
-it is a solution pattern.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">OOP it is awesome for User Interface development,
-as objects like buttons have a lifecucle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are instantiated,
-active, and destroyed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meaning all you have to do to update the User Interface,
-is destroy some Object that represents a User Interface component, like a button.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But a programming language that is all objects,
-will be forced to re-create the entire world of programming as objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It kind of makes sense to have a File object,
-as it will kep the file handle, and maybe some utility functions for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if you just want to write a command,
-or a simple program coding in Objects within a Typed language is just stupid.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript, along with server side run times,
-is more like a super modern version of Perl, it is just perfect.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that is still not enough,
-because you need a s solid user interface technology.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that can only be a stripped down unbranded browser,
-that is where you should start learning JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, the best implementation of a stripped down browser is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.electronjs.org/fiddle">Electron Fiddle</a>,
-it is based on Chromium, but just recently Firefox got headless support.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that may mean, Opening a bare window with server side JavaScript capability,
-will soon be possible enough to write a proper Fox Fiddle and Application Foundry.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now you have the most powerful application framework ever,
-right at your fingertips.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to HTML and CSS,
-which is something you will have to learn as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">HTML is just a way to instantiate nested objects,
-and CSS a way to apply properties to them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you tried that with JavaScript,
-the code would not be as readable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Well designed Objects do not need the full power of a programming language,
-HTML is just a convenient instantiation notation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">CSS is the same way, you don’t need JavaScript notation,
-to apply object properties, as it would be too much confusing code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">CSS is a language that makes applying properties,
-more readable, that makes entire property sheets, easy to read.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are not sure what your first application should be,
-create a Desktop environment that has a task bar, clock, windows, and apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Maybe, make it a zooming and panning user interface so that you can zoom out,
-to see all your windows all at once.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And maybe consider giving windows some ability to connect together,
-maybe connect them by cables or wires, or stack them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way, you can make a audio recorder app,
-and pipe its data into a voice changer app, or an audio library, or just a folder as file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Try to improve the concept of the desktop,
-and make it more programmable, so that people won’t need so many apps.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-08-31T04:15:50.901Z">August 31, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>12:28<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1643.avif" aria-label="Cover for The Future Is Always Bright, Once You Learn Programming, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1643.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Future Is Always Bright, Once You Learn Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 12:28
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1643.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1643.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1643.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>But you have to navigate it right,<br>you have to hit the right steps.</p>
+<p>You have to pick the right language,<br>and choose the right battles.</p>
+<hr>
+<p>I once had to strategically learn Action Script,<br>to eliminate early browser compatibility issues.</p>
+<p>It worked out too perfectly, as people started adding stuff,<br>without consideration for the User Experience.</p>
+<p>That was a beautiful problem to have,<br>during an age where JavaScript was slow and browsers incompatible.</p>
+<p>--</p>
+<p>Then Steve Jobs decided that ActionScript,<br>does not belong on the iPhone.</p>
+<p>Due to business reasons, efficiency, and security,<br>conserving battery bower and the like.</p>
+<p>And ActionScript was no more,<br>which was a huge mistake.</p>
+<p>As it was basically modern JavaScript,<br>a promise to write web apps and phone apps early on.</p>
+<p>TypeScript and React in their mangling of JavaScript,<br>will never catch up to what ActionScript was.</p>
+<p>I personally didn’t trust ActionScript,<br>because it was too corporate, it was tied to a company.</p>
+<p>So I did my server programming in Perl, and PHP,<br>in contrast to PHP Serl fell behind on integrating with the web.</p>
+<p>PHP HTML was cleaner, think server side svelte,<br>cats and dogs happily living together.</p>
+<p>While I enjoyed PHP OOP, the moment Node.js,<br>or competent server-side JavvaScript happened I left PHP and Perl behind.</p>
+<p>It was silly to use JavaScript in the browser,<br>and PHP on the server.</p>
+<p>Node.js made it so that JavaScript could run on the server,<br>and in the browser, I moved my entire practice into JavaScript.</p>
+<p>Both PHP, and Perl have suffered,<br>they are not as popular anymore, but JavaScript is going strong as heck.</p>
+<p>A lot of programmers got tricked into Python,<br>due to a certain large company relying on it.</p>
+<p>Having watched Perl and PHP fade,<br>using Python was silly.</p>
+<p>Now it is being called slow,<br>being phased out towards maybe Rust.</p>
+<p>Torvals decided to rewrite Linux Kernel,<br>in Rust, so it is a good bet.</p>
+<p>I wouldn&#39;t recommend it,<br>but it won’t be a regret like Python, Ruby, CoffeScript, J++, TypeScript, Swift.</p>
+<p>I would still recommend C and C++,<br>for low level stuff.</p>
+<p>If the future version of C++ wows everyone,<br>then Torvalds will ask everyone to rewrite the Kernel again.</p>
+<p>Which brings us to Java, having learned ActionScript,<br>learning java only took me 48 hours.</p>
+<p>It is often the case, that though you may regret investing your soul,<br>in a dead language, you can carry a lot of its power into a new one.</p>
+<p>The moment I made my first Java application,<br>I went back to college to take a Java class.</p>
+<p>Java has always been chained to large corporations,<br>and it was annoying to install, and slow, the IDE was slow too.</p>
+<p>I missed one question on the final,<br>in regards to similarly named nonsense that was long abandoned.</p>
+<p>The college tests were patched to sound recent,<br>but they were uneven, outdated, and quite an insult as they used trickery.</p>
+<p>Learning a language is a noble and precise thing,<br>bringing trickery to a test, is extremely inappropriate.</p>
+<p>And tarnishes the teacher, lectures,<br>and the college.</p>
+<hr>
+<p>I loved programming in that class,<br>as we were tasked with creating a gibberish window.</p>
+<p>A nonsensical application,<br>to test our knowledge.</p>
+<p>I made mine perfect, and enjoyed it,<br>but only because I never took the class seriously.</p>
+<p>I was just entertain myself,<br>with a new language I learned.</p>
+<p>From a serious perspective,<br>it was fraud, a real crime.</p>
+<p>Overpriced outdated mangled text book,<br>teacher who didn’t see anything wrong with gibberish.</p>
+<p>And the lectures were extremely costly,<br>and from a serious perspective heartbreaking.</p>
+<p>The class didn’t teach programming,<br>it taught the crappy textbook.</p>
+<hr>
+<p>I had no room in my life for Java,<br>I just wanted to see the the famous Java Object Oriented Programming.</p>
+<p>It was on my todo list for ages,<br>but there was a problem.</p>
+<p>In Java everything was Objects,<br>in reality that just makes code unredable.</p>
+<p>As javaScript shows, object programming is an extra,<br>it is a solution pattern.</p>
+<p>OOP it is awesome for User Interface development,<br>as objects like buttons have a lifecucle.</p>
+<p>They are instantiated,<br>active, and destroyed.</p>
+<p>Meaning all you have to do to update the User Interface,<br>is destroy some Object that represents a User Interface component, like a button.</p>
+<p>But a programming language that is all objects,<br>will be forced to re-create the entire world of programming as objects.</p>
+<p>It kind of makes sense to have a File object,<br>as it will kep the file handle, and maybe some utility functions for you.</p>
+<p>But if you just want to write a command,<br>or a simple program coding in Objects within a Typed language is just stupid.</p>
+<hr>
+<p>JavaScript, along with server side run times,<br>is more like a super modern version of Perl, it is just perfect.</p>
+<hr>
+<p>But that is still not enough,<br>because you need a s solid user interface technology.</p>
+<p>And that can only be a stripped down unbranded browser,<br>that is where you should start learning JavaScript.</p>
+<p>Today, the best implementation of a stripped down browser is <a href="https://www.electronjs.org/fiddle">Electron Fiddle</a>,<br>it is based on Chromium, but just recently Firefox got headless support.</p>
+<p>And that may mean, Opening a bare window with server side JavaScript capability,<br>will soon be possible enough to write a proper Fox Fiddle and Application Foundry.</p>
+<hr>
+<p>Now you have the most powerful application framework ever,<br>right at your fingertips.</p>
+<p>As to HTML and CSS,<br>which is something you will have to learn as well.</p>
+<p>HTML is just a way to instantiate nested objects,<br>and CSS a way to apply properties to them.</p>
+<p>If you tried that with JavaScript,<br>the code would not be as readable.</p>
+<p>Well designed Objects do not need the full power of a programming language,<br>HTML is just a convenient instantiation notation.</p>
+<p>CSS is the same way, you don’t need JavaScript notation,<br>to apply object properties, as it would be too much confusing code.</p>
+<p>CSS is a language that makes applying properties,<br>more readable, that makes entire property sheets, easy to read.</p>
+<hr>
+<p>If you are not sure what your first application should be,<br>create a Desktop environment that has a task bar, clock, windows, and apps.</p>
+<p>Maybe, make it a zooming and panning user interface so that you can zoom out,<br>to see all your windows all at once.</p>
+<p>And maybe consider giving windows some ability to connect together,<br>maybe connect them by cables or wires, or stack them.</p>
+<p>This way, you can make a audio recorder app,<br>and pipe its data into a voice changer app, or an audio library, or just a folder as file.</p>
+<p>Try to improve the concept of the desktop,<br>and make it more programmable, so that people won’t need so many apps.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.electronjs.org/fiddle">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Electron Fiddle</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.electronjs.org/fiddle</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">actionscripting</span><span class="chip">javascript</span><span class="chip">php</span><span class="chip">perl</span><span class="chip">python</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.electronjs.org/fiddle">
+              <span class="text-truncate">Electron Fiddle</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.electronjs.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/7334cf22-0bf6-4f11-98c4-07672ce304fd/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Bodybuilding Explained Freaky Fast</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/79ca20fd-1a18-40d5-a019-366cdcb75173/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bushwhacking In America</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c6fc42ca-9a33-4dca-9f4f-feff4f4a1340/">
+              <img src="https://catpea.github.io/chapter-11/poem-1645.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programmers! Don&#39;t Just Use Plain Variables, Oh No!</span>
+                <span class="fg-3 fs-xs">September 1, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/26660e0c-4fa8-4bc8-be76-4bce06346cf4/">
+              <img src="https://catpea.github.io/chapter-11/poem-1638.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">So You Have Learned Programming... What Do?</span>
+                <span class="fg-3 fs-xs">August 25, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fc0199db-824a-47e6-9ebb-a312f4a5c6a5/">
+              <img src="https://catpea.github.io/chapter-11/poem-1649.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Programming Is Easy, You Just Have To Put Your Foot In The Door</span>
+                <span class="fg-3 fs-xs">September 5, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9a0a95d3-41b2-4c20-bf2c-244a4364ede9/">
+              <img src="https://catpea.github.io/chapter-11/poem-1637.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn Programming First! Don’t Let Ghouls And Ineffective Education Trick You Out Of Your Future</span>
+                <span class="fg-3 fs-xs">August 24, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

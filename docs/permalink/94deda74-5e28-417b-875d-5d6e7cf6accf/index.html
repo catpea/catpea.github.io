@@ -1,194 +1,466 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie · Cat Pea</title>
+  <meta name="description" content="In this whimsical post the author describes how programming—specifically building a sine‑based test harness that struggled to output values between 0.5 and 2—sparked memories of watching Van Damme movies, pixel art from an arcade game called *Day of the Tentacle*, and the character named Hoagie. The writer then muses on what exactly a “hoagie” is, comparing it to sandwiches, burritos, and boiled sausages with cheese and spices, while recalling a pizza place that sells them. The piece ends with a playful, if somewhat scattered, attempt to define hoagies as a richly flavored, sandwich‑like food that satisfies hunger in an indulgent way.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/94deda74-5e28-417b-875d-5d6e7cf6accf/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie · Cat Pea">
+  <meta property="og:description" content="In this whimsical post the author describes how programming—specifically building a sine‑based test harness that struggled to output values between 0.5 and 2—sparked memories of watching Van Damme movies, pixel art from an arcade game called *Day of the Tentacle*, and the character named Hoagie. The writer then muses on what exactly a “hoagie” is, comparing it to sandwiches, burritos, and boiled sausages with cheese and spices, while recalling a pizza place that sells them. The piece ends with a playful, if somewhat scattered, attempt to define hoagies as a richly flavored, sandwich‑like food that satisfies hunger in an indulgent way.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-09/poem-1495.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-09/">Chapter 09</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1495</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-09/poem-1495.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-09/poem-1495.avif" alt="The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-09/poem-1495.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 09</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1495</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-04-05">4/4/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming, is a very relaxing hobby,
-fore every challenge you can invent a broad range of tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So much so that frustrations never occur,
-you are just taken on great little side quests.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And such, was the case today,
-I embarked on the quest for the Golden Hoagie.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I was little I was watching a Van Damme movie,
-where he escaped a French Foreign Legion.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a scene where he was at a bar ordering food,
-he stared eating a sandwich still in the paper wrapper.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“What a dumbass” – I thought,
-“you are supposed to take the paper wrapper off”.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, I was messing around with PI,
-to create a test harness for a windowing system I am working on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To make the long story short, sine gently moves up and down,
-between ZERO, and 2xPI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You feed the sine function an increasing value between 0 and 2PI,
-and it will return a  gently sloping value between -1 and 1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I needed a value between .5 and 2, was good with .5,
-but the sine can’t produce 2.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I ended up using multiplication,
-and not really liking my cute test harness idea anymore.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where I started thinking about sandwiches,
-and that Van Damme was probably eating a Burrito, not a sandwich.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are no burritos where I come from,
-we only have sausages, pierogies…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this strange transparent, possibly Baltic sea creature,
-with little things suspended in this trnsparencey.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I heard it once being called a medusa,
-and the same comedian mentioned you are supposed to down it with binoculars.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which, I guessed,
-was code for two bottles of vodka.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though I have never been drunk, or even tipsy,
-as I don’t like alcohol, it being a carcinogen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I see how it would be necessary, to hork two bottles of vodka,
-to eat that damn transprent thing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And as I finished my programming for the day,
-roughly generating numbers between .7, not .5 and 1.9 not 2.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I remembered,
-something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am not much for playing computer games.
-But I really really love pixel art.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When my bullies got crafty,
-I skipped school and went to a Game Arcade.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Oh my gosh, I was in there forever,
-for a semester, and never once did I care to play.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just wanted to look at the graphics,
-they were gorgeous, all hand painted, 256 color magnificent works of art.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Forget the damn Louvre, the true art renascence was captured,
-in a little arcade room by a train station.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In and about that time, I came across Day of The Tentacle,
-beautiful pixel art game, breath taking design and animation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the fat boy character, was named Hoagie,
-and I just loved that name, what a beautiful word.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And recently, I discovered a pizza place by a cash machine,
-that shocked me by advertising, the sale of Hoagies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meowrvelous, so the game character was nicknamed Hoagie,
-because he got fat from eating a lot of them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, here is the thing, I thought to my self,
-as pushed the code commit, in my code editor.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What the doodle is a Hoagie?
-Somehow this Van Damme thing has me thinking that it is a burrito style thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, I’ve never seen a Hoagie,
-I’ve never heard of anybody eating a hoagie.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I am going to try to guess,
-Hooooagle…???</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Could it be a boiled sausage, that isn’t just meat,
-but it is stuffed full of bits of spices, and bits of cheese.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that it all becomes a beautiful little symphony,
-when it is all melts in the mouth?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hoagie feels like it is something really integrated together,
-but also fine, and meant for the sophisticated pallet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hoagie is not something you cook, or fry,
-it is a thing you boil in a little pot filled with water.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But would a fat little game character, yearn for sophistication,
-and would a pizza place sell such a thing – maybe not.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I tell you, a hoagie,
-is nothing like pierogie.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a spectrum of taste,
-that must be horked in haste.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will make a fat kid,
-satisfy their need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then beg for more,
-until they can’t fit through the door.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has sausage bits and so much cheese,
-that it will even make a skinny girl wheeze.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I bet her fanny,
-that some old granny…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Makes it with candy bits,
-and she has no pantaloon that fits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Oh my gosh, I hope it is not transparent,
-a meal fit for only a fat parent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A hoagie is such a pretty word,
-that it got to taste ERMAGERD (oh my god with food in mouth).</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think hoagie is like a sandwich wrap,
-that you can’t unwrap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just jam it in the mouth,
-and it slowly slides south.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t have to chew,
-because it is filled with a stew.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">--</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or, maybe, hoagies are so rare,
-because very few actually... dare.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What it is pigeon meat,
-dipped in honey to make it sweet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And like smoked fishes that at first smell nice,
-the pigeon still has holes for they eyes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I can hear grand parents then say,
-“yeah yeah, I member back in the day”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your grandma used to, make hoagies,
-and I’d gobble them down like sweet pierogies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until, we ran out of pigeons in the street,
-and there was no more Hoagie meat.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-04-05T01:46:35.954Z">April 4, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:46<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-09/poem-1495.avif" aria-label="Cover for The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie, full size">
+            <img src="https://catpea.github.io/chapter-09/poem-1495.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:46
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-09/poem-1495.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-09/poem-1495.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-09/poem-1495.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Programming, is a very relaxing hobby,<br>fore every challenge you can invent a broad range of tools.</p>
+<p>So much so that frustrations never occur,<br>you are just taken on great little side quests.</p>
+<p>And such, was the case today,<br>I embarked on the quest for the Golden Hoagie.</p>
+<hr>
+<p>When I was little I was watching a Van Damme movie,<br>where he escaped a French Foreign Legion.</p>
+<p>In a scene where he was at a bar ordering food,<br>he stared eating a sandwich still in the paper wrapper.</p>
+<p>“What a dumbass” – I thought,<br>“you are supposed to take the paper wrapper off”.</p>
+<hr>
+<p>Today, I was messing around with PI,<br>to create a test harness for a windowing system I am working on.</p>
+<p>To make the long story short, sine gently moves up and down,<br>between ZERO, and 2xPI.</p>
+<p>You feed the sine function an increasing value between 0 and 2PI,<br>and it will return a  gently sloping value between -1 and 1.</p>
+<p>I needed a value between .5 and 2, was good with .5,<br>but the sine can’t produce 2.</p>
+<p>I ended up using multiplication,<br>and not really liking my cute test harness idea anymore.</p>
+<hr>
+<p>This is where I started thinking about sandwiches,<br>and that Van Damme was probably eating a Burrito, not a sandwich.</p>
+<p>There are no burritos where I come from,<br>we only have sausages, pierogies…</p>
+<p>And this strange transparent, possibly Baltic sea creature,<br>with little things suspended in this trnsparencey.</p>
+<p>I heard it once being called a medusa,<br>and the same comedian mentioned you are supposed to down it with binoculars.</p>
+<p>Which, I guessed,<br>was code for two bottles of vodka.</p>
+<p>Though I have never been drunk, or even tipsy,<br>as I don’t like alcohol, it being a carcinogen.</p>
+<p>I see how it would be necessary, to hork two bottles of vodka,<br>to eat that damn transprent thing.</p>
+<hr>
+<p>And as I finished my programming for the day,<br>roughly generating numbers between .7, not .5 and 1.9 not 2.</p>
+<p>I remembered,<br>something.</p>
+<p>I am not much for playing computer games.<br>But I really really love pixel art.</p>
+<p>When my bullies got crafty,<br>I skipped school and went to a Game Arcade.</p>
+<p>Oh my gosh, I was in there forever,<br>for a semester, and never once did I care to play.</p>
+<p>I just wanted to look at the graphics,<br>they were gorgeous, all hand painted, 256 color magnificent works of art.</p>
+<p>Forget the damn Louvre, the true art renascence was captured,<br>in a little arcade room by a train station.</p>
+<p>In and about that time, I came across Day of The Tentacle,<br>beautiful pixel art game, breath taking design and animation.</p>
+<p>And the fat boy character, was named Hoagie,<br>and I just loved that name, what a beautiful word.</p>
+<p>And recently, I discovered a pizza place by a cash machine,<br>that shocked me by advertising, the sale of Hoagies.</p>
+<p>Meowrvelous, so the game character was nicknamed Hoagie,<br>because he got fat from eating a lot of them.</p>
+<p>But, here is the thing, I thought to my self,<br>as pushed the code commit, in my code editor.</p>
+<hr>
+<p>What the doodle is a Hoagie?<br>Somehow this Van Damme thing has me thinking that it is a burrito style thing.</p>
+<p>But, I’ve never seen a Hoagie,<br>I’ve never heard of anybody eating a hoagie.</p>
+<p>So I am going to try to guess,<br>Hooooagle…???</p>
+<p>Could it be a boiled sausage, that isn’t just meat,<br>but it is stuffed full of bits of spices, and bits of cheese.</p>
+<p>So that it all becomes a beautiful little symphony,<br>when it is all melts in the mouth?</p>
+<p>Hoagie feels like it is something really integrated together,<br>but also fine, and meant for the sophisticated pallet.</p>
+<p>Hoagie is not something you cook, or fry,<br>it is a thing you boil in a little pot filled with water.</p>
+<hr>
+<p>But would a fat little game character, yearn for sophistication,<br>and would a pizza place sell such a thing – maybe not.</p>
+<hr>
+<p>But I tell you, a hoagie,<br>is nothing like pierogie.</p>
+<p>It is a spectrum of taste,<br>that must be horked in haste.</p>
+<p>It will make a fat kid,<br>satisfy their need.</p>
+<p>And then beg for more,<br>until they can’t fit through the door.</p>
+<p>It has sausage bits and so much cheese,<br>that it will even make a skinny girl wheeze.</p>
+<p>I bet her fanny,<br>that some old granny…</p>
+<p>Makes it with candy bits,<br>and she has no pantaloon that fits.</p>
+<p>Oh my gosh, I hope it is not transparent,<br>a meal fit for only a fat parent.</p>
+<p>A hoagie is such a pretty word,<br>that it got to taste ERMAGERD (oh my god with food in mouth).</p>
+<hr>
+<p>I think hoagie is like a sandwich wrap,<br>that you can’t unwrap.</p>
+<p>You just jam it in the mouth,<br>and it slowly slides south.</p>
+<p>You don’t have to chew,<br>because it is filled with a stew.</p>
+<p>--</p>
+<p>Or, maybe, hoagies are so rare,<br>because very few actually... dare.</p>
+<p>What it is pigeon meat,<br>dipped in honey to make it sweet.</p>
+<p>And like smoked fishes that at first smell nice,<br>the pigeon still has holes for they eyes.</p>
+<p>I can hear grand parents then say,<br>“yeah yeah, I member back in the day”</p>
+<p>Your grandma used to, make hoagies,<br>and I’d gobble them down like sweet pierogies.</p>
+<p>Until, we ran out of pigeons in the street,<br>and there was no more Hoagie meat.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">pi</span><span class="chip">sine</span><span class="chip">test harness</span><span class="chip">pixel art</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/826c6b31-457a-4b91-ad94-2cc9a2d380dd/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Potato Bodybuilding; A Workout Program So Simple Even A Vegetable Can Get Buff</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/12768738-bfd3-4cce-9a5b-471ab64fd281/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bodybuilding Confusion: Don’t Lift Heavy, Lift A Lot, And Sets And Reps Are Sus</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/79586754-903d-4dea-ac24-5fc506413dac/">
+              <img src="https://catpea.github.io/chapter-10/poem-1517.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Easy To Make Computer Games; Or, A Tiny Invitation Into The World Of Programming</span>
+                <span class="fg-3 fs-xs">April 27, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/59571fcf-5346-4810-b1af-b17420bfa034/">
+              <img src="https://catpea.github.io/chapter-09/poem-1493.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Artificial Intelligence Means It Is Time To Learn Programming; Or; The Call Of Interactive Fiction</span>
+                <span class="fg-3 fs-xs">April 2, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/732b0a40-83e1-4ac4-931b-e5345ca077c5/">
+              <img src="https://catpea.github.io/chapter-10/poem-1544.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Don&#39;t Ignore Programming</span>
+                <span class="fg-3 fs-xs">May 23, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/caa26143-bc50-4f83-8cfb-39f153fd18e7/">
+              <img src="https://catpea.github.io/chapter-09/poem-1491.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament</span>
+                <span class="fg-3 fs-xs">March 31, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

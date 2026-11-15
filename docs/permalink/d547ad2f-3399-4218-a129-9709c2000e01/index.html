@@ -1,193 +1,515 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter · Cat Pea</title>
+  <meta name="description" content="The post explains how structuring a program around an Event Emitter—an object that can both listen for events and emit them—simplifies development by making the main file act like an index of all functions rather than a long linear script; it uses a simple chat example where “outgoing‑message” events are emitted when a user sends text, triggering handlers that package data for the server, which then emits “incoming‑message” events to other clients, and extends this pattern to more complex scenarios like a MUD game or inter‑bot communication, showing how keeping everything event‑driven keeps code small (often just 20 lines), easy to modify, and easier to visualize as a diagram of interactions.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/d547ad2f-3399-4218-a129-9709c2000e01/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter · Cat Pea">
+  <meta property="og:description" content="The post explains how structuring a program around an Event Emitter—an object that can both listen for events and emit them—simplifies development by making the main file act like an index of all functions rather than a long linear script; it uses a simple chat example where “outgoing‑message” events are emitted when a user sends text, triggering handlers that package data for the server, which then emits “incoming‑message” events to other clients, and extends this pattern to more complex scenarios like a MUD game or inter‑bot communication, showing how keeping everything event‑driven keeps code small (often just 20 lines), easy to modify, and easier to visualize as a diagram of interactions.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-02/poem-0420.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-02/">Chapter 02</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0420</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-02/poem-0420.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-02/poem-0420.avif" alt="Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-02/poem-0420.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 02</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0420</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-04-25">4/24/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Normally,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you want to go as simple as possible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the main file to your program should not be the program it self,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but rather a kind of an index of all the things that you are calling.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It should be written for your <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=IHJd-vk5x7k">Rubber Duck</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">for your tired self few years down the road.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The opening file to your program,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">ties everything together, reveals the structure of the whole thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It should be basic if/then statements,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and calls to functions that do the actual work.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you ever change your mind about something in your program,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you will only have to edit that simple main file to make the changes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, as you can imagine, some programs can get really complex,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">even a simple chat application can turn a simple program into non sequential madness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where things jump out of the server at you,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">when for example someone sends you a private message.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All of a sudden, your program can&#39;t have a starting point,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">can&#39;t to things in a sequence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is no longer like the music roll in a player piano,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but more like a telegraph, a radio, or a phone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It first has to listen,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and only then can it execute its functions.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So there is this programming pattern, or a strategy called Event Emitter,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and it only really has two things, it is part of its beauty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The event emitter can listen to events,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and it can emit events.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a chat program,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it would listen for an event named &quot;incoming-message&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The thing that it would listen to is is the web server,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you need a hosting company that will sell you a server for about $5 per month.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once you install the chat program, and someone connects to it,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and types something in, and hits send...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They will be emitting an event to the server,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">let us call this event &quot;outgoing-message&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the stranger presses the send button,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and the now-standard-program attached to the &quot;outgoing-message&quot; event...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will grab the text that the stranger typed in,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">create a data object and then send it to the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The server will then send the object to all the users in the chat,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and that will be represented as the &quot;incoming-message&quot; event...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here the event handler will take the text out of the object,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and stick it into the chat window.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All this requires maybe 20 lines of code,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it is a very simple program, as an example, it is just two events, &quot;incoming-message&quot; and &quot;outgoing-message&quot;,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Both of those events have very simple programs attached to them,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">these programs are just five line functions, and the correct term for them is event handler.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once an event is received by the event emitter,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it will trigger the event handler.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And yes the event handlers can also emit events,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">making the entire program come to life.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is it,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Event Emitter can listen for events, or emit them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">My most recent use of the EventEmitter, was just about a week ago</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had to say, once the server has started, then begin downloading its files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wanted to create a very simple abstraction,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and not need to worry about what server I will end up using, or how long it will take for it to start.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One of my most favorite ways of perceiving the event emitter,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">is to see it as a command system, instead of thinking about emitting an event, I think about executing a command.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my most colorful use of the Event Emitter,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">was for a MUD program, an interactive Text Adventure Game.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made a world that consisted of locations like room, palace, woods,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and then send a Golden Snitch from Harry Potter Movies through it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Golden Snitch, when opening doors,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">would actually trigger the Open Door event and i9nteract with the environment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(I don&#39;t know what a Golden Snitch does in Harry Potter&#39;s books,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am a fan of Twilight, I never had time for Harry Potter, but maybe some day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One time after a long programming session for a charity event,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">my teammates and I were asked to to step out for a photo.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the day was so ridiculous bright that I before I could stop myself I said,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if I step into that sun I am going to sparkle like a vampire from Twilight.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This was a weekend long programming session,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and I really didn&#39;t like the idea of mixing PHP with JavaScript when node.js was already around.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was wearing my superman shirt, one one programmer, was fool enough to say &quot;Hey Superman&quot;,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">to which I quickly replied *Good morning Lois* in the most Clark Kent voice I could muster.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am pretty sure nobody liked me there,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was justifying to be funny.)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Anyway, the Golden Snitch led me to a new appreciation for the Event Emitter,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it makes creating virtual worlds very simple, and very fun, I called it Thought Programming, because of how little work needs to get done.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And since it does not matter if it is a Non Playable Character or a User moving through an environment,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it is fun to watch things happening all on their own when just the bots are bumping into each other.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a side note, I once connected two chat bots together over a network,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and they started chatting to one another, and asking and sometimes answering each other&#39;s questions, that is a perfect job for the emitter, it was like 15 lines of code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing, the Event Emitter makes complicated things simple,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and if you stick to structuring your entire program out of events, you can create a beautiful diagram of it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even without a computer, armed with just an... arm and a pencil, you can start sketching complicated multi-input/multi-user programs,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">with multiple things creating ordered chaos.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are just starting out with programming,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">try to imagine how you would create a program you like, by just listening to, and emitting events.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if there is ever a program that is confusing you,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">try wrapping it in an Event Emitter, and giving it a simpler front-end.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-04-25T00:38:17.829Z">April 24, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:48<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-02/poem-0420.avif" aria-label="Cover for Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter, full size">
+            <img src="https://catpea.github.io/chapter-02/poem-0420.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Tutorial: Connecting All The Program Pieces Together With An Event Emitter" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:48
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-02/poem-0420.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-02/poem-0420.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-02/poem-0420.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Normally,</p>
+<p>you want to go as simple as possible.</p>
+<p>So the main file to your program should not be the program it self,</p>
+<p>but rather a kind of an index of all the things that you are calling.</p>
+<p>It should be written for your <a href="https://www.youtube.com/watch?v=IHJd-vk5x7k">Rubber Duck</a>,</p>
+<p>for your tired self few years down the road.</p>
+<p>The opening file to your program,</p>
+<p>ties everything together, reveals the structure of the whole thing.</p>
+<p>It should be basic if/then statements,</p>
+<p>and calls to functions that do the actual work.</p>
+<hr>
+<p>If you ever change your mind about something in your program,</p>
+<p>you will only have to edit that simple main file to make the changes.</p>
+<hr>
+<p>But, as you can imagine, some programs can get really complex,</p>
+<p>even a simple chat application can turn a simple program into non sequential madness.</p>
+<p>Where things jump out of the server at you,</p>
+<p>when for example someone sends you a private message.</p>
+<p>All of a sudden, your program can&#39;t have a starting point,</p>
+<p>can&#39;t to things in a sequence.</p>
+<p>It is no longer like the music roll in a player piano,</p>
+<p>but more like a telegraph, a radio, or a phone.</p>
+<p>It first has to listen,</p>
+<p>and only then can it execute its functions.</p>
+<hr>
+<p>So there is this programming pattern, or a strategy called Event Emitter,</p>
+<p>and it only really has two things, it is part of its beauty.</p>
+<p>The event emitter can listen to events,</p>
+<p>and it can emit events.</p>
+<p>In a chat program,</p>
+<p>it would listen for an event named &quot;incoming-message&quot;.</p>
+<p>The thing that it would listen to is is the web server,</p>
+<p>you need a hosting company that will sell you a server for about $5 per month.</p>
+<p>Once you install the chat program, and someone connects to it,</p>
+<p>and types something in, and hits send...</p>
+<p>They will be emitting an event to the server,</p>
+<p>let us call this event &quot;outgoing-message&quot;.</p>
+<p>So the stranger presses the send button,</p>
+<p>and the now-standard-program attached to the &quot;outgoing-message&quot; event...</p>
+<p>Will grab the text that the stranger typed in,</p>
+<p>create a data object and then send it to the server.</p>
+<p>The server will then send the object to all the users in the chat,</p>
+<p>and that will be represented as the &quot;incoming-message&quot; event...</p>
+<p>Here the event handler will take the text out of the object,</p>
+<p>and stick it into the chat window.</p>
+<hr>
+<p>All this requires maybe 20 lines of code,</p>
+<p>it is a very simple program, as an example, it is just two events, &quot;incoming-message&quot; and &quot;outgoing-message&quot;,</p>
+<p>Both of those events have very simple programs attached to them,</p>
+<p>these programs are just five line functions, and the correct term for them is event handler.</p>
+<p>Once an event is received by the event emitter,</p>
+<p>it will trigger the event handler.</p>
+<p>And yes the event handlers can also emit events,</p>
+<p>making the entire program come to life.</p>
+<p>And that is it,</p>
+<p>Event Emitter can listen for events, or emit them.</p>
+<hr>
+<p><a href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">My most recent use of the EventEmitter, was just about a week ago</a>,</p>
+<p>I had to say, once the server has started, then begin downloading its files.</p>
+<p>I wanted to create a very simple abstraction,</p>
+<p>and not need to worry about what server I will end up using, or how long it will take for it to start.</p>
+<hr>
+<p>One of my most favorite ways of perceiving the event emitter,</p>
+<p>is to see it as a command system, instead of thinking about emitting an event, I think about executing a command.</p>
+<p>And my most colorful use of the Event Emitter,</p>
+<p>was for a MUD program, an interactive Text Adventure Game.</p>
+<p>I made a world that consisted of locations like room, palace, woods,</p>
+<p>and then send a Golden Snitch from Harry Potter Movies through it.</p>
+<p>The Golden Snitch, when opening doors,</p>
+<p>would actually trigger the Open Door event and i9nteract with the environment.</p>
+<p>(I don&#39;t know what a Golden Snitch does in Harry Potter&#39;s books,</p>
+<p>I am a fan of Twilight, I never had time for Harry Potter, but maybe some day.</p>
+<p>One time after a long programming session for a charity event,</p>
+<p>my teammates and I were asked to to step out for a photo.</p>
+<p>And the day was so ridiculous bright that I before I could stop myself I said,</p>
+<p>if I step into that sun I am going to sparkle like a vampire from Twilight.</p>
+<p>This was a weekend long programming session,</p>
+<p>and I really didn&#39;t like the idea of mixing PHP with JavaScript when node.js was already around.</p>
+<p>I was wearing my superman shirt, one one programmer, was fool enough to say &quot;Hey Superman&quot;,</p>
+<p>to which I quickly replied *Good morning Lois* in the most Clark Kent voice I could muster.</p>
+<p>I am pretty sure nobody liked me there,</p>
+<p>I was justifying to be funny.)</p>
+<p>Anyway, the Golden Snitch led me to a new appreciation for the Event Emitter,</p>
+<p>it makes creating virtual worlds very simple, and very fun, I called it Thought Programming, because of how little work needs to get done.</p>
+<p>And since it does not matter if it is a Non Playable Character or a User moving through an environment,</p>
+<p>it is fun to watch things happening all on their own when just the bots are bumping into each other.</p>
+<p>As a side note, I once connected two chat bots together over a network,</p>
+<p>and they started chatting to one another, and asking and sometimes answering each other&#39;s questions, that is a perfect job for the emitter, it was like 15 lines of code.</p>
+<hr>
+<p>In closing, the Event Emitter makes complicated things simple,</p>
+<p>and if you stick to structuring your entire program out of events, you can create a beautiful diagram of it.</p>
+<p>Even without a computer, armed with just an... arm and a pencil, you can start sketching complicated multi-input/multi-user programs,</p>
+<p>with multiple things creating ordered chaos.</p>
+<p>If you are just starting out with programming,</p>
+<p>try to imagine how you would create a program you like, by just listening to, and emitting events.</p>
+<p>And if there is ever a program that is confusing you,</p>
+<p>try wrapping it in an Event Emitter, and giving it a simpler front-end.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=IHJd-vk5x7k">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Rubber Duck</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=IHJd-vk5x7k</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>My most recent use of the EventEmitter, was just about a week ago</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">event emitter</span><span class="chip">node.js</span><span class="chip">chat application</span><span class="chip">moud</span><span class="chip">text adventure game</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/BxEgi-70FQk"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/BxEgi-70FQk</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=IHJd-vk5x7k">
+              <span class="text-truncate">Rubber Duck</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/bowel/blob/507c8e00eef06a7ba72a2d9105025e749cb94cbe/src/compiler/plugins/create-website/index.mjs#L28">
+              <span class="text-truncate">My most recent use of the EventEmitter, was just about a week ago</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/5fd39f97-8991-4791-8f8e-525f91477b89/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Simple Architecture Of Real Schools</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/17d574c5-66b5-476c-8e8d-6a93735bd841/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Back To The Future: Reinventing A Smart Smartphone</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/17d574c5-66b5-476c-8e8d-6a93735bd841/">
+              <img src="https://catpea.github.io/chapter-02/poem-0421.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Back To The Future: Reinventing A Smart Smartphone</span>
+                <span class="fg-3 fs-xs">April 25, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3221bfe4-47c6-4885-bc11-733717303784/">
+              <img src="https://catpea.github.io/chapter-02/poem-0415.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Programming: Is It Worth It?</span>
+                <span class="fg-3 fs-xs">April 19, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/18bcd98b-c02c-4c12-b3fc-e79b89442829/">
+              <img src="https://catpea.github.io/chapter-02/poem-0422.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Skunk Works: How To Become An Inventor</span>
+                <span class="fg-3 fs-xs">April 26, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/eafd07b0-9cf9-45fd-84a6-89cdb339837b/">
+              <img src="https://catpea.github.io/chapter-02/poem-0410.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is A Superpower</span>
+                <span class="fg-3 fs-xs">April 14, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

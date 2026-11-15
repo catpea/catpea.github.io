@@ -1,184 +1,492 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application Architecture For Young Ladies</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Application Architecture For Young Ladies · Cat Pea</title>
+  <meta name="description" content="A programmer encourages use of Bootstrap starter template to build a reactive web app whose structure is described by a single XML map, employing signals, combineLatest, and scoped variables to manage state transitions (rooms or states) that trigger actions on enter/exit, while the AI holds the power to rebuild the next application version at any time based on the XML blueprint.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/923bb1f2-b50a-4a93-892f-9c144ec7f006/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Application Architecture For Young Ladies · Cat Pea">
+  <meta property="og:description" content="A programmer encourages use of Bootstrap starter template to build a reactive web app whose structure is described by a single XML map, employing signals, combineLatest, and scoped variables to manage state transitions (rooms or states) that trigger actions on enter/exit, while the AI holds the power to rebuild the next application version at any time based on the XML blueprint.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2248.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2248</li>
+        </ol>
+      </nav>
 
-          <a href="files/zoom.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2248.avif" alt="Application Architecture For Young Ladies"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Application Architecture For Young Ladies</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2248.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2248</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Application Architecture For Young Ladies</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-04-30">4/29/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Above all, you are a programmer, that is how AI works,
-it is a power that allows you to turn the keyboard around.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The boys that call you a vibe coder,
-belittle all things in their life and have nothing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You use the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://getbootstrap.com/">Bootstrap frontend toolkit</a> starter template,
-and tell your AI to use XML to describe your application structure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/Application.xml">A single XML file, will server as the map</a>,
-of everything AI will be making for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell it to create <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/ReactiveHTMLElement.js.txt">web components</a> for you,
-and use a simple variable <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/concerns.js.txt">Scope/Signal/scope.combineLatest pattern</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Combine latest just subscribes to the signals it is fed,
-and spits out a new signal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Signals and combineLatest are a reactive programming pattern,
-that will keep your code simple.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Scopes are where your variables are tracked,
-you can create, dispose, and add signal subscription.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you rarely create a new scope, you almost always create a child scope,
-the main scope being your application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Singals, are just variables, unlike normal variables,
-here you get notified when they change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI will call that push architecture,
-as opposed to PULL where you r pull variables by manually looking them up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason why combineLatest is bound to scope,
-is because it will reliably free all the subscriptions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A child scope, is just another scope for your reactive variables,
-but is the parent scope is disposes, all the child scopes will get disposed too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If your web app has little panes or windows,
-and you close one of them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can easily free all the signal subscriptions,
-for all your nested components.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your application architecture, should be simple at first,
-start with a chat user interface, where you can print text and UI components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, the brain of your application, should be like a computer game with rooms,
-each time you enter and exit a room, a list of actions or commands will be ran.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As you more through these rooms, these actions run,
-and print various things in your chat UI, or Conversational UI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of rooms consider calling these stares,
-so by changing your location in the brain you transition application state.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your XML should not hold the code for actions,
-just links to them, remember the XML is a map.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to be able to effectively tell your AI,
-to focus on a singe area of your app.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The XML map,
-will help you state that with great clarity.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your biggest power however, is something new,
-something no programmer was ever allowed before.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Armed with your map, a strong declaration of your app,
-you can tell your AI to create a plan to rebuild your entire application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To take the current version with all its imperfections,
-and create a next one where there are none.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just move between states, executing actions on enter and exit,
-affecting what is being sent to your Conversational User Interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I recommend you start with Clear Action,
-and then add <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/AlertElement.js.txt">Text</a> action that will print Hello World.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a bonus, you can work on this program in the AI Canvas,
-the chat interface you use to talk to it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The most popular AI will let you use the bootstrap template,
-so you get all the UI withut any trouble.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Keep it small,
-and learn first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remember XML, is a map,
-stay in control.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-04-30T03:03:17.729Z">April 29, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:51<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="/permalink/923bb1f2-b50a-4a93-892f-9c144ec7f006/files/zoom.avif" aria-label="Cover for Application Architecture For Young Ladies, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2248.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Application Architecture For Young Ladies" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:51
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2248.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2248.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2248.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Above all, you are a programmer, that is how AI works,<br>it is a power that allows you to turn the keyboard around.</p>
+<p>The boys that call you a vibe coder,<br>belittle all things in their life and have nothing.</p>
+<p>You use the <a href="https://getbootstrap.com/">Bootstrap frontend toolkit</a> starter template,<br>and tell your AI to use XML to describe your application structure.</p>
+<p><a href="files/Application.xml">A single XML file, will server as the map</a>,<br>of everything AI will be making for you.</p>
+<p>Tell it to create <a href="files/ReactiveHTMLElement.js.txt">web components</a> for you,<br>and use a simple variable <a href="files/concerns.js.txt">Scope/Signal/scope.combineLatest pattern</a>.</p>
+<p>Combine latest just subscribes to the signals it is fed,<br>and spits out a new signal.</p>
+<p>Signals and combineLatest are a reactive programming pattern,<br>that will keep your code simple.</p>
+<p>Scopes are where your variables are tracked,<br>you can create, dispose, and add signal subscription.</p>
+<p>But you rarely create a new scope, you almost always create a child scope,<br>the main scope being your application.</p>
+<p>Singals, are just variables, unlike normal variables,<br>here you get notified when they change.</p>
+<p>AI will call that push architecture,<br>as opposed to PULL where you r pull variables by manually looking them up.</p>
+<p>The reason why combineLatest is bound to scope,<br>is because it will reliably free all the subscriptions.</p>
+<p>A child scope, is just another scope for your reactive variables,<br>but is the parent scope is disposes, all the child scopes will get disposed too.</p>
+<p>If your web app has little panes or windows,<br>and you close one of them.</p>
+<p>You can easily free all the signal subscriptions,<br>for all your nested components.</p>
+<hr>
+<p>Your application architecture, should be simple at first,<br>start with a chat user interface, where you can print text and UI components.</p>
+<p>But, the brain of your application, should be like a computer game with rooms,<br>each time you enter and exit a room, a list of actions or commands will be ran.</p>
+<p>As you more through these rooms, these actions run,<br>and print various things in your chat UI, or Conversational UI.</p>
+<p>Instead of rooms consider calling these stares,<br>so by changing your location in the brain you transition application state.</p>
+<hr>
+<p>Your XML should not hold the code for actions,<br>just links to them, remember the XML is a map.</p>
+<hr>
+<p>You have to be able to effectively tell your AI,<br>to focus on a singe area of your app.</p>
+<p>The XML map,<br>will help you state that with great clarity.</p>
+<hr>
+<p>Your biggest power however, is something new,<br>something no programmer was ever allowed before.</p>
+<p>Armed with your map, a strong declaration of your app,<br>you can tell your AI to create a plan to rebuild your entire application.</p>
+<p>To take the current version with all its imperfections,<br>and create a next one where there are none.</p>
+<hr>
+<p>You just move between states, executing actions on enter and exit,<br>affecting what is being sent to your Conversational User Interface.</p>
+<p>I recommend you start with Clear Action,<br>and then add <a href="files/AlertElement.js.txt">Text</a> action that will print Hello World.</p>
+<p>As a bonus, you can work on this program in the AI Canvas,<br>the chat interface you use to talk to it.</p>
+<p>The most popular AI will let you use the bootstrap template,<br>so you get all the UI withut any trouble.</p>
+<p>Keep it small,<br>and learn first.</p>
+<p>Remember XML, is a map,<br>stay in control.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://getbootstrap.com/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bootstrap frontend toolkit</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://getbootstrap.com/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/Application.xml">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>A single XML file, will server as the map</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/Application.xml</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/ReactiveHTMLElement.js.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>web components</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/ReactiveHTMLElement.js.txt</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/concerns.js.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Scope/Signal/scope.combineLatest pattern</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/concerns.js.txt</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/AlertElement.js.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Text</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/AlertElement.js.txt</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">bootstrap</span><span class="chip">xml</span><span class="chip">reactive-programming</span><span class="chip">signals</span><span class="chip">combinelatest</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://getbootstrap.com/">
+              <span class="text-truncate">Bootstrap frontend toolkit</span>
+              <span class="fg-3 fs-xs flex-shrink-0">getbootstrap.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/Application.xml">
+              <span class="text-truncate">A single XML file, will server as the map</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/ReactiveHTMLElement.js.txt">
+              <span class="text-truncate">web components</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/concerns.js.txt">
+              <span class="text-truncate">Scope/Signal/scope.combineLatest pattern</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/AlertElement.js.txt">
+              <span class="text-truncate">Text</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/AlertElement.js.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>AlertElement.js.txt
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/Application.xml" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>Application.xml
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/ReactiveHTMLElement.js.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>ReactiveHTMLElement.js.txt
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/concerns.js.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>concerns.js.txt
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/4542bfbc-81d0-4a21-a28c-62e13d7b8061/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Aipocalypse Meow: The Prices Went Up, And Here Is What You Need</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/90cf0cbb-a83a-47bd-913b-f5d8779233aa/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bodybuilding Is Easy; But, Unbelievable</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/39ae5352-df4f-4e9f-ac5b-c5d1043c3e90/">
+              <img src="https://catpea.github.io/chapter-15/poem-2250.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Autonomous Agent Afternoon</span>
+                <span class="fg-3 fs-xs">May 2, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2723171f-e36b-471a-b496-3d8bcb934794/">
+              <img src="https://catpea.github.io/chapter-15/poem-2240.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Beyond Coding Agents</span>
+                <span class="fg-3 fs-xs">April 22, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9b5628b0-213c-4df3-a6ba-5a859893f4b6/">
+              <img src="https://catpea.github.io/chapter-15/poem-2252.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Year Of The New Design Portfolio</span>
+                <span class="fg-3 fs-xs">May 3, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/22e0c20c-8b8c-48a1-b6dc-72d78e9a6f66/">
+              <img src="https://catpea.github.io/chapter-15/poem-2239.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The End Of Vibe Coding: The Rise Of The Neuro-Symbolic Code Generators</span>
+                <span class="fg-3 fs-xs">April 20, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

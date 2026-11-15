@@ -1,206 +1,475 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Worker Queue Explained For The New Programmer</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Worker Queue Explained For The New Programmer · Cat Pea</title>
+  <meta name="description" content="Visual programming simplifies complex logic by representing processes as interconnected boxes rather than lines of code; this approach naturally supports parallel execution through a “worker queue” that distributes tasks to multiple workers—each worker can be configured to run on a single CPU core or across many cores, even scaling out to clusters or cloud services for high‑volume workloads. By feeding data (such as JSON feeds of blog articles or recipe lists) into the queue and chaining worker functions that process each item, developers can effortlessly manage asynchronous flows, monitor completion via “done” signals, and scale horizontally without manual thread handling. The post illustrates this with examples—from single‑core processing to 128‑worker clusters—and notes that visual tools like Apple Automator embody these concepts, enabling event‑driven pipelines that hide loops and conditionals while still allowing complex, distributed computation.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/0bc3dedd-01ee-4c71-8670-1e10d44d0f5d/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Worker Queue Explained For The New Programmer · Cat Pea">
+  <meta property="og:description" content="Visual programming simplifies complex logic by representing processes as interconnected boxes rather than lines of code; this approach naturally supports parallel execution through a “worker queue” that distributes tasks to multiple workers—each worker can be configured to run on a single CPU core or across many cores, even scaling out to clusters or cloud services for high‑volume workloads. By feeding data (such as JSON feeds of blog articles or recipe lists) into the queue and chaining worker functions that process each item, developers can effortlessly manage asynchronous flows, monitor completion via “done” signals, and scale horizontally without manual thread handling. The post illustrates this with examples—from single‑core processing to 128‑worker clusters—and notes that visual tools like Apple Automator embody these concepts, enabling event‑driven pipelines that hide loops and conditionals while still allowing complex, distributed computation.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1562.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1562</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1562.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1562.avif" alt="The Worker Queue Explained For The New Programmer"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Worker Queue Explained For The New Programmer</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1562.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1562</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Worker Queue Explained For The New Programmer</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-06-11">6/11/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming, like any kind of programming,
-can get pretty complicated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we were to base visual programming,
-on standard programming concepts like loops and ifs…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We would quickly defeat the point of visual programming,
-which is easy to comprehend programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Low level constructs are useful to get things started,
-but too primitive to use in creation of large programs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Furthermore there is a problem,
-because computers have multiple CPU/s.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So from the get go,
-we have to write programs with parts that may run at the same time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">How in the wold can you manage such a feat,
-not only tracing the flow of your program as you design it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But 8 or 32 flows of your program at the same time,
-when do you know all the flows completed, even.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In comes, the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a>,
-it is a list of things that need to get done.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of loading a list of blog articles that need processing,
-and then pushing them down a simple pipeline.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where it is likely,
-that only a singe CPU core would process it,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you have to keep track of,
-a no more data signal, along with too much data, or the slow-down signal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You load your blog articles,
-and push them onto a worker queue.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In visual programming, that would mean,
-connect your JSON Feed, where you blog articles are, to a Worker Queue Node.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Pretty much,
-a single swipe of a mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The worker queue, has a single output,
-that spits all the data out once it has been processed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is the DONE signal,
-you get another feed, this time a list of transformed articles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it has the marvelous,
-worker input socket.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where, you put your program in,
-conceptually your blog article processor function is a worker.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you have, JSON Feed Box, a Worker Function Chain Of Boxes, plugged into the Queue,
-and an output port, that spits out another feed you can iterate over.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can configure the number of workers to match your CPU core count,
-or set it to any number including 1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are going to process one article at a time,
-don’t wait for the whole list, tap into the job done output socket.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you can afford to initially process your blog articles,
-with 32 workers crunching data at the same time, go for it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But then need to start worry about memory as things get complex,
-you send the list to another queue, this time process one item at a time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not limited to the CPU cores,
-of a single computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Imagine you have 128 articles in your blog,
-and you want to clean them up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you have a Raspberry PI Cluster,
-of say 32 computers, totaling 128 cores.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can theoretically, have a worker on each of those,
-distributing your worker queue processing to theoretically run 128 times faster.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Go from two minute wait time (if your program ran single threaded),
-to two second wait time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There would be bottlenecks,
-but you could deal with those.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The theory here matters the most,
-as you can go beyond the local network, now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And request, 128 powerful servers,
-which will get booted up, just for a moment, and won’t break the bank.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This kind of dynamic worker network expansion,
-is called self provisioning, or automatic scaling.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you wanted to let your users,
-to convert their blogs to video, you would want a self provisioning network.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As it could theoretically scale, to meet all demand,
-and since you know ahead of time how much it cost to run the remote workers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just include that in what the user pays,
-so you don’t worry about the cost, and it wouldn’t be to expensive.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is one more interesting use of a queue,
-that I must mention as it is just too enchanting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If for example, you needed 128 cooking recipes,
-with some strained but interesting background stories.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You could put that in a queue, and create a worker,
-that posts a bounty somewhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a lady comes in, shares her recipe gets paid,
-and your worker marks that job as solved.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Later sending it to another queue that verifies quality,
-perhaps even with the use of AI this time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These functions that comprise a worker,
-do resent a challenge to the novice programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, this is a solved problem,
-and Apple Automator is a neat example of that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just a comprehensive library of actions
-with some options that you configure,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Automator is a visual programming language,
-that chose to only allow for two ports, input an output.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And rather than lines,
-the UI designers created the idea of Blocks that go on top of the other.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For the sake of completion, the application framework,
-that wraps these feeds, queues, and workers or automations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is event based, I once called Event Based programming,
-Thought Programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you just emit events such as, load initial JSON feed,
-program complete, save the result.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you setup listeners, that hear those events,
-and respond with more actions such as load from URL and save to disk.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So visual programming done right,
-does not bother you with ifs and loops.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It brings out the Elite, Exclusive, and Luxury patters,
-that guide your hand.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is of some note, that the more luxurious the pattern,
-the uglier it is in standard non-visual code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just hard to track everything,
-as there are no shortcuts here you are operating a virtual machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But once you move up to the higher generation of programming languages,
-then it is just a couple of boxes, as the hard to imagine machine becomes visualized.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-06-11T04:43:43.157Z">June 11, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:26<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1562.avif" aria-label="Cover for The Worker Queue Explained For The New Programmer, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1562.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Worker Queue Explained For The New Programmer" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:26
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1562.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1562.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1562.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Visual programming, like any kind of programming,<br>can get pretty complicated.</p>
+<p>If we were to base visual programming,<br>on standard programming concepts like loops and ifs…</p>
+<p>We would quickly defeat the point of visual programming,<br>which is easy to comprehend programs.</p>
+<p>Low level constructs are useful to get things started,<br>but too primitive to use in creation of large programs.</p>
+<hr>
+<p>Furthermore there is a problem,<br>because computers have multiple CPU/s.</p>
+<p>So from the get go,<br>we have to write programs with parts that may run at the same time.</p>
+<p>How in the wold can you manage such a feat,<br>not only tracing the flow of your program as you design it.</p>
+<p>But 8 or 32 flows of your program at the same time,<br>when do you know all the flows completed, even.</p>
+<hr>
+<p>In comes, the <a href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">Worker Queue</a>,<br>it is a list of things that need to get done.</p>
+<p>Instead of loading a list of blog articles that need processing,<br>and then pushing them down a simple pipeline.</p>
+<p>Where it is likely,<br>that only a singe CPU core would process it,</p>
+<p>And you have to keep track of,<br>a no more data signal, along with too much data, or the slow-down signal.</p>
+<p>You load your blog articles,<br>and push them onto a worker queue.</p>
+<p>In visual programming, that would mean,<br>connect your JSON Feed, where you blog articles are, to a Worker Queue Node.</p>
+<p>Pretty much,<br>a single swipe of a mouse.</p>
+<p>The worker queue, has a single output,<br>that spits all the data out once it has been processed.</p>
+<p>That is the DONE signal,<br>you get another feed, this time a list of transformed articles.</p>
+<p>And it has the marvelous,<br>worker input socket.</p>
+<p>Where, you put your program in,<br>conceptually your blog article processor function is a worker.</p>
+<p>So you have, JSON Feed Box, a Worker Function Chain Of Boxes, plugged into the Queue,<br>and an output port, that spits out another feed you can iterate over.</p>
+<p>You can configure the number of workers to match your CPU core count,<br>or set it to any number including 1.</p>
+<p>If you are going to process one article at a time,<br>don’t wait for the whole list, tap into the job done output socket.</p>
+<p>If you can afford to initially process your blog articles,<br>with 32 workers crunching data at the same time, go for it.</p>
+<p>But then need to start worry about memory as things get complex,<br>you send the list to another queue, this time process one item at a time.</p>
+<hr>
+<p>You are not limited to the CPU cores,<br>of a single computer.</p>
+<p>Imagine you have 128 articles in your blog,<br>and you want to clean them up.</p>
+<p>If you have a Raspberry PI Cluster,<br>of say 32 computers, totaling 128 cores.</p>
+<p>You can theoretically, have a worker on each of those,<br>distributing your worker queue processing to theoretically run 128 times faster.</p>
+<p>Go from two minute wait time (if your program ran single threaded),<br>to two second wait time.</p>
+<p>There would be bottlenecks,<br>but you could deal with those.</p>
+<p>The theory here matters the most,<br>as you can go beyond the local network, now.</p>
+<p>And request, 128 powerful servers,<br>which will get booted up, just for a moment, and won’t break the bank.</p>
+<p>This kind of dynamic worker network expansion,<br>is called self provisioning, or automatic scaling.</p>
+<p>If you wanted to let your users,<br>to convert their blogs to video, you would want a self provisioning network.</p>
+<p>As it could theoretically scale, to meet all demand,<br>and since you know ahead of time how much it cost to run the remote workers.</p>
+<p>You just include that in what the user pays,<br>so you don’t worry about the cost, and it wouldn’t be to expensive.</p>
+<hr>
+<p>There is one more interesting use of a queue,<br>that I must mention as it is just too enchanting.</p>
+<p>If for example, you needed 128 cooking recipes,<br>with some strained but interesting background stories.</p>
+<p>You could put that in a queue, and create a worker,<br>that posts a bounty somewhere.</p>
+<p>And a lady comes in, shares her recipe gets paid,<br>and your worker marks that job as solved.</p>
+<p>Later sending it to another queue that verifies quality,<br>perhaps even with the use of AI this time.</p>
+<hr>
+<p>These functions that comprise a worker,<br>do resent a challenge to the novice programmer.</p>
+<p>But, this is a solved problem,<br>and Apple Automator is a neat example of that.</p>
+<p>It is just a comprehensive library of actions<br>with some options that you configure,</p>
+<p>Automator is a visual programming language,<br>that chose to only allow for two ports, input an output.</p>
+<p>And rather than lines,<br>the UI designers created the idea of Blocks that go on top of the other.</p>
+<hr>
+<p>For the sake of completion, the application framework,<br>that wraps these feeds, queues, and workers or automations.</p>
+<p>Is event based, I once called Event Based programming,<br>Thought Programming.</p>
+<p>So you just emit events such as, load initial JSON feed,<br>program complete, save the result.</p>
+<p>And you setup listeners, that hear those events,<br>and respond with more actions such as load from URL and save to disk.</p>
+<hr>
+<p>So visual programming done right,<br>does not bother you with ifs and loops.</p>
+<p>It brings out the Elite, Exclusive, and Luxury patters,<br>that guide your hand.</p>
+<p>It is of some note, that the more luxurious the pattern,<br>the uglier it is in standard non-visual code.</p>
+<p>It is just hard to track everything,<br>as there are no shortcuts here you are operating a virtual machine.</p>
+<p>But once you move up to the higher generation of programming languages,<br>then it is just a couple of boxes, as the hard to imagine machine becomes visualized.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Worker Queue</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual programming</span><span class="chip">worker queue</span><span class="chip">concurrent processing</span><span class="chip">event-driven programming</span><span class="chip">automation</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+A+Worker+Queue">
+              <span class="text-truncate">Worker Queue</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/f4a411ab-ebc0-4a86-a84e-76de6aa9bd57/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Internet Has A Problem; And Here Is How You Can Solve It</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/dd2b5ec2-f2b6-4f7b-9454-4bfaef02555e/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Due Up</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4357d9ff-9762-4175-806d-2c7454ca611c/">
+              <img src="https://catpea.github.io/chapter-10/poem-1569.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Helping New Programmers Code Big; Or, The Aim Of Visual Programming</span>
+                <span class="fg-3 fs-xs">June 18, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f4a411ab-ebc0-4a86-a84e-76de6aa9bd57/">
+              <img src="https://catpea.github.io/chapter-10/poem-1561.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Internet Has A Problem; And Here Is How You Can Solve It</span>
+                <span class="fg-3 fs-xs">June 9, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/59458eea-38f0-44aa-a024-4f0e1db0a066/">
+              <img src="https://catpea.github.io/chapter-10/poem-1570.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Quo Vadis; Or, Learn For Real Because Your Teacher Isn’t Really Trying To Teach You</span>
+                <span class="fg-3 fs-xs">June 19, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/47448ebe-0ece-4981-b932-3ce0e0712e97/">
+              <img src="https://catpea.github.io/chapter-10/poem-1558.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Computer Program Is Just A Neat Little Machine</span>
+                <span class="fg-3 fs-xs">June 7, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

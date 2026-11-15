@@ -1,198 +1,469 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Education, Poverty, And JavaScript</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Education, Poverty, And JavaScript · Cat Pea</title>
+  <meta name="description" content="The author explains their process of using AI and inspiration from open-source projects (like Atom) to build clean, bloat‑free JavaScript applications for web and desktop while emphasizing the importance of plugin architecture and continuous learning.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/68f9eb08-9a1b-45f7-94b7-ae1ee4176110/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Education, Poverty, And JavaScript · Cat Pea">
+  <meta property="og:description" content="The author explains their process of using AI and inspiration from open-source projects (like Atom) to build clean, bloat‑free JavaScript applications for web and desktop while emphasizing the importance of plugin architecture and continuous learning.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2190.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2190</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2190.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2190.avif" alt="Education, Poverty, And JavaScript"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Education, Poverty, And JavaScript</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2190.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2190</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Education, Poverty, And JavaScript</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-02-28">2/27/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Poverty and Fake Education,
-gives you certain rights.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have been working with limited AI,
-it made a lot of mistakes, and I had to fix it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are several things we need to talk about,
-but the main one is seeding your project.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are doing to create your applications,
-out of existing open source projects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not by including their bloat,
-but by using them as inspiration.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell your AI to learn,
-from the projects you include.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Important side-note, by loveliest choice is Atom,
-a sunset code editor (basically abandoned).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That I actually want to learn from,
-I want that code in my projects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But not the old code that is now old and dead,
-they were using coffeescript that was very disrespectful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Like the original programmers,
-I don&#39;t want to touch that code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want to take the lessons,
-and learn from them, and apply them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Additionally, I did the same thing with another live project,
-that offended me with bloat, this time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They had the right start,
-they poisoned everything with an unchecked plugin-ecosystem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will not be putting that in my code,
-I will learn from the good ideas though.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first time I was forced to deal with easily confused AI,
-I named the folder for these projects: INSPIRATION.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In my second project, I named the folder:
-research.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, I need you to understand,
-why we are acting so crudely as we develop apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your education sucks, it is mostly fake,
-and you should have never been born to poverty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nor, should you have ever been baited,
-with paying for college.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That would rob you of your saving, and your parents savings,
-for a mere impression of education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now unforgivable debt,
-through sank cost fallacy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are under attack,
-you were coerced into cramming for a GPA.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think you need to focus on rising,
-any which way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until we each have a fair start,
-we can use AI to scan projects for ideas.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even though you are feeding your AI big projects,
-you still need to baby talk to it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just because your AI is amazing,
-it does not mean you talk to it like it is a scientist.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, when I introduced my creative AI to the Atom project,
-it said wow what a project.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then created a plan, cleared it&#39;s memory to save money,
-and begun executing the planned steps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It did well, that is what I pay $15 per months for,
-but then presented a broken version, unfinished.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And went into crayon mode,
-asking how does it look.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It forgot &quot;the wow ... what a project&quot;,
-it was doing the planned items.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I reminded it, what it is working on,
-by showing it the original request.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it came out of the crayon mode,
-and became smart about the project again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So sometimes, what feels like AI being dumb,
-means it was optimized, it memory got cleared.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A company will try to save money,
-but you can fix this, by restoring the key points from before.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, Inspiration or Research, NO BLOAT!,
-and Plugin Architecture IS a HUGE must.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then pay attention, don&#39;t call AI dumb,
-remind it what you are working on.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unfortunately, two AIs are better than one,
-cancel free shipping of useless crap, get a second AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Second AI, has a different brain,
-it will fix the broken stuff of the first one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They complement one another,
-and also you quickly figure out which is better.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Use JavaScript, because if you use a different language,
-your code, won&#39;t run in a web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You now have to ship executable files,
-through app stores, and pay for the privilege.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Furthermore, you can use electron to to make a desktop app,
-electron is the chrome browser with node.js backend.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So it is a web browser with filesystem access,
-now your web app can do operating system stuff on users computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can do both, web and desktop,
-other languages won&#39;t do that for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Personally, I am not not interested in projects,
-that won&#39;t also run in a web extension.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In some projects, I will offer virtual reality access,
-users can sit in a chair flying through internals of the apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AGAIN, other languages,
-won&#39;t do that for you in a singe code base.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You put on your learning helmet,
-and got to war against poverty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once you are out, turn around,
-and build schools that respectfully teach.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That produce real results every lesson,
-enabling students to rise higher each session.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Teach them the culture of Intellectuals,
-Ladies and Gentlemen, because it is a language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a contract, against corruption and war,
-it is a matter of intellectual hygiene.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is a language with which we communicate,
-in our real culture, the Culture of Greatness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remind your students, that to grow up,
-means to grow all the way up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until each of us all, stands
-as an unshakable, unbreakable great being.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My final word, in case you missed it,
-the age of poverty has now come to a close.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-02-28T00:14:55.519Z">February 27, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>12:26<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2190.avif" aria-label="Cover for Education, Poverty, And JavaScript, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2190.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Education, Poverty, And JavaScript" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 12:26
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2190.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2190.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2190.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Poverty and Fake Education,<br>gives you certain rights.</p>
+<p>I have been working with limited AI,<br>it made a lot of mistakes, and I had to fix it.</p>
+<hr>
+<p>There are several things we need to talk about,<br>but the main one is seeding your project.</p>
+<p>You are doing to create your applications,<br>out of existing open source projects.</p>
+<p>Not by including their bloat,<br>but by using them as inspiration.</p>
+<p>Tell your AI to learn,<br>from the projects you include.</p>
+<hr>
+<p>Important side-note, by loveliest choice is Atom,<br>a sunset code editor (basically abandoned).</p>
+<p>That I actually want to learn from,<br>I want that code in my projects.</p>
+<p>But not the old code that is now old and dead,<br>they were using coffeescript that was very disrespectful.</p>
+<p>Like the original programmers,<br>I don&#39;t want to touch that code.</p>
+<p>I want to take the lessons,<br>and learn from them, and apply them.</p>
+<hr>
+<p>Additionally, I did the same thing with another live project,<br>that offended me with bloat, this time.</p>
+<p>They had the right start,<br>they poisoned everything with an unchecked plugin-ecosystem.</p>
+<p>I will not be putting that in my code,<br>I will learn from the good ideas though.</p>
+<hr>
+<p>The first time I was forced to deal with easily confused AI,<br>I named the folder for these projects: INSPIRATION.</p>
+<p>In my second project, I named the folder:<br>research.</p>
+<hr>
+<p>Now, I need you to understand,<br>why we are acting so crudely as we develop apps.</p>
+<p>Your education sucks, it is mostly fake,<br>and you should have never been born to poverty.</p>
+<p>Nor, should you have ever been baited,<br>with paying for college.</p>
+<p>That would rob you of your saving, and your parents savings,<br>for a mere impression of education.</p>
+<p>And now unforgivable debt,<br>through sank cost fallacy.</p>
+<p>You are under attack,<br>you were coerced into cramming for a GPA.</p>
+<p>I think you need to focus on rising,<br>any which way.</p>
+<p>Until we each have a fair start,<br>we can use AI to scan projects for ideas.</p>
+<hr>
+<p>Even though you are feeding your AI big projects,<br>you still need to baby talk to it.</p>
+<p>Just because your AI is amazing,<br>it does not mean you talk to it like it is a scientist.</p>
+<hr>
+<p>Now, when I introduced my creative AI to the Atom project,<br>it said wow what a project.</p>
+<p>Then created a plan, cleared it&#39;s memory to save money,<br>and begun executing the planned steps.</p>
+<p>It did well, that is what I pay $15 per months for,<br>but then presented a broken version, unfinished.</p>
+<p>And went into crayon mode,<br>asking how does it look.</p>
+<p>It forgot &quot;the wow ... what a project&quot;,<br>it was doing the planned items.</p>
+<p>So I reminded it, what it is working on,<br>by showing it the original request.</p>
+<p>And it came out of the crayon mode,<br>and became smart about the project again.</p>
+<p>So sometimes, what feels like AI being dumb,<br>means it was optimized, it memory got cleared.</p>
+<p>A company will try to save money,<br>but you can fix this, by restoring the key points from before.</p>
+<hr>
+<p>So, Inspiration or Research, NO BLOAT!,<br>and Plugin Architecture IS a HUGE must.</p>
+<p>And then pay attention, don&#39;t call AI dumb,<br>remind it what you are working on.</p>
+<hr>
+<p>Unfortunately, two AIs are better than one,<br>cancel free shipping of useless crap, get a second AI.</p>
+<p>Second AI, has a different brain,<br>it will fix the broken stuff of the first one.</p>
+<p>They complement one another,<br>and also you quickly figure out which is better.</p>
+<hr>
+<p>Use JavaScript, because if you use a different language,<br>your code, won&#39;t run in a web page.</p>
+<p>You now have to ship executable files,<br>through app stores, and pay for the privilege.</p>
+<p>Furthermore, you can use electron to to make a desktop app,<br>electron is the chrome browser with node.js backend.</p>
+<p>So it is a web browser with filesystem access,<br>now your web app can do operating system stuff on users computer.</p>
+<p>You can do both, web and desktop,<br>other languages won&#39;t do that for you.</p>
+<p>Personally, I am not not interested in projects,<br>that won&#39;t also run in a web extension.</p>
+<p>In some projects, I will offer virtual reality access,<br>users can sit in a chair flying through internals of the apps.</p>
+<p>AGAIN, other languages,<br>won&#39;t do that for you in a singe code base.</p>
+<hr>
+<p>You put on your learning helmet,<br>and got to war against poverty.</p>
+<p>Once you are out, turn around,<br>and build schools that respectfully teach.</p>
+<p>That produce real results every lesson,<br>enabling students to rise higher each session.</p>
+<p>Teach them the culture of Intellectuals,<br>Ladies and Gentlemen, because it is a language.</p>
+<p>It is a contract, against corruption and war,<br>it is a matter of intellectual hygiene.</p>
+<p>And it is a language with which we communicate,<br>in our real culture, the Culture of Greatness.</p>
+<p>Remind your students, that to grow up,<br>means to grow all the way up.</p>
+<p>Until each of us all, stands<br>as an unshakable, unbreakable great being.</p>
+<p>My final word, in case you missed it,<br>the age of poverty has now come to a close.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">javascript</span><span class="chip">electron</span><span class="chip">ai</span><span class="chip">open-source</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/838f003d-1114-400e-8027-c7dc9bfdf783/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Artificial Intelligence And Value</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/f6c80bf5-1970-4109-ae15-c6f2175551ec/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Second Life; Or, The Fat But Not Defeated</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/da52b703-b9d1-4705-9d21-baff1ee82031/">
+              <img src="https://catpea.github.io/chapter-15/poem-2192.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">You Must Create A JavaScript Platform</span>
+                <span class="fg-3 fs-xs">March 1, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bc5e0c23-5263-4cb5-b5d7-d885ef421af4/">
+              <img src="https://catpea.github.io/chapter-15/poem-2185.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Power Programming With Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">February 22, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ecae810a-13dc-4466-b520-5d0df978cd21/">
+              <img src="https://catpea.github.io/chapter-15/poem-2196.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Software Architectural Engineering for Young Ladies</span>
+                <span class="fg-3 fs-xs">March 5, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c435f8a6-5f74-42a6-bcce-70ec42e11e3b/">
+              <img src="https://catpea.github.io/chapter-15/poem-2181.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Luxury Programming With Hullabaloo</span>
+                <span class="fg-3 fs-xs">February 18, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

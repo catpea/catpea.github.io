@@ -1,204 +1,480 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Every Computer Program Is Once A Beautiful Story As Clear As Day</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Every Computer Program Is Once A Beautiful Story As Clear As Day · Cat Pea</title>
+  <meta name="description" content="The post explains how a programmer can grasp a program by studying its notes, diagrams, and source code, and why keeping a reference implementation helps to see the structure clearly. It then describes a version‑control scheme where each file gets a unique random name and a version number so that edits made while offline are merged later without loss. Finally it stresses how telling the story of an application’s architecture—whether to another programmer or even to a rubber duck debugger—is essential for clarity, learning, and mastery.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/8859d5a9-5e85-4cc6-b216-c260b6c7d253/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Every Computer Program Is Once A Beautiful Story As Clear As Day · Cat Pea">
+  <meta property="og:description" content="The post explains how a programmer can grasp a program by studying its notes, diagrams, and source code, and why keeping a reference implementation helps to see the structure clearly. It then describes a version‑control scheme where each file gets a unique random name and a version number so that edits made while offline are merged later without loss. Finally it stresses how telling the story of an application’s architecture—whether to another programmer or even to a rubber duck debugger—is essential for clarity, learning, and mastery.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1391.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1391</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1391.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1391.avif" alt="Every Computer Program Is Once A Beautiful Story As Clear As Day"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Every Computer Program Is Once A Beautiful Story As Clear As Day</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1391.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1391</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Every Computer Program Is Once A Beautiful Story As Clear As Day</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-12-23">12/22/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Anybody can understand a program,
-if they care, and sit down and listen to the original programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Eventually the original programmer will begin forgetting,
-some less important parts of the tale.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But notes, diagrams, and source code will remind them,
-everything in great detail.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not necessary for a programmer to get to this point,
-in order o finish the application they are working on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This will make the application a bit heavier,
-less conceptual or logical and more “here is how you do it”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is OK, good applications are not that big,
-they expose plugin or library architecture and let programmers integrate.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, some of us, find a computer program that demands,
-a higher understanding.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One tiny example is WikiWiki, it is a master piece,
-of open file, make it a web page, edit file, and save as new version.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With a magnificent flair, of this incredibly revolutionary statement,
-for when a file does not exist:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“This article is a stub, why don’t you create it?”,
-or “This file does not exist yet, click edit.”</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On a smaller scale, collaborative file editing has such a master piece too,
-use the filename for a folder, and inside the folder…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make the filename a version number, followed by a huge random number,
-and ordinary do not allow saving an older version.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If the latest version is five, and someone tries to save four,
-show an error, and make them look at version five.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, here is the crazy part, make that happen on a 1,000 computers,
-some of which won’t go online for years – and no data will be lost.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At all, we are using long random filenames in that directory,
-so they will always be unique, no data loss.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, there will be edit conflicts, multiple files, with the same version number,
-and here, they can be either ignored, or an editor can review and merge them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You simply take something useful out of an ancient version, 4,
-put it in the latest version, 8,000 and mark that particular version 4 as deleted.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now all the participating commuters,
-will not only be notified that version 8,001 exists.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that an ancient version 4,
-got marked as deleted.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When one of those disconnected computers goes online,
-another version 4 will eventually spread among all the copies of the data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And another editor may make a merge,
-or just find the information outdated, and mark it as deleted.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To get to this understanding, and this level of mostly consistent story telling,
-programmers just use their heads, and scribble all over random scraps of paper.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Some elect to create Reference Implementations,
-you go as far as you can, but don’t feel pressured to finish.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are digging a tunnel into the complexity,
-and crystalline like structure of the program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The final reference implementation,
-will melt away all the confusion and reveal the clear as day diagrams.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then the program can switch hands,
-it may get confusing, it may pick up bugs…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And buggy debuggers that get paid by the hour and call it a scene,
-but that is a good thing, a program should just continue on.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I was starting out, I’ve heard some neat stories,
-one of them is obviously made up, but I still like it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was this super hard game, the ONLY GAME IN THE WORLD,
-that was never successfully beat by the very programmer that made it – wow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then there was a true mythical story, of this lone coder,
-who created this amazing 3D game, all by him self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lyke, he just went home, and freaking coded the whole incredible thing,
-all by his lonesome.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The graphics were so amazing, that while I thought Wolfenstein3D was good stuff,
-it was way too primitive for my sophisticated tastes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The game was named <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=utrxk5_PeEY">Another Word</a>, programmed by <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=GTb6zX7Hd5I">Eric Chahi</a>,
-over a period of two years.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Like <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=wKgLfqOVHco">Prince of Persia</a> he used <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=VhGtYfpmxyY">Rotoscoping</a>,
-tracing motion from a video, it looks 3D, but it is just X and Y without the Z.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The world of tracing pixels has not come to a close,
-fusing real world motion with fantasy is still a beautiful challenge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And 3D graphics, no matter how realistic,
-will never be as beautiful as charming pixelart.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, for many,
-being able to tell a story of their application architecture…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even if just to their <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=ruber+duck+debugging">debugging rubber duck</a>,
-is kind of the point, it means excellence, and knowing the art.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even if it it just your rubber,
-duck that will remember you…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will only remember you,
-because of your finest work.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-12-23T04:38:36.298Z">December 22, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:45<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1391.avif" aria-label="Cover for Every Computer Program Is Once A Beautiful Story As Clear As Day, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1391.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Every Computer Program Is Once A Beautiful Story As Clear As Day" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:45
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1391.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1391.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1391.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Anybody can understand a program,<br>if they care, and sit down and listen to the original programmer.</p>
+<p>Eventually the original programmer will begin forgetting,<br>some less important parts of the tale.</p>
+<p>But notes, diagrams, and source code will remind them,<br>everything in great detail.</p>
+<hr>
+<p>It is not necessary for a programmer to get to this point,<br>in order o finish the application they are working on.</p>
+<p>This will make the application a bit heavier,<br>less conceptual or logical and more “here is how you do it”.</p>
+<p>This is OK, good applications are not that big,<br>they expose plugin or library architecture and let programmers integrate.</p>
+<hr>
+<p>But, some of us, find a computer program that demands,<br>a higher understanding.</p>
+<p>One tiny example is WikiWiki, it is a master piece,<br>of open file, make it a web page, edit file, and save as new version.</p>
+<p>With a magnificent flair, of this incredibly revolutionary statement,<br>for when a file does not exist:</p>
+<p>“This article is a stub, why don’t you create it?”,<br>or “This file does not exist yet, click edit.”</p>
+<hr>
+<p>On a smaller scale, collaborative file editing has such a master piece too,<br>use the filename for a folder, and inside the folder…</p>
+<p>Make the filename a version number, followed by a huge random number,<br>and ordinary do not allow saving an older version.</p>
+<p>If the latest version is five, and someone tries to save four,<br>show an error, and make them look at version five.</p>
+<p>Now, here is the crazy part, make that happen on a 1,000 computers,<br>some of which won’t go online for years – and no data will be lost.</p>
+<p>At all, we are using long random filenames in that directory,<br>so they will always be unique, no data loss.</p>
+<p>But, there will be edit conflicts, multiple files, with the same version number,<br>and here, they can be either ignored, or an editor can review and merge them.</p>
+<p>You simply take something useful out of an ancient version, 4,<br>put it in the latest version, 8,000 and mark that particular version 4 as deleted.</p>
+<p>Now all the participating commuters,<br>will not only be notified that version 8,001 exists.</p>
+<p>But that an ancient version 4,<br>got marked as deleted.</p>
+<p>When one of those disconnected computers goes online,<br>another version 4 will eventually spread among all the copies of the data.</p>
+<p>And another editor may make a merge,<br>or just find the information outdated, and mark it as deleted.</p>
+<hr>
+<p>To get to this understanding, and this level of mostly consistent story telling,<br>programmers just use their heads, and scribble all over random scraps of paper.</p>
+<p>Some elect to create Reference Implementations,<br>you go as far as you can, but don’t feel pressured to finish.</p>
+<p>You are digging a tunnel into the complexity,<br>and crystalline like structure of the program.</p>
+<p>The final reference implementation,<br>will melt away all the confusion and reveal the clear as day diagrams.</p>
+<hr>
+<p>Then the program can switch hands,<br>it may get confusing, it may pick up bugs…</p>
+<p>And buggy debuggers that get paid by the hour and call it a scene,<br>but that is a good thing, a program should just continue on.</p>
+<hr>
+<p>When I was starting out, I’ve heard some neat stories,<br>one of them is obviously made up, but I still like it.</p>
+<p>It was this super hard game, the ONLY GAME IN THE WORLD,<br>that was never successfully beat by the very programmer that made it – wow.</p>
+<p>Then there was a true mythical story, of this lone coder,<br>who created this amazing 3D game, all by him self.</p>
+<p>Lyke, he just went home, and freaking coded the whole incredible thing,<br>all by his lonesome.</p>
+<p>The graphics were so amazing, that while I thought Wolfenstein3D was good stuff,<br>it was way too primitive for my sophisticated tastes.</p>
+<p>The game was named <a href="https://www.youtube.com/watch?v=utrxk5_PeEY">Another Word</a>, programmed by <a href="https://www.youtube.com/watch?v=GTb6zX7Hd5I">Eric Chahi</a>,<br>over a period of two years.</p>
+<p>Like <a href="https://www.youtube.com/watch?v=wKgLfqOVHco">Prince of Persia</a> he used <a href="https://www.youtube.com/watch?v=VhGtYfpmxyY">Rotoscoping</a>,<br>tracing motion from a video, it looks 3D, but it is just X and Y without the Z.</p>
+<p>The world of tracing pixels has not come to a close,<br>fusing real world motion with fantasy is still a beautiful challenge.</p>
+<p>And 3D graphics, no matter how realistic,<br>will never be as beautiful as charming pixelart.</p>
+<hr>
+<p>Finally, for many,<br>being able to tell a story of their application architecture…</p>
+<p>Even if just to their <a href="https://www.youtube.com/results?search_query=ruber+duck+debugging">debugging rubber duck</a>,<br>is kind of the point, it means excellence, and knowing the art.</p>
+<p>Even if it it just your rubber,<br>duck that will remember you…</p>
+<p>It will only remember you,<br>because of your finest work.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=utrxk5_PeEY">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Another Word</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=utrxk5_PeEY</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=GTb6zX7Hd5I">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Eric Chahi</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=GTb6zX7Hd5I</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=wKgLfqOVHco">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Prince of Persia</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=wKgLfqOVHco</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=VhGtYfpmxyY">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Rotoscoping</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=VhGtYfpmxyY</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=ruber+duck+debugging">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>debugging rubber duck</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=ruber+duck+debugging</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">version-control</span><span class="chip">file-editing</span><span class="chip">collaborative-editing</span><span class="chip">debugging</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=utrxk5_PeEY">
+              <span class="text-truncate">Another Word</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=GTb6zX7Hd5I">
+              <span class="text-truncate">Eric Chahi</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=wKgLfqOVHco">
+              <span class="text-truncate">Prince of Persia</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=VhGtYfpmxyY">
+              <span class="text-truncate">Rotoscoping</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=ruber+duck+debugging">
+              <span class="text-truncate">debugging rubber duck</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/5ae10c22-0c12-4ecb-a82a-3d83d166e657/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Tiny Little Workout</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/972b2735-723c-49c6-80c0-da9acc808707/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">My Little Program</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/972b2735-723c-49c6-80c0-da9acc808707/">
+              <img src="https://catpea.github.io/chapter-08/poem-1392.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">My Little Program</span>
+                <span class="fg-3 fs-xs">December 24, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ba61ef27-dc59-43b4-bccc-102759aa5372/">
+              <img src="https://catpea.github.io/chapter-08/poem-1389.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Supremely Boring World Of Visual Programming &amp; Diagramming Tools</span>
+                <span class="fg-3 fs-xs">December 20, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1043fa5f-a4bd-49f1-b1d6-1a89cc3775f2/">
+              <img src="https://catpea.github.io/chapter-08/poem-1393.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Visual Programming Languages; Humanity&#39;s First Cybernetic Enhancement</span>
+                <span class="fg-3 fs-xs">December 24, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/306ec423-054b-43b0-8f9b-668a49c176c0/">
+              <img src="https://catpea.github.io/chapter-08/poem-1387.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Tiny Look At The Wild Wild West Of Visual Programming</span>
+                <span class="fg-3 fs-xs">December 18, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

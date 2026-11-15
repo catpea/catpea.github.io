@@ -1,186 +1,455 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI MUD For Young Ladies; Or, How Do You Do Something With It?</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>AI MUD For Young Ladies; Or, How Do You Do Something With It? · Cat Pea</title>
+  <meta name="description" content="A step‑by‑step guide for beginners to create a small multi‑user dungeon (MUD) that leverages a coding agent and external AI services. Install Node.js, connect to a lightweight model via API, and let the agent generate rooms, NPCs, paintings, and a magical news newspaper. Use a pneumatic‑tube‑style workflow where requests travel in data capsules, trigger email notifications, and produce AI‑generated artwork. Publish a static version of the world on on the internet with side‑scrolling rooms, a minimap, interactive doors, and an endless narrated art world.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/c4eb22bb-656a-4015-82c7-afb4f494f2e2/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI MUD For Young Ladies; Or, How Do You Do Something With It? · Cat Pea">
+  <meta property="og:description" content="A step‑by‑step guide for beginners to create a small multi‑user dungeon (MUD) that leverages a coding agent and external AI services. Install Node.js, connect to a lightweight model via API, and let the agent generate rooms, NPCs, paintings, and a magical news newspaper. Use a pneumatic‑tube‑style workflow where requests travel in data capsules, trigger email notifications, and produce AI‑generated artwork. Publish a static version of the world on on the internet with side‑scrolling rooms, a minimap, interactive doors, and an endless narrated art world.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-16/poem-2394.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-16/">Chapter 16</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2394</li>
+        </ol>
+      </nav>
 
-          <a href="files/zoom.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-16/poem-2394.avif" alt="AI MUD For Young Ladies; Or, How Do You Do Something With It?"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">AI MUD For Young Ladies; Or, How Do You Do Something With It?</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-16/poem-2394.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 16</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2394</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">AI MUD For Young Ladies; Or, How Do You Do Something With It?</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-09-23">9/22/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">For those of you who are just starting out,
-install Node.js and a coding agent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If your machine is not powerful enough to run a local AI,
-ask your coding agent to help you connect
-to a small model through an API.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first thing to do, to feel the power of a MUD,
-is ask your coding agent to create a minimalist one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A few rooms, some doors,
-and objects you can examine and use.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then create Ms. Thelma,
-an inhabitant who, when you first speak to her,
-asks you to connect an AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You configure the model’s address,
-and any required API key, in your local application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then Thelma gets to work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">She can add rooms,
-decorate them in the style of British royalty,
-and fill them with knickknacks and paintings.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Give her a little space to build in,
-and ask her to make something beautiful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Next, connect an image-generation service,
-and ask your coding agent
-to give Thelma’s paintings an action.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you commission a painting,
-it sends its description to the image generator
-and displays the resulting artwork in its frame.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the lobby, the main room where visitors arrive,
-place a newspaper that draws from real news sources.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But make it a magical tomorrow’s newspaper.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It reads what is happening today,
-then imagines what tomorrow’s headlines might be.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are creating objects in the MUD
-that represent something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But they do not merely stand for things.
-They have state,
-and they have actions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The painting holds its description and its artwork.
-The newspaper holds its sources and its latest edition.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can examine them, use them,
-and ask an agent to work with them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am a huge fan of in-game pneumatic tube networks,
-which pass capsules from station to station.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Double-click a tube,
-and it shows you a flow graph:
-where the capsules go,
-and who is seated at each station.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To be seated means taking responsibility
-for the work that arrives there.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When a data capsule reaches the station,
-the seated agent receives an email.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These can be mailboxes inside the world.
-No outside email account is necessary.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I give my agents PDAs,
-so they have somewhere to read their mail.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But how do you use this?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Email the agent at the first station.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Speak in plain English.
-Explain what you would like made.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The agent tidies your request into a work order,
-places it in a capsule,
-and passes it down the line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each station contributes its part,
-and the capsule carries the work forward.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can give objects actions,
-but the agent is your conversational API.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You do not have to memorize every command.
-You explain what you want,
-and the agent works with the objects to make it happen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The world gives those requests
-somewhere to go,
-something to act upon,
-and somewhere to leave the result.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when it is time to share,
-keep the working MUD on your own machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The agents work there.
-The API connections stay there.
-The credentials stay there, too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Publish an explorable edition on GitHub Pages:
-the rooms, the descriptions,
-and all the art the world has made.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Present each room as a sideways-scrolling view
-of its walls, decorations, paintings, and doors.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Scroll far enough,
-and the walls wrap around
-to where you started.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Click a door to enter another room.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A little minimap can help visitors
-find their way around.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The published world does not need to keep generating.
-It lets people explore what has already been created.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They come to visit,
-not to configure an AI.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And to close this strange little tutorial
-with an interesting example:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ask your pneumatic tube network
-to produce vivid, game-outro-style pixel art
-of breathtakingly beautiful animals
-that have never existed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One agent imagines the creature.
-Another describes its impossible habitat.
-Another prepares the commission
-and sends it to the image generator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The finished painting arrives in the gallery.
-...</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-09-23T03:11:48.352Z">September 22, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>18:12<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="/permalink/c4eb22bb-656a-4015-82c7-afb4f494f2e2/files/zoom.avif" aria-label="Cover for AI MUD For Young Ladies; Or, How Do You Do Something With It?, full size">
+            <img src="https://catpea.github.io/chapter-16/poem-2394.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for AI MUD For Young Ladies; Or, How Do You Do Something With It?" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 18:12
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-16/poem-2394.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-16/poem-2394.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-16/poem-2394.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>For those of you who are just starting out,<br>install Node.js and a coding agent.</p>
+<p>If your machine is not powerful enough to run a local AI,<br>ask your coding agent to help you connect<br>to a small model through an API.</p>
+<hr>
+<p>The first thing to do, to feel the power of a MUD,<br>is ask your coding agent to create a minimalist one.</p>
+<p>A few rooms, some doors,<br>and objects you can examine and use.</p>
+<p>Then create Ms. Thelma,<br>an inhabitant who, when you first speak to her,<br>asks you to connect an AI.</p>
+<p>You configure the model’s address,<br>and any required API key, in your local application.</p>
+<p>Then Thelma gets to work.</p>
+<p>She can add rooms,<br>decorate them in the style of British royalty,<br>and fill them with knickknacks and paintings.</p>
+<p>Give her a little space to build in,<br>and ask her to make something beautiful.</p>
+<hr>
+<p>Next, connect an image-generation service,<br>and ask your coding agent<br>to give Thelma’s paintings an action.</p>
+<p>When you commission a painting,<br>it sends its description to the image generator<br>and displays the resulting artwork in its frame.</p>
+<hr>
+<p>In the lobby, the main room where visitors arrive,<br>place a newspaper that draws from real news sources.</p>
+<p>But make it a magical tomorrow’s newspaper.</p>
+<p>It reads what is happening today,<br>then imagines what tomorrow’s headlines might be.</p>
+<hr>
+<p>You are creating objects in the MUD<br>that represent something.</p>
+<p>But they do not merely stand for things.<br>They have state,<br>and they have actions.</p>
+<p>The painting holds its description and its artwork.<br>The newspaper holds its sources and its latest edition.</p>
+<p>You can examine them, use them,<br>and ask an agent to work with them.</p>
+<hr>
+<p>I am a huge fan of in-game pneumatic tube networks,<br>which pass capsules from station to station.</p>
+<p>Double-click a tube,<br>and it shows you a flow graph:<br>where the capsules go,<br>and who is seated at each station.</p>
+<p>To be seated means taking responsibility<br>for the work that arrives there.</p>
+<p>When a data capsule reaches the station,<br>the seated agent receives an email.</p>
+<p>These can be mailboxes inside the world.<br>No outside email account is necessary.</p>
+<p>I give my agents PDAs,<br>so they have somewhere to read their mail.</p>
+<hr>
+<p>But how do you use this?</p>
+<p>Email the agent at the first station.</p>
+<p>Speak in plain English.<br>Explain what you would like made.</p>
+<p>The agent tidies your request into a work order,<br>places it in a capsule,<br>and passes it down the line.</p>
+<p>Each station contributes its part,<br>and the capsule carries the work forward.</p>
+<hr>
+<p>You can give objects actions,<br>but the agent is your conversational API.</p>
+<p>You do not have to memorize every command.<br>You explain what you want,<br>and the agent works with the objects to make it happen.</p>
+<p>The world gives those requests<br>somewhere to go,<br>something to act upon,<br>and somewhere to leave the result.</p>
+<hr>
+<p>And when it is time to share,<br>keep the working MUD on your own machine.</p>
+<p>The agents work there.<br>The API connections stay there.<br>The credentials stay there, too.</p>
+<p>Publish an explorable edition on GitHub Pages:<br>the rooms, the descriptions,<br>and all the art the world has made.</p>
+<p>Present each room as a sideways-scrolling view<br>of its walls, decorations, paintings, and doors.</p>
+<p>Scroll far enough,<br>and the walls wrap around<br>to where you started.</p>
+<p>Click a door to enter another room.</p>
+<p>A little minimap can help visitors<br>find their way around.</p>
+<p>The published world does not need to keep generating.<br>It lets people explore what has already been created.</p>
+<p>They come to visit,<br>not to configure an AI.</p>
+<hr>
+<p>And to close this strange little tutorial<br>with an interesting example:</p>
+<p>Ask your pneumatic tube network<br>to produce vivid, game-outro-style pixel art<br>of breathtakingly beautiful animals<br>that have never existed.</p>
+<p>One agent imagines the creature.<br>Another describes its impossible habitat.<br>Another prepares the commission<br>and sends it to the image generator.</p>
+<p>The finished painting arrives in the gallery.<br>...</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">MUD development</span><span class="chip">coding agents</span><span class="chip">AI‑powered NPCs</span><span class="chip">procedural world building</span><span class="chip">pneumatic tube workflow</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/8b7a370b-3b8f-4dc7-aeda-084c6712eca0/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Aipocalypse And The High Abstraction Plugin Architecture For The Young Lady</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/02986c4b-d426-4edf-a15e-4d7dd891f948/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Non-Stop First, Weights Second! Or, Please Don’t Lift Heavy During Your Workout</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5050cf81-48d9-44e4-81f1-ae15bc780eea/">
+              <img src="https://catpea.github.io/chapter-16/poem-2415.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Our Friend And I</span>
+                <span class="fg-3 fs-xs">October 14, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ef22d74a-e8d4-4365-8d2d-8878e2de484c/">
+              <img src="https://catpea.github.io/chapter-16/poem-2388.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Paper Cybernetics</span>
+                <span class="fg-3 fs-xs">September 16, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/471d03f0-2144-479a-a08a-401b4d0d855c/">
+              <img src="https://catpea.github.io/chapter-16/poem-2418.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming With AI For Young Ladies, Your First Day</span>
+                <span class="fg-3 fs-xs">October 17, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9d1b30d1-ae9a-4250-bbb6-f7507648a609/">
+              <img src="https://catpea.github.io/chapter-16/poem-2385.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Good Practice: A Music Label Company For The Young Lady CEO</span>
+                <span class="fg-3 fs-xs">September 13, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

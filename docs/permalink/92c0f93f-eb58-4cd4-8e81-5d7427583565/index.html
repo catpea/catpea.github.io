@@ -1,231 +1,541 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cosmopolis 1.0</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Cosmopolis 1.0 · Cat Pea</title>
+  <meta name="description" content="The post recounts how a small team built “Cosmopolis,” a lightweight web‑based wiki‑style editor in under 100 lines of Node.js/Express code that uses simple alphanumeric file names to resolve concurrent edits and keep all servers in sync. They added user support with chatbots (Alice and Bob) that could automate tasks—like fetching weather or shipping Amazon groceries—and later let real people take over those bot accounts. The project quickly grew into a live simulation of a city (“Night City”) where bots and users could interact, trade services, and earn money, catching the eye of the United Nations as it evolved toward version 2.0.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/92c0f93f-eb58-4cd4-8e81-5d7427583565/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Cosmopolis 1.0 · Cat Pea">
+  <meta property="og:description" content="The post recounts how a small team built “Cosmopolis,” a lightweight web‑based wiki‑style editor in under 100 lines of Node.js/Express code that uses simple alphanumeric file names to resolve concurrent edits and keep all servers in sync. They added user support with chatbots (Alice and Bob) that could automate tasks—like fetching weather or shipping Amazon groceries—and later let real people take over those bot accounts. The project quickly grew into a live simulation of a city (“Night City”) where bots and users could interact, trade services, and earn money, catching the eye of the United Nations as it evolved toward version 2.0.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-01/poem-0214.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-01/">Chapter 01</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0214</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-01/poem-0214.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-01/poem-0214.avif" alt="Cosmopolis 1.0"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Cosmopolis 1.0</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-01/poem-0214.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 01</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0214</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Cosmopolis 1.0</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2020-10-01">9/30/2020</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">It felt so healthy to sit down to the first version,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the promise of creating a program that will change the world felt amazing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They settled on trusty bare bones <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://expressjs.com/">express</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and the first routes they put in were view and edit.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Carl Sagan once said, that if you wish to make an apple pie from scratch,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you must first invent the universe.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/WardCunningham">Ward Cunningham</a> the inventor of WikiWiki,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">has absolutely solved the problem of starting in the beginning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With just a few lines of code he opened the gateway to content creation,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">in the most simplest way possible.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They already knew how to solve the problem of two users editing the same file at the same time,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the inspiration for that came from CouchDB.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In short, a unit of disk information in the first Cosmopolis was not a file,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it was a directory, with randomly named files prefixed with a version number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, detroit/15-aabbd.txt, detroit/15-xyxx.txt</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The brilliant thing about this is that when two people save version 15 at the same time,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the random name of the file decides which version 15 is used, via a simple alphanumeric sort.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If there are 32 people editing the same file, and they all click save at the same time,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and if some of the version 15 files arrive a second late because they have to travel across a slow network,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">by relying on blindly picking the topmost entry after an alphanumeric sort, once they get all the data,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">every participating server in the world will agree on the same version 15.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It should be noted that at this point the file will be flagged as having many conflicts,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and users will be called to take a look at the different version and manually pick and choose the good parts,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">this time everyone will be careful to just wait until the latest version is compiled.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, they had a collaborative editing platform in less than 100 lines of code,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">basically a blank Wikipedia.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now came the big question,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">which part of the universe do we create first to get that apple pie going?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They briefly considered to name the city Uruk,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">after the oldest city in the world, but settled on Night City instead.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And so it was, just like Wikipedia once had its first article,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">cosmopolis now held the first city: <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="http://localhost:3000/view/night%5C_city">http://localhost:3000/view/night\_city</a></p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This was both exiting and terrifying, this program was meant to bring peace to the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and they only had a blank page for an imaginary city.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Adding user support had to come in next,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">just like every city had a page, so did every user.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thus, Night City would receive its first two citizens,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Alice_and_Bob">Alice and Bob</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Out in the server room the admin was already preparing for corruption simulations,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and she named the malicious politician Mallory.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Alice and Bob represented computer programs,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they were chatbots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">However, the bots are separate programs that use Cosmopolis like a user would,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they would log in, check messages, scan for phrases they recognize and then perform some task within Cosmopolis.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The bots weren&#39;t really inspired by anything other than old <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/MUD">MUD</a> programs but there was a beautiful line of code,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">that one of the leads always looked at, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/hubotio/hubot-rules/blob/master/src/rules.js#L26">line 26</a> in a sample script of github&#39;s hubot.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The bots were special,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they greatly simplified simulations and reasoning about this virtual test city.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a whole they already created a very simple,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but living simulation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example one internal bot would be responsible for generating weather in Night City,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the bot actually got its information from Detroit&#39;s own weather service.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And our virtual Alice had a setting in her profile,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">that would alert her when it was raining, she would then equip an umbrella before leaving for work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Bots gave Cosmopolis that early life,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">that made working on the system fun.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But by far the most special thing about bots,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">was that they could be replaced by a real human,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">by a person that would turn off the bot and log in into their account.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the next release of the program,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the girls focused on enhancing this feature.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A bot could be instructed to ship groceries from Amazon,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but when a real person took over for an account,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they could go to a local store and buy and deliver the groceries for a small payment.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even in the early tests, it was becoming more an more obvious,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">that a powerful automated framework that could help people make money could be built.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As with every program the girls were worried about its adoption,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but it was universally agreed that people would join to make money,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and in the end large cities would go online within weeks,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">because it helped people put food on the table by trading small services.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Cosmopolis 2.0 was what got the attention of United Nations,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but that is a story for another time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Personal Note,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Becoming a programmer is not that hard, and when you have a dream like our story of Cosmopolis here,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it becomes a fun hobby that you just aimlessly poke at when there is some time in a day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a tradition of creating Programming Cook-books, they are books tailored for a specific language,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">that contain short recipes, and it is really fun to flip through it, and see what this programming thing is about.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I recommend learning JavaScript, which is currently called ES2020, to actually execute a program you will need an interpreter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your browser has one built in, as JavaScript is the language of the web, look up how to open the web console in your browser of choice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The industry standard for server-side JavaScript applications like our Imaginary Cosmopolis is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nodejs.org/en/">Node.js</a>, if interested you can <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=nodejs%20tutorial">search for video tutorials</a> to help you get started.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2020-10-01T01:49:42.585Z">September 30, 2020</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:47<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-01/poem-0214.avif" aria-label="Cover for Cosmopolis 1.0, full size">
+            <img src="https://catpea.github.io/chapter-01/poem-0214.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Cosmopolis 1.0" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:47
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-01/poem-0214.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-01/poem-0214.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-01/poem-0214.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>It felt so healthy to sit down to the first version,</p>
+<p>the promise of creating a program that will change the world felt amazing.</p>
+<p>They settled on trusty bare bones <a href="https://expressjs.com/">express</a>,</p>
+<p>and the first routes they put in were view and edit.</p>
+<p>Carl Sagan once said, that if you wish to make an apple pie from scratch,</p>
+<p>you must first invent the universe.</p>
+<hr>
+<p><a href="https://github.com/WardCunningham">Ward Cunningham</a> the inventor of WikiWiki,</p>
+<p>has absolutely solved the problem of starting in the beginning.</p>
+<p>With just a few lines of code he opened the gateway to content creation,</p>
+<p>in the most simplest way possible.</p>
+<hr>
+<p>They already knew how to solve the problem of two users editing the same file at the same time,</p>
+<p>the inspiration for that came from CouchDB.</p>
+<p>In short, a unit of disk information in the first Cosmopolis was not a file,</p>
+<p>it was a directory, with randomly named files prefixed with a version number.</p>
+<p>For example, detroit/15-aabbd.txt, detroit/15-xyxx.txt</p>
+<p>The brilliant thing about this is that when two people save version 15 at the same time,</p>
+<p>the random name of the file decides which version 15 is used, via a simple alphanumeric sort.</p>
+<p>If there are 32 people editing the same file, and they all click save at the same time,</p>
+<p>and if some of the version 15 files arrive a second late because they have to travel across a slow network,</p>
+<p>by relying on blindly picking the topmost entry after an alphanumeric sort, once they get all the data,</p>
+<p>every participating server in the world will agree on the same version 15.</p>
+<p>It should be noted that at this point the file will be flagged as having many conflicts,</p>
+<p>and users will be called to take a look at the different version and manually pick and choose the good parts,</p>
+<p>this time everyone will be careful to just wait until the latest version is compiled.</p>
+<hr>
+<p>So, they had a collaborative editing platform in less than 100 lines of code,</p>
+<p>basically a blank Wikipedia.</p>
+<hr>
+<p>So now came the big question,</p>
+<p>which part of the universe do we create first to get that apple pie going?</p>
+<p>They briefly considered to name the city Uruk,</p>
+<p>after the oldest city in the world, but settled on Night City instead.</p>
+<p>And so it was, just like Wikipedia once had its first article,</p>
+<p>cosmopolis now held the first city: <a href="http://localhost:3000/view/night%5C_city">http://localhost:3000/view/night\_city</a></p>
+<hr>
+<p>This was both exiting and terrifying, this program was meant to bring peace to the world.</p>
+<p>and they only had a blank page for an imaginary city.</p>
+<hr>
+<p>Adding user support had to come in next,</p>
+<p>just like every city had a page, so did every user.</p>
+<p>Thus, Night City would receive its first two citizens,</p>
+<p><a href="https://en.wikipedia.org/wiki/Alice_and_Bob">Alice and Bob</a>.</p>
+<p>Out in the server room the admin was already preparing for corruption simulations,</p>
+<p>and she named the malicious politician Mallory.</p>
+<hr>
+<p>Alice and Bob represented computer programs,</p>
+<p>they were chatbots.</p>
+<p>However, the bots are separate programs that use Cosmopolis like a user would,</p>
+<p>they would log in, check messages, scan for phrases they recognize and then perform some task within Cosmopolis.</p>
+<p>The bots weren&#39;t really inspired by anything other than old <a href="https://en.wikipedia.org/wiki/MUD">MUD</a> programs but there was a beautiful line of code,</p>
+<p>that one of the leads always looked at, <a href="https://github.com/hubotio/hubot-rules/blob/master/src/rules.js#L26">line 26</a> in a sample script of github&#39;s hubot.</p>
+<hr>
+<p>The bots were special,</p>
+<p>they greatly simplified simulations and reasoning about this virtual test city.</p>
+<hr>
+<p>As a whole they already created a very simple,</p>
+<p>but living simulation.</p>
+<p>For example one internal bot would be responsible for generating weather in Night City,</p>
+<p>the bot actually got its information from Detroit&#39;s own weather service.</p>
+<p>And our virtual Alice had a setting in her profile,</p>
+<p>that would alert her when it was raining, she would then equip an umbrella before leaving for work.</p>
+<p>Bots gave Cosmopolis that early life,</p>
+<p>that made working on the system fun.</p>
+<p>But by far the most special thing about bots,</p>
+<p>was that they could be replaced by a real human,</p>
+<p>by a person that would turn off the bot and log in into their account.</p>
+<p>In the next release of the program,</p>
+<p>the girls focused on enhancing this feature.</p>
+<p>A bot could be instructed to ship groceries from Amazon,</p>
+<p>but when a real person took over for an account,</p>
+<p>they could go to a local store and buy and deliver the groceries for a small payment.</p>
+<hr>
+<p>Even in the early tests, it was becoming more an more obvious,</p>
+<p>that a powerful automated framework that could help people make money could be built.</p>
+<hr>
+<p>As with every program the girls were worried about its adoption,</p>
+<p>but it was universally agreed that people would join to make money,</p>
+<p>and in the end large cities would go online within weeks,</p>
+<p>because it helped people put food on the table by trading small services.</p>
+<hr>
+<p>Cosmopolis 2.0 was what got the attention of United Nations,</p>
+<p>but that is a story for another time.</p>
+<hr>
+<p>Personal Note,</p>
+<p>Becoming a programmer is not that hard, and when you have a dream like our story of Cosmopolis here,</p>
+<p>it becomes a fun hobby that you just aimlessly poke at when there is some time in a day.</p>
+<p>There is a tradition of creating Programming Cook-books, they are books tailored for a specific language,</p>
+<p>that contain short recipes, and it is really fun to flip through it, and see what this programming thing is about.</p>
+<p>I recommend learning JavaScript, which is currently called ES2020, to actually execute a program you will need an interpreter.</p>
+<p>Your browser has one built in, as JavaScript is the language of the web, look up how to open the web console in your browser of choice.</p>
+<p>The industry standard for server-side JavaScript applications like our Imaginary Cosmopolis is <a href="https://nodejs.org/en/">Node.js</a>, if interested you can <a href="https://www.youtube.com/results?search_query=nodejs%20tutorial">search for video tutorials</a> to help you get started.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://expressjs.com/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>express</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://expressjs.com/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/WardCunningham">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Ward Cunningham</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/WardCunningham</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="http://localhost:3000/view/night%5C_city">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>http://localhost:3000/view/night\_city</span>
-                      <small class="d-block text-muted fw-lighter mt-2">http://localhost:3000/view/night%5C_city</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Alice_and_Bob">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Alice and Bob</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Alice_and_Bob</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/MUD">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>MUD</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/MUD</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/hubotio/hubot-rules/blob/master/src/rules.js#L26">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>line 26</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/hubotio/hubot-rules/blob/master/src/rules.js#L26</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nodejs.org/en/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Node.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nodejs.org/en/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=nodejs%20tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>search for video tutorials</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=nodejs%20tutorial</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">nodejs</span><span class="chip">express</span><span class="chip">webdev</span><span class="chip">github</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://expressjs.com/">
+              <span class="text-truncate">express</span>
+              <span class="fg-3 fs-xs flex-shrink-0">expressjs.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/WardCunningham">
+              <span class="text-truncate">Ward Cunningham</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="http://localhost:3000/view/night%5C_city">
+              <span class="text-truncate">http://localhost:3000/view/night\_city</span>
+              <span class="fg-3 fs-xs flex-shrink-0">localhost:3000</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Alice_and_Bob">
+              <span class="text-truncate">Alice and Bob</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/MUD">
+              <span class="text-truncate">MUD</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/hubotio/hubot-rules/blob/master/src/rules.js#L26">
+              <span class="text-truncate">line 26</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nodejs.org/en/">
+              <span class="text-truncate">Node.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nodejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=nodejs%20tutorial">
+              <span class="text-truncate">search for video tutorials</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/86836151-4457-441a-94ea-7dc2a895c8e8/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Conjecture</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/a32ac8cb-fa71-4434-9747-ad2401399466/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">They Walk Among Us</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/782e080e-9832-445a-af00-0ac385c9e822/">
+              <img src="https://catpea.github.io/chapter-02/poem-0223.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Programmers</span>
+                <span class="fg-3 fs-xs">October 9, 2020</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/86836151-4457-441a-94ea-7dc2a895c8e8/">
+              <img src="https://catpea.github.io/chapter-01/poem-0213.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Conjecture</span>
+                <span class="fg-3 fs-xs">September 29, 2020</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fadbceb0-0c81-44b3-ab26-4909f5b70326/">
+              <img src="https://catpea.github.io/chapter-02/poem-0235.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Get Out Of My Laboratory, Or Invention Is A Teacher</span>
+                <span class="fg-3 fs-xs">October 21, 2020</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/52a2fb00-58d5-4f87-bcdf-45302bffe4aa/">
+              <img src="https://catpea.github.io/chapter-01/poem-0189.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Web Pages For Ages</span>
+                <span class="fg-3 fs-xs">September 5, 2020</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

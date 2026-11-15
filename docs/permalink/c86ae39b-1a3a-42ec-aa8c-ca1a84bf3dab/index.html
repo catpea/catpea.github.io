@@ -1,213 +1,487 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Introduction To Programming: Systems Architecture</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Introduction To Programming: Systems Architecture · Cat Pea</title>
+  <meta name="description" content="The post outlines a simple yet scalable system architecture that lets each user own a tiny personal database—backed by Couchbase or CouchDB and synchronized via PouchDB on the client side—so that changes made in the browser are automatically stored back to their own server‑side store. It explains how to build a custom design‑document editor (modeled after Windows Explorer) for creating views, then shows how a programmer could pull news posts into each user’s database and expose them through a simple row navigator. From there it describes adding drag‑and‑drop UI tools that let users assemble layouts, link image URLs to UI elements, and even chain actions like an Automator clone. The resulting product is a subscription‑based, per‑user app builder where programmers can contribute reusable components that become available to all subscribers, thereby expanding the “business empire” of user‑generated apps.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/c86ae39b-1a3a-42ec-aa8c-ca1a84bf3dab/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Introduction To Programming: Systems Architecture · Cat Pea">
+  <meta property="og:description" content="The post outlines a simple yet scalable system architecture that lets each user own a tiny personal database—backed by Couchbase or CouchDB and synchronized via PouchDB on the client side—so that changes made in the browser are automatically stored back to their own server‑side store. It explains how to build a custom design‑document editor (modeled after Windows Explorer) for creating views, then shows how a programmer could pull news posts into each user’s database and expose them through a simple row navigator. From there it describes adding drag‑and‑drop UI tools that let users assemble layouts, link image URLs to UI elements, and even chain actions like an Automator clone. The resulting product is a subscription‑based, per‑user app builder where programmers can contribute reusable components that become available to all subscribers, thereby expanding the “business empire” of user‑generated apps.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-0986.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0986</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-0986.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-0986.avif" alt="Introduction To Programming: Systems Architecture"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Introduction To Programming: Systems Architecture</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-0986.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0986</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Introduction To Programming: Systems Architecture</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-11-12">11/11/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Introduction To Programming: System Architecture</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Most tutorials leave out deploying your applications,
-so it is difficult to get a big picture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And giving a solid explanation is difficult,
-as it is sure to involve a lot of concepts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is another way,
-explaining architecture by subtle analogy to other programs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What I present here is a simple to grasp architecture,
-of a self expanding business empire for a busy teenager that has more important things to do.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will need a safe way to handle information from many sources,
-use <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+Couchbase">Couchbase</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or a similar <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+CouchDB">CouchDB</a> provider,
-so that you don’t have to host your own CouchDB.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Know, that every one of your users, upon a sign-up,
-gets a tiny database that only they can view.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are no security issues,
-users just own their data.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When a user logs in, a web page with with a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+PouchDB">PouchDB</a>,
-will synchronize with their CouchDB.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When they make changes to their data in their browser,
-those changes are automatically sent to their little database on Couchbase.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This requires custom programming,
-but this is good practice for learning how to hire programmers to code your ideas.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now things are going to get a little bit crazy,
-Couch and Pouch have a concept of Design Documents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These were originally invented to make Apps,
-an App would sit on top of a Design Document.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hire a programmer, and tell them, to create a simple code editor,
-that will help you create and edit Design Documents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell them that you want it to look like Windows Explorer,
-a File Manager.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you can browse properties inside objects,
-as if they were files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you just make a view folder in your Design Document,
-and create a tiny JavaScript file with just like 3 lines of code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+CouchDB+Design+Document">It won’t take yo long to figure out how to create Design Document views</a>,
-there are many examples everywhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now lets get application specific,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Get a programmer to write a program,
-that will load posts from your user’s favorite news site…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Into their tiny database,
-in your Couchbase.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Have your Design Documents,
-filter for collections of news articles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The way you create multiple collections in PouchDB,
-is just by adding a news-source field, and entering twatter or whatever in there.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This creates rows of news articles,
-every row is a unique article.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now every article has fields,
-such as source, author, date, title, text.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This gets us to the next application layer,
-this one is inspired by <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+FileMaker">FileMaker</a> or Access.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We create a row navigator,
-basically just previous, next, and search.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then below that,
-you will need a program that will help your end users…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To drag and drop fields,
-to create a User Interface that will display each row.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you have a field that just has a link to an image,
-you will need to connect it to an image UI element…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That will show the image,
-rather than the URL.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now you just gave your users the ability to create their own versions,
-of their news sites.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I use news articles as an example,
-there are many application you can create.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Drag And Drop Layout Editor, Color Theme Designer, Web Services Builder, Noise Machine, Song Beat Counter,
-Popular Song Customizer, Bootstrap Shadow Generator, Bootstrap Container Generator, Button Customizer</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a bonus, create an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Apple+Automator">Automator</a> clone,
-on top of the file maker clone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here your users will be able to create actions,
-such as sending a news article from one site to another.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, what you end up with,
-is a custom drag and drop application builder.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Users sign up for $4 a month,
-they get their own little database.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And access to a forum,
-where programmers are willing to code custom components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The fancy thing here is the components,
-once created become available to all.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that the power of your little empire,
-keeps expanding.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-11-12T04:29:07.319Z">November 11, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:47<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-0986.avif" aria-label="Cover for Introduction To Programming: Systems Architecture, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-0986.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Introduction To Programming: Systems Architecture" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:47
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-0986.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-0986.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-0986.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Introduction To Programming: System Architecture</p>
+<p>Most tutorials leave out deploying your applications,<br>so it is difficult to get a big picture.</p>
+<p>And giving a solid explanation is difficult,<br>as it is sure to involve a lot of concepts.</p>
+<p>But there is another way,<br>explaining architecture by subtle analogy to other programs.</p>
+<hr>
+<p>What I present here is a simple to grasp architecture,<br>of a self expanding business empire for a busy teenager that has more important things to do.</p>
+<hr>
+<p>You will need a safe way to handle information from many sources,<br>use <a href="https://www.youtube.com/results?search_query=What+Is+Couchbase">Couchbase</a>.</p>
+<p>Or a similar <a href="https://www.youtube.com/results?search_query=What+Is+CouchDB">CouchDB</a> provider,<br>so that you don’t have to host your own CouchDB.</p>
+<p>Know, that every one of your users, upon a sign-up,<br>gets a tiny database that only they can view.</p>
+<p>There are no security issues,<br>users just own their data.</p>
+<hr>
+<p>When a user logs in, a web page with with a <a href="https://www.youtube.com/results?search_query=What+Is+PouchDB">PouchDB</a>,<br>will synchronize with their CouchDB.</p>
+<p>When they make changes to their data in their browser,<br>those changes are automatically sent to their little database on Couchbase.</p>
+<p>This requires custom programming,<br>but this is good practice for learning how to hire programmers to code your ideas.</p>
+<hr>
+<p>Now things are going to get a little bit crazy,<br>Couch and Pouch have a concept of Design Documents.</p>
+<p>These were originally invented to make Apps,<br>an App would sit on top of a Design Document.</p>
+<p>Hire a programmer, and tell them, to create a simple code editor,<br>that will help you create and edit Design Documents.</p>
+<p>Tell them that you want it to look like Windows Explorer,<br>a File Manager.</p>
+<p>Where you can browse properties inside objects,<br>as if they were files.</p>
+<p>Here you just make a view folder in your Design Document,<br>and create a tiny JavaScript file with just like 3 lines of code.</p>
+<p><a href="https://www.youtube.com/results?search_query=What+Is+CouchDB+Design+Document">It won’t take yo long to figure out how to create Design Document views</a>,<br>there are many examples everywhere.</p>
+<p>Now lets get application specific,</p>
+<p>Get a programmer to write a program,<br>that will load posts from your user’s favorite news site…</p>
+<p>Into their tiny database,<br>in your Couchbase.</p>
+<p>Have your Design Documents,<br>filter for collections of news articles.</p>
+<p>The way you create multiple collections in PouchDB,<br>is just by adding a news-source field, and entering twatter or whatever in there.</p>
+<p>This creates rows of news articles,<br>every row is a unique article.</p>
+<p>And now every article has fields,<br>such as source, author, date, title, text.</p>
+<hr>
+<p>This gets us to the next application layer,<br>this one is inspired by <a href="https://www.youtube.com/results?search_query=What+Is+FileMaker">FileMaker</a> or Access.</p>
+<p>We create a row navigator,<br>basically just previous, next, and search.</p>
+<p>And then below that,<br>you will need a program that will help your end users…</p>
+<p>To drag and drop fields,<br>to create a User Interface that will display each row.</p>
+<p>If you have a field that just has a link to an image,<br>you will need to connect it to an image UI element…</p>
+<p>That will show the image,<br>rather than the URL.</p>
+<hr>
+<p>So now you just gave your users the ability to create their own versions,<br>of their news sites.</p>
+<p>I use news articles as an example,<br>there are many application you can create.</p>
+<p>Drag And Drop Layout Editor, Color Theme Designer, Web Services Builder, Noise Machine, Song Beat Counter,<br>Popular Song Customizer, Bootstrap Shadow Generator, Bootstrap Container Generator, Button Customizer</p>
+<p>As a bonus, create an <a href="https://www.youtube.com/results?search_query=Apple+Automator">Automator</a> clone,<br>on top of the file maker clone.</p>
+<p>Here your users will be able to create actions,<br>such as sending a news article from one site to another.</p>
+<hr>
+<p>Finally, what you end up with,<br>is a custom drag and drop application builder.</p>
+<p>Users sign up for $4 a month,<br>they get their own little database.</p>
+<p>And access to a forum,<br>where programmers are willing to code custom components.</p>
+<p>The fancy thing here is the components,<br>once created become available to all.</p>
+<p>So that the power of your little empire,<br>keeps expanding.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+Couchbase">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Couchbase</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+Couchbase</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+CouchDB">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>CouchDB</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+CouchDB</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+PouchDB">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>PouchDB</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+PouchDB</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+CouchDB+Design+Document">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>It won’t take yo long to figure out how to create Design Document views</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+CouchDB+Design+Document</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+FileMaker">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>FileMaker</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+FileMaker</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Apple+Automator">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Automator</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Apple+Automator</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">couchdb</span><span class="chip">pouchdb</span><span class="chip">couchbase</span><span class="chip">design-document</span><span class="chip">drag-and-drop</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+Couchbase">
+              <span class="text-truncate">Couchbase</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+CouchDB">
+              <span class="text-truncate">CouchDB</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+PouchDB">
+              <span class="text-truncate">PouchDB</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+CouchDB+Design+Document">
+              <span class="text-truncate">It won’t take yo long to figure out how to create Design Document views</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+FileMaker">
+              <span class="text-truncate">FileMaker</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Apple+Automator">
+              <span class="text-truncate">Automator</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/4ae98927-7c33-4d1d-84c5-0b4fb76265ec/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Our Full Heritage &amp; Culture; Or, Nine Thousand Nine Hundred Books Towards Wisdom And World Peace</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b3421be3-862d-4c45-88e3-47fb917fa9cc/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Learn For Real Do Not Gamble With Your Knowledge</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f97199b3-0bcf-4aaf-927f-c4787d8b84de/">
+              <img src="https://catpea.github.io/chapter-05/poem-0988.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Upside Down Data Synchronization</span>
+                <span class="fg-3 fs-xs">November 13, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/48b45bf1-09c4-48b1-a7fe-50d1b9525f6b/">
+              <img src="https://catpea.github.io/chapter-05/poem-0983.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Teaches How To Learn For Real</span>
+                <span class="fg-3 fs-xs">November 8, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/27e21555-adbd-428f-a210-9d13e517494e/">
+              <img src="https://catpea.github.io/chapter-05/poem-0996.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Building Your First Software Empire; Or, Self Editable Applications Are Just Operating Systems</span>
+                <span class="fg-3 fs-xs">November 21, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/faa9b086-6b76-4e40-b88d-3cdf543b4a7b/">
+              <img src="https://catpea.github.io/chapter-05/poem-0982.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming For Your Users, Yourself, And The Older You; Or Writing Valuable, Maintainable, And Non Crazy Code</span>
+                <span class="fg-3 fs-xs">November 7, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

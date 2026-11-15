@@ -1,159 +1,447 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple And Lightweight Code</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Simple And Lightweight Code · Cat Pea</title>
+  <meta name="description" content="The author argues that the best way to build robust software is by starting small and staying modular: plan your program as a tree of loosely coupled components, use simple tables for data, and expose a lightweight HTTP API with a GUI client that talks to it. By writing clear, single‑purpose commands (for example, a tiny reverse‑proxy server) and keeping the codebase tidy, you can easily add new features such as a wiki editor or multiple clients while still maintaining a single source of truth for state. The post stresses automation, regular backups, and using nested structures so that each component stays independent yet coordinated—so that the overall system grows naturally from one small program to many, all driven by simple commands and clean architecture.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/d89f34b1-7ae7-45a9-ac49-b9164889915f/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Simple And Lightweight Code · Cat Pea">
+  <meta property="og:description" content="The author argues that the best way to build robust software is by starting small and staying modular: plan your program as a tree of loosely coupled components, use simple tables for data, and expose a lightweight HTTP API with a GUI client that talks to it. By writing clear, single‑purpose commands (for example, a tiny reverse‑proxy server) and keeping the codebase tidy, you can easily add new features such as a wiki editor or multiple clients while still maintaining a single source of truth for state. The post stresses automation, regular backups, and using nested structures so that each component stays independent yet coordinated—so that the overall system grows naturally from one small program to many, all driven by simple commands and clean architecture.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-06/poem-1123.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-06/">Chapter 06</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1123</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-06/poem-1123.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-06/poem-1123.avif" alt="Simple And Lightweight Code"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Simple And Lightweight Code</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-06/poem-1123.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 06</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1123</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Simple And Lightweight Code</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-03-30">3/29/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">When you make your modules tiny,
-your code-base will become shiny.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as you know what comes next,
-programming is not complex.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Corporate programming is twisted,
-you should write for yourself instead.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Build a tiny little outfit,
-and let it work to your own benefit.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ineffective education will take your money,
-and your corporate job is not a nanny.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They’ll replace you as soon as they can,
-they want a robot not a human.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When programming on your own,
-you are always in the zone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Like you can’t really learn what you are told,
-you can’t write code just to be sold.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your own programs pretty,
-you are after all building a tiny city.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To make sure all the streets connect,
-you have to be the lone architect.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The process of writing your code,
-must also be a simple road.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can’t jump in the middle,
-or the code base turns into a riddle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once you have everything planned,
-you start writing a simple OS command.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You add a few more,
-to create a solid floor.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And code a tiny reverse proxy like server,
-as a uniform API surface is a time saver.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must use tables for your data,
-as these will quickly move you out of beta.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The column names must be a work of art,
-keep your database tidy and smart.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make a new HTTP server for GUI,
-but think of it as client to your API.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Build many clients as you experiment,
-code all kinds of ways to your merriment,</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Know that our universe is a tree,
-everything is a nested category.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To put that in a table think in edges and nodes,
-and you will never run out of roads.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Write more commands to manage your tree,
-keep your components loose and free.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think of your app as living in a desktop,
-and give it a command to start and stop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think of the strange desktop your root,
-and you can listen to branch changes to boot.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">UI state management is impossibly hard,
-and you have to stay on guard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Best way is to give your users a tiny DB,
-and then synchronize tables in a way you can see.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But synchronization conflicts will arise,
-so distributes state is neat but not very wise.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you just hammer one source of truth,
-you won’t waste your time or youth.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make backups but have those CPU cores glow red,
-and make sure the database never goes dead.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Keep the code lightweight,
-and keep writing simple commands and automate.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To practice for success,
-begin by writing a WikiWiki without stress.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And allow code to execute in articles,
-think of it as system particles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are making a code editor, always a win,
-and beneath crafting a secure little code bin.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now your code-base is comments first,
-and your app code won’t be cursed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let your articles nest,
-and create a universe as a test.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now you can work on a hundred apps,
-and easily generate their maps.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is your laboratory,
-and the beginning of your story.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Only in experiment can you find your app,
-and divide winners from scrap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remember to use simple commands and a nested tree,
-so that your vision is never obscured and you can see.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is an ancient philosophy that works really well,
-so you might as well give your commands a shell.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-03-30T03:21:07.857Z">March 29, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>5:43<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-06/poem-1123.avif" aria-label="Cover for Simple And Lightweight Code, full size">
+            <img src="https://catpea.github.io/chapter-06/poem-1123.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Simple And Lightweight Code" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 5:43
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-06/poem-1123.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-06/poem-1123.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-06/poem-1123.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>When you make your modules tiny,<br>your code-base will become shiny.</p>
+<p>So as long as you know what comes next,<br>programming is not complex.</p>
+<p>Corporate programming is twisted,<br>you should write for yourself instead.</p>
+<p>Build a tiny little outfit,<br>and let it work to your own benefit.</p>
+<p>Ineffective education will take your money,<br>and your corporate job is not a nanny.</p>
+<p>They’ll replace you as soon as they can,<br>they want a robot not a human.</p>
+<hr>
+<p>When programming on your own,<br>you are always in the zone.</p>
+<p>Like you can’t really learn what you are told,<br>you can’t write code just to be sold.</p>
+<p>Your own programs pretty,<br>you are after all building a tiny city.</p>
+<p>To make sure all the streets connect,<br>you have to be the lone architect.</p>
+<hr>
+<p>The process of writing your code,<br>must also be a simple road.</p>
+<p>You can’t jump in the middle,<br>or the code base turns into a riddle.</p>
+<p>Once you have everything planned,<br>you start writing a simple OS command.</p>
+<p>You add a few more,<br>to create a solid floor.</p>
+<p>And code a tiny reverse proxy like server,<br>as a uniform API surface is a time saver.</p>
+<p>You must use tables for your data,<br>as these will quickly move you out of beta.</p>
+<p>The column names must be a work of art,<br>keep your database tidy and smart.</p>
+<p>Make a new HTTP server for GUI,<br>but think of it as client to your API.</p>
+<p>Build many clients as you experiment,<br>code all kinds of ways to your merriment,</p>
+<hr>
+<p>Know that our universe is a tree,<br>everything is a nested category.</p>
+<p>To put that in a table think in edges and nodes,<br>and you will never run out of roads.</p>
+<p>Write more commands to manage your tree,<br>keep your components loose and free.</p>
+<p>Think of your app as living in a desktop,<br>and give it a command to start and stop.</p>
+<p>Think of the strange desktop your root,<br>and you can listen to branch changes to boot.</p>
+<hr>
+<p>UI state management is impossibly hard,<br>and you have to stay on guard.</p>
+<p>Best way is to give your users a tiny DB,<br>and then synchronize tables in a way you can see.</p>
+<p>But synchronization conflicts will arise,<br>so distributes state is neat but not very wise.</p>
+<p>If you just hammer one source of truth,<br>you won’t waste your time or youth.</p>
+<p>Make backups but have those CPU cores glow red,<br>and make sure the database never goes dead.</p>
+<p>Keep the code lightweight,<br>and keep writing simple commands and automate.</p>
+<hr>
+<p>To practice for success,<br>begin by writing a WikiWiki without stress.</p>
+<p>And allow code to execute in articles,<br>think of it as system particles.</p>
+<p>You are making a code editor, always a win,<br>and beneath crafting a secure little code bin.</p>
+<p>Now your code-base is comments first,<br>and your app code won’t be cursed.</p>
+<p>Now let your articles nest,<br>and create a universe as a test.</p>
+<p>Now you can work on a hundred apps,<br>and easily generate their maps.</p>
+<hr>
+<p>This is your laboratory,<br>and the beginning of your story.</p>
+<p>Only in experiment can you find your app,<br>and divide winners from scrap.</p>
+<p>Remember to use simple commands and a nested tree,<br>so that your vision is never obscured and you can see.</p>
+<p>It is an ancient philosophy that works really well,<br>so you might as well give your commands a shell.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">software-architecture</span><span class="chip">small-modules</span><span class="chip">database-tables</span><span class="chip">http-server</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://www.pexels.com/photo/person-working-remotely-3987066/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://www.pexels.com/photo/person-working-remotely-3987066/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/efa5fddd-70ba-4453-876f-bc2c84c53c00/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">For The World To Rise</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/18ad004d-275e-4757-81c4-49d5e1d82dba/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Dancing Yourself To Health; Or, Just Dance, And Don&#39;t Stop Under Any Circumstance</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/61e1d26c-666d-4a24-b60b-ee26ec293644/">
+              <img src="https://catpea.github.io/chapter-06/poem-1128.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">An Escape From The Dark Ages Of Programming</span>
+                <span class="fg-3 fs-xs">April 3, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fe757b50-3dc8-44ad-a096-b94e4087fa59/">
+              <img src="https://catpea.github.io/chapter-06/poem-1107.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Quirkedy Quirks</span>
+                <span class="fg-3 fs-xs">March 13, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9a153794-42fc-4683-b06b-297572e357d2/">
+              <img src="https://catpea.github.io/chapter-06/poem-1135.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">I Don’t Even; Or, Rebellious Web Design Is Super Fine</span>
+                <span class="fg-3 fs-xs">April 10, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d34aabf3-042f-4bcf-bd29-bd09195bf148/">
+              <img src="https://catpea.github.io/chapter-06/poem-1105.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Game Of Chess With Infinite Complexity; Or, Return To Antwerp</span>
+                <span class="fg-3 fs-xs">March 11, 2023</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

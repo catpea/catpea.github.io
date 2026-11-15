@@ -1,167 +1,451 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Out-programming State Of The Art AI Is Super Easy And Necessary</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Out-programming State Of The Art AI Is Super Easy And Necessary · Cat Pea</title>
+  <meta name="description" content="The post argues that the most powerful AI we need already exists—a fast, rule‑driven model wrapped in validators, style guides, AST queries and an XML‑based language. Rather than chasing ever‑larger creative models, it advocates building strict, procedural systems: custom DSLs that compile to JavaScript, visual designers, linters, and style checkers that keep AI‑generated code stable and maintainable. By feeding the AI examples, memories, and clear constraints, developers can harness it for reliable code generation, turning AI‑produced scripts into valuable, production‑ready assets.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/24afb6ed-6320-4d24-aa57-934ca4637a12/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Out-programming State Of The Art AI Is Super Easy And Necessary · Cat Pea">
+  <meta property="og:description" content="The post argues that the most powerful AI we need already exists—a fast, rule‑driven model wrapped in validators, style guides, AST queries and an XML‑based language. Rather than chasing ever‑larger creative models, it advocates building strict, procedural systems: custom DSLs that compile to JavaScript, visual designers, linters, and style checkers that keep AI‑generated code stable and maintainable. By feeding the AI examples, memories, and clear constraints, developers can harness it for reliable code generation, turning AI‑produced scripts into valuable, production‑ready assets.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-16/poem-2322.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-16/">Chapter 16</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2322</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-16/poem-2322.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-16/poem-2322.avif" alt="Out-programming State Of The Art AI Is Super Easy And Necessary"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Out-programming State Of The Art AI Is Super Easy And Necessary</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-16/poem-2322.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 16</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2322</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Out-programming State Of The Art AI Is Super Easy And Necessary</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-07-13">7/12/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">What I am about to tell you is not what anybody wants to hear,
-we already have the most powerful artificial intelligence we can have.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is the fastest little thinking model wrapped in validators,
-styleguides, AST queries, and ultimately an XML language for AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">XML being the perfect target for validation,
-it is just the right language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Training an AI model to do all this automatically,
-is simply too much and not needed.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Training a model for creativity by teaching it a lot of clean knowledge,
-is wonderful for ideas.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But creating code is only about finding the most boring path,
-and adjusting it to adhere to rules.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we end up bothering the AI to reduce,
-and re-route, or learn from examples and do it right.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The machines have already learned to think, inside 16GB files,
-it will be made to appear more creative, but what we have is good enough.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We must talk about code generation, because code is a form of intelligence,
-the only real way these AIs can improve themselves is by writing tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now to get a local model to become more powerful,
-than what leading companies have.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need a system of procedures, text files that describe what you need,
-you don’t want your AI to be creative, you want it to be strict about rules.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With each successful task it must update its memory,
-and you may wish to take that to the biggest AI and tidy that up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you have to program in a specific thing in a single area,
-because you want your software to be cross-compatible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I see world’s leading AIs make mistakes all the time,
-and the only way to avoid that is following procedure.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To give you a real world example, I use web Components in my apps,
-the default video player that comes with your browser is a Web Component.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I make more of the, I make entire applications out of them,
-powerful applications that each improve a set of reusable web componets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the corner, that I chased my local AI into,
-I gave it examples, it learns from my existing projects which are consistent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I do the architectural decisions, I decide what components get made,
-though sometimes I ask a big AI for ideas, I do review them, and also learn.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So AI is making notes, I chase it into a consistent corner,
-and on top of that I tell it what I need.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not because my AI is dumb, but because no AI will do this for me,
-the AI will always prefer its own way, and that lacks cross compatibility.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each AI as they develop will do it slightly differently,
-these components need to be made in a way that a human could edit them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which brings us, to two ideas, that no state of the art AI will out-program,
-I made my own language that compiles to JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if there is ever a need for it,
-I do have visual programming languages that can micro-mange the AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will only take a few seconds to make out an app,
-but that control harness guarantees perfection.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Between my own programming language, and the visual designer,
-and on top of AI memories, examples and procedures.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is noting more that can be added,
-this is already more than a fuzzy State Of The Art Model can contribute.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can pivot to automate me, and have a SOTA model,
-do design with these guiding tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we can get a SOTA to make tools that enhance my local AI,
-to need less of this type of guidance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The leading AI is currently programming in a linter, a code checker,
-that will automatically check for syntax errors n my little AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The probability of a small AI creating bad code,
-is much lower now, if not eliminated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I can add another tool that uses standard programming,
-to test for style of programming and check for deviations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These tools are configures by state of the art models,
-but only once, and they run automatically.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are still in school, a lot of wise people will be encouraging you,
-to master using artificial intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that is the 2025 advice, you now have to begin building your own AI,
-with the help of state of the art models.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Creating an AI harness that learns from chat summaries and results,
-creating procedures that prevent AIs from drifting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Enhancing code generation with linter and style checkers,
-and finally enforcing the progress with your own language and visual designer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you have that, you replace yourself with a state of the art model,
-for the duration of the grunt work that all projects need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then return, to a well made project, coded by a small AI,
-configured by a big one, that you now just manage.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ladies and Gentlemen, deep down you knew this was coming,
-you must build your own AI, a strict lattice around a thinking machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is how artificial intelligence generated code goes from vibe coding,
-to a precious company asset that you can stand on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once more, the thinking machines are already invented,
-the ways in which they can be improved are not as useful as strict procedure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because it is that obedience of rules,
-that makes the programs stable, powerful and worth a purchase.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A program coded by AI under strict rules,
-is as precious is as coded by a human who follows the same rules.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t wait for a better AI,
-begin building your own.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-07-13T01:56:37.120Z">July 12, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:10<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-16/poem-2322.avif" aria-label="Cover for Out-programming State Of The Art AI Is Super Easy And Necessary, full size">
+            <img src="https://catpea.github.io/chapter-16/poem-2322.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Out-programming State Of The Art AI Is Super Easy And Necessary" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:10
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-16/poem-2322.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-16/poem-2322.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-16/poem-2322.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>What I am about to tell you is not what anybody wants to hear,<br>we already have the most powerful artificial intelligence we can have.</p>
+<p>It is the fastest little thinking model wrapped in validators,<br>styleguides, AST queries, and ultimately an XML language for AI.</p>
+<p>XML being the perfect target for validation,<br>it is just the right language.</p>
+<p>Training an AI model to do all this automatically,<br>is simply too much and not needed.</p>
+<hr>
+<p>Training a model for creativity by teaching it a lot of clean knowledge,<br>is wonderful for ideas.</p>
+<p>But creating code is only about finding the most boring path,<br>and adjusting it to adhere to rules.</p>
+<p>So we end up bothering the AI to reduce,<br>and re-route, or learn from examples and do it right.</p>
+<hr>
+<p>The machines have already learned to think, inside 16GB files,<br>it will be made to appear more creative, but what we have is good enough.</p>
+<p>We must talk about code generation, because code is a form of intelligence,<br>the only real way these AIs can improve themselves is by writing tools.</p>
+<p>Now to get a local model to become more powerful,<br>than what leading companies have.</p>
+<p>You need a system of procedures, text files that describe what you need,<br>you don’t want your AI to be creative, you want it to be strict about rules.</p>
+<p>With each successful task it must update its memory,<br>and you may wish to take that to the biggest AI and tidy that up.</p>
+<p>And then you have to program in a specific thing in a single area,<br>because you want your software to be cross-compatible.</p>
+<p>I see world’s leading AIs make mistakes all the time,<br>and the only way to avoid that is following procedure.</p>
+<hr>
+<p>To give you a real world example, I use web Components in my apps,<br>the default video player that comes with your browser is a Web Component.</p>
+<p>And I make more of the, I make entire applications out of them,<br>powerful applications that each improve a set of reusable web componets.</p>
+<p>This is the corner, that I chased my local AI into,<br>I gave it examples, it learns from my existing projects which are consistent.</p>
+<p>And I do the architectural decisions, I decide what components get made,<br>though sometimes I ask a big AI for ideas, I do review them, and also learn.</p>
+<p>So AI is making notes, I chase it into a consistent corner,<br>and on top of that I tell it what I need.</p>
+<hr>
+<p>This is not because my AI is dumb, but because no AI will do this for me,<br>the AI will always prefer its own way, and that lacks cross compatibility.</p>
+<p>Each AI as they develop will do it slightly differently,<br>these components need to be made in a way that a human could edit them.</p>
+<p>Which brings us, to two ideas, that no state of the art AI will out-program,<br>I made my own language that compiles to JavaScript.</p>
+<p>And if there is ever a need for it,<br>I do have visual programming languages that can micro-mange the AI.</p>
+<p>It will only take a few seconds to make out an app,<br>but that control harness guarantees perfection.</p>
+<p>Between my own programming language, and the visual designer,<br>and on top of AI memories, examples and procedures.</p>
+<p>There is noting more that can be added,<br>this is already more than a fuzzy State Of The Art Model can contribute.</p>
+<hr>
+<p>We can pivot to automate me, and have a SOTA model,<br>do design with these guiding tools.</p>
+<p>And we can get a SOTA to make tools that enhance my local AI,<br>to need less of this type of guidance.</p>
+<p>The leading AI is currently programming in a linter, a code checker,<br>that will automatically check for syntax errors n my little AI.</p>
+<p>The probability of a small AI creating bad code,<br>is much lower now, if not eliminated.</p>
+<p>I can add another tool that uses standard programming,<br>to test for style of programming and check for deviations.</p>
+<p>These tools are configures by state of the art models,<br>but only once, and they run automatically.</p>
+<hr>
+<p>If you are still in school, a lot of wise people will be encouraging you,<br>to master using artificial intelligence.</p>
+<p>But that is the 2025 advice, you now have to begin building your own AI,<br>with the help of state of the art models.</p>
+<p>Creating an AI harness that learns from chat summaries and results,<br>creating procedures that prevent AIs from drifting.</p>
+<p>Enhancing code generation with linter and style checkers,<br>and finally enforcing the progress with your own language and visual designer.</p>
+<p>When you have that, you replace yourself with a state of the art model,<br>for the duration of the grunt work that all projects need.</p>
+<p>And then return, to a well made project, coded by a small AI,<br>configured by a big one, that you now just manage.</p>
+<p>Ladies and Gentlemen, deep down you knew this was coming,<br>you must build your own AI, a strict lattice around a thinking machine.</p>
+<p>This is how artificial intelligence generated code goes from vibe coding,<br>to a precious company asset that you can stand on.</p>
+<p>Once more, the thinking machines are already invented,<br>the ways in which they can be improved are not as useful as strict procedure.</p>
+<p>Because it is that obedience of rules,<br>that makes the programs stable, powerful and worth a purchase.</p>
+<p>A program coded by AI under strict rules,<br>is as precious is as coded by a human who follows the same rules.</p>
+<p>Don’t wait for a better AI,<br>begin building your own.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">Artificial Intelligence</span><span class="chip">Code Generation</span><span class="chip">AI Safety</span><span class="chip">Developer Tools</span><span class="chip">Web Components</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/590d6d50-d4e7-4a76-b9b9-510ce0ed5102/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Bodybuilding Is Very Easy</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/30f57ac7-8b47-4bc1-807c-717881e5a21b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Step One: The Rebirth Of Bodybuilding</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fde0b42c-437f-42a2-98b4-26188a4b4beb/">
+              <img src="https://catpea.github.io/chapter-16/poem-2334.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Can AI Think? Is It Alive? Or, Is It A Trick?</span>
+                <span class="fg-3 fs-xs">July 25, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/858df2c8-2cb5-4ac8-8494-8d6bd467a21b/">
+              <img src="https://catpea.github.io/chapter-16/poem-2319.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">You Finish Everything All The Time; Or, What Is It Like When You Are Finally Programming With AI?</span>
+                <span class="fg-3 fs-xs">July 9, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3d08a6f5-0062-46c3-8609-a746e1ff7532/">
+              <img src="https://catpea.github.io/chapter-16/poem-2339.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Here You Go: Your Product Ten Years Early</span>
+                <span class="fg-3 fs-xs">July 29, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/854101c9-39b4-4744-82bf-bdad8cc93d78/">
+              <img src="https://catpea.github.io/chapter-16/poem-2318.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Rage, Rage Against The Dying Light, Young Lady</span>
+                <span class="fg-3 fs-xs">July 8, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

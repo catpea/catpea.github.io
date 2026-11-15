@@ -1,179 +1,460 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visual Programming Done Right</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Visual Programming Done Right · Cat Pea</title>
+  <meta name="description" content="The post argues that visual programming—viewed as a language akin to the Linux command line—offers scalable, reliable, and fast development by letting you compose tasks with reusable nodes. It can range from low‑level to high‑level abstractions, enabling everything from simple UI kit generation for Bootstrap to complex domain‑specific tools like web scrapers, HTTP servers, music composition interfaces, or ffmpeg filter graphs. By generating code on the fly and allowing live design, visual programming makes deployment trivial while keeping complexity manageable at the right abstraction level.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/66c079b3-9576-4c94-bed1-b23c8768344c/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Visual Programming Done Right · Cat Pea">
+  <meta property="og:description" content="The post argues that visual programming—viewed as a language akin to the Linux command line—offers scalable, reliable, and fast development by letting you compose tasks with reusable nodes. It can range from low‑level to high‑level abstractions, enabling everything from simple UI kit generation for Bootstrap to complex domain‑specific tools like web scrapers, HTTP servers, music composition interfaces, or ffmpeg filter graphs. By generating code on the fly and allowing live design, visual programming makes deployment trivial while keeping complexity manageable at the right abstraction level.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1400.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1400</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1400.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1400.avif" alt="Visual Programming Done Right"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Visual Programming Done Right</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1400.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1400</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Visual Programming Done Right</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-01-01">1/1/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Preface,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Above all, visual programming is power,
-it should help you deploy...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To a self provisioning bare metal server-less system,
-that it manages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That you can actually modify,
-to match your needs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are done laughing,
-understand that it is the future, the only future.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the reason why you don&#39;t see that,
-is because you have gotten used to how everything is broken.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming,
-represents the much needed repairs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming replaces the programmer,
-it scales, it works securely and reliably, and it is fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It operates on the same patterns programmers use,
-but under a consistent, and simplified user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just like there is an app for everything,
-that is its own world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In visual programming, there is a library of nodes,
-specifically crafted to accomplish one thing well.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Critics, pipe down, a hacker is no contrarian,
-a hacker does not dismiss a technology, only makes it better.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Linux command line,
-is a visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It does not take much,
-to create a lot of function and power.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But yes, there must exist specific nodes,
-for a specific domain.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just like in Linux, there must exist large nodes,
-that do a lot of work, but not all the work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These programs expose ports,
-where a range of things can be plugged in.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming can be as low level as you need it,
-but the lower you go…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The more cumbersome the visual programming will get,
-relative to throwing away the mouse and just coding.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason why you can’t just code everything,
-anyway, is the limitation of your mind.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming provides an interactive system diagram,
-that is also editable, making modding the application trivial.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t need documentation,
-when you can click simulate.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And watch your data packet,
-slowly get routed through the system.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The higher the abstraction layer,
-the more powerful the visual programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A really good level, full of tasty bits,
-is the app world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where your nodes are on the level of phone apps,
-representing schedules, cameras, websites and feeds.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A cheap way of doing this,
-is just wrapping 3rd party API in nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But again, it is not just high level nodes,
-it is also a narrow domain that fixes problems that people actually have.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A visual programming language that does… everything,
-does nothing right.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those of you who dislike the idea of putting in a large tool,
-into your tool-chain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming can run live, during design,
-it can produce programs that run under start and stop buttons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it can also be used to generate source code,
-just like UML can generate your class code for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will leave you with a complex and enticing example,
-of a money making Visual Programming Language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of manually creating themes and UI kits for Bootstrap,
-create a visual programming studio.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can see how intimidating dealing with all the code generation is,
-and that should help you grasp, why visual programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Why, just squares, ports, labels and long lines,
-that show you where everything plugs into.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The higher the abstraction, the greater the complexity,
-and thus greater urgency to keep everything as simple as possible.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A good bootstrap theme can sell countless times for 50 dollars,
-that means no more work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just keep adding nodes,
-and before you dare to think, it would look boring.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just stop it, you use one of the popular image generators,
-to create a new set of beautiful designs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you duplicate your last product,
-and begin modifying it to math the new designs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Other good examples are web scrapers,
-where you turn the internet into feeds.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">UI builders with component tress, as in column has form,
-form has inputs and a footer, footer has a button.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are connecting visual programming nodes,
-you are just building a tree, which is perfect for nested UI components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A tool to build tiny HTTP servers like Express or Koa,
-where all the routing can be configured with drag and drop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And music composition or lecture with Web Audio and Tonejs,
-maybe a visual tool for ffmpeg filter-graphs that charges $9 per month.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally tools that build, enhance, expand, other,
-domain specific programming languages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a visual programming language aimed,
-at creating other domain specific visual programming tools.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-01-01T05:50:03.007Z">January 1, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>21:06<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1400.avif" aria-label="Cover for Visual Programming Done Right, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1400.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Visual Programming Done Right" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 21:06
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1400.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1400.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1400.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Preface,</p>
+<p>Above all, visual programming is power,<br>it should help you deploy...</p>
+<p>To a self provisioning bare metal server-less system,<br>that it manages.</p>
+<p>That you can actually modify,<br>to match your needs.</p>
+<p>When you are done laughing,<br>understand that it is the future, the only future.</p>
+<p>And the reason why you don&#39;t see that,<br>is because you have gotten used to how everything is broken.</p>
+<p>Visual programming,<br>represents the much needed repairs.</p>
+<hr>
+<p>Visual programming replaces the programmer,<br>it scales, it works securely and reliably, and it is fast.</p>
+<p>It operates on the same patterns programmers use,<br>but under a consistent, and simplified user interface.</p>
+<p>Just like there is an app for everything,<br>that is its own world.</p>
+<p>In visual programming, there is a library of nodes,<br>specifically crafted to accomplish one thing well.</p>
+<hr>
+<p>Critics, pipe down, a hacker is no contrarian,<br>a hacker does not dismiss a technology, only makes it better.</p>
+<hr>
+<p>The Linux command line,<br>is a visual programming language.</p>
+<p>It does not take much,<br>to create a lot of function and power.</p>
+<p>But yes, there must exist specific nodes,<br>for a specific domain.</p>
+<hr>
+<p>Just like in Linux, there must exist large nodes,<br>that do a lot of work, but not all the work.</p>
+<p>These programs expose ports,<br>where a range of things can be plugged in.</p>
+<hr>
+<p>Visual programming can be as low level as you need it,<br>but the lower you go…</p>
+<p>The more cumbersome the visual programming will get,<br>relative to throwing away the mouse and just coding.</p>
+<p>The reason why you can’t just code everything,<br>anyway, is the limitation of your mind.</p>
+<p>Visual programming provides an interactive system diagram,<br>that is also editable, making modding the application trivial.</p>
+<hr>
+<p>You don’t need documentation,<br>when you can click simulate.</p>
+<p>And watch your data packet,<br>slowly get routed through the system.</p>
+<hr>
+<p>The higher the abstraction layer,<br>the more powerful the visual programming.</p>
+<p>A really good level, full of tasty bits,<br>is the app world.</p>
+<p>Where your nodes are on the level of phone apps,<br>representing schedules, cameras, websites and feeds.</p>
+<p>A cheap way of doing this,<br>is just wrapping 3rd party API in nodes.</p>
+<p>But again, it is not just high level nodes,<br>it is also a narrow domain that fixes problems that people actually have.</p>
+<hr>
+<p>A visual programming language that does… everything,<br>does nothing right.</p>
+<hr>
+<p>Those of you who dislike the idea of putting in a large tool,<br>into your tool-chain.</p>
+<p>Visual programming can run live, during design,<br>it can produce programs that run under start and stop buttons.</p>
+<p>But it can also be used to generate source code,<br>just like UML can generate your class code for you.</p>
+<p>I will leave you with a complex and enticing example,<br>of a money making Visual Programming Language.</p>
+<p>Instead of manually creating themes and UI kits for Bootstrap,<br>create a visual programming studio.</p>
+<p>You can see how intimidating dealing with all the code generation is,<br>and that should help you grasp, why visual programming.</p>
+<p>Why, just squares, ports, labels and long lines,<br>that show you where everything plugs into.</p>
+<hr>
+<p>The higher the abstraction, the greater the complexity,<br>and thus greater urgency to keep everything as simple as possible.</p>
+<hr>
+<p>A good bootstrap theme can sell countless times for 50 dollars,<br>that means no more work.</p>
+<p>You just keep adding nodes,<br>and before you dare to think, it would look boring.</p>
+<p>Just stop it, you use one of the popular image generators,<br>to create a new set of beautiful designs.</p>
+<p>And then you duplicate your last product,<br>and begin modifying it to math the new designs.</p>
+<p>Other good examples are web scrapers,<br>where you turn the internet into feeds.</p>
+<p>UI builders with component tress, as in column has form,<br>form has inputs and a footer, footer has a button.</p>
+<p>When you are connecting visual programming nodes,<br>you are just building a tree, which is perfect for nested UI components.</p>
+<p>A tool to build tiny HTTP servers like Express or Koa,<br>where all the routing can be configured with drag and drop.</p>
+<p>And music composition or lecture with Web Audio and Tonejs,<br>maybe a visual tool for ffmpeg filter-graphs that charges $9 per month.</p>
+<p>And finally tools that build, enhance, expand, other,<br>domain specific programming languages.</p>
+<p>So a visual programming language aimed,<br>at creating other domain specific visual programming tools.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual-programming</span><span class="chip">node-based</span><span class="chip">drag-and-drop</span><span class="chip">ui-builder</span><span class="chip">code-generation</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/24aa2a21-9e8f-4bdd-8177-a12f6d99546a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Resolution Meow; Or Get Buff, Fluff and Gruff</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/ef4d9072-8454-41ab-b183-63edef256ab8/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Retro Futurism To The Rescue; Or, Chasing All The Bugs</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ef4d9072-8454-41ab-b183-63edef256ab8/">
+              <img src="https://catpea.github.io/chapter-08/poem-1401.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Retro Futurism To The Rescue; Or, Chasing All The Bugs</span>
+                <span class="fg-3 fs-xs">January 2, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2d80374a-3f68-4b0a-8f13-17010af5e0f2/">
+              <img src="https://catpea.github.io/chapter-08/poem-1397.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programmer’s Retirement; Or, Don&#39;t Let The Office Slow You Down</span>
+                <span class="fg-3 fs-xs">December 29, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2be4cc0c-19a2-4fba-8465-60c72ca66dc3/">
+              <img src="https://catpea.github.io/chapter-08/poem-1404.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Just A Fun Little Game</span>
+                <span class="fg-3 fs-xs">January 5, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0f2ee651-b978-4d13-958a-c097a1d1e6d9/">
+              <img src="https://catpea.github.io/chapter-08/poem-1394.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Hacking Holidays And Retro-futurism At The House Of Meow</span>
+                <span class="fg-3 fs-xs">December 25, 2023</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

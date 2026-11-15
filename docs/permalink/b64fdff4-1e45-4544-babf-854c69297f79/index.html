@@ -1,155 +1,473 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Computers And Color Theory, A Little Programming Tutorial</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Computers And Color Theory, A Little Programming Tutorial · Cat Pea</title>
+  <meta name="description" content="The author recounts his journey to create a simple generative‑art sketch in p5.js that illustrates how colors can be generated using the HSL model. After explaining hue, saturation, and luminosity—and why HSL is more natural for artists because it forms a circular hue wheel—he presents a program that picks a random hue, computes its triad by adding 120° and 240°, then draws three rectangles and two semi‑transparent circles in those colors. Each click re‑chooses the triad; right‑click saves the image. He notes how this exercise teaches basic arithmetic and arithmetic with degrees while also serving as background art or prints, and contrasts HSL’s advantages over RGB and CMYK for generative art.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/b64fdff4-1e45-4544-babf-854c69297f79/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Computers And Color Theory, A Little Programming Tutorial · Cat Pea">
+  <meta property="og:description" content="The author recounts his journey to create a simple generative‑art sketch in p5.js that illustrates how colors can be generated using the HSL model. After explaining hue, saturation, and luminosity—and why HSL is more natural for artists because it forms a circular hue wheel—he presents a program that picks a random hue, computes its triad by adding 120° and 240°, then draws three rectangles and two semi‑transparent circles in those colors. Each click re‑chooses the triad; right‑click saves the image. He notes how this exercise teaches basic arithmetic and arithmetic with degrees while also serving as background art or prints, and contrasts HSL’s advantages over RGB and CMYK for generative art.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0573.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0573</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0573.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0573.avif" alt="Computers And Color Theory, A Little Programming Tutorial"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Computers And Color Theory, A Little Programming Tutorial</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0573.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0573</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Computers And Color Theory, A Little Programming Tutorial</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-09-25">9/24/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">My first thought this morning was:<br>explain how programmers make colors with numbers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But then, when I woke up a little bit more,<br>and I though the idea was ridiculous because it is too abstract to explain in text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when I finally got out of bed,<br>I snapped my fingers and said: “Challenge Accepted”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By the time I returned from the gym,<br>I was grumbling that this is not going to work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here it is, if you visit <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://editor.p5js.org/catpea/sketches/">https://editor.p5js.org/catpea/sketches/</a><br>and click on triad-theory you will see a very simple piece of art in 50 lines of code.<br>(you may need to temporary enable third party cookies on p5js)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Computers have different function or mini-programs that can be used to invent a color,<br>but we want to focus on just one the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL</a>, or Hue, Saturation, Luminosity (sometimes called lightness or brightness).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hue, comes from physics,<br>you see it in a prism, our eyes pick up colors between red and violet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Saturation is how much of the color there is,<br>and luminosity is the brightness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is what the HSL algorithm aims for,<br>and there is not much more to it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The best way to use the H, S and L,<br>is when you already picked a color.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you have a red that is too overwhelming,<br>you lower the saturation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If it is too dark, and you need it to stand out more,<br>you increase the luminosity.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just to give you an idea, the most popular function is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/RGB">RGB</a>,<br>where you mix red, green and blue, web developers tend to use that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">HSL, is better for artists,<br>because an artist may wish to stay within luminosity of 80.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And RGB was not made to use a concept as fancy as luminosity,<br>meaning switching from green to red, will not preserve luminosity at all.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is another color function worth mentioning and it is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/CMYK_color_model">CMYK</a>,<br>but this function is made for printing, for companies that actually have Cyan, Magenta, Yellow and Black ink, in stock, for printing on fabric or paper.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In terms of generative art,<br>RGB is a horrible mistake, and HSL gives you colors that hardly ever disappoint, as you can easily reason about brightness and saturation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is more,<br>because while you reason about brightness and saturation in terms of percents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The hue, is round, it is a cylinder,<br>from 0 to 360 degrees.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is another reason why RGB is a bad choice for computer art,<br>that function doesn’t do circles.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Circles are extremely important for art,<br>in color theory colors that oppose on a circle go well together, but the same goes for a triad (three colors), and a tetrad (four colors), and five colors, and probably six, and so on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So if you have a cylinder of colors,<br>and you are looking for a complimentary color, or the opposite color... you just add 180 to get it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For a triad, your starting color is the first color,<br>add 120 to get the second, and 240, to get the third one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For four colors that go well together,<br>you just go around the cylinder in 90 degree increments.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the little program I created,<br>I first select a random number between 0 and 360, and that is my main color.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then I add 120, and 240,<br>to get the full triad of colors.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then I create three rectangles to fill the screen,<br>I add two randomly positioned semi-transparent circles, a big one and a small one, that feature the first and second color.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I created the space between shapes,<br>by giving them very thick outlines, this is a neat shortcut, not really what outlines are intended for.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I did not want to use functions or loops,<br>to keep the program simple, to help with learning programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each time the play button is clicked,<br>a new triad is chosen, and the circles change position.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Right clicking on the art,<br>allows for saving it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I created the screenWidth and screenHeight variables to allow changing the resolution of the generated image, so it is possible to create a desktop background or even something that can be printed out as a poster.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I consider this to be an example of how to teach addition, subtraction, division and degrees,<br>at the end of the class students would be able to parade some fancy infinite artwork.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is possible to sell such little creations,<br>something like this makes a perfect background for a poster, and saves someone five minutes of work - it would probably sell twice a year for a dollar.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I was creating this arrangement, I was imagining five or ten paintings,<br>on the otherwise empty walls of a gallery.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At which point, one could have an noteworthy photo-shoot for an art or design portfolio,</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing, color theory is very simple,<br>and computers do all the calculations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As always, the infinite canvas of Generative Art,<br>serve as a fun invitation to learn computer programming, and fill a gallery.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-09-25T02:55:59.738Z">September 24, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:38<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0573.avif" aria-label="Cover for Computers And Color Theory, A Little Programming Tutorial, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0573.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Computers And Color Theory, A Little Programming Tutorial" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:38
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0573.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0573.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0573.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>My first thought this morning was:<br>explain how programmers make colors with numbers.</p>
+<p>But then, when I woke up a little bit more,<br>and I though the idea was ridiculous because it is too abstract to explain in text.</p>
+<p>And when I finally got out of bed,<br>I snapped my fingers and said: “Challenge Accepted”.</p>
+<p>By the time I returned from the gym,<br>I was grumbling that this is not going to work.</p>
+<p>Here it is, if you visit <a href="https://editor.p5js.org/catpea/sketches/">https://editor.p5js.org/catpea/sketches/</a><br>and click on triad-theory you will see a very simple piece of art in 50 lines of code.<br>(you may need to temporary enable third party cookies on p5js)</p>
+<p>Computers have different function or mini-programs that can be used to invent a color,<br>but we want to focus on just one the <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL</a>, or Hue, Saturation, Luminosity (sometimes called lightness or brightness).</p>
+<p>Hue, comes from physics,<br>you see it in a prism, our eyes pick up colors between red and violet.</p>
+<p>Saturation is how much of the color there is,<br>and luminosity is the brightness.</p>
+<p>That is what the HSL algorithm aims for,<br>and there is not much more to it.</p>
+<hr>
+<p>The best way to use the H, S and L,<br>is when you already picked a color.</p>
+<p>If you have a red that is too overwhelming,<br>you lower the saturation.</p>
+<p>If it is too dark, and you need it to stand out more,<br>you increase the luminosity.</p>
+<hr>
+<p>Just to give you an idea, the most popular function is <a href="https://en.wikipedia.org/wiki/RGB">RGB</a>,<br>where you mix red, green and blue, web developers tend to use that.</p>
+<p>HSL, is better for artists,<br>because an artist may wish to stay within luminosity of 80.</p>
+<p>And RGB was not made to use a concept as fancy as luminosity,<br>meaning switching from green to red, will not preserve luminosity at all.</p>
+<p>There is another color function worth mentioning and it is <a href="https://en.wikipedia.org/wiki/CMYK_color_model">CMYK</a>,<br>but this function is made for printing, for companies that actually have Cyan, Magenta, Yellow and Black ink, in stock, for printing on fabric or paper.</p>
+<hr>
+<p>In terms of generative art,<br>RGB is a horrible mistake, and HSL gives you colors that hardly ever disappoint, as you can easily reason about brightness and saturation.</p>
+<p>But there is more,<br>because while you reason about brightness and saturation in terms of percents.</p>
+<p>The hue, is round, it is a cylinder,<br>from 0 to 360 degrees.</p>
+<p>This is another reason why RGB is a bad choice for computer art,<br>that function doesn’t do circles.</p>
+<hr>
+<p>Circles are extremely important for art,<br>in color theory colors that oppose on a circle go well together, but the same goes for a triad (three colors), and a tetrad (four colors), and five colors, and probably six, and so on.</p>
+<p>So if you have a cylinder of colors,<br>and you are looking for a complimentary color, or the opposite color... you just add 180 to get it.</p>
+<p>For a triad, your starting color is the first color,<br>add 120 to get the second, and 240, to get the third one.</p>
+<p>For four colors that go well together,<br>you just go around the cylinder in 90 degree increments.</p>
+<hr>
+<p>In the little program I created,<br>I first select a random number between 0 and 360, and that is my main color.</p>
+<p>Then I add 120, and 240,<br>to get the full triad of colors.</p>
+<p>And then I create three rectangles to fill the screen,<br>I add two randomly positioned semi-transparent circles, a big one and a small one, that feature the first and second color.</p>
+<p>I created the space between shapes,<br>by giving them very thick outlines, this is a neat shortcut, not really what outlines are intended for.</p>
+<p>I did not want to use functions or loops,<br>to keep the program simple, to help with learning programming.</p>
+<p>Each time the play button is clicked,<br>a new triad is chosen, and the circles change position.</p>
+<p>Right clicking on the art,<br>allows for saving it.</p>
+<p>And I created the screenWidth and screenHeight variables to allow changing the resolution of the generated image, so it is possible to create a desktop background or even something that can be printed out as a poster.</p>
+<hr>
+<p>I consider this to be an example of how to teach addition, subtraction, division and degrees,<br>at the end of the class students would be able to parade some fancy infinite artwork.</p>
+<p>It is possible to sell such little creations,<br>something like this makes a perfect background for a poster, and saves someone five minutes of work - it would probably sell twice a year for a dollar.</p>
+<p>When I was creating this arrangement, I was imagining five or ten paintings,<br>on the otherwise empty walls of a gallery.</p>
+<p>At which point, one could have an noteworthy photo-shoot for an art or design portfolio,</p>
+<hr>
+<p>In closing, color theory is very simple,<br>and computers do all the calculations.</p>
+<p>As always, the infinite canvas of Generative Art,<br>serve as a fun invitation to learn computer programming, and fill a gallery.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://editor.p5js.org/catpea/sketches/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://editor.p5js.org/catpea/sketches/</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://editor.p5js.org/catpea/sketches/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/HSL_and_HSV">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>HSL</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/HSL_and_HSV</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/RGB">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>RGB</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/RGB</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/CMYK_color_model">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>CMYK</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/CMYK_color_model</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">hsl</span><span class="chip">rgb</span><span class="chip">cmyk</span><span class="chip">p5js</span><span class="chip">generative-art</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/H8nxvtKbzdA"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/H8nxvtKbzdA</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://editor.p5js.org/catpea/sketches/">
+              <span class="text-truncate">https://editor.p5js.org/catpea/sketches/</span>
+              <span class="fg-3 fs-xs flex-shrink-0">editor.p5js.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/HSL_and_HSV">
+              <span class="text-truncate">HSL</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/RGB">
+              <span class="text-truncate">RGB</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/CMYK_color_model">
+              <span class="text-truncate">CMYK</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/8c8c733a-060b-481a-b46f-bf41e3e08dd4/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Upgrading The High School Diploma To A Real Design Portfolio And Beyond</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/6d1b7edc-5799-47ef-9312-e5ccaaa156da/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">High School 101: Building Your Own Secret Laboratory</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/598bb163-23b4-4e9d-8eb9-924a3ec4c32f/">
+              <img src="https://catpea.github.io/chapter-03/poem-0585.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Superpower Of Programmatic, Parametric, Algorithmic, Generative, Procedural, Design And Music Composition</span>
+                <span class="fg-3 fs-xs">October 6, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9ae5da53-5ffe-40dc-aa12-c3f2eb0afaab/">
+              <img src="https://catpea.github.io/chapter-03/poem-0555.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Challenge: declaration.json</span>
+                <span class="fg-3 fs-xs">September 6, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b5919586-94f1-47af-9cfe-a38cbdb6fa65/">
+              <img src="https://catpea.github.io/chapter-03/poem-0622.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Firewall: A Fine Internet Business Idea For High School Students</span>
+                <span class="fg-3 fs-xs">November 12, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3e495fbc-a5a8-4f61-973c-c1efc30d9ce5/">
+              <img src="https://catpea.github.io/chapter-03/poem-0553.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">X and Why: A Real Introduction To Real Mathematics</span>
+                <span class="fg-3 fs-xs">September 4, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

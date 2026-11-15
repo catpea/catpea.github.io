@@ -1,245 +1,504 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is · Cat Pea</title>
+  <meta name="description" content="The post argues that modern software development can be driven by detailed textual specifications rather than hand‑written code, using AI to generate requirements documents and automatically decompose them into classes and plugin architectures—illustrated with the “Remotable” example where an AI breaks a reactive variable into State, Subscription, FrozenState, RemoteSync, and DerivedState components—and stresses that organizing large projects as hierarchies of well‑named documents and modular plugins makes them easier for AIs to process; it concludes by recommending starting with a simple desktop application built through this documentation‑first approach so developers can become CEOs and strategists while letting AI handle the actual coding.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/e046f22b-b647-491b-89f9-53308403114c/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is · Cat Pea">
+  <meta property="og:description" content="The post argues that modern software development can be driven by detailed textual specifications rather than hand‑written code, using AI to generate requirements documents and automatically decompose them into classes and plugin architectures—illustrated with the “Remotable” example where an AI breaks a reactive variable into State, Subscription, FrozenState, RemoteSync, and DerivedState components—and stresses that organizing large projects as hierarchies of well‑named documents and modular plugins makes them easier for AIs to process; it concludes by recommending starting with a simple desktop application built through this documentation‑first approach so developers can become CEOs and strategists while letting AI handle the actual coding.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1877.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1877</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1877.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1877.avif" alt="Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1877.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1877</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-04-21">4/21/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">If you bear with me in one more gibberish poem,
-we will close the AI programming research chapter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With the unusual conclusion that it is better to describe code for AI,
-than actually write it yourself; freeing you to invent and strategize.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a poem entitled “<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.catpea.com/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/">Strategic Software Development For Girls New To Programming</a>”,
-we explored a simple AI friendly Application Architecture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then, in “<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.catpea.com/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">The Miracle Requirements Document; Or Investigating The Power Of Artificial Intelligence</a>”,
-we experimented with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/bowtie">letting the AI create a System Requirement Document</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, we look beyond Requirement Documents,
-and put the parts together into a coherent vision.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ignore the confusing words, just skim over them at first,
-and understand that you can build an empire, with just well informed text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don&#39;t actually want to write the code,
-that takes decades.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What you need is to ease yourself into a world of software development,
-in this bright new age of ever improving Artificial Intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ignore the negative commenters, programmers invested in the old ways of manual programming,
-cannot help but to try to push you away from this new road.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But they represent the old ways, the manual cranky ways,
-fill of complaints, advice that leads to nothing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is the advice of senior developers,
-that yell at clouds in a desperate search for their medicine.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The biggest problem you are facing today,
-is lack of competence on the part of AI companies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There was announcement a day ago or so that the leading AI company,
-embedded hidden/non-printable characters for the purpose of watermarking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You probably can’t sell a WebExtension to convert the characters,
-into little Clown Emoji, as it is probably a violation of user agreement.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And, when you create a large Requirements Document, as we have,
-you will have to pay for a premium AI to comprehend it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The leading AI, asked me to log-in, and gave truncated answers,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/liminal/blob/cd6f1395c6cf7e146bb2b127397c6003ca919f1f/remotable/REQUIREMENTS.md">for a 404 line Requirement Document</a> a small part of Application Architecture we described.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To address this dumb discovery, large requirement documents,
-have to be broken down, and not into parts, as that would confuse AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But into stand-alone programs, so the Database part explained in,
-“Strategic Software Development For Girls New To Programming”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Needs to become a stand alone product, with its own name,
-and likely needs to be further broken down into plugin-architecture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Plugins themselves, will each need a Requirements Document,
-and may eve be further broken down into Classes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI will take care of the class breakdown,
-but you need to ask for it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will have to ask, “How can the functionality of this plugin,
-be broken down into separate classes, and what does the re-assembled main plugin Class look like.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The requirement sections of your Requirements Document,
-will help the AI to create a Class breakdown and re-assemble.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will now show you an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/liminal/blob/5df51971e73a95eb7e1e882e933945377ba66666/remotable/COMPOSITION.md">example of such a breakdown</a>,
-for Remotable a somewhat scary and still rough Class.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just a reactive variable, like X, that holds a value, like 1,
-but, the server can update the value, and the program will update it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI broke the class down,
-into State, Subscription, FrozenState, RemoteSync, DerivedState.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">State, or Memory,
-Manages the internal value, revision, and UUID. Handles all value validation, serialization, and ensures state changes are tracked with revision updates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Subscription, or Automatic User Interface Updates,
-Handles registration, deregistration, and invocation of listeners, and manages debounced delivery of notifications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">FrozenState, or protecting, especially the derived objects from change.
-Enforces immutability. Once frozen, prevents any further modifications to the value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">RemoteSync, or a way for a server to inject a value in a smart way,
-Handles synchronization with remote peers, using revision and UUID to resolve update conflicts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">DerivedState, or transforming the value into somethin guseful, that must be read only as the transformation provides the value:
-Provides .map() for derived, read-only states, and .merge() for aggregated Remotables. Derived/merged Remotables are always frozen and update reactively.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So this would be the fine grained architecture of a plugin,
-inside a well named program, with multiple such plugins.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI vendors, may not dumb the AI down,
-but they will prevent you from getting their AI from processing a 1,000 requirements document.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you know, large language models are not perfect,
-breaking something down into simpler stand-alone parts helps them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But at every division, perhaps even on class lever,
-you need to approach the code Requirements Document first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t want to code the thing, you must stop yourself from coding,
-even today’s AI will do it better, and in the future, that will certainly be the case.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, allow me to clearly state,
-that an Application, large or small, is no longer code based.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is now a directory tree of requirements documents,
-and architectural specifications, such as class breakdowns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That describes multiple, well named, stand alone applications,
-that integrate together in simple and obvious ways.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remote via HTTP calls to various URLS, exactly like browsers do it,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nobackend.org/dreamcode.html">and Libraries, via nice, tidy and predictable API</a></p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t have to learn programming,
-but you will pick it up along the way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">More important than code,
-are the architectural patterns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And they are a human invention,
-made to simplify programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They will pose no challenge,
-and all you need to get started.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is to watch videos about Application Architectures,
-talk to AI about what Application Internals work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then as you start reasoning about your Applications,
-break everything down into small programs, their plugins, and even classes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The way you keep track of all this is just text,
-your own wiki, and tables of contents that you memorize and rely on.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not about sidestepping programming,
-this is a programmers dream.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is about having a team of powerful programs,
-do all the coding for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As you drive your Side-projects, Startups, and Companies,
-often staffed primarily by AI, into the future.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not meant to be the programmer anymore,
-today, you are the CEO, the project lead, and the senior strategist.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.literatureandlatte.com/scrivener/overview">I recommend that your first undertaking, is a desktop application</a>,
-that puts all of the above into a simple user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where not only you build an empire,
-but others can buy the program, and built their dreams too.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-04-21T23:23:38.571Z">April 21, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>14:20<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1877.avif" aria-label="Cover for Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1877.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 14:20
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1877.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1877.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1877.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>If you bear with me in one more gibberish poem,<br>we will close the AI programming research chapter.</p>
+<p>With the unusual conclusion that it is better to describe code for AI,<br>than actually write it yourself; freeing you to invent and strategize.</p>
+<p>In a poem entitled “<a href="https://www.catpea.com/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/">Strategic Software Development For Girls New To Programming</a>”,<br>we explored a simple AI friendly Application Architecture.</p>
+<p>Then, in “<a href="https://www.catpea.com/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">The Miracle Requirements Document; Or Investigating The Power Of Artificial Intelligence</a>”,<br>we experimented with <a href="https://github.com/catpea/bowtie">letting the AI create a System Requirement Document</a>.</p>
+<p>Today, we look beyond Requirement Documents,<br>and put the parts together into a coherent vision.</p>
+<p>Ignore the confusing words, just skim over them at first,<br>and understand that you can build an empire, with just well informed text.</p>
+<p>You don&#39;t actually want to write the code,<br>that takes decades.</p>
+<p>What you need is to ease yourself into a world of software development,<br>in this bright new age of ever improving Artificial Intelligence.</p>
+<p>Ignore the negative commenters, programmers invested in the old ways of manual programming,<br>cannot help but to try to push you away from this new road.</p>
+<p>But they represent the old ways, the manual cranky ways,<br>fill of complaints, advice that leads to nothing.</p>
+<p>That is the advice of senior developers,<br>that yell at clouds in a desperate search for their medicine.</p>
+<hr>
+<p>The biggest problem you are facing today,<br>is lack of competence on the part of AI companies.</p>
+<p>There was announcement a day ago or so that the leading AI company,<br>embedded hidden/non-printable characters for the purpose of watermarking.</p>
+<p>You probably can’t sell a WebExtension to convert the characters,<br>into little Clown Emoji, as it is probably a violation of user agreement.</p>
+<p>And, when you create a large Requirements Document, as we have,<br>you will have to pay for a premium AI to comprehend it.</p>
+<p>The leading AI, asked me to log-in, and gave truncated answers,<br><a href="https://github.com/catpea/liminal/blob/cd6f1395c6cf7e146bb2b127397c6003ca919f1f/remotable/REQUIREMENTS.md">for a 404 line Requirement Document</a> a small part of Application Architecture we described.</p>
+<p>To address this dumb discovery, large requirement documents,<br>have to be broken down, and not into parts, as that would confuse AI.</p>
+<p>But into stand-alone programs, so the Database part explained in,<br>“Strategic Software Development For Girls New To Programming”</p>
+<p>Needs to become a stand alone product, with its own name,<br>and likely needs to be further broken down into plugin-architecture.</p>
+<p>Plugins themselves, will each need a Requirements Document,<br>and may eve be further broken down into Classes.</p>
+<p>The AI will take care of the class breakdown,<br>but you need to ask for it.</p>
+<p>You will have to ask, “How can the functionality of this plugin,<br>be broken down into separate classes, and what does the re-assembled main plugin Class look like.”</p>
+<p>The requirement sections of your Requirements Document,<br>will help the AI to create a Class breakdown and re-assemble.</p>
+<p>I will now show you an <a href="https://github.com/catpea/liminal/blob/5df51971e73a95eb7e1e882e933945377ba66666/remotable/COMPOSITION.md">example of such a breakdown</a>,<br>for Remotable a somewhat scary and still rough Class.</p>
+<p>It is just a reactive variable, like X, that holds a value, like 1,<br>but, the server can update the value, and the program will update it self.</p>
+<p>The AI broke the class down,<br>into State, Subscription, FrozenState, RemoteSync, DerivedState.</p>
+<p>State, or Memory,<br>Manages the internal value, revision, and UUID. Handles all value validation, serialization, and ensures state changes are tracked with revision updates.</p>
+<p>Subscription, or Automatic User Interface Updates,<br>Handles registration, deregistration, and invocation of listeners, and manages debounced delivery of notifications.</p>
+<p>FrozenState, or protecting, especially the derived objects from change.<br>Enforces immutability. Once frozen, prevents any further modifications to the value.</p>
+<p>RemoteSync, or a way for a server to inject a value in a smart way,<br>Handles synchronization with remote peers, using revision and UUID to resolve update conflicts.</p>
+<p>DerivedState, or transforming the value into somethin guseful, that must be read only as the transformation provides the value:<br>Provides .map() for derived, read-only states, and .merge() for aggregated Remotables. Derived/merged Remotables are always frozen and update reactively.</p>
+<hr>
+<p>So this would be the fine grained architecture of a plugin,<br>inside a well named program, with multiple such plugins.</p>
+<hr>
+<p>AI vendors, may not dumb the AI down,<br>but they will prevent you from getting their AI from processing a 1,000 requirements document.</p>
+<p>And you know, large language models are not perfect,<br>breaking something down into simpler stand-alone parts helps them.</p>
+<hr>
+<p>But at every division, perhaps even on class lever,<br>you need to approach the code Requirements Document first.</p>
+<p>You don’t want to code the thing, you must stop yourself from coding,<br>even today’s AI will do it better, and in the future, that will certainly be the case.</p>
+<hr>
+<p>Finally, allow me to clearly state,<br>that an Application, large or small, is no longer code based.</p>
+<p>It is now a directory tree of requirements documents,<br>and architectural specifications, such as class breakdowns.</p>
+<p>That describes multiple, well named, stand alone applications,<br>that integrate together in simple and obvious ways.</p>
+<p>Remote via HTTP calls to various URLS, exactly like browsers do it,<br><a href="https://nobackend.org/dreamcode.html">and Libraries, via nice, tidy and predictable API</a></p>
+<hr>
+<p>You don’t have to learn programming,<br>but you will pick it up along the way.</p>
+<p>More important than code,<br>are the architectural patterns.</p>
+<p>And they are a human invention,<br>made to simplify programming.</p>
+<p>They will pose no challenge,<br>and all you need to get started.</p>
+<p>Is to watch videos about Application Architectures,<br>talk to AI about what Application Internals work.</p>
+<p>And then as you start reasoning about your Applications,<br>break everything down into small programs, their plugins, and even classes.</p>
+<p>The way you keep track of all this is just text,<br>your own wiki, and tables of contents that you memorize and rely on.</p>
+<hr>
+<p>This is not about sidestepping programming,<br>this is a programmers dream.</p>
+<p>This is about having a team of powerful programs,<br>do all the coding for you.</p>
+<p>As you drive your Side-projects, Startups, and Companies,<br>often staffed primarily by AI, into the future.</p>
+<p>You are not meant to be the programmer anymore,<br>today, you are the CEO, the project lead, and the senior strategist.</p>
+<hr>
+<p><a href="https://www.literatureandlatte.com/scrivener/overview">I recommend that your first undertaking, is a desktop application</a>,<br>that puts all of the above into a simple user interface.</p>
+<p>Where not only you build an empire,<br>but others can buy the program, and built their dreams too.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.catpea.com/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Strategic Software Development For Girls New To Programming</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.catpea.com/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.catpea.com/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>The Miracle Requirements Document; Or Investigating The Power Of Artificial Intelligence</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.catpea.com/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/bowtie">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>letting the AI create a System Requirement Document</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/bowtie</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/liminal/blob/cd6f1395c6cf7e146bb2b127397c6003ca919f1f/remotable/REQUIREMENTS.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>for a 404 line Requirement Document</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/liminal/blob/cd6f1395c6cf7e146bb2b127397c6003ca919f1f/remotable/REQUIREMENTS.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/liminal/blob/5df51971e73a95eb7e1e882e933945377ba66666/remotable/COMPOSITION.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>example of such a breakdown</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/liminal/blob/5df51971e73a95eb7e1e882e933945377ba66666/remotable/COMPOSITION.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nobackend.org/dreamcode.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>and Libraries, via nice, tidy and predictable API</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nobackend.org/dreamcode.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.literatureandlatte.com/scrivener/overview">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I recommend that your first undertaking, is a desktop application</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.literatureandlatte.com/scrivener/overview</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">software-development</span><span class="chip">architecture</span><span class="chip">plugins</span><span class="chip">requirements-document</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.catpea.com/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/">
+              <span class="text-truncate">Strategic Software Development For Girls New To Programming</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.catpea.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.catpea.com/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">
+              <span class="text-truncate">The Miracle Requirements Document; Or Investigating The Power Of Artificial Intelligence</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.catpea.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/bowtie">
+              <span class="text-truncate">letting the AI create a System Requirement Document</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/liminal/blob/cd6f1395c6cf7e146bb2b127397c6003ca919f1f/remotable/REQUIREMENTS.md">
+              <span class="text-truncate">for a 404 line Requirement Document</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/liminal/blob/5df51971e73a95eb7e1e882e933945377ba66666/remotable/COMPOSITION.md">
+              <span class="text-truncate">example of such a breakdown</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nobackend.org/dreamcode.html">
+              <span class="text-truncate">and Libraries, via nice, tidy and predictable API</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nobackend.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.literatureandlatte.com/scrivener/overview">
+              <span class="text-truncate">I recommend that your first undertaking, is a desktop application</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.literatureandlatte.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/b23985b8-de12-4e88-9cb0-bfc97f887d29/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">At First, Go Slow At The Gym</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/edc4d54c-894a-45e6-88b0-fe92cce3cb4f/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Please Stand Up For Authentic Education</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9f70d1a2-e019-4fe2-b7de-a62f7879221e/">
+              <img src="https://catpea.github.io/chapter-13/poem-1897.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Beyond Vibe Coding</span>
+                <span class="fg-3 fs-xs">May 11, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">
+              <img src="https://catpea.github.io/chapter-13/poem-1875.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Miracle Requirements Document; Or, Investigating The Power Of Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">April 19, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b09d0440-6dd2-47f3-918a-f39f0bcc87bd/">
+              <img src="https://catpea.github.io/chapter-13/poem-1899.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Helping The World Grow With Adaptive Audio Books</span>
+                <span class="fg-3 fs-xs">May 13, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/">
+              <img src="https://catpea.github.io/chapter-13/poem-1874.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Strategic Software Development For Girls New To Programming</span>
+                <span class="fg-3 fs-xs">April 18, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

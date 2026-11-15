@@ -1,205 +1,478 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Tiny Look At The Wild Wild West Of Visual Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Tiny Look At The Wild Wild West Of Visual Programming · Cat Pea</title>
+  <meta name="description" content="The post explains how visual programming can be structured around “control panels” with defined “sockets” that accept reusable component panels—high‑level panels (like a song or book) plug into more generic ones (text panels, image or audio processors)—and how connecting these sockets is managed by the language itself. It gives concrete examples: an AI‑generated book where a high‑level book panel connects to chapter panels, which in turn connect to text panels that can use functions such as lodash’s array joins; for media it suggests ImageMagick/ffmpeg or Tone.js for audio. The author notes that these panels generate shell scripts (or browser commands) that are then executed automatically or manually, making the visual program self‑documenting and more readable than traditional directory trees and diagramming.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/306ec423-054b-43b0-8f9b-668a49c176c0/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Tiny Look At The Wild Wild West Of Visual Programming · Cat Pea">
+  <meta property="og:description" content="The post explains how visual programming can be structured around “control panels” with defined “sockets” that accept reusable component panels—high‑level panels (like a song or book) plug into more generic ones (text panels, image or audio processors)—and how connecting these sockets is managed by the language itself. It gives concrete examples: an AI‑generated book where a high‑level book panel connects to chapter panels, which in turn connect to text panels that can use functions such as lodash’s array joins; for media it suggests ImageMagick/ffmpeg or Tone.js for audio. The author notes that these panels generate shell scripts (or browser commands) that are then executed automatically or manually, making the visual program self‑documenting and more readable than traditional directory trees and diagramming.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1387.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1387</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1387.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1387.avif" alt="A Tiny Look At The Wild Wild West Of Visual Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Tiny Look At The Wild Wild West Of Visual Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1387.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1387</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Tiny Look At The Wild Wild West Of Visual Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-12-19">12/18/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">In the world of visual programming,
-we have control panels with sockets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we can connect those sockets,
-with cables, which is unusually powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is always a high level control panel
-for what you are working on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That speaks with specific concepts,
-related to what you are trying to do.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the stuff that you plug into the sockets,
-is ever more generic and thus more reusable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So if your high level panel is a song,
-then the panel with have a song title socket.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is all high level,
-and very specific.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to specify a title,
-you drop in a generic text panel.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And cable that, or plug it,
-into the song title socket.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The farther you move away from the main goal,
-the more you are programming with reusable components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In case of a book that you want AI to generate,
-You may have a book high level component.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And also a chapter high level components,
-they plug in together…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And both accept a bunch of text panels,
-for chapter titles, and AI prompts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Text panels also accept text function,
-like join array of text, of use text template on named values.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And before you ask,
-you make the high level panels.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though there is what can be called,
-a standard library, of primitives.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For text processing,
-the language the program is written in will provide a lot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to be nice, an additional library can be used,
-in JavaScript world, for example, that would be <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Lodash">lodash</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a hundred useful little plugable panels,
-AI can help with text and descriptions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For image and video processing,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/ImageMagick">ImageMagic</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Ffmpeg">ffmpeg</a> would be used.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would be a standard library,
-that generates shell scripts that the operating system runs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And for audio, just to give a third example,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://tonejs.github.io/">Tone.js</a> and Web Audio would work just fine.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These are all very complicated programs,
-but under a visual programming model.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Everything becomes standardized,
-into a nice little control panel with sockets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The act of connecting a socket,
-is under the control of the programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will only allow connecting what works,
-what makes sense.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So here armed with such a standard library,
-you can create your high level panels.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That then become available in the toolbox,
-as components that you can use in your programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or from another perspective,
-you can double click a high level panel, to see what makes it tick.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is no standard way of doing anything,
-every visual programming language is different.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even the way these programs are executed is unique,
-some programs need a start button…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Others execute automatically,
-each time something changes, or a new connection is made.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To visualize how these programs create stuff,
-just imagine the contents of the book we had the AI make…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Getting printed below the visual programming interface,
-it is just formatted text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To work with videos and images,
-something quite similar occurs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The visual programming language creates a shell script,
-perhaps even with a nice installer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is then setup and made available as a command,
-that can be rerun.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These two,
-are examples of text and code generation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In case of tone JS, that can run in the browser,
-you can imagine a play button appearing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Code or at-least data file based component connecting instructions,
-are still generated, but now you click play.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With the aid of simple reactive programming it is possible,
-to adjust values live, while the song is being played.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today programmers still use directory trees,
-and clunky 3rd party diagrams to map out their applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But now, I think that will change,
-as visual programming can be made lot more readable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is after all documentation and diagram first,
-programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programs,
-are self documenting.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-12-19T04:56:20.064Z">December 18, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:04<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1387.avif" aria-label="Cover for A Tiny Look At The Wild Wild West Of Visual Programming, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1387.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Tiny Look At The Wild Wild West Of Visual Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:04
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1387.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1387.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1387.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>In the world of visual programming,<br>we have control panels with sockets.</p>
+<p>And we can connect those sockets,<br>with cables, which is unusually powerful.</p>
+<p>There is always a high level control panel<br>for what you are working on.</p>
+<p>That speaks with specific concepts,<br>related to what you are trying to do.</p>
+<p>But the stuff that you plug into the sockets,<br>is ever more generic and thus more reusable.</p>
+<p>So if your high level panel is a song,<br>then the panel with have a song title socket.</p>
+<p>This is all high level,<br>and very specific.</p>
+<p>But to specify a title,<br>you drop in a generic text panel.</p>
+<p>And cable that, or plug it,<br>into the song title socket.</p>
+<p>The farther you move away from the main goal,<br>the more you are programming with reusable components.</p>
+<p>In case of a book that you want AI to generate,<br>You may have a book high level component.</p>
+<p>And also a chapter high level components,<br>they plug in together…</p>
+<p>And both accept a bunch of text panels,<br>for chapter titles, and AI prompts.</p>
+<p>Text panels also accept text function,<br>like join array of text, of use text template on named values.</p>
+<hr>
+<p>And before you ask,<br>you make the high level panels.</p>
+<p>Though there is what can be called,<br>a standard library, of primitives.</p>
+<p>For text processing,<br>the language the program is written in will provide a lot.</p>
+<p>But to be nice, an additional library can be used,<br>in JavaScript world, for example, that would be <a href="https://en.wikipedia.org/wiki/Lodash">lodash</a>.</p>
+<p>So a hundred useful little plugable panels,<br>AI can help with text and descriptions.</p>
+<p>For image and video processing,<br><a href="https://en.wikipedia.org/wiki/ImageMagick">ImageMagic</a> and <a href="https://en.wikipedia.org/wiki/Ffmpeg">ffmpeg</a> would be used.</p>
+<p>It would be a standard library,<br>that generates shell scripts that the operating system runs.</p>
+<p>And for audio, just to give a third example,<br><a href="https://tonejs.github.io/">Tone.js</a> and Web Audio would work just fine.</p>
+<hr>
+<p>These are all very complicated programs,<br>but under a visual programming model.</p>
+<p>Everything becomes standardized,<br>into a nice little control panel with sockets.</p>
+<p>The act of connecting a socket,<br>is under the control of the programming language.</p>
+<p>It will only allow connecting what works,<br>what makes sense.</p>
+<hr>
+<p>So here armed with such a standard library,<br>you can create your high level panels.</p>
+<p>That then become available in the toolbox,<br>as components that you can use in your programs.</p>
+<p>Or from another perspective,<br>you can double click a high level panel, to see what makes it tick.</p>
+<hr>
+<p>But there is no standard way of doing anything,<br>every visual programming language is different.</p>
+<p>Even the way these programs are executed is unique,<br>some programs need a start button…</p>
+<p>Others execute automatically,<br>each time something changes, or a new connection is made.</p>
+<p>To visualize how these programs create stuff,<br>just imagine the contents of the book we had the AI make…</p>
+<p>Getting printed below the visual programming interface,<br>it is just formatted text.</p>
+<p>To work with videos and images,<br>something quite similar occurs.</p>
+<p>The visual programming language creates a shell script,<br>perhaps even with a nice installer.</p>
+<p>That is then setup and made available as a command,<br>that can be rerun.</p>
+<p>These two,<br>are examples of text and code generation.</p>
+<p>In case of tone JS, that can run in the browser,<br>you can imagine a play button appearing.</p>
+<p>Code or at-least data file based component connecting instructions,<br>are still generated, but now you click play.</p>
+<p>With the aid of simple reactive programming it is possible,<br>to adjust values live, while the song is being played.</p>
+<hr>
+<p>Today programmers still use directory trees,<br>and clunky 3rd party diagrams to map out their applications.</p>
+<p>But now, I think that will change,<br>as visual programming can be made lot more readable.</p>
+<p>It is after all documentation and diagram first,<br>programming.</p>
+<p>Visual programs,<br>are self documenting.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Lodash">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>lodash</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Lodash</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/ImageMagick">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>ImageMagic</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/ImageMagick</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Ffmpeg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>ffmpeg</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Ffmpeg</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://tonejs.github.io/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Tone.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://tonejs.github.io/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual programming</span><span class="chip">component-based design</span><span class="chip">reusable components</span><span class="chip">code generation</span><span class="chip">shell scripting</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Lodash">
+              <span class="text-truncate">lodash</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/ImageMagick">
+              <span class="text-truncate">ImageMagic</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Ffmpeg">
+              <span class="text-truncate">ffmpeg</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://tonejs.github.io/">
+              <span class="text-truncate">Tone.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">tonejs.github.io</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/72988287-56a8-4292-964f-fda7940905d0/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Bonkers Honkers; Or, The Noise Of The Gaggle Convoys</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/14892573-2b8a-4630-a6a8-bcd84e7336e4/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Life After AI; Or, Eternal Living, Forever Young</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ba61ef27-dc59-43b4-bccc-102759aa5372/">
+              <img src="https://catpea.github.io/chapter-08/poem-1389.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Supremely Boring World Of Visual Programming &amp; Diagramming Tools</span>
+                <span class="fg-3 fs-xs">December 20, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1c95cd07-fb63-4b59-8ad2-f906d71c28f6/">
+              <img src="https://catpea.github.io/chapter-08/poem-1383.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Friendly Superpower Of Reactive Programming</span>
+                <span class="fg-3 fs-xs">December 15, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8859d5a9-5e85-4cc6-b216-c260b6c7d253/">
+              <img src="https://catpea.github.io/chapter-08/poem-1391.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Every Computer Program Is Once A Beautiful Story As Clear As Day</span>
+                <span class="fg-3 fs-xs">December 22, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/32252b73-632e-4c51-9682-d989cd14bc89/">
+              <img src="https://catpea.github.io/chapter-08/poem-1381.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Become A Programmer; Or, Learn For Real Because Discomfort May Just Be A Sign Of A Fake School</span>
+                <span class="fg-3 fs-xs">December 12, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

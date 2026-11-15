@@ -1,175 +1,460 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Introduction To Programming: The Heck Is A State Machine?</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Introduction To Programming: The Heck Is A State Machine? · Cat Pea</title>
+  <meta name="description" content="A state machine is a simple programming pattern that forces an application into well‑defined states, each represented by a verb (e.g., “driving,” “warning,” “stopping”). The post uses a traffic light as an example: green → yellow → red → back to green, and shows how misnamed states (“red” for the stopping state) can confuse developers. It explains that actions are short commands that trigger transitions, while states persist over time; thus a state might be named “sleeping,” “driving,” or “warning.” Proper naming keeps the machine clear, enabling complex user‑interface flows to remain predictable and error‑free, because each transition is explicitly defined by an action leading into a verb‑named state.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/c93d5572-b614-48db-9c80-46a94870398c/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Introduction To Programming: The Heck Is A State Machine? · Cat Pea">
+  <meta property="og:description" content="A state machine is a simple programming pattern that forces an application into well‑defined states, each represented by a verb (e.g., “driving,” “warning,” “stopping”). The post uses a traffic light as an example: green → yellow → red → back to green, and shows how misnamed states (“red” for the stopping state) can confuse developers. It explains that actions are short commands that trigger transitions, while states persist over time; thus a state might be named “sleeping,” “driving,” or “warning.” Proper naming keeps the machine clear, enabling complex user‑interface flows to remain predictable and error‑free, because each transition is explicitly defined by an action leading into a verb‑named state.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-0980.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0980</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-0980.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-0980.avif" alt="Introduction To Programming: The Heck Is A State Machine?"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Introduction To Programming: The Heck Is A State Machine?</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-0980.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0980</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Introduction To Programming: The Heck Is A State Machine?</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-11-06">11/5/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a simple programming pattern,
-that forces your application to have states.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This thing is so powerful,
-that you really just want to use it for complex user interface purposes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The following text emphasizes that a state must be described by a verb,
-so that you never confuse it with an action that moves your application into that state.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But let us take a step back, a machine is something physical,
-it is tough, limited, inflexible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A nuclear power plant is a good example of a machine,
-it has turbines that must be spun by steam to generate electricity via magnets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it requires radioactive materials to heat the water,
-turbines no matter how advanced, can’t work without heat.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nuclear power plants are rigid, limited,
-they are not even nuclear, they are steam powered.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A machine,
-is hard.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A state, it is what you think it is,
-but we have to use a verb, an activity for its name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are feeling philosophical,
-then a good state name is thinking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You always want to choose simple words,
-you don’t want a philosophical state…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then your command to enter that state,
-becomes philosophize – you want to kep it simple.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now onto the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=3_D-3HPUdEI">state machine</a>,
-and the problem that messes everyone up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The most fantastic state machine,
-especially if you are reviewing your programming knowledge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is the traffic light,
-something to ponder while you have a moment.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let me just underl  ine the light cycle here,
-Green, yellow, red, and back to green.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Green does not turn to red,
-it turns to yellow, to warn drivers that the light is about to change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the red light, does not warn the stopped drivers,
-that it is about to become green.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because are stopped,
-there is no need to warn anybody.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All too often,
-inexperienced writers, teachers and professors.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Create a state named red,
-with a green action, which is how the light works, but the naming here is wrong.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a huge disaster,
-because it says nothing about the machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is confusing,
-and often pushes people away people from using state machines.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us start with a green light,
-and call this state, driving.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not the best name,
-but it works great.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the driving state,
-we have a warn action, that is it, we don not have a stop action here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Under driving state we can issue, warn,
-to enter the warning state.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And only in the warning state,
-we get the stop action.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Issuing the stop action,
-puts us in a stopped state.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here we get a drive action,
-and when issued we enter the driving state again.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think of an action, as a shout,
-it is short, a snap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a state, is something that takes a while,
-it is an activity performed over a stretch of time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must never have a sleep state,
-that is a command name, the state is sleep-ing, drive-ing, warn-ing, and stopped.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, a state machine,
-can go through a complex cycle, without causing trouble.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because it won’t let you go from driving, to stopped,
-during the driving state, you can only issue warn.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then when you transition to a warning state,
-you can issue a stop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In complex user interface programming,
-a state machine can protect the integrity of your user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will never be surprised by users not being able to click save,
-because with a state machine…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have that licked, on the back of an envelope,
-even before you sit down to programming your user interface component.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-11-06T02:53:08.113Z">November 5, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:30<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-0980.avif" aria-label="Cover for Introduction To Programming: The Heck Is A State Machine?, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-0980.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Introduction To Programming: The Heck Is A State Machine?" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:30
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-0980.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-0980.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-0980.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>It is a simple programming pattern,<br>that forces your application to have states.</p>
+<p>This thing is so powerful,<br>that you really just want to use it for complex user interface purposes.</p>
+<p>The following text emphasizes that a state must be described by a verb,<br>so that you never confuse it with an action that moves your application into that state.</p>
+<hr>
+<p>But let us take a step back, a machine is something physical,<br>it is tough, limited, inflexible.</p>
+<p>A nuclear power plant is a good example of a machine,<br>it has turbines that must be spun by steam to generate electricity via magnets.</p>
+<p>But it requires radioactive materials to heat the water,<br>turbines no matter how advanced, can’t work without heat.</p>
+<p>Nuclear power plants are rigid, limited,<br>they are not even nuclear, they are steam powered.</p>
+<p>A machine,<br>is hard.</p>
+<hr>
+<p>A state, it is what you think it is,<br>but we have to use a verb, an activity for its name.</p>
+<p>If you are feeling philosophical,<br>then a good state name is thinking.</p>
+<p>You always want to choose simple words,<br>you don’t want a philosophical state…</p>
+<p>Then your command to enter that state,<br>becomes philosophize – you want to kep it simple.</p>
+<hr>
+<p>Now onto the <a href="https://www.youtube.com/watch?v=3_D-3HPUdEI">state machine</a>,<br>and the problem that messes everyone up.</p>
+<p>The most fantastic state machine,<br>especially if you are reviewing your programming knowledge.</p>
+<p>Is the traffic light,<br>something to ponder while you have a moment.</p>
+<hr>
+<p>Let me just underl  ine the light cycle here,<br>Green, yellow, red, and back to green.</p>
+<p>Green does not turn to red,<br>it turns to yellow, to warn drivers that the light is about to change.</p>
+<p>But the red light, does not warn the stopped drivers,<br>that it is about to become green.</p>
+<p>Because are stopped,<br>there is no need to warn anybody.</p>
+<hr>
+<p>All too often,<br>inexperienced writers, teachers and professors.</p>
+<p>Create a state named red,<br>with a green action, which is how the light works, but the naming here is wrong.</p>
+<p>This is a huge disaster,<br>because it says nothing about the machine.</p>
+<p>It is confusing,<br>and often pushes people away people from using state machines.</p>
+<hr>
+<p>Let us start with a green light,<br>and call this state, driving.</p>
+<p>Not the best name,<br>but it works great.</p>
+<p>In the driving state,<br>we have a warn action, that is it, we don not have a stop action here.</p>
+<p>Under driving state we can issue, warn,<br>to enter the warning state.</p>
+<p>And only in the warning state,<br>we get the stop action.</p>
+<p>Issuing the stop action,<br>puts us in a stopped state.</p>
+<p>And here we get a drive action,<br>and when issued we enter the driving state again.</p>
+<hr>
+<p>Think of an action, as a shout,<br>it is short, a snap.</p>
+<p>And a state, is something that takes a while,<br>it is an activity performed over a stretch of time.</p>
+<p>You must never have a sleep state,<br>that is a command name, the state is sleep-ing, drive-ing, warn-ing, and stopped.</p>
+<hr>
+<p>Finally, a state machine,<br>can go through a complex cycle, without causing trouble.</p>
+<p>Because it won’t let you go from driving, to stopped,<br>during the driving state, you can only issue warn.</p>
+<p>And then when you transition to a warning state,<br>you can issue a stop.</p>
+<p>In complex user interface programming,<br>a state machine can protect the integrity of your user interface.</p>
+<p>You will never be surprised by users not being able to click save,<br>because with a state machine…</p>
+<p>You have that licked, on the back of an envelope,<br>even before you sit down to programming your user interface component.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=3_D-3HPUdEI">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>state machine</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=3_D-3HPUdEI</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">fsm</span><span class="chip">state-machine</span><span class="chip">programming-pattern</span><span class="chip">traffic-light-example</span><span class="chip">ui-state</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/_uS8dKPwGrM"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/_uS8dKPwGrM</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=3_D-3HPUdEI">
+              <span class="text-truncate">state machine</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/2698cebe-3069-4028-ab7c-c8496962fe70/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Super Culture; Or The Road To Wisdom, Fairness, And World Peace</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/ab3365b3-b15a-45d8-b312-e56248cdaa17/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Potatoes; Or, The Biggest Problem In Application Programming</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ab3365b3-b15a-45d8-b312-e56248cdaa17/">
+              <img src="https://catpea.github.io/chapter-05/poem-0981.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Potatoes; Or, The Biggest Problem In Application Programming</span>
+                <span class="fg-3 fs-xs">November 6, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ce777fe2-49b2-425a-b037-17de3da3f80a/">
+              <img src="https://catpea.github.io/chapter-05/poem-0978.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications</span>
+                <span class="fg-3 fs-xs">November 3, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/faa9b086-6b76-4e40-b88d-3cdf543b4a7b/">
+              <img src="https://catpea.github.io/chapter-05/poem-0982.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming For Your Users, Yourself, And The Older You; Or Writing Valuable, Maintainable, And Non Crazy Code</span>
+                <span class="fg-3 fs-xs">November 7, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cadf3d38-bff0-478e-94c7-194bee806eae/">
+              <img src="https://catpea.github.io/chapter-05/poem-0977.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Learn Big Programming With Little Programming</span>
+                <span class="fg-3 fs-xs">November 2, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

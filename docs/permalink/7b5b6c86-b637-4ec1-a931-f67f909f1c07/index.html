@@ -1,286 +1,522 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Funny World Of Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Funny World Of Programming · Cat Pea</title>
+  <meta name="description" content="The post explains how HTTP’s statelessness allows session‑based authentication via cookies, shows how attackers manipulate IDs to gain privileges, and proposes building a honeypot site to learn and counter those techniques.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/7b5b6c86-b637-4ec1-a931-f67f909f1c07/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Funny World Of Programming · Cat Pea">
+  <meta property="og:description" content="The post explains how HTTP’s statelessness allows session‑based authentication via cookies, shows how attackers manipulate IDs to gain privileges, and proposes building a honeypot site to learn and counter those techniques.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-06/poem-1154.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-06/">Chapter 06</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1154</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-06/poem-1154.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-06/poem-1154.avif" alt="The Funny World Of Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Funny World Of Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-06/poem-1154.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 06</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1154</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Funny World Of Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-04-30">4/29/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">There used to be just two kinds of hackers,
-the beautiful, and the scary.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is many kinds now,
-most are not worth mentioning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The mightiest hacker,
-is always the programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are looking at security top-down,
-whereas plain hackers look at it blind-up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we just had one paragraph to describe what they want,
-I’d say privilege escalation, to put it simply, to get to the next level.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No matter how you look at it though,
-it is all about having fun.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And not having fun,
-is actually the hardest thing to achieve in hacking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Allow me,
-to explain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Internet is old, made for old computers,
-which is great, because it means stuff runs fast on new computers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But old also means, limited,
-wise, but limited.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us examine the HTTP protocol that you use every where,
-it is often called stateless.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, what that means,
-is that a server has no memory for you, and thus or of you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But no single server, is ever expected,
-to handle all the requests you are making.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see, because they have no memory for you, and of you,
-you can have 50 servers in different parts of the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it simply does not matter,
-which one will handle your request.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sine they have no memory,
-they are all equal, and equally unaware of who you are.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is amazing and auditions, and rebellious,
-because you can servee your website…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From a cardboard box of old phones,
-or used up single board computers, that don’t even blink their LEDs anymore.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your hardware can be so old,
-that it may not even have LEDs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So this is already funny,
-the mighty HTTP, is nixie tube ancient.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it gets funnier,
-because the login feature of a website, demands memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The server needs to remember, that you have logged in,
-or it will just keep asking you for username and password at every request.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where the cookies come in,
-your browser remembers data for the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then each time you make a new request for a page, or image,
-it sends all that data along with it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What this means, is that your login information,
-is in the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What that means in context of hacking,
-is that you can forge, manipulate requests to a server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can send whatever memories you want,
-a hacker can tell the server that they are anybody.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are after all sending in the memory,
-that the server needs to recognize you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see how funny that is,
-because HTTP servers are so primitive, and thus super fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have to send in memory, or state,
-and in that memory is our login information.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a hacker can manipulate that state,
-it is all just user=bob, or account id=5.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When your username and password passes the test,
-the server gives you the thing it can remember you by.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that your browser can send it in,
-next time you make a request.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the funny part,
-hacking HTTP servers, or websites is the natural state of things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The more mature hackers, take several weeks,
-to study a website, they have a list of items that takes them weeks to check.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the first item, is, what is the server sending back after a user logs in,
-and if it is account id=5, what happens when I change it to account id=1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This often results in gaining administrative privileges,
-because the first account added to a system is the administrator id=1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you hear about <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/List_of_data_breaches">data leaks, or data breaches</a>,
-this technique is still responsible for some of them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as a programmer, you can’t just program like a normal person,
-you are not allowed to write rational readable code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has to be a maze, a twisted upside down machine,
-that by it’s very design, makes things impossible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So upon authentication, you can’t reply to the browser,
-with account id, or hackers will start changing that number to get at other users data.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So let’s say there is a man with a very long checklist,
-let’s call him <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Alice_and_Bob">Mallory</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tasked with back-engendering,
-our very thinking, when we programmed the login system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">He wants to know, who we are,
-how we do, do we we have class or just a diploma.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So he he singns-up to our website,
-doesn&#39;t even bother at looking at the HTTP data here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then he signs-in,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=gTVpBbFWry8">and now, Mallory looks at the server response</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The memory, that he is put in charge,
-so that the next time the browser makes a request the server will recognize him.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is going to be a cookie, because browsers automatically keep track of those,
-and always send them back to the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If he sees account id, he goes to lunch,
-and has the intern finish up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If he sees username, he knows that it is baited,
-and can infer that there are active countermeasures in place.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that also means, all the programming is defensive,
-and defensive coding, is complex coding.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Complexity,
-enlarges attack surface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only thing we can send back is a huge random number,
-meaning that if he changes it so something else…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no way, that this number,
-will be valid, in fact it would take hundreds of thousands of years, to guess a valid number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we must never send in an actual account number,
-that is precious information that can absolutely be used elsewhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We need to create a session id,
-that will expire in 8 hours.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And send that out to Mallory,
-this ID will be uses when he resumes his work the next day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, we need to setup a new server, but not HTTP,
-this will be a database server, it will be beefier than out HTTP hardware.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And with each successful user login,
-we will generate a new session ID, and save that in the database, until its expiration.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So out 50 HTTP servers,
-now have to connect to a much beefier database server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Again, it is more complexity, Mallory will infer that there is database server, because we must keep those session IDs somewhere near the user account.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">He forced us, to enlarge our attack surface,
-but we did protect the account number, by sending him just a temporary session id.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Mallory is not alone, he is part of a large team of retired programmers,
-who put together a Penetration Testing company.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The people in the cubicles around him,
-are completely out of control, they don’t have anything in common.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can’t call them geniuses, or brilliant, of gifted,
-they don’t belong to any group.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They don’t dress the same, they don’t really care about their fancy cars,
-they never watched TV.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They never tried to cram for a test in college, as this would waste their time,
-time is precious, and can only be committed towards authentic things.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no way in hell, will not break into your system,
-the elevator problems you had last week, were staged.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason that list is so long, is that they have to keep going,
-even though they already have your passwords.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Their job is to find all the vulnerabilities,
-so that hackers can’t break into your system after you launch.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This does not mean that programming is hard,
-it means that you aren’t just writing programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are wrapping your programs in active countermeasures,
-in hoes of defeating Mallory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to check for cookie tampering,
-check if someone changed a session ID.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to wrap your program features,
-in access control lists, where you always check if a user has permission to execute a particular function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The final and the funniest thing, for this text,
-is that you don’t have the ability to block Mallory’s requests.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">He never uses his real IP address,
-he may not even use the same IP address of browser fingerprint twice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no way, to block new hacking attempts,
-and in a real world scenario…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your website will be exposed to tens of thousands,
-of automated bots scanning for vulnerabilities, and errors that programmers make.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are no jobs more exciting, than programming,
-none, and no sport, no computer game, no game of chess, will ever come close.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is only one thing you can do here, and in fact you can&#39;t stop your self from doing it,
-to prevent yourself from learning programming by building a honey pot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A website specifically designed to trap bots and hackers,
-so that you can learn what they are up to, and how to defeat them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don&#39;t be scared, this,
-is an invitation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=node.js+tutorial">Welcome, to the world of programming</a>,
-it will be fun, and pretty funny, too.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-04-30T03:47:14.494Z">April 29, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>21:21<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>7 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-06/poem-1154.avif" aria-label="Cover for The Funny World Of Programming, full size">
+            <img src="https://catpea.github.io/chapter-06/poem-1154.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Funny World Of Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 21:21
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-06/poem-1154.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-06/poem-1154.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-06/poem-1154.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>There used to be just two kinds of hackers,<br>the beautiful, and the scary.</p>
+<p>But there is many kinds now,<br>most are not worth mentioning.</p>
+<p>The mightiest hacker,<br>is always the programmer.</p>
+<p>They are looking at security top-down,<br>whereas plain hackers look at it blind-up.</p>
+<p>If we just had one paragraph to describe what they want,<br>I’d say privilege escalation, to put it simply, to get to the next level.</p>
+<p>No matter how you look at it though,<br>it is all about having fun.</p>
+<hr>
+<p>And not having fun,<br>is actually the hardest thing to achieve in hacking.</p>
+<p>Allow me,<br>to explain.</p>
+<p>Internet is old, made for old computers,<br>which is great, because it means stuff runs fast on new computers.</p>
+<p>But old also means, limited,<br>wise, but limited.</p>
+<hr>
+<p>Let us examine the HTTP protocol that you use every where,<br>it is often called stateless.</p>
+<p>But, what that means,<br>is that a server has no memory for you, and thus or of you.</p>
+<p>But no single server, is ever expected,<br>to handle all the requests you are making.</p>
+<p>You see, because they have no memory for you, and of you,<br>you can have 50 servers in different parts of the world.</p>
+<p>And it simply does not matter,<br>which one will handle your request.</p>
+<p>Sine they have no memory,<br>they are all equal, and equally unaware of who you are.</p>
+<p>This is amazing and auditions, and rebellious,<br>because you can servee your website…</p>
+<p>From a cardboard box of old phones,<br>or used up single board computers, that don’t even blink their LEDs anymore.</p>
+<p>Your hardware can be so old,<br>that it may not even have LEDs.</p>
+<p>So this is already funny,<br>the mighty HTTP, is nixie tube ancient.</p>
+<hr>
+<p>But it gets funnier,<br>because the login feature of a website, demands memory.</p>
+<p>The server needs to remember, that you have logged in,<br>or it will just keep asking you for username and password at every request.</p>
+<p>This is where the cookies come in,<br>your browser remembers data for the server.</p>
+<p>And then each time you make a new request for a page, or image,<br>it sends all that data along with it.</p>
+<hr>
+<p>What this means, is that your login information,<br>is in the browser.</p>
+<p>What that means in context of hacking,<br>is that you can forge, manipulate requests to a server.</p>
+<p>You can send whatever memories you want,<br>a hacker can tell the server that they are anybody.</p>
+<p>They are after all sending in the memory,<br>that the server needs to recognize you.</p>
+<p>You see how funny that is,<br>because HTTP servers are so primitive, and thus super fast.</p>
+<p>We have to send in memory, or state,<br>and in that memory is our login information.</p>
+<p>So a hacker can manipulate that state,<br>it is all just user=bob, or account id=5.</p>
+<p>When your username and password passes the test,<br>the server gives you the thing it can remember you by.</p>
+<p>So that your browser can send it in,<br>next time you make a request.</p>
+<hr>
+<p>This is the funny part,<br>hacking HTTP servers, or websites is the natural state of things.</p>
+<p>The more mature hackers, take several weeks,<br>to study a website, they have a list of items that takes them weeks to check.</p>
+<p>And the first item, is, what is the server sending back after a user logs in,<br>and if it is account id=5, what happens when I change it to account id=1.</p>
+<p>This often results in gaining administrative privileges,<br>because the first account added to a system is the administrator id=1.</p>
+<p>When you hear about <a href="https://en.wikipedia.org/wiki/List_of_data_breaches">data leaks, or data breaches</a>,<br>this technique is still responsible for some of them.</p>
+<hr>
+<p>So as a programmer, you can’t just program like a normal person,<br>you are not allowed to write rational readable code.</p>
+<p>It has to be a maze, a twisted upside down machine,<br>that by it’s very design, makes things impossible.</p>
+<p>So upon authentication, you can’t reply to the browser,<br>with account id, or hackers will start changing that number to get at other users data.</p>
+<hr>
+<p>So let’s say there is a man with a very long checklist,<br>let’s call him <a href="https://en.wikipedia.org/wiki/Alice_and_Bob">Mallory</a>.</p>
+<p>Tasked with back-engendering,<br>our very thinking, when we programmed the login system.</p>
+<p>He wants to know, who we are,<br>how we do, do we we have class or just a diploma.</p>
+<p>So he he singns-up to our website,<br>doesn&#39;t even bother at looking at the HTTP data here.</p>
+<p>Then he signs-in,<br><a href="https://www.youtube.com/watch?v=gTVpBbFWry8">and now, Mallory looks at the server response</a>.</p>
+<p>The memory, that he is put in charge,<br>so that the next time the browser makes a request the server will recognize him.</p>
+<p>It is going to be a cookie, because browsers automatically keep track of those,<br>and always send them back to the server.</p>
+<p>If he sees account id, he goes to lunch,<br>and has the intern finish up.</p>
+<p>If he sees username, he knows that it is baited,<br>and can infer that there are active countermeasures in place.</p>
+<p>But that also means, all the programming is defensive,<br>and defensive coding, is complex coding.</p>
+<p>Complexity,<br>enlarges attack surface.</p>
+<p>The only thing we can send back is a huge random number,<br>meaning that if he changes it so something else…</p>
+<p>There is no way, that this number,<br>will be valid, in fact it would take hundreds of thousands of years, to guess a valid number.</p>
+<p>And we must never send in an actual account number,<br>that is precious information that can absolutely be used elsewhere.</p>
+<p>We need to create a session id,<br>that will expire in 8 hours.</p>
+<p>And send that out to Mallory,<br>this ID will be uses when he resumes his work the next day.</p>
+<p>Here, we need to setup a new server, but not HTTP,<br>this will be a database server, it will be beefier than out HTTP hardware.</p>
+<p>And with each successful user login,<br>we will generate a new session ID, and save that in the database, until its expiration.</p>
+<p>So out 50 HTTP servers,<br>now have to connect to a much beefier database server.</p>
+<p>Again, it is more complexity, Mallory will infer that there is database server, because we must keep those session IDs somewhere near the user account.</p>
+<p>He forced us, to enlarge our attack surface,<br>but we did protect the account number, by sending him just a temporary session id.</p>
+<hr>
+<p>Mallory is not alone, he is part of a large team of retired programmers,<br>who put together a Penetration Testing company.</p>
+<p>The people in the cubicles around him,<br>are completely out of control, they don’t have anything in common.</p>
+<p>You can’t call them geniuses, or brilliant, of gifted,<br>they don’t belong to any group.</p>
+<p>They don’t dress the same, they don’t really care about their fancy cars,<br>they never watched TV.</p>
+<p>They never tried to cram for a test in college, as this would waste their time,<br>time is precious, and can only be committed towards authentic things.</p>
+<hr>
+<p>There is no way in hell, will not break into your system,<br>the elevator problems you had last week, were staged.</p>
+<p>The reason that list is so long, is that they have to keep going,<br>even though they already have your passwords.</p>
+<p>Their job is to find all the vulnerabilities,<br>so that hackers can’t break into your system after you launch.</p>
+<hr>
+<p>This does not mean that programming is hard,<br>it means that you aren’t just writing programs.</p>
+<p>You are wrapping your programs in active countermeasures,<br>in hoes of defeating Mallory.</p>
+<p>You have to check for cookie tampering,<br>check if someone changed a session ID.</p>
+<p>You have to wrap your program features,<br>in access control lists, where you always check if a user has permission to execute a particular function.</p>
+<p>The final and the funniest thing, for this text,<br>is that you don’t have the ability to block Mallory’s requests.</p>
+<p>He never uses his real IP address,<br>he may not even use the same IP address of browser fingerprint twice.</p>
+<p>There is no way, to block new hacking attempts,<br>and in a real world scenario…</p>
+<p>Your website will be exposed to tens of thousands,<br>of automated bots scanning for vulnerabilities, and errors that programmers make.</p>
+<hr>
+<p>There are no jobs more exciting, than programming,<br>none, and no sport, no computer game, no game of chess, will ever come close.</p>
+<p>There is only one thing you can do here, and in fact you can&#39;t stop your self from doing it,<br>to prevent yourself from learning programming by building a honey pot.</p>
+<p>A website specifically designed to trap bots and hackers,<br>so that you can learn what they are up to, and how to defeat them.</p>
+<p>Don&#39;t be scared, this,<br>is an invitation.</p>
+<p><a href="https://www.youtube.com/results?search_query=node.js+tutorial">Welcome, to the world of programming</a>,<br>it will be fun, and pretty funny, too.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/List_of_data_breaches">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>data leaks, or data breaches</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/List_of_data_breaches</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Alice_and_Bob">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Mallory</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Alice_and_Bob</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=gTVpBbFWry8">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>and now, Mallory looks at the server response</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=gTVpBbFWry8</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=node.js+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Welcome, to the world of programming</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=node.js+tutorial</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">http</span><span class="chip">stateless</span><span class="chip">cookie</span><span class="chip">sessionid</span><span class="chip">webserver</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/K5dAn1gOFEc"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/K5dAn1gOFEc</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/List_of_data_breaches">
+              <span class="text-truncate">data leaks, or data breaches</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Alice_and_Bob">
+              <span class="text-truncate">Mallory</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=gTVpBbFWry8">
+              <span class="text-truncate">and now, Mallory looks at the server response</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=node.js+tutorial">
+              <span class="text-truncate">Welcome, to the world of programming</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/4f1a656b-1df0-4f28-9d4f-c5db4c14ffe1/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Programming For Education And Future; Or, The Computer Program That We Must Each Write</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/cc84be3f-51e5-4e55-99d3-a574d611d6fc/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Learn Programming, Don’t Let Ineffective Education Sentence You To A Lifetime Of Poverty</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/27011905-9f9c-4869-9ddd-f864125cbd5a/">
+              <img src="https://catpea.github.io/chapter-06/poem-1156.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Business Programming, Or; Thinking Up</span>
+                <span class="fg-3 fs-xs">May 1, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4f1a656b-1df0-4f28-9d4f-c5db4c14ffe1/">
+              <img src="https://catpea.github.io/chapter-06/poem-1153.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming For Education And Future; Or, The Computer Program That We Must Each Write</span>
+                <span class="fg-3 fs-xs">April 28, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/208daf10-2bfb-448a-9ff2-d86335119af8/">
+              <img src="https://catpea.github.io/chapter-06/poem-1157.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Your Company, Inc; A Programmer’s Journey</span>
+                <span class="fg-3 fs-xs">May 2, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/6e2952a8-14c5-47a3-ae02-a0958c070d0f/">
+              <img src="https://catpea.github.io/chapter-06/poem-1151.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Towards Web Security</span>
+                <span class="fg-3 fs-xs">April 26, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

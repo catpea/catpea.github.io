@@ -1,299 +1,613 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue · Cat Pea</title>
+  <meta name="description" content="From low‑level bit manipulation up to flexible high‑level features like JavaScript’s eval, the author praises free languages over corporate “cubicle” ones and proposes a game‑style, MUD/REST hybrid system (C.A.T.P.E.A.) to make web programming intuitive.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/55f8bb23-7aa7-4071-b6e5-5c0be56e8bdb/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue · Cat Pea">
+  <meta property="og:description" content="From low‑level bit manipulation up to flexible high‑level features like JavaScript’s eval, the author praises free languages over corporate “cubicle” ones and proposes a game‑style, MUD/REST hybrid system (C.A.T.P.E.A.) to make web programming intuitive.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0723.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0723</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0723.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0723.avif" alt="A Programmer&apos;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0723.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0723</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-02-21">2/21/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">You know how down at the CPU level,<br>you have talk in ones and zeros, XOR and AND.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We created a nicer languages above that,<br>like C, where you can nest functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can have an UPSERT function,<br>that contains INSERT or UPDATE functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If data in whatever the program is using is missing,<br>then we INSERT, and if it already there then we UPDATE.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So UPSERT encompasses multiple functions,<br>and it is pretty readable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, on C level,<br>we have to define things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can&#39;t just say, name = alice,<br>you have to define a name array, and remember a string terminator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To store the five letter name Alice,<br>you need an array of six characters, for the name and a string terminator character.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a good language,<br>but we invented better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have languages where we can just say name = alice,<br>and everything will be taken care of for us.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even better than that,<br>we have languages where you can say name = evaluate name - alice; return name</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is called an eval statement,<br>and everyone is scared of it, becasue you are running code inside code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though you never use it in production,<br>eval is a sign of a healthy language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If a language prevents you from evaluating code,<br>then it is a language for cubicle workers, crafted to control the coders.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript is a very free language,<br>it will let you add a number to a letter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And will probably return the sum of the number and ASCII code of the letter,<br>but it may also try to concatenate, or who cares.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This language does not try to control you,<br>it will let you do whatever the heck you want.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even if it is crazy,<br>like adding letters to numbers, which is also crazy awesome.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a sign,<br>that corporate has not meddled with the language standard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once some big corporation steps in,<br>they will strip the language of easy mistakes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Load it up on computers,<br>give it to all the High Schools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Wait for them to graduate college,<br>and then charge them for the enterprise version.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or for business use,<br>or for business license.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or cancel the language,<br>because they have something that will generate more profits.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to stick with the rebel languages,<br>that is what everyone else will be going.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unless they got trapped in a cubicle,<br>then they will spout how evil eval is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because in order to believe that their walled language is good,<br>they will fight to make all the other languages look bad.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, there is another bump here,<br>because the web browser is not only awesome and very popular.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But powerful enough to let you build a code editor,<br>it means you can edit code in a web browser, and not need a code editor.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Java is slow and bulky for no reason,<br>Web browser is slow and bulky for beautiful reasons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which also means,<br>JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There was a time when it was unwise to use JavaScript on the server,<br>it was possible but unwise, as it was young and slow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We had Perl and PHP,<br>while Microsoft was murdering their once pretty languages for something they felt was better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was actually different,<br>not better - but people who do Microsoft, will absolutely attack me for saying this.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though they may notice, by now, that Microsoft killed IE,<br>that Visual Studio Code uses a browser, probably chrome, but I don&#39;t care, corporate will make mistakes, it is what they do.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Perl is beautiful,<br>writing Perl it is like making jewelry, it makes OOP look ugly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">PHP is useful, full of libraries,<br>and its OOP looks pretty, it flows like water, it is good for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the moment Node came out,<br>which is JavaScript for the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All non JavaScript languages,<br>kind of became outdated, and certainly became outdated in context of the web.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because, you can now have code in the same language,<br>in the browser, and on the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is to say, if you write your server code in PHP,<br>and your browser code in JavaScript - you are just weird.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Like, why would you want to re-create your objects,<br>in some other language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">People were shocked when I brought this up,<br>as in - how dare I tell them what language to use.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was merely telling them,<br>the truth.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Same language, client and server,<br>and it just happens to be a language that is not babysitting cubicle workers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has eval,<br>and it lets yo add letters to numbers, this is a sign of a healthy language.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now of course, Microsoft came in and made their own version,<br>guess what feature they added?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Yeah, the whole count letters of your name thing,<br>they laced JavaScript with strong typing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meaning you have to define the type of your variable,<br>they say &quot;Oh it is just JavaScript&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it is actually cubicle worker cool aid,<br>the typing is there to make the code editors pretend to be useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The variable type information,<br>will allow for fancy drop-down, and a measure of error checking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If this was 1995,<br>it would be, neat to look at, though probably not actually use it, unless you had to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This language is called TypeScript,<br>as in Data Typed JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And to me it is hilarious, as it is a step backwards to make their programmers brain-less,<br>as in think less about things they are doing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So JavaScript is still fine,<br>they just modified it to make their own thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There was briefly a flash of CoffeScript,<br>a JavaScript alternative.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though TypeScript will last much longer because of all the money it makes,<br>it will eventually fade away like CoffeScript did.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Who needs a branch of JavaScript,<br>follow the eval statement, as corporate will always destroy the language to make profits and get raises.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That&#39;s what corporate is for,<br>profits, not languages.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But JavaScript is still not good enough,<br>there is something better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though this time,<br>that something better is written in JavaScript, it is a JavaScript pattern.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here I have to mention Databases,<br>we can&#39;t use files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because as far as multiple users poking at the keyboard at the same time,<br>files live in the world of adding numbers to letters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no good answer to who saves first,<br>files are for single users sitting at the computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can use mutually exclusive locks,<br>or folders named as the files, with versioned GUID named real files, that need manual version conflict resolution.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if you can&#39;t just save a file - simply,<br>just let it go, use the database.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Database use tables,<br>a table is like a spreadsheet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You add rows to a table,<br>each row has cells.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a type, have a good reason to need type information,<br>they aim to be efficient.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you define the username column to be short text,<br>and if you have a description column, you define it to be reasonably long.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There will be an error if you try to add a row,<br>that has a username, that is too long.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is why websites sometimes tell you,<br>this field cannot be longer than 255 characters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">YouTube for example has a 5,000 letter video description field in their database,<br>and I will need to cut this poem shorter to paste it there.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see a divergence here,<br>moment ago we had JavaScript where Microsoft disgraced it self by making a copy of it with data type limits to make their IDE IntelliSense nonsense work better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But now we are adding databases,<br>that have limits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are adding it for a good reason,<br>safe storage of data - that is a very good reason - compared to making debugging less crappy in TypeScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In fact a language without a good connection to a database,<br>is not that good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And manually communicating with a database,<br>like we used to in Perl days, was ugly, and for many, caused security issues - SQL injections.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now we have this thing called ORM in a language as wild as server side JavaScript,<br>what ORM does is let us use JavaScript Objects, very simple and pretty things, to hide the database stuff away.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What ORM stand for is mangled English,<br>ORM translates cute JavaScript to database table, without yo needing to think about it too much.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you just make an object like User,<br>say user.name = &quot;alice&quot;, user.email = &quot;alice at example.com&quot; and then user.save() and it is saved in the database table called users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">ORM also lets you create relationships between such objects,<br>so you can say Alice has many articles she published.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in a table, called articles, you will find, alices userID,<br>along with all the other id/s of users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the alice object, will be smart enough,<br>to only give you articles with Alice&#39;s id, when yo ask for it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a Relational Database, behind this object,<br>and we establish a relationship between user and article, a oneToMany relationship to be precise, but this is completely abstracted away with our sweet javascript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By the way, this relationship is called a JOIN,<br>as we JOIN two database tables on UserID, the user ID in Users table, and User ID, in the Articles table.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you don&#39;t have to think about it,<br>because ORM loves you - and it takes good care of you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we need more,<br>oh yes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because all of this is happening on the server,<br>and we need to bring this stuff safely into the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So on top of ORM,<br>we have to add REST.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I won&#39;t tell yo what REST stands it is just more mangled English,<br>people being cutsy with words.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a technology related to the URL,<br>in your address bar, all those slashes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This technology,<br>is good for working with ORM.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because we can have a user/1,<br>and this will give us alice, as she happens to be the first user.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can also say, user/1/article/1,<br>and that will give us the first article she published.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can get more creative here,<br>and there is a good way to expose ORM information under REST, and a questionably creative way - which can be beautiful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The best way, however,<br>is an automatic way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So here, you are just creating your Objects,<br>that automatically take care of the database.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you automatically,<br>get all of that stuff exposed as paths, in the URL.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For free, you get your databases taken care of,<br>and your website exposes all those objects automatically and uniformly.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">See, you don&#39;t need a better IDE,<br>you just need a better IDEA - ha ha... where stuff can&#39;t get broken.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we need more,<br>because we can&#39;t just expose all the users to the internet.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We need to give users abilities,<br>the way they can have articles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One ability they always get,<br>is updating their address filed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though, they are not quite allowed to update their e-mail address,<br>because that needs to go through a verification process.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We want to send an email to the old account,<br>just in case someone forgot to log out on a public computer, and hopefully they don&#39;t have their email open as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We also want to make sure the new email,<br>is correct, and the user can click on a unique URL we send them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And of course yo can already tell,<br>things are breaking down for us.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are no longer automatic,<br>different things need different things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Yeah we can account for all the variations,<br>and group them, but again, we end up with questionable complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Some very smart people,<br>don&#39;t want you to have a password.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One smart cat, decided yo shouldn&#39;t have a password,<br>that he will only store your email.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And to log in,<br>you just enter your email, he will send yo a link...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And when yo click it,<br>you will be logged in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a result,<br>you can&#39;t forget your password, because yo don&#39;t have one.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is a crazy unique dynamic,<br>and it is so unique that it is hard to generalize it and classify it in a uniform way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is hard to abstract,<br>without rewriting code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If bob chooses not to have a password,<br>then he can&#39;t have an update your password box in his profile.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means you have to go in there and code that exception in,<br>that one and a hundred others.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We had this wonderful JavaScript, ORM, REST and Objects and URL paths experience,<br>and now it is an explosion of User Interface complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And workflows, because, bob is not who he says he is, at all,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=zFLz70eQ9VI">his real name is Mallory, and no, he does not belong to a don&#39;t leak all the internal repos red team, Mallory is Malicious</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">He will try to change the password,<br>even though he is password-less, and one thousand other things, and one of them, will gran him remote code execution.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that one thing,<br>is always obscured by the explosion of complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We will SOMEWHAT remember to disable the change your password UI,<br>for password less users...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But will we remember to code a system,<br>that prevents the submission of the form if Mallory re-enables the UI, based on research from one of his other accounts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Yes, having the ability to change the password field, may not get anything hacked,<br>but it is proof that the system has failed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is inconsistent,<br>the abstractions are leaking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Mallory is already telling tech support he never enabled password less,<br>will this escalate his privileges.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Yes, how, red herring,<br>his problem is fixed, he can login like before, but there is just one more problem he needs help with...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">He needs a solution for,<br>and now that he praised tech support, and tech support gets a little problem fixed happy smiley face.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tech support likes Mallory,<br>tech support will not think twice to click the link that Mallory just sent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tech support want to help,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/List_of_data_breaches">and your business just ended up on List of data breaches on WikiPedia 14,870,304 users, all your customers leaked by helpful tech support being fed a red herring</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point we could almost forgive Microsoft for creating TypeScript,<br>because we could use a little breadcrumb path to at least mangle our cute automatic REST to STOP allowing password change for password less users...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just in case it is used as a red herring,<br>in a fast paces cheerful and feel good dance of privilege escalation in Bangalore.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is why you need to become a programmer,<br>if yo start in High School, yo will surely invent a consistent automatic system that prevents the leakage of abstractions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We don&#39;t need a better IDE or more typed languages with IntelliSense,<br>we need you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because to you,<br>this is a game.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the game is the solution,<br>Multi User Dungeons Object Oriented to be precise, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=QBnXvtR1qBw">MOO</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=QzvqSVgc2t4">MUD</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see, REST is good, but WikiWiki teaches us,<br>the power of consistency.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What if we just had Locations,<br>like WikiPedia has articles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are allowed to cross the pathway,<br>into a location, because you have a password key, then you can update your password.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you don&#39;t have this feature in your inventory,<br>then you can&#39;t access that location.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">TO be clear I am describing a tiny mechanism that builds on top of ORM,<br>and though it has paths, those are not RESTFUL paths, they are of the Dungeon World.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are an anthropomorphized world of objects,<br>and it is tiny and efficient, nothing at all like some bloated VR world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Rails, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/strapi/strapi">strapi</a>, or Cake even is all the proof that Objects and Properties can be defined with a normal User Interface,<br>ORM objects can be built by non-programmers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If MUD can replace the paths of REST and make them more secure,<br>then then company you invent can allow for Web Application programming, to people who hate code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not because they can&#39;t program, or don&#39;t want to learn,<br>but because they can sense that it is the old way - that better abstractions can be had.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Like programming web applications,<br>through a kind of a game.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Oh, sure is sounds goofy,<br>you are walking around dungeons after all.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if Mallory touches that password door,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">without the correct key in his inventory, he gets eaten by a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=f4ZVzl_H_2w">Grue</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Maybe we need to consider, that pretending abstractions are not leaky is goofy,<br>and that using an intelligent system that resembles the mechanics of a real world isn&#39;t goofy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are looking at highly sophisticated security systems,<br>that are as easy to comprehend for a human as using a key to inlock a door, or check out an article from the user&#39;s home library.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It may even be the key of strong AI,<br>that can improve it self - because why stop here?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Anyways, when you have a Grue on your blue team,<br>that consistently chomps red team members, the world becomes a much happier place.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For those of you struggling to come up with a name for this new and groundgreaking technology, I offer:<br>Complete And Thorough Protective Electronic Armor, or C.A.T.P.E.A. for short.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-02-21T21:00:23.402Z">February 21, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>29:22<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>14 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0723.avif" aria-label="Cover for A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0723.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Programmer&#39;s Poem: ORM, REST, OPSEC, MOO, And A Scary Smelly Grue" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 29:22
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0723.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0723.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0723.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>You know how down at the CPU level,<br>you have talk in ones and zeros, XOR and AND.</p>
+<p>We created a nicer languages above that,<br>like C, where you can nest functions.</p>
+<p>You can have an UPSERT function,<br>that contains INSERT or UPDATE functions.</p>
+<p>If data in whatever the program is using is missing,<br>then we INSERT, and if it already there then we UPDATE.</p>
+<p>So UPSERT encompasses multiple functions,<br>and it is pretty readable.</p>
+<p>Now, on C level,<br>we have to define things.</p>
+<p>You can&#39;t just say, name = alice,<br>you have to define a name array, and remember a string terminator.</p>
+<p>To store the five letter name Alice,<br>you need an array of six characters, for the name and a string terminator character.</p>
+<p>It is a good language,<br>but we invented better.</p>
+<p>We have languages where we can just say name = alice,<br>and everything will be taken care of for us.</p>
+<p>Even better than that,<br>we have languages where you can say name = evaluate name - alice; return name</p>
+<p>This is called an eval statement,<br>and everyone is scared of it, becasue you are running code inside code.</p>
+<p>Though you never use it in production,<br>eval is a sign of a healthy language.</p>
+<p>If a language prevents you from evaluating code,<br>then it is a language for cubicle workers, crafted to control the coders.</p>
+<p>JavaScript is a very free language,<br>it will let you add a number to a letter.</p>
+<p>And will probably return the sum of the number and ASCII code of the letter,<br>but it may also try to concatenate, or who cares.</p>
+<p>This language does not try to control you,<br>it will let you do whatever the heck you want.</p>
+<p>Even if it is crazy,<br>like adding letters to numbers, which is also crazy awesome.</p>
+<p>And a sign,<br>that corporate has not meddled with the language standard.</p>
+<p>Once some big corporation steps in,<br>they will strip the language of easy mistakes.</p>
+<p>Load it up on computers,<br>give it to all the High Schools.</p>
+<p>Wait for them to graduate college,<br>and then charge them for the enterprise version.</p>
+<p>Or for business use,<br>or for business license.</p>
+<p>Or cancel the language,<br>because they have something that will generate more profits.</p>
+<hr>
+<p>You have to stick with the rebel languages,<br>that is what everyone else will be going.</p>
+<p>Unless they got trapped in a cubicle,<br>then they will spout how evil eval is.</p>
+<p>Because in order to believe that their walled language is good,<br>they will fight to make all the other languages look bad.</p>
+<hr>
+<p>Now, there is another bump here,<br>because the web browser is not only awesome and very popular.</p>
+<p>But powerful enough to let you build a code editor,<br>it means you can edit code in a web browser, and not need a code editor.</p>
+<p>Java is slow and bulky for no reason,<br>Web browser is slow and bulky for beautiful reasons.</p>
+<p>Which also means,<br>JavaScript.</p>
+<p>There was a time when it was unwise to use JavaScript on the server,<br>it was possible but unwise, as it was young and slow.</p>
+<p>We had Perl and PHP,<br>while Microsoft was murdering their once pretty languages for something they felt was better.</p>
+<p>It was actually different,<br>not better - but people who do Microsoft, will absolutely attack me for saying this.</p>
+<p>Though they may notice, by now, that Microsoft killed IE,<br>that Visual Studio Code uses a browser, probably chrome, but I don&#39;t care, corporate will make mistakes, it is what they do.</p>
+<hr>
+<p>Perl is beautiful,<br>writing Perl it is like making jewelry, it makes OOP look ugly.</p>
+<p>PHP is useful, full of libraries,<br>and its OOP looks pretty, it flows like water, it is good for you.</p>
+<p>But the moment Node came out,<br>which is JavaScript for the server.</p>
+<p>All non JavaScript languages,<br>kind of became outdated, and certainly became outdated in context of the web.</p>
+<hr>
+<p>Because, you can now have code in the same language,<br>in the browser, and on the server.</p>
+<p>Which is to say, if you write your server code in PHP,<br>and your browser code in JavaScript - you are just weird.</p>
+<p>Like, why would you want to re-create your objects,<br>in some other language.</p>
+<p>People were shocked when I brought this up,<br>as in - how dare I tell them what language to use.</p>
+<p>I was merely telling them,<br>the truth.</p>
+<p>Same language, client and server,<br>and it just happens to be a language that is not babysitting cubicle workers.</p>
+<p>It has eval,<br>and it lets yo add letters to numbers, this is a sign of a healthy language.</p>
+<hr>
+<p>Now of course, Microsoft came in and made their own version,<br>guess what feature they added?</p>
+<p>Yeah, the whole count letters of your name thing,<br>they laced JavaScript with strong typing.</p>
+<p>Meaning you have to define the type of your variable,<br>they say &quot;Oh it is just JavaScript&quot;.</p>
+<p>But it is actually cubicle worker cool aid,<br>the typing is there to make the code editors pretend to be useful.</p>
+<p>The variable type information,<br>will allow for fancy drop-down, and a measure of error checking.</p>
+<p>If this was 1995,<br>it would be, neat to look at, though probably not actually use it, unless you had to.</p>
+<p>This language is called TypeScript,<br>as in Data Typed JavaScript.</p>
+<p>And to me it is hilarious, as it is a step backwards to make their programmers brain-less,<br>as in think less about things they are doing.</p>
+<p>So JavaScript is still fine,<br>they just modified it to make their own thing.</p>
+<p>There was briefly a flash of CoffeScript,<br>a JavaScript alternative.</p>
+<p>Though TypeScript will last much longer because of all the money it makes,<br>it will eventually fade away like CoffeScript did.</p>
+<p>Who needs a branch of JavaScript,<br>follow the eval statement, as corporate will always destroy the language to make profits and get raises.</p>
+<p>That&#39;s what corporate is for,<br>profits, not languages.</p>
+<hr>
+<p>But JavaScript is still not good enough,<br>there is something better.</p>
+<p>Though this time,<br>that something better is written in JavaScript, it is a JavaScript pattern.</p>
+<hr>
+<p>And here I have to mention Databases,<br>we can&#39;t use files.</p>
+<p>Because as far as multiple users poking at the keyboard at the same time,<br>files live in the world of adding numbers to letters.</p>
+<p>There is no good answer to who saves first,<br>files are for single users sitting at the computer.</p>
+<p>You can use mutually exclusive locks,<br>or folders named as the files, with versioned GUID named real files, that need manual version conflict resolution.</p>
+<p>But if you can&#39;t just save a file - simply,<br>just let it go, use the database.</p>
+<hr>
+<p>Database use tables,<br>a table is like a spreadsheet.</p>
+<p>You add rows to a table,<br>each row has cells.</p>
+<p>And a type, have a good reason to need type information,<br>they aim to be efficient.</p>
+<p>So you define the username column to be short text,<br>and if you have a description column, you define it to be reasonably long.</p>
+<p>There will be an error if you try to add a row,<br>that has a username, that is too long.</p>
+<p>That is why websites sometimes tell you,<br>this field cannot be longer than 255 characters.</p>
+<p>YouTube for example has a 5,000 letter video description field in their database,<br>and I will need to cut this poem shorter to paste it there.</p>
+<hr>
+<p>You see a divergence here,<br>moment ago we had JavaScript where Microsoft disgraced it self by making a copy of it with data type limits to make their IDE IntelliSense nonsense work better.</p>
+<p>But now we are adding databases,<br>that have limits.</p>
+<p>We are adding it for a good reason,<br>safe storage of data - that is a very good reason - compared to making debugging less crappy in TypeScript.</p>
+<p>In fact a language without a good connection to a database,<br>is not that good.</p>
+<p>And manually communicating with a database,<br>like we used to in Perl days, was ugly, and for many, caused security issues - SQL injections.</p>
+<hr>
+<p>Now we have this thing called ORM in a language as wild as server side JavaScript,<br>what ORM does is let us use JavaScript Objects, very simple and pretty things, to hide the database stuff away.</p>
+<p>What ORM stand for is mangled English,<br>ORM translates cute JavaScript to database table, without yo needing to think about it too much.</p>
+<p>So you just make an object like User,<br>say user.name = &quot;alice&quot;, user.email = &quot;alice at example.com&quot; and then user.save() and it is saved in the database table called users.</p>
+<p>ORM also lets you create relationships between such objects,<br>so you can say Alice has many articles she published.</p>
+<p>And in a table, called articles, you will find, alices userID,<br>along with all the other id/s of users.</p>
+<p>And the alice object, will be smart enough,<br>to only give you articles with Alice&#39;s id, when yo ask for it.</p>
+<p>There is a Relational Database, behind this object,<br>and we establish a relationship between user and article, a oneToMany relationship to be precise, but this is completely abstracted away with our sweet javascript.</p>
+<p>By the way, this relationship is called a JOIN,<br>as we JOIN two database tables on UserID, the user ID in Users table, and User ID, in the Articles table.</p>
+<p>But you don&#39;t have to think about it,<br>because ORM loves you - and it takes good care of you.</p>
+<hr>
+<p>But we need more,<br>oh yes.</p>
+<p>Because all of this is happening on the server,<br>and we need to bring this stuff safely into the browser.</p>
+<p>So on top of ORM,<br>we have to add REST.</p>
+<p>I won&#39;t tell yo what REST stands it is just more mangled English,<br>people being cutsy with words.</p>
+<p>It is a technology related to the URL,<br>in your address bar, all those slashes.</p>
+<p>This technology,<br>is good for working with ORM.</p>
+<p>Because we can have a user/1,<br>and this will give us alice, as she happens to be the first user.</p>
+<p>We can also say, user/1/article/1,<br>and that will give us the first article she published.</p>
+<p>We can get more creative here,<br>and there is a good way to expose ORM information under REST, and a questionably creative way - which can be beautiful.</p>
+<p>The best way, however,<br>is an automatic way.</p>
+<p>So here, you are just creating your Objects,<br>that automatically take care of the database.</p>
+<p>And you automatically,<br>get all of that stuff exposed as paths, in the URL.</p>
+<p>For free, you get your databases taken care of,<br>and your website exposes all those objects automatically and uniformly.</p>
+<hr>
+<p>See, you don&#39;t need a better IDE,<br>you just need a better IDEA - ha ha... where stuff can&#39;t get broken.</p>
+<hr>
+<p>But we need more,<br>because we can&#39;t just expose all the users to the internet.</p>
+<hr>
+<p>We need to give users abilities,<br>the way they can have articles.</p>
+<p>One ability they always get,<br>is updating their address filed.</p>
+<p>Though, they are not quite allowed to update their e-mail address,<br>because that needs to go through a verification process.</p>
+<p>We want to send an email to the old account,<br>just in case someone forgot to log out on a public computer, and hopefully they don&#39;t have their email open as well.</p>
+<p>We also want to make sure the new email,<br>is correct, and the user can click on a unique URL we send them.</p>
+<hr>
+<p>And of course yo can already tell,<br>things are breaking down for us.</p>
+<p>They are no longer automatic,<br>different things need different things.</p>
+<p>Yeah we can account for all the variations,<br>and group them, but again, we end up with questionable complexity.</p>
+<p>Some very smart people,<br>don&#39;t want you to have a password.</p>
+<p>One smart cat, decided yo shouldn&#39;t have a password,<br>that he will only store your email.</p>
+<p>And to log in,<br>you just enter your email, he will send yo a link...</p>
+<p>And when yo click it,<br>you will be logged in.</p>
+<p>As a result,<br>you can&#39;t forget your password, because yo don&#39;t have one.</p>
+<hr>
+<p>That is a crazy unique dynamic,<br>and it is so unique that it is hard to generalize it and classify it in a uniform way.</p>
+<p>It is hard to abstract,<br>without rewriting code.</p>
+<p>If bob chooses not to have a password,<br>then he can&#39;t have an update your password box in his profile.</p>
+<p>That means you have to go in there and code that exception in,<br>that one and a hundred others.</p>
+<p>We had this wonderful JavaScript, ORM, REST and Objects and URL paths experience,<br>and now it is an explosion of User Interface complexity.</p>
+<p>And workflows, because, bob is not who he says he is, at all,<br><a href="https://www.youtube.com/watch?v=zFLz70eQ9VI">his real name is Mallory, and no, he does not belong to a don&#39;t leak all the internal repos red team, Mallory is Malicious</a>.</p>
+<p>He will try to change the password,<br>even though he is password-less, and one thousand other things, and one of them, will gran him remote code execution.</p>
+<p>And that one thing,<br>is always obscured by the explosion of complexity.</p>
+<p>We will SOMEWHAT remember to disable the change your password UI,<br>for password less users...</p>
+<p>But will we remember to code a system,<br>that prevents the submission of the form if Mallory re-enables the UI, based on research from one of his other accounts.</p>
+<p>Yes, having the ability to change the password field, may not get anything hacked,<br>but it is proof that the system has failed.</p>
+<p>It is inconsistent,<br>the abstractions are leaking.</p>
+<p>Mallory is already telling tech support he never enabled password less,<br>will this escalate his privileges.</p>
+<p>Yes, how, red herring,<br>his problem is fixed, he can login like before, but there is just one more problem he needs help with...</p>
+<p>He needs a solution for,<br>and now that he praised tech support, and tech support gets a little problem fixed happy smiley face.</p>
+<p>Tech support likes Mallory,<br>tech support will not think twice to click the link that Mallory just sent.</p>
+<p>Tech support want to help,<br><a href="https://en.wikipedia.org/wiki/List_of_data_breaches">and your business just ended up on List of data breaches on WikiPedia 14,870,304 users, all your customers leaked by helpful tech support being fed a red herring</a>.</p>
+<hr>
+<p>At this point we could almost forgive Microsoft for creating TypeScript,<br>because we could use a little breadcrumb path to at least mangle our cute automatic REST to STOP allowing password change for password less users...</p>
+<p>Just in case it is used as a red herring,<br>in a fast paces cheerful and feel good dance of privilege escalation in Bangalore.</p>
+<hr>
+<p>This is why you need to become a programmer,<br>if yo start in High School, yo will surely invent a consistent automatic system that prevents the leakage of abstractions.</p>
+<p>We don&#39;t need a better IDE or more typed languages with IntelliSense,<br>we need you.</p>
+<hr>
+<p>Because to you,<br>this is a game.</p>
+<p>And the game is the solution,<br>Multi User Dungeons Object Oriented to be precise, <a href="https://www.youtube.com/watch?v=QBnXvtR1qBw">MOO</a> and <a href="https://www.youtube.com/watch?v=QzvqSVgc2t4">MUD</a></p>
+<p>You see, REST is good, but WikiWiki teaches us,<br>the power of consistency.</p>
+<p>What if we just had Locations,<br>like WikiPedia has articles.</p>
+<p>If you are allowed to cross the pathway,<br>into a location, because you have a password key, then you can update your password.</p>
+<p>If you don&#39;t have this feature in your inventory,<br>then you can&#39;t access that location.</p>
+<p>TO be clear I am describing a tiny mechanism that builds on top of ORM,<br>and though it has paths, those are not RESTFUL paths, they are of the Dungeon World.</p>
+<p>They are an anthropomorphized world of objects,<br>and it is tiny and efficient, nothing at all like some bloated VR world.</p>
+<p>Rails, <a href="https://github.com/strapi/strapi">strapi</a>, or Cake even is all the proof that Objects and Properties can be defined with a normal User Interface,<br>ORM objects can be built by non-programmers.</p>
+<p>If MUD can replace the paths of REST and make them more secure,<br>then then company you invent can allow for Web Application programming, to people who hate code.</p>
+<p>Not because they can&#39;t program, or don&#39;t want to learn,<br>but because they can sense that it is the old way - that better abstractions can be had.</p>
+<p>Like programming web applications,<br>through a kind of a game.</p>
+<p>Oh, sure is sounds goofy,<br>you are walking around dungeons after all.</p>
+<p>But if Mallory touches that password door,</p>
+<p>without the correct key in his inventory, he gets eaten by a <a href="https://www.youtube.com/watch?v=f4ZVzl_H_2w">Grue</a>.</p>
+<p>Maybe we need to consider, that pretending abstractions are not leaky is goofy,<br>and that using an intelligent system that resembles the mechanics of a real world isn&#39;t goofy.</p>
+<p>You are looking at highly sophisticated security systems,<br>that are as easy to comprehend for a human as using a key to inlock a door, or check out an article from the user&#39;s home library.</p>
+<p>It may even be the key of strong AI,<br>that can improve it self - because why stop here?</p>
+<p>Anyways, when you have a Grue on your blue team,<br>that consistently chomps red team members, the world becomes a much happier place.</p>
+<p>For those of you struggling to come up with a name for this new and groundgreaking technology, I offer:<br>Complete And Thorough Protective Electronic Armor, or C.A.T.P.E.A. for short.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=zFLz70eQ9VI">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>his real name is Mallory, and no, he does not belong to a don&amp;#39;t leak all the internal repos red team, Mallory is Malicious</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=zFLz70eQ9VI</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/List_of_data_breaches">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>and your business just ended up on List of data breaches on WikiPedia 14,870,304 users, all your customers leaked by helpful tech support being fed a red herring</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/List_of_data_breaches</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=QBnXvtR1qBw">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>MOO</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=QBnXvtR1qBw</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=QzvqSVgc2t4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>MUD</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=QzvqSVgc2t4</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/strapi/strapi">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>strapi</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/strapi/strapi</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=f4ZVzl_H_2w">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Grue</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=f4ZVzl_H_2w</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">c</span><span class="chip">javascript</span><span class="chip">php</span><span class="chip">perl</span><span class="chip">nodejs</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/QuP5RL_E5oE"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/QuP5RL_E5oE</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=zFLz70eQ9VI">
+              <span class="text-truncate">his real name is Mallory, and no, he does not belong to a don&amp;#39;t leak all the internal repos red team, Mallory is Malicious</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/List_of_data_breaches">
+              <span class="text-truncate">and your business just ended up on List of data breaches on WikiPedia 14,870,304 users, all your customers leaked by helpful tech support being fed a red herring</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=QBnXvtR1qBw">
+              <span class="text-truncate">MOO</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=QzvqSVgc2t4">
+              <span class="text-truncate">MUD</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/strapi/strapi">
+              <span class="text-truncate">strapi</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=f4ZVzl_H_2w">
+              <span class="text-truncate">Grue</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/c4f57567-af9e-4593-bff8-851c39ded008/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">And What If My Art, Does Not Sell?</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/14cfc1ef-6093-4984-a222-b33f87a5ef53/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">25 Days Until Spring</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4949d868-b1ac-4043-b170-68f5631c06f8/">
+              <img src="https://catpea.github.io/chapter-04/poem-0742.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Frighten Programmers: A Programming Tutorial</span>
+                <span class="fg-3 fs-xs">March 12, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/487ea9ea-c75b-4771-9a92-3dd425857c88/">
+              <img src="https://catpea.github.io/chapter-04/poem-0698.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Pipe Programming: A Look At Object Passing And Transformation</span>
+                <span class="fg-3 fs-xs">January 27, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fbbad6a5-4404-4868-8ba4-b2f0d5435f22/">
+              <img src="https://catpea.github.io/chapter-04/poem-0773.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Fixing Programming, Or, Building Your First Trillion Dollar Company</span>
+                <span class="fg-3 fs-xs">April 12, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/670c1c3b-672b-4e48-8372-5d921f0d5a9c/">
+              <img src="https://catpea.github.io/chapter-04/poem-0696.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Glance At Future Of Programming: A Neat But Incomplete Introduction To Coding</span>
+                <span class="fg-3 fs-xs">January 25, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

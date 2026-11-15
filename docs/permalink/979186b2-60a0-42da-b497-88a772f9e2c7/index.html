@@ -1,198 +1,473 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>combineLatest; Or, Please Learn Programming And Build A Visual Programming Language</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>combineLatest; Or, Please Learn Programming And Build A Visual Programming Language · Cat Pea</title>
+  <meta name="description" content="The author argues that learning programming starts with grasping concepts like RxJS’s combineLatest operator, which merges the latest values from multiple streams once each has emitted at least one value; he explains this through analogies of “pipes” and “marble diagrams,” then suggests visual programming tools can make such flows obvious, but also notes that mastering JavaScript (with Bootstrap, SVG, or Agent‑Model patterns) is essential before relying on AI‑generated operators, hinting that the future of coding will be more about tracking data packets visually than writing text.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/979186b2-60a0-42da-b497-88a772f9e2c7/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="combineLatest; Or, Please Learn Programming And Build A Visual Programming Language · Cat Pea">
+  <meta property="og:description" content="The author argues that learning programming starts with grasping concepts like RxJS’s combineLatest operator, which merges the latest values from multiple streams once each has emitted at least one value; he explains this through analogies of “pipes” and “marble diagrams,” then suggests visual programming tools can make such flows obvious, but also notes that mastering JavaScript (with Bootstrap, SVG, or Agent‑Model patterns) is essential before relying on AI‑generated operators, hinting that the future of coding will be more about tracking data packets visually than writing text.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-12/poem-1785.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-12/">Chapter 12</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1785</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-12/poem-1785.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1785.avif" alt="combineLatest; Or, Please Learn Programming And Build A Visual Programming Language"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">combineLatest; Or, Please Learn Programming And Build A Visual Programming Language</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1785.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1785</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">combineLatest; Or, Please Learn Programming And Build A Visual Programming Language</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-01-20">1/19/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Yes, you can graduate High School,
-without mastering programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you do, you will be forced to work,
-under the threat of hunger and homelessness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">College will not help you,
-they’ll just take your saving and force you into loans.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need power, in your mind, that works,
-that you know is yours, and that creates results.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is computer programming,
-the first thing you learn, is that memorization is not education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need to dream, imagine, invent,
-and practice programming daily, by writing ever larger little projects.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are about to talk about a function from RxJs,
-a toolkit, that is hard to understand.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning programming, by starting with RxJS,
-could considered, an assault.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But we will talk about just one function: combineLatest,
-the authors of RxJs don’t call it a function, they call it an operator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not an RxJs tutorial,
-I just explain the dynamics of such a function.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We are also not doing conventional programming,
-times have changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The old way still has it place,
-but as tiny functions - or as Rx (very neatly) calls them operators.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason for that is that people use programming frameworks,
-which exposes that everyone has trouble with keeping track of things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If they can’t program vanilla, they sure as sunshine,
-will never be able to comprehend their program structure, as it is not their own.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">combineLatest accepts data from multiple sources,
-that yous hould imagine as pipes, think communication cables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It combines, the latest value, arriving from each of those pipes,
-and sends the combined data as one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please be aware, that in order for it to know when to send the combined data,
-it needs to know how many pipes are stuck into it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it must wait, until data comes from every one of those pipes,
-if you got three pipes stuck into combineLatest,
-it will never send data from one or two, it will wait for all three to bring data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It combines the latest values from each of its inputs,
-and sends it along as its own output.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Practical use, you have three web pages, that you are waiting for, to load,
-each of them will send you status, either loading or ready.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you want to check if all pipes say ready,
-before you send out an action to let your application extract data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One, you will be never bothered with empty values, null, or undefined,
-once you start getting status information, it will be either page-loading or page-ready.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript has an every function, that you can run across all the status info,
-and when all are page-ready, the every function returns true, otherwise it is false.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remember you will be notified as each pipe sends in data,
-that is a perfect time to check is every status page ready.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is when you will output some action packet,
-that will be interpreted into a command, down the pipework.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I would wait to web pagers, to extract data form the,
-so the action would be, everything is loaded start data extraction.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If any of this made any sense to you, that is good,
-but my goodness, you should never need such an explanation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://rxjs.dev/api/index/function/combineLatest">Look at RxJs combine latest documentation, to see the disaster</a>,
-neither the singe sentence explain much plainly, nor is the marble diagram helpful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Certainly not for a cheerful peron,
-having a nice afternoon, and hoping to go on a walk later.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which brings us to visual programming,
-where you don’t need an explanation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because you can see what combineLatest does,
-with your won eyes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://catpea.github.io/mawp/">Visual programming languages must show you how data flows</a>,
-and every marble must reveal the data it represents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you were shown three pipes connected to combineLatest,
-slowly sending a packet their its way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You would immediately notice,
-that it waits for all packets to arrive before combining them, and passing them along as one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not a computer game approach to learning programming,
-this is programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even if you don’t end up using visual programming,
-you still learn, Rx, functional programming, and reactive programming.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I need you to to understand that it is just boxes with ports,
-and the ports connect with lines, and boxes represent operators.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learn JavaScript, use Bootstrap for windows, SVG for lines,
-and Agent Model programming as a more beautiful replacement for Rx.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just as AI to give you a JavaScript version of OTP/Erlang,
-and know that you are just sending and receiving between objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you don’t use addresses, the pipes, pass the packets for you,
-so you just send send, and the pipe will deliver your data where it is connected to.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please do not wait for the era of visual programming languages,
-use the opportunity that it is not here yet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And not just master a trull powerful and beautiful ind of programming,
-but instead of paying for college or universe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">License your software for them, for fees proportionally as high,
-as those that they would chare you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Mark my words, the era of visual programming languages is coming,
-because the AI can easily generate any kind of operator you could wish for.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Code will move away from questionably useful frameworks,
-and state management flows, to flows that you can animate in a debuger.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Packets that anybody can track,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://catpea.github.io/mawp/">by just watching them flow and transform through pipes and operators</a>.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-01-20T03:55:23.420Z">January 19, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>13:04<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-12/poem-1785.avif" aria-label="Cover for combineLatest; Or, Please Learn Programming And Build A Visual Programming Language, full size">
+            <img src="https://catpea.github.io/chapter-12/poem-1785.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for combineLatest; Or, Please Learn Programming And Build A Visual Programming Language" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 13:04
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-12/poem-1785.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-12/poem-1785.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-12/poem-1785.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Yes, you can graduate High School,<br>without mastering programming.</p>
+<p>If you do, you will be forced to work,<br>under the threat of hunger and homelessness.</p>
+<p>College will not help you,<br>they’ll just take your saving and force you into loans.</p>
+<p>You need power, in your mind, that works,<br>that you know is yours, and that creates results.</p>
+<p>That is computer programming,<br>the first thing you learn, is that memorization is not education.</p>
+<p>You need to dream, imagine, invent,<br>and practice programming daily, by writing ever larger little projects.</p>
+<hr>
+<p>We are about to talk about a function from RxJs,<br>a toolkit, that is hard to understand.</p>
+<p>Learning programming, by starting with RxJS,<br>could considered, an assault.</p>
+<p>But we will talk about just one function: combineLatest,<br>the authors of RxJs don’t call it a function, they call it an operator.</p>
+<p>This is not an RxJs tutorial,<br>I just explain the dynamics of such a function.</p>
+<hr>
+<p>We are also not doing conventional programming,<br>times have changed.</p>
+<p>The old way still has it place,<br>but as tiny functions - or as Rx (very neatly) calls them operators.</p>
+<p>The reason for that is that people use programming frameworks,<br>which exposes that everyone has trouble with keeping track of things.</p>
+<p>If they can’t program vanilla, they sure as sunshine,<br>will never be able to comprehend their program structure, as it is not their own.</p>
+<hr>
+<p>combineLatest accepts data from multiple sources,<br>that yous hould imagine as pipes, think communication cables.</p>
+<p>It combines, the latest value, arriving from each of those pipes,<br>and sends the combined data as one.</p>
+<p>Please be aware, that in order for it to know when to send the combined data,<br>it needs to know how many pipes are stuck into it.</p>
+<p>And it must wait, until data comes from every one of those pipes,<br>if you got three pipes stuck into combineLatest,<br>it will never send data from one or two, it will wait for all three to bring data.</p>
+<p>It combines the latest values from each of its inputs,<br>and sends it along as its own output.</p>
+<hr>
+<p>Practical use, you have three web pages, that you are waiting for, to load,<br>each of them will send you status, either loading or ready.</p>
+<p>And you want to check if all pipes say ready,<br>before you send out an action to let your application extract data.</p>
+<p>One, you will be never bothered with empty values, null, or undefined,<br>once you start getting status information, it will be either page-loading or page-ready.</p>
+<p>JavaScript has an every function, that you can run across all the status info,<br>and when all are page-ready, the every function returns true, otherwise it is false.</p>
+<p>Remember you will be notified as each pipe sends in data,<br>that is a perfect time to check is every status page ready.</p>
+<p>And that is when you will output some action packet,<br>that will be interpreted into a command, down the pipework.</p>
+<p>I would wait to web pagers, to extract data form the,<br>so the action would be, everything is loaded start data extraction.</p>
+<hr>
+<p>If any of this made any sense to you, that is good,<br>but my goodness, you should never need such an explanation.</p>
+<p><a href="https://rxjs.dev/api/index/function/combineLatest">Look at RxJs combine latest documentation, to see the disaster</a>,<br>neither the singe sentence explain much plainly, nor is the marble diagram helpful.</p>
+<p>Certainly not for a cheerful peron,<br>having a nice afternoon, and hoping to go on a walk later.</p>
+<hr>
+<p>Which brings us to visual programming,<br>where you don’t need an explanation.</p>
+<p>Because you can see what combineLatest does,<br>with your won eyes.</p>
+<p><a href="https://catpea.github.io/mawp/">Visual programming languages must show you how data flows</a>,<br>and every marble must reveal the data it represents.</p>
+<p>If you were shown three pipes connected to combineLatest,<br>slowly sending a packet their its way.</p>
+<p>You would immediately notice,<br>that it waits for all packets to arrive before combining them, and passing them along as one.</p>
+<p>This is not a computer game approach to learning programming,<br>this is programming.</p>
+<p>Even if you don’t end up using visual programming,<br>you still learn, Rx, functional programming, and reactive programming.</p>
+<hr>
+<p>I need you to to understand that it is just boxes with ports,<br>and the ports connect with lines, and boxes represent operators.</p>
+<p>Learn JavaScript, use Bootstrap for windows, SVG for lines,<br>and Agent Model programming as a more beautiful replacement for Rx.</p>
+<p>Just as AI to give you a JavaScript version of OTP/Erlang,<br>and know that you are just sending and receiving between objects.</p>
+<p>But you don’t use addresses, the pipes, pass the packets for you,<br>so you just send send, and the pipe will deliver your data where it is connected to.</p>
+<hr>
+<p>Please do not wait for the era of visual programming languages,<br>use the opportunity that it is not here yet.</p>
+<p>And not just master a trull powerful and beautiful ind of programming,<br>but instead of paying for college or universe.</p>
+<p>License your software for them, for fees proportionally as high,<br>as those that they would chare you.</p>
+<hr>
+<p>Mark my words, the era of visual programming languages is coming,<br>because the AI can easily generate any kind of operator you could wish for.</p>
+<p>Code will move away from questionably useful frameworks,<br>and state management flows, to flows that you can animate in a debuger.</p>
+<p>Packets that anybody can track,<br><a href="https://catpea.github.io/mawp/">by just watching them flow and transform through pipes and operators</a>.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://rxjs.dev/api/index/function/combineLatest">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Look at RxJs combine latest documentation, to see the disaster</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://rxjs.dev/api/index/function/combineLatest</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://catpea.github.io/mawp/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Visual programming languages must show you how data flows</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://catpea.github.io/mawp/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">rxjs</span><span class="chip">combinelatest</span><span class="chip">operator</span><span class="chip">functionalprogramming</span><span class="chip">visualprogramming</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://rxjs.dev/api/index/function/combineLatest">
+              <span class="text-truncate">Look at RxJs combine latest documentation, to see the disaster</span>
+              <span class="fg-3 fs-xs flex-shrink-0">rxjs.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://catpea.github.io/mawp/">
+              <span class="text-truncate">Visual programming languages must show you how data flows</span>
+              <span class="fg-3 fs-xs flex-shrink-0">catpea.github.io</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/a85e7019-2db7-4744-bf75-4d0ba76ce0d4/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Programming Frosty Michigan Nights</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/81b012e7-2b20-4411-bf86-e0cbe700aa4c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Gently Easing Yourself Into Camping And Hiking</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e315c4c8-9df8-417b-8180-4d4861ff9360/">
+              <img src="https://catpea.github.io/chapter-12/poem-1792.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Vanilla; Or, Programming JavaScript Without The Use Of Frameworks</span>
+                <span class="fg-3 fs-xs">January 27, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a85e7019-2db7-4744-bf75-4d0ba76ce0d4/">
+              <img src="https://catpea.github.io/chapter-12/poem-1784.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Frosty Michigan Nights</span>
+                <span class="fg-3 fs-xs">January 19, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/23b40f77-24b5-4381-8d61-dd34d958756c/">
+              <img src="https://catpea.github.io/chapter-12/poem-1794.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Program Wild And Scary! Apologize For Nothing</span>
+                <span class="fg-3 fs-xs">January 29, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/7b9019b0-e660-44e8-9ff2-233d641d6e10/">
+              <img src="https://catpea.github.io/chapter-12/poem-1778.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn JavaScript, And Don’t Use Frameworks</span>
+                <span class="fg-3 fs-xs">January 12, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

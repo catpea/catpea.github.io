@@ -1,232 +1,504 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Quick Look At A Signal Operator</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Quick Look At A Signal Operator · Cat Pea</title>
+  <meta name="description" content="The post explains how a “Signal” (internally renamed “Pulse”) works as an observable value holder: when its non‑null value changes, all subscribed functions are notified with the new value; subscribers receive only that single argument. It shows how to create a Signal, subscribe to it, and extend it by adding a `map` operator that produces another Signal whose value is the result of applying a mapping function to the original value. The example demonstrates setting a username Signal to “Alice”, using `map(v=&gt;\`Hello ${v}\`)` to transform the value, and subscribing to log the transformed string, illustrating how the mapping operator chains notifications while keeping the implementation simple.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/a5811258-b513-4891-9c03-150b700d0be4/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Quick Look At A Signal Operator · Cat Pea">
+  <meta property="og:description" content="The post explains how a “Signal” (internally renamed “Pulse”) works as an observable value holder: when its non‑null value changes, all subscribed functions are notified with the new value; subscribers receive only that single argument. It shows how to create a Signal, subscribe to it, and extend it by adding a `map` operator that produces another Signal whose value is the result of applying a mapping function to the original value. The example demonstrates setting a username Signal to “Alice”, using `map(v=&gt;\`Hello ${v}\`)` to transform the value, and subscribing to log the transformed string, illustrating how the mapping operator chains notifications while keeping the implementation simple.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1964.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1964</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1964.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1964.avif" alt="A Quick Look At A Signal Operator"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Quick Look At A Signal Operator</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1964.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1964</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Quick Look At A Signal Operator</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-07-18">7/17/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Before we begin, just between us, we have to internally change the name Signal to Pulse,
-pulse is a short burst, a signal is a kid and caboodle with extras.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I didn’t come up with the name signal,
-but pulse is the correct term.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will still use the term signal,
-up until I show you why it is important that we switch.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/Signal.txt">Allow me to remind us what Signals are</a>,
-it is a complex variable, meaning an object with properties and methods.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Similar to how an Array has a length property,
-and push method.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And an array is a complex variable, an object, that is efficiently programmed,
-for the purpose of storing things like numbers, letters, and other objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unlike an array, which does not announce changes,
-a signal when given a non null value will notify all its subscribers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A subscriber is just a function that is given the value of the signal,
-during value change notification, it only gets one argument, the value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us make a signal, and we will call it username,
-const usernameSignal = new Signal();</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a null signal, because we didn’t specify value between the parentheses,
-we will now subscribe to it: // usernameSignal.subscribe(v=&gt;console.log(v));</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I use the letter v, but you can use the word username,
-though can see that it is the username signal, that’s why I only use “v”.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a horrible mistake, some people give the signal dependencies,
-so that you can log, v and another signal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that second signal will be remembered as a dependency,
-and now whenever “it” or the username changes the subscription will be reran.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don’t do that, do not make the signal more that a value holder,
-that notifies subscribers on non-null value changes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Last week I was fool enough to tweak the non-null comparator,
-to foolishly provide a customization isNull function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With just such a tiny change, you can no longer check if .value is null,
-you now have to run .test() and then use the .value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I do believe it,
-they used to call that a blivet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must protect the simplicity of signals,
-they are far too precious.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Especially in context of User Interfaces,
-something that is outside of JavaScript/ECMAscript design considerations.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This simple signal can’t do much but notify on non null,
-but that give you power, because your mind is good at simplicity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we will make a map function, this is a signal utility,
-and it should be both external where you can say map(usernameSignal, mapFunction)…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also, be good to yourself, create a class that extends Signal,
-and give it a map method, that will call the reusable map function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With the “this” keyword,
-as the first argument, and the given mapFunction as the second.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then return the result of the map function,
-as the result of the map method.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you are just wrapping the method around the function,
-setting this as first argument and mapFunction method argument as second.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The keyword this,
-is how objects refer to themselves, internally.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So inside the usernameSignal, we don’t say usernameSignal,
-because when we create the Signal…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have no clue what variable name the user will pick,
-as they instantiate it at a later data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we use the keyword “this”,
-which always refers to the owner of the method.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The difference between function and method,
-is that functions are just programming language functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Methods however,
-are functions that belong to an object, and can use the keyword “this”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you want to call another method of the object you are in,
-you say “this” followed by the method name.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Signal extension,
-is where the naming problem reveals it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our perfect little signal,
-must be renamed to Pulse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will often find yourself using pulses,
-without any of the extras.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the extension that has map, is now what we will refer to as Signal,
-so; externally no one will notice this change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you will know, that if you don’t need anything extra,
-you can just use a pulse – such is the world of programming.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Map takes two argument, a signal to map, and a function,
-to send the value of the signal through.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a map,
-transforms or maps the value for the signal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the way this is accomplished,
-without ruining anything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remember,
-pulses and signals are precious,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is, by creating a new signal called mappedSignal,
-subscribing to the given signal in this case usernameSignal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And taking that v of the usrname signal,
-and passing it through the mapFunction…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then setting the mappedSignal value,
-as the result of mapFunction(v);</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And remember that the v is the usernameSignal.value,
-and then the map function and thus method return the mappedSignal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when you call a map on a signal,
-you get another and equally uniform signal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it also has a map method,
-so not the pulse bu signal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just to give the fast version, map returns a new signal,
-the mappedSignal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a standard signal as we have it here,
-that subscribed to the signal that we fed into the map function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then each time the signal we fed into the map function changes,
-that new value is passed through mapFunction…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and assigned to out mappedSignal,
-that was returned from the mapped function.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It does not get much more complicated than this,
-this was the shot, and it dod not hurt.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just like the function of an object is called a method.
-a function that operates on signals, alslo has a special name, that name is operator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So map is an operator,
-there are many operators.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can look up Reactive Operators,
-but don’t read the documentation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead, ask AI for a simple implementation,
-that works with your pulse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To understand an operator,
-you have to understand its code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is pretty simple in our case we just pass the original signal value,
-through the mapFunction, often referred to as predicate.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So our mapFunction predicate,
-is where we can add stuff to out username, not signals, but some text, like hello.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can now say  usernameSignal.value = “Alice”,
-and say  usernameSignal.map(v=&gt;<code>Hello ${v}</code>).subscribe(v=&gt;console.log(v))</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we will see “Hello Alice” in the console,
-as the map function automatically subscribes us to usernameSignal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which now that it holds the value of “Alice”,
-instantly executes the subscription.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which means it sends its value Alice to the map subscriber,
-which sends the v thorough the mappedSignal mapFunction predicate.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And assigns to the value of the mappedSignal,
-which then yet again….</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instantly executes the subscription which just has console.log
-that prints Hello Alice.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not complexity you hear,
-it is just English that sounds weird when describing program flow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Looking at the tiny snippet,
-undoes all the tangled words.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-07-18T00:37:37.104Z">July 17, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>16:47<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1964.avif" aria-label="Cover for A Quick Look At A Signal Operator, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1964.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Quick Look At A Signal Operator" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 16:47
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1964.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1964.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1964.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Before we begin, just between us, we have to internally change the name Signal to Pulse,<br>pulse is a short burst, a signal is a kid and caboodle with extras.</p>
+<p>I didn’t come up with the name signal,<br>but pulse is the correct term.</p>
+<p>I will still use the term signal,<br>up until I show you why it is important that we switch.</p>
+<hr>
+<p><a href="files/Signal.txt">Allow me to remind us what Signals are</a>,<br>it is a complex variable, meaning an object with properties and methods.</p>
+<p>Similar to how an Array has a length property,<br>and push method.</p>
+<p>And an array is a complex variable, an object, that is efficiently programmed,<br>for the purpose of storing things like numbers, letters, and other objects.</p>
+<p>Unlike an array, which does not announce changes,<br>a signal when given a non null value will notify all its subscribers.</p>
+<p>A subscriber is just a function that is given the value of the signal,<br>during value change notification, it only gets one argument, the value.</p>
+<p>Let us make a signal, and we will call it username,<br>const usernameSignal = new Signal();</p>
+<p>This is a null signal, because we didn’t specify value between the parentheses,<br>we will now subscribe to it: // usernameSignal.subscribe(v=&gt;console.log(v));</p>
+<p>I use the letter v, but you can use the word username,<br>though can see that it is the username signal, that’s why I only use “v”.</p>
+<hr>
+<p>In a horrible mistake, some people give the signal dependencies,<br>so that you can log, v and another signal.</p>
+<p>And that second signal will be remembered as a dependency,<br>and now whenever “it” or the username changes the subscription will be reran.</p>
+<p>Don’t do that, do not make the signal more that a value holder,<br>that notifies subscribers on non-null value changes.</p>
+<hr>
+<p>Last week I was fool enough to tweak the non-null comparator,<br>to foolishly provide a customization isNull function.</p>
+<p>With just such a tiny change, you can no longer check if .value is null,<br>you now have to run .test() and then use the .value.</p>
+<p>I do believe it,<br>they used to call that a blivet.</p>
+<p>You must protect the simplicity of signals,<br>they are far too precious.</p>
+<p>Especially in context of User Interfaces,<br>something that is outside of JavaScript/ECMAscript design considerations.</p>
+<hr>
+<p>This simple signal can’t do much but notify on non null,<br>but that give you power, because your mind is good at simplicity.</p>
+<p>So we will make a map function, this is a signal utility,<br>and it should be both external where you can say map(usernameSignal, mapFunction)…</p>
+<p>But also, be good to yourself, create a class that extends Signal,<br>and give it a map method, that will call the reusable map function.</p>
+<p>With the “this” keyword,<br>as the first argument, and the given mapFunction as the second.</p>
+<p>And then return the result of the map function,<br>as the result of the map method.</p>
+<p>So you are just wrapping the method around the function,<br>setting this as first argument and mapFunction method argument as second.</p>
+<p>The keyword this,<br>is how objects refer to themselves, internally.</p>
+<p>So inside the usernameSignal, we don’t say usernameSignal,<br>because when we create the Signal…</p>
+<p>We have no clue what variable name the user will pick,<br>as they instantiate it at a later data.</p>
+<p>So we use the keyword “this”,<br>which always refers to the owner of the method.</p>
+<p>The difference between function and method,<br>is that functions are just programming language functions.</p>
+<p>Methods however,<br>are functions that belong to an object, and can use the keyword “this”.</p>
+<p>If you want to call another method of the object you are in,<br>you say “this” followed by the method name.</p>
+<hr>
+<p>The Signal extension,<br>is where the naming problem reveals it self.</p>
+<p>Our perfect little signal,<br>must be renamed to Pulse.</p>
+<p>You will often find yourself using pulses,<br>without any of the extras.</p>
+<p>But the extension that has map, is now what we will refer to as Signal,<br>so; externally no one will notice this change.</p>
+<p>But you will know, that if you don’t need anything extra,<br>you can just use a pulse – such is the world of programming.</p>
+<hr>
+<p>Map takes two argument, a signal to map, and a function,<br>to send the value of the signal through.</p>
+<p>So a map,<br>transforms or maps the value for the signal.</p>
+<p>And the way this is accomplished,<br>without ruining anything.</p>
+<p>Remember,<br>pulses and signals are precious,</p>
+<p>Is, by creating a new signal called mappedSignal,<br>subscribing to the given signal in this case usernameSignal.</p>
+<p>And taking that v of the usrname signal,<br>and passing it through the mapFunction…</p>
+<p>And then setting the mappedSignal value,<br>as the result of mapFunction(v);</p>
+<p>And remember that the v is the usernameSignal.value,<br>and then the map function and thus method return the mappedSignal.</p>
+<p>So when you call a map on a signal,<br>you get another and equally uniform signal.</p>
+<p>And it also has a map method,<br>so not the pulse bu signal.</p>
+<p>Just to give the fast version, map returns a new signal,<br>the mappedSignal.</p>
+<p>It is a standard signal as we have it here,<br>that subscribed to the signal that we fed into the map function.</p>
+<p>And then each time the signal we fed into the map function changes,<br>that new value is passed through mapFunction…</p>
+<p>and assigned to out mappedSignal,<br>that was returned from the mapped function.</p>
+<hr>
+<p>It does not get much more complicated than this,<br>this was the shot, and it dod not hurt.</p>
+<p>Just like the function of an object is called a method.<br>a function that operates on signals, alslo has a special name, that name is operator.</p>
+<p>So map is an operator,<br>there are many operators.</p>
+<p>You can look up Reactive Operators,<br>but don’t read the documentation.</p>
+<p>Instead, ask AI for a simple implementation,<br>that works with your pulse.</p>
+<p>To understand an operator,<br>you have to understand its code.</p>
+<p>It is pretty simple in our case we just pass the original signal value,<br>through the mapFunction, often referred to as predicate.</p>
+<hr>
+<p>So our mapFunction predicate,<br>is where we can add stuff to out username, not signals, but some text, like hello.</p>
+<p>We can now say  usernameSignal.value = “Alice”,<br>and say  usernameSignal.map(v=&gt;<code>Hello ${v}</code>).subscribe(v=&gt;console.log(v))</p>
+<p>And we will see “Hello Alice” in the console,<br>as the map function automatically subscribes us to usernameSignal.</p>
+<p>Which now that it holds the value of “Alice”,<br>instantly executes the subscription.</p>
+<p>Which means it sends its value Alice to the map subscriber,<br>which sends the v thorough the mappedSignal mapFunction predicate.</p>
+<p>And assigns to the value of the mappedSignal,<br>which then yet again….</p>
+<p>Instantly executes the subscription which just has console.log<br>that prints Hello Alice.</p>
+<hr>
+<p>It is not complexity you hear,<br>it is just English that sounds weird when describing program flow.</p>
+<p>Looking at the tiny snippet,<br>undoes all the tangled words.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/Signal.txt">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Allow me to remind us what Signals are</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/Signal.txt</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">reactive-programming</span><span class="chip">signal</span><span class="chip">pulse</span><span class="chip">operator</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/Signal.txt">
+              <span class="text-truncate">Allow me to remind us what Signals are</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/Signal.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>Signal.txt
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/no-comments.txt" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>no-comments.txt
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/99b5f923-b21d-40d1-8a43-bcaf10b2e891/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Learn Programming To Rise Above Poverty! Don’t Let Others Control Your Future</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/1049638a-cdde-48a6-87a3-db7aa393f216/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Signals, Signals: But What Can I Do With Them In My Laboratory?</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1049638a-cdde-48a6-87a3-db7aa393f216/">
+              <img src="https://catpea.github.io/chapter-13/poem-1965.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Signals, Signals: But What Can I Do With Them In My Laboratory?</span>
+                <span class="fg-3 fs-xs">July 18, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/99b5f923-b21d-40d1-8a43-bcaf10b2e891/">
+              <img src="https://catpea.github.io/chapter-13/poem-1963.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn Programming To Rise Above Poverty! Don’t Let Others Control Your Future</span>
+                <span class="fg-3 fs-xs">July 16, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/dd2ef9f5-0593-4af6-be85-49e35b9c7e7a/">
+              <img src="https://catpea.github.io/chapter-13/poem-1966.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Signals The Big Picture, And Then, You Just Continue Inventing</span>
+                <span class="fg-3 fs-xs">July 19, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d704b79b-91cc-49d4-9892-ed665549e0af/">
+              <img src="https://catpea.github.io/chapter-13/poem-1961.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Spooked By AI, Bravo Who? Or, The Invention Of Computer Hecking</span>
+                <span class="fg-3 fs-xs">July 14, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

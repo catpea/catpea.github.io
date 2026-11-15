@@ -1,168 +1,452 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learning Programming By Writing Cute Little Programs</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Learning Programming By Writing Cute Little Programs · Cat Pea</title>
+  <meta name="description" content="Programming is described as an adventure that starts with simple function calls and grows through loops, conditionals, and relational databases that structure data like spreadsheets; authentication is handled via cookies or JSON web tokens, while HTTP servers (often built with frameworks such as Koa) expose API endpoints for sign‑up/sign‑in and user‑specific actions. Testing these endpoints is encouraged with tools like cURL, and the evolving UI landscape—Bootstrap, Svelte, and others—is acknowledged, along with WebSockets that enable real‑time server updates. The post concludes by urging readers to write many small programs to grasp each concept, turning experimentation into a learning tool for mastering both back‑end and front‑end development.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/56f2813f-6c07-4281-a572-a37d8e773113/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Learning Programming By Writing Cute Little Programs · Cat Pea">
+  <meta property="og:description" content="Programming is described as an adventure that starts with simple function calls and grows through loops, conditionals, and relational databases that structure data like spreadsheets; authentication is handled via cookies or JSON web tokens, while HTTP servers (often built with frameworks such as Koa) expose API endpoints for sign‑up/sign‑in and user‑specific actions. Testing these endpoints is encouraged with tools like cURL, and the evolving UI landscape—Bootstrap, Svelte, and others—is acknowledged, along with WebSockets that enable real‑time server updates. The post concludes by urging readers to write many small programs to grasp each concept, turning experimentation into a learning tool for mastering both back‑end and front‑end development.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-06/poem-1139.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-06/">Chapter 06</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1139</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-06/poem-1139.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-06/poem-1139.avif" alt="Learning Programming By Writing Cute Little Programs"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Learning Programming By Writing Cute Little Programs</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-06/poem-1139.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 06</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1139</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Learning Programming By Writing Cute Little Programs</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-04-15">4/14/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming is an adventure, very often you make your way downwards,
-as it to search for a starting point to your invention.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And once you have nowhere to go,
-you begin building your way up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is adventurer stuff,
-or at the very least a great text adventure game.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are very few things that one needs to know,
-programming is all about functions calling functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you have a list, you loop over it,
-when you have questions you use if/else statements.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming is so easy,
-that the languages are not the problem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is knowing where to go next,
-what the limits are, where the good decisions are.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But guess what, all the good places in your adventures,
-have cities built around them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or application ecosystems,
-the long term popular things are good pointers of where to go.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Relational databases, which is just grids of data, like spreadsheets,
-but the spreadsheets share fields like user id from users table…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Will pop up in the songs table,
-where you can relate users to their songs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Start all of your inventions,
-by making tables of your data, and figure out how to relate them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On top of that, goes authentication, cookies are neat,
-very classy, but JSON web tokens are neat too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These things sit in the users browser,
-reminding your HTTP server, who the user is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your HTTP server, pulls data from your relational tables,
-so it needs to know the user ID.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">HTTP servers are super simple,
-so simple that it is easier to make a custom one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Piece it together out of community provided plugins,
-I use koa, but that is just because I am waiting on the new version of express.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When a browser connects to your server, it sends a request,
-and that will come up as the arguments to your HTTP server functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is how your signUp, or signIn function,
-will receive the user and password arguments.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The browser sends a request to your HTTP server,
-and you make a response, send a cookie, or your JSON token.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">API is an unfinished application,
-it is a list of functions your HTTP server can execute.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first functions you need to write is, signUp(),
-and then signIn() which if user name and password is correct, gives your browser a cookie, or a token to hang on to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then you create API functions that require a valid user,
-updateProfile(), makePlaylist(), addSong(), addSongToPlaylist().</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All of these need to know who the user is,
-so that these functions execute under the correct account.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A lot of people use cUrl here, it is a command line utility,
-usually ran on the black terminal screen they show in Hacker movies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">cUrl makes requests to HTTP servers,
-and prints out their replies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you can test everything out,
-ling before you have a user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A lot of people will laugh at using cUrl,
-and whip out some massive over-engineered mistake as proof.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the cUrl way, cannot be beat,
-because it is the simplest possible way to communicate with an HTTP server.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The UI technologies are still evolving,
-Bootstrap the CSS Framework, and Svelte the Programming System are on top right now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are other technologies that seem more popular,
-but that is because programmers got stuck with them, and keep using them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">User Interface is not a solved problem, and sticking to older frameworks,
-only makes it worse.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will find great comfort in WebSockets, the npm ws library,
-could not be simpler, and you only install it on the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your browser is ready to communicate with it,
-WebSockets make a persistent connection…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And can keep pumping updates from your database to the UI,
-the server will send stuff into your browser without asking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">HTTP is more efficent, but WebSockets,
-make application programming easier because it will send in data as it changes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The way to get a hang of all this,
-is to write hundreds of cute little programs that explore whatever calls to you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a big deal,
-this is about creating tools that help your understanding.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Being confused about Relational Databases, for example,
-means that you have to write a little program that helps you visualize them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Maybe more than one, and same goes for HTTP servers,
-just make an HTTP server in nodejs’s koa…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And make a page that lists everything, shows your routes,
-shows the request and response HTTP headers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The same thing applies to UI, if you don’t know where to start learning svelte,
-just make a login page, that will help you study Web Tokens or Cookies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would be the most beautiful login pop-up,
-that opens to a blank page that you can program later.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is one thing that is strange about computers,
-they want to help you learn to program them.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-04-15T03:10:38.649Z">April 14, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:04<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-06/poem-1139.avif" aria-label="Cover for Learning Programming By Writing Cute Little Programs, full size">
+            <img src="https://catpea.github.io/chapter-06/poem-1139.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Learning Programming By Writing Cute Little Programs" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:04
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-06/poem-1139.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-06/poem-1139.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-06/poem-1139.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Programming is an adventure, very often you make your way downwards,<br>as it to search for a starting point to your invention.</p>
+<p>And once you have nowhere to go,<br>you begin building your way up.</p>
+<p>This is adventurer stuff,<br>or at the very least a great text adventure game.</p>
+<hr>
+<p>There are very few things that one needs to know,<br>programming is all about functions calling functions.</p>
+<p>If you have a list, you loop over it,<br>when you have questions you use if/else statements.</p>
+<p>Programming is so easy,<br>that the languages are not the problem.</p>
+<p>It is knowing where to go next,<br>what the limits are, where the good decisions are.</p>
+<hr>
+<p>But guess what, all the good places in your adventures,<br>have cities built around them.</p>
+<p>Or application ecosystems,<br>the long term popular things are good pointers of where to go.</p>
+<p>Relational databases, which is just grids of data, like spreadsheets,<br>but the spreadsheets share fields like user id from users table…</p>
+<p>Will pop up in the songs table,<br>where you can relate users to their songs.</p>
+<p>Start all of your inventions,<br>by making tables of your data, and figure out how to relate them.</p>
+<p>On top of that, goes authentication, cookies are neat,<br>very classy, but JSON web tokens are neat too.</p>
+<p>These things sit in the users browser,<br>reminding your HTTP server, who the user is.</p>
+<p>Your HTTP server, pulls data from your relational tables,<br>so it needs to know the user ID.</p>
+<p>HTTP servers are super simple,<br>so simple that it is easier to make a custom one.</p>
+<p>Piece it together out of community provided plugins,<br>I use koa, but that is just because I am waiting on the new version of express.</p>
+<p>When a browser connects to your server, it sends a request,<br>and that will come up as the arguments to your HTTP server functions.</p>
+<p>That is how your signUp, or signIn function,<br>will receive the user and password arguments.</p>
+<p>The browser sends a request to your HTTP server,<br>and you make a response, send a cookie, or your JSON token.</p>
+<hr>
+<p>API is an unfinished application,<br>it is a list of functions your HTTP server can execute.</p>
+<p>The first functions you need to write is, signUp(),<br>and then signIn() which if user name and password is correct, gives your browser a cookie, or a token to hang on to.</p>
+<p>Then you create API functions that require a valid user,<br>updateProfile(), makePlaylist(), addSong(), addSongToPlaylist().</p>
+<p>All of these need to know who the user is,<br>so that these functions execute under the correct account.</p>
+<p>A lot of people use cUrl here, it is a command line utility,<br>usually ran on the black terminal screen they show in Hacker movies.</p>
+<p>cUrl makes requests to HTTP servers,<br>and prints out their replies.</p>
+<p>So you can test everything out,<br>ling before you have a user interface.</p>
+<p>A lot of people will laugh at using cUrl,<br>and whip out some massive over-engineered mistake as proof.</p>
+<p>But the cUrl way, cannot be beat,<br>because it is the simplest possible way to communicate with an HTTP server.</p>
+<hr>
+<p>The UI technologies are still evolving,<br>Bootstrap the CSS Framework, and Svelte the Programming System are on top right now.</p>
+<p>There are other technologies that seem more popular,<br>but that is because programmers got stuck with them, and keep using them.</p>
+<p>User Interface is not a solved problem, and sticking to older frameworks,<br>only makes it worse.</p>
+<hr>
+<p>You will find great comfort in WebSockets, the npm ws library,<br>could not be simpler, and you only install it on the server.</p>
+<p>Your browser is ready to communicate with it,<br>WebSockets make a persistent connection…</p>
+<p>And can keep pumping updates from your database to the UI,<br>the server will send stuff into your browser without asking.</p>
+<p>HTTP is more efficent, but WebSockets,<br>make application programming easier because it will send in data as it changes.</p>
+<hr>
+<p>The way to get a hang of all this,<br>is to write hundreds of cute little programs that explore whatever calls to you.</p>
+<p>This is a big deal,<br>this is about creating tools that help your understanding.</p>
+<p>Being confused about Relational Databases, for example,<br>means that you have to write a little program that helps you visualize them.</p>
+<p>Maybe more than one, and same goes for HTTP servers,<br>just make an HTTP server in nodejs’s koa…</p>
+<p>And make a page that lists everything, shows your routes,<br>shows the request and response HTTP headers.</p>
+<p>The same thing applies to UI, if you don’t know where to start learning svelte,<br>just make a login page, that will help you study Web Tokens or Cookies.</p>
+<p>It would be the most beautiful login pop-up,<br>that opens to a blank page that you can program later.</p>
+<hr>
+<p>That is one thing that is strange about computers,<br>they want to help you learn to program them.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">koa</span><span class="chip">nodejs</span><span class="chip">http server</span><span class="chip">curl</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://www.pexels.com/photo/black-and-silver-laptop-computer-on-round-brown-wooden-table-1181243/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://www.pexels.com/photo/black-and-silver-laptop-computer-on-round-brown-wooden-table-1181243/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/4ecfbba5-3e8c-4a7c-b6cc-852d6b4059f3/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Human Culture Is A Culture Of Greatness, And Growing Up, Is For All</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/6e230179-11c7-42c0-8a83-473c4564d5dc/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Where To Begin In Life</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5500d6ea-5036-406e-9a8e-63d54ac407dd/">
+              <img src="https://catpea.github.io/chapter-06/poem-1141.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming, The Fourth Subject; Or, Start Learning In The Middle With Promising Blank Platforms</span>
+                <span class="fg-3 fs-xs">April 16, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e180a7ec-9b03-4f76-9595-592c6a90c742/">
+              <img src="https://catpea.github.io/chapter-06/poem-1137.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Really Neat</span>
+                <span class="fg-3 fs-xs">April 12, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a132dd21-fe71-497b-ac47-2de2a82d80b3/">
+              <img src="https://catpea.github.io/chapter-06/poem-1143.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Not Hard; You Just Need Real Context</span>
+                <span class="fg-3 fs-xs">April 18, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9a153794-42fc-4683-b06b-297572e357d2/">
+              <img src="https://catpea.github.io/chapter-06/poem-1135.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">I Don’t Even; Or, Rebellious Web Design Is Super Fine</span>
+                <span class="fg-3 fs-xs">April 10, 2023</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

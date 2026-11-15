@@ -1,175 +1,455 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Automatic AI Magic; Or, How I Am Experimenting With AI Today</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Automatic AI Magic; Or, How I Am Experimenting With AI Today · Cat Pea</title>
+  <meta name="description" content="I’m building a visual programming language for busy young people that feels like a computer game but lets them wield powerful agent‑based components—simple nodes connected by input/output ports, much like Linux pipes. I’ll ship an empty framework plus AI (local or commercial) that can generate “genius” code blocks such as circuit breakers, request queues, and checkout agents; users can regenerate these snippets as the AI improves. The core UI will be JavaScript‑based, with a server version that works without the UI, and I’ll add automatic cross‑language generation (Python, PHP, Perl, ASP, etc.) complete with tests so the language outputs stable, secure code in any target language while staying human‑friendly and game‑like.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/af6b60a6-0df0-4c0d-bb2c-0befbc8c7d6e/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Automatic AI Magic; Or, How I Am Experimenting With AI Today · Cat Pea">
+  <meta property="og:description" content="I’m building a visual programming language for busy young people that feels like a computer game but lets them wield powerful agent‑based components—simple nodes connected by input/output ports, much like Linux pipes. I’ll ship an empty framework plus AI (local or commercial) that can generate “genius” code blocks such as circuit breakers, request queues, and checkout agents; users can regenerate these snippets as the AI improves. The core UI will be JavaScript‑based, with a server version that works without the UI, and I’ll add automatic cross‑language generation (Python, PHP, Perl, ASP, etc.) complete with tests so the language outputs stable, secure code in any target language while staying human‑friendly and game‑like.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1704.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1704</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1704.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1704.avif" alt="Automatic AI Magic; Or, How I Am Experimenting With AI Today"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Automatic AI Magic; Or, How I Am Experimenting With AI Today</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1704.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1704</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Automatic AI Magic; Or, How I Am Experimenting With AI Today</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-10-31">10/30/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I am working on a visual programming language,
-specifically aimed at busy young people.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want it to feel like a computer game,
-and I want it to make the young programmer powerful</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Being able to dominate enemies ruins a game,
-but it does make, a visual programming language.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All of this is a lot simpler than it sounds,
-you build a network of virtual people, called agents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By connecting them together,
-with lines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The lines attach from output port of one agent,
-to the input port of another.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Linux Operating System does the same thing,
-here the agent is a command…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the ports are called standard input,
-and standard output.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I push up, to create a concept of an agent inbox,
-and relay on the Agent/Supervisor programming model and beyond.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In short,
-the design, is very human.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is easy for me to program the User Interface,
-and it already feels a bit like a game – I enjoy it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to make the young programmer powerful,
-is a fun little challenge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t know, what commands or agents they will need,
-and I wouldn&#39;t want to create basic ones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t want to ship a program with basic building blocks,
-that then are used to create more complex things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This would be boring, and it would ask the busy young programmer,
-to invest their time in expanding my program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As they build the components they need,
-and share, and sell, and debug – this would be too much to ask.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I like to hope to ship an empty,
-visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you guessed it,
-with an interface to use an AI, be it a local ollama or a commercial one.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I already tested how simple models behave,
-when I ask them to design a program that relies on the agent programming model.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The simple AI I tested, created both agent networks,
-and agent actions, things that the agents are supposed to handle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So a checkout agent, would for example have,
-return to cart, and pay with card.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am sure the AI is not perfect at it,
-but it assists perfectly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To me a checkout agent is a very large program component,
-it would be just a few lines of code, using stripe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But such large functionality,
-does not help the user build a custom program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I sat down today, to ask the AI,
-to surprise me with genius level code, that deal with program flow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the AI created incredible,
-little machines, in deed genius level stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it is important to note,
-that I did not ask the AI for anything specific, jus that it should be genius.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just like that, the AI,
-begun returning little programming blocks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One that stands out is a circuit breaker,
-when a download fails twice, a circuit is broken for 10 seconds.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The program sits and waits, giving the server time,
-instead of resubmitting requests.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Anointer little machine, of the 10 I generated,
-controlled how many programs can run at the same time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Queuing up, new requests, and returning to fulfill them,
-when there is room.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without even mentioning a visual programming language,
-I got the AI to create brilliant little building blocks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That in deed will make a busy young programmer,
-extremely powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Being a firm believer that code is liability,
-I will ship the description of these little blocks, along with some starter library.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way the programmers can regenerate the genius blocks,
-with ever more powerful AI as the time goes on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While I generate code that uses these blocks,
-to create a server version of the programmers application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One that does not rely,
-on the visual programming language, user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is yet a third magical step here,
-and that is regenerating the code in any language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I come from the world of Visual Basic, Perl, PHP, and ActionScript,
-and I adore JavaScript, to me modern JavaScript is the promised Perl.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it won’t take much effort, to convert the JavaScript,
-to Python, PHP, Perl 5 and 6, and even ASP, and perhaps strongly typed languages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is the building blocks, the agents,
-that very nearly promise this may just work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The agents are simple, the AI can describe what it generated in great detail,
-it can add matching tests, in multiple languages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So my visual programming language, written in JavaScript,
-with the help of AI may just be able to output code for all other languages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would test it for stability, memory leaks,
-and security problems.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing, the world has changed,
-completely.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And so quickly,
-that we’ll probably never have time to complain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As new marvels are headed are way,
-and so much more quickly now, precisely because of AI.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-10-31T03:39:21.212Z">October 30, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:09<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1704.avif" aria-label="Cover for Automatic AI Magic; Or, How I Am Experimenting With AI Today, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1704.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Automatic AI Magic; Or, How I Am Experimenting With AI Today" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:09
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1704.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1704.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1704.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I am working on a visual programming language,<br>specifically aimed at busy young people.</p>
+<p>I want it to feel like a computer game,<br>and I want it to make the young programmer powerful</p>
+<p>Being able to dominate enemies ruins a game,<br>but it does make, a visual programming language.</p>
+<hr>
+<p>All of this is a lot simpler than it sounds,<br>you build a network of virtual people, called agents.</p>
+<p>By connecting them together,<br>with lines.</p>
+<p>The lines attach from output port of one agent,<br>to the input port of another.</p>
+<p>The Linux Operating System does the same thing,<br>here the agent is a command…</p>
+<p>And the ports are called standard input,<br>and standard output.</p>
+<p>But I push up, to create a concept of an agent inbox,<br>and relay on the Agent/Supervisor programming model and beyond.</p>
+<p>In short,<br>the design, is very human.</p>
+<hr>
+<p>It is easy for me to program the User Interface,<br>and it already feels a bit like a game – I enjoy it.</p>
+<p>But to make the young programmer powerful,<br>is a fun little challenge.</p>
+<p>I don’t know, what commands or agents they will need,<br>and I wouldn&#39;t want to create basic ones.</p>
+<p>I don’t want to ship a program with basic building blocks,<br>that then are used to create more complex things.</p>
+<p>This would be boring, and it would ask the busy young programmer,<br>to invest their time in expanding my program.</p>
+<p>As they build the components they need,<br>and share, and sell, and debug – this would be too much to ask.</p>
+<hr>
+<p>I like to hope to ship an empty,<br>visual programming language.</p>
+<p>And you guessed it,<br>with an interface to use an AI, be it a local ollama or a commercial one.</p>
+<hr>
+<p>I already tested how simple models behave,<br>when I ask them to design a program that relies on the agent programming model.</p>
+<p>The simple AI I tested, created both agent networks,<br>and agent actions, things that the agents are supposed to handle.</p>
+<p>So a checkout agent, would for example have,<br>return to cart, and pay with card.</p>
+<p>I am sure the AI is not perfect at it,<br>but it assists perfectly.</p>
+<p>To me a checkout agent is a very large program component,<br>it would be just a few lines of code, using stripe.</p>
+<p>But such large functionality,<br>does not help the user build a custom program.</p>
+<p>So I sat down today, to ask the AI,<br>to surprise me with genius level code, that deal with program flow.</p>
+<p>And the AI created incredible,<br>little machines, in deed genius level stuff.</p>
+<p>But it is important to note,<br>that I did not ask the AI for anything specific, jus that it should be genius.</p>
+<p>And just like that, the AI,<br>begun returning little programming blocks.</p>
+<p>One that stands out is a circuit breaker,<br>when a download fails twice, a circuit is broken for 10 seconds.</p>
+<p>The program sits and waits, giving the server time,<br>instead of resubmitting requests.</p>
+<p>Anointer little machine, of the 10 I generated,<br>controlled how many programs can run at the same time.</p>
+<p>Queuing up, new requests, and returning to fulfill them,<br>when there is room.</p>
+<hr>
+<p>Without even mentioning a visual programming language,<br>I got the AI to create brilliant little building blocks.</p>
+<p>That in deed will make a busy young programmer,<br>extremely powerful.</p>
+<p>Being a firm believer that code is liability,<br>I will ship the description of these little blocks, along with some starter library.</p>
+<p>This way the programmers can regenerate the genius blocks,<br>with ever more powerful AI as the time goes on.</p>
+<p>While I generate code that uses these blocks,<br>to create a server version of the programmers application.</p>
+<p>One that does not rely,<br>on the visual programming language, user interface.</p>
+<p>There is yet a third magical step here,<br>and that is regenerating the code in any language.</p>
+<p>I come from the world of Visual Basic, Perl, PHP, and ActionScript,<br>and I adore JavaScript, to me modern JavaScript is the promised Perl.</p>
+<p>But it won’t take much effort, to convert the JavaScript,<br>to Python, PHP, Perl 5 and 6, and even ASP, and perhaps strongly typed languages.</p>
+<p>And it is the building blocks, the agents,<br>that very nearly promise this may just work.</p>
+<p>The agents are simple, the AI can describe what it generated in great detail,<br>it can add matching tests, in multiple languages.</p>
+<p>So my visual programming language, written in JavaScript,<br>with the help of AI may just be able to output code for all other languages.</p>
+<p>It would test it for stability, memory leaks,<br>and security problems.</p>
+<hr>
+<p>In closing, the world has changed,<br>completely.</p>
+<p>And so quickly,<br>that we’ll probably never have time to complain.</p>
+<p>As new marvels are headed are way,<br>and so much more quickly now, precisely because of AI.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">visual programming language</span><span class="chip">agent programming</span><span class="chip">ai code generation</span><span class="chip">javascript</span><span class="chip">cross-language compilation</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/c17c0fce-236b-4084-85e3-6278f871f837/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">A Tiny Halloween Discovery For Dance Instructors</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/045834a0-21fa-46e2-8bd5-0bab25e5967a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Artificial Intelligence Helps</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3b84a8b7-0da2-491c-bb68-ac7f6250eefb/">
+              <img src="https://catpea.github.io/chapter-11/poem-1708.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Is Programming Fun?</span>
+                <span class="fg-3 fs-xs">November 4, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/84e0e0cd-2176-4970-ac4f-f50fd1d39fed/">
+              <img src="https://catpea.github.io/chapter-11/poem-1700.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">This Halloween Become A Real Wizard</span>
+                <span class="fg-3 fs-xs">October 27, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0d17b807-7e68-4704-bad6-0aa50b07b240/">
+              <img src="https://catpea.github.io/chapter-11/poem-1709.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Late; Or, Adventure And Invention</span>
+                <span class="fg-3 fs-xs">November 5, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/89f2ae8b-3931-42c8-8e7e-4046a0bb3375/">
+              <img src="https://catpea.github.io/chapter-11/poem-1687.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Are Your Programmers Even Programming?</span>
+                <span class="fg-3 fs-xs">October 13, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

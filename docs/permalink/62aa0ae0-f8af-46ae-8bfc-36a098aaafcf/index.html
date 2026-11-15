@@ -1,190 +1,468 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think · Cat Pea</title>
+  <meta name="description" content="The post guides you through setting up Node.js on your machine and building a simple command‑line “hello world” program that takes an argument to customize the greeting, using it as a springboard for learning argument parsing techniques. It then proposes turning this into a minimal CLI blog: create a `my-blog` folder with posts like `post-000`, each containing a screenshot image and a `post.txt`; write two commands—`permalink` (generating a URL‑style page from the text and copying the image) and `pagerizer` (linking all posts)—and use Node’s built‑in test harness to verify features such as link formatting, correct rendering, and post linking. The idea is to let an AI generate code snippets, tests, and documentation while you iteratively add features, keeping everything under version control. Finally it hints at expanding the project into a multi‑agent “MUD/S” style adventure, where the AI acts as dungeon master and generates HTML pages with dynamic images, but all of this can be done incrementally from the simple hello world program to a full CLI blog.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/62aa0ae0-f8af-46ae-8bfc-36a098aaafcf/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think · Cat Pea">
+  <meta property="og:description" content="The post guides you through setting up Node.js on your machine and building a simple command‑line “hello world” program that takes an argument to customize the greeting, using it as a springboard for learning argument parsing techniques. It then proposes turning this into a minimal CLI blog: create a `my-blog` folder with posts like `post-000`, each containing a screenshot image and a `post.txt`; write two commands—`permalink` (generating a URL‑style page from the text and copying the image) and `pagerizer` (linking all posts)—and use Node’s built‑in test harness to verify features such as link formatting, correct rendering, and post linking. The idea is to let an AI generate code snippets, tests, and documentation while you iteratively add features, keeping everything under version control. Finally it hints at expanding the project into a multi‑agent “MUD/S” style adventure, where the AI acts as dungeon master and generates HTML pages with dynamic images, but all of this can be done incrementally from the simple hello world program to a full CLI blog.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2139.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2139</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2139.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2139.avif" alt="This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2139.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2139</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-01-08">1/7/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">First your programming language should be JavaScript,
-because it runs everywhere, and leaves optimizations to AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Install <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nodejs.org/en">node.js</a> on your computer,
-and ask a public AI to help you create a hello world command line program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That accepts an argument that changes Hello World,
-to whatever you give it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ask it to show you some nice ways of parsing command line arguments,
-such a list is a wonderful introduction to more serious things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But don’t worry about programming yet,
-In the age of AI, you don’t have to write code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you do need to know how to ask the AI,
-so that your project does something meaningful for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here most people would probably mention creating a WikiWiki,
-but we should stay on the command line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">Command-line is the first thing programmers trully loved</a>,
-they always complained about the punch cards, and moths.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a really great project for the command line is a blog,
-a diary of learning programming that you upload to the internet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here, you begin with creating a folder, called my blog,
-and inside a folder called “post-000” programmers start at zero.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will need an image, a screenshot will work,
-and a text file named post.txt.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will need two commands, to create permalinks,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="http://www.example.com/permalink/post-000">www.example.com/permalink/post-000</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And index pages, index.html loads automatically,
-but you also need an older posts button on the bottom.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You should think of these as two separate commands,
-permalink and pagerizer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now that you have folders, and are aware of two commands.
-You can write a program and test request for the AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Normally, this would not be a big deal,
-but there is something really important here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell the AI what the permalink should do,
-convert text to a web page, and copy your image.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And follow up with, a test request,
-to that you can test if your commands have all the features.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Node.js comes with a built in test harness,
-be sure to tell the AI to use that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now when you add a new feature,
-you can test for it, before it is complete.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can add link support to your text files,
-and AI will write a test is the links are well formed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It can also add more complex tests,
-like checking is the pagerizer linked all your blog posts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in the future, as things get more complicated,
-you can ask AI to create the feature tests firtst.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Markdown support, a files folder for every post,
-and options file, that will hold timestamps, and maybe tag support.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tests are a lot easier to create,
-than complete features.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tut they also give the AI a way to <em>AUTOMATICALLY</em> verify,
-that they are correctly implementing features you need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in the future, if you enjoy working this way,
-you can become more open about test.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And instead of saying this command does not exist,
-or showing an error, take the WikiWiki approach, and say.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This command, is only 30% complete, missing 7 features,
-and then create a system summary report system 75% complete.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way or the more traditions, you can map out very large programs,
-before they get their commands, or features.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can do this on your phone, in a simple text file,
-that you then ask the AI to convert into node js test harness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And even though you test becomes code, and you are still new,
-you stay in control.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And your curiosity alone,
-will have you exploring all the code bits.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now just in case you thought this was a little to simple,
-let me introduce you to the very simple concept of MUD/S.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And before I mention anything, note that you should play,
-with and against powerful artificial intelligence agents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A mud is short for “Multi-user dungeon”,
-but you should invent an Multi-agent dungeon.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And your Dungeon-master, the AI tasked with weaving an interesting story,
-should be informed to take you to places you would have never expected.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Swiftly switching environment, like Indiana Jones movies,
-environments should include star ships, and time travel and mysteries.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can ask AI to create an HTML version,
-that you can enjoy in your browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And there you can have images generated on the fly,
-that capture your unique, one of a kind story line.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">None of this requires programming on your end,
-but it does ask that you install node, and enjoy hello world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then make super tiny blog,
-so that you start baby steps first.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-01-08T02:11:44.222Z">January 7, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:08<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2139.avif" aria-label="Cover for This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2139.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for This Is A Wonderful Time To Learn Programming And It Is Easier And More Fascinating Than You Think" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:08
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2139.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2139.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2139.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>First your programming language should be JavaScript,<br>because it runs everywhere, and leaves optimizations to AI.</p>
+<p>Install <a href="https://nodejs.org/en">node.js</a> on your computer,<br>and ask a public AI to help you create a hello world command line program.</p>
+<p>That accepts an argument that changes Hello World,<br>to whatever you give it.</p>
+<p>Ask it to show you some nice ways of parsing command line arguments,<br>such a list is a wonderful introduction to more serious things.</p>
+<p>But don’t worry about programming yet,<br>In the age of AI, you don’t have to write code.</p>
+<p>But you do need to know how to ask the AI,<br>so that your project does something meaningful for you.</p>
+<p>Here most people would probably mention creating a WikiWiki,<br>but we should stay on the command line.</p>
+<p><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">Command-line is the first thing programmers trully loved</a>,<br>they always complained about the punch cards, and moths.</p>
+<hr>
+<p>And a really great project for the command line is a blog,<br>a diary of learning programming that you upload to the internet.</p>
+<p>And here, you begin with creating a folder, called my blog,<br>and inside a folder called “post-000” programmers start at zero.</p>
+<p>You will need an image, a screenshot will work,<br>and a text file named post.txt.</p>
+<p>You will need two commands, to create permalinks,<br><a href="http://www.example.com/permalink/post-000">www.example.com/permalink/post-000</a></p>
+<p>And index pages, index.html loads automatically,<br>but you also need an older posts button on the bottom.</p>
+<p>You should think of these as two separate commands,<br>permalink and pagerizer.</p>
+<p>Now that you have folders, and are aware of two commands.<br>You can write a program and test request for the AI.</p>
+<p>Normally, this would not be a big deal,<br>but there is something really important here.</p>
+<p>Tell the AI what the permalink should do,<br>convert text to a web page, and copy your image.</p>
+<p>And follow up with, a test request,<br>to that you can test if your commands have all the features.</p>
+<p>Node.js comes with a built in test harness,<br>be sure to tell the AI to use that.</p>
+<p>Now when you add a new feature,<br>you can test for it, before it is complete.</p>
+<p>You can add link support to your text files,<br>and AI will write a test is the links are well formed.</p>
+<p>It can also add more complex tests,<br>like checking is the pagerizer linked all your blog posts.</p>
+<p>And in the future, as things get more complicated,<br>you can ask AI to create the feature tests firtst.</p>
+<p>Markdown support, a files folder for every post,<br>and options file, that will hold timestamps, and maybe tag support.</p>
+<p>Tests are a lot easier to create,<br>than complete features.</p>
+<p>Tut they also give the AI a way to <em>AUTOMATICALLY</em> verify,<br>that they are correctly implementing features you need.</p>
+<p>And in the future, if you enjoy working this way,<br>you can become more open about test.</p>
+<p>And instead of saying this command does not exist,<br>or showing an error, take the WikiWiki approach, and say.</p>
+<p>This command, is only 30% complete, missing 7 features,<br>and then create a system summary report system 75% complete.</p>
+<p>This way or the more traditions, you can map out very large programs,<br>before they get their commands, or features.</p>
+<p>You can do this on your phone, in a simple text file,<br>that you then ask the AI to convert into node js test harness.</p>
+<p>And even though you test becomes code, and you are still new,<br>you stay in control.</p>
+<p>And your curiosity alone,<br>will have you exploring all the code bits.</p>
+<hr>
+<p>Now just in case you thought this was a little to simple,<br>let me introduce you to the very simple concept of MUD/S.</p>
+<p>And before I mention anything, note that you should play,<br>with and against powerful artificial intelligence agents.</p>
+<p>A mud is short for “Multi-user dungeon”,<br>but you should invent an Multi-agent dungeon.</p>
+<p>And your Dungeon-master, the AI tasked with weaving an interesting story,<br>should be informed to take you to places you would have never expected.</p>
+<p>Swiftly switching environment, like Indiana Jones movies,<br>environments should include star ships, and time travel and mysteries.</p>
+<p>You can ask AI to create an HTML version,<br>that you can enjoy in your browser.</p>
+<p>And there you can have images generated on the fly,<br>that capture your unique, one of a kind story line.</p>
+<hr>
+<p>None of this requires programming on your end,<br>but it does ask that you install node, and enjoy hello world.</p>
+<p>And then make super tiny blog,<br>so that you start baby steps first.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nodejs.org/en">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>node.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nodejs.org/en</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Command-line is the first thing programmers trully loved</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=tc4ROCJYbm0</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="http://www.example.com/permalink/post-000">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>www.example.com/permalink/post-000</span>
-                      <small class="d-block text-muted fw-lighter mt-2">http://www.example.com/permalink/post-000</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">nodejs</span><span class="chip">javascript</span><span class="chip">command-line</span><span class="chip">helloworld</span><span class="chip">ai</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nodejs.org/en">
+              <span class="text-truncate">node.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nodejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">
+              <span class="text-truncate">Command-line is the first thing programmers trully loved</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="http://www.example.com/permalink/post-000">
+              <span class="text-truncate">www.example.com/permalink/post-000</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.example.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/13497e39-b8a8-459b-befe-559f39bbd190/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">There Is No Program</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/41e00707-be0c-4515-a5db-9ef264740f77/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">School Is Out And AI Is In; Or, Learning With Artificial Intelligence</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0281e093-474d-4802-9dc9-6c9112aa143a/">
+              <img src="https://catpea.github.io/chapter-15/poem-2141.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Before Learning Programming</span>
+                <span class="fg-3 fs-xs">January 9, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/13497e39-b8a8-459b-befe-559f39bbd190/">
+              <img src="https://catpea.github.io/chapter-14/poem-2138.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">There Is No Program</span>
+                <span class="fg-3 fs-xs">January 6, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/74a8cdb9-19fe-4e9d-9bf0-7ee775591613/">
+              <img src="https://catpea.github.io/chapter-15/poem-2142.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming With AI: Fight Like A Butterfly Or Die Like A Fly</span>
+                <span class="fg-3 fs-xs">January 10, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e11cf138-ff4e-45f7-b748-bfa1a95ca868/">
+              <img src="https://catpea.github.io/chapter-14/poem-2137.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia</span>
+                <span class="fg-3 fs-xs">January 5, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

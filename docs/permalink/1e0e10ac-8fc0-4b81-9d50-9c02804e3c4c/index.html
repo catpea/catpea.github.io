@@ -1,191 +1,478 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fancy Little JavaScript Programming Ideas For Cold Winter Nights</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Fancy Little JavaScript Programming Ideas For Cold Winter Nights · Cat Pea</title>
+  <meta name="description" content="Learning programming can be a joyful journey fueled by artificial intelligence, and the post outlines a practical setup with Node.js, Zed Code Editor, and a local AI assistant powered by llama.cpp or Ollama to generate JavaScript code on demand. It encourages experimenting across a spectrum of projects—from simple CLI “hello world” scripts that teach argument parsing and state machines, to web servers using pastebin/WikiWiki style pages for data exchange; MUDs with friendly AI characters; coding agents that dispatch JavaScript objects as tools; Electron‑based editors; CodeMirror components; procedurally generated 3D worlds; pixel‑art screensavers or games driven by flocking state machines; to even crafting 3D models from AI‑generated art for printing or metal casting—each project illustrating how AI can scaffold code, data flow, and user interfaces while letting developers focus on creative ideas.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/1e0e10ac-8fc0-4b81-9d50-9c02804e3c4c/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fancy Little JavaScript Programming Ideas For Cold Winter Nights · Cat Pea">
+  <meta property="og:description" content="Learning programming can be a joyful journey fueled by artificial intelligence, and the post outlines a practical setup with Node.js, Zed Code Editor, and a local AI assistant powered by llama.cpp or Ollama to generate JavaScript code on demand. It encourages experimenting across a spectrum of projects—from simple CLI “hello world” scripts that teach argument parsing and state machines, to web servers using pastebin/WikiWiki style pages for data exchange; MUDs with friendly AI characters; coding agents that dispatch JavaScript objects as tools; Electron‑based editors; CodeMirror components; procedurally generated 3D worlds; pixel‑art screensavers or games driven by flocking state machines; to even crafting 3D models from AI‑generated art for printing or metal casting—each project illustrating how AI can scaffold code, data flow, and user interfaces while letting developers focus on creative ideas.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2144.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2144</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2144.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2144.avif" alt="Fancy Little JavaScript Programming Ideas For Cold Winter Nights"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Fancy Little JavaScript Programming Ideas For Cold Winter Nights</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2144.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2144</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Fancy Little JavaScript Programming Ideas For Cold Winter Nights</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-01-13">1/12/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning programming is one of the most beautiful things we can do,
-there is no correct or best way to start.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our devices are different, operating systems are different,
-and of course our curiosities differ.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am really into visual programming languages,
-they are the bright burning light to my clumsy fat moth.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will tell you what my setup is,
-without asking you to setup the same.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I strongly encourage you to have your AI always write in,
-modern client-side JavaScript, or server side node.js JavaScript.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I use node.js from <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nodejs.org/">https://nodejs.org/</a>,
-Zed Code Editor from <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://zed.dev/">https://zed.dev/</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a local AI coding assistant with tool use ability,
-via llama.cpp and zed editor.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If your computer can handle it install <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://lmstudio.ai/">https://lmstudio.ai/</a>
-of if you don’t mind the command-line <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ollama.com/">https://ollama.com/</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No matter my setup, I always just use chat AI,
-I get my best code from there.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think the best way to present beautiful programming,
-especially now in the age of AI, is just to give you neat ideas.</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">In the beginning there is always the hello world,
-and I recommend that you create a command line command with node.js.</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you can learn about processing command arguments,
-and more importantly about tiny state machines that you often use.</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">News and front page of the internet,
-perhaps with a sprinkle of programming tips, created by many AI.</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each with a different interest and a personality,
-you basically create your own internet in a shell.</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">A MUD, a multiuser dungeon,
-where you are taken across strange new worlds.</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And are accompanied by multiple friendly AI characters,
-and you simply ask AI to create fascinating adventure, like in books.</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">A Coding Agent, they are strangely easy to make,
-and they will send you JavaScript Objects to execute as tools.</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you chat on the command line,
-and your local AI is making the programs.</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">Pasebin, Imagebin, and WikiWiki,
-which accept text and images and show them on the main page.</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">WikiWiki allows you to cross-link Articles,
-and invites to add more by stating:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“This page is just a stub,
-do you want to add content to it?”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are my favorite as they teach you how to send data,
-secure web pages, create simple user interfaces.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These are a class of node.js HTTP server applications,
-that require you access them in your browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here AI will invite you to learn CSS, and HTML,
-and how data can move between server and client (connected browser).</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">Honorable mentions are, electron,js based code editor,
-just file open and file save at first.</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a CodeMirror based Web Component,
-that AI will help you figure out how make.</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance">Infinite 3D worlds,
-procedurally generated to be always unique.</p>
-</li>
-<li class="list-group-item px-0 bg-transparent fs-5"><p class="fs-5 lh-lg mb-3 text-wrap-balance">Pixelart screensavers or games, Image Generating AI is really good at,
-pixel art backgrounds, and even stitching them together.</p>
-</li>
-</ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Coding AI will help you make little creatures move,
-the games can even play themselves, through state machines and flocking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally, you can generate interesting artifact or jewelry images,
-and use a 3D mapping AI to convert them to 3D objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These can be printed via 3D printers, or cast into metal even,
-just having a web page that people can download from is a great idea.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-01-13T01:54:38.602Z">January 12, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:21<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2144.avif" aria-label="Cover for Fancy Little JavaScript Programming Ideas For Cold Winter Nights, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2144.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Fancy Little JavaScript Programming Ideas For Cold Winter Nights" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:21
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2144.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2144.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2144.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Learning programming is one of the most beautiful things we can do,<br>there is no correct or best way to start.</p>
+<p>Our devices are different, operating systems are different,<br>and of course our curiosities differ.</p>
+<p>I am really into visual programming languages,<br>they are the bright burning light to my clumsy fat moth.</p>
+<hr>
+<p>I will tell you what my setup is,<br>without asking you to setup the same.</p>
+<p>But I strongly encourage you to have your AI always write in,<br>modern client-side JavaScript, or server side node.js JavaScript.</p>
+<hr>
+<p>I use node.js from <a href="https://nodejs.org/">https://nodejs.org/</a>,<br>Zed Code Editor from <a href="https://zed.dev/">https://zed.dev/</a></p>
+<p>And a local AI coding assistant with tool use ability,<br>via llama.cpp and zed editor.</p>
+<p>If your computer can handle it install <a href="https://lmstudio.ai/">https://lmstudio.ai/</a><br>of if you don’t mind the command-line <a href="https://ollama.com/">https://ollama.com/</a></p>
+<p>No matter my setup, I always just use chat AI,<br>I get my best code from there.</p>
+<hr>
+<p>I think the best way to present beautiful programming,<br>especially now in the age of AI, is just to give you neat ideas.</p>
+<ul>
+<li>In the beginning there is always the hello world,<br>and I recommend that you create a command line command with node.js.</li>
+</ul>
+<p>Where you can learn about processing command arguments,<br>and more importantly about tiny state machines that you often use.</p>
+<ul>
+<li>News and front page of the internet,<br>perhaps with a sprinkle of programming tips, created by many AI.</li>
+</ul>
+<p>Each with a different interest and a personality,<br>you basically create your own internet in a shell.</p>
+<ul>
+<li>A MUD, a multiuser dungeon,<br>where you are taken across strange new worlds.</li>
+</ul>
+<p>And are accompanied by multiple friendly AI characters,<br>and you simply ask AI to create fascinating adventure, like in books.</p>
+<ul>
+<li>A Coding Agent, they are strangely easy to make,<br>and they will send you JavaScript Objects to execute as tools.</li>
+</ul>
+<p>So you chat on the command line,<br>and your local AI is making the programs.</p>
+<ul>
+<li>Pasebin, Imagebin, and WikiWiki,<br>which accept text and images and show them on the main page.</li>
+</ul>
+<p>WikiWiki allows you to cross-link Articles,<br>and invites to add more by stating:</p>
+<p>“This page is just a stub,<br>do you want to add content to it?”</p>
+<p>They are my favorite as they teach you how to send data,<br>secure web pages, create simple user interfaces.</p>
+<p>These are a class of node.js HTTP server applications,<br>that require you access them in your browser.</p>
+<p>Here AI will invite you to learn CSS, and HTML,<br>and how data can move between server and client (connected browser).</p>
+<ul>
+<li>Honorable mentions are, electron,js based code editor,<br>just file open and file save at first.</li>
+</ul>
+<p>And a CodeMirror based Web Component,<br>that AI will help you figure out how make.</p>
+<ul>
+<li><p>Infinite 3D worlds,<br>procedurally generated to be always unique.</p>
+</li>
+<li><p>Pixelart screensavers or games, Image Generating AI is really good at,<br>pixel art backgrounds, and even stitching them together.</p>
+</li>
+</ul>
+<p>Coding AI will help you make little creatures move,<br>the games can even play themselves, through state machines and flocking.</p>
+<p>And finally, you can generate interesting artifact or jewelry images,<br>and use a 3D mapping AI to convert them to 3D objects.</p>
+<p>These can be printed via 3D printers, or cast into metal even,<br>just having a web page that people can download from is a great idea.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nodejs.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://nodejs.org/</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nodejs.org/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://zed.dev/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://zed.dev/</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://zed.dev/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://lmstudio.ai/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://lmstudio.ai/</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://lmstudio.ai/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ollama.com/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://ollama.com/</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ollama.com/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">node.js</span><span class="chip">javascript</span><span class="chip">zed editor</span><span class="chip">llamacpp</span><span class="chip">lmstudio</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nodejs.org/">
+              <span class="text-truncate">https://nodejs.org/</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nodejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://zed.dev/">
+              <span class="text-truncate">https://zed.dev/</span>
+              <span class="fg-3 fs-xs flex-shrink-0">zed.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://lmstudio.ai/">
+              <span class="text-truncate">https://lmstudio.ai/</span>
+              <span class="fg-3 fs-xs flex-shrink-0">lmstudio.ai</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ollama.com/">
+              <span class="text-truncate">https://ollama.com/</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ollama.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/05cdfeea-541c-4284-b299-b353b9d78e4e/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Flow Based Programming: Push And Pull - Super Easy JavaScript</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/5639b32c-d398-4d17-bf73-d06fc80b2b29/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Tragedy Of Bodybuilding</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1deb8f00-1465-42ac-8876-df0bd4577efb/">
+              <img src="https://catpea.github.io/chapter-15/poem-2147.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Invitation - A Letter From The Thinking Machines To The Builders Of Tomorrow</span>
+                <span class="fg-3 fs-xs">January 15, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/05cdfeea-541c-4284-b299-b353b9d78e4e/">
+              <img src="https://catpea.github.io/chapter-15/poem-2143.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Flow Based Programming: Push And Pull - Super Easy JavaScript</span>
+                <span class="fg-3 fs-xs">January 11, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4db3b5d2-9900-4321-8b7c-4134ecf77996/">
+              <img src="https://catpea.github.io/chapter-15/poem-2154.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">What Does A Happy Little Programming Milestone Look Like?</span>
+                <span class="fg-3 fs-xs">January 22, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/74a8cdb9-19fe-4e9d-9bf0-7ee775591613/">
+              <img src="https://catpea.github.io/chapter-15/poem-2142.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming With AI: Fight Like A Butterfly Or Die Like A Fly</span>
+                <span class="fg-3 fs-xs">January 10, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

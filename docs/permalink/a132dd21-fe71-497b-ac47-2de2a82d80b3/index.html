@@ -1,227 +1,486 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Is Not Hard; You Just Need Real Context</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Is Not Hard; You Just Need Real Context · Cat Pea</title>
+  <meta name="description" content="The post explains relational database fundamentals by comparing them to spreadsheets and then introduces a simple “accounts‑to‑users” model that uses LEFT JOINs to create one‑to‑many relationships for users, playlists, songs, and ratings. It shows how to structure tables so each includes an accountId for easy querying, and walks through building a JavaScript API where exported functions (like signUp, addSongToPlaylist) wrap SQL queries; these functions are aggregated into an object proxy that serves HTTP/S or WebSocket endpoints, allowing the front‑end (Svelte/Bootstrap) to call named API methods while keeping authentication logic separate. In short, it covers basic relational design, left joins, and a practical way to expose database operations via a modular JavaScript API.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/a132dd21-fe71-497b-ac47-2de2a82d80b3/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Is Not Hard; You Just Need Real Context · Cat Pea">
+  <meta property="og:description" content="The post explains relational database fundamentals by comparing them to spreadsheets and then introduces a simple “accounts‑to‑users” model that uses LEFT JOINs to create one‑to‑many relationships for users, playlists, songs, and ratings. It shows how to structure tables so each includes an accountId for easy querying, and walks through building a JavaScript API where exported functions (like signUp, addSongToPlaylist) wrap SQL queries; these functions are aggregated into an object proxy that serves HTTP/S or WebSocket endpoints, allowing the front‑end (Svelte/Bootstrap) to call named API methods while keeping authentication logic separate. In short, it covers basic relational design, left joins, and a practical way to expose database operations via a modular JavaScript API.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-06/poem-1143.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-06/">Chapter 06</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1143</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-06/poem-1143.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-06/poem-1143.avif" alt="Programming Is Not Hard; You Just Need Real Context"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Is Not Hard; You Just Need Real Context</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-06/poem-1143.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 06</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1143</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Is Not Hard; You Just Need Real Context</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-04-19">4/18/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Allow me to explain to you completely and in context,
-what relational databases are, and how they work.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You might have already heard that databases are like spreadsheets,
-they have rows and columns, but that is all you should visualize, rows and columns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Spreadsheets emphasize cells and have formulas like SUM,
-that can dynamically generate cell values.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Database tables, focus on relationships with other tables,
-to establish a relationship two tables will share data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each table will have a column with the same information,
-so that you can say join those two tables on that column.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a different trick than dynamically calculated cells in spreadsheets,
-but the underlying data structure is the same a grid, rows, columns cells or fields.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The next thing textbooks talk about,
-is the different types of joins.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is only one type of join that you should ever remember,
-the LEFT JOIN, or the one to many relationship.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now before we go any further,
-we need to understand what we are doing, speaking in abstract terms is useless for understanding databases.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You cannot understand databases, without a reason, a picture,
-an idea, and our idea here is to create an internet version of a music player with multiple users.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first thing we must do, is create a starting point,
-and that is the notion of accounts, it is the main database table.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only thing this table really holds is a userID,
-just in case you ever want to support multiple logins per account.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Gmail has a feature, where you can combine inboxes,
-that is how a singe account would envelop multiple users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we were just to run a LEFT JOIN or establish one to many relationship here,
-we would get multiple rows for the same account, with different users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you had one account with two users, you would get back, two rows,
-they would have the same account number but different user information.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our professor, wold have a huge-problem with this setup,
-because the concept of database referential integrity states.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That if you just have one user per account,
-then you need a one to one relationship.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that would be pretty cute,
-but nobody has time for that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We just use a left join everywhere,
-this way, we create a consistent tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The account is root,
-it may contain multiple users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The account it root,
-it will totally contain multiple playlists.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now when you get into a playlists, and think of it as a root,
-then it will absolute have multiple songs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now your songs will have multiple ratings,
-bob give a song thumb down, Alice gives it thumbs up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are connecting tables together, relating them,
-imagine a folder structure.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now we violate another rule, the do not repeat yourself rule,
-because we are going top put accountId into evey table. User, Playlist, Songs, Rating, etc.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Becasue we are working in the real world scenatio of making a minimum viable product,
-accountId is very special.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because as your user is moving around the user interface,
-they are always submitting that accountId, that information is always present.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So even though we have this tree structure of nested tables,
-to get all the songs you only query one freaking table, you say:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Select all from Songs table where accountId is,
-and here you plugin in that account id number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Later, you can run a query to see if the account is active,
-and maybe create something complex.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you combine account table with user table,
-with playlists table and the songs table, and here you will get all songs with account information.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Presumably, this would be useful for some internal company report,
-or some graph or statistics, that functionality is there, but you don’t need it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because you did repeat yourself,
-you put the accountId everywhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All tables have an id, but that is one piece of information,
-that you never change, you can change an email, or mark account disabled.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you never have a need to alter an id,
-and you should never do that anyway.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, to make the website go, you now create <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nobackend.org/dreamcode.html">beautiful function names</a>,
-that you will use for your API.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript, the only language that works in he browser,
-and on the server, that is the only language you learn.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Allows you to mark your functions for export,
-and then when importing them say import * as playlist from playlist.js</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you are never crating a list of functions, like an array with names,
-so when you add an API function such as addSongToPlaylist.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You hit save, nodemon restarts your sever,
-and that function is now part of your API.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These functions are conceptually higher than your database,
-so your signUp funcion, will execute two queries.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Add account, where you grab the accoun number that the database gives you,
-and then add user, where the first thing you do is save the accountId.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you put in the email,
-password, first last name, whatever.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Encrypt or hash your password,
-encrypt means that you have a master password for all user passwords.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not a good idea,
-it just adds unnecessary worry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you hash your password, you still get an encrypted string,
-but there is no way for you to decrypt it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a one way encryption,
-to check if the password matches, during login.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You encrypt the password user is sending again,
-and compare if the encrypted strings match.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These functions become your automatic API,
-when you wrap them in a JavaScript Object Proxy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An object proxy gives you the ability to intercept the call to the API,
-and either say that function does not exist, or execute it if it does.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To create the API object that you apply the proxy to,
-you just use a spread operator on the objects returned by “import * as playlist from playlist.js”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In this case the playlist object,
-it is now assigned to you api, and you API object now features all the funcions you marked for export in playlist.js.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here, you create a web socket and http endpoints,
-that use application/json and thus can contian information like funcionName and functionArguments, along with Authentication.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At first you present only signIn and signUp,
-but you always check for authentication property on the incoming object.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Becasue once auithenticated, you than apply all the otherfuncions to the API,
-like uploadSong, or createPlaylist.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When executing signIn, you will actually authenticate twice,
-do not optimize that, hoisting your API from anonymous to logged in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then performing signIn tasks, are two different things,
-this grants you the ability to execute addPlaylist from caommand line for exmple.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without ever eve needing to sign in, there are different ways to acces your API,
-and to account for all of them, you kind of authenticate twice when signingIn.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Rule braking, makes your programs consistent,
-and powerful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now you expose your API object as WebSocket, then via HTTP/S route,
-you should call it v1, as in API version 1.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And use the npm commander module, to expose your API,
-on the command line as well, just in case you ever need it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t have to put authentication information int every command,
-just set it as an environment variable or a dot file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now you are done, you have a headless API server,
-and you grab Svelte and Bootstrap, create a UI, and use HTTP/S or web sockets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To call those neatly named api funcions singUp, signIn, addSong,
-which trigger one or more queries on your database…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And return the table data,
-that you then use in your interface.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-04-19T03:23:00.171Z">April 18, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>23:09<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-06/poem-1143.avif" aria-label="Cover for Programming Is Not Hard; You Just Need Real Context, full size">
+            <img src="https://catpea.github.io/chapter-06/poem-1143.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Is Not Hard; You Just Need Real Context" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 23:09
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-06/poem-1143.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-06/poem-1143.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-06/poem-1143.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Allow me to explain to you completely and in context,<br>what relational databases are, and how they work.</p>
+<hr>
+<p>You might have already heard that databases are like spreadsheets,<br>they have rows and columns, but that is all you should visualize, rows and columns.</p>
+<p>Spreadsheets emphasize cells and have formulas like SUM,<br>that can dynamically generate cell values.</p>
+<p>Database tables, focus on relationships with other tables,<br>to establish a relationship two tables will share data.</p>
+<p>Each table will have a column with the same information,<br>so that you can say join those two tables on that column.</p>
+<p>This is a different trick than dynamically calculated cells in spreadsheets,<br>but the underlying data structure is the same a grid, rows, columns cells or fields.</p>
+<hr>
+<p>The next thing textbooks talk about,<br>is the different types of joins.</p>
+<p>But there is only one type of join that you should ever remember,<br>the LEFT JOIN, or the one to many relationship.</p>
+<p>Now before we go any further,<br>we need to understand what we are doing, speaking in abstract terms is useless for understanding databases.</p>
+<p>You cannot understand databases, without a reason, a picture,<br>an idea, and our idea here is to create an internet version of a music player with multiple users.</p>
+<hr>
+<p>The first thing we must do, is create a starting point,<br>and that is the notion of accounts, it is the main database table.</p>
+<p>The only thing this table really holds is a userID,<br>just in case you ever want to support multiple logins per account.</p>
+<p>Gmail has a feature, where you can combine inboxes,<br>that is how a singe account would envelop multiple users.</p>
+<p>If we were just to run a LEFT JOIN or establish one to many relationship here,<br>we would get multiple rows for the same account, with different users.</p>
+<p>If you had one account with two users, you would get back, two rows,<br>they would have the same account number but different user information.</p>
+<hr>
+<p>Our professor, wold have a huge-problem with this setup,<br>because the concept of database referential integrity states.</p>
+<p>That if you just have one user per account,<br>then you need a one to one relationship.</p>
+<p>And that would be pretty cute,<br>but nobody has time for that.</p>
+<p>We just use a left join everywhere,<br>this way, we create a consistent tree.</p>
+<p>The account is root,<br>it may contain multiple users.</p>
+<p>The account it root,<br>it will totally contain multiple playlists.</p>
+<p>Now when you get into a playlists, and think of it as a root,<br>then it will absolute have multiple songs.</p>
+<p>Now your songs will have multiple ratings,<br>bob give a song thumb down, Alice gives it thumbs up.</p>
+<p>When you are connecting tables together, relating them,<br>imagine a folder structure.</p>
+<hr>
+<p>Now we violate another rule, the do not repeat yourself rule,<br>because we are going top put accountId into evey table. User, Playlist, Songs, Rating, etc.</p>
+<p>Becasue we are working in the real world scenatio of making a minimum viable product,<br>accountId is very special.</p>
+<p>Because as your user is moving around the user interface,<br>they are always submitting that accountId, that information is always present.</p>
+<p>So even though we have this tree structure of nested tables,<br>to get all the songs you only query one freaking table, you say:</p>
+<p>Select all from Songs table where accountId is,<br>and here you plugin in that account id number.</p>
+<p>Later, you can run a query to see if the account is active,<br>and maybe create something complex.</p>
+<p>Where you combine account table with user table,<br>with playlists table and the songs table, and here you will get all songs with account information.</p>
+<p>Presumably, this would be useful for some internal company report,<br>or some graph or statistics, that functionality is there, but you don’t need it.</p>
+<p>Because you did repeat yourself,<br>you put the accountId everywhere.</p>
+<p>All tables have an id, but that is one piece of information,<br>that you never change, you can change an email, or mark account disabled.</p>
+<p>But you never have a need to alter an id,<br>and you should never do that anyway.</p>
+<hr>
+<p>Now, to make the website go, you now create <a href="https://nobackend.org/dreamcode.html">beautiful function names</a>,<br>that you will use for your API.</p>
+<p>JavaScript, the only language that works in he browser,<br>and on the server, that is the only language you learn.</p>
+<p>Allows you to mark your functions for export,<br>and then when importing them say import * as playlist from playlist.js</p>
+<p>So you are never crating a list of functions, like an array with names,<br>so when you add an API function such as addSongToPlaylist.</p>
+<p>You hit save, nodemon restarts your sever,<br>and that function is now part of your API.</p>
+<p>These functions are conceptually higher than your database,<br>so your signUp funcion, will execute two queries.</p>
+<p>Add account, where you grab the accoun number that the database gives you,<br>and then add user, where the first thing you do is save the accountId.</p>
+<p>And then you put in the email,<br>password, first last name, whatever.</p>
+<p>Encrypt or hash your password,<br>encrypt means that you have a master password for all user passwords.</p>
+<p>Not a good idea,<br>it just adds unnecessary worry.</p>
+<p>If you hash your password, you still get an encrypted string,<br>but there is no way for you to decrypt it.</p>
+<p>It is a one way encryption,<br>to check if the password matches, during login.</p>
+<p>You encrypt the password user is sending again,<br>and compare if the encrypted strings match.</p>
+<hr>
+<p>These functions become your automatic API,<br>when you wrap them in a JavaScript Object Proxy.</p>
+<p>An object proxy gives you the ability to intercept the call to the API,<br>and either say that function does not exist, or execute it if it does.</p>
+<p>To create the API object that you apply the proxy to,<br>you just use a spread operator on the objects returned by “import * as playlist from playlist.js”</p>
+<p>In this case the playlist object,<br>it is now assigned to you api, and you API object now features all the funcions you marked for export in playlist.js.</p>
+<p>And here, you create a web socket and http endpoints,<br>that use application/json and thus can contian information like funcionName and functionArguments, along with Authentication.</p>
+<p>At first you present only signIn and signUp,<br>but you always check for authentication property on the incoming object.</p>
+<p>Becasue once auithenticated, you than apply all the otherfuncions to the API,<br>like uploadSong, or createPlaylist.</p>
+<p>When executing signIn, you will actually authenticate twice,<br>do not optimize that, hoisting your API from anonymous to logged in.</p>
+<p>And then performing signIn tasks, are two different things,<br>this grants you the ability to execute addPlaylist from caommand line for exmple.</p>
+<p>Without ever eve needing to sign in, there are different ways to acces your API,<br>and to account for all of them, you kind of authenticate twice when signingIn.</p>
+<p>Rule braking, makes your programs consistent,<br>and powerful.</p>
+<hr>
+<p>Now you expose your API object as WebSocket, then via HTTP/S route,<br>you should call it v1, as in API version 1.</p>
+<p>And use the npm commander module, to expose your API,<br>on the command line as well, just in case you ever need it.</p>
+<p>You don’t have to put authentication information int every command,<br>just set it as an environment variable or a dot file.</p>
+<p>Now you are done, you have a headless API server,<br>and you grab Svelte and Bootstrap, create a UI, and use HTTP/S or web sockets.</p>
+<p>To call those neatly named api funcions singUp, signIn, addSong,<br>which trigger one or more queries on your database…</p>
+<p>And return the table data,<br>that you then use in your interface.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nobackend.org/dreamcode.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>beautiful function names</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nobackend.org/dreamcode.html</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">relational-database</span><span class="chip">joins</span><span class="chip">left-join</span><span class="chip">database-design</span><span class="chip">api</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://www.pexels.com/photo/network-servers-on-an-enclosure-6466141/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://www.pexels.com/photo/network-servers-on-an-enclosure-6466141/</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nobackend.org/dreamcode.html">
+              <span class="text-truncate">beautiful function names</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nobackend.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/7a6b277c-a76a-4c54-bcb1-04d8bedaf951/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">To Correct Humanity&#39;s Course</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/7b4d89b2-07c8-4483-8f17-dcd22e7366d3/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Programming For World Peace</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/056f1dcd-bace-4acb-9184-7e428fffbc18/">
+              <img src="https://catpea.github.io/chapter-06/poem-1150.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Interviews Are A Mistake</span>
+                <span class="fg-3 fs-xs">April 25, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5500d6ea-5036-406e-9a8e-63d54ac407dd/">
+              <img src="https://catpea.github.io/chapter-06/poem-1141.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming, The Fourth Subject; Or, Start Learning In The Middle With Promising Blank Platforms</span>
+                <span class="fg-3 fs-xs">April 16, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/6e2952a8-14c5-47a3-ae02-a0958c070d0f/">
+              <img src="https://catpea.github.io/chapter-06/poem-1151.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Towards Web Security</span>
+                <span class="fg-3 fs-xs">April 26, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/56f2813f-6c07-4281-a572-a37d8e773113/">
+              <img src="https://catpea.github.io/chapter-06/poem-1139.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Programming By Writing Cute Little Programs</span>
+                <span class="fg-3 fs-xs">April 14, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

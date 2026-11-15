@@ -1,188 +1,464 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Potatoes; Or, The Biggest Problem In Application Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Potatoes; Or, The Biggest Problem In Application Programming · Cat Pea</title>
+  <meta name="description" content="The post introduces “potatoes” as a lightweight abstraction for CouchDB documents that makes it easier to keep data in sync across a networked application and the user interface. Each potato has a unique ID and revision number, so changes are stored as separate files and the latest revision is chosen by sorting filenames—an eventual‑consistency approach that works even when many users update concurrently. By treating potatoes like Svelte stores or Bootstrap components, the author shows how UI elements can automatically refresh whenever a new winner revision appears, while “views” (small programs) filter changes to build the visible collection of potatoes. The article explains that this model supports simple list handling, page re‑calculation, and fast searches, all while keeping the system free from overwrites or hacks because each change is uniquely identified and propagated through Pouch/Couch or a custom storage layer.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/ab3365b3-b15a-45d8-b312-e56248cdaa17/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Potatoes; Or, The Biggest Problem In Application Programming · Cat Pea">
+  <meta property="og:description" content="The post introduces “potatoes” as a lightweight abstraction for CouchDB documents that makes it easier to keep data in sync across a networked application and the user interface. Each potato has a unique ID and revision number, so changes are stored as separate files and the latest revision is chosen by sorting filenames—an eventual‑consistency approach that works even when many users update concurrently. By treating potatoes like Svelte stores or Bootstrap components, the author shows how UI elements can automatically refresh whenever a new winner revision appears, while “views” (small programs) filter changes to build the visible collection of potatoes. The article explains that this model supports simple list handling, page re‑calculation, and fast searches, all while keeping the system free from overwrites or hacks because each change is uniquely identified and propagated through Pouch/Couch or a custom storage layer.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-0981.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0981</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-0981.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-0981.avif" alt="Potatoes; Or, The Biggest Problem In Application Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Potatoes; Or, The Biggest Problem In Application Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-0981.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0981</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Potatoes; Or, The Biggest Problem In Application Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-11-06">11/6/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">The biggest problem is synchronizing information on your computer network,
-with the information displayed on your customers screens.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By synchronizing, I mean constant updates,
-if you as administrator change something, it needs to change on all the affected application screens.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nerds may argue with me that the biggest problem in General Purpose Strong AI,
-but we are talking about real problems that business owners fighting poverty face every day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Other may check me here, and mention security, but security problems exist out of greed,
-if you let your user to own their own database, there will be nothing to hack on the application level.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The changes, to the network data, come from an application, that can uniformly access all the databases,
-the application lives on the network end and cannot be run from the web.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Enough of that, let me tell you how to get things going,
-we need to introduce some somewhat new concepts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of coming up with fancy names,
-let us come up with cute ones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The unit of information on out network will be a potato, our potatoes are inspired by the CouchDB Document,
-the Java programming language has a similar concept, but they call them Beans, as in Java Beans.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We just have plain potatoes, because we want to keep things simple,
-and underline the fact that we don&#39;t program computers, but rather take what we can get.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In programming language, we have numbers and strings of letters, strings for short,
-we can group numbers and strings into objects, and we can put objects inside objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But our potato is special, because we treat potatoes as high level objects,
-there is nothing above them, and potatoes cannot hold other potatoes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A potato is a highest level object,
-it can only have generic objects nested inside it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means, when you create a use on your system, you make a potato,
-and give it a username property.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you create a new post, for a user blog,
-it is a potato, with user and text properties.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A potato has a universally unique ID,
-and a revision number, exactly like the CouchDB documents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The ID never changes, nothing is ever deleted,
-the revision number, also has a unique ID.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is the filename that is used on the hard drive,
-the document ID is used for the directory that contains revisions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you have one million users saving all at the same time,
-to revision 15, you will just end up with one million files inside the directory marked by the document ID.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No data is lost, all conflicting revisions get saved,
-and a program will let you know about conflict resolution strategies.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is one important point that yo have to remember,
-when picking the winning revision, you sort the random filenames, and pick the one that comes first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a stupid way of picking the winner,
-but no matter how many conflicting revisions you have, and how many of those are still being uploaded to your server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will always have a winner, and eventually,
-as all files make it to your network, you will pick the same winner.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nerds call it,
-eventual consistency.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want to repeat that the Potato is inspired by CouchDB,
-and you should use PouchDB and CouchDB at first...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But as your software becomes more advanced,
-you go potato.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Eventual consistency be it on your network,
-or inside an array in the users browser...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Means that users have their account data,
-synchronized with their browsers - it just works.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it also means that the network will continue bubbling up,
-new revisions of all kinds of potatoes or CouchDB Documents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your user interface components, must be notified of new potato revisions,
-or more precisely revision winners winners - the ones that come up on top in sort.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you have to keep things simple,
-use svelte, and svelte stores, create a readable array and call it a collection of Potatoes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sometimes, you might just want to have a collection,
-that is always just one potato, for example user profile.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If at some point in the future,
-you start offering complex services, you can throw another potato in that collection.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Perhaps one for custom domain name, one for web hosting,
-you are going to have three potatoes, a little menu on the side.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And whichever one the user click on,
-you render it, with user interface components, I recommend using The Bootstrap CSS framework for now.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to consider unusual use cases,
-If your user is browsing a list of products.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are on page, ten, of ten pages,
-and you decide to remove most products to sell something more integrated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There will no longer be a page ten,
-you may only have three pages now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you have to pull them back and say,
-by saying current page equals the new last page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Keeping things consistent in lists,
-even if you just have one thing will pay off.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because potatoes have an ID that is independent of whatever you are storing in them,
-to save something, you just send it to the sever.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the server will send it everywhere else,
-including back to you, as a new change during live synchronization.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is nothing to hack here, the most confusing thing is the list of potatoes,
-the collection that you application use to create the UI...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you know that the potatoes are there,
-you are always comparing ids and whenever a new potato is found you send the latest revisions out to everything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it all sorts it self out,
-a new ID means new potato, a new revision you have to re-select a winner.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Svelte will automatically update the user interface,
-and all your buttons worry about is sending documents into your network.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">PouchDB, or CouchDB also reveals a good pattern for fast searches,
-roughly each time a new document or change is announced...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Little programs called views, check, if the new changes,
-match the information they are filtering for.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is how your potato collection is assembled,
-you remember the potato id that matches, and forget the one that does not.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is possible to eliminate svelte, and just use a DOM reconciler,
-that will merge your document object nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And while I recommend using Pouch, Couch, and compatible services,
-eventually it is just easier to write a custom potato storage system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Document IDs and random revision filenames,
-allow for multi-core/CPU data storage, nothing is ever overwritten with universally unique identifiers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not on networked computer,
-not in simultaneous processing.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-11-06T23:19:53.340Z">November 6, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>15:37<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-0981.avif" aria-label="Cover for Potatoes; Or, The Biggest Problem In Application Programming, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-0981.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Potatoes; Or, The Biggest Problem In Application Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 15:37
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-0981.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-0981.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-0981.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>The biggest problem is synchronizing information on your computer network,<br>with the information displayed on your customers screens.</p>
+<p>By synchronizing, I mean constant updates,<br>if you as administrator change something, it needs to change on all the affected application screens.</p>
+<p>Nerds may argue with me that the biggest problem in General Purpose Strong AI,<br>but we are talking about real problems that business owners fighting poverty face every day.</p>
+<p>Other may check me here, and mention security, but security problems exist out of greed,<br>if you let your user to own their own database, there will be nothing to hack on the application level.</p>
+<p>The changes, to the network data, come from an application, that can uniformly access all the databases,<br>the application lives on the network end and cannot be run from the web.</p>
+<p>Enough of that, let me tell you how to get things going,<br>we need to introduce some somewhat new concepts.</p>
+<p>Instead of coming up with fancy names,<br>let us come up with cute ones.</p>
+<p>The unit of information on out network will be a potato, our potatoes are inspired by the CouchDB Document,<br>the Java programming language has a similar concept, but they call them Beans, as in Java Beans.</p>
+<p>We just have plain potatoes, because we want to keep things simple,<br>and underline the fact that we don&#39;t program computers, but rather take what we can get.</p>
+<hr>
+<p>In programming language, we have numbers and strings of letters, strings for short,<br>we can group numbers and strings into objects, and we can put objects inside objects.</p>
+<p>But our potato is special, because we treat potatoes as high level objects,<br>there is nothing above them, and potatoes cannot hold other potatoes.</p>
+<hr>
+<p>A potato is a highest level object,<br>it can only have generic objects nested inside it.</p>
+<p>That means, when you create a use on your system, you make a potato,<br>and give it a username property.</p>
+<p>When you create a new post, for a user blog,<br>it is a potato, with user and text properties.</p>
+<hr>
+<p>A potato has a universally unique ID,<br>and a revision number, exactly like the CouchDB documents.</p>
+<p>The ID never changes, nothing is ever deleted,<br>the revision number, also has a unique ID.</p>
+<p>And that is the filename that is used on the hard drive,<br>the document ID is used for the directory that contains revisions.</p>
+<p>If you have one million users saving all at the same time,<br>to revision 15, you will just end up with one million files inside the directory marked by the document ID.</p>
+<p>No data is lost, all conflicting revisions get saved,<br>and a program will let you know about conflict resolution strategies.</p>
+<hr>
+<p>There is one important point that yo have to remember,<br>when picking the winning revision, you sort the random filenames, and pick the one that comes first.</p>
+<p>It is a stupid way of picking the winner,<br>but no matter how many conflicting revisions you have, and how many of those are still being uploaded to your server.</p>
+<p>You will always have a winner, and eventually,<br>as all files make it to your network, you will pick the same winner.</p>
+<p>Nerds call it,<br>eventual consistency.</p>
+<p>I want to repeat that the Potato is inspired by CouchDB,<br>and you should use PouchDB and CouchDB at first...</p>
+<p>But as your software becomes more advanced,<br>you go potato.</p>
+<hr>
+<p>Eventual consistency be it on your network,<br>or inside an array in the users browser...</p>
+<p>Means that users have their account data,<br>synchronized with their browsers - it just works.</p>
+<hr>
+<p>But it also means that the network will continue bubbling up,<br>new revisions of all kinds of potatoes or CouchDB Documents.</p>
+<p>Your user interface components, must be notified of new potato revisions,<br>or more precisely revision winners winners - the ones that come up on top in sort.</p>
+<p>Here you have to keep things simple,<br>use svelte, and svelte stores, create a readable array and call it a collection of Potatoes.</p>
+<p>Sometimes, you might just want to have a collection,<br>that is always just one potato, for example user profile.</p>
+<p>If at some point in the future,<br>you start offering complex services, you can throw another potato in that collection.</p>
+<p>Perhaps one for custom domain name, one for web hosting,<br>you are going to have three potatoes, a little menu on the side.</p>
+<p>And whichever one the user click on,<br>you render it, with user interface components, I recommend using The Bootstrap CSS framework for now.</p>
+<hr>
+<p>You have to consider unusual use cases,<br>If your user is browsing a list of products.</p>
+<p>They are on page, ten, of ten pages,<br>and you decide to remove most products to sell something more integrated.</p>
+<p>There will no longer be a page ten,<br>you may only have three pages now.</p>
+<p>So you have to pull them back and say,<br>by saying current page equals the new last page.</p>
+<p>Keeping things consistent in lists,<br>even if you just have one thing will pay off.</p>
+<hr>
+<p>Because potatoes have an ID that is independent of whatever you are storing in them,<br>to save something, you just send it to the sever.</p>
+<p>And the server will send it everywhere else,<br>including back to you, as a new change during live synchronization.</p>
+<hr>
+<p>There is nothing to hack here, the most confusing thing is the list of potatoes,<br>the collection that you application use to create the UI...</p>
+<p>But you know that the potatoes are there,<br>you are always comparing ids and whenever a new potato is found you send the latest revisions out to everything.</p>
+<p>And it all sorts it self out,<br>a new ID means new potato, a new revision you have to re-select a winner.</p>
+<p>Svelte will automatically update the user interface,<br>and all your buttons worry about is sending documents into your network.</p>
+<hr>
+<p>PouchDB, or CouchDB also reveals a good pattern for fast searches,<br>roughly each time a new document or change is announced...</p>
+<p>Little programs called views, check, if the new changes,<br>match the information they are filtering for.</p>
+<p>This is how your potato collection is assembled,<br>you remember the potato id that matches, and forget the one that does not.</p>
+<hr>
+<p>It is possible to eliminate svelte, and just use a DOM reconciler,<br>that will merge your document object nodes.</p>
+<p>And while I recommend using Pouch, Couch, and compatible services,<br>eventually it is just easier to write a custom potato storage system.</p>
+<p>Document IDs and random revision filenames,<br>allow for multi-core/CPU data storage, nothing is ever overwritten with universally unique identifiers.</p>
+<p>Not on networked computer,<br>not in simultaneous processing.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">couchdb</span><span class="chip">pouchdb</span><span class="chip">svelte</span><span class="chip">javascript</span><span class="chip">eventual-consistency</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/Kl4NIz8FeVc"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/Kl4NIz8FeVc</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/c93d5572-b614-48db-9c80-46a94870398c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Introduction To Programming: The Heck Is A State Machine?</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/faa9b086-6b76-4e40-b88d-3cdf543b4a7b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Programming For Your Users, Yourself, And The Older You; Or Writing Valuable, Maintainable, And Non Crazy Code</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/faa9b086-6b76-4e40-b88d-3cdf543b4a7b/">
+              <img src="https://catpea.github.io/chapter-05/poem-0982.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming For Your Users, Yourself, And The Older You; Or Writing Valuable, Maintainable, And Non Crazy Code</span>
+                <span class="fg-3 fs-xs">November 7, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c93d5572-b614-48db-9c80-46a94870398c/">
+              <img src="https://catpea.github.io/chapter-05/poem-0980.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Introduction To Programming: The Heck Is A State Machine?</span>
+                <span class="fg-3 fs-xs">November 5, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/48b45bf1-09c4-48b1-a7fe-50d1b9525f6b/">
+              <img src="https://catpea.github.io/chapter-05/poem-0983.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Teaches How To Learn For Real</span>
+                <span class="fg-3 fs-xs">November 8, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ce777fe2-49b2-425a-b037-17de3da3f80a/">
+              <img src="https://catpea.github.io/chapter-05/poem-0978.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Don&#39;t Generalize, Specialize; Or, How To Invent And Program Useful Web Applications</span>
+                <span class="fg-3 fs-xs">November 3, 2022</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

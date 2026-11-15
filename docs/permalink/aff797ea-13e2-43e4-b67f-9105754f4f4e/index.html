@@ -1,344 +1,628 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why And How Do Hackers Use Those Black Screens?</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Why And How Do Hackers Use Those Black Screens? · Cat Pea</title>
+  <meta name="description" content="The post explains how to use the Linux command line for tasks such as playing media, downloading files, and retrieving data from APIs, illustrating with examples like using wget, curl, jq, and xargs or while loops to fetch Hacker News top stories.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/aff797ea-13e2-43e4-b67f-9105754f4f4e/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why And How Do Hackers Use Those Black Screens? · Cat Pea">
+  <meta property="og:description" content="The post explains how to use the Linux command line for tasks such as playing media, downloading files, and retrieving data from APIs, illustrating with examples like using wget, curl, jq, and xargs or while loops to fetch Hacker News top stories.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0511.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0511</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0511.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0511.avif" alt="Why And How Do Hackers Use Those Black Screens?"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Why And How Do Hackers Use Those Black Screens?</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0511.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0511</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Why And How Do Hackers Use Those Black Screens?</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-07-24">7/24/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">The shortest possible answer is,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://linuxcommandlibrary.com/basic/oneliners">https://linuxcommandlibrary.com/basic/oneliners</a> to get a good overview of what they are typing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a different kind of a user interface,<br>and the applications within that world can be connected together to make new applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This used to be the original computer interface,<br>before graphic applications and the mouse were invented.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today it is used because it is faster than the GUI,<br>it is less distracting, and it is easier to make those programs.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think about playing music, how many icons you have to click to get there,<br>on the command line you just type in <code>cvlc ~/Music/*</code> and keep doing what you were doing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The reason why graphic user interfaces are popular,<br>is because they have an easy on ramp, they give you breadcrumbs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The command line requires that you remember where your files are,<br>and remember some of the command names, such as cvlc to play music, or wget to download a file.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don&#39;t have to memorize those commands,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.google.com/search?q=Linux+Cheat+Sheet">you can just download a little cheat-sheet</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">After a while you will stop forgetting their names,<br>it is really not that big of a deal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you need to browse some photos,<br>then you just use a normal GUI program that can display them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though, instead of clicking on an icon somewhere,<br>you&#39;ll launch it from the command line by entering its name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just another command to add to your cheat sheet,<br>and just like there is a limited number of things that you do on your phone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You&#39;ll also limit yourself to just knowing 5 to 20 things,<br>that you normally do on the command line.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just like your phone apps or desktop applications,<br>programs on the command line can do multiple things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">every command has a help feature,<br>where you type in the command name followed by <code>-h</code> and that will list all the different things that a command can do.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/">wget has a --mirror option</a>,<br>here you don&#39;t just download a file, but mirror the entire website.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So just imagine wget being an app on your phone, called Web Get,<br>and it would have two buttons, &quot;Download A File&quot;, and &quot;Download Website&quot;.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let me give you a more involved example,<br>I would like to show you how to download internet stories.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every website offers some way of getting some of their data,<br>Hacker News (a website for programmers) has a nice description of their raw data: <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/HackerNews/API">https://github.com/HackerNews/API</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We learn that their website data structure is all about numbers,<br>and to get at those number we have to download their <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">topstories.json</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JSON is a file format, it is not really purrfect for the command line,<br>so we will thin it, reduce it simplify with a program called <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://stedolan.github.io/jq/">jq</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">jq reaches into the JSON file format and grabs plain text for us,<br>without the extra curly bracets, quotes, or in this case, commas that delimit the entries and square brackets that represent lists of data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We will use <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=I6id1Y0YuNk">curl</a>, it is very similar to wget,<br>but it doesn&#39;t have that fancy extra stuff for mirroring websites.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we need a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://stedolan.github.io/jq/manual/#Basicfilters">jq tutorial</a> to give us some hints on how to use it, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=FSn_38gDvzM">sometimes watching a video tutorial is useful too</a>,<br>I found the stuff under &quot;Array/Object Value Iterator: .[]&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programmers speak like this when they assume only other programmers will read their stuff,<br>little do they know, we don&#39;t really read their funk, we just look at the code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is an important lesson, never read the freaking manual,<br>what takes you 20 minutes instead of 1 minute, teaches you 20 times more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a lot of people out there that say <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="http://www.catb.org/~esr/jargon/html/R/RTFM.html">RTFM</a>,<br>but that is only because they don&#39;t know the answer, because they spent their career brainlessly looking everything up - just ignore them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So to get at the numbers we have to say<br>curl <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty</a> | jq &#39;.[]&#39;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those single quotes tell your command line that your code in there belong to jq,<br>the command line is a programming language it self, to keep command related stuff isolated we use single brackets.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The way you get a feel for this is by looking at <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.google.com/search?q=command+line+cheat+sheets">command line cheat sheets</a>,<br>and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Linux+command+line+tutorial">video tutorials</a>, and if you are going somewhere without computers, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.google.com/search?q=linux+pocket+reference">grab some pocket reference titles</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The smaller the source of information,<br>the more valuable the information within.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you buy a Linux Bible,<br>you won&#39;t be able to tell what is important and what isn&#39;t.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is really cool to just have a long little row,<br>of pocket reference books, it shows that you don&#39;t mess around.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point we have a lit of numbers that represent stories on hacker news,<br>to grab a story we have to curl item / story number followed by .json <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://hacker-news.firebaseio.com/v0/item/27941616.json?print=pretty">27941616.json</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a bit of a problem here, because piping the output of the list of numbers to,<br>wc command with the -l switch, which stands for word count, count number of lines for me.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reveals that hacker news API returns 500 story numbers,<br>and it is bad etiquette to issue 500 requests to hacker news servers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Moreover, each hacker news story has, a list of numbers that represent the comments,<br>presumably the top comments in the thread.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even though they say there is no rate limit,<br>we would probably trigger their security system and get temporary banned.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I recently got banned by npm becasue i was looking for package names I could use to publish a program,<br>I knew I wanted something similar to rsync, which is the name of a command responsible for remote synchronization.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But somebody else took rsync ages ago, so I started changing the url in the address bar to<br>ssync tsync usync vsync wsync xsync ysync,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And all of a sudden the website said, you are doing too much of that,<br>you are temporary banned - fair enough, I guess.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I ended up publishing <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/rsend">rsend</a>, because it occurred to me,<br>that I am not really syncing arbitrary locations, but sending from local to remote.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I use it, to upload my music to my workout audio player,<br>but the program is very ugly because, I only expect GNU utilities on the target system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While I can program all kinds of things on the local system,<br>the remote system will not have my code, so checking file uploads has to be done via Linux commands.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One way to throttle our requests, is to use the sleep command, between downloading each of the stories,<br>we could sleep for 1 second for the first 10 stories, and then, two seconds, three seconds, and finally five seconds between each request, and nobody would get mad a that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another way to do it, is to pre-fetch three or five stories,<br>ahead of where you are at right now, so you wouldn&#39;t have any wait times, if you just read the stories live.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If all you want to see for the day is 10 stories,<br>then you will only download 15, AND NOT 500!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Beyond that, you could do a little bit of maneuvering,<br>and begin gathering top stories every hour throughout the day at a comfy 10 second interval.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is something you should know,<br>you know how that wc command that we just rand had a -l to make it couldn&#39;t lines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are inside a full screen program,<br>interacting with things kind of should be maybe about letters as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we made an interactive terminal program,<br>that just browsers a screenful at a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To go to the next page,<br>you would have to pres the &quot;n&quot; key.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is yet another Black Screen shortcut,<br>that goes straight into a cheeatsheet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We also need to consider other news sources,<br>whatever your favorite hangout spots are.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And, not everyone is going to be as nice as Hacker News and present an API,<br>there may not be a public API.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In that case we will need to write a screen scraper,<br>that is one of the worst kinds of programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As it doesn&#39;t use the data beneath the screen,<br>it just sort of does this ugly scrape of whatever is on the screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This entails controlling a full Web Browser,<br>and sort of making it look like there is a human browsing the page, where it is actually a freaking robot.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it gets worse,<br>lyke super bad.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There was a world wide DNS problem couple of days ago,<br>and Amazon keeps forcing me to solve their CAPTCHA when I use Firefox, Chromium works fine for me.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There maybe websites out there that can stop you from scraping them,<br>by presenting a CAPTCHA, and the only way to fix that, is to solve it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The glitched Amazon that I am still experiencing,<br>would only ask me to solve the CAPTCHA once per opening a browser, and that was already pretty annoying.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">CAPTCHA is unlikely to feature on News Websites though,<br>but if you scrape too quickly, of they detect your browser signature you may bet one.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now that all websites use JavaScript, you can&#39;t just mirror them with wget,<br>they need an automated browser that will run the JavaScript to make the pages come to life.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When we are inventing on the command line,<br>we have to jump ahead of ourselves and see what our program will need when it is finished.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the first thing that comes to mind,<br>is multiple news sources.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we are to create a system to extract interesting stories from multiple places on the internet,<br>then it is definable something that should consist of multiple programs, that run hourly or so.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we would have one program for extracting data from hacker news,<br>another for extracting data from eBay about some obscure phone that is cool but never available.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And another program to get emails from different service providers,<br>news from, say, the Raspberry PI blog.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And information from Raspberry Pi, like temperature or pressure changes,<br>maybe a new hires photos from the nearby Squirrel cam.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We could make this work via a command line RSS reader (with the option of using a proper desktop one),<br>by setting up a local RSS server that keeps track of data from all these places.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I think the data would have to sit in an SQL database,<br>this way all those different data sources would have a universal format that can be easily processed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once they are put into the database,<br>creating custom RSS feeds is easy, they are actually just plain XML files, same idea as JSON.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While SQL and the feed server can be easily can be easily controlled from the command line,<br>the scraping of the various unfriendly websites, will require a custom program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Personally I would base it on <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://browserless.js.org/">Browserless.js</a>,<br>as it has built-in &quot;evasions technniques (sic)&quot; to prevent being blocked.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just noticed that they misspelled evasion techniques,<br>forked their project, and fixed a couple more mistakes I could find.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/microlinkhq/browserless/pull/295">I created a PR, short for pull request, which means that I am requesting that they pull the fixes that I have created</a>,<br>so because Browserless.js is an Open Source Code Project, anybody can make valuable little contributions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But even with the mighty Browserless.js project,<br>websites we would be scraping will sometimes update their code, and our scraper brains would need to be updated.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Overall, our best option here, is to cut 10 entries from top of the Hacker News,<br>and see if we can get away with making 10 quick requests for their top stories, and call our initial version done.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Personally I would begin testing <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ostechnix.com/newsbeuter-command-line-rssatom-feed-reader-unix-like-systems/">Newsbeuter</a> <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/msharov/snownews">Snownews</a> <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.tecmint.com/newsroom-commandline-linux-news-reader/">Newsroom</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.tecmint.com/newsboat-rss-atom-feed-reader-for-linux-terminals/">newsboat</a> to get the feel for command line news,<br>and consider moving to desktop RSS clients so as long as they support ad blockers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then quietly, I would begin working on my scrapers,<br>being mindful that they must output RSS feeds, which then I would add to my RSS readers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To be honest, there is not much time that I have for reading internet news,<br>and the more I think about it, the more fetching that little 10 news items program seems, and the more clunky RSS starts to look.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us chop off the top then entries from Hacker News,<br>and see if we can quickly get an overview of what is going on in the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The command for getting the top of data is head, and to specify how many lines we want we use -n,<br>so our command now looks like this: curl <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty</a> | jq &#39;.[]&#39; | head -n 10;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Armed with 10 numbers that represent top stories,<br>we now have to take the second step, and use each of those numbers to download the titles from Hacker News.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here we reuse curl, but the url that we give to curl needs to have that number inserted in there,<br>there are two ways to do this, one is xargs, and the other a while loop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The while loop is better, it is more readable, it is faster, but I don&#39;t like it because it wraps things,<br>my xargs approach, creates a single straight command line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unfortunately my line ends up having a command that uses quotes, inside quotes,<br>so there is quote escaping, by means of backslash, and that is something I don&#39;t like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I must say the proper way to do this, is a single pipe,<br>get the top story numbers, map the numbers to data, and map the data to text so that it looks nice on the black screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Three simple steps,<br>get numbers, convert them to stories, print them to screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing, I will read to you the code of each of the three approaches, in the way that I think about it,<br>I wont read quote, backslash, n, backslash n, but give you a somewhat poetic reading.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">First is my xargs approach, a single pipe;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">curl -s <code>https://hacker-news.firebaseio.com/v0/topstories.json</code> | jq &#39;.[]&#39; | head -n 10 | xargs -I % sh -c &quot;curl -s <code>https://hacker-news.firebaseio.com/v0/item/%.json</code> | jq -r &#39;. | [.title,.url, null] | join(&quot;\n&quot;)&#39;&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, describe the first loop approach, which is actually a little bit backwards.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">while read -r ID; do curl -s <code>https://hacker-news.firebaseio.com/v0/item/$ID.json</code> | jq -r &#39;. | [.title, &quot;\n&quot;, .url, &quot;\n&quot;] | add&#39;; done &lt; &lt;(curl -s <code>https://hacker-news.firebaseio.com/v0/topstories.json</code> | jq &#39;.[]&#39; | head -n 10 )</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here is the way that people probably prefer, but I am unhappy about, because there shoudn&#39;t be a loop here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">curl -s <code>https://hacker-news.firebaseio.com/v0/topstories.json</code> | jq &#39;.[]&#39; | head -n 10 | while read -r ID ; do curl -s <code>https://hacker-news.firebaseio.com/v0/item/$ID.json</code> | jq -r &#39;. | [.title, &quot;\n&quot;, .url, &quot;\n&quot;] | add&#39;; done;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is what the black screens are all about,<br>I hope I inspired you to look a little bit more into those black screens.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-07-24T17:54:53.655Z">July 24, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>24:17<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>12 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0511.avif" aria-label="Cover for Why And How Do Hackers Use Those Black Screens?, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0511.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Why And How Do Hackers Use Those Black Screens?" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 24:17
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0511.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0511.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0511.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>The shortest possible answer is,<br><a href="https://linuxcommandlibrary.com/basic/oneliners">https://linuxcommandlibrary.com/basic/oneliners</a> to get a good overview of what they are typing.</p>
+<p>It is a different kind of a user interface,<br>and the applications within that world can be connected together to make new applications.</p>
+<p>This used to be the original computer interface,<br>before graphic applications and the mouse were invented.</p>
+<p>Today it is used because it is faster than the GUI,<br>it is less distracting, and it is easier to make those programs.</p>
+<hr>
+<p>Think about playing music, how many icons you have to click to get there,<br>on the command line you just type in <code>cvlc ~/Music/*</code> and keep doing what you were doing.</p>
+<p>The reason why graphic user interfaces are popular,<br>is because they have an easy on ramp, they give you breadcrumbs.</p>
+<p>The command line requires that you remember where your files are,<br>and remember some of the command names, such as cvlc to play music, or wget to download a file.</p>
+<hr>
+<p>You don&#39;t have to memorize those commands,<br><a href="https://www.google.com/search?q=Linux+Cheat+Sheet">you can just download a little cheat-sheet</a>.</p>
+<p>After a while you will stop forgetting their names,<br>it is really not that big of a deal.</p>
+<p>And if you need to browse some photos,<br>then you just use a normal GUI program that can display them.</p>
+<p>Though, instead of clicking on an icon somewhere,<br>you&#39;ll launch it from the command line by entering its name.</p>
+<p>It is just another command to add to your cheat sheet,<br>and just like there is a limited number of things that you do on your phone.</p>
+<p>You&#39;ll also limit yourself to just knowing 5 to 20 things,<br>that you normally do on the command line.</p>
+<hr>
+<p>Just like your phone apps or desktop applications,<br>programs on the command line can do multiple things.</p>
+<p>every command has a help feature,<br>where you type in the command name followed by <code>-h</code> and that will list all the different things that a command can do.</p>
+<p>For example <a href="https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/">wget has a --mirror option</a>,<br>here you don&#39;t just download a file, but mirror the entire website.</p>
+<p>So just imagine wget being an app on your phone, called Web Get,<br>and it would have two buttons, &quot;Download A File&quot;, and &quot;Download Website&quot;.</p>
+<hr>
+<p>Now let me give you a more involved example,<br>I would like to show you how to download internet stories.</p>
+<p>Every website offers some way of getting some of their data,<br>Hacker News (a website for programmers) has a nice description of their raw data: <a href="https://github.com/HackerNews/API">https://github.com/HackerNews/API</a></p>
+<p>We learn that their website data structure is all about numbers,<br>and to get at those number we have to download their <a href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">topstories.json</a></p>
+<p>JSON is a file format, it is not really purrfect for the command line,<br>so we will thin it, reduce it simplify with a program called <a href="https://stedolan.github.io/jq/">jq</a>,</p>
+<p>jq reaches into the JSON file format and grabs plain text for us,<br>without the extra curly bracets, quotes, or in this case, commas that delimit the entries and square brackets that represent lists of data.</p>
+<p>We will use <a href="https://www.youtube.com/watch?v=I6id1Y0YuNk">curl</a>, it is very similar to wget,<br>but it doesn&#39;t have that fancy extra stuff for mirroring websites.</p>
+<p>And we need a <a href="https://stedolan.github.io/jq/manual/#Basicfilters">jq tutorial</a> to give us some hints on how to use it, <a href="https://www.youtube.com/watch?v=FSn_38gDvzM">sometimes watching a video tutorial is useful too</a>,<br>I found the stuff under &quot;Array/Object Value Iterator: .[]&quot;.</p>
+<p>Programmers speak like this when they assume only other programmers will read their stuff,<br>little do they know, we don&#39;t really read their funk, we just look at the code.</p>
+<hr>
+<p>That is an important lesson, never read the freaking manual,<br>what takes you 20 minutes instead of 1 minute, teaches you 20 times more.</p>
+<p>There is a lot of people out there that say <a href="http://www.catb.org/~esr/jargon/html/R/RTFM.html">RTFM</a>,<br>but that is only because they don&#39;t know the answer, because they spent their career brainlessly looking everything up - just ignore them.</p>
+<hr>
+<p>So to get at the numbers we have to say<br>curl <a href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty</a> | jq &#39;.[]&#39;.</p>
+<p>Those single quotes tell your command line that your code in there belong to jq,<br>the command line is a programming language it self, to keep command related stuff isolated we use single brackets.</p>
+<hr>
+<p>The way you get a feel for this is by looking at <a href="https://www.google.com/search?q=command+line+cheat+sheets">command line cheat sheets</a>,<br>and <a href="https://www.youtube.com/results?search_query=Linux+command+line+tutorial">video tutorials</a>, and if you are going somewhere without computers, <a href="https://www.google.com/search?q=linux+pocket+reference">grab some pocket reference titles</a>.</p>
+<p>The smaller the source of information,<br>the more valuable the information within.</p>
+<p>If you buy a Linux Bible,<br>you won&#39;t be able to tell what is important and what isn&#39;t.</p>
+<p>And it is really cool to just have a long little row,<br>of pocket reference books, it shows that you don&#39;t mess around.</p>
+<hr>
+<p>At this point we have a lit of numbers that represent stories on hacker news,<br>to grab a story we have to curl item / story number followed by .json <a href="https://hacker-news.firebaseio.com/v0/item/27941616.json?print=pretty">27941616.json</a></p>
+<p>There is a bit of a problem here, because piping the output of the list of numbers to,<br>wc command with the -l switch, which stands for word count, count number of lines for me.</p>
+<p>Reveals that hacker news API returns 500 story numbers,<br>and it is bad etiquette to issue 500 requests to hacker news servers.</p>
+<p>Moreover, each hacker news story has, a list of numbers that represent the comments,<br>presumably the top comments in the thread.</p>
+<p>Even though they say there is no rate limit,<br>we would probably trigger their security system and get temporary banned.</p>
+<hr>
+<p>I recently got banned by npm becasue i was looking for package names I could use to publish a program,<br>I knew I wanted something similar to rsync, which is the name of a command responsible for remote synchronization.</p>
+<p>But somebody else took rsync ages ago, so I started changing the url in the address bar to<br>ssync tsync usync vsync wsync xsync ysync,</p>
+<p>And all of a sudden the website said, you are doing too much of that,<br>you are temporary banned - fair enough, I guess.</p>
+<p>I ended up publishing <a href="https://github.com/catpea/rsend">rsend</a>, because it occurred to me,<br>that I am not really syncing arbitrary locations, but sending from local to remote.</p>
+<p>I use it, to upload my music to my workout audio player,<br>but the program is very ugly because, I only expect GNU utilities on the target system.</p>
+<p>While I can program all kinds of things on the local system,<br>the remote system will not have my code, so checking file uploads has to be done via Linux commands.</p>
+<hr>
+<p>One way to throttle our requests, is to use the sleep command, between downloading each of the stories,<br>we could sleep for 1 second for the first 10 stories, and then, two seconds, three seconds, and finally five seconds between each request, and nobody would get mad a that.</p>
+<p>Another way to do it, is to pre-fetch three or five stories,<br>ahead of where you are at right now, so you wouldn&#39;t have any wait times, if you just read the stories live.</p>
+<p>If all you want to see for the day is 10 stories,<br>then you will only download 15, AND NOT 500!</p>
+<p>Beyond that, you could do a little bit of maneuvering,<br>and begin gathering top stories every hour throughout the day at a comfy 10 second interval.</p>
+<hr>
+<p>There is something you should know,<br>you know how that wc command that we just rand had a -l to make it couldn&#39;t lines.</p>
+<p>When you are inside a full screen program,<br>interacting with things kind of should be maybe about letters as well.</p>
+<p>If we made an interactive terminal program,<br>that just browsers a screenful at a time.</p>
+<p>To go to the next page,<br>you would have to pres the &quot;n&quot; key.</p>
+<p>This is yet another Black Screen shortcut,<br>that goes straight into a cheeatsheet.</p>
+<p>We also need to consider other news sources,<br>whatever your favorite hangout spots are.</p>
+<p>And, not everyone is going to be as nice as Hacker News and present an API,<br>there may not be a public API.</p>
+<p>In that case we will need to write a screen scraper,<br>that is one of the worst kinds of programs.</p>
+<p>As it doesn&#39;t use the data beneath the screen,<br>it just sort of does this ugly scrape of whatever is on the screen.</p>
+<p>This entails controlling a full Web Browser,<br>and sort of making it look like there is a human browsing the page, where it is actually a freaking robot.</p>
+<p>And it gets worse,<br>lyke super bad.</p>
+<p>There was a world wide DNS problem couple of days ago,<br>and Amazon keeps forcing me to solve their CAPTCHA when I use Firefox, Chromium works fine for me.</p>
+<p>There maybe websites out there that can stop you from scraping them,<br>by presenting a CAPTCHA, and the only way to fix that, is to solve it.</p>
+<p>The glitched Amazon that I am still experiencing,<br>would only ask me to solve the CAPTCHA once per opening a browser, and that was already pretty annoying.</p>
+<p>CAPTCHA is unlikely to feature on News Websites though,<br>but if you scrape too quickly, of they detect your browser signature you may bet one.</p>
+<p>Now that all websites use JavaScript, you can&#39;t just mirror them with wget,<br>they need an automated browser that will run the JavaScript to make the pages come to life.</p>
+<hr>
+<p>When we are inventing on the command line,<br>we have to jump ahead of ourselves and see what our program will need when it is finished.</p>
+<p>And the first thing that comes to mind,<br>is multiple news sources.</p>
+<p>If we are to create a system to extract interesting stories from multiple places on the internet,<br>then it is definable something that should consist of multiple programs, that run hourly or so.</p>
+<p>So we would have one program for extracting data from hacker news,<br>another for extracting data from eBay about some obscure phone that is cool but never available.</p>
+<p>And another program to get emails from different service providers,<br>news from, say, the Raspberry PI blog.</p>
+<p>And information from Raspberry Pi, like temperature or pressure changes,<br>maybe a new hires photos from the nearby Squirrel cam.</p>
+<hr>
+<p>We could make this work via a command line RSS reader (with the option of using a proper desktop one),<br>by setting up a local RSS server that keeps track of data from all these places.</p>
+<p>And I think the data would have to sit in an SQL database,<br>this way all those different data sources would have a universal format that can be easily processed.</p>
+<p>Once they are put into the database,<br>creating custom RSS feeds is easy, they are actually just plain XML files, same idea as JSON.</p>
+<hr>
+<p>While SQL and the feed server can be easily can be easily controlled from the command line,<br>the scraping of the various unfriendly websites, will require a custom program.</p>
+<p>Personally I would base it on <a href="https://browserless.js.org/">Browserless.js</a>,<br>as it has built-in &quot;evasions technniques (sic)&quot; to prevent being blocked.</p>
+<p>I just noticed that they misspelled evasion techniques,<br>forked their project, and fixed a couple more mistakes I could find.</p>
+<p><a href="https://github.com/microlinkhq/browserless/pull/295">I created a PR, short for pull request, which means that I am requesting that they pull the fixes that I have created</a>,<br>so because Browserless.js is an Open Source Code Project, anybody can make valuable little contributions.</p>
+<p>But even with the mighty Browserless.js project,<br>websites we would be scraping will sometimes update their code, and our scraper brains would need to be updated.</p>
+<hr>
+<p>Overall, our best option here, is to cut 10 entries from top of the Hacker News,<br>and see if we can get away with making 10 quick requests for their top stories, and call our initial version done.</p>
+<p>Personally I would begin testing <a href="https://ostechnix.com/newsbeuter-command-line-rssatom-feed-reader-unix-like-systems/">Newsbeuter</a> <a href="https://github.com/msharov/snownews">Snownews</a> <a href="https://www.tecmint.com/newsroom-commandline-linux-news-reader/">Newsroom</a> and <a href="https://www.tecmint.com/newsboat-rss-atom-feed-reader-for-linux-terminals/">newsboat</a> to get the feel for command line news,<br>and consider moving to desktop RSS clients so as long as they support ad blockers.</p>
+<p>And then quietly, I would begin working on my scrapers,<br>being mindful that they must output RSS feeds, which then I would add to my RSS readers.</p>
+<hr>
+<p>To be honest, there is not much time that I have for reading internet news,<br>and the more I think about it, the more fetching that little 10 news items program seems, and the more clunky RSS starts to look.</p>
+<p>Let us chop off the top then entries from Hacker News,<br>and see if we can quickly get an overview of what is going on in the world.</p>
+<p>The command for getting the top of data is head, and to specify how many lines we want we use -n,<br>so our command now looks like this: curl <a href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty</a> | jq &#39;.[]&#39; | head -n 10;</p>
+<p>Armed with 10 numbers that represent top stories,<br>we now have to take the second step, and use each of those numbers to download the titles from Hacker News.</p>
+<p>And here we reuse curl, but the url that we give to curl needs to have that number inserted in there,<br>there are two ways to do this, one is xargs, and the other a while loop.</p>
+<p>The while loop is better, it is more readable, it is faster, but I don&#39;t like it because it wraps things,<br>my xargs approach, creates a single straight command line.</p>
+<p>Unfortunately my line ends up having a command that uses quotes, inside quotes,<br>so there is quote escaping, by means of backslash, and that is something I don&#39;t like.</p>
+<p>But I must say the proper way to do this, is a single pipe,<br>get the top story numbers, map the numbers to data, and map the data to text so that it looks nice on the black screen.</p>
+<p>Three simple steps,<br>get numbers, convert them to stories, print them to screen.</p>
+<p>In closing, I will read to you the code of each of the three approaches, in the way that I think about it,<br>I wont read quote, backslash, n, backslash n, but give you a somewhat poetic reading.</p>
+<hr>
+<p>First is my xargs approach, a single pipe;</p>
+<p>curl -s <code>https://hacker-news.firebaseio.com/v0/topstories.json</code> | jq &#39;.[]&#39; | head -n 10 | xargs -I % sh -c &quot;curl -s <code>https://hacker-news.firebaseio.com/v0/item/%.json</code> | jq -r &#39;. | [.title,.url, null] | join(&quot;\n&quot;)&#39;&quot;</p>
+<p>Now, describe the first loop approach, which is actually a little bit backwards.</p>
+<p>while read -r ID; do curl -s <code>https://hacker-news.firebaseio.com/v0/item/$ID.json</code> | jq -r &#39;. | [.title, &quot;\n&quot;, .url, &quot;\n&quot;] | add&#39;; done &lt; &lt;(curl -s <code>https://hacker-news.firebaseio.com/v0/topstories.json</code> | jq &#39;.[]&#39; | head -n 10 )</p>
+<p>And here is the way that people probably prefer, but I am unhappy about, because there shoudn&#39;t be a loop here.</p>
+<p>curl -s <code>https://hacker-news.firebaseio.com/v0/topstories.json</code> | jq &#39;.[]&#39; | head -n 10 | while read -r ID ; do curl -s <code>https://hacker-news.firebaseio.com/v0/item/$ID.json</code> | jq -r &#39;. | [.title, &quot;\n&quot;, .url, &quot;\n&quot;] | add&#39;; done;</p>
+<p>And that is what the black screens are all about,<br>I hope I inspired you to look a little bit more into those black screens.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://linuxcommandlibrary.com/basic/oneliners">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://linuxcommandlibrary.com/basic/oneliners</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://linuxcommandlibrary.com/basic/oneliners</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.google.com/search?q=Linux+Cheat+Sheet">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>you can just download a little cheat-sheet</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.google.com/search?q=Linux+Cheat+Sheet</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>wget has a --mirror option</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/HackerNews/API">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://github.com/HackerNews/API</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/HackerNews/API</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>topstories.json</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://stedolan.github.io/jq/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>jq</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://stedolan.github.io/jq/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=I6id1Y0YuNk">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>curl</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=I6id1Y0YuNk</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://stedolan.github.io/jq/manual/#Basicfilters">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>jq tutorial</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://stedolan.github.io/jq/manual/#Basicfilters</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=FSn_38gDvzM">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>sometimes watching a video tutorial is useful too</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=FSn_38gDvzM</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="http://www.catb.org/~esr/jargon/html/R/RTFM.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>RTFM</span>
-                      <small class="d-block text-muted fw-lighter mt-2">http://www.catb.org/~esr/jargon/html/R/RTFM.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.google.com/search?q=command+line+cheat+sheets">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>command line cheat sheets</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.google.com/search?q=command+line+cheat+sheets</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Linux+command+line+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>video tutorials</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Linux+command+line+tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.google.com/search?q=linux+pocket+reference">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>grab some pocket reference titles</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.google.com/search?q=linux+pocket+reference</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://hacker-news.firebaseio.com/v0/item/27941616.json?print=pretty">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>27941616.json</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://hacker-news.firebaseio.com/v0/item/27941616.json?print=pretty</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/rsend">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>rsend</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/rsend</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://browserless.js.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Browserless.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://browserless.js.org/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/microlinkhq/browserless/pull/295">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I created a PR, short for pull request, which means that I am requesting that they pull the fixes that I have created</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/microlinkhq/browserless/pull/295</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ostechnix.com/newsbeuter-command-line-rssatom-feed-reader-unix-like-systems/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Newsbeuter</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ostechnix.com/newsbeuter-command-line-rssatom-feed-reader-unix-like-systems/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/msharov/snownews">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Snownews</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/msharov/snownews</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.tecmint.com/newsroom-commandline-linux-news-reader/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Newsroom</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.tecmint.com/newsroom-commandline-linux-news-reader/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.tecmint.com/newsboat-rss-atom-feed-reader-for-linux-terminals/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>newsboat</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.tecmint.com/newsboat-rss-atom-feed-reader-for-linux-terminals/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">bash</span><span class="chip">shell</span><span class="chip">command-line</span><span class="chip">curl</span><span class="chip">wget</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/9i5zipnKJ14"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/9i5zipnKJ14</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://linuxcommandlibrary.com/basic/oneliners">
+              <span class="text-truncate">https://linuxcommandlibrary.com/basic/oneliners</span>
+              <span class="fg-3 fs-xs flex-shrink-0">linuxcommandlibrary.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.google.com/search?q=Linux+Cheat+Sheet">
+              <span class="text-truncate">you can just download a little cheat-sheet</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.google.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/">
+              <span class="text-truncate">wget has a --mirror option</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.guyrutenberg.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/HackerNews/API">
+              <span class="text-truncate">https://github.com/HackerNews/API</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">
+              <span class="text-truncate">topstories.json</span>
+              <span class="fg-3 fs-xs flex-shrink-0">hacker-news.firebaseio.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://stedolan.github.io/jq/">
+              <span class="text-truncate">jq</span>
+              <span class="fg-3 fs-xs flex-shrink-0">stedolan.github.io</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=I6id1Y0YuNk">
+              <span class="text-truncate">curl</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://stedolan.github.io/jq/manual/#Basicfilters">
+              <span class="text-truncate">jq tutorial</span>
+              <span class="fg-3 fs-xs flex-shrink-0">stedolan.github.io</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=FSn_38gDvzM">
+              <span class="text-truncate">sometimes watching a video tutorial is useful too</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="http://www.catb.org/~esr/jargon/html/R/RTFM.html">
+              <span class="text-truncate">RTFM</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.catb.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.google.com/search?q=command+line+cheat+sheets">
+              <span class="text-truncate">command line cheat sheets</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.google.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Linux+command+line+tutorial">
+              <span class="text-truncate">video tutorials</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.google.com/search?q=linux+pocket+reference">
+              <span class="text-truncate">grab some pocket reference titles</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.google.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://hacker-news.firebaseio.com/v0/item/27941616.json?print=pretty">
+              <span class="text-truncate">27941616.json</span>
+              <span class="fg-3 fs-xs flex-shrink-0">hacker-news.firebaseio.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/rsend">
+              <span class="text-truncate">rsend</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://browserless.js.org/">
+              <span class="text-truncate">Browserless.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">browserless.js.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/microlinkhq/browserless/pull/295">
+              <span class="text-truncate">I created a PR, short for pull request, which means that I am requesting that they pull the fixes that I have created</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ostechnix.com/newsbeuter-command-line-rssatom-feed-reader-unix-like-systems/">
+              <span class="text-truncate">Newsbeuter</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ostechnix.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/msharov/snownews">
+              <span class="text-truncate">Snownews</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.tecmint.com/newsroom-commandline-linux-news-reader/">
+              <span class="text-truncate">Newsroom</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.tecmint.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.tecmint.com/newsboat-rss-atom-feed-reader-for-linux-terminals/">
+              <span class="text-truncate">newsboat</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.tecmint.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/3e9b73ec-b6aa-46ba-bd81-8ebd2ed8901c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">A Very Brief Overview Of Linux</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/cb35e982-a5df-43b3-bd45-6c98c07f64b9/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Wearable Computer Networks: Linux Audio Player Upgrade, Or The Six Key Keyboard</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cb35e982-a5df-43b3-bd45-6c98c07f64b9/">
+              <img src="https://catpea.github.io/chapter-03/poem-0512.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Wearable Computer Networks: Linux Audio Player Upgrade, Or The Six Key Keyboard</span>
+                <span class="fg-3 fs-xs">July 25, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3e9b73ec-b6aa-46ba-bd81-8ebd2ed8901c/">
+              <img src="https://catpea.github.io/chapter-03/poem-0510.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Very Brief Overview Of Linux</span>
+                <span class="fg-3 fs-xs">July 23, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5b9fb4f8-228d-42f2-b0c7-89e0752963e3/">
+              <img src="https://catpea.github.io/chapter-03/poem-0515.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming A Remote Controlled Portable Raspberry Pi Audio Player</span>
+                <span class="fg-3 fs-xs">July 28, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/318fe2b0-7c84-4658-82cd-c00f529e0348/">
+              <img src="https://catpea.github.io/chapter-03/poem-0508.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">My First Homemade Portable Music Player</span>
+                <span class="fg-3 fs-xs">July 21, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

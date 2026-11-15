@@ -1,188 +1,500 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Printing: A Look At Strange Wallets</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>3D Printing: A Look At Strange Wallets · Cat Pea</title>
+  <meta name="description" content="I started by exploring a Blender Doughnut tutorial and found its keyboard shortcuts and interface clear, which prompted me to use Blender as a backup to FreeCAD while also enjoying the patience it builds; I then shifted to Inkscape for 2‑D design work, taking advantage of its snapping and line tools to create precise shapes that can be exported as SVGs—SVG files that translate into FreeCAD sketches requiring many constraints but can instead be imported into Blender where extrusion turns them into 3‑D objects ready for slicer‑generated G‑code and printing; I also experimented with simple wallet concepts, adding LEDs and elastic hinges, and considered a generative wallet design system that would randomly assemble features from an SVG outline to produce multiple options for users to choose from, illustrating how 3‑D modeling can turn creative ideas into tangible products and serve as a practical lesson in both design and entrepreneurship for students.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/a2d5a87a-753f-4a0e-8aba-03d6ccd4962b/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="3D Printing: A Look At Strange Wallets · Cat Pea">
+  <meta property="og:description" content="I started by exploring a Blender Doughnut tutorial and found its keyboard shortcuts and interface clear, which prompted me to use Blender as a backup to FreeCAD while also enjoying the patience it builds; I then shifted to Inkscape for 2‑D design work, taking advantage of its snapping and line tools to create precise shapes that can be exported as SVGs—SVG files that translate into FreeCAD sketches requiring many constraints but can instead be imported into Blender where extrusion turns them into 3‑D objects ready for slicer‑generated G‑code and printing; I also experimented with simple wallet concepts, adding LEDs and elastic hinges, and considered a generative wallet design system that would randomly assemble features from an SVG outline to produce multiple options for users to choose from, illustrating how 3‑D modeling can turn creative ideas into tangible products and serve as a practical lesson in both design and entrepreneurship for students.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0536.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/art/">Art &amp; Music</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0536</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0536.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0536.avif" alt="3D Printing: A Look At Strange Wallets"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">3D Printing: A Look At Strange Wallets</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0536.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/art/">
+              <i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0536</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">3D Printing: A Look At Strange Wallets</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-08-19">8/18/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I took the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=TPrnSACiTJ4">Blender Doughnut Tutorial</a> today,<br>and the first level is not bad at all - Keyboard Shortcuts and Little Buttons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have been looking into Blender as a backup to FreeCAD,<br>but also it is good for the soul to develop patience for special need programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have spent a little bit more time in Inkscape, a 2D program,<br>it has very good features.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I have also spent a moment thinking about paper,<br>as it is reasonable to draw a design on paper.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will require conversion to SVG,<br>and in some cases can be used in a 3D sculpting program.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My initial designs were squares,<br>the latest design, is me drawing with a line tool.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not a free hand tool,<br>but a tool that draws straight lines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, by pressing the control key,<br>you are only allowed to make angles in 15 degree increments.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The designs almost design themselves,<br>this is within <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Inkscape+tutorial">Inkscape</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a tool,<br>that prevents crooked doodles.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The latest design that is shown in the title picture,<br>is mostly a random arrangement of 2D shapes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a study,<br>in what a more deliberate design process would feel like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Inkscape in particular has helpful tools for arranging objects evenly,<br>evenly distributing spaces between objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When a 2D design is imported to FreeCAD, it can be converted to a sketch,<br>but the sketch will need hundreds of constraints, 700 in this case.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the program demands can be ignored,<br>so as long as all the objects that will later become holes by means of Boolean Cuts, are solid paths.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had them set as lines and FreeCAD would get confused,<br>a hole in the SVG will not translate to a hole in FreeCAD, it will become an object that needs to go through the Boolean Cut process.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is where Blender comes in,<br>blenders ability to convert an SVG into a 3D object is a matter of setting the imported SVG object extrusion value under Geometry,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In my case here it is 2mm,<br>Blender can export the object, but in case of TinkerCAD it must be scaled a 1,000 times during export.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Blender&#39;s default scene is in meters,<br>it is just easier to enter 1000 during export then mess with the settings.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By using Blender with a Slicer that generates gcode that 3D printers and other machines understand,<br>it is hard to see any limitations to any kind of design.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">FreeCAD seems to be a more serious program,<br>it is meant to create tools and parts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Blender, takes the concept to the maximum,<br>and far beyond manufacturing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There was a cartoon that I watched a few times when I was little,<br>it was called <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=7TdvUcVZFWs">Enchanted Pencil</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://youtu.be/7TdvUcVZFWs?t=228">Three minutes fifty seconds into the cartoon</a>,<br>a Gnome appears for no reason, and hands the main character a magical pencil.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The boy then copies a tattoo on a nearby sleeping admiral,<br>and the drawing magically appears in reality.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=I0EfPcc6O6k">3D pens that extrude the same kind of filament that 3D printers use do exist</a>,<br>but making 3D drawings free hand is a different process.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is very artistic through, and the filament work does smooth out with a hot knife and some filling,<br>it is just that one can&#39;t make perfect copies.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that is what 3D modeling of real world objects feels like to me,<br>it is like using a magical pencil.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.kickstarter.com/stories/wallets">It seems almost everyone is using wallets to refine their work flow</a>,<br>it certainly makes for an interesting hobby.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I bought a little CR2030 battery,<br>and while it was still in packaging I pierced it with a pin and slid in a 5mm led.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It has been on all afternoon,<br>I can tell the green LED needs more juice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just jabbed in a red one in there and it looks fantastic,<br>all it takes is a pair of calipers to create a useless wallet feature, that will make all the difference.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I&#39;ve noticed many wallet designs have little little ports for MicroSD cards,<br>and even card adapters.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I continue using elastic string during my initial research,<br>that&#39;s what the round holes are for in the title image.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I&#39;ve notices people using rubber washers or bands to create simple hinges,<br>and a handful of designs takes that extra step and feature an actual mechanical hinge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Creating a proper hinge is simple math,<br>and a hinge can be printed per-assembled which is yet another fantastic tangent.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My favorite idea in the world of wallets,<br>is of course Generative Wallets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A program would follow simple logic to outline an SVG design,<br>it would randomly choose from ideas about each of the corners, rounded, exposed, square with an extrusion, etc.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With a handful of randomly set parameters,<br>the wallet design would emerge out of random chaos.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Moreover once could display nine wallets,<br>and allow the user to choose which of the features look most fetching.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then re generate nine new designs,<br>that select for what the features previously picked.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Borrowing from the process of evolution,<br>though I prefer non-interactive product generation, myself.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing, I want to hold this up as an example of Real Education,<br>something that can be learned in 7th grade, and mastered by high school.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even though this is just printing,<br>it is also a lesson in business.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It shows a young mind that there is a small gap between an original invention,<br>and an online store.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">High school graduation, should end with all the students being equipped with an independent business,<br>most of the time it would be multiple co-founders, as it is easier - but that is not the rule.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here the students would see that they don&#39;t need to graduate into more debt and more poverty,<br>but rather have something that <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=9M4tdMsg3ts">pushes all the fears of post-graduation back</a>.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-08-19T00:26:56.407Z">August 18, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:58<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0536.avif" aria-label="Cover for 3D Printing: A Look At Strange Wallets, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0536.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for 3D Printing: A Look At Strange Wallets" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:58
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0536.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0536.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0536.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I took the <a href="https://www.youtube.com/watch?v=TPrnSACiTJ4">Blender Doughnut Tutorial</a> today,<br>and the first level is not bad at all - Keyboard Shortcuts and Little Buttons.</p>
+<p>I have been looking into Blender as a backup to FreeCAD,<br>but also it is good for the soul to develop patience for special need programs.</p>
+<p>I have spent a little bit more time in Inkscape, a 2D program,<br>it has very good features.</p>
+<p>And I have also spent a moment thinking about paper,<br>as it is reasonable to draw a design on paper.</p>
+<p>It will require conversion to SVG,<br>and in some cases can be used in a 3D sculpting program.</p>
+<hr>
+<p>My initial designs were squares,<br>the latest design, is me drawing with a line tool.</p>
+<p>Not a free hand tool,<br>but a tool that draws straight lines.</p>
+<p>Now, by pressing the control key,<br>you are only allowed to make angles in 15 degree increments.</p>
+<p>The designs almost design themselves,<br>this is within <a href="https://www.youtube.com/results?search_query=Inkscape+tutorial">Inkscape</a>.</p>
+<p>It is a tool,<br>that prevents crooked doodles.</p>
+<hr>
+<p>The latest design that is shown in the title picture,<br>is mostly a random arrangement of 2D shapes.</p>
+<p>It is a study,<br>in what a more deliberate design process would feel like.</p>
+<p>Inkscape in particular has helpful tools for arranging objects evenly,<br>evenly distributing spaces between objects.</p>
+<p>When a 2D design is imported to FreeCAD, it can be converted to a sketch,<br>but the sketch will need hundreds of constraints, 700 in this case.</p>
+<p>But the program demands can be ignored,<br>so as long as all the objects that will later become holes by means of Boolean Cuts, are solid paths.</p>
+<p>I had them set as lines and FreeCAD would get confused,<br>a hole in the SVG will not translate to a hole in FreeCAD, it will become an object that needs to go through the Boolean Cut process.</p>
+<p>Which is where Blender comes in,<br>blenders ability to convert an SVG into a 3D object is a matter of setting the imported SVG object extrusion value under Geometry,</p>
+<p>In my case here it is 2mm,<br>Blender can export the object, but in case of TinkerCAD it must be scaled a 1,000 times during export.</p>
+<p>Blender&#39;s default scene is in meters,<br>it is just easier to enter 1000 during export then mess with the settings.</p>
+<hr>
+<p>By using Blender with a Slicer that generates gcode that 3D printers and other machines understand,<br>it is hard to see any limitations to any kind of design.</p>
+<p>FreeCAD seems to be a more serious program,<br>it is meant to create tools and parts.</p>
+<p>Blender, takes the concept to the maximum,<br>and far beyond manufacturing.</p>
+<hr>
+<p>There was a cartoon that I watched a few times when I was little,<br>it was called <a href="https://www.youtube.com/watch?v=7TdvUcVZFWs">Enchanted Pencil</a>.</p>
+<p><a href="https://youtu.be/7TdvUcVZFWs?t=228">Three minutes fifty seconds into the cartoon</a>,<br>a Gnome appears for no reason, and hands the main character a magical pencil.</p>
+<p>The boy then copies a tattoo on a nearby sleeping admiral,<br>and the drawing magically appears in reality.</p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=I0EfPcc6O6k">3D pens that extrude the same kind of filament that 3D printers use do exist</a>,<br>but making 3D drawings free hand is a different process.</p>
+<p>It is very artistic through, and the filament work does smooth out with a hot knife and some filling,<br>it is just that one can&#39;t make perfect copies.</p>
+<hr>
+<p>But that is what 3D modeling of real world objects feels like to me,<br>it is like using a magical pencil.</p>
+<hr>
+<p><a href="https://www.kickstarter.com/stories/wallets">It seems almost everyone is using wallets to refine their work flow</a>,<br>it certainly makes for an interesting hobby.</p>
+<p>I bought a little CR2030 battery,<br>and while it was still in packaging I pierced it with a pin and slid in a 5mm led.</p>
+<p>It has been on all afternoon,<br>I can tell the green LED needs more juice.</p>
+<p>I just jabbed in a red one in there and it looks fantastic,<br>all it takes is a pair of calipers to create a useless wallet feature, that will make all the difference.</p>
+<p>I&#39;ve noticed many wallet designs have little little ports for MicroSD cards,<br>and even card adapters.</p>
+<hr>
+<p>I continue using elastic string during my initial research,<br>that&#39;s what the round holes are for in the title image.</p>
+<p>But I&#39;ve notices people using rubber washers or bands to create simple hinges,<br>and a handful of designs takes that extra step and feature an actual mechanical hinge.</p>
+<p>Creating a proper hinge is simple math,<br>and a hinge can be printed per-assembled which is yet another fantastic tangent.</p>
+<hr>
+<p>My favorite idea in the world of wallets,<br>is of course Generative Wallets.</p>
+<p>A program would follow simple logic to outline an SVG design,<br>it would randomly choose from ideas about each of the corners, rounded, exposed, square with an extrusion, etc.</p>
+<p>With a handful of randomly set parameters,<br>the wallet design would emerge out of random chaos.</p>
+<p>Moreover once could display nine wallets,<br>and allow the user to choose which of the features look most fetching.</p>
+<p>And then re generate nine new designs,<br>that select for what the features previously picked.</p>
+<p>Borrowing from the process of evolution,<br>though I prefer non-interactive product generation, myself.</p>
+<hr>
+<p>In closing, I want to hold this up as an example of Real Education,<br>something that can be learned in 7th grade, and mastered by high school.</p>
+<p>Even though this is just printing,<br>it is also a lesson in business.</p>
+<p>It shows a young mind that there is a small gap between an original invention,<br>and an online store.</p>
+<p>High school graduation, should end with all the students being equipped with an independent business,<br>most of the time it would be multiple co-founders, as it is easier - but that is not the rule.</p>
+<p>And here the students would see that they don&#39;t need to graduate into more debt and more poverty,<br>but rather have something that <a href="https://www.youtube.com/watch?v=9M4tdMsg3ts">pushes all the fears of post-graduation back</a>.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=TPrnSACiTJ4">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Blender Doughnut Tutorial</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=TPrnSACiTJ4</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Inkscape+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Inkscape</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Inkscape+tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=7TdvUcVZFWs">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Enchanted Pencil</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=7TdvUcVZFWs</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://youtu.be/7TdvUcVZFWs?t=228">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Three minutes fifty seconds into the cartoon</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://youtu.be/7TdvUcVZFWs?t=228</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=I0EfPcc6O6k">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>3D pens that extrude the same kind of filament that 3D printers use do exist</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=I0EfPcc6O6k</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.kickstarter.com/stories/wallets">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>It seems almost everyone is using wallets to refine their work flow</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.kickstarter.com/stories/wallets</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=9M4tdMsg3ts">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>pushes all the fears of post-graduation back</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=9M4tdMsg3ts</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">blender</span><span class="chip">inkscape</span><span class="chip">freecad</span><span class="chip">svg</span><span class="chip">tinker-cad</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=TPrnSACiTJ4">
+              <span class="text-truncate">Blender Doughnut Tutorial</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Inkscape+tutorial">
+              <span class="text-truncate">Inkscape</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=7TdvUcVZFWs">
+              <span class="text-truncate">Enchanted Pencil</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://youtu.be/7TdvUcVZFWs?t=228">
+              <span class="text-truncate">Three minutes fifty seconds into the cartoon</span>
+              <span class="fg-3 fs-xs flex-shrink-0">youtu.be</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=I0EfPcc6O6k">
+              <span class="text-truncate">3D pens that extrude the same kind of filament that 3D printers use do exist</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.kickstarter.com/stories/wallets">
+              <span class="text-truncate">It seems almost everyone is using wallets to refine their work flow</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.kickstarter.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=9M4tdMsg3ts">
+              <span class="text-truncate">pushes all the fears of post-graduation back</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/c20d99e4-bfde-4614-bec7-8af3baf0c3fe/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">To Lake Erie And Back</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b5c6fbfb-dd7e-481e-8c6a-def25e364067/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Transforming Fake Education Into Real Education</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Art &amp; Music</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c8f60ce8-96d7-4fcd-8c24-41a517b80020/">
+              <img src="https://catpea.github.io/chapter-03/poem-0544.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">My Little Adventure In 3D Modeling</span>
+                <span class="fg-3 fs-xs">August 26, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ff2d0c75-0b90-431e-9950-6b71b6c47562/">
+              <img src="https://catpea.github.io/chapter-03/poem-0529.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Into The World Of Design</span>
+                <span class="fg-3 fs-xs">August 11, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cd0546a6-9347-44b6-8bab-d1b3232667f6/">
+              <img src="https://catpea.github.io/chapter-03/poem-0548.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Into Fabrication: Are 3D Printers The Bee&#39;s Knees?</span>
+                <span class="fg-3 fs-xs">August 30, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9141dd6e-68bb-458e-a876-785024f4951e/">
+              <img src="https://catpea.github.io/chapter-03/poem-0528.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Computer Aided Design or CAD Is Somewhat Easy</span>
+                <span class="fg-3 fs-xs">August 10, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/art/">All of Art &amp; Music<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

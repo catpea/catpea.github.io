@@ -1,215 +1,477 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament · Cat Pea</title>
+  <meta name="description" content="I got my first computer mouse as a gift and quickly fell into the world of cursor events—starting with simple drag‑and‑drop logic (mouseDown → movement → delta calculation) but soon running into inconsistencies between movementX/movementY, clientX/clientY, and viewport size changes when nested windows are transformed. After trying to track pixel deltas in a multi‑window setup, I created a small repo called kerfuffle to handle the transforms and re‑calculate positions, only to discover that even though the math works out, the mouse’s imprecision still throws off the layout, reminding me of the exacting precision needed in watchmaking.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/caa26143-bc50-4f83-8cfb-39f153fd18e7/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament · Cat Pea">
+  <meta property="og:description" content="I got my first computer mouse as a gift and quickly fell into the world of cursor events—starting with simple drag‑and‑drop logic (mouseDown → movement → delta calculation) but soon running into inconsistencies between movementX/movementY, clientX/clientY, and viewport size changes when nested windows are transformed. After trying to track pixel deltas in a multi‑window setup, I created a small repo called kerfuffle to handle the transforms and re‑calculate positions, only to discover that even though the math works out, the mouse’s imprecision still throws off the layout, reminding me of the exacting precision needed in watchmaking.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-09/poem-1491.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-09/">Chapter 09</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1491</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-09/poem-1491.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-09/poem-1491.avif" alt="Computer Mouse: The Meanest Creature In The World; Or, A Programmer&apos;s Lament"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-09/poem-1491.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 09</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1491</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-04-01">3/31/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I never wanted a computer mouse,
-it found me, I got a used one as a gift.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then I came across GEOS,
-saw a little cursor and put the two together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve been struggling with computer mice,
-my whole life.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let me show you,
-let me just tell you a story.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One of the biggest battles I’ve had,
-with the computer mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Happened just this past week,
-and I lost, I lost.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Allow me to open,
-with evidence, just what a cruel beast it is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is from the Mozilla Developer Network documentation,
-on the subject of the movement, the bare movement event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The most basic thing there is,
-and it reads as follows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">“Warning: Browsers use different units for movementX and screenX than what the specification defines. Depending on the browser and operating system, the movementX units may be a physical pixel, a logical pixel, or a CSS pixel. You may want to avoid the movement properties, and instead calculate the delta between the current client values (screenX, screenY) and the previous client values.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is done on purpose,
-somehow perpetrated by the hold the mouse has over our world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a simple problem,
-and I’ll explain to you how dragging a thing works.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You press the mouse button,
-and receive a mouse down event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lets say you pressed it in 5,5 position,
-just for simplicity sake.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, at this point, you hae to begin monitoring,
-for a mouse move event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because you don’t care about the movement,
-until you press the button.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you set up a listener,
-and wait, you actually have to wait.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no sequential execution here,
-the mouse will send the move event, the damn mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will be just a few milliseconds,
-but you don’t decide how many, you just wait.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you will receive the event,
-and it may say:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Okie kitty, the mouse,
-is now at position 10,10.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meaning it has moved five pixels,
-to calculate that you say current position minus previous position.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is 10 minus 5,
-for both x and y.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now that you have performed this calcuation,
-you say to whatever you are dragging on the screen.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I need you to update you position, by 5,5 pixels,
-because the mouse said so.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you release the mouse button,
-you remove the listener for mouse movement.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the friendliest thing you can expect from the mouse,
-subtracting pixels to get the delta.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it all gets worse from here,
-it gets so bad, that the movement property needs a warning.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, where I have been defeated,
-by the mouse, just this week.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is where I need to drag something,
-in something very similar to a desktop window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That unlike a desktop window,
-has no limit to how many windows can be nested in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And cannot use, pixels for calculations,
-no pixels.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to use transforms,
-each window defines how it should transform x and y.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was prepared for it,
-I had a beautiful little array...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where every window reported to me,
-by how many pixels things have been panned inside it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my what scale,
-things have been zoomed in or out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My calculations were perfect,
-I understood the problem I was facing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Including, that things inside the windows,
-have their own layout manger, which needs to be alerted to when the window moves.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I could make it work,
-which required that wherever you scroll the mouse wheel.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You either zoom in or zoom out,
-and have to pan, at the same time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that the point under the cursor,
-is always the same.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had to abandon the way windows are structured,
-create a new repository, which I called kerfuffle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is one of my development strategies,
-to carefully move the code, while just going over it step by stem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There isn’t a lot of code,
-but you have to follow the story it tells precisley.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had to begin, anew,
-and yes, it was the mouse.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was the mouse...
-the documentation states that .x and .y, another way of reading coordinates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is an alias for .clientX and .clientY,
-that reports mouse position within the visible window viewport.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(the square that shows,
-the page you are scrolling)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As opposed the long page that requires all the scrolling,
-view-port, view port is the camera view port.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I compared, .x and .clientX,
-and the values were just different.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Furthermore, when I maximized the window,
-the view-port coordinates appeared to have changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By what seemed to me,
-the size of the browser menu bar.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point,
-I wasn’t taking the program seriously.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am sure I am wrong about clientX and x being different,
-but it is the distrust for the mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Presley because of warning messages,
-such as the one I quoted in the beginning about movemenX.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That, derail you, that cause doubt,
-that perhaps somewhere, you used the wrongX.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally there is one more thing,
-I could make it work, I had it working.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But because I observed the numbers that needed change,
-not because I understood the problem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And even then,
-understanding is not enough.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am a watch maker,
-the clockwork is an art form.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Adding extra gears to correct movement,
-is not how programming is done.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Only wisdom and precision,
-is allowed.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was the mouse,
-a cruel cybernetic creature, that threw me off.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I know it,
-the mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just imprecise enough,
-just unique enough, to make you reassemble the watch.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I like normal mice,
-but I do not like the computer mice...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Too imprecise,
-the mouse jinxed me.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-04-01T02:58:05.613Z">March 31, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>11:42<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-09/poem-1491.avif" aria-label="Cover for Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament, full size">
+            <img src="https://catpea.github.io/chapter-09/poem-1491.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Computer Mouse: The Meanest Creature In The World; Or, A Programmer&#39;s Lament" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 11:42
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-09/poem-1491.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-09/poem-1491.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-09/poem-1491.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I never wanted a computer mouse,<br>it found me, I got a used one as a gift.</p>
+<p>Then I came across GEOS,<br>saw a little cursor and put the two together.</p>
+<p>I’ve been struggling with computer mice,<br>my whole life.</p>
+<p>Let me show you,<br>let me just tell you a story.</p>
+<p>One of the biggest battles I’ve had,<br>with the computer mouse.</p>
+<p>Happened just this past week,<br>and I lost, I lost.</p>
+<hr>
+<p>Allow me to open,<br>with evidence, just what a cruel beast it is.</p>
+<p>This is from the Mozilla Developer Network documentation,<br>on the subject of the movement, the bare movement event.</p>
+<p>The most basic thing there is,<br>and it reads as follows.</p>
+<p>“Warning: Browsers use different units for movementX and screenX than what the specification defines. Depending on the browser and operating system, the movementX units may be a physical pixel, a logical pixel, or a CSS pixel. You may want to avoid the movement properties, and instead calculate the delta between the current client values (screenX, screenY) and the previous client values.”</p>
+<p>This is done on purpose,<br>somehow perpetrated by the hold the mouse has over our world.</p>
+<p>This is a simple problem,<br>and I’ll explain to you how dragging a thing works.</p>
+<p>You press the mouse button,<br>and receive a mouse down event.</p>
+<p>Lets say you pressed it in 5,5 position,<br>just for simplicity sake.</p>
+<p>Now, at this point, you hae to begin monitoring,<br>for a mouse move event.</p>
+<p>Because you don’t care about the movement,<br>until you press the button.</p>
+<p>So you set up a listener,<br>and wait, you actually have to wait.</p>
+<p>There is no sequential execution here,<br>the mouse will send the move event, the damn mouse.</p>
+<p>It will be just a few milliseconds,<br>but you don’t decide how many, you just wait.</p>
+<p>And then you will receive the event,<br>and it may say:</p>
+<p>Okie kitty, the mouse,<br>is now at position 10,10.</p>
+<p>Meaning it has moved five pixels,<br>to calculate that you say current position minus previous position.</p>
+<p>Which is 10 minus 5,<br>for both x and y.</p>
+<p>Now that you have performed this calcuation,<br>you say to whatever you are dragging on the screen.</p>
+<p>I need you to update you position, by 5,5 pixels,<br>because the mouse said so.</p>
+<p>When you release the mouse button,<br>you remove the listener for mouse movement.</p>
+<hr>
+<p>This is the friendliest thing you can expect from the mouse,<br>subtracting pixels to get the delta.</p>
+<p>And it all gets worse from here,<br>it gets so bad, that the movement property needs a warning.</p>
+<hr>
+<p>Now, where I have been defeated,<br>by the mouse, just this week.</p>
+<p>Is where I need to drag something,<br>in something very similar to a desktop window.</p>
+<p>That unlike a desktop window,<br>has no limit to how many windows can be nested in.</p>
+<p>And cannot use, pixels for calculations,<br>no pixels.</p>
+<p>You have to use transforms,<br>each window defines how it should transform x and y.</p>
+<p>I was prepared for it,<br>I had a beautiful little array...</p>
+<p>Where every window reported to me,<br>by how many pixels things have been panned inside it.</p>
+<p>And my what scale,<br>things have been zoomed in or out.</p>
+<p>My calculations were perfect,<br>I understood the problem I was facing.</p>
+<p>Including, that things inside the windows,<br>have their own layout manger, which needs to be alerted to when the window moves.</p>
+<p>I could make it work,<br>which required that wherever you scroll the mouse wheel.</p>
+<p>You either zoom in or zoom out,<br>and have to pan, at the same time.</p>
+<p>So that the point under the cursor,<br>is always the same.</p>
+<hr>
+<p>I had to abandon the way windows are structured,<br>create a new repository, which I called kerfuffle.</p>
+<p>And it is one of my development strategies,<br>to carefully move the code, while just going over it step by stem.</p>
+<p>There isn’t a lot of code,<br>but you have to follow the story it tells precisley.</p>
+<p>I had to begin, anew,<br>and yes, it was the mouse.</p>
+<hr>
+<p>It was the mouse...<br>the documentation states that .x and .y, another way of reading coordinates.</p>
+<p>Is an alias for .clientX and .clientY,<br>that reports mouse position within the visible window viewport.</p>
+<p>(the square that shows,<br>the page you are scrolling)</p>
+<p>As opposed the long page that requires all the scrolling,<br>view-port, view port is the camera view port.</p>
+<p>And I compared, .x and .clientX,<br>and the values were just different.</p>
+<hr>
+<p>Furthermore, when I maximized the window,<br>the view-port coordinates appeared to have changed.</p>
+<p>By what seemed to me,<br>the size of the browser menu bar.</p>
+<p>At this point,<br>I wasn’t taking the program seriously.</p>
+<hr>
+<p>I am sure I am wrong about clientX and x being different,<br>but it is the distrust for the mouse.</p>
+<p>Presley because of warning messages,<br>such as the one I quoted in the beginning about movemenX.</p>
+<p>That, derail you, that cause doubt,<br>that perhaps somewhere, you used the wrongX.</p>
+<hr>
+<p>Finally there is one more thing,<br>I could make it work, I had it working.</p>
+<p>But because I observed the numbers that needed change,<br>not because I understood the problem.</p>
+<p>And even then,<br>understanding is not enough.</p>
+<p>I am a watch maker,<br>the clockwork is an art form.</p>
+<p>Adding extra gears to correct movement,<br>is not how programming is done.</p>
+<p>Only wisdom and precision,<br>is allowed.</p>
+<hr>
+<p>I was the mouse,<br>a cruel cybernetic creature, that threw me off.</p>
+<p>I know it,<br>the mouse.</p>
+<p>It is just imprecise enough,<br>just unique enough, to make you reassemble the watch.</p>
+<p>I like normal mice,<br>but I do not like the computer mice...</p>
+<p>Too imprecise,<br>the mouse jinxed me.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">mouse</span><span class="chip">events</span><span class="chip">javascript</span><span class="chip">dom</span><span class="chip">coordinates</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/d6a9eb46-3988-4d74-b83a-665f364b6887/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Bodybuilding For Ladies</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/623565af-fcd9-4d1d-b320-ac3561dc0e05/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The European Cowboy</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/59571fcf-5346-4810-b1af-b17420bfa034/">
+              <img src="https://catpea.github.io/chapter-09/poem-1493.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Artificial Intelligence Means It Is Time To Learn Programming; Or; The Call Of Interactive Fiction</span>
+                <span class="fg-3 fs-xs">April 2, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/61f4e6a1-e112-454d-bcdb-94958eb46278/">
+              <img src="https://catpea.github.io/chapter-09/poem-1489.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Devil In The Details; Or, What The Hell Have I Been Inventing Anyways?</span>
+                <span class="fg-3 fs-xs">March 30, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/94deda74-5e28-417b-875d-5d6e7cf6accf/">
+              <img src="https://catpea.github.io/chapter-09/poem-1495.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Golden Hoagie; Or, A Rare Spiced Pigeon Hoagie With A Side Of Pierogie</span>
+                <span class="fg-3 fs-xs">April 4, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/631bf1d4-bee2-415b-85da-f5e19779226a/">
+              <img src="https://catpea.github.io/chapter-09/poem-1468.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Structure Your Computer Programs And Clearly Communicate Their Internal Architecture</span>
+                <span class="fg-3 fs-xs">March 9, 2024</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

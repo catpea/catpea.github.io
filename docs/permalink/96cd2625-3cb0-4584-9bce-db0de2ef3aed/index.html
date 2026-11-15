@@ -1,292 +1,524 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strategic Software Development For Girls New To Programming</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Strategic Software Development For Girls New To Programming · Cat Pea</title>
+  <meta name="description" content="A three‑layered architecture is described: a key‑value store (Couch/Pouch) for persistent data, an AI‑driven flat‑object command brain that records actions with undo/redo history, and a reactive WebComponent UI driven by signals to display and control the brain.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/96cd2625-3cb0-4584-9bce-db0de2ef3aed/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Strategic Software Development For Girls New To Programming · Cat Pea">
+  <meta property="og:description" content="A three‑layered architecture is described: a key‑value store (Couch/Pouch) for persistent data, an AI‑driven flat‑object command brain that records actions with undo/redo history, and a reactive WebComponent UI driven by signals to display and control the brain.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1874.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1874</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1874.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1874.avif" alt="Strategic Software Development For Girls New To Programming"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Strategic Software Development For Girls New To Programming</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1874.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1874</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Strategic Software Development For Girls New To Programming</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-04-19">4/18/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Avoid generic algorithmic ideas, don’t create reusable nodes,
-that when nested together create a tree, that you shape into an Application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No, you have to create an Application Object, with Toolboxes and Tools,
-Scenery and Scenes, Commander with Commands and History.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are naming things what they are, so that AI can understand them,
-by just looking at them, and not how they are supposed to be structured.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are two additional benefits to that, you can really spend days,
-working on your Toolboxes, or Commands, and make them Unique and Perfect.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you were reusing generic objects to create your application,
-you would be limited to only the changes that are useful to all things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unless necessary, avoid object inheritance as well,
-that is where you say, Toolbox extends ToolCategories.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or LoggedInUser extends User, which extends Profile,
-that also makes a mess, write poetry, long objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because you are no longer writing for programmers,
-now you also write for Artificial Intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The biggest benefit,
-is that you don’t make a program, by programming it first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You now, MUST, make programs, by describing them first,
-by telling the story of your Application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From this end, you see that it is CRITICAL to call things what they are,
-the AI does not want you to talk about nested Nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It wants a story, how everything fits together,
-how information flows, and it wants a clean separation between layers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are three layers, Server, Application, and UserInterface,
-and you want to use the Server as little as possible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t want 10,000 sign-ups when you hit a front page somewhere,
-to shut you down or cost you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What follows is a brief overvio of the three,
-without talking about any specific application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Simply just going over the outline,
-to help you get an overview of what is inside a program.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=PouchDB+Tutorioal">PouchDB</a> is a good starting point for server work, it runs in the browser,
-and whenever possible synchronizes with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=CouchDB+Tutorioal">CouchDB</a> on the server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it would be best to have a simpler storage mechanism,
-that follows the same principles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Key value stores where keys are paths such as:
-“/users/alice/projects” = “a, b, c” can go a long way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whenever you store such a key value pair,
-you also build up a tree based on the key.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So your app would create a users location if not yet there,
-and with user alice, who has a projects location.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This tree then allows you to iterate over all users,
-otherwise you are matching strings and that can get ugly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Down here, on the storage level, you do have generic things,
-like a location.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But beneath that is just your key value database,
-or a database that you only use for key value storage.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the server, the end,
-there is nothing unusual behind the key value storage.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I do want to add, that you need to version your values,
-Couch and Pouch teach you everything you need here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But basically, you give all the key value storage values,
-a revision number, and with each revision a Universally Unique ID.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A revision number starts at 1,
-and the UUID is just random letters and numbers created for that revision.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way when alice updates a, b, c,
-to include a project d.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The revision number tells you if it is an update,
-or an old version of the value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In some cases, usually when two people do the same things somewhere,
-you get the same revision due to a hiccup.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So then you use the universally unique ID of those revisions,
-you just sort by it, the one on top is the winner.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as all servers get the same data,
-everyone will elect the same revision as winner.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is called eventual consistency,
-the conflicting revisions stay in your logs, and are marked as a conflict.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Depending on what you are doing,
-you may need human intervention.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is how CouchDB written in Erlang,
-and PouchDB a clone of Couch written in JavaScript do it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just to clarify, The revision number and uuid, is stored along with the abcd,
-in the value of your key value store, under the path “/users/alice/projects”.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The web browser has its own key value store,
-that is why you want the same on the server, as you get easy sync.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And data synchronization is something you can’t avoid,
-you want to let your users run your application in multiple separate windows.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If this sounds a little scary, it is because databases are primitive,
-and data synchronization is scary.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In fact it is so scary that we call sorting by UUID,
-an eventual consistency conflict resolution mechanism.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we just rely on key value stores written by other people,
-to reasonably guarantee the disk persistence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Disks are primitive, tornadoes that knock out electricity are primitive,
-complex databases and memory leaks are scary.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we just do a clever key value store,
-sync up a couple of databases servers in US WEST and US EAST east.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because now your little database can wisely clone it self,
-with the use of revisions and UUIDs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as you guarantee delivery of all records at laest once,
-meaning if initial transfer failed, replay from your logs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Simple means you can debug the thing,
-if you use an ORM with an SQL, what are you going to replay from which log?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Most programmers will disagree with me,
-and just use a third party service with guaranteed up time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, the key-value store in the browser,
-and Desktop Applications based on Web Browsers as the case with Electron is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Show that, there is a more responsible way to deploy your application,
-don’t put everything on servers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let them download to their desktop, or browser,
-or install a browser extension, or all of the above.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In this case,
-a simple key value store is a wise idea.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That comes with no monthly bills,
-and your user can save data in a simple JSON format.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to the Application Layer, that needs to be described by you,
-but written by AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As AI improves, this will become the wiser way of building,
-because if you want to change or upgrade something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just re-write the requirements document,
-that you feed to the AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As AI improves, no only do you get your features,
-but also more advanced version of your program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the begiing, you can actually ask AI,
-how to structure the application and ensure flat Objects without inheritance.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You should know that your application, is just objects,
-and to do something with it, you say.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Application.Commander.Command(‘echo’, ‘Hello World’);
-this is just the brain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On top of this, you start a new project,
-and think of it as a remote UI that connects to the brain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So remote, that you can have multiple Uis,
-talking with the brain.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The application I am working on right now,
-has both a data synchronization simulation and feature testing system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Behave like remote user interfaces,
-that – remotely – connect to the brain.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please learn good ideas from frameworks,
-but don&#39;t use them in important projects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your final user interface, should use <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Are+WebComponents">WebComponents</a>,
-and rely heavily on simple <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Are+Signals+JavaScript">Signals</a>, Signals are reactive variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You set a value through x.value = 7,
-and listen to changes via unsubscribeFunction = x.subscribe(v=&gt;console.log(v))</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They flatten your user interface needs, when your your WebComponent is removed,
-you just call all the  unsubscribeFunctions, and clear the memory.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The WebComponents you create, are likely
-ApplicationComponent, SceneComponent, ToolBoxComponent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are closely related to the Brain,
-but their purpose is to visualize it, and let the user execute commands.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, the commander and commands,
-are useful for a neat little command line, and command output.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But their real purpose, is the UNDO/REDO system,
-like data synchronization, this is not something you can escape from.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it is easy, you just give your Commander a History that keeps a list,
-of all the commands you executed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, you must think of them as events, events in your application,
-when a command is executed, you add an event to your Commander History.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here is the crazy thing, and event, does not just store the command you executed,
-it also stores the command you need to execute to undo the change it represents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And event has an UNDO COMMAND,
-and a REDO COMMAND, redo is for going back, because the user went too far.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So redo is the main command the user executed, undo is its opposite,
-the you have to program into your Commander. You need an opposites creator.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the way you move up and down history,
-is by an event popery called active.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So if you just deleted a file, you store that command under redo,
-you store a re-create deleted file under undo, and set event as active.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If the user wants to go back in history, Ctrl-Z sets active as false,
-which triggers the undo that creates the file again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if they decide that they really wanted to delete the file,
-and press Shift-Ctrl-Z, you set active as true again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which now runs the redo, where we stored the original delete,
-and yet again we delete the file.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI will both explain it in more detail,
-and write a first version of whatever your application is about.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This kind of text is how you get started,
-we divided your Project into Server, Application/Brain, and User Interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can now approach each of these separately,
-and write a first draft requirement document for whichever one interest you the most.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With the aid of AI,
-you can now engineer applications while learning programming.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-04-19T00:30:48.640Z">April 18, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>17:14<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>8 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1874.avif" aria-label="Cover for Strategic Software Development For Girls New To Programming, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1874.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Strategic Software Development For Girls New To Programming" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 17:14
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1874.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1874.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1874.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Avoid generic algorithmic ideas, don’t create reusable nodes,<br>that when nested together create a tree, that you shape into an Application.</p>
+<p>No, you have to create an Application Object, with Toolboxes and Tools,<br>Scenery and Scenes, Commander with Commands and History.</p>
+<p>You are naming things what they are, so that AI can understand them,<br>by just looking at them, and not how they are supposed to be structured.</p>
+<p>There are two additional benefits to that, you can really spend days,<br>working on your Toolboxes, or Commands, and make them Unique and Perfect.</p>
+<p>If you were reusing generic objects to create your application,<br>you would be limited to only the changes that are useful to all things.</p>
+<p>Unless necessary, avoid object inheritance as well,<br>that is where you say, Toolbox extends ToolCategories.</p>
+<p>Or LoggedInUser extends User, which extends Profile,<br>that also makes a mess, write poetry, long objects.</p>
+<p>Because you are no longer writing for programmers,<br>now you also write for Artificial Intelligence.</p>
+<p>The biggest benefit,<br>is that you don’t make a program, by programming it first.</p>
+<p>You now, MUST, make programs, by describing them first,<br>by telling the story of your Application.</p>
+<p>From this end, you see that it is CRITICAL to call things what they are,<br>the AI does not want you to talk about nested Nodes.</p>
+<p>It wants a story, how everything fits together,<br>how information flows, and it wants a clean separation between layers.</p>
+<p>There are three layers, Server, Application, and UserInterface,<br>and you want to use the Server as little as possible.</p>
+<p>You don’t want 10,000 sign-ups when you hit a front page somewhere,<br>to shut you down or cost you.</p>
+<hr>
+<p>What follows is a brief overvio of the three,<br>without talking about any specific application.</p>
+<p>Simply just going over the outline,<br>to help you get an overview of what is inside a program.</p>
+<hr>
+<p><a href="https://www.youtube.com/results?search_query=PouchDB+Tutorioal">PouchDB</a> is a good starting point for server work, it runs in the browser,<br>and whenever possible synchronizes with <a href="https://www.youtube.com/results?search_query=CouchDB+Tutorioal">CouchDB</a> on the server.</p>
+<p>But it would be best to have a simpler storage mechanism,<br>that follows the same principles.</p>
+<p>Key value stores where keys are paths such as:<br>“/users/alice/projects” = “a, b, c” can go a long way.</p>
+<p>Whenever you store such a key value pair,<br>you also build up a tree based on the key.</p>
+<p>So your app would create a users location if not yet there,<br>and with user alice, who has a projects location.</p>
+<p>This tree then allows you to iterate over all users,<br>otherwise you are matching strings and that can get ugly.</p>
+<p>Down here, on the storage level, you do have generic things,<br>like a location.</p>
+<p>But beneath that is just your key value database,<br>or a database that you only use for key value storage.</p>
+<p>This is the server, the end,<br>there is nothing unusual behind the key value storage.</p>
+<p>I do want to add, that you need to version your values,<br>Couch and Pouch teach you everything you need here.</p>
+<p>But basically, you give all the key value storage values,<br>a revision number, and with each revision a Universally Unique ID.</p>
+<p>A revision number starts at 1,<br>and the UUID is just random letters and numbers created for that revision.</p>
+<p>This way when alice updates a, b, c,<br>to include a project d.</p>
+<p>The revision number tells you if it is an update,<br>or an old version of the value.</p>
+<p>In some cases, usually when two people do the same things somewhere,<br>you get the same revision due to a hiccup.</p>
+<p>So then you use the universally unique ID of those revisions,<br>you just sort by it, the one on top is the winner.</p>
+<p>So as long as all servers get the same data,<br>everyone will elect the same revision as winner.</p>
+<p>This is called eventual consistency,<br>the conflicting revisions stay in your logs, and are marked as a conflict.</p>
+<p>Depending on what you are doing,<br>you may need human intervention.</p>
+<p>That is how CouchDB written in Erlang,<br>and PouchDB a clone of Couch written in JavaScript do it.</p>
+<p>Just to clarify, The revision number and uuid, is stored along with the abcd,<br>in the value of your key value store, under the path “/users/alice/projects”.</p>
+<hr>
+<p>The web browser has its own key value store,<br>that is why you want the same on the server, as you get easy sync.</p>
+<p>And data synchronization is something you can’t avoid,<br>you want to let your users run your application in multiple separate windows.</p>
+<hr>
+<p>If this sounds a little scary, it is because databases are primitive,<br>and data synchronization is scary.</p>
+<p>In fact it is so scary that we call sorting by UUID,<br>an eventual consistency conflict resolution mechanism.</p>
+<p>And we just rely on key value stores written by other people,<br>to reasonably guarantee the disk persistence.</p>
+<p>Disks are primitive, tornadoes that knock out electricity are primitive,<br>complex databases and memory leaks are scary.</p>
+<p>So we just do a clever key value store,<br>sync up a couple of databases servers in US WEST and US EAST east.</p>
+<p>Because now your little database can wisely clone it self,<br>with the use of revisions and UUIDs.</p>
+<p>So as long as you guarantee delivery of all records at laest once,<br>meaning if initial transfer failed, replay from your logs.</p>
+<p>Simple means you can debug the thing,<br>if you use an ORM with an SQL, what are you going to replay from which log?</p>
+<p>Most programmers will disagree with me,<br>and just use a third party service with guaranteed up time.</p>
+<p>But, the key-value store in the browser,<br>and Desktop Applications based on Web Browsers as the case with Electron is.</p>
+<p>Show that, there is a more responsible way to deploy your application,<br>don’t put everything on servers.</p>
+<p>Let them download to their desktop, or browser,<br>or install a browser extension, or all of the above.</p>
+<p>In this case,<br>a simple key value store is a wise idea.</p>
+<p>That comes with no monthly bills,<br>and your user can save data in a simple JSON format.</p>
+<hr>
+<p>As to the Application Layer, that needs to be described by you,<br>but written by AI.</p>
+<p>As AI improves, this will become the wiser way of building,<br>because if you want to change or upgrade something.</p>
+<p>You just re-write the requirements document,<br>that you feed to the AI.</p>
+<p>As AI improves, no only do you get your features,<br>but also more advanced version of your program.</p>
+<p>In the begiing, you can actually ask AI,<br>how to structure the application and ensure flat Objects without inheritance.</p>
+<hr>
+<p>You should know that your application, is just objects,<br>and to do something with it, you say.</p>
+<p>Application.Commander.Command(‘echo’, ‘Hello World’);<br>this is just the brain.</p>
+<p>On top of this, you start a new project,<br>and think of it as a remote UI that connects to the brain.</p>
+<p>So remote, that you can have multiple Uis,<br>talking with the brain.</p>
+<p>The application I am working on right now,<br>has both a data synchronization simulation and feature testing system.</p>
+<p>Behave like remote user interfaces,<br>that – remotely – connect to the brain.</p>
+<hr>
+<p>Please learn good ideas from frameworks,<br>but don&#39;t use them in important projects.</p>
+<p>Your final user interface, should use <a href="https://www.youtube.com/results?search_query=What+Are+WebComponents">WebComponents</a>,<br>and rely heavily on simple <a href="https://www.youtube.com/results?search_query=What+Are+Signals+JavaScript">Signals</a>, Signals are reactive variables.</p>
+<p>You set a value through x.value = 7,<br>and listen to changes via unsubscribeFunction = x.subscribe(v=&gt;console.log(v))</p>
+<p>They flatten your user interface needs, when your your WebComponent is removed,<br>you just call all the  unsubscribeFunctions, and clear the memory.</p>
+<hr>
+<p>The WebComponents you create, are likely<br>ApplicationComponent, SceneComponent, ToolBoxComponent.</p>
+<p>They are closely related to the Brain,<br>but their purpose is to visualize it, and let the user execute commands.</p>
+<hr>
+<p>Finally, the commander and commands,<br>are useful for a neat little command line, and command output.</p>
+<p>But their real purpose, is the UNDO/REDO system,<br>like data synchronization, this is not something you can escape from.</p>
+<p>But it is easy, you just give your Commander a History that keeps a list,<br>of all the commands you executed.</p>
+<p>But, you must think of them as events, events in your application,<br>when a command is executed, you add an event to your Commander History.</p>
+<p>Here is the crazy thing, and event, does not just store the command you executed,<br>it also stores the command you need to execute to undo the change it represents.</p>
+<p>And event has an UNDO COMMAND,<br>and a REDO COMMAND, redo is for going back, because the user went too far.</p>
+<p>So redo is the main command the user executed, undo is its opposite,<br>the you have to program into your Commander. You need an opposites creator.</p>
+<p>And the way you move up and down history,<br>is by an event popery called active.</p>
+<p>So if you just deleted a file, you store that command under redo,<br>you store a re-create deleted file under undo, and set event as active.</p>
+<p>If the user wants to go back in history, Ctrl-Z sets active as false,<br>which triggers the undo that creates the file again.</p>
+<p>And if they decide that they really wanted to delete the file,<br>and press Shift-Ctrl-Z, you set active as true again.</p>
+<p>Which now runs the redo, where we stored the original delete,<br>and yet again we delete the file.</p>
+<hr>
+<p>The AI will both explain it in more detail,<br>and write a first version of whatever your application is about.</p>
+<p>This kind of text is how you get started,<br>we divided your Project into Server, Application/Brain, and User Interface.</p>
+<p>You can now approach each of these separately,<br>and write a first draft requirement document for whichever one interest you the most.</p>
+<p>With the aid of AI,<br>you can now engineer applications while learning programming.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=PouchDB+Tutorioal">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>PouchDB</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=PouchDB+Tutorioal</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=CouchDB+Tutorioal">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>CouchDB</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=CouchDB+Tutorioal</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Are+WebComponents">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>WebComponents</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Are+WebComponents</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Are+Signals+JavaScript">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Signals</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Are+Signals+JavaScript</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">pouchdb</span><span class="chip">couchdb</span><span class="chip">keyvaluestore</span><span class="chip">eventualconsistency</span><span class="chip">revisionnumber</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=PouchDB+Tutorioal">
+              <span class="text-truncate">PouchDB</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=CouchDB+Tutorioal">
+              <span class="text-truncate">CouchDB</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Are+WebComponents">
+              <span class="text-truncate">WebComponents</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Are+Signals+JavaScript">
+              <span class="text-truncate">Signals</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/f13f4e6f-543a-4687-9d85-a37797a41de6/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Crimes Against Humanity Committed Through The Classroom; With A Note To All The World&#39;s Students</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Miracle Requirements Document; Or, Investigating The Power Of Artificial Intelligence</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/68c192aa-29bd-4c33-bfff-3de0e9e84d78/">
+              <img src="https://catpea.github.io/chapter-13/poem-1875.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Miracle Requirements Document; Or, Investigating The Power Of Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">April 19, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b3a3a8a7-2ab0-4ce5-b37c-16d80e2d2139/">
+              <img src="https://catpea.github.io/chapter-12/poem-1849.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Just Two Numbers; Or, Easy Peasy Data Synchronization For The Rest Of Us</span>
+                <span class="fg-3 fs-xs">March 24, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e046f22b-b647-491b-89f9-53308403114c/">
+              <img src="https://catpea.github.io/chapter-13/poem-1877.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Architectural Programming For Ladies; Or, Teaching Your AI Who The Boss Is</span>
+                <span class="fg-3 fs-xs">April 21, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/49291ead-2a03-4d1b-8a68-3228ed2001e6/">
+              <img src="https://catpea.github.io/chapter-12/poem-1848.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">What If Programming Is Everything?</span>
+                <span class="fg-3 fs-xs">March 23, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

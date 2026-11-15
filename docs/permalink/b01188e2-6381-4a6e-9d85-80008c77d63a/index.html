@@ -1,165 +1,498 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem · Cat Pea</title>
+  <meta name="description" content="I’m a programmer who’s been experimenting with the unit circle and recently built a decorative ring of “Peruvian Froggies,” spacing big ones close together and leaving more room for the little ones; at the same time I’ve battled a slew of software hiccups—from mis‑named audio recordings, ffmpeg slowdowns on Fedora 36, Krita crashes under Noveau, to Blender texture failures—and ended up switching to NVIDIA drivers and Debian. In my first‑draft post I outline how I used Geometry Nodes to lay out ten points along a 180° arc (10 mm radius), employing the Accumulate node like a reducer, then crafted a custom coordinate system based on radians, tau, pi, and division by the number of parts; after a 10 % floating‑point error I discovered that simply subtracting one in the math node fixed the precision problem. The whole exercise, wrapped up with a fish‑and‑pita dinner and a poem about magical rings, demonstrates my learning curve from “rubber duck” debugging to mastering ring decorations via arcs.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/b01188e2-6381-4a6e-9d85-80008c77d63a/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem · Cat Pea">
+  <meta property="og:description" content="I’m a programmer who’s been experimenting with the unit circle and recently built a decorative ring of “Peruvian Froggies,” spacing big ones close together and leaving more room for the little ones; at the same time I’ve battled a slew of software hiccups—from mis‑named audio recordings, ffmpeg slowdowns on Fedora 36, Krita crashes under Noveau, to Blender texture failures—and ended up switching to NVIDIA drivers and Debian. In my first‑draft post I outline how I used Geometry Nodes to lay out ten points along a 180° arc (10 mm radius), employing the Accumulate node like a reducer, then crafted a custom coordinate system based on radians, tau, pi, and division by the number of parts; after a 10 % floating‑point error I discovered that simply subtracting one in the math node fixed the precision problem. The whole exercise, wrapped up with a fish‑and‑pita dinner and a poem about magical rings, demonstrates my learning curve from “rubber duck” debugging to mastering ring decorations via arcs.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0835.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0835</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0835.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0835.avif" alt="Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0835.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0835</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-06-14">6/13/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Oh, boy, I don’t feel less of a programmer,<br>I was just exploring the Unit Circle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I never had the opportunity to write screensavers,<br>I always write mighty code, and mighty code generators, Rawr!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, I woke up early morning,<br>as I have been trying to switch to enjoy Summer some more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My days seem extremely long now,<br>and I enjoy that, quite a bit.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the first thing that jumped on me as soon as opened my eyes,<br>was the ring with my Ancient Peru Froggies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have distributed the scaled down froggies,<br>evenly around a circle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that made it so that there was almost no space between the big ones,<br>And a lot of space between the little ones,</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve made some errors in my audio recordings recently,<br>I said radius rather than diameter, I thought rigs were measured by their radius.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it makes sense that a 17mm radius ring,<br>would be something a lady would wear on an oddly large toe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then I said Boolean Math Node, instead of Compare Node,<br>and I made another error at 2:50 but I forget which video.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And on top of that, ffmpeg my audio to video converter,<br>stated working too slow, after I upgraded to Fedora 36.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I had to switch to a different audio visualization algorithms,<br>it looks nice though, at least until I get ffmpeg going again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And even worse, noveau started crashing Krita when I was using my Tablet,<br>and Blender wouldn&#39;t dare to apply a texture to any of my objects, everything crashed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had to switch from noveau to real NVIDIA drivers,<br>closed source yuck, but I will be leaving Ferdora for Debian now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And not atom, my code editor started crashing,<br>because of the little blank pane it opens, I should probably update it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All my writing is in the first draft phase,<br>as I am still learning and exploring.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I must pay better attention to potential mistakes,<br>but I am becoming a much better writer already.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Long road from squirty squirrels that ate my trailmix,<br>though I am certain I will never beat by <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=oetrmS0oeso">Midnight Owl</a> poem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to be fair, I wanted to give extra thought,<br>to the froggies, because it is an important ring.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will be working on a series of enchanted rings,<br>and the froggies are probably the first creation.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I though to my self unit circle,<br>and in my style of teaching and discovery.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I begun explaining the problem,<br>as if taking to a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">rubber duuuuck</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Above all, a circle is not a perfect thing to be decorating rings with,<br>because you really don’t want anything on the bottom.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, when applying decorations to rings,<br>the arc, is the magical thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to keep things easy, I set my arc to be half a circle, 180 degrees,<br>I really feel strongly about this, the arc is very useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And rather than doing all the math by myself,<br>I used the new nodes, especially the Accumulate Node.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It accumulates numbers that are sent through a geometry stream,<br>so if you send a box that is 1 pixels wide, followed by a box that is two pixels wide.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The accumulate node will first say, hey you got a one in there,<br>followed by oh, no you got three in there.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In standard programming this is called a reducer,<br>spreadsheet programs are a good example, as they reduce lists of things to a singe value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I continued setting things up in round numbers,<br>I had 10 points on my 180 degree arc, with 10 millimeters radius.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It took a couple of hours to get to the meat of the matter,<br>and here I had to come up with what I called a custom coordinate system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As all I cared about for moving the parts,<br>was radians, that I then shifted with simple multiplication.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remembering that tau is the circumference of a circle,<br>no this is not a mistake this time, I highly recommend clebrating <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://tauday.com/">Tau Day</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I cut it in half, to get just PI,<br>and then FREAKING divided it, by the number of parts of the arc.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Gosh diddly darn it, it is because I recently made fun of fence post problems<br>in my <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=FHHuzxiQYm8&t=583s">Bling: Thinking In Geometry Nodes</a> poem, serves me right.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I had a lot to test, because forst I needed to reset positions of all my objects,<br>already distributed on the arc curve.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then I had to yank them back,<br>repositioning them based on their size.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I saw that my math worked, except not with the necessary precision,<br>everything was off by 10%, and when I enraged things, everything went crazy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My math worked, it was the floating point operations that were wrong,<br>so I assumed Geometry Nodes being under development...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Somewhere doubles are getting damaged,<br>and I double checked that I am not casing doubles to integers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I walked away from the computer,<br>my algorithm worked, but the floating point precision was not there.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made dinner by wrapping some flavored fish in a bit of pita bread,<br>and started writing a poem about magical rings.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was half way through, when it finally hit me,<br>the adjustment I was making was 10 percent, or .1 milimeter, and I had 10 things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you have 10 things, and you are off by almost precisely 10%,<br>you done goofed :)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just got nailed with a fence post problem,<br>I didn’t have to look at the code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just dropped a math node on the custom coordinate system,<br>set it to subtract ONE :) and everything, went swhoosh and became perfect.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It turned out,<br>I was the precision problem.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-06-14T00:13:45.746Z">June 13, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>11:39<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0835.avif" aria-label="Cover for Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0835.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Oh Noes Unit Circle; Or,  How I Got Attacked By The Fence Post Problem" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 11:39
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0835.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0835.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0835.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Oh, boy, I don’t feel less of a programmer,<br>I was just exploring the Unit Circle.</p>
+<p>I never had the opportunity to write screensavers,<br>I always write mighty code, and mighty code generators, Rawr!</p>
+<p>But, I woke up early morning,<br>as I have been trying to switch to enjoy Summer some more.</p>
+<p>My days seem extremely long now,<br>and I enjoy that, quite a bit.</p>
+<hr>
+<p>And the first thing that jumped on me as soon as opened my eyes,<br>was the ring with my Ancient Peru Froggies.</p>
+<p>I have distributed the scaled down froggies,<br>evenly around a circle.</p>
+<p>But that made it so that there was almost no space between the big ones,<br>And a lot of space between the little ones,</p>
+<hr>
+<p>I’ve made some errors in my audio recordings recently,<br>I said radius rather than diameter, I thought rigs were measured by their radius.</p>
+<p>But it makes sense that a 17mm radius ring,<br>would be something a lady would wear on an oddly large toe.</p>
+<p>And then I said Boolean Math Node, instead of Compare Node,<br>and I made another error at 2:50 but I forget which video.</p>
+<p>And on top of that, ffmpeg my audio to video converter,<br>stated working too slow, after I upgraded to Fedora 36.</p>
+<p>And I had to switch to a different audio visualization algorithms,<br>it looks nice though, at least until I get ffmpeg going again.</p>
+<p>And even worse, noveau started crashing Krita when I was using my Tablet,<br>and Blender wouldn&#39;t dare to apply a texture to any of my objects, everything crashed.</p>
+<p>I had to switch from noveau to real NVIDIA drivers,<br>closed source yuck, but I will be leaving Ferdora for Debian now.</p>
+<p>And not atom, my code editor started crashing,<br>because of the little blank pane it opens, I should probably update it.</p>
+<hr>
+<p>All my writing is in the first draft phase,<br>as I am still learning and exploring.</p>
+<p>I must pay better attention to potential mistakes,<br>but I am becoming a much better writer already.</p>
+<p>Long road from squirty squirrels that ate my trailmix,<br>though I am certain I will never beat by <a href="https://www.youtube.com/watch?v=oetrmS0oeso">Midnight Owl</a> poem.</p>
+<p>But to be fair, I wanted to give extra thought,<br>to the froggies, because it is an important ring.</p>
+<p>I will be working on a series of enchanted rings,<br>and the froggies are probably the first creation.</p>
+<hr>
+<p>So I though to my self unit circle,<br>and in my style of teaching and discovery.</p>
+<p>I begun explaining the problem,<br>as if taking to a <a href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">rubber duuuuck</a>.</p>
+<p>Above all, a circle is not a perfect thing to be decorating rings with,<br>because you really don’t want anything on the bottom.</p>
+<p>So, when applying decorations to rings,<br>the arc, is the magical thing.</p>
+<p>But to keep things easy, I set my arc to be half a circle, 180 degrees,<br>I really feel strongly about this, the arc is very useful.</p>
+<p>And rather than doing all the math by myself,<br>I used the new nodes, especially the Accumulate Node.</p>
+<p>It accumulates numbers that are sent through a geometry stream,<br>so if you send a box that is 1 pixels wide, followed by a box that is two pixels wide.</p>
+<p>The accumulate node will first say, hey you got a one in there,<br>followed by oh, no you got three in there.</p>
+<p>In standard programming this is called a reducer,<br>spreadsheet programs are a good example, as they reduce lists of things to a singe value.</p>
+<p>I continued setting things up in round numbers,<br>I had 10 points on my 180 degree arc, with 10 millimeters radius.</p>
+<hr>
+<p>It took a couple of hours to get to the meat of the matter,<br>and here I had to come up with what I called a custom coordinate system.</p>
+<p>As all I cared about for moving the parts,<br>was radians, that I then shifted with simple multiplication.</p>
+<p>Remembering that tau is the circumference of a circle,<br>no this is not a mistake this time, I highly recommend clebrating <a href="https://tauday.com/">Tau Day</a></p>
+<p>I cut it in half, to get just PI,<br>and then FREAKING divided it, by the number of parts of the arc.</p>
+<p>Gosh diddly darn it, it is because I recently made fun of fence post problems<br>in my <a href="https://www.youtube.com/watch?v=FHHuzxiQYm8&t=583s">Bling: Thinking In Geometry Nodes</a> poem, serves me right.</p>
+<p>I had a lot to test, because forst I needed to reset positions of all my objects,<br>already distributed on the arc curve.</p>
+<p>And then I had to yank them back,<br>repositioning them based on their size.</p>
+<hr>
+<p>I saw that my math worked, except not with the necessary precision,<br>everything was off by 10%, and when I enraged things, everything went crazy.</p>
+<p>My math worked, it was the floating point operations that were wrong,<br>so I assumed Geometry Nodes being under development...</p>
+<p>Somewhere doubles are getting damaged,<br>and I double checked that I am not casing doubles to integers.</p>
+<p>I walked away from the computer,<br>my algorithm worked, but the floating point precision was not there.</p>
+<hr>
+<p>I made dinner by wrapping some flavored fish in a bit of pita bread,<br>and started writing a poem about magical rings.</p>
+<p>I was half way through, when it finally hit me,<br>the adjustment I was making was 10 percent, or .1 milimeter, and I had 10 things.</p>
+<p>When you have 10 things, and you are off by almost precisely 10%,<br>you done goofed :)</p>
+<p>You just got nailed with a fence post problem,<br>I didn’t have to look at the code.</p>
+<p>I just dropped a math node on the custom coordinate system,<br>set it to subtract ONE :) and everything, went swhoosh and became perfect.</p>
+<hr>
+<p>It turned out,<br>I was the precision problem.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=oetrmS0oeso">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Midnight Owl</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=oetrmS0oeso</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>rubber duuuuck</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Rubber_duck_debugging</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://tauday.com/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Tau Day</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://tauday.com/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=FHHuzxiQYm8&amp;t=583s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bling: Thinking In Geometry Nodes</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=FHHuzxiQYm8&amp;t=583s</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">blender</span><span class="chip">geometry-nodes</span><span class="chip">circle</span><span class="chip">arc</span><span class="chip">radians</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=oetrmS0oeso">
+              <span class="text-truncate">Midnight Owl</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">
+              <span class="text-truncate">rubber duuuuck</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://tauday.com/">
+              <span class="text-truncate">Tau Day</span>
+              <span class="fg-3 fs-xs flex-shrink-0">tauday.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=FHHuzxiQYm8&amp;t=583s">
+              <span class="text-truncate">Bling: Thinking In Geometry Nodes</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/poetry-0835-illustration-new.jpg" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>poetry-0835-illustration-new.jpg
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/poetry-0835-illustration-old.jpg" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>poetry-0835-illustration-old.jpg
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/0ee48cd6-7929-4faa-bdee-84a36bafff0a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Easy Peasy World Citizenship</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/c1463b72-1705-488e-940e-4120bba1bcfe/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">On Designing Enchanted Rings</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fd258f3d-6344-4df6-b172-a5e06ce354ae/">
+              <img src="https://catpea.github.io/chapter-04/poem-0839.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Super Tiny Poem About Building Your First Visual Programming Company</span>
+                <span class="fg-3 fs-xs">June 17, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/efc088cb-8e98-424f-a7dd-05ceeaa92fd5/">
+              <img src="https://catpea.github.io/chapter-04/poem-0832.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Bling: Thinking In Geometry Nodes</span>
+                <span class="fg-3 fs-xs">June 10, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ebdd842b-7cb8-4e74-8f8b-fea2eb73aed1/">
+              <img src="https://catpea.github.io/chapter-04/poem-0842.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Tiny Music Programming Idea</span>
+                <span class="fg-3 fs-xs">June 20, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/97b0a742-3aab-4ba0-97af-7c0b442cf530/">
+              <img src="https://catpea.github.io/chapter-04/poem-0820.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Design In Blender Print On An Ender: Easy To Read Visual Programming For The Purpose Of 3D Printing</span>
+                <span class="fg-3 fs-xs">May 29, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

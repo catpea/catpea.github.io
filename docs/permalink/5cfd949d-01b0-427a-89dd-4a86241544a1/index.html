@@ -1,164 +1,474 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Little Froggie From Peru</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Little Froggie From Peru · Cat Pea</title>
+  <meta name="description" content="I began by sculpting a small Peruvian “froggie” based on a Moche artifact, then explored how to convert it into a low‑poly wireframe for 3D printing. By hollowing the model with Solidify and using Boolean cuts I could flatten its base, split it along an intersecting plane, add thickness, and attach a hinge and lock—turning it into a tiny trinket box that can be assembled by hand. The post also notes how thin‑wire jewelry saves material and cost, and reflects on the cultural context of the original Moche frog, suggesting the reconstructed piece could serve as jewelry, game token, or downloadable STL for others to use.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/5cfd949d-01b0-427a-89dd-4a86241544a1/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Little Froggie From Peru · Cat Pea">
+  <meta property="og:description" content="I began by sculpting a small Peruvian “froggie” based on a Moche artifact, then explored how to convert it into a low‑poly wireframe for 3D printing. By hollowing the model with Solidify and using Boolean cuts I could flatten its base, split it along an intersecting plane, add thickness, and attach a hinge and lock—turning it into a tiny trinket box that can be assembled by hand. The post also notes how thin‑wire jewelry saves material and cost, and reflects on the cultural context of the original Moche frog, suggesting the reconstructed piece could serve as jewelry, game token, or downloadable STL for others to use.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-04/poem-0828.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/art/">Art &amp; Music</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-04/">Chapter 04</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0828</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-04/poem-0828.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-04/poem-0828.avif" alt="The Little Froggie From Peru"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Little Froggie From Peru</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-04/poem-0828.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/art/">
+              <i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 04</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0828</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Little Froggie From Peru</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-06-06">6/6/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Upon having sculpted my <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.clevelandart.org/art/1955.375#">little Peru froggie friend</a>,<br>I begun pondering what more can be done with little rebuilt artifacts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I came across a really sad story from Pompeii,<br>about <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.smithsonianmag.com/smart-news/sorceresss-kit-was-discovered-ashes-pompeii-180972907/">A Sorceress’ Kit</a> being found.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There I noticed all the little bits had holes in them,<br>to hang them on necklaces and such.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So selling a Sorcerer’s Kit,<br>is another thing that can be done.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I pondered creating a low polygon version,<br>which is a geometric wire frame.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But this has to be designed from scratch as such,<br>reducing geometry of a sculpted piece just distorts it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For blobby sculptures like the froggie,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=A56g5VkznUA">it is easy to apply the Solidify modifier to make it hollow</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Using a boolean modifier to subtract some of the bottom,<br>can make a sculpture it stand flat.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think my best idea is to split the froggie,<br>very much like the original.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which calls for <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=moPDPB4MY2U">intersecting it with a plane</a>,<br>using difference boolean modifier and parting it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then giving it thickness with Solidify,<br>followed by a hinge and a locking mechanism.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way it can become a little trinket box,<br>this seems like something that should be done manually.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Geometry nodes, may not be the best choice here,<br>because of how complex the sculpted mesh usually is.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://lite.qwant.com/?q=3D+Jewelry&t=images">Majority of 3D printed jewelry is about thin wires</a>,<br>a lot of open space that a human hand can’t create.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It makes a piece look intricate,<br>and saves on material costs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have noticed <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.instructables.com/3D-Print-Infill-Jewelry/">plastic jewelry somewhat seems OK</a>,<br>a golden silky filament could maybe make something, but I am not too sure.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Moche_culture">Moche Culture</a> that the Froggie originates from,<br>is theorized to have faded away 1300 years ago due to climate change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I could tell the original artist was studying frogs,<br>it wasn’t just from memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They gave the frog a belly, a strong brow, a nose,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://piction.clevelandart.org/cma/ump.di?e=51FCB021712D452AA0FDE31D4E0935E13629F9042C90C05AFBAB146AC74EF6F5&s=24247294&se=1672797228&v=1&f=%5C1955.375det01_o2.jpg">and there is a hint of front legs too</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Whether it is jewelry, a game piece,<br>or sold as an STL digital model that others can use in their own pursuits.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Rebuilding a 1500 year old artifact,<br>was quite an amazing adventure.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-06-06T21:01:57.611Z">June 6, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>3:21<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-04/poem-0828.avif" aria-label="Cover for The Little Froggie From Peru, full size">
+            <img src="https://catpea.github.io/chapter-04/poem-0828.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Little Froggie From Peru" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 3:21
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-04/poem-0828.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-04/poem-0828.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-04/poem-0828.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Upon having sculpted my <a href="https://www.clevelandart.org/art/1955.375#">little Peru froggie friend</a>,<br>I begun pondering what more can be done with little rebuilt artifacts.</p>
+<p>I came across a really sad story from Pompeii,<br>about <a href="https://www.smithsonianmag.com/smart-news/sorceresss-kit-was-discovered-ashes-pompeii-180972907/">A Sorceress’ Kit</a> being found.</p>
+<p>There I noticed all the little bits had holes in them,<br>to hang them on necklaces and such.</p>
+<p>So selling a Sorcerer’s Kit,<br>is another thing that can be done.</p>
+<hr>
+<p>I pondered creating a low polygon version,<br>which is a geometric wire frame.</p>
+<p>But this has to be designed from scratch as such,<br>reducing geometry of a sculpted piece just distorts it.</p>
+<hr>
+<p>For blobby sculptures like the froggie,<br><a href="https://www.youtube.com/watch?v=A56g5VkznUA">it is easy to apply the Solidify modifier to make it hollow</a>.</p>
+<p>Using a boolean modifier to subtract some of the bottom,<br>can make a sculpture it stand flat.</p>
+<hr>
+<p>I think my best idea is to split the froggie,<br>very much like the original.</p>
+<p>Which calls for <a href="https://www.youtube.com/watch?v=moPDPB4MY2U">intersecting it with a plane</a>,<br>using difference boolean modifier and parting it.</p>
+<p>Then giving it thickness with Solidify,<br>followed by a hinge and a locking mechanism.</p>
+<p>This way it can become a little trinket box,<br>this seems like something that should be done manually.</p>
+<p>Geometry nodes, may not be the best choice here,<br>because of how complex the sculpted mesh usually is.</p>
+<hr>
+<p><a href="https://lite.qwant.com/?q=3D+Jewelry&t=images">Majority of 3D printed jewelry is about thin wires</a>,<br>a lot of open space that a human hand can’t create.</p>
+<p>It makes a piece look intricate,<br>and saves on material costs.</p>
+<p>I have noticed <a href="https://www.instructables.com/3D-Print-Infill-Jewelry/">plastic jewelry somewhat seems OK</a>,<br>a golden silky filament could maybe make something, but I am not too sure.</p>
+<hr>
+<p>The <a href="https://en.wikipedia.org/wiki/Moche_culture">Moche Culture</a> that the Froggie originates from,<br>is theorized to have faded away 1300 years ago due to climate change.</p>
+<p>I could tell the original artist was studying frogs,<br>it wasn’t just from memory.</p>
+<p>They gave the frog a belly, a strong brow, a nose,<br><a href="https://piction.clevelandart.org/cma/ump.di?e=51FCB021712D452AA0FDE31D4E0935E13629F9042C90C05AFBAB146AC74EF6F5&s=24247294&se=1672797228&v=1&f=%5C1955.375det01_o2.jpg">and there is a hint of front legs too</a>.</p>
+<p>Whether it is jewelry, a game piece,<br>or sold as an STL digital model that others can use in their own pursuits.</p>
+<p>Rebuilding a 1500 year old artifact,<br>was quite an amazing adventure.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.clevelandart.org/art/1955.375#">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>little Peru froggie friend</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.clevelandart.org/art/1955.375#</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.smithsonianmag.com/smart-news/sorceresss-kit-was-discovered-ashes-pompeii-180972907/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>A Sorceress’ Kit</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.smithsonianmag.com/smart-news/sorceresss-kit-was-discovered-ashes-pompeii-180972907/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=A56g5VkznUA">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>it is easy to apply the Solidify modifier to make it hollow</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=A56g5VkznUA</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=moPDPB4MY2U">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>intersecting it with a plane</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=moPDPB4MY2U</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://lite.qwant.com/?q=3D+Jewelry&amp;t=images">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Majority of 3D printed jewelry is about thin wires</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://lite.qwant.com/?q=3D+Jewelry&amp;t=images</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.instructables.com/3D-Print-Infill-Jewelry/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>plastic jewelry somewhat seems OK</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.instructables.com/3D-Print-Infill-Jewelry/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Moche_culture">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Moche Culture</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Moche_culture</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://piction.clevelandart.org/cma/ump.di?e=51FCB021712D452AA0FDE31D4E0935E13629F9042C90C05AFBAB146AC74EF6F5&amp;s=24247294&amp;se=1672797228&amp;v=1&amp;f=%5C1955.375det01_o2.jpg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>and there is a hint of front legs too</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://piction.clevelandart.org/cma/ump.di?e=51FCB021712D452AA0FDE31D4E0935E13629F9042C90C05AFBAB146AC74EF6F5&amp;s=24247294&amp;se=1672797228&amp;v=1&amp;f=%5C1955.375det01_o2.jpg</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">blender</span><span class="chip">geometry-nodes</span><span class="chip">solidify-modifier</span><span class="chip">boolean-modifier</span><span class="chip">low-poly</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.clevelandart.org/art/1955.375#">
+              <span class="text-truncate">little Peru froggie friend</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.clevelandart.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.smithsonianmag.com/smart-news/sorceresss-kit-was-discovered-ashes-pompeii-180972907/">
+              <span class="text-truncate">A Sorceress’ Kit</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.smithsonianmag.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=A56g5VkznUA">
+              <span class="text-truncate">it is easy to apply the Solidify modifier to make it hollow</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=moPDPB4MY2U">
+              <span class="text-truncate">intersecting it with a plane</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://lite.qwant.com/?q=3D+Jewelry&amp;t=images">
+              <span class="text-truncate">Majority of 3D printed jewelry is about thin wires</span>
+              <span class="fg-3 fs-xs flex-shrink-0">lite.qwant.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.instructables.com/3D-Print-Infill-Jewelry/">
+              <span class="text-truncate">plastic jewelry somewhat seems OK</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.instructables.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Moche_culture">
+              <span class="text-truncate">Moche Culture</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://piction.clevelandart.org/cma/ump.di?e=51FCB021712D452AA0FDE31D4E0935E13629F9042C90C05AFBAB146AC74EF6F5&amp;s=24247294&amp;se=1672797228&amp;v=1&amp;f=%5C1955.375det01_o2.jpg">
+              <span class="text-truncate">and there is a hint of front legs too</span>
+              <span class="fg-3 fs-xs flex-shrink-0">piction.clevelandart.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/79d6da58-b394-4c54-86a4-2d2c9bf5c346/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Fancy Little Pendants</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/de65edaf-436f-425a-bb2d-42e8f0791a29/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Rinkydink Doublethink</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Art &amp; Music</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/dae59056-bf54-4a39-a517-67e657b0a1d9/">
+              <img src="https://catpea.github.io/chapter-04/poem-0833.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Enchanted Ring Of The Little Froggies; Or, Hopping Around Ancient And Modern Jewelry Ideas</span>
+                <span class="fg-3 fs-xs">June 11, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/79d6da58-b394-4c54-86a4-2d2c9bf5c346/">
+              <img src="https://catpea.github.io/chapter-04/poem-0827.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Fancy Little Pendants</span>
+                <span class="fg-3 fs-xs">June 5, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c1463b72-1705-488e-940e-4120bba1bcfe/">
+              <img src="https://catpea.github.io/chapter-04/poem-0836.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">On Designing Enchanted Rings</span>
+                <span class="fg-3 fs-xs">June 14, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/39f81e5c-6d06-4b4a-b83f-5fb3ac07c552/">
+              <img src="https://catpea.github.io/chapter-04/poem-0825.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">On Rebuilding And 3D Printing Ancient Artifacts</span>
+                <span class="fg-3 fs-xs">June 3, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/art/">All of Art &amp; Music<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

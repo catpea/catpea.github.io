@@ -1,149 +1,482 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Observation About Music Composition</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Little Observation About Music Composition · Cat Pea</title>
+  <meta name="description" content="In the post the author explains how to build a simple yet effective drum‑based sequence in LMMS by first laying out a basic Beat+BassLine pattern at 140 bpm, then duplicating it with a slight variation on every second beat to create rhythmic interest. He shows that low‑pitched drums (bass) are less frequent than high‑pitched ones (cymbals), and demonstrates how adding just one extra hit in the duplicate section turns a simple drum loop into a melodic line. After covering bass and mid‑frequency layers, he adds high‑frequency clicks or sticks to break repetition, then finishes by applying reverb from the FX mixer to give the whole arrangement depth and polish. The result is a short “full song” example that illustrates pattern creation, variation, layering, and basic mixing techniques in LMMS.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/3ce31649-0fa6-48ec-915e-f0acd81e1a81/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Little Observation About Music Composition · Cat Pea">
+  <meta property="og:description" content="In the post the author explains how to build a simple yet effective drum‑based sequence in LMMS by first laying out a basic Beat+BassLine pattern at 140 bpm, then duplicating it with a slight variation on every second beat to create rhythmic interest. He shows that low‑pitched drums (bass) are less frequent than high‑pitched ones (cymbals), and demonstrates how adding just one extra hit in the duplicate section turns a simple drum loop into a melodic line. After covering bass and mid‑frequency layers, he adds high‑frequency clicks or sticks to break repetition, then finishes by applying reverb from the FX mixer to give the whole arrangement depth and polish. The result is a short “full song” example that illustrates pattern creation, variation, layering, and basic mixing techniques in LMMS.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0624.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/art/">Art &amp; Music</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0624</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0624.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0624.avif" alt="A Little Observation About Music Composition"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Little Observation About Music Composition</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0624.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/art/">
+              <i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0624</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Little Observation About Music Composition</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-11-14">11/14/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I have noticed that low pitched sounds are rare,<br>and high pitched sounds more frequent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a musical composition Bass Drums,<br>are a lot less frequent than cymbals.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think this observation can be very valuable,<br>to people that just started learning music.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you can get to the Beat+BassLine Editor in lmms,<br>you can start composing instantly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Put the drums on every beat,<br>or maybe every other beat....</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then whatever sounds higher,<br>make it more frequent.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is one very very very tiny complication here,<br>we will immediately add variation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Find the clone steps button,<br>in the upper right corner of the Beat+BassLine Editor and hit it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now the patter you created will have twice the length,<br>so mess up the second part a very very very tiny bit.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Allow me to demonstrate,<br>Normally, lmms starts in 140 beats per minute.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I&#39;ll use the metronome to let you hear the beat,<br>at 140bpm.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(metronome plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let me put a drum on every other beat,<br>I&#39;ll keep the metronome on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(drum1 plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, allow me to turn off the metronome,<br>so you can hear what every other beat sounds like without interference.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(drum2 plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you were to measure beats of this sample,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.beatsperminuteonline.com/">your tool would report 70 beats per minute, since we are skipping every other beat</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let us put in a second drum,<br>filling in those empty beats, this will register as 140bpm now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(drum3 plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point you can hear how this has no motion or dance,<br>it seems very square, very mechanical.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, already we will perform that,<br>very very very tiny complication here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where we double things up,<br>and introduce gentle variation in the second part.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(drum4 plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see how neat it sounds,<br>let me redo this one more time, to show you variation on the other drum.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(drum5 plays)</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even though we are just doing two boring drums,<br>by adding that one variation...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is just an extra hit on the drum,<br>we get a melody going.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By just hitting the drum one extra time,<br>we get a melody, out of nowhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I really hope you don&#39;t mind me adding that variation,<br>it is just a beautiful thing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So what we have now is the low pitch sound,<br>or low frequency sound, or bass.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Basically hitting on every beat,<br>not counting the little variation, which hits the drum twice in a beat.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now we will add a medium pitched sound,<br>that hits more often then the drum.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(mid1 plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let us add a second medium pitched sound,<br>to introduce more variation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(mid2 plays)</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And now we will add some high pitched sounds,<br>clicks and sticks and the like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These will hit at a very high rate,<br>which means we should break-up repetition more frequently.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we will very the pattern twice or thrice,<br>or whatever sounds good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us give that a listen,<br>and I made this section slightly longer as it sounds nice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(high1 plays)</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing I would like to show you one more trick,<br>here we have to go to FX Mixer, click Master, Add Effect, and add Plate 2x2 versatile plate re-verb.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reverb effects are magical, as they take a dry sound,<br>and give them wet thickness.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will replay the previous melody,<br>but this time slowly turn up reverb by the time we reach the middle of the piece.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(high2 plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here is the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/poke-poke-song.mp3">full song</a>,<br>enjoy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(full plays)</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-11-14T20:02:45.770Z">November 14, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>11:18<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0624.avif" aria-label="Cover for A Little Observation About Music Composition, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0624.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Little Observation About Music Composition" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 11:18
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0624.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0624.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0624.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I have noticed that low pitched sounds are rare,<br>and high pitched sounds more frequent.</p>
+<p>In a musical composition Bass Drums,<br>are a lot less frequent than cymbals.</p>
+<p>I think this observation can be very valuable,<br>to people that just started learning music.</p>
+<p>If you can get to the Beat+BassLine Editor in lmms,<br>you can start composing instantly.</p>
+<p>Put the drums on every beat,<br>or maybe every other beat....</p>
+<p>And then whatever sounds higher,<br>make it more frequent.</p>
+<hr>
+<p>There is one very very very tiny complication here,<br>we will immediately add variation.</p>
+<p>Find the clone steps button,<br>in the upper right corner of the Beat+BassLine Editor and hit it.</p>
+<p>Now the patter you created will have twice the length,<br>so mess up the second part a very very very tiny bit.</p>
+<hr>
+<p>Allow me to demonstrate,<br>Normally, lmms starts in 140 beats per minute.</p>
+<p>I&#39;ll use the metronome to let you hear the beat,<br>at 140bpm.</p>
+<p>(metronome plays)</p>
+<p>Now let me put a drum on every other beat,<br>I&#39;ll keep the metronome on.</p>
+<p>(drum1 plays)</p>
+<p>Now, allow me to turn off the metronome,<br>so you can hear what every other beat sounds like without interference.</p>
+<p>(drum2 plays)</p>
+<p>If you were to measure beats of this sample,<br><a href="https://www.beatsperminuteonline.com/">your tool would report 70 beats per minute, since we are skipping every other beat</a>.</p>
+<p>Now let us put in a second drum,<br>filling in those empty beats, this will register as 140bpm now.</p>
+<p>(drum3 plays)</p>
+<p>At this point you can hear how this has no motion or dance,<br>it seems very square, very mechanical.</p>
+<p>So, already we will perform that,<br>very very very tiny complication here.</p>
+<p>Where we double things up,<br>and introduce gentle variation in the second part.</p>
+<p>(drum4 plays)</p>
+<p>You see how neat it sounds,<br>let me redo this one more time, to show you variation on the other drum.</p>
+<p>(drum5 plays)</p>
+<hr>
+<p>Even though we are just doing two boring drums,<br>by adding that one variation...</p>
+<p>Which is just an extra hit on the drum,<br>we get a melody going.</p>
+<p>By just hitting the drum one extra time,<br>we get a melody, out of nowhere.</p>
+<p>I really hope you don&#39;t mind me adding that variation,<br>it is just a beautiful thing.</p>
+<hr>
+<p>So what we have now is the low pitch sound,<br>or low frequency sound, or bass.</p>
+<p>Basically hitting on every beat,<br>not counting the little variation, which hits the drum twice in a beat.</p>
+<hr>
+<p>Now we will add a medium pitched sound,<br>that hits more often then the drum.</p>
+<p>(mid1 plays)</p>
+<p>Now let us add a second medium pitched sound,<br>to introduce more variation.</p>
+<p>(mid2 plays)</p>
+<hr>
+<p>And now we will add some high pitched sounds,<br>clicks and sticks and the like.</p>
+<p>These will hit at a very high rate,<br>which means we should break-up repetition more frequently.</p>
+<p>So we will very the pattern twice or thrice,<br>or whatever sounds good.</p>
+<p>Let us give that a listen,<br>and I made this section slightly longer as it sounds nice.</p>
+<p>(high1 plays)</p>
+<hr>
+<p>In closing I would like to show you one more trick,<br>here we have to go to FX Mixer, click Master, Add Effect, and add Plate 2x2 versatile plate re-verb.</p>
+<p>Reverb effects are magical, as they take a dry sound,<br>and give them wet thickness.</p>
+<p>I will replay the previous melody,<br>but this time slowly turn up reverb by the time we reach the middle of the piece.</p>
+<p>(high2 plays)</p>
+<p>And here is the <a href="files/poke-poke-song.mp3">full song</a>,<br>enjoy.</p>
+<p>(full plays)</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.beatsperminuteonline.com/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>your tool would report 70 beats per minute, since we are skipping every other beat</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.beatsperminuteonline.com/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/poke-poke-song.mp3">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>full song</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/poke-poke-song.mp3</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">lmms</span><span class="chip">beat+bassline editor</span><span class="chip">drum pattern</span><span class="chip">composition technique</span><span class="chip">reverb</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/VzlICQnbz-Y"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/VzlICQnbz-Y</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.beatsperminuteonline.com/">
+              <span class="text-truncate">your tool would report 70 beats per minute, since we are skipping every other beat</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.beatsperminuteonline.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/poke-poke-song.mp3">
+              <span class="text-truncate">full song</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/poke-poke-song.mp3" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>poke-poke-song.mp3
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/3ac7a091-a5fa-4dff-a6d3-a86a3f05fd43/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">School Independent Tutors, Audio Books And Video Lectures: On Getting A Real Self Directed Education, Early On</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b9a531f1-2da6-4a34-9a51-561628eef4ed/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Of Constellations, Superluminal Galaxies, And The Future Of Humanity</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Art &amp; Music</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/078a590c-f655-4c23-a700-dbcca45bf7f4/">
+              <img src="https://catpea.github.io/chapter-03/poem-0626.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Source Of Art And A Question To Start</span>
+                <span class="fg-3 fs-xs">November 16, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8c9fe797-070a-4d69-8c16-334d38d5049e/">
+              <img src="https://catpea.github.io/chapter-03/poem-0620.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Art Is Where It Is At</span>
+                <span class="fg-3 fs-xs">November 10, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/97d3b4ce-e4a8-4064-b182-9d6f40bc3933/">
+              <img src="https://catpea.github.io/chapter-03/poem-0631.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Your Art Book</span>
+                <span class="fg-3 fs-xs">November 21, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cd290fbc-5bed-46a9-829f-656dd8338a76/">
+              <img src="https://catpea.github.io/chapter-03/poem-0614.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Full Of Stars</span>
+                <span class="fg-3 fs-xs">November 4, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/art/">All of Art &amp; Music<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

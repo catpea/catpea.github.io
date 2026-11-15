@@ -1,155 +1,449 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programmers! Don&#39;t Just Use Plain Variables, Oh No!</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programmers! Don&#39;t Just Use Plain Variables, Oh No! · Cat Pea</title>
+  <meta name="description" content="In this post the author explains how to replace simple variable assignments with reactive “Signal” objects in web applications: a Signal has get/set/subscribe methods so that when its value changes all subscribers are notified automatically. They then describe extending this idea into a signal tree—an ordinary JavaScript object whose properties (including a children array) are turned into Signals, allowing nested state to propagate through the UI via custom web components such as &lt;loop&gt; and &lt;bind&gt;. In short, server‑driven or user‑input data is inserted once into the tree, and any bound UI element updates automatically whenever that data changes.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/c6fc42ca-9a33-4dca-9f4f-feff4f4a1340/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programmers! Don&#39;t Just Use Plain Variables, Oh No! · Cat Pea">
+  <meta property="og:description" content="In this post the author explains how to replace simple variable assignments with reactive “Signal” objects in web applications: a Signal has get/set/subscribe methods so that when its value changes all subscribers are notified automatically. They then describe extending this idea into a signal tree—an ordinary JavaScript object whose properties (including a children array) are turned into Signals, allowing nested state to propagate through the UI via custom web components such as &lt;loop&gt; and &lt;bind&gt;. In short, server‑driven or user‑input data is inserted once into the tree, and any bound UI element updates automatically whenever that data changes.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1645.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1645</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1645.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1645.avif" alt="Programmers! Don&apos;t Just Use Plain Variables, Oh No!"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programmers! Don&#39;t Just Use Plain Variables, Oh No!</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1645.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1645</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programmers! Don&#39;t Just Use Plain Variables, Oh No!</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-09-02">9/1/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">When calculating the sum of two numbers,
-we say x = 1, y = 1, and get 2 by executing x+y.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is good for crunching numbers,
-but in the old school way, where we rerun x+y if either variables change.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In web pages where we deal with information that can come from a database,
-a live remote web socket, or user input, we can’t use old school, no, no!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of saying profileName = ‘<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="mailto:alice@example.com">alice@example.com</a>’,
-we must say profileName = new Signal(‘<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="mailto:alice@example.com">alice@example.com</a>’);</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if we want to update the profileName we talk to the signal,
-which has simple .get, .set and .subscribe functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we say  profileName.set(‘<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="mailto:bob@example.com">bob@example.com</a>’),
-because this is not an old school assignment, but interaction with a Signal object.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now stuff can happen behind the closed curtains,
-for one, while we can just get a value once, that is still old school.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Signals allow us to subscribe to variables like profileName,
-which you should imagine being displayed atop a web page now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we can say,  profileName.subscibe() and put in function that is executed,
-each time the profileName is set.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This function could select the label in a profile drop-down,
-and update the text to reflect the newly logged in user.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is nice, but one signal is not a big deal,
-yet.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What we need to do,
-to create real applications, is to use a signal tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just a normal Object, that accepts any proper, and has a children list,
-which is an array, that can accept other objects of its own kind.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This can be generalized, where any property can be used to hold objects,
-but for simplicity and explanation we just use the children array.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So it is a recursive object tree,
-and it does not really require any special notation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The curly brackets in JavaScript work perfectly fine,
-but you do have to transform the nested objects or signalize them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This converts every property, including children,
-into signals, with .set, .get, and .subscribe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The code is perfectly readable,
-the tree does not need to be complex, just whatever works for the app.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then we use a web component,
-which is a way to extend the HTML of a web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made one called loop, that loops over the children property,
-and another one called bind, that can connect any property to any bit of HTML.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we can say bind profileName to .drop-down-button,
-the .drop-down-button finds the nearest button tagged with that class name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And of course, the bind tag does not use the old school get function, oh no,
-it uses the .subscribe method, so profileName always automatically updates.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In summary, if you are adding numbers,
-or must use standard and fast assignments in your program, you are good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if you are marking a web page,
-you need a Signal Tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All information coming from the server, or from whatever the user is up to,
-always goes into the tree, that is the single source of truth.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And whenever a value changes in the tree,
-all the components, and tags automatically update.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when you are working on a web page,
-you can’t use normal variables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need a tree of signals,
-where the server can send data into, and the User Interface can auto-magically update from.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-09-02T01:24:09.966Z">September 1, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:11<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1645.avif" aria-label="Cover for Programmers! Don&#39;t Just Use Plain Variables, Oh No!, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1645.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programmers! Don&#39;t Just Use Plain Variables, Oh No!" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:11
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1645.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1645.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1645.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>When calculating the sum of two numbers,<br>we say x = 1, y = 1, and get 2 by executing x+y.</p>
+<p>That is good for crunching numbers,<br>but in the old school way, where we rerun x+y if either variables change.</p>
+<p>In web pages where we deal with information that can come from a database,<br>a live remote web socket, or user input, we can’t use old school, no, no!</p>
+<p>Instead of saying profileName = ‘<a href="mailto:alice@example.com">alice@example.com</a>’,<br>we must say profileName = new Signal(‘<a href="mailto:alice@example.com">alice@example.com</a>’);</p>
+<p>And if we want to update the profileName we talk to the signal,<br>which has simple .get, .set and .subscribe functions.</p>
+<p>And we say  profileName.set(‘<a href="mailto:bob@example.com">bob@example.com</a>’),<br>because this is not an old school assignment, but interaction with a Signal object.</p>
+<p>Now stuff can happen behind the closed curtains,<br>for one, while we can just get a value once, that is still old school.</p>
+<p>Signals allow us to subscribe to variables like profileName,<br>which you should imagine being displayed atop a web page now.</p>
+<p>So we can say,  profileName.subscibe() and put in function that is executed,<br>each time the profileName is set.</p>
+<p>This function could select the label in a profile drop-down,<br>and update the text to reflect the newly logged in user.</p>
+<hr>
+<p>This is nice, but one signal is not a big deal,<br>yet.</p>
+<hr>
+<p>What we need to do,<br>to create real applications, is to use a signal tree.</p>
+<p>It is just a normal Object, that accepts any proper, and has a children list,<br>which is an array, that can accept other objects of its own kind.</p>
+<p>This can be generalized, where any property can be used to hold objects,<br>but for simplicity and explanation we just use the children array.</p>
+<p>So it is a recursive object tree,<br>and it does not really require any special notation.</p>
+<p>The curly brackets in JavaScript work perfectly fine,<br>but you do have to transform the nested objects or signalize them.</p>
+<p>This converts every property, including children,<br>into signals, with .set, .get, and .subscribe.</p>
+<p>The code is perfectly readable,<br>the tree does not need to be complex, just whatever works for the app.</p>
+<p>And then we use a web component,<br>which is a way to extend the HTML of a web page.</p>
+<p>I made one called loop, that loops over the children property,<br>and another one called bind, that can connect any property to any bit of HTML.</p>
+<p>So we can say bind profileName to .drop-down-button,<br>the .drop-down-button finds the nearest button tagged with that class name.</p>
+<p>And of course, the bind tag does not use the old school get function, oh no,<br>it uses the .subscribe method, so profileName always automatically updates.</p>
+<hr>
+<p>In summary, if you are adding numbers,<br>or must use standard and fast assignments in your program, you are good.</p>
+<p>But if you are marking a web page,<br>you need a Signal Tree.</p>
+<p>All information coming from the server, or from whatever the user is up to,<br>always goes into the tree, that is the single source of truth.</p>
+<p>And whenever a value changes in the tree,<br>all the components, and tags automatically update.</p>
+<p>So when you are working on a web page,<br>you can’t use normal variables.</p>
+<p>You need a tree of signals,<br>where the server can send data into, and the User Interface can auto-magically update from.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="mailto:alice@example.com">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>alice@example.com</span>
-                      <small class="d-block text-muted fw-lighter mt-2">mailto:alice@example.com</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="mailto:bob@example.com">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>bob@example.com</span>
-                      <small class="d-block text-muted fw-lighter mt-2">mailto:bob@example.com</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">signals</span><span class="chip">web-components</span><span class="chip">state-management</span><span class="chip">binding</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="mailto:alice@example.com">
+              <span class="text-truncate">alice@example.com</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="mailto:bob@example.com">
+              <span class="text-truncate">bob@example.com</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/79ca20fd-1a18-40d5-a019-366cdcb75173/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Bushwhacking In America</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/8f122f9d-e326-4a8c-84a1-a0cd41831c48/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">You Are A Creature Of The Stars</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/fc0199db-824a-47e6-9ebb-a312f4a5c6a5/">
+              <img src="https://catpea.github.io/chapter-11/poem-1649.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learning Programming Is Easy, You Just Have To Put Your Foot In The Door</span>
+                <span class="fg-3 fs-xs">September 5, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b8b746a1-2fa1-499e-a5dc-94c5f432ab1a/">
+              <img src="https://catpea.github.io/chapter-11/poem-1643.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Future Is Always Bright, Once You Learn Programming</span>
+                <span class="fg-3 fs-xs">August 31, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d6dbaa33-20fe-476d-bde1-de1fe5457289/">
+              <img src="https://catpea.github.io/chapter-11/poem-1653.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Teaches Like A Mother</span>
+                <span class="fg-3 fs-xs">September 9, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/26660e0c-4fa8-4bc8-be76-4bce06346cf4/">
+              <img src="https://catpea.github.io/chapter-11/poem-1638.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">So You Have Learned Programming... What Do?</span>
+                <span class="fg-3 fs-xs">August 25, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

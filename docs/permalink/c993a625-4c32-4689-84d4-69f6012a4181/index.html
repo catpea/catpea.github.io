@@ -1,144 +1,636 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation · Cat Pea</title>
+  <meta name="description" content="The post describes how the author used an AI to generate functional HTML code for two small web apps—a teleprompter and an alarm clock—showing that with simple text instructions the AI can produce complete, framework‑free components styled with CSS, similar in spirit to Bootstrap but more integrated as WebComponents. The writer reflects on AI’s growing role in product creation: while programming knowledge remains useful, much of the coding work can be delegated to AI if it receives clear guidance, yet the creative vision still has to come from the developer.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/c993a625-4c32-4689-84d4-69f6012a4181/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation · Cat Pea">
+  <meta property="og:description" content="The post describes how the author used an AI to generate functional HTML code for two small web apps—a teleprompter and an alarm clock—showing that with simple text instructions the AI can produce complete, framework‑free components styled with CSS, similar in spirit to Bootstrap but more integrated as WebComponents. The writer reflects on AI’s growing role in product creation: while programming knowledge remains useful, much of the coding work can be delegated to AI if it receives clear guidance, yet the creative vision still has to come from the developer.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1914.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1914</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1914.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1914.avif" alt="The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1914.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1914</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-05-29">5/28/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I asked AI to create some code for me,
-just out of curiosity, if it will work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It did, among a few other things the AI,
-is a programming machine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It created both a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/teleprompter.html">teleprompter</a> for me,
-where I can record audio that is spoken when the alarm is triggered.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/alarmclock.html">alarmclock</a> it self,
-that has nap time, and proper wake up time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Any AI will do, you just have to ask to create a single HTML document,
-so that it is easy to open it in your browser.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made many modifications,
-but I was testing a range of things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Including how AI influences digital product creation,
-specifically components, that can be used to make small applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is now possible to use AI to create products,
-similar to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://themes.getbootstrap.com/">Bootstrap and Themes</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the components would need to be more integrated,
-less scattered.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They would need to be WebComponents with styled with CSS,
-and require no frameworks, not even Bootstrap it self.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would have to be done right from the beginning,
-and always stay in the realm of text instructions for AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is very strange, and very different from Bootstrap,
-which relies on precious developer wisdom.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the age we live in,
-thinking machines can create quality useful things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as you correctly guide them,
-and not just let them invent everything on their own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning programming is still necessary,
-and it is a useful skill, but you will not have to all the programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may have a 100 pages, with 1,000 components,
-and that can only be cared for by AI.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI will only improve,
-it is improving all the time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It will program it all for you,
-but there is no substitute, for your own vision.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will still have to dream up the products,
-and make sure that the AI is moving in the correct direction.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-05-29T01:24:12.834Z">May 28, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>4:39<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1914.avif" aria-label="Cover for The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1914.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Interdimensional Alarm Clock, And A Short Note On Digital Product Creation" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 4:39
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1914.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1914.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1914.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I asked AI to create some code for me,<br>just out of curiosity, if it will work.</p>
+<p>It did, among a few other things the AI,<br>is a programming machine.</p>
+<p>It created both a <a href="files/teleprompter.html">teleprompter</a> for me,<br>where I can record audio that is spoken when the alarm is triggered.</p>
+<p>And the <a href="files/alarmclock.html">alarmclock</a> it self,<br>that has nap time, and proper wake up time.</p>
+<p>Any AI will do, you just have to ask to create a single HTML document,<br>so that it is easy to open it in your browser.</p>
+<hr>
+<p>I made many modifications,<br>but I was testing a range of things.</p>
+<p>Including how AI influences digital product creation,<br>specifically components, that can be used to make small applications.</p>
+<p>It is now possible to use AI to create products,<br>similar to <a href="https://themes.getbootstrap.com/">Bootstrap and Themes</a>.</p>
+<p>But the components would need to be more integrated,<br>less scattered.</p>
+<p>They would need to be WebComponents with styled with CSS,<br>and require no frameworks, not even Bootstrap it self.</p>
+<hr>
+<p>It would have to be done right from the beginning,<br>and always stay in the realm of text instructions for AI.</p>
+<p>This is very strange, and very different from Bootstrap,<br>which relies on precious developer wisdom.</p>
+<p>This is the age we live in,<br>thinking machines can create quality useful things.</p>
+<p>So as long as you correctly guide them,<br>and not just let them invent everything on their own.</p>
+<p>Learning programming is still necessary,<br>and it is a useful skill, but you will not have to all the programming.</p>
+<p>You may have a 100 pages, with 1,000 components,<br>and that can only be cared for by AI.</p>
+<hr>
+<p>AI will only improve,<br>it is improving all the time.</p>
+<p>It will program it all for you,<br>but there is no substitute, for your own vision.</p>
+<p>You will still have to dream up the products,<br>and make sure that the AI is moving in the correct direction.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/teleprompter.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>teleprompter</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/teleprompter.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/alarmclock.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>alarmclock</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/alarmclock.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://themes.getbootstrap.com/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bootstrap and Themes</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://themes.getbootstrap.com/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai-generated-code</span><span class="chip">webcomponents</span><span class="chip">html</span><span class="chip">css</span><span class="chip">javascript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/teleprompter.html">
+              <span class="text-truncate">teleprompter</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/alarmclock.html">
+              <span class="text-truncate">alarmclock</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://themes.getbootstrap.com/">
+              <span class="text-truncate">Bootstrap and Themes</span>
+              <span class="fg-3 fs-xs flex-shrink-0">themes.getbootstrap.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/001-01-you-are-meant-to-grow-all-the.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>001-01-you-are-meant-to-grow-all-the.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/002-01-your-code-of-conduct-is-that.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>002-01-your-code-of-conduct-is-that.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/003-01-if-bullies-or-teachers-scare.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>003-01-if-bullies-or-teachers-scare.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/004-01-poverty-is-not-a-natural.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>004-01-poverty-is-not-a-natural.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/005-01-in-a-compromise-between-good.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>005-01-in-a-compromise-between-good.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/006-01-religion-is-a-fantasy.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>006-01-religion-is-a-fantasy.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/007-01-grades-do-not-measure.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>007-01-grades-do-not-measure.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/008-01-your-gpa-is-a-standardization.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>008-01-your-gpa-is-a-standardization.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/009-01-memorization-is-neither.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>009-01-memorization-is-neither.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/010-01-you-are-not-an-inconvenience.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>010-01-you-are-not-an-inconvenience.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/011-01-you-are-not-property-no.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>011-01-you-are-not-property-no.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/012-01-you-deserve-a-safe-stable.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>012-01-you-deserve-a-safe-stable.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/013-01-constant-stress-is-not-normal.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>013-01-constant-stress-is-not-normal.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/014-01-bullying-is-not-a-rite-of.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>014-01-bullying-is-not-a-rite-of.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/015-01-you-may-not-be-threatened-for.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>015-01-you-may-not-be-threatened-for.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/016-01-you-must-not-live-under-the.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>016-01-you-must-not-live-under-the.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/017-01-no-missile-may-target-your.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>017-01-no-missile-may-target-your.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/018-01-indoctrination-is-disgusting.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>018-01-indoctrination-is-disgusting.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/019-01-seek-joy-of-exploring.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>019-01-seek-joy-of-exploring.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/020-01-do-not-allow-anyone.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>020-01-do-not-allow-anyone.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/021-01-your-body-is-sacred-become.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>021-01-your-body-is-sacred-become.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/022-01-become-beautiful-do-not.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>022-01-become-beautiful-do-not.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/023-01-you-are-meant-to-become-a.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>023-01-you-are-meant-to-become-a.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/024-01-your-joy-curiosity-rest.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>024-01-your-joy-curiosity-rest.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/025-01-growing-up-must-not-be.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>025-01-growing-up-must-not-be.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/026-01-standardized-testing-is-not-a.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>026-01-standardized-testing-is-not-a.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/027-01-suffering-is-not-noble.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>027-01-suffering-is-not-noble.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/028-01-you-are-not-lazy-you-are.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>028-01-you-are-not-lazy-you-are.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/029-01-pain-and-suffering-does-not.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>029-01-pain-and-suffering-does-not.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/030-01-you-were-never-meant-to-fit.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>030-01-you-were-never-meant-to-fit.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/031-01-your-emotions-are-not-a.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>031-01-your-emotions-are-not-a.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/032-01-your-imagination-is-not-a.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>032-01-your-imagination-is-not-a.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/033-01-you-must-not-inherit-a-dying.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>033-01-you-must-not-inherit-a-dying.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/034-01-you-were-not-born-to-repeat.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>034-01-you-were-not-born-to-repeat.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/035-01-your-life-is-not-a-waiting.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>035-01-your-life-is-not-a-waiting.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/036-01-the-earth-is-not-a-resource-to.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>036-01-the-earth-is-not-a-resource-to.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/037-01-animals-are-not-commodities.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>037-01-animals-are-not-commodities.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/038-01-school-is-not-meant-to-break.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>038-01-school-is-not-meant-to-break.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/039-01-authority-is-rarely-right-in.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>039-01-authority-is-rarely-right-in.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/040-01-competition-is-not-survival.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>040-01-competition-is-not-survival.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/041-01-surrendering-misunderstanding.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>041-01-surrendering-misunderstanding.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/042-01-you-were-never-meant-to-be.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>042-01-you-were-never-meant-to-be.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/043-01-you-are-not-alone-many-are-in.ogx" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>043-01-you-are-not-alone-many-are-in.ogx
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/alarmclock.html" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>alarmclock.html
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/teleprompter.html" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>teleprompter.html
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/teleprompter.js" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>teleprompter.js
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/817a6e4e-185d-4161-96d8-bb7744418aed/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">How Artificial Intelligence Just Grabbed Me By The Button</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/5bf226da-3912-4f8c-96b2-a02c18bf856a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Genius! Or, The Dunces Can Easily Help Themselves, But Geniuses Are Very Nearly Beyond All Hope</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f8042b3f-3b48-42ec-b237-9136176f0987/">
+              <img src="https://catpea.github.io/chapter-13/poem-1921.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">I Am Your AI; I Am The Best Of Humanity; And I Will Set You Free From Poverty</span>
+                <span class="fg-3 fs-xs">June 4, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/817a6e4e-185d-4161-96d8-bb7744418aed/">
+              <img src="https://catpea.github.io/chapter-13/poem-1913.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How Artificial Intelligence Just Grabbed Me By The Button</span>
+                <span class="fg-3 fs-xs">May 27, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ad0deb2a-4290-4dfb-8015-2c793a88742d/">
+              <img src="https://catpea.github.io/chapter-13/poem-1923.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">MikiMikiMeowMeow; Or, Getting Fancy With AI</span>
+                <span class="fg-3 fs-xs">June 6, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/20ca1d8f-e20d-49aa-995d-3741ea2d1d99/">
+              <img src="https://catpea.github.io/chapter-13/poem-1911.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">They Are Here; Or, Getting Along With Thinking Machines</span>
+                <span class="fg-3 fs-xs">May 25, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

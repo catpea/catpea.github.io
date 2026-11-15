@@ -1,223 +1,506 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment · Cat Pea</title>
+  <meta name="description" content="The post explains a workflow for building applications with AI assistance: start by giving the idea to an LLM and first ask for a plain‑English requirements document; then generate code in iterative steps that can be reset or reverted back into a new requirements draft if needed, allowing you to keep progress while debugging. It highlights the benefit of modular plugin architecture—each plugin lives in its own file, has descriptive metadata (name, type, description), and exposes a simple init function that receives the application object so it can hook into events, UI, and other helpers; this structure keeps context size manageable for the AI and lets you add or drop plugins without breaking the core app. The post then assigns homework: design a drag‑and‑drop visual programming language using functional reactive operators (e.g., Rx.js) in vanilla JS, embed it in a modal search box with Bootstrap CDN, and progressively let the AI move the code into the visual environment until the language is self‑contained—an exercise meant to demonstrate how AI can help build complex, extensible systems.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/79a0786e-b9d9-4ae5-a864-8aeff6fcc196/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment · Cat Pea">
+  <meta property="og:description" content="The post explains a workflow for building applications with AI assistance: start by giving the idea to an LLM and first ask for a plain‑English requirements document; then generate code in iterative steps that can be reset or reverted back into a new requirements draft if needed, allowing you to keep progress while debugging. It highlights the benefit of modular plugin architecture—each plugin lives in its own file, has descriptive metadata (name, type, description), and exposes a simple init function that receives the application object so it can hook into events, UI, and other helpers; this structure keeps context size manageable for the AI and lets you add or drop plugins without breaking the core app. The post then assigns homework: design a drag‑and‑drop visual programming language using functional reactive operators (e.g., Rx.js) in vanilla JS, embed it in a modal search box with Bootstrap CDN, and progressively let the AI move the code into the visual environment until the language is self‑contained—an exercise meant to demonstrate how AI can help build complex, extensible systems.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1937.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1937</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1937.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1937.avif" alt="The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1937.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1937</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-06-20">6/20/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">“Good art changes lives.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This week we talked about Artificial Intelligence,
-and how it can create your applications.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have learned that if you give it your idea,
-and ask for a requirements document first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of asking for code,
-you ask for an intermediate step.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In which you can double check and refine key items,
-in plain english language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you try to generate the application,
-with expectations of bugs that you have to explain to the AI,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It your going back and forth, you can hit the reset button,
-withut losing too much progress.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By asking the AI,
-to convert your program back to the requirements document.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may try asking it to save some of the code you got working,
-in an appendix so that the next re-generation is more informed.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is a rather large problem,
-eventually you code will be too be big.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you may wish to separate features out anyway,
-just so that you can make them optional.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I asked AI about <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/plugins.md">application plug-ins</a> today,
-with focus on on AI friendly code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here is what it had to say:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That’s a <em>superb</em> question—and one that gets right to the heart of <strong>human-AI collaborative coding at scale</strong>.  You&#39;re designing a system <em>not just for users</em>, but for <strong>yourself and an LLM working together</strong>. That changes everything. The architecture must be not only <strong>modular and extensible</strong> but also <strong>navigable, explainable, and contextualizable by an LLM</strong> with limited memory.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here is what to focus on:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Explicit structure, configuration over convention,
-LLMs can&#39;t infer large codebases without guidance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Uniform plugin contracts, predictable plug-in structure,
-makes reasoning and code generation easier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Registry-based discovery,
-lets LLMs &quot;scan&quot; functionality without loading every file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">File separation (1 plugin = 1 file),
-keeps context sizes manageable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Flat call graph (low indirection),
-avoids LLMs getting lost in multiple layers of abstraction.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Metadata, and Self-describing plugins,
-Makes summarization and documentation easier.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This means that evey plugin has a name, description, type,
-it may mention what it provides.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then all plugins have a simple init function,
-that will receive the application object it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here it can access app.events where it can subscribe-to and emit event,
-and mountUI where it can append it self to some UI selector or zone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI wants simplicity,
-just give the whole application object to the plugin.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And make sure that good metadata describing the plugins,
-and maybe even what they provide, exists.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The result of this, is you having the ability to add and throw-away plugins,
-without harming the application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One plugin per file, is trouble for sample projects,
-but it makes sense, because when you include all the plugin code…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The free AI runs out of context memory,
-but eventually even premium AI may have trouble with one file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When everything is split into plugins,
-you will not encounter any problems.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make plugin architecture part of the requirements document,
-and at first while the applicaion is still small, let the plugins sit in the index,.html.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once things start working, pull them out,
-and uses an AI that can scan multiple files, that works with file systems.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just to say it again, your plugins need to have an initialize or init function,
-and the application of app object will be passed in as the first and only argument.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you will hook into the app events, UI, bus,
-and even helper funcions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is one step out of of index.html,
-you are not adding any other layer than plugin with initialize.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You must protect the AI,
-from confusion.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let us talk about homework,
-and graduation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because the self educated never get a break,
-you are receiving homework for this weekend.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t have to turn it in,
-becasue there are no deadlines in my programming class.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, once you understand what it is about,
-there is not much you can do to stop yourself from doing it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I ask you to get plenty of rest,
-touch grass often, eat your vegetables and drink plenty of water.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sit down for this one,
-because like I said before…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The world has changed,
-it will take some time to understand it, and get used to it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are to ask artificial intelligence,
-to create a drag and drop visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/demo.html">You can use source code I generated, as a stable seed</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you have to unstruct the AI to use functional reactive programming operators,
-written in vanilla JS, to code your visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(You can ask it to use Rx.js
-or Bacon, or ramda if you wish.)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then to allow using those functions,
-in the programming language it self (See <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nodered.org/">Node-RED</a>)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can ask it to pop up a modal search box,
-that means tell the AI to use latest <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://getbootstrap.com">bootstrap from their CDN</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then once the user interface works,
-instruct the AI to replace the code of the visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With, programs that run on your visual canvas,
-continue asking the AI to move everything into the visual programming environment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until the visulal programming language,
-is written in it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Upon completion for this task,
-which may take anywhere between one hour and 25 years.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may consider yourself a graduate of the CPU,
-and a programmer of the Brave New Era Of Artificial Intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Please remember,
-what I said about the vegetables.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-06-20T16:25:35.234Z">June 20, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:28<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1937.avif" aria-label="Cover for The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1937.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Secret Application Sauce; Or, SPA Plug-ins And The Homework Assignment" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:28
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1937.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1937.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1937.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>“Good art changes lives.”</p>
+<p>This week we talked about Artificial Intelligence,<br>and how it can create your applications.</p>
+<hr>
+<p>We have learned that if you give it your idea,<br>and ask for a requirements document first.</p>
+<p>Instead of asking for code,<br>you ask for an intermediate step.</p>
+<p>In which you can double check and refine key items,<br>in plain english language.</p>
+<p>And then you try to generate the application,<br>with expectations of bugs that you have to explain to the AI,</p>
+<p>It your going back and forth, you can hit the reset button,<br>withut losing too much progress.</p>
+<p>By asking the AI,<br>to convert your program back to the requirements document.</p>
+<p>You may try asking it to save some of the code you got working,<br>in an appendix so that the next re-generation is more informed.</p>
+<hr>
+<p>But there is a rather large problem,<br>eventually you code will be too be big.</p>
+<p>And you may wish to separate features out anyway,<br>just so that you can make them optional.</p>
+<hr>
+<p>I asked AI about <a href="files/plugins.md">application plug-ins</a> today,<br>with focus on on AI friendly code.</p>
+<p>Here is what it had to say:</p>
+<p>That’s a <em>superb</em> question—and one that gets right to the heart of <strong>human-AI collaborative coding at scale</strong>.  You&#39;re designing a system <em>not just for users</em>, but for <strong>yourself and an LLM working together</strong>. That changes everything. The architecture must be not only <strong>modular and extensible</strong> but also <strong>navigable, explainable, and contextualizable by an LLM</strong> with limited memory.</p>
+<p>Here is what to focus on:</p>
+<p>Explicit structure, configuration over convention,<br>LLMs can&#39;t infer large codebases without guidance.</p>
+<p>Uniform plugin contracts, predictable plug-in structure,<br>makes reasoning and code generation easier.</p>
+<p>Registry-based discovery,<br>lets LLMs &quot;scan&quot; functionality without loading every file.</p>
+<p>File separation (1 plugin = 1 file),<br>keeps context sizes manageable.</p>
+<p>Flat call graph (low indirection),<br>avoids LLMs getting lost in multiple layers of abstraction.</p>
+<p>Metadata, and Self-describing plugins,<br>Makes summarization and documentation easier.</p>
+<p>This means that evey plugin has a name, description, type,<br>it may mention what it provides.</p>
+<p>And then all plugins have a simple init function,<br>that will receive the application object it self.</p>
+<p>Here it can access app.events where it can subscribe-to and emit event,<br>and mountUI where it can append it self to some UI selector or zone.</p>
+<p>AI wants simplicity,<br>just give the whole application object to the plugin.</p>
+<p>And make sure that good metadata describing the plugins,<br>and maybe even what they provide, exists.</p>
+<hr>
+<p>The result of this, is you having the ability to add and throw-away plugins,<br>without harming the application.</p>
+<p>One plugin per file, is trouble for sample projects,<br>but it makes sense, because when you include all the plugin code…</p>
+<p>The free AI runs out of context memory,<br>but eventually even premium AI may have trouble with one file.</p>
+<p>When everything is split into plugins,<br>you will not encounter any problems.</p>
+<p>Make plugin architecture part of the requirements document,<br>and at first while the applicaion is still small, let the plugins sit in the index,.html.</p>
+<p>Once things start working, pull them out,<br>and uses an AI that can scan multiple files, that works with file systems.</p>
+<hr>
+<p>Just to say it again, your plugins need to have an initialize or init function,<br>and the application of app object will be passed in as the first and only argument.</p>
+<p>Here you will hook into the app events, UI, bus,<br>and even helper funcions.</p>
+<p>This is one step out of of index.html,<br>you are not adding any other layer than plugin with initialize.</p>
+<p>You must protect the AI,<br>from confusion.</p>
+<hr>
+<p>Now let us talk about homework,<br>and graduation.</p>
+<p>Because the self educated never get a break,<br>you are receiving homework for this weekend.</p>
+<p>You don’t have to turn it in,<br>becasue there are no deadlines in my programming class.</p>
+<p>But, once you understand what it is about,<br>there is not much you can do to stop yourself from doing it.</p>
+<p>So I ask you to get plenty of rest,<br>touch grass often, eat your vegetables and drink plenty of water.</p>
+<hr>
+<p>Sit down for this one,<br>because like I said before…</p>
+<p>The world has changed,<br>it will take some time to understand it, and get used to it.</p>
+<hr>
+<p>You are to ask artificial intelligence,<br>to create a drag and drop visual programming language.</p>
+<p><a href="files/demo.html">You can use source code I generated, as a stable seed</a></p>
+<p>But you have to unstruct the AI to use functional reactive programming operators,<br>written in vanilla JS, to code your visual programming language.</p>
+<p>(You can ask it to use Rx.js<br>or Bacon, or ramda if you wish.)</p>
+<p>And then to allow using those functions,<br>in the programming language it self (See <a href="https://nodered.org/">Node-RED</a>)</p>
+<p>You can ask it to pop up a modal search box,<br>that means tell the AI to use latest <a href="https://getbootstrap.com">bootstrap from their CDN</a>.</p>
+<p>And then once the user interface works,<br>instruct the AI to replace the code of the visual programming language.</p>
+<p>With, programs that run on your visual canvas,<br>continue asking the AI to move everything into the visual programming environment.</p>
+<p>Until the visulal programming language,<br>is written in it self.</p>
+<p>Upon completion for this task,<br>which may take anywhere between one hour and 25 years.</p>
+<p>You may consider yourself a graduate of the CPU,<br>and a programmer of the Brave New Era Of Artificial Intelligence.</p>
+<p>Please remember,<br>what I said about the vegetables.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/plugins.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>application plug-ins</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/plugins.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/demo.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>You can use source code I generated, as a stable seed</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/demo.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nodered.org/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Node-RED</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nodered.org/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://getbootstrap.com">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>bootstrap from their CDN</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://getbootstrap.com</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">artificial intelligence</span><span class="chip">ai</span><span class="chip">code generation</span><span class="chip">plugin architecture</span><span class="chip">modular programming</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/plugins.md">
+              <span class="text-truncate">application plug-ins</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/demo.html">
+              <span class="text-truncate">You can use source code I generated, as a stable seed</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nodered.org/">
+              <span class="text-truncate">Node-RED</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nodered.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://getbootstrap.com">
+              <span class="text-truncate">bootstrap from their CDN</span>
+              <span class="fg-3 fs-xs flex-shrink-0">getbootstrap.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/demo.html" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>demo.html
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/plugins.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>plugins.md
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/90b77741-6fa2-4f48-84e6-a7d3ebcc3599/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Do You Understand That You Are A Programmer Now?</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/5782ec18-4c09-4c17-a9b1-ec2569ca947a/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The New Programmer</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5782ec18-4c09-4c17-a9b1-ec2569ca947a/">
+              <img src="https://catpea.github.io/chapter-13/poem-1938.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The New Programmer</span>
+                <span class="fg-3 fs-xs">June 21, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/7a0bb1d0-889d-4101-a960-9b600097b5ff/">
+              <img src="https://catpea.github.io/chapter-13/poem-1934.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Gibberish Invitation To Web Programming: Objects, HTML, Templating, Components, And Signals</span>
+                <span class="fg-3 fs-xs">June 17, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/236bd82c-90cb-42c6-a934-a3e36b7e0086/">
+              <img src="https://catpea.github.io/chapter-13/poem-1947.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Gentle Introduction To Programming</span>
+                <span class="fg-3 fs-xs">June 30, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a06ff9bf-dea8-4f77-adb6-0c80cbc2ee0a/">
+              <img src="https://catpea.github.io/chapter-13/poem-1931.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Confusing Programming Is Super Fun</span>
+                <span class="fg-3 fs-xs">June 14, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

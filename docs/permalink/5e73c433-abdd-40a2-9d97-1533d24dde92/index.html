@@ -1,158 +1,472 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial · Cat Pea</title>
+  <meta name="description" content="In this whimsical post the author recounts a bicycle ride that inspires a foray into Linux and audio processing; he sets up a Raspberry Pi as an inexpensive workstation, installs ffmpeg via apt, and explains how to speed‑up an MP3 by 125 % using the atempo filter in the command line: `ffmpeg -i original-song.mp3 -af atempo=1.25 spedup-song.mp3`. He walks through each flag (-i for input, -af for audio filter) and notes that atempo=1.25 means 125 % tempo. The post ends with a short demo of the before‑and‑after audio and a brief reflection on how the command line can be efficient once you learn its syntax.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/5e73c433-abdd-40a2-9d97-1533d24dde92/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial · Cat Pea">
+  <meta property="og:description" content="In this whimsical post the author recounts a bicycle ride that inspires a foray into Linux and audio processing; he sets up a Raspberry Pi as an inexpensive workstation, installs ffmpeg via apt, and explains how to speed‑up an MP3 by 125 % using the atempo filter in the command line: `ffmpeg -i original-song.mp3 -af atempo=1.25 spedup-song.mp3`. He walks through each flag (-i for input, -af for audio filter) and notes that atempo=1.25 means 125 % tempo. The post ends with a short demo of the before‑and‑after audio and a brief reflection on how the command line can be efficient once you learn its syntax.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0487.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0487</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0487.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0487.avif" alt="Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0487.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0487</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-07-01">6/30/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Upon a tiny bicycle adventure,<br>asking myself how to approach the subject of workout music and linux.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While I was contemplating an introduction to linux,<br>and the many steps required along the way...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=gWGiWHwmhhc">A little bird swooped down and tried to carry me away</a>,<br>apparently this was exactly what I needed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the moment I was pedaling on my bicycle,<br>and a little bird was camping on top of my head, hopefully merely attacking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I realized all I need to say about UNIX and Linux in this poem,<br>is that I have been speeding up my workout music, and explain the command I use to do it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As the bird let go, and I started waiving frantically above my head,<br>so that it doesn&#39;t come back again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I felt that I should mention that it is probably best to buy a cheap dedicated Linux computer,<br>a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.canakit.com/raspberry-pi-4-complete-starter-kit.html">Raspberry PI</a> costs $140 dollars, and a monitor runs about $70.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not very fast, but web pages load OK,<br>and it is a proper Linux with a proper terminal application where you can type commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Installing ffmpeg should only require running <code>sudo apt-get install ffmpeg</code><br>Raspberry Pi Documentation has some useful information about <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.raspberrypi.org/documentation/linux/software/apt.md">APT</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If the command does not work out, which doesn&#39;t really happen,<br>then you have to search for <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.google.com/search?q=How+to+install+ffmpeg+on+Raspberry+PI">&quot;How to install ffmpeg on Raspberry PI&quot;</a> and begin your Linux adventure here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But using apt is easy, and you will soon have ffmpeg on your system,<br>you&#39;ll have to copy your music onto the PI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And from now on I will refer to your favorite song as: &quot;original-song.mp3&quot;,<br>and the song that we will speed up will be called &quot;spedup-song.mp3&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are three parts to this command,<br>and it all begins by saying <code>ffmpeg</code> to tell the system you will be using the ffmpeg program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then the developers behind ffmpeg decided that you should use -i<br>to tell ffmpeg of any input files so you have to say <code>-i original-song.mp3</code></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is called giving a command an argument,<br>we are giving it the -i argument with the value of original-song.mp3.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Next, we say <code>-af atempo=1.25</code> so we are giving ffmpeg the -af argument,<br>which is short for audio filter, and then we specify the filter which is atempo.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://ffmpeg.org/ffmpeg-filters.html#atempo">atempo</a> stands for &quot;Adjust audio tempo&quot; but the syntax that follows -af,<br>is something that ffmpeg programmers picked to try to make things easy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In this case atempo is followed by equal sign,<br>which means assign value, and the value we are assigning is 1.25</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is so hard to grasp at first, because ffmpeg programmers,<br>really struggled with how to make all this somewhat readable, and useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">1.25 is a programmers way of saying set the tempo to 125%,<br>the math is easier this way, an everyone just does it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So if you wanted to speed up your song to 150% tempo, you would say, atempo=1.50,<br>and if you wanted to slow it down to 50% tempo, you would say atempo=0.50</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point we just give ffmpeg the filename we want to save the changes to,<br>which in this tutorial is spedup-song.mp3.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the whole command reads like this:<br><code>ffmpeg -i original-song.mp3 -af atempo=1.25 spedup-song.mp3;</code></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The biggest thing to learn from all this,<br>is that programmers are trying to be useful, and they are very thrifty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The operating system has no idea where or what atempo is,<br>that is just part of ffmpeg, and its own world of complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to the command line,<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">the command line is trying to be useful</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just command names and arguments,<br>and developers trying to make commands useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is faster to do things on the command line,<br>just imagine how many clicks you would have to make in a Graphic User Interface application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As to not knowing what the commands are,<br>nobody knows them at first, you just write them down, and eventually memorize them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In Closing,<br>I will speed up one of my songs to let you hear the difference.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here is the original speed,<br>(audio plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And here is the version, that is sped up to 125% tempo.<br>(audio plays)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The overall lesson to take from all this, is that command line is not scary, but it will take a Linux, and some notes to get used to it.<br>and if you are ever bicycling among angry birds, bring an emergency hat.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-07-01T02:40:35.825Z">June 30, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>7:21<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0487.avif" aria-label="Cover for Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0487.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Bird Attacks And Speeding Up Your Workout Music: A Linux Command Line Tutorial" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 7:21
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0487.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0487.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0487.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Upon a tiny bicycle adventure,<br>asking myself how to approach the subject of workout music and linux.</p>
+<p>While I was contemplating an introduction to linux,<br>and the many steps required along the way...</p>
+<p><a href="https://www.youtube.com/watch?v=gWGiWHwmhhc">A little bird swooped down and tried to carry me away</a>,<br>apparently this was exactly what I needed.</p>
+<p>In the moment I was pedaling on my bicycle,<br>and a little bird was camping on top of my head, hopefully merely attacking.</p>
+<p>I realized all I need to say about UNIX and Linux in this poem,<br>is that I have been speeding up my workout music, and explain the command I use to do it.</p>
+<p>As the bird let go, and I started waiving frantically above my head,<br>so that it doesn&#39;t come back again.</p>
+<p>I felt that I should mention that it is probably best to buy a cheap dedicated Linux computer,<br>a <a href="https://www.canakit.com/raspberry-pi-4-complete-starter-kit.html">Raspberry PI</a> costs $140 dollars, and a monitor runs about $70.</p>
+<p>It is not very fast, but web pages load OK,<br>and it is a proper Linux with a proper terminal application where you can type commands.</p>
+<p>Installing ffmpeg should only require running <code>sudo apt-get install ffmpeg</code><br>Raspberry Pi Documentation has some useful information about <a href="https://www.raspberrypi.org/documentation/linux/software/apt.md">APT</a></p>
+<p>If the command does not work out, which doesn&#39;t really happen,<br>then you have to search for <a href="https://www.google.com/search?q=How+to+install+ffmpeg+on+Raspberry+PI">&quot;How to install ffmpeg on Raspberry PI&quot;</a> and begin your Linux adventure here.</p>
+<p>But using apt is easy, and you will soon have ffmpeg on your system,<br>you&#39;ll have to copy your music onto the PI.</p>
+<p>And from now on I will refer to your favorite song as: &quot;original-song.mp3&quot;,<br>and the song that we will speed up will be called &quot;spedup-song.mp3&quot;</p>
+<p>There are three parts to this command,<br>and it all begins by saying <code>ffmpeg</code> to tell the system you will be using the ffmpeg program.</p>
+<p>Then the developers behind ffmpeg decided that you should use -i<br>to tell ffmpeg of any input files so you have to say <code>-i original-song.mp3</code></p>
+<p>This is called giving a command an argument,<br>we are giving it the -i argument with the value of original-song.mp3.</p>
+<p>Next, we say <code>-af atempo=1.25</code> so we are giving ffmpeg the -af argument,<br>which is short for audio filter, and then we specify the filter which is atempo.</p>
+<p><a href="https://ffmpeg.org/ffmpeg-filters.html#atempo">atempo</a> stands for &quot;Adjust audio tempo&quot; but the syntax that follows -af,<br>is something that ffmpeg programmers picked to try to make things easy.</p>
+<p>In this case atempo is followed by equal sign,<br>which means assign value, and the value we are assigning is 1.25</p>
+<p>This is so hard to grasp at first, because ffmpeg programmers,<br>really struggled with how to make all this somewhat readable, and useful.</p>
+<p>1.25 is a programmers way of saying set the tempo to 125%,<br>the math is easier this way, an everyone just does it.</p>
+<p>So if you wanted to speed up your song to 150% tempo, you would say, atempo=1.50,<br>and if you wanted to slow it down to 50% tempo, you would say atempo=0.50</p>
+<p>At this point we just give ffmpeg the filename we want to save the changes to,<br>which in this tutorial is spedup-song.mp3.</p>
+<p>So the whole command reads like this:<br><code>ffmpeg -i original-song.mp3 -af atempo=1.25 spedup-song.mp3;</code></p>
+<p>The biggest thing to learn from all this,<br>is that programmers are trying to be useful, and they are very thrifty.</p>
+<p>The operating system has no idea where or what atempo is,<br>that is just part of ffmpeg, and its own world of complexity.</p>
+<p>As to the command line,<br><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">the command line is trying to be useful</a></p>
+<p>It is just command names and arguments,<br>and developers trying to make commands useful.</p>
+<p>It is faster to do things on the command line,<br>just imagine how many clicks you would have to make in a Graphic User Interface application.</p>
+<p>As to not knowing what the commands are,<br>nobody knows them at first, you just write them down, and eventually memorize them.</p>
+<hr>
+<p>In Closing,<br>I will speed up one of my songs to let you hear the difference.</p>
+<p>Here is the original speed,<br>(audio plays)</p>
+<p>And here is the version, that is sped up to 125% tempo.<br>(audio plays)</p>
+<p>The overall lesson to take from all this, is that command line is not scary, but it will take a Linux, and some notes to get used to it.<br>and if you are ever bicycling among angry birds, bring an emergency hat.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=gWGiWHwmhhc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>A little bird swooped down and tried to carry me away</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=gWGiWHwmhhc</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.canakit.com/raspberry-pi-4-complete-starter-kit.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Raspberry PI</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.canakit.com/raspberry-pi-4-complete-starter-kit.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.raspberrypi.org/documentation/linux/software/apt.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>APT</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.raspberrypi.org/documentation/linux/software/apt.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.google.com/search?q=How+to+install+ffmpeg+on+Raspberry+PI">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>&amp;quot;How to install ffmpeg on Raspberry PI&amp;quot;</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.google.com/search?q=How+to+install+ffmpeg+on+Raspberry+PI</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://ffmpeg.org/ffmpeg-filters.html#atempo">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>atempo</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://ffmpeg.org/ffmpeg-filters.html#atempo</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>the command line is trying to be useful</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=tc4ROCJYbm0</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ffmpeg</span><span class="chip">raspberry-pi</span><span class="chip">linux</span><span class="chip">command-line</span><span class="chip">audio-processing</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://example.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://example.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=gWGiWHwmhhc">
+              <span class="text-truncate">A little bird swooped down and tried to carry me away</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.canakit.com/raspberry-pi-4-complete-starter-kit.html">
+              <span class="text-truncate">Raspberry PI</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.canakit.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.raspberrypi.org/documentation/linux/software/apt.md">
+              <span class="text-truncate">APT</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.raspberrypi.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.google.com/search?q=How+to+install+ffmpeg+on+Raspberry+PI">
+              <span class="text-truncate">&amp;quot;How to install ffmpeg on Raspberry PI&amp;quot;</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.google.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://ffmpeg.org/ffmpeg-filters.html#atempo">
+              <span class="text-truncate">atempo</span>
+              <span class="fg-3 fs-xs flex-shrink-0">ffmpeg.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=tc4ROCJYbm0">
+              <span class="text-truncate">the command line is trying to be useful</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/040db672-a74c-4df2-8fb8-ed85aaaca99c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Rainy Adventure: A Little Poetry Tutorial</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/ccfe880a-e591-466b-8848-dfba513e823f/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Trail Magic</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/96e9dbea-7c5e-4a44-9171-5d8e8c2eb049/">
+              <img src="https://catpea.github.io/chapter-03/poem-0507.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Self Education: In Hot Pursuit Of Curiosities</span>
+                <span class="fg-3 fs-xs">July 20, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/11a670b3-a38e-4811-a65e-1914c7040b67/">
+              <img src="https://catpea.github.io/chapter-03/poem-0468.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Not That Scary</span>
+                <span class="fg-3 fs-xs">June 11, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/318fe2b0-7c84-4658-82cd-c00f529e0348/">
+              <img src="https://catpea.github.io/chapter-03/poem-0508.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">My First Homemade Portable Music Player</span>
+                <span class="fg-3 fs-xs">July 21, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/dd5e9f5c-c0ff-4d77-96bb-f9a5aba410cb/">
+              <img src="https://catpea.github.io/chapter-03/poem-0465.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Super Nintendent Meow</span>
+                <span class="fg-3 fs-xs">June 8, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

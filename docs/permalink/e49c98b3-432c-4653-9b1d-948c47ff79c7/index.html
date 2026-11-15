@@ -1,171 +1,463 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application Design: You Will Lose Control, So Give Yourself Weapons First</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Application Design: You Will Lose Control, So Give Yourself Weapons First · Cat Pea</title>
+  <meta name="description" content="Modular plug‑in architecture—like an army of independent corps—is key to building adaptable, resilient apps that let developers rapidly generate and replace code (even via AI) without overloading a single system.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/e49c98b3-432c-4653-9b1d-948c47ff79c7/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Application Design: You Will Lose Control, So Give Yourself Weapons First · Cat Pea">
+  <meta property="og:description" content="Modular plug‑in architecture—like an army of independent corps—is key to building adaptable, resilient apps that let developers rapidly generate and replace code (even via AI) without overloading a single system.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1970.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1970</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1970.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1970.avif" alt="Application Design: You Will Lose Control, So Give Yourself Weapons First"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Application Design: You Will Lose Control, So Give Yourself Weapons First</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1970.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1970</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Application Design: You Will Lose Control, So Give Yourself Weapons First</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-07-23">7/23/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Above all, you need to be able to rip out code out of your program,
-even if just to gently replace something, or upgrade a feature.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So plug-in architecture is a must,
-and since it naturally divides things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It goes a long way,
-to help you communicate your needs with artificial intelligence.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Napoleon:</strong> <em>Mes jeunes soldats!</em> Listen well - in war, as in your programming, you must build armies that can be divided yet never conquered! When I organized the Grande Armée, each corps was complete unto itself - its own artillery, cavalry, supply trains. Why? Because I knew that in the heat of battle, communications fail, plans crumble, and you must rely on independent units to seize victory! Build your applications the same way - each component strong enough to stand alone, yet powerful when united!</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The design of an application is both
-Administrative and a Military Campaign.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You become a ruler and administrator,
-who will engage in multiple military campaigns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is because even your best designs,
-that closely follow emergent features of other applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Are rendered into Swiss cheese,
-by your savant and genius nature.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Alexander:</strong> Young conquerors of the digital realm! When I set forth from Macedonia, did I know I would face war elephants in India? Greek fire in Persia? The horse archers of Scythia? <em>Never!</em> Yet this is the glory of true conquest - each new territory teaches you warfare you never imagined! Your applications will be the same. Do not expect to know all your battles before you fight them. Instead, cultivate the spirit of adaptation - when you meet your war elephants, invent new tactics on the field! Embrace the unknown challenges, for they will make you invincible!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You enter the world of application design,
-to take care of all the needs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you begin discovering,
-revolutionary features, not previously known in the context.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Darius:</strong> <em>Young administrators of the code!</em> Learn from one who ruled from the sunrise to the sunset - the secret of governing vast complexity is knowing when to trust your systems over your oversight. When my empire stretched across three continents, I could not personally manage every village tax collector or mountain fortress. I learned to create structures that governed themselves! Build your applications like satrapies - each region autonomous, each governed by clear laws, yet all serving the greater kingdom. This way, when distant provinces develop new needs, you need not rebuild your entire administration!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To give you a good example, in my visual programming language,
-I am slowly beginning to kiss up to <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://astexplorer.net/">AST</a> generation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not very wise, prior to the rise of artificial intelligence,
-but now, probably a critical feature in a Visual Programming Language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just printing code as strings,
-is a damn dirty and desperate ordeal.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Napoleon:</strong> <em>Mes étudiants!</em> Take heed - I revolutionized artillery not by clinging to old methods, but by embracing the mathematics of destruction! Where others saw mere cannons, I saw precise instruments of victory. You face the same choice with your tools - cling to the familiar &quot;dirty and desperate&quot; methods, or master the new sciences that will make you unstoppable! Remember: <em>l&#39;audace, encore l&#39;audace!</em> - audacity, always audacity! The battlefield rewards those who adapt their weapons to new realities!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Many of such tangents, will turn out to be a bad idea,
-but some, will let you have your 5 minutes of fame.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Atop the trillion dollar software industry,
-whatever that does, it won&#39;t be too bad, and it is probably pretty good.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Alexander:</strong> <em>Brave students!</em> Do not fear to reach for immortal glory in your craft! Yes, some bold ventures will fail - I lost many good soldiers pursuing dreams in distant India. But one triumph that changes the world justifies a thousand risks! When opportunity presents itself in your digital conquests, <em>seize it with both hands!</em> The timid inherit nothing. The bold reshape empires. Fortune smiles only upon those who dare to write their names across the sky!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you commit such a feature to a plugin,
-if it ever turns out to be too needy or messy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You simply avoid loading the plugin,
-and that is it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a win win situation,
-you gained a world of wisdom without much trouble.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Darius:</strong> <em>Students, hear the wisdom of ages!</em> The mark of a great ruler is not perfection, but the ability to correct course without destroying the realm. When a satrap proves incompetent, do I burn down the entire province? <em>Never!</em> I simply replace the governor and the system continues. Build your applications with this same wisdom - make your components replaceable, your systems resilient to failure. Learn to rule through systems that survive your mistakes, and you shall govern digital empires that span generations!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just to give you an example,
-of trouble that genius ideas get you into.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It may just turn out that generating an AI prompt,
-instead of a pristine AST tree driven code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is more efficient, because your AST code,
-can&#39;t hope to account for all environments you program will run in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Napoleon:</strong> I abandoned the rigid battle formations of kings past because I learned this truth: the perfect plan that cannot adapt is inferior to the flexible plan that can! Do not fall in love with your beautiful, precise systems if they shatter upon contact with reality. Better to command crude tools that respond to your will than elegant weapons that fail in the decisive moment! Adaptability conquers perfection every time!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In my area,
-in context of visual programming languages,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if you just generate detailed program instructions,
-AI can adapt to no end.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you want that program to run,
-it could be inside an Event Emitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It could be a plugin to some application,
-it could be a server based node.js data scraper that crawls the internet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No matter how powerful you AST generator,
-AI will defeat it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Plus, AST wrangling takes development time,
-as it requires precision, it could take weeks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Large language models will just take the code you got,
-and transform it into whatever it needs to be, that just takes hours.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Alexander:</strong> <em>My digital warriors!</em> Learn this lesson from Gaugamela - sometimes overwhelming force applied with intelligence defeats the most sophisticated tactics! I could have spent months perfecting elaborate siege machines, but instead I chose swift, crushing assault with my Companion Cavalry. When you find tools that can accomplish in hours what would take you weeks of precision work, <em>use them!</em> Do not let pride in craftsmanship blind you to strategic advantage. Victory belongs to those who choose the right weapon for the moment, not the prettiest one!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Therefore, know that you are unable to predict the future of your application,
-no matter how genius your thinking.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only thing that you can be certain,
-is that you will encounter interesting challenges, neat surprises.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And probably lose control,
-over seeing the entirety of your application in great detail.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Darius:</strong> <em>Future rulers of digital realms!</em> Accept this truth that all great kings must learn - no single mind, however brilliant, can grasp every detail of a vast domain. From the gold mines of Lydia to the spice routes of Bactria, I learned to see through the eyes of trusted governors, to build systems that informed me rather than trying to control everything personally. Embrace this limitation! Create applications that can grow beyond your direct oversight, and you will rule territories greater than any single architect could manage!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will however, be able to see it well,
-a brilliant plugin at a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Treat it as military campaign,
-a wise victory at a time, will eventually get you where you need to be.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Napoleon:</strong> <em>Mes futurs généraux!</em> Master this principle: never fight all your battles simultaneously! I conquered Europe by concentrating my force at the decisive point, achieving victory there, then moving to the next objective. Your applications should follow the same strategy - perfect one component completely, then advance to the next challenge. This is how empires are built, one brilliant victory at a time! Remember: <em>la guerre, c&#39;est l&#39;art du possible</em> - war is the art of the possible!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>Alexander:</strong> <em>Students worthy of the Academy!</em> Even I, who dreamed of reaching the ends of the earth, learned that immortal glory comes through mastering each challenge as it arises. From the Granicus to the Hydaspes, each victory taught us to fight the next battle. Do not be overwhelmed by the magnitude of your vision - instead, let each conquered challenge prepare you for greater triumphs ahead! This is how legends are born!</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-07-23T22:28:53.380Z">July 23, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>16:00<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>7 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1970.avif" aria-label="Cover for Application Design: You Will Lose Control, So Give Yourself Weapons First, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1970.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Application Design: You Will Lose Control, So Give Yourself Weapons First" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 16:00
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1970.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1970.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1970.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Above all, you need to be able to rip out code out of your program,<br>even if just to gently replace something, or upgrade a feature.</p>
+<p>So plug-in architecture is a must,<br>and since it naturally divides things.</p>
+<p>It goes a long way,<br>to help you communicate your needs with artificial intelligence.</p>
+<hr>
+<p><strong>Napoleon:</strong> <em>Mes jeunes soldats!</em> Listen well - in war, as in your programming, you must build armies that can be divided yet never conquered! When I organized the Grande Armée, each corps was complete unto itself - its own artillery, cavalry, supply trains. Why? Because I knew that in the heat of battle, communications fail, plans crumble, and you must rely on independent units to seize victory! Build your applications the same way - each component strong enough to stand alone, yet powerful when united!</p>
+<hr>
+<p>The design of an application is both<br>Administrative and a Military Campaign.</p>
+<p>You become a ruler and administrator,<br>who will engage in multiple military campaigns.</p>
+<p>This is because even your best designs,<br>that closely follow emergent features of other applications.</p>
+<p>Are rendered into Swiss cheese,<br>by your savant and genius nature.</p>
+<p><strong>Alexander:</strong> Young conquerors of the digital realm! When I set forth from Macedonia, did I know I would face war elephants in India? Greek fire in Persia? The horse archers of Scythia? <em>Never!</em> Yet this is the glory of true conquest - each new territory teaches you warfare you never imagined! Your applications will be the same. Do not expect to know all your battles before you fight them. Instead, cultivate the spirit of adaptation - when you meet your war elephants, invent new tactics on the field! Embrace the unknown challenges, for they will make you invincible!</p>
+<p>You enter the world of application design,<br>to take care of all the needs.</p>
+<p>And then you begin discovering,<br>revolutionary features, not previously known in the context.</p>
+<hr>
+<p><strong>Darius:</strong> <em>Young administrators of the code!</em> Learn from one who ruled from the sunrise to the sunset - the secret of governing vast complexity is knowing when to trust your systems over your oversight. When my empire stretched across three continents, I could not personally manage every village tax collector or mountain fortress. I learned to create structures that governed themselves! Build your applications like satrapies - each region autonomous, each governed by clear laws, yet all serving the greater kingdom. This way, when distant provinces develop new needs, you need not rebuild your entire administration!</p>
+<p>To give you a good example, in my visual programming language,<br>I am slowly beginning to kiss up to <a href="https://astexplorer.net/">AST</a> generation.</p>
+<p>Not very wise, prior to the rise of artificial intelligence,<br>but now, probably a critical feature in a Visual Programming Language.</p>
+<p>Just printing code as strings,<br>is a damn dirty and desperate ordeal.</p>
+<hr>
+<p><strong>Napoleon:</strong> <em>Mes étudiants!</em> Take heed - I revolutionized artillery not by clinging to old methods, but by embracing the mathematics of destruction! Where others saw mere cannons, I saw precise instruments of victory. You face the same choice with your tools - cling to the familiar &quot;dirty and desperate&quot; methods, or master the new sciences that will make you unstoppable! Remember: <em>l&#39;audace, encore l&#39;audace!</em> - audacity, always audacity! The battlefield rewards those who adapt their weapons to new realities!</p>
+<p>Many of such tangents, will turn out to be a bad idea,<br>but some, will let you have your 5 minutes of fame.</p>
+<p>Atop the trillion dollar software industry,<br>whatever that does, it won&#39;t be too bad, and it is probably pretty good.</p>
+<hr>
+<p><strong>Alexander:</strong> <em>Brave students!</em> Do not fear to reach for immortal glory in your craft! Yes, some bold ventures will fail - I lost many good soldiers pursuing dreams in distant India. But one triumph that changes the world justifies a thousand risks! When opportunity presents itself in your digital conquests, <em>seize it with both hands!</em> The timid inherit nothing. The bold reshape empires. Fortune smiles only upon those who dare to write their names across the sky!</p>
+<p>If you commit such a feature to a plugin,<br>if it ever turns out to be too needy or messy.</p>
+<p>You simply avoid loading the plugin,<br>and that is it.</p>
+<p>It is a win win situation,<br>you gained a world of wisdom without much trouble.</p>
+<hr>
+<p><strong>Darius:</strong> <em>Students, hear the wisdom of ages!</em> The mark of a great ruler is not perfection, but the ability to correct course without destroying the realm. When a satrap proves incompetent, do I burn down the entire province? <em>Never!</em> I simply replace the governor and the system continues. Build your applications with this same wisdom - make your components replaceable, your systems resilient to failure. Learn to rule through systems that survive your mistakes, and you shall govern digital empires that span generations!</p>
+<p>Just to give you an example,<br>of trouble that genius ideas get you into.</p>
+<p>It may just turn out that generating an AI prompt,<br>instead of a pristine AST tree driven code.</p>
+<p>Is more efficient, because your AST code,<br>can&#39;t hope to account for all environments you program will run in.</p>
+<p><strong>Napoleon:</strong> I abandoned the rigid battle formations of kings past because I learned this truth: the perfect plan that cannot adapt is inferior to the flexible plan that can! Do not fall in love with your beautiful, precise systems if they shatter upon contact with reality. Better to command crude tools that respond to your will than elegant weapons that fail in the decisive moment! Adaptability conquers perfection every time!</p>
+<p>In my area,<br>in context of visual programming languages,</p>
+<p>if you just generate detailed program instructions,<br>AI can adapt to no end.</p>
+<p>Where you want that program to run,<br>it could be inside an Event Emitter.</p>
+<p>It could be a plugin to some application,<br>it could be a server based node.js data scraper that crawls the internet.</p>
+<p>No matter how powerful you AST generator,<br>AI will defeat it.</p>
+<p>Plus, AST wrangling takes development time,<br>as it requires precision, it could take weeks.</p>
+<p>Large language models will just take the code you got,<br>and transform it into whatever it needs to be, that just takes hours.</p>
+<hr>
+<p><strong>Alexander:</strong> <em>My digital warriors!</em> Learn this lesson from Gaugamela - sometimes overwhelming force applied with intelligence defeats the most sophisticated tactics! I could have spent months perfecting elaborate siege machines, but instead I chose swift, crushing assault with my Companion Cavalry. When you find tools that can accomplish in hours what would take you weeks of precision work, <em>use them!</em> Do not let pride in craftsmanship blind you to strategic advantage. Victory belongs to those who choose the right weapon for the moment, not the prettiest one!</p>
+<p>Therefore, know that you are unable to predict the future of your application,<br>no matter how genius your thinking.</p>
+<p>The only thing that you can be certain,<br>is that you will encounter interesting challenges, neat surprises.</p>
+<p>And probably lose control,<br>over seeing the entirety of your application in great detail.</p>
+<p><strong>Darius:</strong> <em>Future rulers of digital realms!</em> Accept this truth that all great kings must learn - no single mind, however brilliant, can grasp every detail of a vast domain. From the gold mines of Lydia to the spice routes of Bactria, I learned to see through the eyes of trusted governors, to build systems that informed me rather than trying to control everything personally. Embrace this limitation! Create applications that can grow beyond your direct oversight, and you will rule territories greater than any single architect could manage!</p>
+<p>You will however, be able to see it well,<br>a brilliant plugin at a time.</p>
+<p>Treat it as military campaign,<br>a wise victory at a time, will eventually get you where you need to be.</p>
+<p><strong>Napoleon:</strong> <em>Mes futurs généraux!</em> Master this principle: never fight all your battles simultaneously! I conquered Europe by concentrating my force at the decisive point, achieving victory there, then moving to the next objective. Your applications should follow the same strategy - perfect one component completely, then advance to the next challenge. This is how empires are built, one brilliant victory at a time! Remember: <em>la guerre, c&#39;est l&#39;art du possible</em> - war is the art of the possible!</p>
+<p><strong>Alexander:</strong> <em>Students worthy of the Academy!</em> Even I, who dreamed of reaching the ends of the earth, learned that immortal glory comes through mastering each challenge as it arises. From the Granicus to the Hydaspes, each victory taught us to fight the next battle. Do not be overwhelmed by the magnitude of your vision - instead, let each conquered challenge prepare you for greater triumphs ahead! This is how legends are born!</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://astexplorer.net/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>AST</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://astexplorer.net/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">architecture</span><span class="chip">plugins</span><span class="chip">ast</span><span class="chip">visual programming</span><span class="chip">component based design</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://astexplorer.net/">
+              <span class="text-truncate">AST</span>
+              <span class="fg-3 fs-xs flex-shrink-0">astexplorer.net</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/177c91bb-0f3c-43bb-9d55-c6aa6f431915/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Saga of Loki&#39;s Integers and the Valkyries&#39; Thunder</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/8487458d-c759-45c9-89e7-f5e00fb9801b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Not With A Whimper</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0a9b9eb7-aceb-4535-80e2-34045a715f95/">
+              <img src="https://catpea.github.io/chapter-13/poem-1980.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Holy Guacamole: Learn JavaScript Today!</span>
+                <span class="fg-3 fs-xs">August 2, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/177c91bb-0f3c-43bb-9d55-c6aa6f431915/">
+              <img src="https://catpea.github.io/chapter-13/poem-1969.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Saga of Loki&#39;s Integers and the Valkyries&#39; Thunder</span>
+                <span class="fg-3 fs-xs">July 22, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cc7f0f84-cb37-4655-bd5c-68a8ac5380cb/">
+              <img src="https://catpea.github.io/chapter-13/poem-1981.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">High School: JavaScript Is The Way Out</span>
+                <span class="fg-3 fs-xs">August 3, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e30feac7-efee-48a6-a506-3435759935d0/">
+              <img src="https://catpea.github.io/chapter-13/poem-1968.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">JavaScript Application Architecture Crash Course: Of EventEmitter and EventCorrelator</span>
+                <span class="fg-3 fs-xs">July 21, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

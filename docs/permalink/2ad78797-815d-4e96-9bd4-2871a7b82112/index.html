@@ -1,245 +1,508 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teach Me JavaScript; Or, From Local AI To Great Being</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Teach Me JavaScript; Or, From Local AI To Great Being · Cat Pea</title>
+  <meta name="description" content="The author urges students to adopt local AI tools—especially Ollama and optimized models like llama.cpp or GPT‑OSS—to learn programming swiftly and independently from traditional schooling, arguing that parents must invest in a capable gaming desktop running Linux to enable this setup; he explains how these setups work (e.g., gguf “thinking files”, token rates on RTX 5080/5090 GPUs), contrasts them with cloud models, and stresses that mastering AI-powered coding will free learners from poverty and give them the creative edge needed for future success.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/2ad78797-815d-4e96-9bd4-2871a7b82112/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Teach Me JavaScript; Or, From Local AI To Great Being · Cat Pea">
+  <meta property="og:description" content="The author urges students to adopt local AI tools—especially Ollama and optimized models like llama.cpp or GPT‑OSS—to learn programming swiftly and independently from traditional schooling, arguing that parents must invest in a capable gaming desktop running Linux to enable this setup; he explains how these setups work (e.g., gguf “thinking files”, token rates on RTX 5080/5090 GPUs), contrasts them with cloud models, and stresses that mastering AI-powered coding will free learners from poverty and give them the creative edge needed for future success.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-14/poem-2127.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-14/">Chapter 14</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2127</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-14/poem-2127.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-14/poem-2127.avif" alt="Teach Me JavaScript; Or, From Local AI To Great Being"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Teach Me JavaScript; Or, From Local AI To Great Being</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-14/poem-2127.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 14</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2127</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Teach Me JavaScript; Or, From Local AI To Great Being</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-12-27">12/26/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Preface</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This text is written with great urgency,
-and in great haste, the same haste with which I installed my local AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want you to know the words,
-that have now become part of my daily vocabulary, as I talk to machines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want you to know that the world has changed,
-and that you must change too.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As person new to programming, you must embrace AI first,
-as a seasoned programmer, you have to re-learn programming, with AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Parents, this is a matter of great urgency, this is not about money,
-don’t think twice about it,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Get the computer, and get someone to help with it at first,
-sometimes the first steps are the hardest.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Pay attention, remember that school didn&#39;t work for you,
-but AI will beigin teaching instantly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I repeat, this is a matter of great urgency,
-schools are sad theater compared to even local AI, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/teach-me.md">as evidenced</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Good news is that you can run fast and smart AI at home,
-your parents MUST purchase a fast gaming desktop.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The fastest thing you can find,
-at the local stores, it wont be $5K, it should be half that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your parents must know this is important,
-more important than college, because here you learn for real.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to install linux, so get a generic desktop computer,
-and the firs tthing you do, is use AI, to ask now what.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In 2025, the answer is ollama, becasuse it is simple to use,
-but I installed llama.cpp and I had a $20/mo coding assistant.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Modify the llama.cpp source code,
-to optimize it for my computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">llama.cpp is not the fastest,
-vLLM seems better, but it is python.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then nvidia has a TensorRT-LLM,
-which requres specific versions of software, and OS.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A rational requirement,
-but you very much dedicate your desktop to it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">llama.cpp uses gguf files,
-I call them thinking files.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I download one 10GB file,
-and tell llama to use it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I just want one thing to run well,
-you may with to experiment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I tried LM-Studio, and that looked nice,
-I like ComfyUI as their templates are good education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And ollama has you type in one command in the terminal,
-and it launches a model and you can chat with it in the terminal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am currently using zed editor for my programming,
-and zed does support ollama, so it is a nice combination.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ollama is a resonable combination,
-and I do recommend it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want to repeat that, you need AI,
-to do anything – the old-skool days are over.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You become a creative programmer,
-a different way now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You start with an AI you may need to pay a few dollar for,
-you have the AI write several letters to your parents…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To make them hurry with the purchase of the desktop,
-remember generic, you want linux on it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your parents must take this seriously,
-everyone is poor, and the AI is the only way out.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your local AI, removes 3rd party from messing with your plans,
-for example college will slow you down on purpose to make you pay.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI companies, will be maximizing profits too,
-you already see clowns talking about putting ads in AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And all public AI has been nerfed as is,
-so you are being messed with already.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need the local AI,
-and your parents need to take that seriously.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">High School, College, University,
-is a money game that sends you int poverty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can play that,
-after you win with AI, and secure your future.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let me make that clear,
-uneducated underpaid teachers don’t do education, they do theater.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are forbidden, from gambling with your future,
-because the house always wins, and you become the product.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The fact that your parents may not buy you a fast computer,
-shows that the hose triumphed over them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are stressed, exhausted, poor and blind,
-unable to see that AI has the best chance of setting you free.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In any way, you are not supposed to be born to you parents poverty,
-every human being is meant to be equal, and deserves a fair shot.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The purpose of AI is to teach yo programming,
-and set you free from terror of poverty.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From worries of homelessness, hunger,
-and uneducation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The adults have failed to get their with about them,
-they are propagating a brain warm.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They vote on political puppets, for status,
-not on authentic world leaders for the world we need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once free from the terror of poverty,
-you are to grow all the way up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until,
-you become a great being.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Afterword,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have been testing local AI for weeks now,
-AI is unstable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What I got from properly configured Qwen,
-was bad compared to nicely configured GPT-OSS.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A medium Qwen gave me 70 tokens per second,
-this means it generates code faster than anyone can read it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it didn’t work with crush my replacement for claude,
-we don’t know why.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It didn’t listen right, because AI is unstable,
-and we have to move fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I expect similar problems from GPT-OSS,
-but only once in a long while.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">However, I only get 30 tokens per second,
-it is fast, but, you do not want to go lower.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I use a RTX 5080, ChaGPT tells me I should get 100 tokens,
-Claude tells me 35 is top of the line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In fact, RTX5090 which costs $1000 dollars more,
-would not run faster according to claude.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It would just have larger context,
-support larger chats, but you don’t need chats that big.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Qwen and GPT-OSS,
-are AI models.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Models, are the AI, there are many models,
-different companies make their own models.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And they release many model variations,
-that are good at different things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Chat, programming, video, images, following instructions,
-and general purpose, a little bit of everything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then coders, people, optimize those further,
-to run faster on cheaper computers.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Normal people, who will not pay $10K for a computer,
-use optimized models, they are not bad, but amlost not god-like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you have an RTX 5080 with 16GB of ram,
-you will get 35 token per second with a gpt-oss gguf file under llama.cpp</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a wonderful start,
-you will optimize the heck out of this.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There are better models, already,
-but gpt-oss is your start.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">--</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And once more, I repeat,
-do nothing, without the assistance of artificial intelligence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a new way of learning,
-it is not as baroque as no AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it is rapid, precisely what you need,
-to put up a good fight for your future.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI is a miracle,
-“thinking files” should not exist yet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Fight for it, pay for it, get a local AI to induce learning,
-learn programming, end the terror of poverty, and begin rising.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You  deserve so much better than this,
-but this is the most powerful method of breaking out there is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From here you collaborate with your AI,
-to create programs, games, tools, services, schools...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/teach-me.md">Teach Me JavaScript</a></p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-12-27T01:08:50.419Z">December 26, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>14:25<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-14/poem-2127.avif" aria-label="Cover for Teach Me JavaScript; Or, From Local AI To Great Being, full size">
+            <img src="https://catpea.github.io/chapter-14/poem-2127.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Teach Me JavaScript; Or, From Local AI To Great Being" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 14:25
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-14/poem-2127.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-14/poem-2127.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-14/poem-2127.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Preface</p>
+<p>This text is written with great urgency,<br>and in great haste, the same haste with which I installed my local AI.</p>
+<p>I want you to know the words,<br>that have now become part of my daily vocabulary, as I talk to machines.</p>
+<p>I want you to know that the world has changed,<br>and that you must change too.</p>
+<p>As person new to programming, you must embrace AI first,<br>as a seasoned programmer, you have to re-learn programming, with AI.</p>
+<p>Parents, this is a matter of great urgency, this is not about money,<br>don’t think twice about it,</p>
+<p>Get the computer, and get someone to help with it at first,<br>sometimes the first steps are the hardest.</p>
+<p>Pay attention, remember that school didn&#39;t work for you,<br>but AI will beigin teaching instantly.</p>
+<p>I repeat, this is a matter of great urgency,<br>schools are sad theater compared to even local AI, <a href="files/teach-me.md">as evidenced</a>.</p>
+<hr>
+<p>Good news is that you can run fast and smart AI at home,<br>your parents MUST purchase a fast gaming desktop.</p>
+<p>The fastest thing you can find,<br>at the local stores, it wont be $5K, it should be half that.</p>
+<p>Your parents must know this is important,<br>more important than college, because here you learn for real.</p>
+<p>You have to install linux, so get a generic desktop computer,<br>and the firs tthing you do, is use AI, to ask now what.</p>
+<p>In 2025, the answer is ollama, becasuse it is simple to use,<br>but I installed llama.cpp and I had a $20/mo coding assistant.</p>
+<p>Modify the llama.cpp source code,<br>to optimize it for my computer.</p>
+<p>llama.cpp is not the fastest,<br>vLLM seems better, but it is python.</p>
+<p>And then nvidia has a TensorRT-LLM,<br>which requres specific versions of software, and OS.</p>
+<p>A rational requirement,<br>but you very much dedicate your desktop to it.</p>
+<p>llama.cpp uses gguf files,<br>I call them thinking files.</p>
+<p>So I download one 10GB file,<br>and tell llama to use it.</p>
+<p>I just want one thing to run well,<br>you may with to experiment.</p>
+<p>I tried LM-Studio, and that looked nice,<br>I like ComfyUI as their templates are good education.</p>
+<p>And ollama has you type in one command in the terminal,<br>and it launches a model and you can chat with it in the terminal.</p>
+<p>I am currently using zed editor for my programming,<br>and zed does support ollama, so it is a nice combination.</p>
+<p>Ollama is a resonable combination,<br>and I do recommend it.</p>
+<hr>
+<p>I want to repeat that, you need AI,<br>to do anything – the old-skool days are over.</p>
+<p>You become a creative programmer,<br>a different way now.</p>
+<p>You start with an AI you may need to pay a few dollar for,<br>you have the AI write several letters to your parents…</p>
+<p>To make them hurry with the purchase of the desktop,<br>remember generic, you want linux on it.</p>
+<p>Your parents must take this seriously,<br>everyone is poor, and the AI is the only way out.</p>
+<hr>
+<p>Your local AI, removes 3rd party from messing with your plans,<br>for example college will slow you down on purpose to make you pay.</p>
+<p>AI companies, will be maximizing profits too,<br>you already see clowns talking about putting ads in AI.</p>
+<p>And all public AI has been nerfed as is,<br>so you are being messed with already.</p>
+<p>You need the local AI,<br>and your parents need to take that seriously.</p>
+<p>High School, College, University,<br>is a money game that sends you int poverty.</p>
+<p>You can play that,<br>after you win with AI, and secure your future.</p>
+<p>Let me make that clear,<br>uneducated underpaid teachers don’t do education, they do theater.</p>
+<p>You are forbidden, from gambling with your future,<br>because the house always wins, and you become the product.</p>
+<p>The fact that your parents may not buy you a fast computer,<br>shows that the hose triumphed over them.</p>
+<p>They are stressed, exhausted, poor and blind,<br>unable to see that AI has the best chance of setting you free.</p>
+<p>In any way, you are not supposed to be born to you parents poverty,<br>every human being is meant to be equal, and deserves a fair shot.</p>
+<hr>
+<p>The purpose of AI is to teach yo programming,<br>and set you free from terror of poverty.</p>
+<p>From worries of homelessness, hunger,<br>and uneducation.</p>
+<p>The adults have failed to get their with about them,<br>they are propagating a brain warm.</p>
+<p>They vote on political puppets, for status,<br>not on authentic world leaders for the world we need.</p>
+<p>Once free from the terror of poverty,<br>you are to grow all the way up.</p>
+<p>Until,<br>you become a great being.</p>
+<hr>
+<p>Afterword,</p>
+<p>I have been testing local AI for weeks now,<br>AI is unstable.</p>
+<p>What I got from properly configured Qwen,<br>was bad compared to nicely configured GPT-OSS.</p>
+<p>A medium Qwen gave me 70 tokens per second,<br>this means it generates code faster than anyone can read it.</p>
+<p>But it didn’t work with crush my replacement for claude,<br>we don’t know why.</p>
+<p>It didn’t listen right, because AI is unstable,<br>and we have to move fast.</p>
+<p>I expect similar problems from GPT-OSS,<br>but only once in a long while.</p>
+<p>However, I only get 30 tokens per second,<br>it is fast, but, you do not want to go lower.</p>
+<p>I use a RTX 5080, ChaGPT tells me I should get 100 tokens,<br>Claude tells me 35 is top of the line.</p>
+<p>In fact, RTX5090 which costs $1000 dollars more,<br>would not run faster according to claude.</p>
+<p>It would just have larger context,<br>support larger chats, but you don’t need chats that big.</p>
+<hr>
+<p>Qwen and GPT-OSS,<br>are AI models.</p>
+<p>Models, are the AI, there are many models,<br>different companies make their own models.</p>
+<p>And they release many model variations,<br>that are good at different things.</p>
+<p>Chat, programming, video, images, following instructions,<br>and general purpose, a little bit of everything.</p>
+<p>And then coders, people, optimize those further,<br>to run faster on cheaper computers.</p>
+<hr>
+<p>Normal people, who will not pay $10K for a computer,<br>use optimized models, they are not bad, but amlost not god-like.</p>
+<p>If you have an RTX 5080 with 16GB of ram,<br>you will get 35 token per second with a gpt-oss gguf file under llama.cpp</p>
+<p>It is a wonderful start,<br>you will optimize the heck out of this.</p>
+<p>There are better models, already,<br>but gpt-oss is your start.</p>
+<p>--</p>
+<p>And once more, I repeat,<br>do nothing, without the assistance of artificial intelligence.</p>
+<p>It is a new way of learning,<br>it is not as baroque as no AI.</p>
+<p>But it is rapid, precisely what you need,<br>to put up a good fight for your future.</p>
+<hr>
+<p>AI is a miracle,<br>“thinking files” should not exist yet.</p>
+<p>Fight for it, pay for it, get a local AI to induce learning,<br>learn programming, end the terror of poverty, and begin rising.</p>
+<p>You  deserve so much better than this,<br>but this is the most powerful method of breaking out there is.</p>
+<p>From here you collaborate with your AI,<br>to create programs, games, tools, services, schools...</p>
+<p><a href="files/teach-me.md">Teach Me JavaScript</a></p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/teach-me.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>as evidenced</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/teach-me.md</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">programming</span><span class="chip">linux</span><span class="chip">ollama</span><span class="chip">llama.cpp</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/teach-me.md">
+              <span class="text-truncate">as evidenced</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/teach-me.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>teach-me.md
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/66483a5e-c00f-4581-8010-7c405caaca8c/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Spiral Path 𐇐 𐇛 𐇜 𐇑 𐇡</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/505ac641-5b81-4e2e-94df-f89c1305514e/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Fear, Mystery, And Comedy (Fast AI Testing / Failure Example)</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ea69e745-188d-4082-a94f-e0bcb1e140cb/">
+              <img src="https://catpea.github.io/chapter-14/poem-2135.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Reversing For Young Ladies</span>
+                <span class="fg-3 fs-xs">January 3, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/66483a5e-c00f-4581-8010-7c405caaca8c/">
+              <img src="https://catpea.github.io/chapter-14/poem-2126.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Spiral Path 𐇐 𐇛 𐇜 𐇑 𐇡</span>
+                <span class="fg-3 fs-xs">December 25, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e11cf138-ff4e-45f7-b748-bfa1a95ca868/">
+              <img src="https://catpea.github.io/chapter-14/poem-2137.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Plus Est En Vous: Reversing Success, And Project Dedication To +Fravia</span>
+                <span class="fg-3 fs-xs">January 5, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/28916315-a5c8-4184-925b-ab897a715bf2/">
+              <img src="https://catpea.github.io/chapter-14/poem-2119.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Just One More Thing, On Becoming a LAN-First Android Infrastructure Engineer, Starting Today</span>
+                <span class="fg-3 fs-xs">December 18, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

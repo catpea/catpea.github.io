@@ -1,157 +1,458 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squirrel Programming 2025</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Squirrel Programming 2025 · Cat Pea</title>
+  <meta name="description" content="The post starts by reflecting on learning “for real” with AI, joking about how programming documentation can still feel like gibberish even when written by a machine, and then introduces the author’s new project: an AST‑based JavaScript syntax highlighter called Squirrel Pie 2.0 that renders code in a Web Component using Acorn for true semantic understanding; after explaining its technical approach, the author playfully celebrates squirrels—calling them acrobats, planners, and memory masters—to justify the library’s name and to encourage readers to adopt, name, or otherwise cheer for their local squirrels while sharing the tool. The post ends with a whimsical summary that Squirrel Pie is both a useful highlighter and a small tribute to these clever rodents.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/bb97a8ac-2963-4acd-beb7-ee67d5a5bd39/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Squirrel Programming 2025 · Cat Pea">
+  <meta property="og:description" content="The post starts by reflecting on learning “for real” with AI, joking about how programming documentation can still feel like gibberish even when written by a machine, and then introduces the author’s new project: an AST‑based JavaScript syntax highlighter called Squirrel Pie 2.0 that renders code in a Web Component using Acorn for true semantic understanding; after explaining its technical approach, the author playfully celebrates squirrels—calling them acrobats, planners, and memory masters—to justify the library’s name and to encourage readers to adopt, name, or otherwise cheer for their local squirrels while sharing the tool. The post ends with a whimsical summary that Squirrel Pie is both a useful highlighter and a small tribute to these clever rodents.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-14/poem-2061.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-14/">Chapter 14</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2061</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-14/poem-2061.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-14/poem-2061.avif" alt="Squirrel Programming 2025"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Squirrel Programming 2025</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-14/poem-2061.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 14</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2061</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Squirrel Programming 2025</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-10-22">10/21/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning for real is a lot of fun,
-it is all about fun, really.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is how people go extra steps,
-learning for real is not a challenge or a chore.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is magical,
-with AI becoming smarter all the time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And since you are dictating what you are learning,
-it is always interesting and useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our minds go in a cycle slowly moving,
-from one curiosity to another.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because it is a circle,
-and you revisit your favorite subjects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t really forget anything,
-our minds are really powerful.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I often ask AI to write my documentation and code comments,
-in a way that is friendly to those new to programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It still comes out as gibberish,
-today I wrote dry humor about in-lining object inheritance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But last week, I ended up creating
-a program source-code highlighter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that one,
-is a little bit but different.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A code highlighter gives different colors,
-gives different colors to brackets, keywords and variable names.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To that it is a little bit easier,
-on the eye.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I shall read to you from its Documentation and LICENSE,
-it is a fun way to show just how nuts learning programming can be.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in fact I invite you to name all your programs,
-after silly animal things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And please don&#39;t stop at funny, there are some amazing program names,
-that you wodnt want to meantion driting an interview.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I registered a program name called QRWA!
-and I can&#39;t wait to get back to working on it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I can&#39;t mention it,
-perfect.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/squirrel-pie">Squirrel Pie</a> 2.0 🥧</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An AST-based JavaScript syntax highlighter built as a Web Component using Acorn.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unlike traditional regex-based highlighters, Squirrel Pie parses your code into an Abstract Syntax Tree (AST) and renders it with proper semantic understanding. Each element is wrapped with its AST node type, allowing for precise styling and interactive features.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">🐿️💔 A Message About Squirrel Pies
-The Heartbreaking Truth We Must Face Together</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the time it took you to read this sentence, somewhere in the world, someone searched the internet &quot;squirrel pie recipe.&quot; We must do better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every day, innocent squirrels wake up with dreams. Dreams of finding the perfect acorn. Dreams of executing that triple-backflip leap between trees. Dreams of judging you silently from a branch while you fumble with your groceries. These magnificent, bushy-tailed mathematicians—who can calculate a parabolic trajectory better than most physics PhDs—deserve our protection, not our pastry crusts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Consider the Squirrel</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Have you ever watched a squirrel? Really watched one? They&#39;re not just rodents—they&#39;re acrobats, engineers, and frankly, better at planning for winter than most of us. While we&#39;re panic-buying bread at the first sight of snow, squirrels have been strategically caching nuts since September with the organizational skills of a Fortune 500 logistics manager.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They plant thousands of trees by &quot;forgetting&quot; where they buried seeds. They&#39;re literally reforesting the planet while we&#39;re doom-scrolling. They do more for the environment before 9 AM than most of us do all week.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And yet... squirrel pie.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These are creatures who:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Named themselves after their magnificent tails (ancient Greek skiouros: &quot;shadow tail&quot;)
-Can fall from any height without injury (terminal velocity: adorable)
-Communicate with complex tail movements (basically fluent in semaphore)
-Remember where they buried thousands of nuts (photographic memory, but for snacks)
-Have better work-life balance than any human (nap whenever, eat whenever, judge humans whenever)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What You Can Do</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Use this library. Every npm install is a pledge. A promise. A covenant with squirrelkind that you will never, ever, make a squirrel pie.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Spread the word. Share this project. Not because it&#39;s a good AST-based syntax highlighter (it is), but because every share is a squirrel saved (in spirit).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Leave nuts. Plant trees. Build tiny bridges between trees in your backyard. Invest in squirrel infrastructure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Adopt a squirrel. Not literally—they&#39;re wild animals with zero interest in your affection. But spiritually. Pick a local squirrel. Name them. Wave at them. They won&#39;t care, but you&#39;ll feel better.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In Conclusion</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This library is named Squirrel Pie not to glorify the consumption of these perfect beings, but as a warning. A reminder. A call to action.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We stand at a crossroads. On one path: syntax highlighting and the end of squirrel-pies, and the other, a cute but bloody squirrel uprising.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Choose wisely.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">&quot;In every acorn, there is a forest. In every squirrel, there is a friend.&quot; — Anonymous squirrel advocate (me, just now)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Squirrel Pie: The library with a conscience. 🌰</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No squirrels were harmed in the making of this software. In fact, several were consulted. They provided no useful feedback but did eat all my peanuts.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-10-22T01:46:07.360Z">October 21, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:04<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-14/poem-2061.avif" aria-label="Cover for Squirrel Programming 2025, full size">
+            <img src="https://catpea.github.io/chapter-14/poem-2061.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Squirrel Programming 2025" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:04
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-14/poem-2061.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-14/poem-2061.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-14/poem-2061.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Learning for real is a lot of fun,<br>it is all about fun, really.</p>
+<p>That is how people go extra steps,<br>learning for real is not a challenge or a chore.</p>
+<p>It is magical,<br>with AI becoming smarter all the time.</p>
+<p>And since you are dictating what you are learning,<br>it is always interesting and useful.</p>
+<p>Our minds go in a cycle slowly moving,<br>from one curiosity to another.</p>
+<p>Because it is a circle,<br>and you revisit your favorite subjects.</p>
+<p>You don’t really forget anything,<br>our minds are really powerful.</p>
+<hr>
+<p>I often ask AI to write my documentation and code comments,<br>in a way that is friendly to those new to programming.</p>
+<p>It still comes out as gibberish,<br>today I wrote dry humor about in-lining object inheritance.</p>
+<p>But last week, I ended up creating<br>a program source-code highlighter.</p>
+<p>And that one,<br>is a little bit but different.</p>
+<p>A code highlighter gives different colors,<br>gives different colors to brackets, keywords and variable names.</p>
+<p>To that it is a little bit easier,<br>on the eye.</p>
+<hr>
+<p>I shall read to you from its Documentation and LICENSE,<br>it is a fun way to show just how nuts learning programming can be.</p>
+<p>And in fact I invite you to name all your programs,<br>after silly animal things.</p>
+<p>And please don&#39;t stop at funny, there are some amazing program names,<br>that you wodnt want to meantion driting an interview.</p>
+<p>I registered a program name called QRWA!<br>and I can&#39;t wait to get back to working on it.</p>
+<p>And I can&#39;t mention it,<br>perfect.</p>
+<hr>
+<p><a href="https://github.com/catpea/squirrel-pie">Squirrel Pie</a> 2.0 🥧</p>
+<p>An AST-based JavaScript syntax highlighter built as a Web Component using Acorn.</p>
+<p>Unlike traditional regex-based highlighters, Squirrel Pie parses your code into an Abstract Syntax Tree (AST) and renders it with proper semantic understanding. Each element is wrapped with its AST node type, allowing for precise styling and interactive features.</p>
+<p>🐿️💔 A Message About Squirrel Pies<br>The Heartbreaking Truth We Must Face Together</p>
+<p>In the time it took you to read this sentence, somewhere in the world, someone searched the internet &quot;squirrel pie recipe.&quot; We must do better.</p>
+<p>Every day, innocent squirrels wake up with dreams. Dreams of finding the perfect acorn. Dreams of executing that triple-backflip leap between trees. Dreams of judging you silently from a branch while you fumble with your groceries. These magnificent, bushy-tailed mathematicians—who can calculate a parabolic trajectory better than most physics PhDs—deserve our protection, not our pastry crusts.</p>
+<p>Consider the Squirrel</p>
+<p>Have you ever watched a squirrel? Really watched one? They&#39;re not just rodents—they&#39;re acrobats, engineers, and frankly, better at planning for winter than most of us. While we&#39;re panic-buying bread at the first sight of snow, squirrels have been strategically caching nuts since September with the organizational skills of a Fortune 500 logistics manager.</p>
+<p>They plant thousands of trees by &quot;forgetting&quot; where they buried seeds. They&#39;re literally reforesting the planet while we&#39;re doom-scrolling. They do more for the environment before 9 AM than most of us do all week.</p>
+<p>And yet... squirrel pie.</p>
+<p>These are creatures who:</p>
+<p>Named themselves after their magnificent tails (ancient Greek skiouros: &quot;shadow tail&quot;)<br>Can fall from any height without injury (terminal velocity: adorable)<br>Communicate with complex tail movements (basically fluent in semaphore)<br>Remember where they buried thousands of nuts (photographic memory, but for snacks)<br>Have better work-life balance than any human (nap whenever, eat whenever, judge humans whenever)</p>
+<p>What You Can Do</p>
+<p>Use this library. Every npm install is a pledge. A promise. A covenant with squirrelkind that you will never, ever, make a squirrel pie.</p>
+<p>Spread the word. Share this project. Not because it&#39;s a good AST-based syntax highlighter (it is), but because every share is a squirrel saved (in spirit).</p>
+<p>Leave nuts. Plant trees. Build tiny bridges between trees in your backyard. Invest in squirrel infrastructure.</p>
+<p>Adopt a squirrel. Not literally—they&#39;re wild animals with zero interest in your affection. But spiritually. Pick a local squirrel. Name them. Wave at them. They won&#39;t care, but you&#39;ll feel better.</p>
+<p>In Conclusion</p>
+<p>This library is named Squirrel Pie not to glorify the consumption of these perfect beings, but as a warning. A reminder. A call to action.</p>
+<p>We stand at a crossroads. On one path: syntax highlighting and the end of squirrel-pies, and the other, a cute but bloody squirrel uprising.</p>
+<p>Choose wisely.</p>
+<p>&quot;In every acorn, there is a forest. In every squirrel, there is a friend.&quot; — Anonymous squirrel advocate (me, just now)</p>
+<p>Squirrel Pie: The library with a conscience. 🌰</p>
+<p>No squirrels were harmed in the making of this software. In fact, several were consulted. They provided no useful feedback but did eat all my peanuts.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/squirrel-pie">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Squirrel Pie</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/squirrel-pie</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">ast</span><span class="chip">web component</span><span class="chip">acorn</span><span class="chip">syntax highlighter</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/squirrel-pie">
+              <span class="text-truncate">Squirrel Pie</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/78bbdd7c-4531-4734-954c-28258422c75f/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Unimagined</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/7b39c6f5-4462-4978-9f03-af62acd54eda/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Learn For Real, Learn Programming</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/220c9f06-37b0-40cd-be7e-d418ca7e4dd2/">
+              <img src="https://catpea.github.io/chapter-14/poem-2063.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Once You Are Programming JavaScript: Choose Your Starting Platform</span>
+                <span class="fg-3 fs-xs">October 23, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/6554742d-e67c-4a41-87e3-f5504cc1a5bd/">
+              <img src="https://catpea.github.io/chapter-14/poem-2057.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">AI Can Teach For Real Now; Are You Still Pretending To Learn In Return For Good Grades?</span>
+                <span class="fg-3 fs-xs">October 17, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/87449623-a2c1-4b2b-901e-171ae0aa490e/">
+              <img src="https://catpea.github.io/chapter-14/poem-2065.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Really Weird Programming And The Modulo Of Doom</span>
+                <span class="fg-3 fs-xs">October 25, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3830c121-4c48-4ce2-97e6-be1d2a44d55f/">
+              <img src="https://catpea.github.io/chapter-14/poem-2055.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn JavaScript And Get Scared Of What You Can Do With Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">October 15, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,219 +1,482 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Computer Game</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Computer Game · Cat Pea</title>
+  <meta name="description" content="I began by extending JavaScript with a MapSet that combined Maps (key–value pairs) and Sets (unique values) to implement a lightweight EventEmitter—each event name maps to a set of listener functions that can be added or removed, while a Signal object holds a single value and notifies subscribers whenever it changes. I then built a TripleStore that stores facts like “Socrates isA Man” and, with an event‑driven RuleEngine (adding transitive rules such as if x isA y and y isA z then x isA z, plus “Man isA Mortal”), automatically updates Signals so that querying “Is Sokrates mortal?” now emits a value. With this reactive foundation I created progressive tests: a signup form, an AI‑powered prompt, and finally a text‑adventure game modeled after Zork—using a node server, the TripleStore to generate world data, and Stable Diffusion to produce room images in styles like Painterly or Botero. I then explored VR with Meta’s IWSDK, letting the AI build a textured skybox, 8K upscaling, movable objects, and a simple platform while I interacted via gestures. On Monday morning I reflected that the game logic is essentially the same 2D text adventure code, but I can now generate 3‑D models quickly with Stable Diffusion and render them in Painted, Neon or Cartoon worlds; the remaining work is to">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/974bda32-81c5-4962-814f-e3cdbf861a4f/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Computer Game · Cat Pea">
+  <meta property="og:description" content="I began by extending JavaScript with a MapSet that combined Maps (key–value pairs) and Sets (unique values) to implement a lightweight EventEmitter—each event name maps to a set of listener functions that can be added or removed, while a Signal object holds a single value and notifies subscribers whenever it changes. I then built a TripleStore that stores facts like “Socrates isA Man” and, with an event‑driven RuleEngine (adding transitive rules such as if x isA y and y isA z then x isA z, plus “Man isA Mortal”), automatically updates Signals so that querying “Is Sokrates mortal?” now emits a value. With this reactive foundation I created progressive tests: a signup form, an AI‑powered prompt, and finally a text‑adventure game modeled after Zork—using a node server, the TripleStore to generate world data, and Stable Diffusion to produce room images in styles like Painterly or Botero. I then explored VR with Meta’s IWSDK, letting the AI build a textured skybox, 8K upscaling, movable objects, and a simple platform while I interacted via gestures. On Monday morning I reflected that the game logic is essentially the same 2D text adventure code, but I can now generate 3‑D models quickly with Stable Diffusion and render them in Painted, Neon or Cartoon worlds; the remaining work is to">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2165.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2165</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2165.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2165.avif" alt="Computer Game"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Computer Game</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2165.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2165</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Computer Game</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-02-03">2/2/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us start in the beginning,
-two new dat structures were added to JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Map and Set, Maps associate names and values,
-first name Alice, last name Kingsleigh.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sets only have values,
-1, 2, 3, “A”, “B”, “C”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I merged the two into a new data structure,
-called MapSet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you can say friends contains,
-a set with names Alice, Bob, Carol.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I created this,
-for a tiny Event Emitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that I can say “mouseclick” event name,
-has a set of functions that are called when a click is made.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An event emitter lets you say on click,
-execute this function, on click execute that function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then off click removes that function,
-so that it is no longer executed wen a click is made.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Satisfied, I proceeded to make a Signal,
-a Signal is a super primitive emitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So weird, it only has subscribe and value you can read,
-so a Signal holds a value “Alice Kingsleigh”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you can subscribe to it,
-when the value changes you will be notified.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">MapSet keeps the EventEmitter simple,
-and Signal is tiny we don’t want to use an EventEmitter for it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Signals, signal change, Event Emitters,
-can emit all kinds of events.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then, I created a Triple Store,
-a triple store stores Triples.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Socrates isA Man,
-isA; the thing between Socrates and Man, represents a relationship.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The statement as a whole,
-represents a fact.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made my TripleStore query, return Signals,
-and asked is Socrates Mortal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My triple store didn’t have that information,
-so the signal didn’t do anything.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I need to be able to notify my signal when I add new facts,
-to the store.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My signals have to listen to specific events,
-to get the right updates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are primitive, they just hold a value,
-with a TripleStore based on an EventEmitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They could listen,
-to just the right facts.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But Socrates isA Man,
-is far from concepts of mortality.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I upgraded my now Reactive TripleStore,
-with a Rule Engine.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I then added a transitive rule that states,
-when x isA y, y isA z, then x isA z.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And states,
-Man isA Mortal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my Signal, lurched forward,
-announcing that Socrates at least technically was mortal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when x isA y, and y isA z, then x isA z, translated to:
-when socrates isA Man, and man isA Mortal, then Socates isA mortal.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tricky, to get used to,
-but very clear.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a difficult territory to navigate,
-so I created a range of progressive challenging tests.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made a signup form,
-that checks if user isA member.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I created a little prompt program, like AI today,
-but inspired by the old Mozilla Uniquity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then, with system showing no errors,
-I proceeded to the creation of a text adventure game.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I told AI to make me a node based server.js,
-to bypas Browser security so that I could make requests to any remote server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I downloaded, source code for Zork,
-a classic Text Adventure game.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I commanded the AI to create a user interface,
-similar to our Mozilla Uniqity clone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And use the Reactive Rule based TripleStore,
-to create a Procedurally Generated world insired by Zork.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made it clear that we are not copying the Grue,
-but paying respects to Zork by having one in our system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It kindly implements direction buttons,
-so I didn’t have to type to move around the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was just pressing N,S,W,E buttons on the screen,
-no arrow keys here.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once I was sure that the infinitely large game world worked,
-I instructed the AI to connect to my image generating Stable Diffusion server.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And each time I enter a room,
-to generate an image based on the rooms description in our text adventure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was wonderful,
-I frequently stirred the Grue.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I found keys,
-scattered around the back rooms.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I told AI to create a style command,
-that asks Stable Diffusion to create graphics in Painterly, or Modern Style.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I switched to Botero style,
-and saw, a fat round little Grue man, creeping up on me.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before I ran our of time this weekend,
-I entered virtual reality using the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://developers.meta.com/horizon/documentation/web/iwsdk-overview/">IWSDK</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I enabled all the features in the sample project builder,
-and asked AI to let me grab and move anything and eveything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I created a texture for the skybox,
-and upscaled to to 8K.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A small platform to stand on,
-I took care of readable text and input forms, gestures.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I created one flat image,
-I could stretch and reposition any which way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This image,
-represented a textured wall, and admired it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With a sad little noise,
-I had to leave VR, to get some sleep.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I spent Monday morning, appreciating,
-that the game code was the text of the text adventure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That what I saw in 2D, was not that difficult to create in 3D,
-N,S,W,E, just represents four cardinal directions, four wall images.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Stable Difussion 1.5 can deliver something in 30 seconds,
-I can follow up with a more advanced model.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I can can generate unpainted 3D models,
-that I can load into VR.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To me, the biggest feature is the styles,
-that I can render a Painted World or a Neon World, a Cartoon World.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Sometimes just taking a walk through an infinite portal universe,
-emerging around you is even better than a game.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I admit it,
-something has to be done about the Grue.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-02-03T02:29:15.059Z">February 2, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:37<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2165.avif" aria-label="Cover for Computer Game, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2165.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Computer Game" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:37
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2165.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2165.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2165.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Let us start in the beginning,<br>two new dat structures were added to JavaScript.</p>
+<p>Map and Set, Maps associate names and values,<br>first name Alice, last name Kingsleigh.</p>
+<p>Sets only have values,<br>1, 2, 3, “A”, “B”, “C”.</p>
+<p>I merged the two into a new data structure,<br>called MapSet.</p>
+<p>Here you can say friends contains,<br>a set with names Alice, Bob, Carol.</p>
+<p>I created this,<br>for a tiny Event Emitter.</p>
+<p>So that I can say “mouseclick” event name,<br>has a set of functions that are called when a click is made.</p>
+<p>An event emitter lets you say on click,<br>execute this function, on click execute that function.</p>
+<p>And then off click removes that function,<br>so that it is no longer executed wen a click is made.</p>
+<p>Satisfied, I proceeded to make a Signal,<br>a Signal is a super primitive emitter.</p>
+<p>So weird, it only has subscribe and value you can read,<br>so a Signal holds a value “Alice Kingsleigh”.</p>
+<p>And you can subscribe to it,<br>when the value changes you will be notified.</p>
+<hr>
+<p>MapSet keeps the EventEmitter simple,<br>and Signal is tiny we don’t want to use an EventEmitter for it.</p>
+<p>Signals, signal change, Event Emitters,<br>can emit all kinds of events.</p>
+<hr>
+<p>Then, I created a Triple Store,<br>a triple store stores Triples.</p>
+<p>Socrates isA Man,<br>isA; the thing between Socrates and Man, represents a relationship.</p>
+<p>The statement as a whole,<br>represents a fact.</p>
+<p>I made my TripleStore query, return Signals,<br>and asked is Socrates Mortal.</p>
+<p>My triple store didn’t have that information,<br>so the signal didn’t do anything.</p>
+<hr>
+<p>I need to be able to notify my signal when I add new facts,<br>to the store.</p>
+<p>My signals have to listen to specific events,<br>to get the right updates.</p>
+<p>They are primitive, they just hold a value,<br>with a TripleStore based on an EventEmitter.</p>
+<p>They could listen,<br>to just the right facts.</p>
+<hr>
+<p>But Socrates isA Man,<br>is far from concepts of mortality.</p>
+<hr>
+<p>So I upgraded my now Reactive TripleStore,<br>with a Rule Engine.</p>
+<p>I then added a transitive rule that states,<br>when x isA y, y isA z, then x isA z.</p>
+<p>And states,<br>Man isA Mortal.</p>
+<p>And my Signal, lurched forward,<br>announcing that Socrates at least technically was mortal.</p>
+<p>So when x isA y, and y isA z, then x isA z, translated to:<br>when socrates isA Man, and man isA Mortal, then Socates isA mortal.</p>
+<p>Tricky, to get used to,<br>but very clear.</p>
+<hr>
+<p>This is a difficult territory to navigate,<br>so I created a range of progressive challenging tests.</p>
+<p>I made a signup form,<br>that checks if user isA member.</p>
+<p>I created a little prompt program, like AI today,<br>but inspired by the old Mozilla Uniquity.</p>
+<p>And then, with system showing no errors,<br>I proceeded to the creation of a text adventure game.</p>
+<p>I told AI to make me a node based server.js,<br>to bypas Browser security so that I could make requests to any remote server.</p>
+<p>And I downloaded, source code for Zork,<br>a classic Text Adventure game.</p>
+<p>And I commanded the AI to create a user interface,<br>similar to our Mozilla Uniqity clone.</p>
+<p>And use the Reactive Rule based TripleStore,<br>to create a Procedurally Generated world insired by Zork.</p>
+<p>I made it clear that we are not copying the Grue,<br>but paying respects to Zork by having one in our system.</p>
+<p>It kindly implements direction buttons,<br>so I didn’t have to type to move around the world.</p>
+<p>I was just pressing N,S,W,E buttons on the screen,<br>no arrow keys here.</p>
+<hr>
+<p>Once I was sure that the infinitely large game world worked,<br>I instructed the AI to connect to my image generating Stable Diffusion server.</p>
+<p>And each time I enter a room,<br>to generate an image based on the rooms description in our text adventure.</p>
+<p>It was wonderful,<br>I frequently stirred the Grue.</p>
+<p>I found keys,<br>scattered around the back rooms.</p>
+<p>I told AI to create a style command,<br>that asks Stable Diffusion to create graphics in Painterly, or Modern Style.</p>
+<p>I switched to Botero style,<br>and saw, a fat round little Grue man, creeping up on me.</p>
+<hr>
+<p>Before I ran our of time this weekend,<br>I entered virtual reality using the <a href="https://developers.meta.com/horizon/documentation/web/iwsdk-overview/">IWSDK</a>.</p>
+<p>I enabled all the features in the sample project builder,<br>and asked AI to let me grab and move anything and eveything.</p>
+<p>I created a texture for the skybox,<br>and upscaled to to 8K.</p>
+<p>A small platform to stand on,<br>I took care of readable text and input forms, gestures.</p>
+<p>And I created one flat image,<br>I could stretch and reposition any which way.</p>
+<p>This image,<br>represented a textured wall, and admired it.</p>
+<p>With a sad little noise,<br>I had to leave VR, to get some sleep.</p>
+<p>I spent Monday morning, appreciating,<br>that the game code was the text of the text adventure.</p>
+<p>That what I saw in 2D, was not that difficult to create in 3D,<br>N,S,W,E, just represents four cardinal directions, four wall images.</p>
+<p>Stable Difussion 1.5 can deliver something in 30 seconds,<br>I can follow up with a more advanced model.</p>
+<p>I can can generate unpainted 3D models,<br>that I can load into VR.</p>
+<p>To me, the biggest feature is the styles,<br>that I can render a Painted World or a Neon World, a Cartoon World.</p>
+<p>Sometimes just taking a walk through an infinite portal universe,<br>emerging around you is even better than a game.</p>
+<p>But I admit it,<br>something has to be done about the Grue.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://developers.meta.com/horizon/documentation/web/iwsdk-overview/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>IWSDK</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://developers.meta.com/horizon/documentation/web/iwsdk-overview/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">mapset</span><span class="chip">events</span><span class="chip">signal</span><span class="chip">triples</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://developers.meta.com/horizon/documentation/web/iwsdk-overview/">
+              <span class="text-truncate">IWSDK</span>
+              <span class="fg-3 fs-xs flex-shrink-0">developers.meta.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/13f7e75d-1773-4dcb-b4f2-4d589afd0d62/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Walk</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/1b63ef6e-54a4-4df5-b78e-5fcaadec329d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Grades Were Lies</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b531675d-4a6b-4131-b6c1-7c2512e982eb/">
+              <img src="https://catpea.github.io/chapter-15/poem-2179.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Look At Fair Start Web Programming</span>
+                <span class="fg-3 fs-xs">February 16, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8d062209-51b1-4ee9-9c62-416a37355469/">
+              <img src="https://catpea.github.io/chapter-15/poem-2159.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Spicy Little Invitation To Web Programming</span>
+                <span class="fg-3 fs-xs">January 27, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c435f8a6-5f74-42a6-bcce-70ec42e11e3b/">
+              <img src="https://catpea.github.io/chapter-15/poem-2181.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Luxury Programming With Hullabaloo</span>
+                <span class="fg-3 fs-xs">February 18, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/75e3c387-b5e6-43f7-9c29-f84d680ac692/">
+              <img src="https://catpea.github.io/chapter-15/poem-2158.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Helping Artificial Intelligence Comprehend Program Code</span>
+                <span class="fg-3 fs-xs">January 26, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

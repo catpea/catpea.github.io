@@ -1,200 +1,473 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself · Cat Pea</title>
+  <meta name="description" content="After years of wanting to build a Beowulf cluster, the author finally tackled the task by leveraging an AI assistant to generate JavaScript code for an HTTP master server and workers that handle queue processing and leader election; the AI produced a working prototype within minutes, demonstrating its ability to translate between languages (e.g. XML, Gherkin) and to wrap functional libraries into EventEmitter agents. By integrating these agents into the author’s visual programming language—where code is represented as plain English descriptions—the AI not only generated ready‑to‑run code but also tests, a README, and reusable blocks, showing that simplicity of syntax aids both human understanding and AI generation.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/28b62ab3-2d8a-4724-b866-886a546c0695/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself · Cat Pea">
+  <meta property="og:description" content="After years of wanting to build a Beowulf cluster, the author finally tackled the task by leveraging an AI assistant to generate JavaScript code for an HTTP master server and workers that handle queue processing and leader election; the AI produced a working prototype within minutes, demonstrating its ability to translate between languages (e.g. XML, Gherkin) and to wrap functional libraries into EventEmitter agents. By integrating these agents into the author’s visual programming language—where code is represented as plain English descriptions—the AI not only generated ready‑to‑run code but also tests, a README, and reusable blocks, showing that simplicity of syntax aids both human understanding and AI generation.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-12/poem-1747.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-12/">Chapter 12</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1747</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-12/poem-1747.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-12/poem-1747.avif" alt="Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-12/poem-1747.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 12</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1747</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-12-13">12/12/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">The Beowulf computer cluster has been on my todo,
-for multiple decades now.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I assumed,
-I’d never have time to get to it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Recently I begun work on Queue Processing,
-in my Visual Programming language, the thing that makes me busy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And with no more than 30 seconds to myself,
-I quickly prompted AI for a Beowulf cluster in JavaScript.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I chose JavaScript,
-because it is a simplified C family language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI aided languages with AI based memory management,
-are sure to be even simpler come future.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just like that the AI gave me an HTTP master server,
-and workers, deciding that the master will distribute tasks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I asked about master re-election, in an unreliable network.
-and it clearly listed re-election strategies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In under a minute, I took care of a really old TODO,
-that I would never have time for.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The result of having the opportunity to look into Beowulf Clusters,
-and being shown how they are just a few lines of code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is me looking for integration strategies,
-in my visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I already have local and network queue processing,
-but I want the backing of an older approach.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want to have a Beowulf Cluster project in my templates,
-and an article with multiple strategies.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">None of this would be possible without an AI assistant,
-who speaks in my language of choice.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I ask for JavaScript examples of common problems,
-I get 99.9 accurate results.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But when I stray asking for code that usually lives,
-in other languages, there maybe a line missing, but it is easy to fix.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Beowult cluster question, strained the AI,
-as it is an idea, not a program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But with some encouragement I got a 75% working sample,
-that would need less than an hour of to to get running.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When I add “in JavaScript” I expect AI to “translate”,
-which is what LLMs are good at.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I previously tested translation of computer programs,
-into declarative XML with good success.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And had excellent results with LLMs frigteningly understanding,
-not only translating into an EventEmitter, but an Agent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Event Emitters have an on and emit action,
-so you can say on hello say meow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then just state,
-emit hello, and the agent will output meow.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Very clear, simple,
-and powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An agent has an on input, and on upgrade,
-where data emitted into the input...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is processed by code,
-sent in via upgrade.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thus, when a program made of agents is running,
-you can upgrade its parts, its agents.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In real life an agent already has code,
-and upgrade is something that is used to just upgrade it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that is only done,
-not to scare programmers, and is not needed.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Simple and clear is good for coders and AI,
-I don’t think AI follows the flow as I explained it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is likely paying attention to the words input and process,
-but as AI get faster it will.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The clearer the code, and the simpler the language,
-the finer the AI contributions in the future.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, simplicity and clarity throughout adds up,
-it helps you read code faster, it helps AI be more accurate.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It helps you with back of envelope flow control and architectures,
-and it helps AI to dream out clear starter code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For me specifically,
-as I tune and refine my Visual Programming Language,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript is already too complex, any code I write in JavaScript,
-in the visual programming world real I’ve built…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is either unnecessary,
-or will be replaced.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In fact, I already made the wrong assumption,
-that I must replace JavaScript with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language">Gherkin</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which can be thought of as structured English,
-or a subset of English.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nope, the units of visual programming,
-must be a plain English description of code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that AI not only generates it,
-but re-generates it as it gets better.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even free AI is perfectly capable of generating a list,
-of commony used visual programming blocks, of functional programming funcions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And based on that list it will generate EventEmitter based Agents,
-with proper tests, and even a README file.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Not only my tests show almost no code hallucinations,
-but in one test the AI dropped into reusing other libraries in my blocks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Effectivley wrapping Ramda-js and lodash functions,
-with an agent making all these functions part of an EventEmitter network.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a ward, they can be used raw,
-to create drag and drop programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming it self, multiples all this power,
-the lines that the user connects boxes with…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is all that is needed to create programs,
-that go far beyond extracting and transforming data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Interacting with a tree of web components in a web page,
-creates a user interface development environment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And again, one that is clear to understand,
-and is likely not to pose a challenge to AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The simplet the language,
-the more effective the AI.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-12-13T04:16:11.151Z">December 12, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:05<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-12/poem-1747.avif" aria-label="Cover for Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself, full size">
+            <img src="https://catpea.github.io/chapter-12/poem-1747.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Modern Talking; Or, How AI Is Helping Me Jump Ahead Of Myself" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:05
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-12/poem-1747.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-12/poem-1747.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-12/poem-1747.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>The Beowulf computer cluster has been on my todo,<br>for multiple decades now.</p>
+<p>I assumed,<br>I’d never have time to get to it.</p>
+<p>Recently I begun work on Queue Processing,<br>in my Visual Programming language, the thing that makes me busy.</p>
+<p>And with no more than 30 seconds to myself,<br>I quickly prompted AI for a Beowulf cluster in JavaScript.</p>
+<hr>
+<p>I chose JavaScript,<br>because it is a simplified C family language.</p>
+<p>AI aided languages with AI based memory management,<br>are sure to be even simpler come future.</p>
+<hr>
+<p>And just like that the AI gave me an HTTP master server,<br>and workers, deciding that the master will distribute tasks.</p>
+<p>I asked about master re-election, in an unreliable network.<br>and it clearly listed re-election strategies.</p>
+<p>In under a minute, I took care of a really old TODO,<br>that I would never have time for.</p>
+<hr>
+<p>The result of having the opportunity to look into Beowulf Clusters,<br>and being shown how they are just a few lines of code.</p>
+<p>Is me looking for integration strategies,<br>in my visual programming language.</p>
+<p>I already have local and network queue processing,<br>but I want the backing of an older approach.</p>
+<p>I want to have a Beowulf Cluster project in my templates,<br>and an article with multiple strategies.</p>
+<hr>
+<p>None of this would be possible without an AI assistant,<br>who speaks in my language of choice.</p>
+<hr>
+<p>When I ask for JavaScript examples of common problems,<br>I get 99.9 accurate results.</p>
+<p>But when I stray asking for code that usually lives,<br>in other languages, there maybe a line missing, but it is easy to fix.</p>
+<p>The Beowult cluster question, strained the AI,<br>as it is an idea, not a program.</p>
+<p>But with some encouragement I got a 75% working sample,<br>that would need less than an hour of to to get running.</p>
+<hr>
+<p>When I add “in JavaScript” I expect AI to “translate”,<br>which is what LLMs are good at.</p>
+<p>I previously tested translation of computer programs,<br>into declarative XML with good success.</p>
+<p>And had excellent results with LLMs frigteningly understanding,<br>not only translating into an EventEmitter, but an Agent.</p>
+<p>Event Emitters have an on and emit action,<br>so you can say on hello say meow.</p>
+<p>And then just state,<br>emit hello, and the agent will output meow.</p>
+<p>Very clear, simple,<br>and powerful.</p>
+<p>An agent has an on input, and on upgrade,<br>where data emitted into the input...</p>
+<p>Is processed by code,<br>sent in via upgrade.</p>
+<p>Thus, when a program made of agents is running,<br>you can upgrade its parts, its agents.</p>
+<p>In real life an agent already has code,<br>and upgrade is something that is used to just upgrade it.</p>
+<p>But that is only done,<br>not to scare programmers, and is not needed.</p>
+<hr>
+<p>Simple and clear is good for coders and AI,<br>I don’t think AI follows the flow as I explained it.</p>
+<p>It is likely paying attention to the words input and process,<br>but as AI get faster it will.</p>
+<p>The clearer the code, and the simpler the language,<br>the finer the AI contributions in the future.</p>
+<hr>
+<p>Finally, simplicity and clarity throughout adds up,<br>it helps you read code faster, it helps AI be more accurate.</p>
+<p>It helps you with back of envelope flow control and architectures,<br>and it helps AI to dream out clear starter code.</p>
+<p>For me specifically,<br>as I tune and refine my Visual Programming Language,</p>
+<p>JavaScript is already too complex, any code I write in JavaScript,<br>in the visual programming world real I’ve built…</p>
+<p>Is either unnecessary,<br>or will be replaced.</p>
+<p>In fact, I already made the wrong assumption,<br>that I must replace JavaScript with <a href="https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language">Gherkin</a>.</p>
+<p>Which can be thought of as structured English,<br>or a subset of English.</p>
+<p>Nope, the units of visual programming,<br>must be a plain English description of code.</p>
+<p>So that AI not only generates it,<br>but re-generates it as it gets better.</p>
+<hr>
+<p>Even free AI is perfectly capable of generating a list,<br>of commony used visual programming blocks, of functional programming funcions.</p>
+<p>And based on that list it will generate EventEmitter based Agents,<br>with proper tests, and even a README file.</p>
+<p>Not only my tests show almost no code hallucinations,<br>but in one test the AI dropped into reusing other libraries in my blocks.</p>
+<p>Effectivley wrapping Ramda-js and lodash functions,<br>with an agent making all these functions part of an EventEmitter network.</p>
+<p>In a ward, they can be used raw,<br>to create drag and drop programs.</p>
+<p>Visual programming it self, multiples all this power,<br>the lines that the user connects boxes with…</p>
+<p>Is all that is needed to create programs,<br>that go far beyond extracting and transforming data.</p>
+<p>Interacting with a tree of web components in a web page,<br>creates a user interface development environment.</p>
+<p>And again, one that is clear to understand,<br>and is likely not to pose a challenge to AI.</p>
+<p>The simplet the language,<br>the more effective the AI.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Gherkin</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">beowulf</span><span class="chip">cluster</span><span class="chip">javascript</span><span class="chip">visual programming</span><span class="chip">eventemitter</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language">
+              <span class="text-truncate">Gherkin</span>
+              <span class="fg-3 fs-xs flex-shrink-0">en.wikipedia.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/d5a5bd78-ca97-4695-8cd5-454a9b90cc06/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Programmers Don’t Always Publish Their Inventions</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/7c72864e-2d47-41ba-9d07-7a441beb0031/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bodybuilding</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b69ae309-9a6c-4143-8e05-0cceea93f69c/">
+              <img src="https://catpea.github.io/chapter-12/poem-1749.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">My Strange Little Caturday Mornings</span>
+                <span class="fg-3 fs-xs">December 15, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d5a5bd78-ca97-4695-8cd5-454a9b90cc06/">
+              <img src="https://catpea.github.io/chapter-12/poem-1746.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programmers Don’t Always Publish Their Inventions</span>
+                <span class="fg-3 fs-xs">December 12, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/45e39502-1f44-4a11-8afc-b2b0af6d8f67/">
+              <img src="https://catpea.github.io/chapter-12/poem-1763.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">JavaScript Wild!</span>
+                <span class="fg-3 fs-xs">December 28, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b9c1beab-6cb5-4396-95d8-dcb407f00b3a/">
+              <img src="https://catpea.github.io/chapter-12/poem-1741.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Programming Story</span>
+                <span class="fg-3 fs-xs">December 6, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

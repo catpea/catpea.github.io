@@ -1,180 +1,463 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Art; Or, Beyond One Illustration Per Generation</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming Art; Or, Beyond One Illustration Per Generation · Cat Pea</title>
+  <meta name="description" content="Generative art has advanced but still relies on programmers to orchestrate it; while AI can remix and create content, you must issue separate requests for each task, otherwise you’ll get errors or hallucinations. The post argues that mastering data‑stream programming—especially visual, node‑based tools that represent connections graphically—is essential to control and combine multiple AIs into coherent workflows (from music to illustrations). It stresses that while today manual coding feels faster, true visual programming environments are missing; building such frameworks will let you design multi‑workspace pipelines for routing data, building UIs, and orchestrating large AI generations into complete applications.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/cd9be2a0-2f55-4a1c-b6e9-6450445c08af/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming Art; Or, Beyond One Illustration Per Generation · Cat Pea">
+  <meta property="og:description" content="Generative art has advanced but still relies on programmers to orchestrate it; while AI can remix and create content, you must issue separate requests for each task, otherwise you’ll get errors or hallucinations. The post argues that mastering data‑stream programming—especially visual, node‑based tools that represent connections graphically—is essential to control and combine multiple AIs into coherent workflows (from music to illustrations). It stresses that while today manual coding feels faster, true visual programming environments are missing; building such frameworks will let you design multi‑workspace pipelines for routing data, building UIs, and orchestrating large AI generations into complete applications.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-09/poem-1411.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-09/">Chapter 09</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1411</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-09/poem-1411.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-09/poem-1411.avif" alt="Programming Art; Or, Beyond One Illustration Per Generation"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming Art; Or, Beyond One Illustration Per Generation</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-09/poem-1411.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 09</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1411</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming Art; Or, Beyond One Illustration Per Generation</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-01-12">1/11/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Generative art has come a long way,
-but it still stands as invitation to programming.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI responds with clever bursts of intelligence,
-it won&#39;t write a book for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to ask separately,
-for everything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One page at a time,
-one illustration per generation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Asking for multiple things,
-returns errors and hallucinations.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The artist has a problem,
-the AI is amazing at remixing art.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The music industry,
-will try to stop the obvious, but it won&#39;t work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Soon we&#39;ll get music as good as art,
-and nobody will care to pay a dime.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to combine multiple AI,
-and to automate things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You still need to learn programming,
-and not just any kind.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need to learn Object Stream Processing,
-in that there is a stream of objects going over a wire.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">People don&#39;t understand,
-that this is what steaming is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Packets of data,
-over a wire.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But unlike with video,
-when controlling AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are routing things around,
-you ask for a list here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And ask to convert it to book chapter ideas there,
-then convert those ideas into pages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And decorate pages, with illustrations,
-based on the routed lists, lists of chapters and such.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming streams of data is special,
-because it can be <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/xyflow/awesome-node-based-uis">represented graphically</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As lines representing connections,
-and boxes with ports representing various actions.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, manual programming is faster,
-but only because we lack the proper Visual Programming tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We lack the friendliness of games,
-driving visual programming environments.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It seems that you are not only challenged,
-with learning to program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But also bringing your expectations,
-and first creating a visual programming language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a wonderful way,
-to master programming in general.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you accept this challenge,
-know that the only real critique of visual programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Exists in the area,
-of mutually incompatible programming concepts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where something that makes sense in one place,
-would be incompatible elsewhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The concept of a file,
-is pretty useless in-context of web servers, for example.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Multiple users would over-write data,
-this is why databases are used.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But mutually incompatible concepts,
-is just how the world works.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To make room for mutual incompatibility,
-make every bit of configuration in your visual program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A visual sub-program, with its own action set,
-thus one workspace will have actions for routing data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And another, for building user interfaces,
-every workspace can have multiple outputs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That can be cross connected,
-the same way different computers exchange data.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Both must be ready to accepts,
-generic packets of information, or objects.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">People are already complaining,
-that AI generates garbage.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, today, we don&#39;t have the software,
-to orchestrate large generations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That can validate, enrich,
-expand and make things worth our while.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can create the occasional good photo,
-but we need entire interactive games or stories.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you were ever wondering,
-what to learn programming for.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learn it to collaborate with AI,
-and to generate awesome new things.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-01-12T02:49:06.615Z">January 11, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:34<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-09/poem-1411.avif" aria-label="Cover for Programming Art; Or, Beyond One Illustration Per Generation, full size">
+            <img src="https://catpea.github.io/chapter-09/poem-1411.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming Art; Or, Beyond One Illustration Per Generation" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:34
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-09/poem-1411.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-09/poem-1411.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-09/poem-1411.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Generative art has come a long way,<br>but it still stands as invitation to programming.</p>
+<hr>
+<p>The AI responds with clever bursts of intelligence,<br>it won&#39;t write a book for you.</p>
+<p>You have to ask separately,<br>for everything.</p>
+<p>One page at a time,<br>one illustration per generation.</p>
+<p>Asking for multiple things,<br>returns errors and hallucinations.</p>
+<hr>
+<p>The artist has a problem,<br>the AI is amazing at remixing art.</p>
+<p>The music industry,<br>will try to stop the obvious, but it won&#39;t work.</p>
+<p>Soon we&#39;ll get music as good as art,<br>and nobody will care to pay a dime.</p>
+<hr>
+<p>But to combine multiple AI,<br>and to automate things.</p>
+<p>You still need to learn programming,<br>and not just any kind.</p>
+<p>You need to learn Object Stream Processing,<br>in that there is a stream of objects going over a wire.</p>
+<p>People don&#39;t understand,<br>that this is what steaming is.</p>
+<p>Packets of data,<br>over a wire.</p>
+<p>But unlike with video,<br>when controlling AI.</p>
+<p>You are routing things around,<br>you ask for a list here.</p>
+<p>And ask to convert it to book chapter ideas there,<br>then convert those ideas into pages.</p>
+<p>And decorate pages, with illustrations,<br>based on the routed lists, lists of chapters and such.</p>
+<hr>
+<p>Programming streams of data is special,<br>because it can be <a href="https://github.com/xyflow/awesome-node-based-uis">represented graphically</a>.</p>
+<p>As lines representing connections,<br>and boxes with ports representing various actions.</p>
+<hr>
+<p>Today, manual programming is faster,<br>but only because we lack the proper Visual Programming tools.</p>
+<p>We lack the friendliness of games,<br>driving visual programming environments.</p>
+<p>It seems that you are not only challenged,<br>with learning to program.</p>
+<p>But also bringing your expectations,<br>and first creating a visual programming language.</p>
+<p>This is a wonderful way,<br>to master programming in general.</p>
+<hr>
+<p>If you accept this challenge,<br>know that the only real critique of visual programming.</p>
+<p>Exists in the area,<br>of mutually incompatible programming concepts.</p>
+<p>Where something that makes sense in one place,<br>would be incompatible elsewhere.</p>
+<p>The concept of a file,<br>is pretty useless in-context of web servers, for example.</p>
+<p>Multiple users would over-write data,<br>this is why databases are used.</p>
+<hr>
+<p>But mutually incompatible concepts,<br>is just how the world works.</p>
+<p>To make room for mutual incompatibility,<br>make every bit of configuration in your visual program.</p>
+<p>A visual sub-program, with its own action set,<br>thus one workspace will have actions for routing data.</p>
+<p>And another, for building user interfaces,<br>every workspace can have multiple outputs.</p>
+<p>That can be cross connected,<br>the same way different computers exchange data.</p>
+<p>Both must be ready to accepts,<br>generic packets of information, or objects.</p>
+<hr>
+<p>People are already complaining,<br>that AI generates garbage.</p>
+<p>But, today, we don&#39;t have the software,<br>to orchestrate large generations.</p>
+<p>That can validate, enrich,<br>expand and make things worth our while.</p>
+<p>We can create the occasional good photo,<br>but we need entire interactive games or stories.</p>
+<hr>
+<p>If you were ever wondering,<br>what to learn programming for.</p>
+<p>Learn it to collaborate with AI,<br>and to generate awesome new things.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/xyflow/awesome-node-based-uis">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>represented graphically</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/xyflow/awesome-node-based-uis</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">generative-art</span><span class="chip">ai-generated-art</span><span class="chip">visual-programming</span><span class="chip">node-based-ui</span><span class="chip">data-streams</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/xyflow/awesome-node-based-uis">
+              <span class="text-truncate">represented graphically</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/5846f6a0-855d-437d-8f47-82d53c3b011f/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">The Productive Programmer</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/7e025d0f-7b01-4280-977d-917a8343c5a7/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Michigan Geese Know No Peace</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5ecd5851-9366-4171-99bc-4726bf545b52/">
+              <img src="https://catpea.github.io/chapter-09/poem-1418.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Visual Programming: The Worlds</span>
+                <span class="fg-3 fs-xs">January 18, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5846f6a0-855d-437d-8f47-82d53c3b011f/">
+              <img src="https://catpea.github.io/chapter-09/poem-1410.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Productive Programmer</span>
+                <span class="fg-3 fs-xs">January 10, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/577c2ba2-154a-4941-a8e5-44fdeeca9561/">
+              <img src="https://catpea.github.io/chapter-09/poem-1429.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">One Thing Done Well; Or, The Two Reasons Why Programming Seems Scary</span>
+                <span class="fg-3 fs-xs">January 29, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9a9fcd69-a9f1-4c5a-99b3-e7bc69e7e42b/">
+              <img src="https://catpea.github.io/chapter-08/poem-1406.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Easy Introduction To Programming; And, Reactive Programming Explained</span>
+                <span class="fg-3 fs-xs">January 7, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

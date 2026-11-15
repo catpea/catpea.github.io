@@ -1,201 +1,476 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Computer Program Is Just A Neat Little Machine</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Computer Program Is Just A Neat Little Machine · Cat Pea</title>
+  <meta name="description" content="In this post we explore how object‑oriented programming models a program as a machine built from nested objects—like a desktop or window frame—that can send data, trigger events, and transform state through commands such as on:click listeners. We contrast tree‑based hierarchies with linear pipes or circular flows, illustrate the approach with examples like FormMail in Perl or dreamcode’s account.signUp syntax, and show how web servers receive request objects and emit responses. Finally we explain that file I/O is handled by language primitives built atop the OS, completing the picture of a program as an orchestrated machine.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/47448ebe-0ece-4981-b932-3ce0e0712e97/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Computer Program Is Just A Neat Little Machine · Cat Pea">
+  <meta property="og:description" content="In this post we explore how object‑oriented programming models a program as a machine built from nested objects—like a desktop or window frame—that can send data, trigger events, and transform state through commands such as on:click listeners. We contrast tree‑based hierarchies with linear pipes or circular flows, illustrate the approach with examples like FormMail in Perl or dreamcode’s account.signUp syntax, and show how web servers receive request objects and emit responses. Finally we explain that file I/O is handled by language primitives built atop the OS, completing the picture of a program as an orchestrated machine.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1558.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1558</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1558.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1558.avif" alt="A Computer Program Is Just A Neat Little Machine"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Computer Program Is Just A Neat Little Machine</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1558.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1558</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Computer Program Is Just A Neat Little Machine</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-06-07">6/7/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">And there is nothing mysterious about it,
-because you are responsible for the machine architecture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the most flexible device you can use,
-to create a machine like behavior.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is a tree of Things, that contain other Things,
-in the world of programming we refer to Things as Objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, nested Objects, the object at the very top,
-that accepts the first set of sub objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Can be imagined as Desktop, or a Window,
-or the frame of a Word-processor Page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you just add more stuff,
-inside other stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you have a machine,
-a weird processing plant, or assembly line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To make it move,
-you create commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Such as on data,
-send on data to all the sub elements.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This would create a waterfall,
-over your nested tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then you filter,
-and transform things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or listen for various happenings
-on nodes with a specific purpose.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We call those events,
-and a button within a form will emit an on:click event.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And sure you can cross all this up,
-and add nodes upside down and sideways.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But then you won’t be able to imagine,
-what the machine looks like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we call that spaghetti code,
-basically an unreadable mess, that may even work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But because it lacks architecture,
-a sturdy vision, or theory, it is trouble.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is hard to service spaghetti code,
-so no one really does it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are ready to write your big program,
-you first imagine a machine of how everything flows.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Maybe you won’t like trees,
-because they are so recursive.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then you may like pipes,
-or circular assembly lines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you put a command on the line,
-the command will change something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Maybe the username of a logged in user,
-and then that change triggers a User Interface update.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Usually it is nice,
-to start with creating a hierarchy of objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then just responding to the things they do,
-your Home Directory is just a tree, and then commands cause updates.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the old way of programming used to be about defining Functions,
-and then calling them, it is still commony used for low level stuff and commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Take a look at <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.scriptarchive.com/download.cgi?s=formmail&c=txt&f=FormMail%2Epl">FormMail</a> a Perl program (you should learn JavaScript),
-you can see how functions are being called right beneath the header.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then below those initial calls, they are all spelled out or defined line by line,,
-often including reusable helper functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is also a little machine, a call is made, things get done,
-and program execution returns to the next line ready for more calls.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In object programming, you create concepts like account,
-and then you attach functions to that.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So it is not just a function call,
-a call for action made in context of something else,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://gist.github.com/gr2m/5463426">A nice example can be found in dream code</a>,
-where you say account.signUp, and then pass in an object with username and password.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, account groups, account functions,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nobackend.org/dreamcode.html">other groups maybe data, email, sharing, files, payments, and make coffee or tea</a></p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think the neatest example of machines is the web server,
-when you want to pull up a web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A function inside the program,
-will receive two Objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your Request with url information, IP address, and such,
-and Blank Response that you must customize.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The most magical machine may just be the Event Emitter,
-the event emitter listens via . on function that specifies the event name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you can say,
-saveButton.on(‘click’, applicaion.emit(‘save’)),</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And somewhere in your application
-you will have a save listener that uponb getting the even saves the file to disk.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, you are probably wondering,
-now how the heck do I save a file to disk?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, you don’t, your programming language,
-comes with built-in functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And those are built on top of the operating system features,
-which then is build atop of drivers, and microprocessors in computer hardware.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So to save a file, you look at the programming language manual,
-and see what you need to call, often writeFile(‘file/path‘, andData);</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming languages are made by people, and for people,
-by experienced programmers, for programmers who are always in a hurry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the world of programming,
-is a masterpiece or art, as great as all galleries put together.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-06-07T05:02:03.350Z">June 7, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:25<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1558.avif" aria-label="Cover for A Computer Program Is Just A Neat Little Machine, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1558.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Computer Program Is Just A Neat Little Machine" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:25
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1558.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1558.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1558.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>And there is nothing mysterious about it,<br>because you are responsible for the machine architecture.</p>
+<p>And the most flexible device you can use,<br>to create a machine like behavior.</p>
+<p>Is a tree of Things, that contain other Things,<br>in the world of programming we refer to Things as Objects.</p>
+<p>So, nested Objects, the object at the very top,<br>that accepts the first set of sub objects.</p>
+<p>Can be imagined as Desktop, or a Window,<br>or the frame of a Word-processor Page.</p>
+<p>And then you just add more stuff,<br>inside other stuff.</p>
+<p>And you have a machine,<br>a weird processing plant, or assembly line.</p>
+<p>To make it move,<br>you create commands.</p>
+<p>Such as on data,<br>send on data to all the sub elements.</p>
+<p>This would create a waterfall,<br>over your nested tree.</p>
+<p>Then you filter,<br>and transform things.</p>
+<p>Or listen for various happenings<br>on nodes with a specific purpose.</p>
+<p>We call those events,<br>and a button within a form will emit an on:click event.</p>
+<hr>
+<p>And sure you can cross all this up,<br>and add nodes upside down and sideways.</p>
+<p>But then you won’t be able to imagine,<br>what the machine looks like.</p>
+<p>And we call that spaghetti code,<br>basically an unreadable mess, that may even work.</p>
+<p>But because it lacks architecture,<br>a sturdy vision, or theory, it is trouble.</p>
+<p>It is hard to service spaghetti code,<br>so no one really does it.</p>
+<hr>
+<p>When you are ready to write your big program,<br>you first imagine a machine of how everything flows.</p>
+<p>Maybe you won’t like trees,<br>because they are so recursive.</p>
+<p>Then you may like pipes,<br>or circular assembly lines.</p>
+<p>Where you put a command on the line,<br>the command will change something.</p>
+<p>Maybe the username of a logged in user,<br>and then that change triggers a User Interface update.</p>
+<hr>
+<p>Usually it is nice,<br>to start with creating a hierarchy of objects.</p>
+<p>And then just responding to the things they do,<br>your Home Directory is just a tree, and then commands cause updates.</p>
+<p>But the old way of programming used to be about defining Functions,<br>and then calling them, it is still commony used for low level stuff and commands.</p>
+<p>Take a look at <a href="https://www.scriptarchive.com/download.cgi?s=formmail&c=txt&f=FormMail%2Epl">FormMail</a> a Perl program (you should learn JavaScript),<br>you can see how functions are being called right beneath the header.</p>
+<p>And then below those initial calls, they are all spelled out or defined line by line,,<br>often including reusable helper functions.</p>
+<p>That is also a little machine, a call is made, things get done,<br>and program execution returns to the next line ready for more calls.</p>
+<hr>
+<p>In object programming, you create concepts like account,<br>and then you attach functions to that.</p>
+<p>So it is not just a function call,<br>a call for action made in context of something else,</p>
+<p><a href="https://gist.github.com/gr2m/5463426">A nice example can be found in dream code</a>,<br>where you say account.signUp, and then pass in an object with username and password.</p>
+<p>Here, account groups, account functions,<br><a href="https://nobackend.org/dreamcode.html">other groups maybe data, email, sharing, files, payments, and make coffee or tea</a></p>
+<hr>
+<p>I think the neatest example of machines is the web server,<br>when you want to pull up a web page.</p>
+<p>A function inside the program,<br>will receive two Objects.</p>
+<p>Your Request with url information, IP address, and such,<br>and Blank Response that you must customize.</p>
+<hr>
+<p>The most magical machine may just be the Event Emitter,<br>the event emitter listens via . on function that specifies the event name.</p>
+<p>So you can say,<br>saveButton.on(‘click’, applicaion.emit(‘save’)),</p>
+<p>And somewhere in your application<br>you will have a save listener that uponb getting the even saves the file to disk.</p>
+<hr>
+<p>Finally, you are probably wondering,<br>now how the heck do I save a file to disk?</p>
+<p>But, you don’t, your programming language,<br>comes with built-in functions.</p>
+<p>And those are built on top of the operating system features,<br>which then is build atop of drivers, and microprocessors in computer hardware.</p>
+<p>So to save a file, you look at the programming language manual,<br>and see what you need to call, often writeFile(‘file/path‘, andData);</p>
+<hr>
+<p>Programming languages are made by people, and for people,<br>by experienced programmers, for programmers who are always in a hurry.</p>
+<p>So the world of programming,<br>is a masterpiece or art, as great as all galleries put together.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.scriptarchive.com/download.cgi?s=formmail&amp;c=txt&amp;f=FormMail%2Epl">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>FormMail</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.scriptarchive.com/download.cgi?s=formmail&amp;c=txt&amp;f=FormMail%2Epl</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://gist.github.com/gr2m/5463426">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>A nice example can be found in dream code</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://gist.github.com/gr2m/5463426</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nobackend.org/dreamcode.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>other groups maybe data, email, sharing, files, payments, and make coffee or tea</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nobackend.org/dreamcode.html</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">object-oriented</span><span class="chip">nested-objects</span><span class="chip">event-driven</span><span class="chip">functions</span><span class="chip">perl</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.scriptarchive.com/download.cgi?s=formmail&amp;c=txt&amp;f=FormMail%2Epl">
+              <span class="text-truncate">FormMail</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.scriptarchive.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://gist.github.com/gr2m/5463426">
+              <span class="text-truncate">A nice example can be found in dream code</span>
+              <span class="fg-3 fs-xs flex-shrink-0">gist.github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nobackend.org/dreamcode.html">
+              <span class="text-truncate">other groups maybe data, email, sharing, files, payments, and make coffee or tea</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nobackend.org</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/6d65ca06-8320-4d53-ae85-29c0f6ea37e1/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Point Of Genius</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/0a228993-149a-454d-a630-01814af09522/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bad News For Bodybuilders: Creatine Wants Its Monohydrates Back</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/f4a411ab-ebc0-4a86-a84e-76de6aa9bd57/">
+              <img src="https://catpea.github.io/chapter-10/poem-1561.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Internet Has A Problem; And Here Is How You Can Solve It</span>
+                <span class="fg-3 fs-xs">June 9, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a7ca74fd-1573-41ff-ae58-317f72af2484/">
+              <img src="https://catpea.github.io/chapter-10/poem-1555.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Free As In Speech, Great As In Mind; Or, Visual Programming As A Right, And Great Idea</span>
+                <span class="fg-3 fs-xs">June 4, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0bc3dedd-01ee-4c71-8670-1e10d44d0f5d/">
+              <img src="https://catpea.github.io/chapter-10/poem-1562.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Worker Queue Explained For The New Programmer</span>
+                <span class="fg-3 fs-xs">June 11, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/7336297a-2fad-4db6-8761-5d26a26c5ff9/">
+              <img src="https://catpea.github.io/chapter-10/poem-1552.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">So You Are Learning JavaScript, Now You May, Step Into The Fray</span>
+                <span class="fg-3 fs-xs">June 1, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

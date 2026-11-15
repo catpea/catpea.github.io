@@ -1,232 +1,505 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learning Programming Is Easy, You Just Have To Put Your Foot In The Door</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Learning Programming Is Easy, You Just Have To Put Your Foot In The Door · Cat Pea</title>
+  <meta name="description" content="The author opens by declaring a single‑language focus and then walks through the very first steps of learning JavaScript: writing a “Hello World” in the console with `console.log`, executing it in Chrome’s DevTools, and then moving on to richer tutorials. They recommend starting with practical projects such as an Electron Fiddle desktop app, then exploring p5.js for creative graphics, and finally adding Node/Express or NativeScript for more complex applications. Alongside these tutorials they suggest browsing JavaScript libraries, awesome lists, and Git repositories, while favoring lightweight editors like Pulsar or zed over Visual Studio Code. The post emphasizes hands‑on practice, planning with paper diagrams for larger projects, and watching tutorial videos until something clicks. Finally it stresses that mastering programming is a powerful multiplier skill—much like language, reading, or math—and can elevate any other interest when applied through automation, simulation, visualization, or AI scripting.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/fc0199db-824a-47e6-9ebb-a312f4a5c6a5/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Learning Programming Is Easy, You Just Have To Put Your Foot In The Door · Cat Pea">
+  <meta property="og:description" content="The author opens by declaring a single‑language focus and then walks through the very first steps of learning JavaScript: writing a “Hello World” in the console with `console.log`, executing it in Chrome’s DevTools, and then moving on to richer tutorials. They recommend starting with practical projects such as an Electron Fiddle desktop app, then exploring p5.js for creative graphics, and finally adding Node/Express or NativeScript for more complex applications. Alongside these tutorials they suggest browsing JavaScript libraries, awesome lists, and Git repositories, while favoring lightweight editors like Pulsar or zed over Visual Studio Code. The post emphasizes hands‑on practice, planning with paper diagrams for larger projects, and watching tutorial videos until something clicks. Finally it stresses that mastering programming is a powerful multiplier skill—much like language, reading, or math—and can elevate any other interest when applied through automation, simulation, visualization, or AI scripting.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-11/poem-1649.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-11/">Chapter 11</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1649</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-11/poem-1649.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-11/poem-1649.avif" alt="Learning Programming Is Easy, You Just Have To Put Your Foot In The Door"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Learning Programming Is Easy, You Just Have To Put Your Foot In The Door</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-11/poem-1649.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 11</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1649</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Learning Programming Is Easy, You Just Have To Put Your Foot In The Door</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-09-06">9/5/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">&quot;I Wish I Had 2,000 Feet So I Could Put 500 Of Them In Each Of Your Asses.&quot;
--- Red Forman</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am now wise enough,
-to avoid learning multiple languages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I want to invest my focus, power, patience, energy, madness,
-creativity, inventiveness, chaos, and anarchy into one good one.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, back when I was exploring languages,
-all I needed to really get going...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Was to put my foot,
-in it&#39;s door.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a programming tradition that every language,
-always has a hello world example.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is a magnificent start,
-but you also need to know how to execute it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you are reading this on a desktop browser,
-you can just press Shift+CTRL+I to open Web Developer Tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then just type in console dot log, round bracket, single quite,
-Hello World single quote, closing round bracket, and press enter to execute.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is why I recommend JavaScript,
-it is the language of the web.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once you know how to write hello world,
-and how to execute it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You go for the double whammy,
-you search for text and video tutorials.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Text tutorials are not outdated,
-you can copy and paste, and you don&#39;t have to hurry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And video tutorials are so rich,
-that sometimes you don&#39;t have to follow along.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I recommend that you start with <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=electron+fiddle">Electron Fiddle Tutorials</a>,
-as that is a quick way to begin creating Desktop Applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you want to get creative, and practice JavaScript syntax,
-the language, the brackets, and even formatting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I recommend you go for the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=HerCR8bw_GE&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA">p5.js tutorial</a>,
-as it is very friendly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you want something with more meat on the bone,
-take a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=express.js+tutorial">node.js + express.js tutorial</a>, or get a taste of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=NativeScript+tutorial">NativeScript</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I also recommend that you <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/search?q=language%3AJavaScript+stars%3A%3E1000+&type=repositories&s=stars&o=desc">browse java script libraries</a>, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/topics/javascript">visit JavaScript topics</a>,
-and both <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/sorrycc/awesome-javascript">JavaScript</a> and <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/sindresorhus/awesome-nodejs">Node.js</a> Awesome Lists.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Later on you will need a source code repository like <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://gogs.io/">git</a>,
-a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.npmjs.com/package/@cucumber/cucumber">unit testing</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Consider avoiding VisialStudio if you can,
-I use <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://pulsar-edit.dev/">Pulsar</a>, but maybe you should consider <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://zed.dev/">zed</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While you are learning programming,
-program as much as you can.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you begin working on serious programs,
-you diagram on paper first.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the best recommendation I can possibly make,
-for learning JavaScript...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is to just relax and watch tutorial videos,
-until something grabs you by the button.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And lastly, if you are not interested in learning programming,
-focus on what you are interested in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And look how much better you would be at it,
-if you could automate it, simulate it, visualize it, or script it with AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The ability to program is a fundamental,
-like language or reading, or basic math.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is a multiplier,
-it makes you more powerful, at anything and everything.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-09-06T02:12:18.404Z">September 5, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:29<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-11/poem-1649.avif" aria-label="Cover for Learning Programming Is Easy, You Just Have To Put Your Foot In The Door, full size">
+            <img src="https://catpea.github.io/chapter-11/poem-1649.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Learning Programming Is Easy, You Just Have To Put Your Foot In The Door" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:29
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-11/poem-1649.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-11/poem-1649.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-11/poem-1649.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>&quot;I Wish I Had 2,000 Feet So I Could Put 500 Of Them In Each Of Your Asses.&quot;<br>-- Red Forman</p>
+<p>I am now wise enough,<br>to avoid learning multiple languages.</p>
+<p>I want to invest my focus, power, patience, energy, madness,<br>creativity, inventiveness, chaos, and anarchy into one good one.</p>
+<hr>
+<p>But, back when I was exploring languages,<br>all I needed to really get going...</p>
+<p>Was to put my foot,<br>in it&#39;s door.</p>
+<hr>
+<p>It is a programming tradition that every language,<br>always has a hello world example.</p>
+<p>That is a magnificent start,<br>but you also need to know how to execute it.</p>
+<p>If you are reading this on a desktop browser,<br>you can just press Shift+CTRL+I to open Web Developer Tools.</p>
+<p>And then just type in console dot log, round bracket, single quite,<br>Hello World single quote, closing round bracket, and press enter to execute.</p>
+<hr>
+<p>This is why I recommend JavaScript,<br>it is the language of the web.</p>
+<hr>
+<p>Once you know how to write hello world,<br>and how to execute it.</p>
+<p>You go for the double whammy,<br>you search for text and video tutorials.</p>
+<p>Text tutorials are not outdated,<br>you can copy and paste, and you don&#39;t have to hurry.</p>
+<p>And video tutorials are so rich,<br>that sometimes you don&#39;t have to follow along.</p>
+<hr>
+<p>And I recommend that you start with <a href="https://www.youtube.com/results?search_query=electron+fiddle">Electron Fiddle Tutorials</a>,<br>as that is a quick way to begin creating Desktop Applications.</p>
+<p>If you want to get creative, and practice JavaScript syntax,<br>the language, the brackets, and even formatting.</p>
+<p>I recommend you go for the <a href="https://www.youtube.com/watch?v=HerCR8bw_GE&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA">p5.js tutorial</a>,<br>as it is very friendly.</p>
+<p>And if you want something with more meat on the bone,<br>take a <a href="https://www.youtube.com/results?search_query=express.js+tutorial">node.js + express.js tutorial</a>, or get a taste of <a href="https://www.youtube.com/results?search_query=NativeScript+tutorial">NativeScript</a>.</p>
+<hr>
+<p>I also recommend that you <a href="https://github.com/search?q=language%3AJavaScript+stars%3A%3E1000+&type=repositories&s=stars&o=desc">browse java script libraries</a>, <a href="https://github.com/topics/javascript">visit JavaScript topics</a>,<br>and both <a href="https://github.com/sorrycc/awesome-javascript">JavaScript</a> and <a href="https://github.com/sindresorhus/awesome-nodejs">Node.js</a> Awesome Lists.</p>
+<p>Later on you will need a source code repository like <a href="https://gogs.io/">git</a>,<br>a <a href="https://www.npmjs.com/package/@cucumber/cucumber">unit testing</a>.</p>
+<p>Consider avoiding VisialStudio if you can,<br>I use <a href="https://pulsar-edit.dev/">Pulsar</a>, but maybe you should consider <a href="https://zed.dev/">zed</a>.</p>
+<hr>
+<p>While you are learning programming,<br>program as much as you can.</p>
+<p>When you begin working on serious programs,<br>you diagram on paper first.</p>
+<hr>
+<p>But the best recommendation I can possibly make,<br>for learning JavaScript...</p>
+<p>Is to just relax and watch tutorial videos,<br>until something grabs you by the button.</p>
+<p>And lastly, if you are not interested in learning programming,<br>focus on what you are interested in.</p>
+<p>And look how much better you would be at it,<br>if you could automate it, simulate it, visualize it, or script it with AI.</p>
+<p>The ability to program is a fundamental,<br>like language or reading, or basic math.</p>
+<p>It is a multiplier,<br>it makes you more powerful, at anything and everything.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=electron+fiddle">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Electron Fiddle Tutorials</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=electron+fiddle</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=HerCR8bw_GE&amp;list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>p5.js tutorial</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=HerCR8bw_GE&amp;list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=express.js+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>node.js + express.js tutorial</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=express.js+tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=NativeScript+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>NativeScript</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=NativeScript+tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/search?q=language%3AJavaScript+stars%3A%3E1000+&amp;type=repositories&amp;s=stars&amp;o=desc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>browse java script libraries</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/search?q=language%3AJavaScript+stars%3A%3E1000+&amp;type=repositories&amp;s=stars&amp;o=desc</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/topics/javascript">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>visit JavaScript topics</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/topics/javascript</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/sorrycc/awesome-javascript">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>JavaScript</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/sorrycc/awesome-javascript</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/sindresorhus/awesome-nodejs">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Node.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/sindresorhus/awesome-nodejs</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://gogs.io/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>git</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://gogs.io/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.npmjs.com/package/@cucumber/cucumber">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>unit testing</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.npmjs.com/package/@cucumber/cucumber</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://pulsar-edit.dev/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Pulsar</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://pulsar-edit.dev/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://zed.dev/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>zed</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://zed.dev/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">programming</span><span class="chip">tutorials</span><span class="chip">electron</span><span class="chip">p5js</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=electron+fiddle">
+              <span class="text-truncate">Electron Fiddle Tutorials</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=HerCR8bw_GE&amp;list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA">
+              <span class="text-truncate">p5.js tutorial</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=express.js+tutorial">
+              <span class="text-truncate">node.js + express.js tutorial</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=NativeScript+tutorial">
+              <span class="text-truncate">NativeScript</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/search?q=language%3AJavaScript+stars%3A%3E1000+&amp;type=repositories&amp;s=stars&amp;o=desc">
+              <span class="text-truncate">browse java script libraries</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/topics/javascript">
+              <span class="text-truncate">visit JavaScript topics</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/sorrycc/awesome-javascript">
+              <span class="text-truncate">JavaScript</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/sindresorhus/awesome-nodejs">
+              <span class="text-truncate">Node.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://gogs.io/">
+              <span class="text-truncate">git</span>
+              <span class="fg-3 fs-xs flex-shrink-0">gogs.io</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.npmjs.com/package/@cucumber/cucumber">
+              <span class="text-truncate">unit testing</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.npmjs.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://pulsar-edit.dev/">
+              <span class="text-truncate">Pulsar</span>
+              <span class="fg-3 fs-xs flex-shrink-0">pulsar-edit.dev</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://zed.dev/">
+              <span class="text-truncate">zed</span>
+              <span class="fg-3 fs-xs flex-shrink-0">zed.dev</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/f4cb3c5c-fe4e-45cb-ae77-6a35f223abbc/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Integrate Your Future; Or, Stand Up For Effective Education</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/6d988577-c95e-48e8-afac-e82690ffc020/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Learn For Real; Or, Don&#39;t Get Tricked, Ineffective Education Is A Shortcut For Liars</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d6dbaa33-20fe-476d-bde1-de1fe5457289/">
+              <img src="https://catpea.github.io/chapter-11/poem-1653.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Teaches Like A Mother</span>
+                <span class="fg-3 fs-xs">September 9, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c6fc42ca-9a33-4dca-9f4f-feff4f4a1340/">
+              <img src="https://catpea.github.io/chapter-11/poem-1645.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programmers! Don&#39;t Just Use Plain Variables, Oh No!</span>
+                <span class="fg-3 fs-xs">September 1, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8a06218b-ae48-41b6-ac94-d8dbfec3edaf/">
+              <img src="https://catpea.github.io/chapter-11/poem-1654.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Super Nerd; Or, A Fistful Of Code And The Age Of Enlightenment</span>
+                <span class="fg-3 fs-xs">September 10, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b8b746a1-2fa1-499e-a5dc-94c5f432ab1a/">
+              <img src="https://catpea.github.io/chapter-11/poem-1643.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Future Is Always Bright, Once You Learn Programming</span>
+                <span class="fg-3 fs-xs">August 31, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

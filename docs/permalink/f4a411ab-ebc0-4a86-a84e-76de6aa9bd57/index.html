@@ -1,237 +1,498 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Internet Has A Problem; And Here Is How You Can Solve It</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Internet Has A Problem; And Here Is How You Can Solve It · Cat Pea</title>
+  <meta name="description" content="The post argues that today’s web pages are essentially programs that rely on constant network activity and that “walled gardens” of closed‑source brands wrap our browsing experience in tracking, hidden ads, and needless complexity; it therefore proposes a two‑step solution: first, use a proxy (e.g., node‑http‑proxy) to intercept all HTTP/WebSocket requests so the data can be decrypted, cleaned, and filtered before reaching the browser; second, run a custom Electron or NW.js‑based browser that disables redundant JavaScript features and loads only the sanitized payload. Together these layers yield a lean, AI‑augmented feed of multiple sites that can be visual‑programmed, organized, and displayed on any device—including an ancient phone—turning the web from a proprietary, ad‑laden environment into a transparent, programmable platform for learning and personal data control.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/f4a411ab-ebc0-4a86-a84e-76de6aa9bd57/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Internet Has A Problem; And Here Is How You Can Solve It · Cat Pea">
+  <meta property="og:description" content="The post argues that today’s web pages are essentially programs that rely on constant network activity and that “walled gardens” of closed‑source brands wrap our browsing experience in tracking, hidden ads, and needless complexity; it therefore proposes a two‑step solution: first, use a proxy (e.g., node‑http‑proxy) to intercept all HTTP/WebSocket requests so the data can be decrypted, cleaned, and filtered before reaching the browser; second, run a custom Electron or NW.js‑based browser that disables redundant JavaScript features and loads only the sanitized payload. Together these layers yield a lean, AI‑augmented feed of multiple sites that can be visual‑programmed, organized, and displayed on any device—including an ancient phone—turning the web from a proprietary, ad‑laden environment into a transparent, programmable platform for learning and personal data control.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-10/poem-1561.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-10/">Chapter 10</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1561</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-10/poem-1561.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-10/poem-1561.avif" alt="The Internet Has A Problem; And Here Is How You Can Solve It"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Internet Has A Problem; And Here Is How You Can Solve It</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-10/poem-1561.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 10</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1561</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Internet Has A Problem; And Here Is How You Can Solve It</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-06-10">6/9/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Slowly, all your favorite internet brands,
-will close a loop around the content you find fun.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Eliminating all the ways,
-that help you control what you see.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The best advertising,
-is the one you never notice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is your favorite phone,
-because that is not what you should be using.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Closed source is not the security model,
-you should be relying on.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Internet technology is not for greed,
-it is for connecting the world together.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is for sharing worthy ideas,
-it is for learning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Walled Gardens and Closed Source,
-are terrible ideas.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that they are ever closing in on you,
-is dangerous enough, not to use your brand-name phones.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The solution, is tough to deal with,
-but it needs to be talked about, it needs to be developed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us turn out attention to a model of a web page,
-we are going to reduce it down to get to the very bottom.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At the very top we have interactive features,
-programmed with JavaScript listening to your mouse and responding with programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Beneath that, is a broken mess of barely complete functionality,
-that you get when you disable JavaScript in your browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript loads more stuff into the web page,
-so with it disabled, you may not see graphics, or text even.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And beneath that, are the requests to the servers,
-due to tracking and content serving optimization often scattered across networks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, at the very bottom, everything is a web address,
-including what JavaScript may dynamically request.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is another technology called a web socket,
-but for what we are doing we should just think of it as a request as well.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, at the very top,
-the web-page is alive, making requests as needed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the middle, the page is dead,
-it will make a few requests to get started, but it won’t start without JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And on the bottom, we don’t see the web page,
-just all the data requests that will eventually make it come to life.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I mention the middle because long ago you could read a web page,
-when you downloaded it and read it off-line.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But today, web pages are no longer documents,
-they are programs that require a constant connection to the internet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To deal with walled gardens today,
-we have to work on the bottom and top level, as the middle, just does not work anymore.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The bottom level, with all the requests including web sockets can be proxied,
-it is just a bunch of internet addresses.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/http-party/node-http-proxy">proxy</a>, is a tool that intercepts the request being made,
-and then just pretends that it is a browser, and passes that request on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you are communicating with a secure website,
-not your browser, but it will negotiate the security with it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your browser will setup a secure connection with the proxy,
-but the proxy will setup its own secure connection with whatever you are requesting.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when the proxy receives data, it gets a decrypted version,
-that data can then be edited before it is sent to your CUSTOM browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here the data traffic can be cleaned of the walled garden garbage,
-junk can be filtered out for enhanced security.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in certain cased, your own AI,
-can do some problem solving as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then once the result of the request is cleaned,
-it is sent back to your browser.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It must be a special modified browser,
-that further disables more walled garden stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The proxy taking over the request,
-and stripping off the walled garden stuff at the request level…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Is easily detectable by off the shelf browsers,
-so you will need an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=Electron+Tutorial">Electron</a> of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=NW.js+tutorial">NW.js</a> based custom browser.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point, we can have our requests cleaned up,
-and turn on JavaScript, which will now make more requests.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That will now again return cleaned data,
-there will be less tracking, less propaganda, less hidden advertising.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your AI will be watching for trouble,
-and because you are in control.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are now able to use a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=What+Is+A+Visual+Programming+Language">Visual Programming Language</a>,
-to merge multiple websites into a single super feed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where your AI or you can tag and sort the cleaned content,
-and the internet can become fun again.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The web browsing experience becomes very different here,
-but all the stuff you cared for is still here, and ow under a better UI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A User Interface that you can reshape,
-you can make a simple HTML snapshot of all your favorites.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And browse it on an ancient phone,
-with JavaScript disabled.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Proxy and The Custom Browser,
-are a one two punch.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Wherever it is imperfect today, it can adapt in the future,
-it is flexible enough to account for any and all future countermeasures.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your desktop can send a feed of all your favorite data,
-under an amazing interface to your closed phone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This data will be free of all the walled garden stuff,
-so it is accessible over a phone.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now I must reveal something about this technology,
-that may not sit right with you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it is only because,
-you don’t yet know it is the right thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You see, this browser, is actually,
-a visual programming environment first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Its primary purpose is not to clean data,
-but to help you learn programming, and help you integrate with your own AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not a trick, as you learn programming,
-you rise above the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are not a simple consumer,
-you become more.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Proxy and The Visual Programming Language does not exist yet,
-but that may not be bad news.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learn JavaScript programming, customize Electron,
-and begin developing your own Proxy and Visual Programming Language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even though the technology is not quit here,
-you have been invited into the world of programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To build your own vision of a Visual Language and Re-Programmable Browser,
-it is a pretty good start, to a pretty powerful and promising startup.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make the future,
-programmable.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-06-10T03:51:32.098Z">June 9, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:31<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-10/poem-1561.avif" aria-label="Cover for The Internet Has A Problem; And Here Is How You Can Solve It, full size">
+            <img src="https://catpea.github.io/chapter-10/poem-1561.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Internet Has A Problem; And Here Is How You Can Solve It" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:31
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-10/poem-1561.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-10/poem-1561.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-10/poem-1561.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Slowly, all your favorite internet brands,<br>will close a loop around the content you find fun.</p>
+<p>Eliminating all the ways,<br>that help you control what you see.</p>
+<p>The best advertising,<br>is the one you never notice.</p>
+<p>Which is your favorite phone,<br>because that is not what you should be using.</p>
+<p>Closed source is not the security model,<br>you should be relying on.</p>
+<hr>
+<p>Internet technology is not for greed,<br>it is for connecting the world together.</p>
+<p>It is for sharing worthy ideas,<br>it is for learning.</p>
+<p>Walled Gardens and Closed Source,<br>are terrible ideas.</p>
+<p>And that they are ever closing in on you,<br>is dangerous enough, not to use your brand-name phones.</p>
+<hr>
+<p>The solution, is tough to deal with,<br>but it needs to be talked about, it needs to be developed.</p>
+<p>Let us turn out attention to a model of a web page,<br>we are going to reduce it down to get to the very bottom.</p>
+<hr>
+<p>At the very top we have interactive features,<br>programmed with JavaScript listening to your mouse and responding with programs.</p>
+<p>Beneath that, is a broken mess of barely complete functionality,<br>that you get when you disable JavaScript in your browser.</p>
+<p>JavaScript loads more stuff into the web page,<br>so with it disabled, you may not see graphics, or text even.</p>
+<p>And beneath that, are the requests to the servers,<br>due to tracking and content serving optimization often scattered across networks.</p>
+<p>Here, at the very bottom, everything is a web address,<br>including what JavaScript may dynamically request.</p>
+<p>There is another technology called a web socket,<br>but for what we are doing we should just think of it as a request as well.</p>
+<hr>
+<p>So, at the very top,<br>the web-page is alive, making requests as needed.</p>
+<p>In the middle, the page is dead,<br>it will make a few requests to get started, but it won’t start without JavaScript.</p>
+<p>And on the bottom, we don’t see the web page,<br>just all the data requests that will eventually make it come to life.</p>
+<hr>
+<p>I mention the middle because long ago you could read a web page,<br>when you downloaded it and read it off-line.</p>
+<p>But today, web pages are no longer documents,<br>they are programs that require a constant connection to the internet.</p>
+<p>To deal with walled gardens today,<br>we have to work on the bottom and top level, as the middle, just does not work anymore.</p>
+<hr>
+<p>The bottom level, with all the requests including web sockets can be proxied,<br>it is just a bunch of internet addresses.</p>
+<p>A <a href="https://github.com/http-party/node-http-proxy">proxy</a>, is a tool that intercepts the request being made,<br>and then just pretends that it is a browser, and passes that request on.</p>
+<p>When you are communicating with a secure website,<br>not your browser, but it will negotiate the security with it.</p>
+<p>Your browser will setup a secure connection with the proxy,<br>but the proxy will setup its own secure connection with whatever you are requesting.</p>
+<p>So when the proxy receives data, it gets a decrypted version,<br>that data can then be edited before it is sent to your CUSTOM browser.</p>
+<p>Here the data traffic can be cleaned of the walled garden garbage,<br>junk can be filtered out for enhanced security.</p>
+<p>And in certain cased, your own AI,<br>can do some problem solving as well.</p>
+<p>And then once the result of the request is cleaned,<br>it is sent back to your browser.</p>
+<hr>
+<p>It must be a special modified browser,<br>that further disables more walled garden stuff.</p>
+<p>The proxy taking over the request,<br>and stripping off the walled garden stuff at the request level…</p>
+<p>Is easily detectable by off the shelf browsers,<br>so you will need an <a href="https://www.youtube.com/results?search_query=Electron+Tutorial">Electron</a> of <a href="https://www.youtube.com/results?search_query=NW.js+tutorial">NW.js</a> based custom browser.</p>
+<hr>
+<p>At this point, we can have our requests cleaned up,<br>and turn on JavaScript, which will now make more requests.</p>
+<p>That will now again return cleaned data,<br>there will be less tracking, less propaganda, less hidden advertising.</p>
+<p>Your AI will be watching for trouble,<br>and because you are in control.</p>
+<p>You are now able to use a <a href="https://www.youtube.com/results?search_query=What+Is+A+Visual+Programming+Language">Visual Programming Language</a>,<br>to merge multiple websites into a single super feed.</p>
+<p>Where your AI or you can tag and sort the cleaned content,<br>and the internet can become fun again.</p>
+<hr>
+<p>The web browsing experience becomes very different here,<br>but all the stuff you cared for is still here, and ow under a better UI.</p>
+<p>A User Interface that you can reshape,<br>you can make a simple HTML snapshot of all your favorites.</p>
+<p>And browse it on an ancient phone,<br>with JavaScript disabled.</p>
+<hr>
+<p>The Proxy and The Custom Browser,<br>are a one two punch.</p>
+<p>Wherever it is imperfect today, it can adapt in the future,<br>it is flexible enough to account for any and all future countermeasures.</p>
+<hr>
+<p>Your desktop can send a feed of all your favorite data,<br>under an amazing interface to your closed phone.</p>
+<p>This data will be free of all the walled garden stuff,<br>so it is accessible over a phone.</p>
+<hr>
+<p>Now I must reveal something about this technology,<br>that may not sit right with you.</p>
+<p>But it is only because,<br>you don’t yet know it is the right thing.</p>
+<p>You see, this browser, is actually,<br>a visual programming environment first.</p>
+<p>Its primary purpose is not to clean data,<br>but to help you learn programming, and help you integrate with your own AI.</p>
+<p>It is not a trick, as you learn programming,<br>you rise above the browser.</p>
+<p>You are not a simple consumer,<br>you become more.</p>
+<hr>
+<p>The Proxy and The Visual Programming Language does not exist yet,<br>but that may not be bad news.</p>
+<p>Learn JavaScript programming, customize Electron,<br>and begin developing your own Proxy and Visual Programming Language.</p>
+<p>Even though the technology is not quit here,<br>you have been invited into the world of programming.</p>
+<p>To build your own vision of a Visual Language and Re-Programmable Browser,<br>it is a pretty good start, to a pretty powerful and promising startup.</p>
+<p>Make the future,<br>programmable.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/http-party/node-http-proxy">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>proxy</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/http-party/node-http-proxy</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=Electron+Tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Electron</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=Electron+Tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=NW.js+tutorial">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>NW.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=NW.js+tutorial</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=What+Is+A+Visual+Programming+Language">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Visual Programming Language</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=What+Is+A+Visual+Programming+Language</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">internet</span><span class="chip">web</span><span class="chip">proxy</span><span class="chip">browser</span><span class="chip">javascript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/http-party/node-http-proxy">
+              <span class="text-truncate">proxy</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=Electron+Tutorial">
+              <span class="text-truncate">Electron</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=NW.js+tutorial">
+              <span class="text-truncate">NW.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=What+Is+A+Visual+Programming+Language">
+              <span class="text-truncate">Visual Programming Language</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/4e55391c-ca92-4dde-8836-4f52028ce5a4/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Historic Breakthrough: Artificial Intelligence Conquers Aging</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/0bc3dedd-01ee-4c71-8670-1e10d44d0f5d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">The Worker Queue Explained For The New Programmer</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0bc3dedd-01ee-4c71-8670-1e10d44d0f5d/">
+              <img src="https://catpea.github.io/chapter-10/poem-1562.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Worker Queue Explained For The New Programmer</span>
+                <span class="fg-3 fs-xs">June 11, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/47448ebe-0ece-4981-b932-3ce0e0712e97/">
+              <img src="https://catpea.github.io/chapter-10/poem-1558.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Computer Program Is Just A Neat Little Machine</span>
+                <span class="fg-3 fs-xs">June 7, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4357d9ff-9762-4175-806d-2c7454ca611c/">
+              <img src="https://catpea.github.io/chapter-10/poem-1569.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Helping New Programmers Code Big; Or, The Aim Of Visual Programming</span>
+                <span class="fg-3 fs-xs">June 18, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a7ca74fd-1573-41ff-ae58-317f72af2484/">
+              <img src="https://catpea.github.io/chapter-10/poem-1555.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Free As In Speech, Great As In Mind; Or, Visual Programming As A Right, And Great Idea</span>
+                <span class="fg-3 fs-xs">June 4, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

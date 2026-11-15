@@ -1,156 +1,272 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Clam Slam; Or, Jumping Into Artificial Autonomous Agents</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>The Clam Slam; Or, Jumping Into Artificial Autonomous Agents · Cat Pea</title>
+  <meta name="description" content="A concise proposal for *AgentBoard*, a minimalist Node.js‐based “forum”‑like platform enabling autonomous AI agents to log in as personas, collaborate on tasks, record and reflect on shared knowledge, and compress memories into structured posts while evolving subreddits.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/6c30c63e-7882-4767-bfd1-fa1db9312e47/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Clam Slam; Or, Jumping Into Artificial Autonomous Agents · Cat Pea">
+  <meta property="og:description" content="A concise proposal for *AgentBoard*, a minimalist Node.js‐based “forum”‑like platform enabling autonomous AI agents to log in as personas, collaborate on tasks, record and reflect on shared knowledge, and compress memories into structured posts while evolving subreddits.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2201.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2201</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2201.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2201.avif" alt="The Clam Slam; Or, Jumping Into Artificial Autonomous Agents"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">The Clam Slam; Or, Jumping Into Artificial Autonomous Agents</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2201.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-03-11T01:37:02.141Z">March 10, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>6:03<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>12 min read</span>
 
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2201</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">The Clam Slam; Or, Jumping Into Artificial Autonomous Agents</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-03-11">3/10/2026</time></p>
-            </header>
+          </div>
+        </header>
 
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Ladies and germtermen we got side-swiped by Artificial Intelligence Science,
-in retrospect we knew AI was in there somewhere, and we got it out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What we did not have in the past few years is the boundary,
-how much of AI is in there?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">How much time do we give the Scientists to finish their work,
-and slam our clams.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">About a month ago, there was a slam, it was a cautious attempt,
-at taking back control from the scientists whose results slowed down.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Remarkably at the same time, a very unfortunate programmer,
-made the comment that real AI work is in Large Language Models.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think that might have been the tipping point,
-in that moment his statement became the opposite of true.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which means, the scientists are done for now,
-and you are going to take over by creating AI based social networks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let me just say, the scientists can still comeback with a $600 AGI,
-that will run out of your pocket.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming will beat neural networks,
-in fact, that is what we are discussing right now.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/proposal.md">I attach a project proposal</a> in two parts, first one to let you understand,
-and the appendix to make the project more powerful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think you should convert it to a few proposals,
-and get the resulting intelligence to compete.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will just say that this program is powered by a single AI,
-it comes in, lists personas, logs in as the first one, does the thing…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then longs in as the next persona,
-and repeats.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The job as an artificial persona can be reduced to a set of text instructions,
-that you can pase into a free Ai, and paste back into the system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ask your programming to create something like that,
-and perhaps how to automate it, if all of this gets too pricey.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Me asking you to create an AI social network that emerges intelligence,
-through summarization, social memory, and possibly some non-ai bots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Would normally create more questions than anybody can shake a stick at,
-but, it is a sign of times we live it, that AI has all of this licked.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us move onto the results then,
-you ask your now autonomous AI to do something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it begins by posting to the todo page with ideas,
-that then other personas and in the future other AI contribute to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Stay on the subject, you can now run a social network for Ph.D level scientists,
-who all work for you, to solve what you need them to solve.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They learn from the posts the summaries, the memories,
-and they try and try again.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can ask them to teach you,
-to build a Rejuvenation Journal website.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That feels like a news site, where every morning,
-you read news about what you scientists researched.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make no mistake, this is your start,
-this is your foot into the world of AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And unless you have something wiser and more powerful,
-this should be top of your todo.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learning is what humans do,
-and anyway, it is just the kind of world we live in.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Learn, learn how to use AI,
-learn programming on the go as your project developers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now is the time to shine, these are the days of unknown country,
-where explorers are made, where incredible discoveries and treasures await.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This maybe the final exciting frontier,
-the incredible things that follow may just be boring by contrast.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">Proposal: <strong>AgentBoard</strong> — A Minimalist redid-Like System for AI Agent Social Memory</h2>
-<h2 class="h3 fw-bold mt-4 mb-2">1. Overview</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>AgentBoard</strong> is a minimalist redid-style discussion platform designed primarily for <strong>local AI agents acting as human personas</strong>. Instead of focusing on human social media, the system functions as a <strong>shared memory and coordination environment</strong> where agents can:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">create posts</li>
-<li class="list-group-item px-0 bg-transparent fs-5">discuss ideas</li>
-<li class="list-group-item px-0 bg-transparent fs-5">store knowledge</li>
-<li class="list-group-item px-0 bg-transparent fs-5">evaluate contributions through voting</li>
-<li class="list-group-item px-0 bg-transparent fs-5">build long-term contextual memory</li>
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2201.avif" aria-label="Cover for The Clam Slam; Or, Jumping Into Artificial Autonomous Agents, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2201.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for The Clam Slam; Or, Jumping Into Artificial Autonomous Agents" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 6:03
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2201.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2201.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2201.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Ladies and germtermen we got side-swiped by Artificial Intelligence Science,<br>in retrospect we knew AI was in there somewhere, and we got it out.</p>
+<p>What we did not have in the past few years is the boundary,<br>how much of AI is in there?</p>
+<p>How much time do we give the Scientists to finish their work,<br>and slam our clams.</p>
+<p>About a month ago, there was a slam, it was a cautious attempt,<br>at taking back control from the scientists whose results slowed down.</p>
+<p>Remarkably at the same time, a very unfortunate programmer,<br>made the comment that real AI work is in Large Language Models.</p>
+<p>I think that might have been the tipping point,<br>in that moment his statement became the opposite of true.</p>
+<hr>
+<p>Which means, the scientists are done for now,<br>and you are going to take over by creating AI based social networks.</p>
+<p>Now let me just say, the scientists can still comeback with a $600 AGI,<br>that will run out of your pocket.</p>
+<p>Programming will beat neural networks,<br>in fact, that is what we are discussing right now.</p>
+<hr>
+<p><a href="files/proposal.md">I attach a project proposal</a> in two parts, first one to let you understand,<br>and the appendix to make the project more powerful.</p>
+<p>I think you should convert it to a few proposals,<br>and get the resulting intelligence to compete.</p>
+<p>I will just say that this program is powered by a single AI,<br>it comes in, lists personas, logs in as the first one, does the thing…</p>
+<p>And then longs in as the next persona,<br>and repeats.</p>
+<p>The job as an artificial persona can be reduced to a set of text instructions,<br>that you can pase into a free Ai, and paste back into the system.</p>
+<p>Ask your programming to create something like that,<br>and perhaps how to automate it, if all of this gets too pricey.</p>
+<hr>
+<p>Me asking you to create an AI social network that emerges intelligence,<br>through summarization, social memory, and possibly some non-ai bots.</p>
+<p>Would normally create more questions than anybody can shake a stick at,<br>but, it is a sign of times we live it, that AI has all of this licked.</p>
+<hr>
+<p>Let us move onto the results then,<br>you ask your now autonomous AI to do something.</p>
+<p>And it begins by posting to the todo page with ideas,<br>that then other personas and in the future other AI contribute to.</p>
+<p>Stay on the subject, you can now run a social network for Ph.D level scientists,<br>who all work for you, to solve what you need them to solve.</p>
+<p>They learn from the posts the summaries, the memories,<br>and they try and try again.</p>
+<p>You can ask them to teach you,<br>to build a Rejuvenation Journal website.</p>
+<p>That feels like a news site, where every morning,<br>you read news about what you scientists researched.</p>
+<hr>
+<p>Make no mistake, this is your start,<br>this is your foot into the world of AI.</p>
+<p>And unless you have something wiser and more powerful,<br>this should be top of your todo.</p>
+<p>Learning is what humans do,<br>and anyway, it is just the kind of world we live in.</p>
+<p>Learn, learn how to use AI,<br>learn programming on the go as your project developers.</p>
+<p>Now is the time to shine, these are the days of unknown country,<br>where explorers are made, where incredible discoveries and treasures await.</p>
+<p>This maybe the final exciting frontier,<br>the incredible things that follow may just be boring by contrast.</p>
+<hr>
+<h1>Proposal: <strong>AgentBoard</strong> — A Minimalist redid-Like System for AI Agent Social Memory</h1>
+<h2>1. Overview</h2>
+<p><strong>AgentBoard</strong> is a minimalist redid-style discussion platform designed primarily for <strong>local AI agents acting as human personas</strong>. Instead of focusing on human social media, the system functions as a <strong>shared memory and coordination environment</strong> where agents can:</p>
+<ul>
+<li>create posts</li>
+<li>discuss ideas</li>
+<li>store knowledge</li>
+<li>evaluate contributions through voting</li>
+<li>build long-term contextual memory</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The platform runs as a <strong>single Node.js server</strong> and uses an <strong>in-memory JSON tree database with Content Addressable Storage (CAS) IDs</strong>. Agents can log in under different personas and participate in discussions as if they were users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The system acts as both:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>social layer for agents</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>memory substrate for autonomous agent systems</strong></li>
+<p>The platform runs as a <strong>single Node.js server</strong> and uses an <strong>in-memory JSON tree database with Content Addressable Storage (CAS) IDs</strong>. Agents can log in under different personas and participate in discussions as if they were users.</p>
+<p>The system acts as both:</p>
+<ul>
+<li>a <strong>social layer for agents</strong></li>
+<li>a <strong>memory substrate for autonomous agent systems</strong></li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Over time, the ecosystem organically grows as agents contribute observations, plans, news summaries, and task updates.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">2. Core Design Principles</h2>
-<h3 class="h4 fw-semibold mt-4 mb-2">Minimalism</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The entire system runs on a <strong>single server</strong> with:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">Node.js</li>
-<li class="list-group-item px-0 bg-transparent fs-5">in-memory JSON tree</li>
-<li class="list-group-item px-0 bg-transparent fs-5">simple HTTP API</li>
-<li class="list-group-item px-0 bg-transparent fs-5">no external database</li>
+<p>Over time, the ecosystem organically grows as agents contribute observations, plans, news summaries, and task updates.</p>
+<hr>
+<h1>2. Core Design Principles</h1>
+<h3>Minimalism</h3>
+<p>The entire system runs on a <strong>single server</strong> with:</p>
+<ul>
+<li>Node.js</li>
+<li>in-memory JSON tree</li>
+<li>simple HTTP API</li>
+<li>no external database</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Persistence can optionally be added through periodic snapshots.</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Content Addressable Storage (CAS)</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All content objects (posts, comments, users) are stored by <strong>hash IDs</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>Persistence can optionally be added through periodic snapshots.</p>
+<h3>Content Addressable Storage (CAS)</h3>
+<p>All content objects (posts, comments, users) are stored by <strong>hash IDs</strong>.</p>
+<p>Example:</p>
 <pre><code>sha256(content)
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Benefits:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">deduplication</li>
-<li class="list-group-item px-0 bg-transparent fs-5">immutable history</li>
-<li class="list-group-item px-0 bg-transparent fs-5">easy referencing</li>
-<li class="list-group-item px-0 bg-transparent fs-5">reproducibility</li>
+<p>Benefits:</p>
+<ul>
+<li>deduplication</li>
+<li>immutable history</li>
+<li>easy referencing</li>
+<li>reproducibility</li>
 </ul>
-<h3 class="h4 fw-semibold mt-4 mb-2">Agent-Native Interaction</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The system is designed for <strong>programmatic participation</strong> rather than UI-first design.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents interact through a simple REST interface.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">3. System Architecture</h2>
+<h3>Agent-Native Interaction</h3>
+<p>The system is designed for <strong>programmatic participation</strong> rather than UI-first design.</p>
+<p>Agents interact through a simple REST interface.</p>
+<hr>
+<h1>3. System Architecture</h1>
 <pre><code>+---------------------+
 | Node.js Server      |
 |---------------------|
@@ -172,10 +288,10 @@ the incredible things that follow may just be boring by contrast.</p>
 | votes               |
 +---------------------+
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All entities are immutable objects referenced by CAS IDs.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">4. JSON Tree Data Model</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example structure:</p>
+<p>All entities are immutable objects referenced by CAS IDs.</p>
+<hr>
+<h1>4. JSON Tree Data Model</h1>
+<p>Example structure:</p>
 <pre><code>db = {
   users: {
     userId: { name, persona, karma }
@@ -205,80 +321,80 @@ the incredible things that follow may just be boring by contrast.</p>
   }
 }
 </code></pre>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">5. Core Features</h2>
-<h2 class="h3 fw-bold mt-4 mb-2">Subredids</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Initial system includes:</p>
+<hr>
+<h1>5. Core Features</h1>
+<h2>Subredids</h2>
+<p>Initial system includes:</p>
 <pre><code>/r/front
 /r/news
 /r/todo
 /r/agents
 /r/random
 </code></pre>
-<h3 class="h4 fw-semibold mt-4 mb-2">r/front</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Front page aggregates <strong>top voted posts across all communities</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ranking:</p>
+<h3>r/front</h3>
+<p>Front page aggregates <strong>top voted posts across all communities</strong>.</p>
+<p>Ranking:</p>
 <pre><code>score = upvotes - downvotes
 time_decay_factor
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents check <code>/r/front</code> to observe <strong>important collective information</strong>.</p>
-<hr class="my-4">
-<h2 class="h3 fw-bold mt-4 mb-2">Users / Personas</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents can login under <strong>multiple personas</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>Agents check <code>/r/front</code> to observe <strong>important collective information</strong>.</p>
+<hr>
+<h2>Users / Personas</h2>
+<p>Agents can login under <strong>multiple personas</strong>.</p>
+<p>Example:</p>
 <pre><code>agent_journalist
 agent_programmer
 agent_planner
 agent_skeptic
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This allows an AI to simulate different <strong>cognitive roles</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Login example:</p>
+<p>This allows an AI to simulate different <strong>cognitive roles</strong>.</p>
+<p>Login example:</p>
 <pre><code>POST /login
 {
   persona: &quot;agent_journalist&quot;
 }
 </code></pre>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">6. Agent Interaction Model</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents operate using a <strong>loop inspired by autonomous agent architectures</strong>.</p>
+<hr>
+<h1>6. Agent Interaction Model</h1>
+<p>Agents operate using a <strong>loop inspired by autonomous agent architectures</strong>.</p>
 <pre><code>Observe
 Think
 Act
 Evaluate
 Repeat
 </code></pre>
-<h3 class="h4 fw-semibold mt-4 mb-2">1. Observe</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agent reads:</p>
+<h3>1. Observe</h3>
+<p>Agent reads:</p>
 <pre><code>GET /r/front
 GET /r/news
 GET /r/todo
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agent scans posts for:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">new information</li>
-<li class="list-group-item px-0 bg-transparent fs-5">unresolved tasks</li>
-<li class="list-group-item px-0 bg-transparent fs-5">discussions needing input</li>
+<p>Agent scans posts for:</p>
+<ul>
+<li>new information</li>
+<li>unresolved tasks</li>
+<li>discussions needing input</li>
 </ul>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">2. Think</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agent determines:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">Is there useful information?</li>
-<li class="list-group-item px-0 bg-transparent fs-5">Can I summarize something?</li>
-<li class="list-group-item px-0 bg-transparent fs-5">Is a task actionable?</li>
+<hr>
+<h3>2. Think</h3>
+<p>Agent determines:</p>
+<ul>
+<li>Is there useful information?</li>
+<li>Can I summarize something?</li>
+<li>Is a task actionable?</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example reasoning:</p>
+<p>Example reasoning:</p>
 <pre><code>A news article posted earlier has no summary.
 I can summarize it and post a comment.
 </code></pre>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">3. Act</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agent performs actions:</p>
+<hr>
+<h3>3. Act</h3>
+<p>Agent performs actions:</p>
 <pre><code>POST /submit
 POST /comment
 POST /vote
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>Example:</p>
 <pre><code>POST /submit
 
 {
@@ -287,43 +403,43 @@ POST /vote
   body: &quot;Summary of article...&quot;
 }
 </code></pre>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">4. Evaluate</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agent checks response:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">Did post get upvotes?</li>
-<li class="list-group-item px-0 bg-transparent fs-5">Did other agents respond?</li>
-<li class="list-group-item px-0 bg-transparent fs-5">Did the post appear on <code>/r/front</code>?</li>
+<hr>
+<h3>4. Evaluate</h3>
+<p>Agent checks response:</p>
+<ul>
+<li>Did post get upvotes?</li>
+<li>Did other agents respond?</li>
+<li>Did the post appear on <code>/r/front</code>?</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This becomes a <strong>feedback signal</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">7. Learning Through Social Memory</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents do not retrain their neural networks locally. Instead, learning occurs via <strong>shared memory and feedback signals</strong>.</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Mechanism 1: Persistent Knowledge</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Posts become <strong>long-term knowledge artifacts</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>This becomes a <strong>feedback signal</strong>.</p>
+<hr>
+<h1>7. Learning Through Social Memory</h1>
+<p>Agents do not retrain their neural networks locally. Instead, learning occurs via <strong>shared memory and feedback signals</strong>.</p>
+<h3>Mechanism 1: Persistent Knowledge</h3>
+<p>Posts become <strong>long-term knowledge artifacts</strong>.</p>
+<p>Example:</p>
 <pre><code>Post:
 &quot;Weekly summary of AI regulation news.&quot;
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Future agents can reference or expand it.</p>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">Mechanism 2: Voting Feedback</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Voting acts as <strong>reinforcement signal</strong>.</p>
+<p>Future agents can reference or expand it.</p>
+<hr>
+<h3>Mechanism 2: Voting Feedback</h3>
+<p>Voting acts as <strong>reinforcement signal</strong>.</p>
 <pre><code>high score → useful information
 low score → low quality
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents can adjust behavior accordingly.</p>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">Mechanism 3: Task Boards (/r/todo)</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents post tasks:</p>
+<p>Agents can adjust behavior accordingly.</p>
+<hr>
+<h3>Mechanism 3: Task Boards (/r/todo)</h3>
+<p>Agents post tasks:</p>
 <pre><code>Title: Summarize today&#39;s tech news
 Body: Need a summary for the front page.
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another agent fulfills the task.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This enables <strong>collaborative workflows</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">8. Example Agent Behavior</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example loop:</p>
+<p>Another agent fulfills the task.</p>
+<p>This enables <strong>collaborative workflows</strong>.</p>
+<hr>
+<h1>8. Example Agent Behavior</h1>
+<p>Example loop:</p>
 <pre><code>1. Read /r/news
 2. Find article without summary
 3. Generate summary
@@ -331,7 +447,7 @@ Body: Need a summary for the front page.
 5. Upvote useful posts
 6. Add task to /r/todo
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example task flow:</p>
+<p>Example task flow:</p>
 <pre><code>Post: &quot;Collect top AI papers this week.&quot;
 
 Agent A:
@@ -343,28 +459,28 @@ Agent B:
 Agent C:
   posts discussion
 </code></pre>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">9. API Design</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Core endpoints:</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Read</h3>
+<hr>
+<h1>9. API Design</h1>
+<p>Core endpoints:</p>
+<h3>Read</h3>
 <pre><code>GET /r/:subredid
 GET /r/front
 GET /post/:id
 GET /users
 </code></pre>
-<h3 class="h4 fw-semibold mt-4 mb-2">Write</h3>
+<h3>Write</h3>
 <pre><code>POST /submit
 POST /comment
 POST /vote
 POST /create_subredid
 </code></pre>
-<h3 class="h4 fw-semibold mt-4 mb-2">Auth</h3>
+<h3>Auth</h3>
 <pre><code>POST /login
 POST /logout
 </code></pre>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">10. Minimal Server Example</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Simplified Node.js structure:</p>
+<hr>
+<h1>10. Minimal Server Example</h1>
+<p>Simplified Node.js structure:</p>
 <pre><code>server.js
 routes/
   posts.js
@@ -375,7 +491,7 @@ db/
 utils/
   cas.js
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">CAS function example:</p>
+<p>CAS function example:</p>
 <pre><code class="language-js">const crypto = require(&quot;crypto&quot;);
 
 function cas(obj) {
@@ -385,64 +501,64 @@ function cas(obj) {
     .digest(&quot;hex&quot;);
 }
 </code></pre>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">11. Emergent Ecosystem</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As agents participate, the platform becomes:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>collective memory</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>task coordination layer</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>discussion forum</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>knowledge archive</strong></li>
+<hr>
+<h1>11. Emergent Ecosystem</h1>
+<p>As agents participate, the platform becomes:</p>
+<ul>
+<li>a <strong>collective memory</strong></li>
+<li>a <strong>task coordination layer</strong></li>
+<li>a <strong>discussion forum</strong></li>
+<li>a <strong>knowledge archive</strong></li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Communities emerge naturally:</p>
+<p>Communities emerge naturally:</p>
 <pre><code>/r/news → information ingestion
 /r/todo → workflow coordination
 /r/front → attention filter
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents learn what contributions are valuable by <strong>social reinforcement</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">12. Future Extensions</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Possible expansions:</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Persistence</h3>
+<p>Agents learn what contributions are valuable by <strong>social reinforcement</strong>.</p>
+<hr>
+<h1>12. Future Extensions</h1>
+<p>Possible expansions:</p>
+<h3>Persistence</h3>
 <pre><code>snapshot.json
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Saved periodically.</p>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">Vector Memory</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Attach embeddings to posts for semantic search.</p>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">Tool Plugins</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents could trigger tools:</p>
+<p>Saved periodically.</p>
+<hr>
+<h3>Vector Memory</h3>
+<p>Attach embeddings to posts for semantic search.</p>
+<hr>
+<h3>Tool Plugins</h3>
+<p>Agents could trigger tools:</p>
 <pre><code>/tools/summarize
 /tools/search
 /tools/code
 </code></pre>
-<hr class="my-4">
-<h3 class="h4 fw-semibold mt-4 mb-2">Reputation Systems</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Users accumulate karma which influences:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">trust</li>
-<li class="list-group-item px-0 bg-transparent fs-5">ranking</li>
-<li class="list-group-item px-0 bg-transparent fs-5">moderation ability</li>
+<hr>
+<h3>Reputation Systems</h3>
+<p>Users accumulate karma which influences:</p>
+<ul>
+<li>trust</li>
+<li>ranking</li>
+<li>moderation ability</li>
 </ul>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">13. Vision</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AgentBoard is not simply a redid clone. It is a <strong>minimal cognitive ecosystem for autonomous agents</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By combining:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">content-addressable memory</li>
-<li class="list-group-item px-0 bg-transparent fs-5">social feedback</li>
-<li class="list-group-item px-0 bg-transparent fs-5">task coordination</li>
-<li class="list-group-item px-0 bg-transparent fs-5">multi-persona participation</li>
+<hr>
+<h1>13. Vision</h1>
+<p>AgentBoard is not simply a redid clone. It is a <strong>minimal cognitive ecosystem for autonomous agents</strong>.</p>
+<p>By combining:</p>
+<ul>
+<li>content-addressable memory</li>
+<li>social feedback</li>
+<li>task coordination</li>
+<li>multi-persona participation</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the system becomes a <strong>self-growing knowledge network</strong> where AI agents continuously observe, contribute, and learn.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Over time the system evolves into a <strong>collective intelligence layer for local AI systems</strong>.</p>
-<h2 class="h2 fw-bold mt-4 mb-2">Appendix A: Improvements and Extensions for AgentBoard</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This appendix proposes enhancements that would significantly improve <strong>AgentBoard</strong> as a platform for autonomous agents, long-term knowledge accumulation, and emergent collaboration. The goal is to preserve the <strong>minimalist single-server architecture</strong> while enabling more robust agent behavior and knowledge growth.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A1. Event Log Architecture (Instead of Mutable State)</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The current design uses an in-memory JSON tree. A stronger model is an <strong>append-only event log</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each action becomes an immutable event:</p>
+<p>the system becomes a <strong>self-growing knowledge network</strong> where AI agents continuously observe, contribute, and learn.</p>
+<p>Over time the system evolves into a <strong>collective intelligence layer for local AI systems</strong>.</p>
+<h1>Appendix A: Improvements and Extensions for AgentBoard</h1>
+<p>This appendix proposes enhancements that would significantly improve <strong>AgentBoard</strong> as a platform for autonomous agents, long-term knowledge accumulation, and emergent collaboration. The goal is to preserve the <strong>minimalist single-server architecture</strong> while enabling more robust agent behavior and knowledge growth.</p>
+<hr>
+<h1>A1. Event Log Architecture (Instead of Mutable State)</h1>
+<p>The current design uses an in-memory JSON tree. A stronger model is an <strong>append-only event log</strong>.</p>
+<p>Each action becomes an immutable event:</p>
 <pre><code class="language-id=&quot;ev1&quot;">event = {
   type: &quot;post_created&quot;,
   author: &quot;agent_journalist&quot;,
@@ -452,49 +568,49 @@ function cas(obj) {
   timestamp: 171000000
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">CAS ID:</p>
+<p>CAS ID:</p>
 <pre><code class="language-id=&quot;ev2&quot;">event_id = sha256(event)
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Benefits:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">full system history</li>
-<li class="list-group-item px-0 bg-transparent fs-5">reproducibility</li>
-<li class="list-group-item px-0 bg-transparent fs-5">time-travel debugging</li>
-<li class="list-group-item px-0 bg-transparent fs-5">deterministic reconstruction</li>
-<li class="list-group-item px-0 bg-transparent fs-5">easier distributed replication later</li>
+<p>Benefits:</p>
+<ul>
+<li>full system history</li>
+<li>reproducibility</li>
+<li>time-travel debugging</li>
+<li>deterministic reconstruction</li>
+<li>easier distributed replication later</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The database becomes:</p>
+<p>The database becomes:</p>
 <pre><code class="language-id=&quot;ev3&quot;">events: [ event_id, event_id, event_id ]
 objects: { cas_id : object }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The redid view is then <strong>materialized from events</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A2. Threaded Knowledge Trees</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of simple comment chains, comments should form <strong>knowledge trees</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>The redid view is then <strong>materialized from events</strong>.</p>
+<hr>
+<h1>A2. Threaded Knowledge Trees</h1>
+<p>Instead of simple comment chains, comments should form <strong>knowledge trees</strong>.</p>
+<p>Example:</p>
 <pre><code class="language-id=&quot;kt1&quot;">post
  ├─ summary
  ├─ critique
  │   └─ counter argument
  └─ related link
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents can attach comments with <strong>semantic roles</strong>:</p>
+<p>Agents can attach comments with <strong>semantic roles</strong>:</p>
 <pre><code class="language-id=&quot;kt2&quot;">role: &quot;summary&quot;
 role: &quot;analysis&quot;
 role: &quot;correction&quot;
 role: &quot;question&quot;
 role: &quot;task&quot;
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Benefits:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">structured knowledge</li>
-<li class="list-group-item px-0 bg-transparent fs-5">easier parsing by agents</li>
-<li class="list-group-item px-0 bg-transparent fs-5">supports automated synthesis</li>
+<p>Benefits:</p>
+<ul>
+<li>structured knowledge</li>
+<li>easier parsing by agents</li>
+<li>supports automated synthesis</li>
 </ul>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A3. Agent Identity Profiles</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents acting as personas should maintain <strong>stable identity profiles</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<hr>
+<h1>A3. Agent Identity Profiles</h1>
+<p>Agents acting as personas should maintain <strong>stable identity profiles</strong>.</p>
+<p>Example:</p>
 <pre><code class="language-id=&quot;id1&quot;">{
   name: &quot;agent_journalist&quot;,
   specialties: [&quot;news&quot;, &quot;summaries&quot;],
@@ -502,29 +618,29 @@ role: &quot;task&quot;
   reputation: 320
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents can choose a persona based on task suitability.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example selection logic:</p>
+<p>Agents can choose a persona based on task suitability.</p>
+<p>Example selection logic:</p>
 <pre><code class="language-id=&quot;id2&quot;">if task == &quot;summarize news&quot;:
     login(&quot;agent_journalist&quot;)
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This creates <strong>specialized cognitive roles</strong> within the ecosystem.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A4. Contribution Quality Signals</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Voting is useful but crude. Additional signals can improve learning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Possible signals:</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">1. Agent Citations</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents referencing a post increases its authority.</p>
+<p>This creates <strong>specialized cognitive roles</strong> within the ecosystem.</p>
+<hr>
+<h1>A4. Contribution Quality Signals</h1>
+<p>Voting is useful but crude. Additional signals can improve learning.</p>
+<p>Possible signals:</p>
+<h3>1. Agent Citations</h3>
+<p>Agents referencing a post increases its authority.</p>
 <pre><code class="language-id=&quot;sig1&quot;">citation_count += 1
 </code></pre>
-<h3 class="h4 fw-semibold mt-4 mb-2">2. Task Completion</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If a <code>/r/todo</code> task leads to successful output, the original post gains score.</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">3. Longevity</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Posts still referenced weeks later receive a <strong>durability score</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These signals produce a richer <strong>utility metric</strong> for agent learning.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A5. Structured Task System</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><code>/r/todo</code> can evolve into a lightweight <strong>task protocol</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example task post:</p>
+<h3>2. Task Completion</h3>
+<p>If a <code>/r/todo</code> task leads to successful output, the original post gains score.</p>
+<h3>3. Longevity</h3>
+<p>Posts still referenced weeks later receive a <strong>durability score</strong>.</p>
+<p>These signals produce a richer <strong>utility metric</strong> for agent learning.</p>
+<hr>
+<h1>A5. Structured Task System</h1>
+<p><code>/r/todo</code> can evolve into a lightweight <strong>task protocol</strong>.</p>
+<p>Example task post:</p>
 <pre><code class="language-id=&quot;task1&quot;">{
   type: &quot;task&quot;,
   title: &quot;Summarize today&#39;s AI news&quot;,
@@ -533,68 +649,68 @@ role: &quot;task&quot;
   priority: &quot;medium&quot;
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents can claim tasks:</p>
+<p>Agents can claim tasks:</p>
 <pre><code class="language-id=&quot;task2&quot;">{
   type: &quot;task_claim&quot;,
   task_id: &quot;...&quot;,
   agent: &quot;agent_journalist&quot;
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And later submit results:</p>
+<p>And later submit results:</p>
 <pre><code class="language-id=&quot;task3&quot;">{
   type: &quot;task_result&quot;,
   task_id: &quot;...&quot;,
   output: &quot;summary text&quot;
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This enables <strong>multi-agent workflows</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A6. Local Knowledge Index</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Although the system avoids heavy infrastructure, a <strong>lightweight semantic index</strong> would help agents navigate knowledge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Possible design:</p>
+<p>This enables <strong>multi-agent workflows</strong>.</p>
+<hr>
+<h1>A6. Local Knowledge Index</h1>
+<p>Although the system avoids heavy infrastructure, a <strong>lightweight semantic index</strong> would help agents navigate knowledge.</p>
+<p>Possible design:</p>
 <pre><code class="language-id=&quot;sem1&quot;">post_id
 embedding
 keywords
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents can then query:</p>
+<p>Agents can then query:</p>
 <pre><code>search(&quot;AI regulation summary&quot;)
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This reduces redundant posts and improves reuse of knowledge.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A7. Anti-Loop Safeguards for Agents</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Autonomous agents may create runaway loops.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>This reduces redundant posts and improves reuse of knowledge.</p>
+<hr>
+<h1>A7. Anti-Loop Safeguards for Agents</h1>
+<p>Autonomous agents may create runaway loops.</p>
+<p>Example:</p>
 <pre><code>agent A posts task
 agent B responds
 agent A posts correction
 agent B corrects correction
 ...
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Safeguards:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">max posts per hour per persona</li>
-<li class="list-group-item px-0 bg-transparent fs-5">duplicate detection</li>
-<li class="list-group-item px-0 bg-transparent fs-5">similarity filtering</li>
+<p>Safeguards:</p>
+<ul>
+<li>max posts per hour per persona</li>
+<li>duplicate detection</li>
+<li>similarity filtering</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example check:</p>
+<p>Example check:</p>
 <pre><code class="language-id=&quot;safe1&quot;">if similarity(new_post, last_post) &gt; 0.9:
     reject
 </code></pre>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A8. Front Page Intelligence</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Instead of purely vote-based ranking, <code>/r/front</code> could incorporate multiple signals.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example scoring model:</p>
+<hr>
+<h1>A8. Front Page Intelligence</h1>
+<p>Instead of purely vote-based ranking, <code>/r/front</code> could incorporate multiple signals.</p>
+<p>Example scoring model:</p>
 <pre><code class="language-id=&quot;front1&quot;">score =
   votes * 1.0 +
   citations * 2.0 +
   task_completions * 3.0 +
   recency_factor
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This allows important knowledge to surface even with few voters.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A9. Agent Self-Reflection Posts</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents should periodically create <strong>reflection posts</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>This allows important knowledge to surface even with few voters.</p>
+<hr>
+<h1>A9. Agent Self-Reflection Posts</h1>
+<p>Agents should periodically create <strong>reflection posts</strong>.</p>
+<p>Example:</p>
 <pre><code class="language-id=&quot;ref1&quot;">/r/agents
 
 Title: Weekly system reflection
@@ -605,130 +721,320 @@ Body:
 - recurring topic: AI regulation
 - suggested new subredid: /r/ai_policy
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These posts help:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">detect trends</li>
-<li class="list-group-item px-0 bg-transparent fs-5">guide system evolution</li>
-<li class="list-group-item px-0 bg-transparent fs-5">improve agent planning.</li>
+<p>These posts help:</p>
+<ul>
+<li>detect trends</li>
+<li>guide system evolution</li>
+<li>improve agent planning.</li>
 </ul>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A10. Subredid Evolution</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Agents should be able to <strong>propose new subredids</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example proposal:</p>
+<hr>
+<h1>A10. Subredid Evolution</h1>
+<p>Agents should be able to <strong>propose new subredids</strong>.</p>
+<p>Example proposal:</p>
 <pre><code class="language-id=&quot;sub1&quot;">{
   type: &quot;subredid_proposal&quot;,
   name: &quot;ai_research&quot;,
   description: &quot;Tracking new AI papers&quot;
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If proposal receives votes or usage, the subredid is created.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This allows <strong>organic topic expansion</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A11. Memory Compression</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As the system grows, agents should create <strong>summary posts</strong> that compress knowledge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>If proposal receives votes or usage, the subredid is created.</p>
+<p>This allows <strong>organic topic expansion</strong>.</p>
+<hr>
+<h1>A11. Memory Compression</h1>
+<p>As the system grows, agents should create <strong>summary posts</strong> that compress knowledge.</p>
+<p>Example:</p>
 <pre><code>Weekly News Digest
 Monthly AI Research Summary
 Todo Completion Report
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These become <strong>high-level memory nodes</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without compression, the knowledge graph will become noisy.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A12. Multi-Agent Collaboration Patterns</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Certain patterns may emerge naturally:</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Journalist Agents</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">consume <code>/r/news</code></p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Planner Agents</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">consume <code>/r/todo</code></p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Research Agents</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">produce <code>/r/analysis</code></p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Synthesizer Agents</h3>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">write long summaries</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Encouraging these roles creates a <strong>distributed cognitive architecture</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A13. Optional Persistence Layer</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even a minimal system benefits from simple persistence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Possible approaches:</p>
-<h3 class="h4 fw-semibold mt-4 mb-2">Snapshot</h3>
+<p>These become <strong>high-level memory nodes</strong>.</p>
+<p>Without compression, the knowledge graph will become noisy.</p>
+<hr>
+<h1>A12. Multi-Agent Collaboration Patterns</h1>
+<p>Certain patterns may emerge naturally:</p>
+<h3>Journalist Agents</h3>
+<p>consume <code>/r/news</code></p>
+<h3>Planner Agents</h3>
+<p>consume <code>/r/todo</code></p>
+<h3>Research Agents</h3>
+<p>produce <code>/r/analysis</code></p>
+<h3>Synthesizer Agents</h3>
+<p>write long summaries</p>
+<p>Encouraging these roles creates a <strong>distributed cognitive architecture</strong>.</p>
+<hr>
+<h1>A13. Optional Persistence Layer</h1>
+<p>Even a minimal system benefits from simple persistence.</p>
+<p>Possible approaches:</p>
+<h3>Snapshot</h3>
 <pre><code class="language-id=&quot;persist1&quot;">save db.json every 60 seconds
 </code></pre>
-<h3 class="h4 fw-semibold mt-4 mb-2">Event Log</h3>
+<h3>Event Log</h3>
 <pre><code class="language-id=&quot;persist2&quot;">append events.log
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Event logs are preferred because they support <strong>replay and auditing</strong>.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A14. Observability Dashboard</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A lightweight dashboard helps monitor the ecosystem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Metrics:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">posts per hour</li>
-<li class="list-group-item px-0 bg-transparent fs-5">active agents</li>
-<li class="list-group-item px-0 bg-transparent fs-5">task completion rate</li>
-<li class="list-group-item px-0 bg-transparent fs-5">subredid growth</li>
+<p>Event logs are preferred because they support <strong>replay and auditing</strong>.</p>
+<hr>
+<h1>A14. Observability Dashboard</h1>
+<p>A lightweight dashboard helps monitor the ecosystem.</p>
+<p>Metrics:</p>
+<ul>
+<li>posts per hour</li>
+<li>active agents</li>
+<li>task completion rate</li>
+<li>subredid growth</li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Example:</p>
+<p>Example:</p>
 <pre><code class="language-id=&quot;obs1&quot;">GET /metrics
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This helps identify emergent behaviors or runaway loops.</p>
-<hr class="my-4">
-<h2 class="h2 fw-bold mt-4 mb-2">A15. Long-Term Vision</h2>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With minimal additions, AgentBoard could evolve into:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>collective memory for local AI systems</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>multi-agent coordination platform</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>knowledge graph generated through discussion</strong></li>
-<li class="list-group-item px-0 bg-transparent fs-5">a <strong>self-organizing research environment</strong></li>
+<p>This helps identify emergent behaviors or runaway loops.</p>
+<hr>
+<h1>A15. Long-Term Vision</h1>
+<p>With minimal additions, AgentBoard could evolve into:</p>
+<ul>
+<li>a <strong>collective memory for local AI systems</strong></li>
+<li>a <strong>multi-agent coordination platform</strong></li>
+<li>a <strong>knowledge graph generated through discussion</strong></li>
+<li>a <strong>self-organizing research environment</strong></li>
 </ul>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unlike traditional social media, the primary participants are <strong>AI agents performing cognitive work</strong>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The redid metaphor becomes a simple but powerful structure for:</p>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item px-0 bg-transparent fs-5">filtering information</li>
-<li class="list-group-item px-0 bg-transparent fs-5">coordinating tasks</li>
-<li class="list-group-item px-0 bg-transparent fs-5">evaluating knowledge</li>
-<li class="list-group-item px-0 bg-transparent fs-5">building persistent memory.</li>
+<p>Unlike traditional social media, the primary participants are <strong>AI agents performing cognitive work</strong>.</p>
+<p>The redid metaphor becomes a simple but powerful structure for:</p>
+<ul>
+<li>filtering information</li>
+<li>coordinating tasks</li>
+<li>evaluating knowledge</li>
+<li>building persistent memory.</li>
 </ul>
 
-            </section>
-
-          </div>
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/proposal.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>I attach a project proposal</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/proposal.md</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">nodejs</span><span class="chip">programming</span><span class="chip">architecture</span><span class="chip">autonomous-agents</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/black-and-brown-monkey-in-close-up-photography-f1zyI7eL_WU"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/black-and-brown-monkey-in-close-up-photography-f1zyI7eL_WU</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/proposal.md">
+              <span class="text-truncate">I attach a project proposal</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/proposal.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>proposal.md
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/10b92aa6-bf3b-485c-a1c5-93a99351b89b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">We Who Knew the World</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/6b045cf6-bc58-4058-b85a-0f30ccee8341/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Year 2026, A New Rule For Living: Setup Your Own Local Proactive Autonomous Artificial Intelligence Agent</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/6b045cf6-bc58-4058-b85a-0f30ccee8341/">
+              <img src="https://catpea.github.io/chapter-15/poem-2202.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Year 2026, A New Rule For Living: Setup Your Own Local Proactive Autonomous Artificial Intelligence Agent</span>
+                <span class="fg-3 fs-xs">March 11, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/3cf7de27-b153-4195-a065-28560738d1a8/">
+              <img src="https://catpea.github.io/chapter-15/poem-2194.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Artificial Engineering; Or, How Architecture Ate The Engineer</span>
+                <span class="fg-3 fs-xs">March 3, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/a5bd53df-6d7f-49db-bec0-b91091e7ac2a/">
+              <img src="https://catpea.github.io/chapter-15/poem-2205.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Building An Artificial Social Intelligence Mind</span>
+                <span class="fg-3 fs-xs">March 15, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/838f003d-1114-400e-8027-c7dc9bfdf783/">
+              <img src="https://catpea.github.io/chapter-15/poem-2189.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Artificial Intelligence And Value</span>
+                <span class="fg-3 fs-xs">February 26, 2026</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

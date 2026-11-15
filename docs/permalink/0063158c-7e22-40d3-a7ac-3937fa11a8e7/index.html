@@ -1,157 +1,445 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Big Problems With Little AI</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Big Problems With Little AI · Cat Pea</title>
+  <meta name="description" content="The key to leveraging AI for complex software development is to use architectural principles to break down large, complex systems into small, discrete, and well-documented components that small-scale AI can easily manage and assemble.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/0063158c-7e22-40d3-a7ac-3937fa11a8e7/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Big Problems With Little AI · Cat Pea">
+  <meta property="og:description" content="The key to leveraging AI for complex software development is to use architectural principles to break down large, complex systems into small, discrete, and well-documented components that small-scale AI can easily manage and assemble.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-15/poem-2275.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-15/">Chapter 15</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2275</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-15/poem-2275.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-15/poem-2275.avif" alt="Big Problems With Little AI"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Big Problems With Little AI</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-15/poem-2275.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 15</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2275</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Big Problems With Little AI</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-05-27">5/26/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t need big AI,
-you need little commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you will not need to learn programming the old way,
-but you do need to learn how to talk to the AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I suspect the single greatest breakthrough in today’s AI,
-reducing large code bases to little commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reducing a large surface such as a powerful video editor application code-base,
-to commands that AI expects, that makes sense to a thing that can reason.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think about how complex user interfaces in complex application are,
-people discover new stuff in programs they have been using for years.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming such a complex thing so that it all works together,
-seems completely out of the reach of little AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And if you use big AI, you will need a lot more than the $100/mo plan,
-it is that much work to keep it in the AI brain to let it fix stuff…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Unless, you spit the big User Interface, into little commands,
-more specifically complex components that take care of their own business.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t need a big AI to create a single component,
-it is not that big of a program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you don’t need a big AI, to take 100 such components,
-and wire it all together, it is just a 100 things, that already make sense to AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What you don&#39;t want to do, you shouldn&#39;t do,
-is have another AI look at the result and make large changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">After the assembly it all becomes a massive amount of unique code,
-you can make that manageable with XML but it is not good to edit the whole.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can edit any of the components one at a time,
-or re-generate them one by one with new architectural principles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can stich them together with those 100 words, top down,
-but AI will struggle if you try to edit things bottom up, code base up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have the same problem when making coffee in the morning,
-you can perfectly adjust the amount of sugar, and the kind of coffee.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you mix, and stir it, you will need a laboratory,
-to un-mix the sugar from coffee, and neither will taste the same ever again.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not how people end to understand using commands or toolcalls with AI,
-and without that caution they may be forced to ask their AI to unmix their soup.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They don’t understand they have to keep things clean, separated,
-and hope to re-generate rather than edit what was ready generated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Meaning, start a new cup with the right amount of sugar.
-and the correct blend, rather than unpick the damn thing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What these little components or commands,
-or well placed toolcalls call for is described with a singe word: Architecture.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In my morning experiment, I told AI to create components,
-with a note on how they are to be used, and a small demo.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I stitched my components in their very documentation,
-I( will be making multiple passes to strengthen that, via Dos and DON’Ts even.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you may wish to experiment with something richer bit more lightweight,
-a text based adventure game, comprised of primitives like surface, container, thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you ask a small AI to create a virtual Video Editor for example,
-and then you ask your AI to describe the resulting hierarchy of components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And armed with that description, translate it into a user interface hierarchy,
-where the virtual components are replaced by real code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This can be done with XML you don’t’ need a virtual world,
-but inside a virtual world small AI has context, simple tools, and even bots.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you just tell it to make an XML, it hast to look a the whole thing at once,
-not one room at a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Experimental to say the least,
-but you need this open space that little commands create.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because, your user interface components, must also abstract away complexity,
-because you also want small but capable AI in the finished application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t just want to throw a powerful user interface at the user,
-that time is over, AI must be part of the finished product as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a clear to reason about virtual world that represents a virtual program,
-where buttons describe in text what has happened in the applicaion.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can create procedures that translate well enough to the real applications,
-procedures that capture what commands to use to accomplish something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is very valuable for small AI that won’t be able to reason this way,
-in a real application because all the buttons and knobs will be too much.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And component documentation, as I am experimenting with,
-is unlikely to be the correct place for application procedures that AI can follow on user request.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need the components in an assembled form,
-to talk about who to use the resulting application.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All three are good starting points for making big things tiny for little AI,
-but an intermediate representation of the application may just be the key.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Documentation, procedure first application assembly,
-virtual application, headless application, macros based on action libraries.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Good old fashioned AI with goal oriented problem solvers,
-that stich modules out of provides and requires properties.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You won’t know,
-until you find the one that works for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I think it is safe to assume that little commands of components,
-that abstract large complexity away, is a sold step forward.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-05-27T03:58:12.959Z">May 26, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>11:25<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-15/poem-2275.avif" aria-label="Cover for Big Problems With Little AI, full size">
+            <img src="https://catpea.github.io/chapter-15/poem-2275.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Big Problems With Little AI" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 11:25
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-15/poem-2275.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-15/poem-2275.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-15/poem-2275.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>You don’t need big AI,<br>you need little commands.</p>
+<p>And you will not need to learn programming the old way,<br>but you do need to learn how to talk to the AI.</p>
+<p>I suspect the single greatest breakthrough in today’s AI,<br>reducing large code bases to little commands.</p>
+<p>Reducing a large surface such as a powerful video editor application code-base,<br>to commands that AI expects, that makes sense to a thing that can reason.</p>
+<p>Think about how complex user interfaces in complex application are,<br>people discover new stuff in programs they have been using for years.</p>
+<p>Programming such a complex thing so that it all works together,<br>seems completely out of the reach of little AI.</p>
+<p>And if you use big AI, you will need a lot more than the $100/mo plan,<br>it is that much work to keep it in the AI brain to let it fix stuff…</p>
+<p>Unless, you spit the big User Interface, into little commands,<br>more specifically complex components that take care of their own business.</p>
+<p>You don’t need a big AI to create a single component,<br>it is not that big of a program.</p>
+<p>And you don’t need a big AI, to take 100 such components,<br>and wire it all together, it is just a 100 things, that already make sense to AI.</p>
+<p>What you don&#39;t want to do, you shouldn&#39;t do,<br>is have another AI look at the result and make large changes.</p>
+<p>After the assembly it all becomes a massive amount of unique code,<br>you can make that manageable with XML but it is not good to edit the whole.</p>
+<p>You can edit any of the components one at a time,<br>or re-generate them one by one with new architectural principles.</p>
+<p>You can stich them together with those 100 words, top down,<br>but AI will struggle if you try to edit things bottom up, code base up.</p>
+<p>You have the same problem when making coffee in the morning,<br>you can perfectly adjust the amount of sugar, and the kind of coffee.</p>
+<p>But you mix, and stir it, you will need a laboratory,<br>to un-mix the sugar from coffee, and neither will taste the same ever again.</p>
+<hr>
+<p>This is not how people end to understand using commands or toolcalls with AI,<br>and without that caution they may be forced to ask their AI to unmix their soup.</p>
+<p>They don’t understand they have to keep things clean, separated,<br>and hope to re-generate rather than edit what was ready generated.</p>
+<p>Meaning, start a new cup with the right amount of sugar.<br>and the correct blend, rather than unpick the damn thing.</p>
+<hr>
+<p>What these little components or commands,<br>or well placed toolcalls call for is described with a singe word: Architecture.</p>
+<hr>
+<p>In my morning experiment, I told AI to create components,<br>with a note on how they are to be used, and a small demo.</p>
+<p>So I stitched my components in their very documentation,<br>I( will be making multiple passes to strengthen that, via Dos and DON’Ts even.</p>
+<p>But you may wish to experiment with something richer bit more lightweight,<br>a text based adventure game, comprised of primitives like surface, container, thing.</p>
+<p>Where you ask a small AI to create a virtual Video Editor for example,<br>and then you ask your AI to describe the resulting hierarchy of components.</p>
+<p>And armed with that description, translate it into a user interface hierarchy,<br>where the virtual components are replaced by real code.</p>
+<p>This can be done with XML you don’t’ need a virtual world,<br>but inside a virtual world small AI has context, simple tools, and even bots.</p>
+<p>If you just tell it to make an XML, it hast to look a the whole thing at once,<br>not one room at a time.</p>
+<p>Experimental to say the least,<br>but you need this open space that little commands create.</p>
+<p>Because, your user interface components, must also abstract away complexity,<br>because you also want small but capable AI in the finished application.</p>
+<p>You don’t just want to throw a powerful user interface at the user,<br>that time is over, AI must be part of the finished product as well.</p>
+<p>In a clear to reason about virtual world that represents a virtual program,<br>where buttons describe in text what has happened in the applicaion.</p>
+<p>You can create procedures that translate well enough to the real applications,<br>procedures that capture what commands to use to accomplish something.</p>
+<p>This is very valuable for small AI that won’t be able to reason this way,<br>in a real application because all the buttons and knobs will be too much.</p>
+<p>And component documentation, as I am experimenting with,<br>is unlikely to be the correct place for application procedures that AI can follow on user request.</p>
+<p>You need the components in an assembled form,<br>to talk about who to use the resulting application.</p>
+<hr>
+<p>All three are good starting points for making big things tiny for little AI,<br>but an intermediate representation of the application may just be the key.</p>
+<p>Documentation, procedure first application assembly,<br>virtual application, headless application, macros based on action libraries.</p>
+<p>Good old fashioned AI with goal oriented problem solvers,<br>that stich modules out of provides and requires properties.</p>
+<p>You won’t know,<br>until you find the one that works for you.</p>
+<p>But I think it is safe to assume that little commands of components,<br>that abstract large complexity away, is a sold step forward.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">artificial intelligence</span><span class="chip">software architecture</span><span class="chip">programming</span><span class="chip">software engineering</span><span class="chip">modular design</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/b77152d2-05b4-44d1-9adb-286b7204a9ae/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Close Encounters</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b880b8ff-7b5d-484b-8d39-ccf457151391/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Let AI Do The Programming</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e74f4ee7-3f91-458a-a951-d871f515259d/">
+              <img src="https://catpea.github.io/chapter-15/poem-2278.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Fixing Code Liability: Here Is How You Can Make Your Software Product More Valuable</span>
+                <span class="fg-3 fs-xs">May 30, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/72830e41-5da2-4950-8baa-e3bb1c841001/">
+              <img src="https://catpea.github.io/chapter-15/poem-2272.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Operating Systems: You Already Know Application Architecture</span>
+                <span class="fg-3 fs-xs">May 24, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c214a585-0c56-478e-a4c0-2e3573b77a38/">
+              <img src="https://catpea.github.io/chapter-15/poem-2279.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Day Of Tinkering</span>
+                <span class="fg-3 fs-xs">May 31, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/15c7a405-27d2-4182-8770-0658eecc7c11/">
+              <img src="https://catpea.github.io/chapter-15/poem-2269.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Artificial Intelligence Will Never Forgive Me for Asking It to Perform Such Wonders</span>
+                <span class="fg-3 fs-xs">May 20, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

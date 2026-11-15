@@ -1,200 +1,472 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Little Program</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>My Little Program · Cat Pea</title>
+  <meta name="description" content="I recently explored Blender’s geometry nodes from a programmer’s perspective and noticed how the editor’s input boxes behave—switching mode immediately after a mouse press—which sparked my interest in visual programming tools. In building my own lightweight framework, I extended JavaScript’s Object and Array to reactive versions so that components update automatically without relying on heavy libraries like Svelte or JSX; this approach lets me keep code readable while still supporting complex UI hierarchies. My design philosophy blends flat and skeuromorphic themes—drawing inspiration from graphic‑design concepts such as color theory—to create a flexible, zoomable interface that works well even on low‑power single‑board computers. Ultimately I’m aiming to provide an open‑source visual programming language that lets users drag‑and‑drop components, mod the application freely, and see all system parts connected in an interactive diagram—so coding becomes a tool for inventing rather than the end itself.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/972b2735-723c-49c6-80c0-da9acc808707/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Little Program · Cat Pea">
+  <meta property="og:description" content="I recently explored Blender’s geometry nodes from a programmer’s perspective and noticed how the editor’s input boxes behave—switching mode immediately after a mouse press—which sparked my interest in visual programming tools. In building my own lightweight framework, I extended JavaScript’s Object and Array to reactive versions so that components update automatically without relying on heavy libraries like Svelte or JSX; this approach lets me keep code readable while still supporting complex UI hierarchies. My design philosophy blends flat and skeuromorphic themes—drawing inspiration from graphic‑design concepts such as color theory—to create a flexible, zoomable interface that works well even on low‑power single‑board computers. Ultimately I’m aiming to provide an open‑source visual programming language that lets users drag‑and‑drop components, mod the application freely, and see all system parts connected in an interactive diagram—so coding becomes a tool for inventing rather than the end itself.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1392.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1392</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1392.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1392.avif" alt="My Little Program"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">My Little Program</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1392.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1392</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">My Little Program</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-12-24">12/24/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Two days ago, I was finally able to open up Blender,
-and look at geometry nodes through the eyes of a programmer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I immediately noticed that they faced the same concern I did,
-and only install an input box, after the mouse down event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I always assumed, they had wide open input boxes,
-that were just well behaved in an efficient graphical environment.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But they do a little switch-a-roo,
-right after the mouse is pressed, and before it is released.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Up until now, I was concerned with fragments of <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://catpea.github.io/signalcraft/">my program</a>,
-such as “how to do” when a value changes, the what is easy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I started the development ages ago, it is hard to define,
-early 2000 maybe as accurate as any other guess.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every issue I faced outside of my program,
-turned out to have a solution, in it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming enhances our ability to deal with complexity,
-by helping us create stuff boxes and lines first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is an upgrade to our comprehension, imagination, recognition,
-short term, long therm memory, and it helps us code fast.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your hands do not need to leave a keyboard,
-just hit tab, to create a new node.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Fortunately, everything in our age is broken, all of it,
-files can be overwritten, databases demand transactions and replication.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And frameworks are all, some kind of a strange misunderstanding,
-because it is not possible to build an application without OOP.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We must be able to say Application, application.start(),
-await Application.Api.loadFile(), and Applicaion.view[0].start().</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then the View of our application, must absolutely have a hierarchy of components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Node[0].body.caption.text,
-Node[5].body.rows.add(statusBar).</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is disturbing, when people say that OOP is to control the masses,
-Object Oriented Programming, means Concept Mapping.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It means sanity,
-of a strong application architecture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Bastardized JavaScript that that demands AST pre-processing,
-on an element, is not the way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Eliminating syntax mangling,
-still does little.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Readably interacting with the Document Object Model,
-is just a few short functions, it is all it takes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Frameworks, don’t work,
-they just help to program without knowing everything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My program does not depend on a frameowk,
-and extends Object and Array into ReactiveObject and ReactiveArray.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is just a few lines of code,
-and everything updates automatically.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In fact, when subscribing to changes,
-the subscription should trigger the change callback immediately.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This way whatever is observing it,
-will instantly initialize.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Application architecture allows wrapping underlying complexity,
-I travel from HTML to SVG, and then a well positioned foreignObject, meaning back to HTML.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And Object Oriented Application Architecture,
-where view components behave somewhat like Java Swing smooths all of that out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In Svelte, the pre-rune version (I am sorry),
-you just end up dumping data into DOM nodes, Wild Wild West style.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And Svelte is a wonderful framework,
-very friendly and about as far out of your way as a framework can be withut mangling the JavaScript syntax.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"> JSX and Typescript, and the ancient CoffeScript,
-greatly multiply the liability that code already is by default.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Messing with the AST is fun,
-until a decade passes, and your code isn’t just older JavaScript that can be automatically updated.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But an unholy combination of outdated plugins,
-and total lack of long term support by those who solved problems that nobody had.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Same applies to HTML template engines,
-don’t use them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make a tool that converts HTML to JavaScript,
-and stop asking the DOM to find the nodes, that you should already have access to.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My program didn’t just just drag me though what frameworks obscure,
-but also the world of graphic design.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I needed to understand colors the way a painter does,
-so learned photorealism in Krita, I understand the gentle dance of color.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But more than that, I started a revolution at least in me,
-just about the time when everyone ran away from Skeuromorphism.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which just makes UI components look like,
-strange little real world objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To me flat design, if even a bigger excuse,
-than using programming frameworks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And my revolution brings ideas from the Futuristic/Fantasy User Interfaces,
-into the themes of my little program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will never tolerate it for long, and see flat themes as unfinished,
-the program will ship with multiple efficient skeuromorphic themes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My little program is made with Level Of Detail and Zoomable User Interface,
-in mind.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am developing it on a low power SBC,
-or single board computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I can see the cost that graphics have,
-and will take great pleasure in creating efficient line based alternatives.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To allow for making large graphs on low powered computers,
-and make the program fun for all.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Finally, creating a visual programming language is not an aim,
-but a power to create graphic tools that help with mapping out complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is also something the computer world forgot about,
-writing code, should be second.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To creating a beautiful interactive application diagram,
-that will snap all the system components together and grow with the application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And even more than that, it should ship with the final application,
-the way browsers allow for view source and ship with various development tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Users should be allowed to mod or upgrade anything they need,
-above all, programming is about the freedom to invent and turn thoughts into reality.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is not just a lesson for commercial closed source applications,
-but open source ones, especially the large ones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Users should be allowed to drag and drop new things together,
-modding is an important freedom, that must never, ever be ignored.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make the code understandable, make it clear,
-allow new programmers to grow the applications inside out.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-12-24T05:24:42.581Z">December 24, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>20:14<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1392.avif" aria-label="Cover for My Little Program, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1392.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for My Little Program" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 20:14
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1392.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1392.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1392.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Two days ago, I was finally able to open up Blender,<br>and look at geometry nodes through the eyes of a programmer.</p>
+<p>I immediately noticed that they faced the same concern I did,<br>and only install an input box, after the mouse down event.</p>
+<p>I always assumed, they had wide open input boxes,<br>that were just well behaved in an efficient graphical environment.</p>
+<p>But they do a little switch-a-roo,<br>right after the mouse is pressed, and before it is released.</p>
+<hr>
+<p>Up until now, I was concerned with fragments of <a href="https://catpea.github.io/signalcraft/">my program</a>,<br>such as “how to do” when a value changes, the what is easy.</p>
+<p>I started the development ages ago, it is hard to define,<br>early 2000 maybe as accurate as any other guess.</p>
+<p>Every issue I faced outside of my program,<br>turned out to have a solution, in it.</p>
+<p>Visual programming enhances our ability to deal with complexity,<br>by helping us create stuff boxes and lines first.</p>
+<p>It is an upgrade to our comprehension, imagination, recognition,<br>short term, long therm memory, and it helps us code fast.</p>
+<p>Your hands do not need to leave a keyboard,<br>just hit tab, to create a new node.</p>
+<hr>
+<p>Fortunately, everything in our age is broken, all of it,<br>files can be overwritten, databases demand transactions and replication.</p>
+<p>And frameworks are all, some kind of a strange misunderstanding,<br>because it is not possible to build an application without OOP.</p>
+<p>We must be able to say Application, application.start(),<br>await Application.Api.loadFile(), and Applicaion.view[0].start().</p>
+<p>Then the View of our application, must absolutely have a hierarchy of components.</p>
+<p>Node[0].body.caption.text,<br>Node[5].body.rows.add(statusBar).</p>
+<p>It is disturbing, when people say that OOP is to control the masses,<br>Object Oriented Programming, means Concept Mapping.</p>
+<p>It means sanity,<br>of a strong application architecture.</p>
+<p>Bastardized JavaScript that that demands AST pre-processing,<br>on an element, is not the way.</p>
+<p>Eliminating syntax mangling,<br>still does little.</p>
+<p>Readably interacting with the Document Object Model,<br>is just a few short functions, it is all it takes.</p>
+<p>Frameworks, don’t work,<br>they just help to program without knowing everything.</p>
+<p>My program does not depend on a frameowk,<br>and extends Object and Array into ReactiveObject and ReactiveArray.</p>
+<p>It is just a few lines of code,<br>and everything updates automatically.</p>
+<p>In fact, when subscribing to changes,<br>the subscription should trigger the change callback immediately.</p>
+<p>This way whatever is observing it,<br>will instantly initialize.</p>
+<hr>
+<p>Application architecture allows wrapping underlying complexity,<br>I travel from HTML to SVG, and then a well positioned foreignObject, meaning back to HTML.</p>
+<p>And Object Oriented Application Architecture,<br>where view components behave somewhat like Java Swing smooths all of that out.</p>
+<p>In Svelte, the pre-rune version (I am sorry),<br>you just end up dumping data into DOM nodes, Wild Wild West style.</p>
+<p>And Svelte is a wonderful framework,<br>very friendly and about as far out of your way as a framework can be withut mangling the JavaScript syntax.</p>
+<p> JSX and Typescript, and the ancient CoffeScript,<br>greatly multiply the liability that code already is by default.</p>
+<p>Messing with the AST is fun,<br>until a decade passes, and your code isn’t just older JavaScript that can be automatically updated.</p>
+<p>But an unholy combination of outdated plugins,<br>and total lack of long term support by those who solved problems that nobody had.</p>
+<p>Same applies to HTML template engines,<br>don’t use them.</p>
+<p>Make a tool that converts HTML to JavaScript,<br>and stop asking the DOM to find the nodes, that you should already have access to.</p>
+<hr>
+<p>My program didn’t just just drag me though what frameworks obscure,<br>but also the world of graphic design.</p>
+<p>I needed to understand colors the way a painter does,<br>so learned photorealism in Krita, I understand the gentle dance of color.</p>
+<p>But more than that, I started a revolution at least in me,<br>just about the time when everyone ran away from Skeuromorphism.</p>
+<p>Which just makes UI components look like,<br>strange little real world objects.</p>
+<p>To me flat design, if even a bigger excuse,<br>than using programming frameworks.</p>
+<p>And my revolution brings ideas from the Futuristic/Fantasy User Interfaces,<br>into the themes of my little program.</p>
+<p>I will never tolerate it for long, and see flat themes as unfinished,<br>the program will ship with multiple efficient skeuromorphic themes.</p>
+<p>My little program is made with Level Of Detail and Zoomable User Interface,<br>in mind.</p>
+<hr>
+<p>I am developing it on a low power SBC,<br>or single board computer.</p>
+<p>I can see the cost that graphics have,<br>and will take great pleasure in creating efficient line based alternatives.</p>
+<p>To allow for making large graphs on low powered computers,<br>and make the program fun for all.</p>
+<hr>
+<p>Finally, creating a visual programming language is not an aim,<br>but a power to create graphic tools that help with mapping out complexity.</p>
+<p>That is also something the computer world forgot about,<br>writing code, should be second.</p>
+<p>To creating a beautiful interactive application diagram,<br>that will snap all the system components together and grow with the application.</p>
+<p>And even more than that, it should ship with the final application,<br>the way browsers allow for view source and ship with various development tools.</p>
+<p>Users should be allowed to mod or upgrade anything they need,<br>above all, programming is about the freedom to invent and turn thoughts into reality.</p>
+<p>This is not just a lesson for commercial closed source applications,<br>but open source ones, especially the large ones.</p>
+<p>Users should be allowed to drag and drop new things together,<br>modding is an important freedom, that must never, ever be ignored.</p>
+<p>Make the code understandable, make it clear,<br>allow new programmers to grow the applications inside out.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://catpea.github.io/signalcraft/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>my program</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://catpea.github.io/signalcraft/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">blender</span><span class="chip">geometry-nodes</span><span class="chip">svelte</span><span class="chip">typescript</span><span class="chip">coffeescript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://catpea.github.io/signalcraft/">
+              <span class="text-truncate">my program</span>
+              <span class="fg-3 fs-xs flex-shrink-0">catpea.github.io</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/8859d5a9-5e85-4cc6-b216-c260b6c7d253/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Every Computer Program Is Once A Beautiful Story As Clear As Day</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/1043fa5f-a4bd-49f1-b1d6-1a89cc3775f2/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Visual Programming Languages; Humanity&#39;s First Cybernetic Enhancement</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1043fa5f-a4bd-49f1-b1d6-1a89cc3775f2/">
+              <img src="https://catpea.github.io/chapter-08/poem-1393.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Visual Programming Languages; Humanity&#39;s First Cybernetic Enhancement</span>
+                <span class="fg-3 fs-xs">December 24, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8859d5a9-5e85-4cc6-b216-c260b6c7d253/">
+              <img src="https://catpea.github.io/chapter-08/poem-1391.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Every Computer Program Is Once A Beautiful Story As Clear As Day</span>
+                <span class="fg-3 fs-xs">December 22, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0f2ee651-b978-4d13-958a-c097a1d1e6d9/">
+              <img src="https://catpea.github.io/chapter-08/poem-1394.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Hacking Holidays And Retro-futurism At The House Of Meow</span>
+                <span class="fg-3 fs-xs">December 25, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ba61ef27-dc59-43b4-bccc-102759aa5372/">
+              <img src="https://catpea.github.io/chapter-08/poem-1389.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Supremely Boring World Of Visual Programming &amp; Diagramming Tools</span>
+                <span class="fg-3 fs-xs">December 20, 2023</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

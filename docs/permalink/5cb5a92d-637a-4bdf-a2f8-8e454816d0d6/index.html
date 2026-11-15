@@ -1,246 +1,515 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming And Med School</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Programming And Med School · Cat Pea</title>
+  <meta name="description" content="The author argues that programming is a powerful way to learn medicine, because it lets you model biological processes—neurons firing, heart rhythm, enzyme cascades, blood flow, drug binding, immune responses and gene regulation—and turn those models into visual simulations that aid memorization. He then shows how artificial intelligence speeds up this learning: by using Node.js worker threads he parallelises tasks on low‑powered machines, and AI supplies native‑worker code patterns (without external libraries) to handle operations such as HTML generation, file copying, image processing, etc., turning the program into a “memory palace” for anatomy. The post ends with a quick anecdote of learning new languages by rewriting existing scripts, underscoring how programming, AI and biology can fuse into an effective educational tool.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/5cb5a92d-637a-4bdf-a2f8-8e454816d0d6/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming And Med School · Cat Pea">
+  <meta property="og:description" content="The author argues that programming is a powerful way to learn medicine, because it lets you model biological processes—neurons firing, heart rhythm, enzyme cascades, blood flow, drug binding, immune responses and gene regulation—and turn those models into visual simulations that aid memorization. He then shows how artificial intelligence speeds up this learning: by using Node.js worker threads he parallelises tasks on low‑powered machines, and AI supplies native‑worker code patterns (without external libraries) to handle operations such as HTML generation, file copying, image processing, etc., turning the program into a “memory palace” for anatomy. The post ends with a quick anecdote of learning new languages by rewriting existing scripts, underscoring how programming, AI and biology can fuse into an effective educational tool.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-14/poem-2066.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/education/">Education</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-14/">Chapter 14</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2066</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-14/poem-2066.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-14/poem-2066.avif" alt="Programming And Med School"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Programming And Med School</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-14/poem-2066.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/education/">
+              <i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 14</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2066</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Programming And Med School</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-10-26">10/26/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I don&#39;t know much about Med School,
-but I know much about programming, so hear me out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have long had a suspicion that programming,
-is the only powerful approach to authentic education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In conspiratorial terms, just to get your attention,
-“They are not teaching you coding to stop you from learning.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The foremost problem with this notion is that,
-if you want to go to med school programming will do little for you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The correct way to solve this, is to understand,
-that you can easily memorize human anatomy by becoming an artist.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Creating you own Codex Leicester,
-will not only make a precious keepsake, but build a memory palace.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming, goes beyond pencils and paper,
-you can make games, simulations, and visualizations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And not only memorize hierarchies,
-but sequences, processes, interactions, and mechanisms.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can model how neurons fire in networks,
-how the heart’s electrical system maintains rhythm.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or how enzymes catalyze reactions,
-in cascades.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You could simulate blood flow through arteries,
-how drugs bind to receptors and alter pathways.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even complex phenomena,
-immune responses, gene regulation.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have ended the programming won’t help you with med-school argument,
-it will make you more than you can imagine today.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that was before AI, that was the primitive answer,
-the one that challenged you to more side education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Today, with the power of AI,
-your programming education is not a support system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is the heart of your education,
-the heart of the greatness of your knowledge.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The crucible of transcendence,
-the flame of invention.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This has nothing to do with Computational Biology,
-this is just what learning programming does for you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will now briefly describe evidence of how artificial intelligence,
-enhances and greatly accelerates your programming education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I will use a quick example from my own world,
-where I am learning something new about programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am designing a program that converts text, audio and even video,
-on inexpensive low powered computers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My target computer reports 4 CPUs, at 1800 MHz
-my 15 year old desktop by contrast has 8 CPUs at 4000 Mhz.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To be precise, both computers have a single chip,
-that feature multiple cores.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The core approach is cheaper to manufacture,
-and more energy efficient.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a result modern programming requires,
-that you write code that does not just directly execute.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But instead creates a small program,
-that will be sent for execution on one of the available CPUs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can no longer write instructions in a single column,
-you now have to create tasks called threads that execute on a CPU core.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve been using a singe core thus far,
-because I was analyzing requirements for my programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But now time came to stop executing code,
-and instead send tasks up for execution.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I work with node.js,
-as it allows me to write for multiple operating systems.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I can execute my programs on a web page,
-which is to say client computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or a proper network server,
-where many tasks from many users can be handled.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My ultimate aim, as you might have guesses already,
-is to write a program that uses users browsers as threads.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where I can just point some computers at a web page,
-and speed up task processing, such as video encoding.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This can really help an inexpensive computer,
-complete intensive tasks.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But for now, I am practicing the crafting of an architecture,
-that looks like a single CPU program, but uses multiple cores.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Best of both worlds,
-for that I need <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://nodejs.org/api/worker_threads.html">node.js worker threads</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But I used AI to double check, I asked a plain question,
-how can I make use of all my CPUS in a node.js appliciaon.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I explained that I am building a blog engine,
-AI responded with “<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/strategies.md">High-Performance Static Site Generator Strategies for Node.js v25</a>”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which is a small mix of 3rd party libraries that simplify node.js,
-and wonderful explanations of latest efficient patterns.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You would ask a similar question about your programming projects,
-receiving not just links, but complete code snippets.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I tend to avoid 3rd party libraries,
-as they pose some security risks…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I asked a follow up question:
-“I like the Native Worker Threads without external libraries. Can you show me a pattern where I do many kinds of different operations? creating html files, but but also copying files, processing images, etc…”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI responded with:
-“<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/miracle.md">Native Worker Threads Pattern for Multiple Operations,
-Here&#39;s a comprehensive pattern for handling different operations (HTML generation, file copying, asset optimization, etc.) using native Worker Threads</a>”</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This may sound like an ordinary thing,
-but this is a modern miracle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A miracle, that turned some of the best AI researchers,
-into futuristic “theorists”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And even I often feel the pressure to ramble,
-about AI, but I assure you I am not rambling here.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This miracle, is real, is about taking worker_threads,
-and placing it, in your context, in what you are programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Worker threads are confusing,
-but not when AI shows you how to address your needs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, simultaneous processing, worker pools,
-task queues, are not on your reading list.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, are attached to your programming needs,
-where you can see where everything is supposed to go.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Think of my requirements as a skeleton,
-the AI adds the organs, vessels, and connective tissue.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Worker threads become neurons transmitting impulses in parallel, while queues act as the bloodstream carrying resources to where they’re needed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Task schedulers behave like the autonomic nervous system, regulating flow without conscious control.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Shared memory resembles inter-cellular signaling, while synchronization barriers act like membranes ensuring proper exchange.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The miracle is in AI locating the correct programming patterns,
-and transforming them into your needs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that you are now able, to now figure out,
-where everything goes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From needs and context, and program requirements,
-that you yourself have set, and will have trouble recognizing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Lastly, I want to show you how I did this decades ago,
-I would learn languages, by rewriting a popular email script.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I would bring the context of the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/FormMail">FormMail</a> script,
-and search documentation of a new language I was learning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On how the things that FormMail Does,
-are accomplished in the new language I was learning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The more languages I learned,
-the faster I learned new languages.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What you have today, is so much superior,
-that it is foolish not to take a break from school and learn programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is much more to this,
-I already mentioned Computational Biology…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to close, it will suffice to say, AI will not take your job,
-is you are able to conduct a symphony orchestra with its powers.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-10-26T21:57:07.108Z">October 26, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>13:07<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-14/poem-2066.avif" aria-label="Cover for Programming And Med School, full size">
+            <img src="https://catpea.github.io/chapter-14/poem-2066.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Programming And Med School" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 13:07
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-14/poem-2066.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-14/poem-2066.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-14/poem-2066.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I don&#39;t know much about Med School,<br>but I know much about programming, so hear me out.</p>
+<p>I have long had a suspicion that programming,<br>is the only powerful approach to authentic education.</p>
+<p>In conspiratorial terms, just to get your attention,<br>“They are not teaching you coding to stop you from learning.”</p>
+<p>The foremost problem with this notion is that,<br>if you want to go to med school programming will do little for you.</p>
+<p>The correct way to solve this, is to understand,<br>that you can easily memorize human anatomy by becoming an artist.</p>
+<p>Creating you own Codex Leicester,<br>will not only make a precious keepsake, but build a memory palace.</p>
+<p>Programming, goes beyond pencils and paper,<br>you can make games, simulations, and visualizations.</p>
+<p>And not only memorize hierarchies,<br>but sequences, processes, interactions, and mechanisms.</p>
+<p>You can model how neurons fire in networks,<br>how the heart’s electrical system maintains rhythm.</p>
+<p>Or how enzymes catalyze reactions,<br>in cascades.</p>
+<p>You could simulate blood flow through arteries,<br>how drugs bind to receptors and alter pathways.</p>
+<p>Even complex phenomena,<br>immune responses, gene regulation.</p>
+<hr>
+<p>I have ended the programming won’t help you with med-school argument,<br>it will make you more than you can imagine today.</p>
+<p>But that was before AI, that was the primitive answer,<br>the one that challenged you to more side education.</p>
+<p>Today, with the power of AI,<br>your programming education is not a support system.</p>
+<p>It is the heart of your education,<br>the heart of the greatness of your knowledge.</p>
+<p>The crucible of transcendence,<br>the flame of invention.</p>
+<p>This has nothing to do with Computational Biology,<br>this is just what learning programming does for you.</p>
+<hr>
+<p>I will now briefly describe evidence of how artificial intelligence,<br>enhances and greatly accelerates your programming education.</p>
+<p>I will use a quick example from my own world,<br>where I am learning something new about programming.</p>
+<p>I am designing a program that converts text, audio and even video,<br>on inexpensive low powered computers.</p>
+<p>My target computer reports 4 CPUs, at 1800 MHz<br>my 15 year old desktop by contrast has 8 CPUs at 4000 Mhz.</p>
+<p>To be precise, both computers have a single chip,<br>that feature multiple cores.</p>
+<p>The core approach is cheaper to manufacture,<br>and more energy efficient.</p>
+<p>As a result modern programming requires,<br>that you write code that does not just directly execute.</p>
+<p>But instead creates a small program,<br>that will be sent for execution on one of the available CPUs.</p>
+<p>You can no longer write instructions in a single column,<br>you now have to create tasks called threads that execute on a CPU core.</p>
+<p>I’ve been using a singe core thus far,<br>because I was analyzing requirements for my programs.</p>
+<p>But now time came to stop executing code,<br>and instead send tasks up for execution.</p>
+<p>I work with node.js,<br>as it allows me to write for multiple operating systems.</p>
+<p>And I can execute my programs on a web page,<br>which is to say client computer.</p>
+<p>Or a proper network server,<br>where many tasks from many users can be handled.</p>
+<hr>
+<p>My ultimate aim, as you might have guesses already,<br>is to write a program that uses users browsers as threads.</p>
+<p>Where I can just point some computers at a web page,<br>and speed up task processing, such as video encoding.</p>
+<p>This can really help an inexpensive computer,<br>complete intensive tasks.</p>
+<p>But for now, I am practicing the crafting of an architecture,<br>that looks like a single CPU program, but uses multiple cores.</p>
+<p>Best of both worlds,<br>for that I need <a href="https://nodejs.org/api/worker_threads.html">node.js worker threads</a>.</p>
+<p>But I used AI to double check, I asked a plain question,<br>how can I make use of all my CPUS in a node.js appliciaon.</p>
+<p>And I explained that I am building a blog engine,<br>AI responded with “<a href="files/strategies.md">High-Performance Static Site Generator Strategies for Node.js v25</a>”</p>
+<p>Which is a small mix of 3rd party libraries that simplify node.js,<br>and wonderful explanations of latest efficient patterns.</p>
+<p>You would ask a similar question about your programming projects,<br>receiving not just links, but complete code snippets.</p>
+<p>I tend to avoid 3rd party libraries,<br>as they pose some security risks…</p>
+<p>So I asked a follow up question:<br>“I like the Native Worker Threads without external libraries. Can you show me a pattern where I do many kinds of different operations? creating html files, but but also copying files, processing images, etc…”</p>
+<p>AI responded with:<br>“<a href="files/miracle.md">Native Worker Threads Pattern for Multiple Operations,<br>Here&#39;s a comprehensive pattern for handling different operations (HTML generation, file copying, asset optimization, etc.) using native Worker Threads</a>”</p>
+<hr>
+<p>This may sound like an ordinary thing,<br>but this is a modern miracle.</p>
+<p>A miracle, that turned some of the best AI researchers,<br>into futuristic “theorists”.</p>
+<p>And even I often feel the pressure to ramble,<br>about AI, but I assure you I am not rambling here.</p>
+<hr>
+<p>This miracle, is real, is about taking worker_threads,<br>and placing it, in your context, in what you are programming.</p>
+<p>Worker threads are confusing,<br>but not when AI shows you how to address your needs.</p>
+<p>Now, simultaneous processing, worker pools,<br>task queues, are not on your reading list.</p>
+<p>But, are attached to your programming needs,<br>where you can see where everything is supposed to go.</p>
+<p>Think of my requirements as a skeleton,<br>the AI adds the organs, vessels, and connective tissue.</p>
+<p>Worker threads become neurons transmitting impulses in parallel, while queues act as the bloodstream carrying resources to where they’re needed.</p>
+<p>Task schedulers behave like the autonomic nervous system, regulating flow without conscious control.</p>
+<p>Shared memory resembles inter-cellular signaling, while synchronization barriers act like membranes ensuring proper exchange.</p>
+<p>The miracle is in AI locating the correct programming patterns,<br>and transforming them into your needs.</p>
+<p>So that you are now able, to now figure out,<br>where everything goes.</p>
+<p>From needs and context, and program requirements,<br>that you yourself have set, and will have trouble recognizing.</p>
+<hr>
+<p>Lastly, I want to show you how I did this decades ago,<br>I would learn languages, by rewriting a popular email script.</p>
+<p>I would bring the context of the <a href="https://github.com/catpea/FormMail">FormMail</a> script,<br>and search documentation of a new language I was learning.</p>
+<p>On how the things that FormMail Does,<br>are accomplished in the new language I was learning.</p>
+<p>The more languages I learned,<br>the faster I learned new languages.</p>
+<hr>
+<p>What you have today, is so much superior,<br>that it is foolish not to take a break from school and learn programming.</p>
+<p>There is much more to this,<br>I already mentioned Computational Biology…</p>
+<p>But to close, it will suffice to say, AI will not take your job,<br>is you are able to conduct a symphony orchestra with its powers.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://nodejs.org/api/worker_threads.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>node.js worker threads</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://nodejs.org/api/worker_threads.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/strategies.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>High-Performance Static Site Generator Strategies for Node.js v25</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/strategies.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/miracle.md">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Native Worker Threads Pattern for Multiple Operations,
-Here&amp;#39;s a comprehensive pattern for handling different operations (HTML generation, file copying, asset optimization, etc.) using native Worker Threads</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/miracle.md</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/FormMail">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>FormMail</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/FormMail</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">nodejs</span><span class="chip">worker_threads</span><span class="chip">ai</span><span class="chip">simulations</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://nodejs.org/api/worker_threads.html">
+              <span class="text-truncate">node.js worker threads</span>
+              <span class="fg-3 fs-xs flex-shrink-0">nodejs.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/strategies.md">
+              <span class="text-truncate">High-Performance Static Site Generator Strategies for Node.js v25</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/miracle.md">
+              <span class="text-truncate">Native Worker Threads Pattern for Multiple Operations,Here&amp;#39;s a comprehensive pattern for handling different operations (HTML generation, file copying, asset optimization, etc.) using native Worker Threads</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/FormMail">
+              <span class="text-truncate">FormMail</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/miracle.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>miracle.md
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/strategies.md" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>strategies.md
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/87449623-a2c1-4b2b-901e-171ae0aa490e/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Really Weird Programming And The Modulo Of Doom</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/20a82bca-126b-449d-bc4d-2fe05e38c8a7/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">And So It Goes</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Education</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1ad3eaed-f2f1-4e5b-a9a6-19b99b8c794b/">
+              <img src="https://catpea.github.io/chapter-14/poem-2074.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">There Is No Such Thing As Genius, That’s The Normal You</span>
+                <span class="fg-3 fs-xs">November 3, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/7b39c6f5-4462-4978-9f03-af62acd54eda/">
+              <img src="https://catpea.github.io/chapter-14/poem-2062.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn For Real, Learn Programming</span>
+                <span class="fg-3 fs-xs">October 22, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2183ace4-a28e-42a0-824b-a8e6e31435fb/">
+              <img src="https://catpea.github.io/chapter-14/poem-2075.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Mama Going Back to High School</span>
+                <span class="fg-3 fs-xs">November 4, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8d974123-90c1-43cd-8c5e-78b15b104d6e/">
+              <img src="https://catpea.github.io/chapter-14/poem-2053.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">About Your School: Genius Is Not Rare</span>
+                <span class="fg-3 fs-xs">October 13, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/education/">All of Education<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

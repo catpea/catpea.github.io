@@ -1,252 +1,504 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Education Is A Spectacular Disaster</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>My Education Is A Spectacular Disaster · Cat Pea</title>
+  <meta name="description" content="After reflecting on his school experiences and self‑education mishaps, the author introduces **Oumuamua**, a lightweight in‑memory database inspired by CouchDB and EventSourcing that stores every revision of each document using GUIDs and alphabetical merging to resolve conflicts. He explains how the project arose from experimenting with Redis, Memcache, RedBeanPHP, and PouchDB, and describes its design: automatic document IDs, versioning without mutexes, and a simple table‑like classification scheme. The post concludes by noting his iterative learning process and how Oumuamua embodies reliable, conflict‑free data persistence for browser applications.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/2756f1a5-18b9-4b4b-a177-2c6c4182658d/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Education Is A Spectacular Disaster · Cat Pea">
+  <meta property="og:description" content="After reflecting on his school experiences and self‑education mishaps, the author introduces **Oumuamua**, a lightweight in‑memory database inspired by CouchDB and EventSourcing that stores every revision of each document using GUIDs and alphabetical merging to resolve conflicts. He explains how the project arose from experimenting with Redis, Memcache, RedBeanPHP, and PouchDB, and describes its design: automatic document IDs, versioning without mutexes, and a simple table‑like classification scheme. The post concludes by noting his iterative learning process and how Oumuamua embodies reliable, conflict‑free data persistence for browser applications.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-05/poem-1016.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-05/">Chapter 05</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1016</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-05/poem-1016.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-05/poem-1016.avif" alt="My Education Is A Spectacular Disaster"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">My Education Is A Spectacular Disaster</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-05/poem-1016.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 05</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1016</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">My Education Is A Spectacular Disaster</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2022-12-11">12/11/2022</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">And this has nothing to do with the fact,
-that schools are creepy and fake.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just as soon as the first bully wanted to push me into a puddle,
-circa third grade, I knew schools were a meat processing plant.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Ran by crooks and supported by all the world&#39;s crappy parents,
-fake schools are a betrayal that the future generation will never forgive us for.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My own self education, is a series of spectacular disasters,
-that are really difficult to describe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though, I will try to show you,
-how spectacular of a disaster it is.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is only one rule in the world of programming,
-that must never be broken.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I haaaave been thinking, and thinking, and thinking about it,
-and it is so bad.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The rule is: &quot;NEVER MAKE YOUR OWN DATABASE&quot;,
-and I totally agree with it - I swear?</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.npmjs.com/package/oumuamua">My database, that I just published</a>,
-which is to say, none of the code is anywhere where it should be.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Has been named after what many consider to be a star ship,
-still passing though our solar system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is the beautiful, tiny kilometer long, asteroid,
-named: Oumuamua.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which in Hawaiian means,
-a scout, as in an <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/results?search_query=oumuamua">extrasolar visitor</a>, checking up on us.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If I wasn&#39;t from around here,
-I would first be checking up on the state of your schools...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And see how you shaped the system,
-all the future of your kind.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I would not be stopping by,
-though I&#39;d return in less than a thousand years.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you know what,
-if I found out fools are making their own databases.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wouldn&#39;t even try to pretend my non‑gravitational acceleration,
-is potentially due to outgassing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I&#39;d slam the pedal to the metal,
-and wait an extra century before coming back.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You know I didn&#39;t really want to admit to it, but I was classified as an alien, once,
-though I flew here from the boring parts of Europe where schools are double-crappy.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, Oumuamua is my little study of databases,
-the programming patterns underlying CouchDB in particular.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Originally, my interest did not include CouchDB,
-I was focused on in-memory databases...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That are basically just programs exposing,
-easy to serialize data structures.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here the information is saved periodically,
-so a battery backup is needed in case of a power outage.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A laptop will do,
-as it will be the last thing to run out of electricity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In this original model there was backup,
-consisting only of capturing the raw HTTP requests made to the database.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is EventSourcing, which means I can re-play,
-all the HTTP requests, and reconstruct the latest state of the database.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can of course make snapshots along the way,
-this is nothing new, but I really like the simplicity of it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I dreamed about just exposing JavaScript as a kind of database,
-for a long time, I really let it sink in, and internalize.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think I had the idea before I came across redis,
-but redis has done it well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My idea might have been inspired by memcache,
-which I guessed to be a key=value store, no queries, just key ids.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These are fantastic ideas, and what a great name memcache is,
-I didn&#39;t even have to look at the program to know what it does, bravo.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">While I was still somewhat pondering <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.redbeanphp.com/index.php">RedBeanPHP</a>,
-a beautiful and brilliant little invention that helps with prototyping.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I came across CouchDB, and became interested,
-in a series of brilliant ideas.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Its automatic use of the GUID for documents,
-that you don&#39;t id yourself was the same idea I had once used in a big program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we became were instant friends,
-Oumuamua is my second Couch inspired program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first one is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/fantasyui-com/und">und</a>, and works with the file-system,
-it actually has a spellchecked README, I think.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">On the file-system, und allows for saving files,
-by multiple CPU cores withut any conflict or need for MUTEXES and such.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Oumuamua is written for the browser,
-and does away with emphasis on versioning.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though, all it is keeping every revision of all documents,
-in history.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is what a real database does,
-there is no erasing, no merging.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every revision is uniquely tagged,
-so even if you have two revisions with the same number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Coming in from all the way across the world,
-in the same microsecond, it is not at all a problem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The revision with the GUID, that ranks higher,
-when sorted alphabetically, wins.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It isn&#39;t fair,
-but it is beautiful, and simple, and absolutely reliable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So as long as everyone has all the revisions,
-a matter of just downloading them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then they will resolve to the same version of data,
-everywhere...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because when we are not sure about something,
-we simply sort the bunch alphabetically...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And choose the thing on top,
-as the winner - boom.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An you can see how frivolous the process is,
-<a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R12">if the document does not have an id I give it a random one for life</a>.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I haven&#39;t really looked at the original source code anywhere,
-because everything is divided up into plugins, and sorted for easy collaboration.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So when working with PouchDB, I just asked myself,
-what the design views help with.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And in my estimation, they classify database documents,
-grouping them into tables.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R47">So I just guessed, and programmed a table like system</a>,
-and that wonderfully demonstrates why my education is a spectacular disaster.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Because I will program my best guesses, until I am proven wrong,
-though, I don&#39;t maintain any big programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My style of spectacularly disastrous self education,
-has kept me sharp, sharpening my skills, since I was 10.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Even though I like ideas left and right,
-I am still programming my own way forward.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And each time I prove myself wrong,
-I yank myself, as if by my own solaces, to a higher understanding...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Of the slice of programming world,
-that calls to me.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2022-12-11T23:22:12.980Z">December 11, 2022</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:38<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-05/poem-1016.avif" aria-label="Cover for My Education Is A Spectacular Disaster, full size">
+            <img src="https://catpea.github.io/chapter-05/poem-1016.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for My Education Is A Spectacular Disaster" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:38
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-05/poem-1016.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-05/poem-1016.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-05/poem-1016.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>And this has nothing to do with the fact,<br>that schools are creepy and fake.</p>
+<p>Just as soon as the first bully wanted to push me into a puddle,<br>circa third grade, I knew schools were a meat processing plant.</p>
+<p>Ran by crooks and supported by all the world&#39;s crappy parents,<br>fake schools are a betrayal that the future generation will never forgive us for.</p>
+<hr>
+<p>My own self education, is a series of spectacular disasters,<br>that are really difficult to describe.</p>
+<p>Though, I will try to show you,<br>how spectacular of a disaster it is.</p>
+<p>There is only one rule in the world of programming,<br>that must never be broken.</p>
+<p>And I haaaave been thinking, and thinking, and thinking about it,<br>and it is so bad.</p>
+<p>The rule is: &quot;NEVER MAKE YOUR OWN DATABASE&quot;,<br>and I totally agree with it - I swear?</p>
+<hr>
+<p><a href="https://www.npmjs.com/package/oumuamua">My database, that I just published</a>,<br>which is to say, none of the code is anywhere where it should be.</p>
+<p>Has been named after what many consider to be a star ship,<br>still passing though our solar system.</p>
+<p>It is the beautiful, tiny kilometer long, asteroid,<br>named: Oumuamua.</p>
+<p>Which in Hawaiian means,<br>a scout, as in an <a href="https://www.youtube.com/results?search_query=oumuamua">extrasolar visitor</a>, checking up on us.</p>
+<p>If I wasn&#39;t from around here,<br>I would first be checking up on the state of your schools...</p>
+<p>And see how you shaped the system,<br>all the future of your kind.</p>
+<p>I would not be stopping by,<br>though I&#39;d return in less than a thousand years.</p>
+<hr>
+<p>And you know what,<br>if I found out fools are making their own databases.</p>
+<p>I wouldn&#39;t even try to pretend my non‑gravitational acceleration,<br>is potentially due to outgassing.</p>
+<p>I&#39;d slam the pedal to the metal,<br>and wait an extra century before coming back.</p>
+<hr>
+<p>You know I didn&#39;t really want to admit to it, but I was classified as an alien, once,<br>though I flew here from the boring parts of Europe where schools are double-crappy.</p>
+<hr>
+<p>So, Oumuamua is my little study of databases,<br>the programming patterns underlying CouchDB in particular.</p>
+<p>Originally, my interest did not include CouchDB,<br>I was focused on in-memory databases...</p>
+<p>That are basically just programs exposing,<br>easy to serialize data structures.</p>
+<p>Here the information is saved periodically,<br>so a battery backup is needed in case of a power outage.</p>
+<p>A laptop will do,<br>as it will be the last thing to run out of electricity.</p>
+<p>In this original model there was backup,<br>consisting only of capturing the raw HTTP requests made to the database.</p>
+<p>This is EventSourcing, which means I can re-play,<br>all the HTTP requests, and reconstruct the latest state of the database.</p>
+<p>You can of course make snapshots along the way,<br>this is nothing new, but I really like the simplicity of it.</p>
+<p>I dreamed about just exposing JavaScript as a kind of database,<br>for a long time, I really let it sink in, and internalize.</p>
+<p>I think I had the idea before I came across redis,<br>but redis has done it well.</p>
+<p>My idea might have been inspired by memcache,<br>which I guessed to be a key=value store, no queries, just key ids.</p>
+<hr>
+<p>These are fantastic ideas, and what a great name memcache is,<br>I didn&#39;t even have to look at the program to know what it does, bravo.</p>
+<hr>
+<p>While I was still somewhat pondering <a href="https://www.redbeanphp.com/index.php">RedBeanPHP</a>,<br>a beautiful and brilliant little invention that helps with prototyping.</p>
+<p>I came across CouchDB, and became interested,<br>in a series of brilliant ideas.</p>
+<p>Its automatic use of the GUID for documents,<br>that you don&#39;t id yourself was the same idea I had once used in a big program.</p>
+<p>So we became were instant friends,<br>Oumuamua is my second Couch inspired program.</p>
+<p>The first one is <a href="https://github.com/fantasyui-com/und">und</a>, and works with the file-system,<br>it actually has a spellchecked README, I think.</p>
+<p>On the file-system, und allows for saving files,<br>by multiple CPU cores withut any conflict or need for MUTEXES and such.</p>
+<p>Oumuamua is written for the browser,<br>and does away with emphasis on versioning.</p>
+<p>Though, all it is keeping every revision of all documents,<br>in history.</p>
+<p>That is what a real database does,<br>there is no erasing, no merging.</p>
+<p>Every revision is uniquely tagged,<br>so even if you have two revisions with the same number.</p>
+<p>Coming in from all the way across the world,<br>in the same microsecond, it is not at all a problem.</p>
+<p>The revision with the GUID, that ranks higher,<br>when sorted alphabetically, wins.</p>
+<p>It isn&#39;t fair,<br>but it is beautiful, and simple, and absolutely reliable.</p>
+<p>So as long as everyone has all the revisions,<br>a matter of just downloading them.</p>
+<p>Then they will resolve to the same version of data,<br>everywhere...</p>
+<p>Because when we are not sure about something,<br>we simply sort the bunch alphabetically...</p>
+<p>And choose the thing on top,<br>as the winner - boom.</p>
+<p>An you can see how frivolous the process is,<br><a href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R12">if the document does not have an id I give it a random one for life</a>.</p>
+<hr>
+<p>I haven&#39;t really looked at the original source code anywhere,<br>because everything is divided up into plugins, and sorted for easy collaboration.</p>
+<p>So when working with PouchDB, I just asked myself,<br>what the design views help with.</p>
+<p>And in my estimation, they classify database documents,<br>grouping them into tables.</p>
+<p><a href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R47">So I just guessed, and programmed a table like system</a>,<br>and that wonderfully demonstrates why my education is a spectacular disaster.</p>
+<p>Because I will program my best guesses, until I am proven wrong,<br>though, I don&#39;t maintain any big programs.</p>
+<p>My style of spectacularly disastrous self education,<br>has kept me sharp, sharpening my skills, since I was 10.</p>
+<p>Even though I like ideas left and right,<br>I am still programming my own way forward.</p>
+<p>And each time I prove myself wrong,<br>I yank myself, as if by my own solaces, to a higher understanding...</p>
+<p>Of the slice of programming world,<br>that calls to me.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.npmjs.com/package/oumuamua">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>My database, that I just published</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.npmjs.com/package/oumuamua</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/results?search_query=oumuamua">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>extrasolar visitor</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/results?search_query=oumuamua</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.redbeanphp.com/index.php">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>RedBeanPHP</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.redbeanphp.com/index.php</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/fantasyui-com/und">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>und</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/fantasyui-com/und</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R12">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>if the document does not have an id I give it a random one for life</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R12</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R47">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>So I just guessed, and programmed a table like system</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R47</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">database</span><span class="chip">couchdb</span><span class="chip">pouchdb</span><span class="chip">javascript</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/Wj1D-qiOseE"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/Wj1D-qiOseE</small></a>
-                </li>
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/PuxXygVWWkU"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/PuxXygVWWkU</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.npmjs.com/package/oumuamua">
+              <span class="text-truncate">My database, that I just published</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.npmjs.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/results?search_query=oumuamua">
+              <span class="text-truncate">extrasolar visitor</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.redbeanphp.com/index.php">
+              <span class="text-truncate">RedBeanPHP</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.redbeanphp.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/fantasyui-com/und">
+              <span class="text-truncate">und</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R12">
+              <span class="text-truncate">if the document does not have an id I give it a random one for life</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/oumuamua/commit/103c04d03e9069b27e3f67d837d02f5df5ef0e19#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346R47">
+              <span class="text-truncate">So I just guessed, and programmed a table like system</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/8777d1af-4fa7-4f83-ae9a-90b4dd2d3740/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">High School And Future Generations</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/0d1b81d2-5845-42fd-b8b1-580c828698df/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">A Glance At Speculative Thinking; Or, A Thought For Oumuamua</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/700f536a-5b9d-4c99-aaa5-f1d47bd7bf15/">
+              <img src="https://catpea.github.io/chapter-05/poem-1018.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Algorithm</span>
+                <span class="fg-3 fs-xs">December 13, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/53143161-35ee-4d47-b04c-763ecdbdb9aa/">
+              <img src="https://catpea.github.io/chapter-05/poem-1014.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Bytes; Or, The Terrible Mambas Doth Linger In Pairs</span>
+                <span class="fg-3 fs-xs">December 9, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bdadb39f-c850-4adc-98b3-8c195b3bbd67/">
+              <img src="https://catpea.github.io/chapter-05/poem-1019.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Thinking Outside Windows, Where Developer Experience And Power User Experience Is One And The Same</span>
+                <span class="fg-3 fs-xs">December 14, 2022</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9c8176c0-8c0a-4aef-a613-e0a91d03e2a9/">
+              <img src="https://catpea.github.io/chapter-05/poem-1009.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How To Enhance Your Design or Programming Portfolio</span>
+                <span class="fg-3 fs-xs">December 4, 2022</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

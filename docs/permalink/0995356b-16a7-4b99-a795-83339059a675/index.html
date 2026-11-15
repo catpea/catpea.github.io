@@ -1,140 +1,437 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beyond Learning Programming: You Have To Keep Up A Little Bit</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Beyond Learning Programming: You Have To Keep Up A Little Bit · Cat Pea</title>
+  <meta name="description" content="The post recounts the author’s journey learning RxJS by building a custom reactive signal system that uses .map, .filter, and .subscribe to transform values, then moving on to a new framework based on state, derived signals, and effects. They explain how an effect signal announces when it is read, listens automatically to changes without needing explicit combineLatest calls, and batches updates using a Set plus queueMicrotask so that UI updates happen only once after all dependent signals have changed. Derived signals are created from other signals in the same automatic‑subscription style, and the author reflects on how writing their own implementation deepened their understanding of JavaScript’s evolving reactive features.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/0995356b-16a7-4b99-a795-83339059a675/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Beyond Learning Programming: You Have To Keep Up A Little Bit · Cat Pea">
+  <meta property="og:description" content="The post recounts the author’s journey learning RxJS by building a custom reactive signal system that uses .map, .filter, and .subscribe to transform values, then moving on to a new framework based on state, derived signals, and effects. They explain how an effect signal announces when it is read, listens automatically to changes without needing explicit combineLatest calls, and batches updates using a Set plus queueMicrotask so that UI updates happen only once after all dependent signals have changed. Derived signals are created from other signals in the same automatic‑subscription style, and the author reflects on how writing their own implementation deepened their understanding of JavaScript’s evolving reactive features.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1996.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1996</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1996.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1996.avif" alt="Beyond Learning Programming: You Have To Keep Up A Little Bit"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Beyond Learning Programming: You Have To Keep Up A Little Bit</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1996.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1996</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Beyond Learning Programming: You Have To Keep Up A Little Bit</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-08-19">8/18/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">And all you need to do to keep up, is buy a heavy paper book, about latest version,
-and treat it like a newspaper, all 500+ pages of it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may learn more this way, as that will take you outside of your zone,
-and you darn well should get beach sand all over it, it is what we do.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But if you have a wee bit of time, then get mad,
-because you should use that time in the most uncomfortable way.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am a big fan of Signals, which are reactive variables,
-that have a .value for the value, and .subscribe for the change of value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I add .map, .filter, and other useful transformations,
-which all take the signal they are attached to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They subscribe to it, transform the value in some way,
-and apply it to a new signal that they return, so the process can repeat.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This was my crazy way to plow through RxJs,
-I learned it so fast, by building my Signals, that I try not to talk about it.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to stay with it, I set aside my .map() and .filter(),
-and jumped to another reactive system, ew.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This thing has state, derived and effect,
-and that just means signal, map, and subscribe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But the point of it, is not to translate,
-it is to look anew.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And indeed, effect, is crazy, it forced me to modify the Signal,
-to make it announce when it is being read.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t use combineLatest here where you merge multiple signals into one,
-effect, quietly listens to what signals are beings read.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a tricky announcement, because if effect contains many signals,
-many will try to tell effect/subscribe when they changed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And all at the same time, to keep things clean, you have to use a set,
-which only allows one of anything.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If many signals change, the set, will only contain one call to execute,
-effect/subscribe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But you don’t know when the last signal calls,
-and you use queueMicrotask a replacement for setTimeout of 0;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When the callstack clears and JavaScript is ready to move forward,
-the effect/subscribe function will run, and update the UI just once.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The difference between the two, is automatic subscription,
-inside an effect, you con’t have to specify what signals you use.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You just use them, and effect will take care of everything,
-effect is probably short for side-effects, or application changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Derived, creates a new signal, based on other signals,
-where effect is just a function that runs when signals inside it change value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I made my derived based on effect,
-it also supports automatic discovery and signal subscription.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I loved studying the code,
-but writing my own implementation required turning my thinking inside out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I like combining signals, that I spell out one by one,
-I like all my ducks in proper order.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Effect and Derived,
-are weird.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is what happens,
-programming languages emerge both new and old trends.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you have to,
-twist your mind around them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">JavaScript is getting lots of new features,
-they are very beautiful, and well worth your time and scribbles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming is a life long exploration,
-it is not complex, because you can reinvent whatever confuses you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And arrive at the same decisions that the system you are studying made,
-you learn it inside out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the best programs, only exist because they are tiny,
-so it is about brain gymnastics, not confusion from complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If anything ever challenges you, just ask AI to create a simplified version,
-and start your journey there.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-08-19T01:49:51.807Z">August 18, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>8:18<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1996.avif" aria-label="Cover for Beyond Learning Programming: You Have To Keep Up A Little Bit, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1996.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Beyond Learning Programming: You Have To Keep Up A Little Bit" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 8:18
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1996.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1996.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1996.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>And all you need to do to keep up, is buy a heavy paper book, about latest version,<br>and treat it like a newspaper, all 500+ pages of it.</p>
+<p>You may learn more this way, as that will take you outside of your zone,<br>and you darn well should get beach sand all over it, it is what we do.</p>
+<hr>
+<p>But if you have a wee bit of time, then get mad,<br>because you should use that time in the most uncomfortable way.</p>
+<hr>
+<p>I am a big fan of Signals, which are reactive variables,<br>that have a .value for the value, and .subscribe for the change of value.</p>
+<p>I add .map, .filter, and other useful transformations,<br>which all take the signal they are attached to.</p>
+<p>They subscribe to it, transform the value in some way,<br>and apply it to a new signal that they return, so the process can repeat.</p>
+<p>This was my crazy way to plow through RxJs,<br>I learned it so fast, by building my Signals, that I try not to talk about it.</p>
+<hr>
+<p>But to stay with it, I set aside my .map() and .filter(),<br>and jumped to another reactive system, ew.</p>
+<p>This thing has state, derived and effect,<br>and that just means signal, map, and subscribe.</p>
+<p>But the point of it, is not to translate,<br>it is to look anew.</p>
+<p>And indeed, effect, is crazy, it forced me to modify the Signal,<br>to make it announce when it is being read.</p>
+<p>You don’t use combineLatest here where you merge multiple signals into one,<br>effect, quietly listens to what signals are beings read.</p>
+<p>This is a tricky announcement, because if effect contains many signals,<br>many will try to tell effect/subscribe when they changed.</p>
+<p>And all at the same time, to keep things clean, you have to use a set,<br>which only allows one of anything.</p>
+<p>If many signals change, the set, will only contain one call to execute,<br>effect/subscribe.</p>
+<p>But you don’t know when the last signal calls,<br>and you use queueMicrotask a replacement for setTimeout of 0;</p>
+<p>When the callstack clears and JavaScript is ready to move forward,<br>the effect/subscribe function will run, and update the UI just once.</p>
+<p>The difference between the two, is automatic subscription,<br>inside an effect, you con’t have to specify what signals you use.</p>
+<p>You just use them, and effect will take care of everything,<br>effect is probably short for side-effects, or application changes.</p>
+<p>Derived, creates a new signal, based on other signals,<br>where effect is just a function that runs when signals inside it change value.</p>
+<p>I made my derived based on effect,<br>it also supports automatic discovery and signal subscription.</p>
+<hr>
+<p>I loved studying the code,<br>but writing my own implementation required turning my thinking inside out.</p>
+<p>I like combining signals, that I spell out one by one,<br>I like all my ducks in proper order.</p>
+<p>Effect and Derived,<br>are weird.</p>
+<hr>
+<p>This is what happens,<br>programming languages emerge both new and old trends.</p>
+<p>And you have to,<br>twist your mind around them.</p>
+<p>JavaScript is getting lots of new features,<br>they are very beautiful, and well worth your time and scribbles.</p>
+<p>Programming is a life long exploration,<br>it is not complex, because you can reinvent whatever confuses you.</p>
+<p>And arrive at the same decisions that the system you are studying made,<br>you learn it inside out.</p>
+<p>And the best programs, only exist because they are tiny,<br>so it is about brain gymnastics, not confusion from complexity.</p>
+<p>If anything ever challenges you, just ask AI to create a simplified version,<br>and start your journey there.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">rxjs</span><span class="chip">signals</span><span class="chip">reactive-programming</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/cf53e8a0-2abf-4350-9c34-1e5cf9eeea5d/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">And This Is Where You Start...</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/4b0b333c-12ea-4c17-85be-77c89a3b6a43/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Don’t Give Up On Programming: Unlike Success Failure Is A Path To Mastery</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4b0b333c-12ea-4c17-85be-77c89a3b6a43/">
+              <img src="https://catpea.github.io/chapter-13/poem-1997.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Don’t Give Up On Programming: Unlike Success Failure Is A Path To Mastery</span>
+                <span class="fg-3 fs-xs">August 19, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5c18c9f7-0624-4d25-9342-e9fdaf85fcce/">
+              <img src="https://catpea.github.io/chapter-13/poem-1993.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">No More Homework, Mother!</span>
+                <span class="fg-3 fs-xs">August 15, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/1ee6272a-724b-4362-9c44-e8176003b261/">
+              <img src="https://catpea.github.io/chapter-13/poem-2000.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Maybe Programming Is More, Than Meets The Eye</span>
+                <span class="fg-3 fs-xs">August 22, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/0c3ba247-19da-433b-b1bb-706a4147a9b2/">
+              <img src="https://catpea.github.io/chapter-13/poem-1992.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Inventing Of A Product; Or, Growing Up In The Age of Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">August 14, 2025</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

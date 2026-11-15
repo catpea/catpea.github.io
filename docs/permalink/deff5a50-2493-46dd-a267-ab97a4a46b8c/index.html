@@ -1,177 +1,458 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long · Cat Pea</title>
+  <meta name="description" content="Programming often drags because of missing tools; the author suggests that Behavior‑Driven Development (BDD) – where requirements are written in a simple English dialect called Gherkin – can be fed to language models that produce code. By marrying BDD with visual and packet‑based programming, actions can be described in plain text and then automatically turned into test‑driven code, giving developers a high‑level view of the program’s internal communication network and enabling rapid UI construction from nested boxes or conversational interfaces. The post envisions a future where AI‑generated code from BDD specifications lets business and home applications be built faster, with visual nodes representing everything from database queries to human workers.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/deff5a50-2493-46dd-a267-ab97a4a46b8c/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long · Cat Pea">
+  <meta property="og:description" content="Programming often drags because of missing tools; the author suggests that Behavior‑Driven Development (BDD) – where requirements are written in a simple English dialect called Gherkin – can be fed to language models that produce code. By marrying BDD with visual and packet‑based programming, actions can be described in plain text and then automatically turned into test‑driven code, giving developers a high‑level view of the program’s internal communication network and enabling rapid UI construction from nested boxes or conversational interfaces. The post envisions a future where AI‑generated code from BDD specifications lets business and home applications be built faster, with visual nodes representing everything from database queries to human workers.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1358.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1358</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1358.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1358.avif" alt="A Fistful Of Pickles; Or, Programming Stuff Shouldn&apos;t Take Very Long"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1358.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1358</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2023-11-20">11/19/2023</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">When programming takes too long,
-it means that there aren&#39;t enough tools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming is a desperate science,
-and it is often true that programming bare bones are best.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But complexity is always increasing,
-and what is bare shifts as well.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is a lovely and rebellious movement,
-called Behavior Driven Development.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where people speak a subset of English called Gherkin (as in pickled cucumber)
-and describe what they need and how it should work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then real programmers bind that text,
-to code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If that text changes,
-the code will need to be rewritten.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Well it just so happens,
-that 2023 is the year of AI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We don&#39;t have it yet,
-we may not be close.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But thanks to the language models,
-we can get a good idea of what it will be like.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now what we do have,
-is good enough for subsets of English.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means, the language models can attempt,
-to create the code that BDD describes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means it maybe possible,
-to create programs in just BDD.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But even with AI, what do you say,
-and where do you start.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You start with Visual Programming,
-and Packet Based Programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where you send packets through Filters or Actions,
-that Transform them, or form into multiple wires.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming languages,
-demand high level actions and filters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So that instead of talking about querying a database for users,
-we can just drop a Box that represents a stream of all users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That then can be filtered, rerouted,
-transformed, and altered.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Up until now, the best we had,
-was making high abstraction visual programming nodes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With low level visual programming,
-that would call for writing functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is very good, luxurious even,
-but it takes time, planning, implementation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By introducing BDD to Visual Programming,
-we can describe a Visual Programming Action in English.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Send it to a programming AI,
-and see if the solution passes tests.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, we can focus on describing Actions in English,
-without any programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is still not perfect,
-but the result is the entire internal communication network.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is normally obscured inside programs,
-is not only visually mapped out and editable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But gets done,
-long before the UI comes into question.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">User interfaces are traditionally built by using nested boxes,
-as in the button is in a footer, footer in a form.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The form is in the main area,
-the main are in the body, and the body in the view-port, and in a window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The Chat user Interface, or Conversational User Interface,
-shows that something as complex as a form with logic.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Can be filled out,
-by a bot interrogating the user.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is more to discover in this ares,
-taking to multiple bots over email is another kind of Conversational UI.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Some programs don&#39;t need User Interfaces,
-rewriting web pages is about tiny program internal to User Scripts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So the Visual Programming pipelines,
-is all it takes.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Database browsing programs,
-just need a cursor, search box, and a form builder.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Visual programming language, with nodes that represent,
-departments, or department managers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Can go a long way to automate a company,
-here some nodes would represent an actual person.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They would be part of the Visual Program workflow,
-a slow Action, that instead of a CPU uses humans.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally, the Visual Programming Canvas,
-is a user interface as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The end user simply demands high level actions,
-so that they can connect temperature to furnace control.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And instead of hoping to find an app,
-just make the feature they need.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If Visual Programming was more popular,
-and nodes were made with BDD and AI or even Code Bounties.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Creating programs for home of business,
-or programs that make business would take a lot less time.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It used to be that clicking view source on a web page,
-would reveal the bare bones.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But today, we should be able to view,
-the intern communication network of an application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Represented by a visual programming language,
-that easily allows adding or requesting new features.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2023-11-20T04:17:34.996Z">November 19, 2023</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>15:01<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>3 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1358.avif" aria-label="Cover for A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1358.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Fistful Of Pickles; Or, Programming Stuff Shouldn&#39;t Take Very Long" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 15:01
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1358.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1358.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1358.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>When programming takes too long,<br>it means that there aren&#39;t enough tools.</p>
+<p>Programming is a desperate science,<br>and it is often true that programming bare bones are best.</p>
+<p>But complexity is always increasing,<br>and what is bare shifts as well.</p>
+<hr>
+<p>There is a lovely and rebellious movement,<br>called Behavior Driven Development.</p>
+<p>Where people speak a subset of English called Gherkin (as in pickled cucumber)<br>and describe what they need and how it should work.</p>
+<p>And then real programmers bind that text,<br>to code.</p>
+<p>If that text changes,<br>the code will need to be rewritten.</p>
+<p>Well it just so happens,<br>that 2023 is the year of AI.</p>
+<p>We don&#39;t have it yet,<br>we may not be close.</p>
+<p>But thanks to the language models,<br>we can get a good idea of what it will be like.</p>
+<p>Now what we do have,<br>is good enough for subsets of English.</p>
+<p>That means, the language models can attempt,<br>to create the code that BDD describes.</p>
+<p>That means it maybe possible,<br>to create programs in just BDD.</p>
+<hr>
+<p>But even with AI, what do you say,<br>and where do you start.</p>
+<p>You start with Visual Programming,<br>and Packet Based Programming.</p>
+<p>Where you send packets through Filters or Actions,<br>that Transform them, or form into multiple wires.</p>
+<hr>
+<p>Visual programming languages,<br>demand high level actions and filters.</p>
+<p>So that instead of talking about querying a database for users,<br>we can just drop a Box that represents a stream of all users.</p>
+<p>That then can be filtered, rerouted,<br>transformed, and altered.</p>
+<p>Up until now, the best we had,<br>was making high abstraction visual programming nodes.</p>
+<p>With low level visual programming,<br>that would call for writing functions.</p>
+<p>This is very good, luxurious even,<br>but it takes time, planning, implementation.</p>
+<p>By introducing BDD to Visual Programming,<br>we can describe a Visual Programming Action in English.</p>
+<p>Send it to a programming AI,<br>and see if the solution passes tests.</p>
+<hr>
+<p>Here, we can focus on describing Actions in English,<br>without any programming.</p>
+<p>It is still not perfect,<br>but the result is the entire internal communication network.</p>
+<p>That is normally obscured inside programs,<br>is not only visually mapped out and editable.</p>
+<p>But gets done,<br>long before the UI comes into question.</p>
+<hr>
+<p>User interfaces are traditionally built by using nested boxes,<br>as in the button is in a footer, footer in a form.</p>
+<p>The form is in the main area,<br>the main are in the body, and the body in the view-port, and in a window.</p>
+<p>The Chat user Interface, or Conversational User Interface,<br>shows that something as complex as a form with logic.</p>
+<p>Can be filled out,<br>by a bot interrogating the user.</p>
+<p>There is more to discover in this ares,<br>taking to multiple bots over email is another kind of Conversational UI.</p>
+<hr>
+<p>Some programs don&#39;t need User Interfaces,<br>rewriting web pages is about tiny program internal to User Scripts.</p>
+<p>So the Visual Programming pipelines,<br>is all it takes.</p>
+<hr>
+<p>Database browsing programs,<br>just need a cursor, search box, and a form builder.</p>
+<p>Visual programming language, with nodes that represent,<br>departments, or department managers.</p>
+<p>Can go a long way to automate a company,<br>here some nodes would represent an actual person.</p>
+<p>They would be part of the Visual Program workflow,<br>a slow Action, that instead of a CPU uses humans.</p>
+<hr>
+<p>And finally, the Visual Programming Canvas,<br>is a user interface as well.</p>
+<p>The end user simply demands high level actions,<br>so that they can connect temperature to furnace control.</p>
+<p>And instead of hoping to find an app,<br>just make the feature they need.</p>
+<hr>
+<p>If Visual Programming was more popular,<br>and nodes were made with BDD and AI or even Code Bounties.</p>
+<p>Creating programs for home of business,<br>or programs that make business would take a lot less time.</p>
+<hr>
+<p>It used to be that clicking view source on a web page,<br>would reveal the bare bones.</p>
+<p>But today, we should be able to view,<br>the intern communication network of an application.</p>
+<p>Represented by a visual programming language,<br>that easily allows adding or requesting new features.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">bdd</span><span class="chip">visual programming</span><span class="chip">ai</span><span class="chip">language models</span><span class="chip">gherkin</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/c814fa32-f6ad-4b61-9042-996a86f1dff2/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Five True Facts About Geese; Or, When You See Michigan Geese You Might Want To Call The Police</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/9a45404e-cfbc-4a03-87d4-2c4102402b37/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">In Search For Greatness</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/34f2694a-8b92-47fd-8d8d-c96b7fd328da/">
+              <img src="https://catpea.github.io/chapter-08/poem-1360.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Lone Wolf Programming; And, The Older You Wants You To Learn To Code</span>
+                <span class="fg-3 fs-xs">November 21, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/30524311-4d37-4801-8499-66207aa51bbb/">
+              <img src="https://catpea.github.io/chapter-08/poem-1352.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Into The Future; Or, Visual Programming Languages And Artificial Intelligence</span>
+                <span class="fg-3 fs-xs">November 13, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/c57d1d4a-b140-43fa-91f7-89350d8333ed/">
+              <img src="https://catpea.github.io/chapter-08/poem-1362.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Thanksgiving Programmer; Or, Making A GUI Out Of A VPL, FUI, And The ZUI</span>
+                <span class="fg-3 fs-xs">November 23, 2023</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b1a3b365-aa81-47d9-91dc-0701bbaa9892/">
+              <img src="https://catpea.github.io/chapter-08/poem-1351.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Eight Hours Of Programming Alongside A Robot</span>
+                <span class="fg-3 fs-xs">November 12, 2023</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

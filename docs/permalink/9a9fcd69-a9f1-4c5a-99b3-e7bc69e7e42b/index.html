@@ -1,336 +1,541 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Introduction To Programming; And, Reactive Programming Explained</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Easy Introduction To Programming; And, Reactive Programming Explained · Cat Pea</title>
+  <meta name="description" content="The post walks through core programming fundamentals—variables, printing, functions, loops, arrays, strings, and objects—then shows how reactive property changes and component start/stop lifecycles can streamline UI development.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/9a9fcd69-a9f1-4c5a-99b3-e7bc69e7e42b/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Easy Introduction To Programming; And, Reactive Programming Explained · Cat Pea">
+  <meta property="og:description" content="The post walks through core programming fundamentals—variables, printing, functions, loops, arrays, strings, and objects—then shows how reactive property changes and component start/stop lifecycles can streamline UI development.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-08/poem-1406.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-08/">Chapter 08</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1406</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-08/poem-1406.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-08/poem-1406.avif" alt="Easy Introduction To Programming; And, Reactive Programming Explained"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Easy Introduction To Programming; And, Reactive Programming Explained</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-08/poem-1406.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 08</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1406</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Easy Introduction To Programming; And, Reactive Programming Explained</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2024-01-07">1/7/2024</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">I recently quoted a new programmer stating,
-“coding is basically just ifs and for loops.”.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is true, it is also functions,
-which is kind of the base reality of programming.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, you can add stuff beyond that,
-let me show you how that works.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">All programming languages, are caculators,
-where you can say <code>const result = 1+1;</code></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And result variable will hold the value of 2,
-to display the contents of result, like in a calculator…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to say:
-print result.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A variable is just a way of saving things,
-a variable stores variable content.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I am sorry to say that different languages,
-have different ways of printing things, and print to different things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you wanted to print something to a debug console,
-that you can open in a web browser with SHIFT+CTRIL+I.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You would say console.log(result); ENTER,
-or you can just say console.log(1+1) and that will print 2 as well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now if you wanted to print to the web page that is currently open,
-you would say document.body.textContent = 1+1 (which would just show number 2 in the entire window)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So there is no one way printing things,
-it depends on context.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Everything in programming is like that,
-it is about what are you trying to do?</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If we wanted to create a calculator with a print function,
-that prints to the web page.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We would simply say:
-function print(input){document.body.textContent = input}</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And we could print numbers,
-all day;</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So in the beginning we can add,
-but to do anything beyond that, we need functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I say, if you don’t have one,
-the first thing you should away do is to create a print function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where it will be printing,
-depends on what you are doing.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Functions,
-abstract and automate.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We have more than just numbers in a programming language,
-we also have groups, never use the word group.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No one calls it that,
-but for us the normal people arrays, strings, and objects are just groups.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Arrays are a way to hold multiple things under one name,
-strings are pretty much arrays of letters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Languages use a lot of good ideas, to be useful,
-so it is best to think of strings as being for text, and having little to do with arrays.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we are moving up the abstraction ladder,
-from numbers, to lists of numbers, and now strings.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By extension, we can now have lists of strings, numbers, functions,
-and finally, there is one more grouping thing, called an object.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Objects are not lists,
-object name things, rather than keep them in a sequence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you can say someObject.someName = “Alice”,
-or myCalculator.result = 1+1;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can get stuff out of a list by number,
-it is called an index number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But it is better to use objects,
-and then retrieve things by name.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here, we finally arrive at “coding is basically just ifs and for loops.”,
-so we covered the stuff that this quote glosses over.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Calculations, variables to remember them, functions to simplify stuff,
-arrays to hold sequential lists of variables, strings to hold text.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And objects, to group things,
-under some name.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And by thing I mean, everything we learned so far,
-variables, functions, arrays, strings, other objects, arrays of objects, and functions, and more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you see, how we are enhancing out abilities,
-we started with 1+1, but now have lists of objects that can have objects with names of maybe lists of other stuff.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When we say result = 1+1;
-we execute a statement, in time, or in a sequence;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where ifs come in,
-we can now say if(result &gt; 0){
-	print(result)
-}else{
-	print(“ERROR: Something has ran afoul”);
-}</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you bet your fanny,
-you can nest if statements.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So now we explode, in multiple directions in a program,
-depending on some variable, some parts of you program, many never run.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">See, you are now controlling a machine,
-you are a wizard.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But there is one more thing we need to upgrade our ability,
-because arrays are no good if you just refer to items inside them by number.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Arrays then are just objects,
-with stupid names, like 0, 1, 2, 3.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we need those loops,
-a for loop is just one of many kinds of loops, it is the most verbose and flexible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With loops we can say for every person object in the array of people,
-execute some ifs and functions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is the base layer of programming,
-you can make solid programs here.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The longer you stay on this level of abstraction,
-the more of a code poet you become.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You invent state machines, strange chat-bots like ELIZA,
-multi-user dungeons, and just thrive in the world of text.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is much more to it,
-but it is harder to explain, as you have to use strange new words.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, objects are more than ways of grouping named variables,
-though this is an important explanation of objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Objects model things with properties,
-and since they can nest other objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They can model the world,
-or processes, they abstract things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An object has two modes of existence,
-as a description of something, a specification of it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And as an instance,
-once it has been instantiated with the “new” keyword.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the reason why you want instances,
-is to have multiple instances of the same objects.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">An instance of a calculator that writes to the web page,
-and an instance of a calculator that writes to the developer console.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now you can add stuff,
-and print it in multiple places.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A more sane example of multiple instances,
-is a File object that groups file related operations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can have multiple files represented,
-by the same File object, by just instantiating the File object with a different path.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Files, are a very primitive concept,
-you have to keep track of file handles, and modes, like read or write, or append.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are a great candidate for being abstracted,
-with an Object that has useful funcions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My favorite abstraction of a File,
-is the now <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filesystem/File.html">ancient ActionScript File Object</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every file you opened had a .desktopDirectory property,
-it seems like overkill, and pretty strange.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But that would change based on what operating system you used,
-and it was right there in the file object, you didn’t have to ask anything else.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I think the finest example of Object use,
-is Component Based User Interfaces.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That just means you are creating a world of Objects,
-such as Window, Button, and even Draggable and Selectable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you can say, myProgram = new Window();
-const calculate = new Button()
-myProgram.add(calculate)
-and calculate.onClick = funcion(){print(1+1)};</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you see how you have an .add function,
-where you can add a button to a Window.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is all you need, to build massive user interfaces,
-with menus, panes, tabs, slide out consoles, and embedded browsers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Window add menu,
-for every menuItem in list of menu items menu add menuItem.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I think web design greatly benefits,
-from this type of abstraction, but I seem to be in the minority.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I personally see <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://dojo.io/">new Dojo</a> as being superior to React and now the Ru[i]ned Svelte,
-tidy Object based component architectures are just more friendly.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now, that we have covered ifs and loops,
-and tasted the strange vocabularies with words like instance.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Which at my old job, earned me the nickname “Buzzword Boy”,
-and made my idiot co-workers create a web age with my really fat face on it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And just recently had me ban a user,
-who lost his tits assuming I am just speaking in tongues, still too scary to be funnny.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Let us finally, get to the adventure part,
-and blow some professional programmer minds.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is something crazy you can do with Objects,
-and a lot of programmers either don’t understand that yet, or more likely are freaked out by it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One of the leading programmers said,
-that he made JavaScript reactive, but that is only correct in the context of funcions, kind of.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the broader context that includes JavaScript OOP programming,
-there has been this beautiful little thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I’ll demonstrate it, with the X of a User Interface component tree,
-where the x is part of the x and y coordinate system.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But at the same time I also want to give you a preview of it,
-so that you know this is not just some boring x to be used in geometry calculations.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Beyond object instantiation, you also want to hoist yourself up,
-to using .start() and .stop() in your components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This helps to let your components to for example,
-stop listening to the mouse, when you remove the component form a UI.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Every time you say on click do something,
-you need to add a mouse listener...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and you better remove it,
-when you get rid of that something.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When for example moving to the next step in a form,
-you must remove the listeners from the previous user interface.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A stop() is just the reality,
-of cool cats working with the mouse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you just leave your listens laying around,
-the mouse will eventually get ya.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means, your component,
-once instantiated is in a stopped mode.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or more usefully component.started=false,
-mode.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before you start a User Interface component,
-it won’t be displaying anything in the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So if you try to make it draggable,
-everything will crash, because you didn’t create anything that can be dragged yet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The component hasn’t started,
-yet.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By using a getter and a setter,
-that divides the act of assigning to an object property.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can create a cute little system,
-that notifies things when the .started property changes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you say observe(started, andDosomething),
-where andDosomething is a function that will be given the latest value of started.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And this is the cool part, any time you started=true or started=false,
-[and]Dosomething will be automatically executed, with that value.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So all you are saying is .started=true,
-and all the observers will start dong their stuff, bringing your component to life.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When moving to the next step in a form,
-inside your .stop() you just say .started = false…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And whatever is still listening to that,
-will know, it is no loner needed and must clean up after it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now let me show you how the x works,
-and then you can go get a drink of water.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To move a window all the way to the left,
-you just say window.x = 0;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">No crazy function calls, no calling refresh(),
-ore remain, you just assign a number to the x.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the window will react,
-as the x notifies all of its observers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">By going an extra step beyond start and stop,
-and making the properties of an observable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You almost, almost, almost pretty much, go back,
-all the way to the begging of the language, where we just assign 1+1 to result.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reactive programming, hides almost everything,
-and when you consider, that objects are a programmer interface…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That actually make the programming better,
-reactive assignments, make programming accessible to novice users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And the code, so readable, to programmers,
-that they won’t ever want to go back to the non reactive world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The non-reactive world,
-won’t let them request operations out of sequence.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They have to wait, until a component produces elements,
-that the mouse can then listen to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In the reactive world,
-things just work in sequence, without any strange syntax at all.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2024-01-07T06:09:41.758Z">January 7, 2024</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>30:55<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>10 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-08/poem-1406.avif" aria-label="Cover for Easy Introduction To Programming; And, Reactive Programming Explained, full size">
+            <img src="https://catpea.github.io/chapter-08/poem-1406.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Easy Introduction To Programming; And, Reactive Programming Explained" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 30:55
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-08/poem-1406.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-08/poem-1406.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-08/poem-1406.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>I recently quoted a new programmer stating,<br>“coding is basically just ifs and for loops.”.</p>
+<p>And that is true, it is also functions,<br>which is kind of the base reality of programming.</p>
+<p>But, you can add stuff beyond that,<br>let me show you how that works.</p>
+<hr>
+<p>All programming languages, are caculators,<br>where you can say <code>const result = 1+1;</code></p>
+<p>And result variable will hold the value of 2,<br>to display the contents of result, like in a calculator…</p>
+<p>You have to say:<br>print result.</p>
+<p>A variable is just a way of saving things,<br>a variable stores variable content.</p>
+<hr>
+<p>I am sorry to say that different languages,<br>have different ways of printing things, and print to different things.</p>
+<p>If you wanted to print something to a debug console,<br>that you can open in a web browser with SHIFT+CTRIL+I.</p>
+<p>You would say console.log(result); ENTER,<br>or you can just say console.log(1+1) and that will print 2 as well.</p>
+<p>Now if you wanted to print to the web page that is currently open,<br>you would say document.body.textContent = 1+1 (which would just show number 2 in the entire window)</p>
+<p>So there is no one way printing things,<br>it depends on context.</p>
+<hr>
+<p>Everything in programming is like that,<br>it is about what are you trying to do?</p>
+<p>If we wanted to create a calculator with a print function,<br>that prints to the web page.</p>
+<p>We would simply say:<br>function print(input){document.body.textContent = input}</p>
+<p>And we could print numbers,<br>all day;</p>
+<hr>
+<p>So in the beginning we can add,<br>but to do anything beyond that, we need functions.</p>
+<p>And I say, if you don’t have one,<br>the first thing you should away do is to create a print function.</p>
+<p>Where it will be printing,<br>depends on what you are doing.</p>
+<hr>
+<p>Functions,<br>abstract and automate.</p>
+<p>We have more than just numbers in a programming language,<br>we also have groups, never use the word group.</p>
+<p>No one calls it that,<br>but for us the normal people arrays, strings, and objects are just groups.</p>
+<p>Arrays are a way to hold multiple things under one name,<br>strings are pretty much arrays of letters.</p>
+<p>Languages use a lot of good ideas, to be useful,<br>so it is best to think of strings as being for text, and having little to do with arrays.</p>
+<p>So we are moving up the abstraction ladder,<br>from numbers, to lists of numbers, and now strings.</p>
+<p>By extension, we can now have lists of strings, numbers, functions,<br>and finally, there is one more grouping thing, called an object.</p>
+<p>Objects are not lists,<br>object name things, rather than keep them in a sequence.</p>
+<p>So you can say someObject.someName = “Alice”,<br>or myCalculator.result = 1+1;</p>
+<p>You can get stuff out of a list by number,<br>it is called an index number.</p>
+<p>But it is better to use objects,<br>and then retrieve things by name.</p>
+<hr>
+<p>Here, we finally arrive at “coding is basically just ifs and for loops.”,<br>so we covered the stuff that this quote glosses over.</p>
+<p>Calculations, variables to remember them, functions to simplify stuff,<br>arrays to hold sequential lists of variables, strings to hold text.</p>
+<p>And objects, to group things,<br>under some name.</p>
+<p>And by thing I mean, everything we learned so far,<br>variables, functions, arrays, strings, other objects, arrays of objects, and functions, and more.</p>
+<p>So you see, how we are enhancing out abilities,<br>we started with 1+1, but now have lists of objects that can have objects with names of maybe lists of other stuff.</p>
+<p>When we say result = 1+1;<br>we execute a statement, in time, or in a sequence;</p>
+<p>This is where ifs come in,<br>we can now say if(result &gt; 0){<br>	print(result)<br>}else{<br>	print(“ERROR: Something has ran afoul”);<br>}</p>
+<p>And you bet your fanny,<br>you can nest if statements.</p>
+<p>So now we explode, in multiple directions in a program,<br>depending on some variable, some parts of you program, many never run.</p>
+<p>See, you are now controlling a machine,<br>you are a wizard.</p>
+<p>But there is one more thing we need to upgrade our ability,<br>because arrays are no good if you just refer to items inside them by number.</p>
+<p>Arrays then are just objects,<br>with stupid names, like 0, 1, 2, 3.</p>
+<p>So we need those loops,<br>a for loop is just one of many kinds of loops, it is the most verbose and flexible.</p>
+<p>With loops we can say for every person object in the array of people,<br>execute some ifs and functions.</p>
+<p>This is the base layer of programming,<br>you can make solid programs here.</p>
+<p>The longer you stay on this level of abstraction,<br>the more of a code poet you become.</p>
+<p>You invent state machines, strange chat-bots like ELIZA,<br>multi-user dungeons, and just thrive in the world of text.</p>
+<hr>
+<p>There is much more to it,<br>but it is harder to explain, as you have to use strange new words.</p>
+<p>For example, objects are more than ways of grouping named variables,<br>though this is an important explanation of objects.</p>
+<p>Objects model things with properties,<br>and since they can nest other objects.</p>
+<p>They can model the world,<br>or processes, they abstract things.</p>
+<p>An object has two modes of existence,<br>as a description of something, a specification of it.</p>
+<p>And as an instance,<br>once it has been instantiated with the “new” keyword.</p>
+<p>And the reason why you want instances,<br>is to have multiple instances of the same objects.</p>
+<p>An instance of a calculator that writes to the web page,<br>and an instance of a calculator that writes to the developer console.</p>
+<p>Now you can add stuff,<br>and print it in multiple places.</p>
+<p>A more sane example of multiple instances,<br>is a File object that groups file related operations.</p>
+<p>You can have multiple files represented,<br>by the same File object, by just instantiating the File object with a different path.</p>
+<p>Files, are a very primitive concept,<br>you have to keep track of file handles, and modes, like read or write, or append.</p>
+<p>They are a great candidate for being abstracted,<br>with an Object that has useful funcions.</p>
+<p>My favorite abstraction of a File,<br>is the now <a href="https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filesystem/File.html">ancient ActionScript File Object</a>.</p>
+<p>Every file you opened had a .desktopDirectory property,<br>it seems like overkill, and pretty strange.</p>
+<p>But that would change based on what operating system you used,<br>and it was right there in the file object, you didn’t have to ask anything else.</p>
+<hr>
+<p>And I think the finest example of Object use,<br>is Component Based User Interfaces.</p>
+<p>That just means you are creating a world of Objects,<br>such as Window, Button, and even Draggable and Selectable.</p>
+<p>And you can say, myProgram = new Window();<br>const calculate = new Button()<br>myProgram.add(calculate)<br>and calculate.onClick = funcion(){print(1+1)};</p>
+<p>So you see how you have an .add function,<br>where you can add a button to a Window.</p>
+<p>That is all you need, to build massive user interfaces,<br>with menus, panes, tabs, slide out consoles, and embedded browsers.</p>
+<p>Window add menu,<br>for every menuItem in list of menu items menu add menuItem.</p>
+<p>I think web design greatly benefits,<br>from this type of abstraction, but I seem to be in the minority.</p>
+<p>I personally see <a href="https://dojo.io/">new Dojo</a> as being superior to React and now the Ru[i]ned Svelte,<br>tidy Object based component architectures are just more friendly.</p>
+<hr>
+<p>Now, that we have covered ifs and loops,<br>and tasted the strange vocabularies with words like instance.</p>
+<p>Which at my old job, earned me the nickname “Buzzword Boy”,<br>and made my idiot co-workers create a web age with my really fat face on it.</p>
+<p>And just recently had me ban a user,<br>who lost his tits assuming I am just speaking in tongues, still too scary to be funnny.</p>
+<p>Let us finally, get to the adventure part,<br>and blow some professional programmer minds.</p>
+<hr>
+<p>There is something crazy you can do with Objects,<br>and a lot of programmers either don’t understand that yet, or more likely are freaked out by it.</p>
+<p>One of the leading programmers said,<br>that he made JavaScript reactive, but that is only correct in the context of funcions, kind of.</p>
+<p>In the broader context that includes JavaScript OOP programming,<br>there has been this beautiful little thing.</p>
+<p>And I’ll demonstrate it, with the X of a User Interface component tree,<br>where the x is part of the x and y coordinate system.</p>
+<p>But at the same time I also want to give you a preview of it,<br>so that you know this is not just some boring x to be used in geometry calculations.</p>
+<p>Beyond object instantiation, you also want to hoist yourself up,<br>to using .start() and .stop() in your components.</p>
+<p>This helps to let your components to for example,<br>stop listening to the mouse, when you remove the component form a UI.</p>
+<p>Every time you say on click do something,<br>you need to add a mouse listener...</p>
+<p>and you better remove it,<br>when you get rid of that something.</p>
+<p>When for example moving to the next step in a form,<br>you must remove the listeners from the previous user interface.</p>
+<p>A stop() is just the reality,<br>of cool cats working with the mouse.</p>
+<p>If you just leave your listens laying around,<br>the mouse will eventually get ya.</p>
+<hr>
+<p>That means, your component,<br>once instantiated is in a stopped mode.</p>
+<p>Or more usefully component.started=false,<br>mode.</p>
+<p>Before you start a User Interface component,<br>it won’t be displaying anything in the browser.</p>
+<p>So if you try to make it draggable,<br>everything will crash, because you didn’t create anything that can be dragged yet.</p>
+<p>The component hasn’t started,<br>yet.</p>
+<hr>
+<p>By using a getter and a setter,<br>that divides the act of assigning to an object property.</p>
+<p>We can create a cute little system,<br>that notifies things when the .started property changes.</p>
+<p>So you say observe(started, andDosomething),<br>where andDosomething is a function that will be given the latest value of started.</p>
+<p>And this is the cool part, any time you started=true or started=false,<br>[and]Dosomething will be automatically executed, with that value.</p>
+<p>So all you are saying is .started=true,<br>and all the observers will start dong their stuff, bringing your component to life.</p>
+<p>When moving to the next step in a form,<br>inside your .stop() you just say .started = false…</p>
+<p>And whatever is still listening to that,<br>will know, it is no loner needed and must clean up after it self.</p>
+<p>Now let me show you how the x works,<br>and then you can go get a drink of water.</p>
+<p>To move a window all the way to the left,<br>you just say window.x = 0;</p>
+<p>No crazy function calls, no calling refresh(),<br>ore remain, you just assign a number to the x.</p>
+<p>And the window will react,<br>as the x notifies all of its observers.</p>
+<p>By going an extra step beyond start and stop,<br>and making the properties of an observable.</p>
+<p>You almost, almost, almost pretty much, go back,<br>all the way to the begging of the language, where we just assign 1+1 to result.</p>
+<p>Reactive programming, hides almost everything,<br>and when you consider, that objects are a programmer interface…</p>
+<p>That actually make the programming better,<br>reactive assignments, make programming accessible to novice users.</p>
+<p>And the code, so readable, to programmers,<br>that they won’t ever want to go back to the non reactive world.</p>
+<p>The non-reactive world,<br>won’t let them request operations out of sequence.</p>
+<p>They have to wait, until a component produces elements,<br>that the mouse can then listen to.</p>
+<p>In the reactive world,<br>things just work in sequence, without any strange syntax at all.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filesystem/File.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>ancient ActionScript File Object</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filesystem/File.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://dojo.io/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>new Dojo</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://dojo.io/</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">javascript</span><span class="chip">basics</span><span class="chip">variables</span><span class="chip">functions</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filesystem/File.html">
+              <span class="text-truncate">ancient ActionScript File Object</span>
+              <span class="fg-3 fs-xs flex-shrink-0">help.adobe.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://dojo.io/">
+              <span class="text-truncate">new Dojo</span>
+              <span class="fg-3 fs-xs flex-shrink-0">dojo.io</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/274e413e-2d9e-4863-964d-5331ed086d85/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Programming On Principle; The Challenge To Bring Powerful Programming To All</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/fe01b42b-1406-433b-9b7a-1af3041dc336/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Don&#39;t Obey</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5846f6a0-855d-437d-8f47-82d53c3b011f/">
+              <img src="https://catpea.github.io/chapter-09/poem-1410.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Productive Programmer</span>
+                <span class="fg-3 fs-xs">January 10, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/274e413e-2d9e-4863-964d-5331ed086d85/">
+              <img src="https://catpea.github.io/chapter-08/poem-1405.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming On Principle; The Challenge To Bring Powerful Programming To All</span>
+                <span class="fg-3 fs-xs">January 6, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/cd9be2a0-2f55-4a1c-b6e9-6450445c08af/">
+              <img src="https://catpea.github.io/chapter-09/poem-1411.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Art; Or, Beyond One Illustration Per Generation</span>
+                <span class="fg-3 fs-xs">January 11, 2024</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/2be4cc0c-19a2-4fba-8465-60c72ca66dc3/">
+              <img src="https://catpea.github.io/chapter-08/poem-1404.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Is Just A Fun Little Game</span>
+                <span class="fg-3 fs-xs">January 5, 2024</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

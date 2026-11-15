@@ -1,187 +1,462 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emergence First, Or; Building An Artificial Intelligence Software Company</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Emergence First, Or; Building An Artificial Intelligence Software Company · Cat Pea</title>
+  <meta name="description" content="The post argues that true emergence in software comes from building on fundamental, reusable UI components, themes, and a purpose‑built XML‑based language orchestrated by AI. It advocates a workflow where AI generates the language, validates XML, compiles it to JavaScript, and assembles complete applications without the developer micromanaging individual features. The author highlights the need for state‑of‑the‑art AI to manage component interactions, event sourcing, and an event bus, while emphasizing readability, maintainability, and cross‑platform deployment. After creating a robust component library through successive app releases, the writer suggests monetization strategies such as subscription‑based stores, self‑hosted marketplaces, and eventually offering the whole system as a platform‑as‑a‑service that lets other companies generate their own applications.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/a6b2b24e-87e2-463c-8b80-51d032a6d287/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Emergence First, Or; Building An Artificial Intelligence Software Company · Cat Pea">
+  <meta property="og:description" content="The post argues that true emergence in software comes from building on fundamental, reusable UI components, themes, and a purpose‑built XML‑based language orchestrated by AI. It advocates a workflow where AI generates the language, validates XML, compiles it to JavaScript, and assembles complete applications without the developer micromanaging individual features. The author highlights the need for state‑of‑the‑art AI to manage component interactions, event sourcing, and an event bus, while emphasizing readability, maintainability, and cross‑platform deployment. After creating a robust component library through successive app releases, the writer suggests monetization strategies such as subscription‑based stores, self‑hosted marketplaces, and eventually offering the whole system as a platform‑as‑a‑service that lets other companies generate their own applications.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-16/poem-2320.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-16/">Chapter 16</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2320</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-16/poem-2320.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-16/poem-2320.avif" alt="Emergence First, Or; Building An Artificial Intelligence Software Company"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Emergence First, Or; Building An Artificial Intelligence Software Company</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-16/poem-2320.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 16</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2320</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Emergence First, Or; Building An Artificial Intelligence Software Company</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2026-07-11">7/10/2026</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Emergence means you don’t start your company,
-by asking your AI to create a video editor, or a music maker.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Those are emergent, you you just wave your hand one day,
-and say, or yeah and make me 50 apps,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Emergence is the art of creating something more,
-without adding more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Mr. Gell-mann remind us that life is an emergent property,
-of fundamental principles of physics and chemistry.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your applications must be an emergent popery of more fundamental things,
-which are user interface components, themes, templates and a new language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We need a new language,
-because it needs to be purposefully designed to make applications.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This in turn makes the code clear, and more maintainable,
-including wonderfully readable by humans.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(If they tried to gag you with react-js during a computer class,
-know that XML does it 3,000 times better, it is clean and tidy, and perfect.)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The language is like the conductor of a symphony orchestra,
-it arranges everything perfectly with great clarity for all.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The user interface components are nothing like a button or a login form,
-They are waveform displays, video editor timelines.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Components too advanced for any one programmer,
-components that deliver features, not just some partial funcionality.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your programming language assembles the applicaions,
-out of large pieces.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You need state of the art AI, to get those components to talk to each other,
-you need application, and event sourcing or state, and event bus, and events.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your XML based programming language must actually be,
-multiple smaller languages, that do one thing and do it well.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is all XML but there are very strong boundaries,
-and AI takes care of it all, and this being XML validation is trivial.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your XML language is then compiled to JavaScript,
-a standard language that fulfill the promise of write once run everywhere.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The people who say JavaScript or Electron is wrong,
-have never made an app that needed to properly wrap text or support themes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They have convinced themselves their language is the best,
-and and dedicated their careers to ignoring that the web browser does it better.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just like you don’t ask your AI for applications,
-because it would take decades to hand manage them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t ask your AI for specific UI Components,
-just that they are complete, powerful, well made, and make apps work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Same goes for the language, you are not allowed to design it,
-it would take 5 – 15 years.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You ask your AI for an XML based maintainable, and clean to read.
-application programming and UI component orchestration language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">(For those of you who are familiar with terminology,
-you don’t use the language to code a Model View Controller.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You don’t tell your AI to use Reactive Programming and Signals,
-that is already there, and none of your business.)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you begin your week, by ordering the AI to program in that language,
-first creating magnificent User Interface Kits, and then Apps based on them.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The first couple of weeks, AI will be missing UI components,
-and sometimes even programming language functionality.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is where you tell the AI to create what it needs,
-and continue keeping an an eye on code readability and large UI components.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you complete a series of 30 powerful apps,
-based on basically what is popular.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can then be reasonably sure you have a good component library,
-and a proper language.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can order your AI to begin enhancing the apps,
-or just ask it to create a powerful app that fixes problems that people have.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you see, you set up the fundamentals,
-and emerge out of them much-much more, without adding more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You then ask AI where to publish them, and to do so,
-and AI will ask you questions based on user feedback.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI will fix bugs, and you can choose to ignore requests for features,
-or expand your applications, to satisfy your users.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is easy to create a 100 powerful applications,
-you may wish to consider giving them away fro free.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And find a wiser and more respectful,
-way to monetize your efforts.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you don’t have to publish to an existing app store,
-you can ask AI to make your own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Here you could setup a monthly membership feature,
-where your users pay for access to all the and their updates.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Once you make a few dollars, being a CEO, you ask your AI,
-to build a stronger application sales platform based on what you have.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That may become another company, or separate effort,
-or you can make your existing store free and open and move on to the next.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You may wish to consider going one step up,
-ad becoming a company that self software that creates companies.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your customers, would be paying you a lot more,
-for the software that captures the process we just described.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And lets them craft their own application platform,
-in their own corner of some industry that they are comfortable with.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The final touch is bundling AI with your apps, the browsers do this currently,
-it is a 3GB file that requires a modern computer.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before you know it, local AI will be the standard way,
-of how applications do their processing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To take our scary programming language for example,
-you would still write the code, but it would be more like english XML.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Like you are mapping an idea with a well structured language,
-you make up function names, component names, you only hint on multiple users.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And inside your compiler, is just an AI, a happy little thinking machine,
-that will quote compile unquote, your program into an app.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There is no parsing of the language,
-the AI just reads the darn thing and makes what you need.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This still needs strict boundaries, for compatibility with everything else,
-but AI will of course know that.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In contest of a Spreadsheet program, AI calculates,
-that cure fill-in feature is just AI – but it is not a plugin like you see today.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI is the spreadsheet program, it is just sitting inside there,
-watching you stumble and getting stuff done.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">AI will forever be computationally expensive,
-and it takes a smaller device to just run a well made app.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Plus, you know, it is a lot less creepy,
-if there are no thinking creatures inside it.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2026-07-11T03:20:23.556Z">July 10, 2026</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>10:08<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>5 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-16/poem-2320.avif" aria-label="Cover for Emergence First, Or; Building An Artificial Intelligence Software Company, full size">
+            <img src="https://catpea.github.io/chapter-16/poem-2320.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Emergence First, Or; Building An Artificial Intelligence Software Company" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 10:08
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-16/poem-2320.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-16/poem-2320.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-16/poem-2320.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Emergence means you don’t start your company,<br>by asking your AI to create a video editor, or a music maker.</p>
+<p>Those are emergent, you you just wave your hand one day,<br>and say, or yeah and make me 50 apps,</p>
+<p>Emergence is the art of creating something more,<br>without adding more.</p>
+<p>Mr. Gell-mann remind us that life is an emergent property,<br>of fundamental principles of physics and chemistry.</p>
+<hr>
+<p>Your applications must be an emergent popery of more fundamental things,<br>which are user interface components, themes, templates and a new language.</p>
+<p>We need a new language,<br>because it needs to be purposefully designed to make applications.</p>
+<p>This in turn makes the code clear, and more maintainable,<br>including wonderfully readable by humans.</p>
+<p>(If they tried to gag you with react-js during a computer class,<br>know that XML does it 3,000 times better, it is clean and tidy, and perfect.)</p>
+<p>The language is like the conductor of a symphony orchestra,<br>it arranges everything perfectly with great clarity for all.</p>
+<p>The user interface components are nothing like a button or a login form,<br>They are waveform displays, video editor timelines.</p>
+<p>Components too advanced for any one programmer,<br>components that deliver features, not just some partial funcionality.</p>
+<p>Your programming language assembles the applicaions,<br>out of large pieces.</p>
+<p>You need state of the art AI, to get those components to talk to each other,<br>you need application, and event sourcing or state, and event bus, and events.</p>
+<p>Your XML based programming language must actually be,<br>multiple smaller languages, that do one thing and do it well.</p>
+<p>It is all XML but there are very strong boundaries,<br>and AI takes care of it all, and this being XML validation is trivial.</p>
+<p>Your XML language is then compiled to JavaScript,<br>a standard language that fulfill the promise of write once run everywhere.</p>
+<p>The people who say JavaScript or Electron is wrong,<br>have never made an app that needed to properly wrap text or support themes.</p>
+<p>They have convinced themselves their language is the best,<br>and and dedicated their careers to ignoring that the web browser does it better.</p>
+<hr>
+<p>Just like you don’t ask your AI for applications,<br>because it would take decades to hand manage them.</p>
+<p>You don’t ask your AI for specific UI Components,<br>just that they are complete, powerful, well made, and make apps work.</p>
+<p>Same goes for the language, you are not allowed to design it,<br>it would take 5 – 15 years.</p>
+<p>You ask your AI for an XML based maintainable, and clean to read.<br>application programming and UI component orchestration language.</p>
+<p>(For those of you who are familiar with terminology,<br>you don’t use the language to code a Model View Controller.</p>
+<p>You don’t tell your AI to use Reactive Programming and Signals,<br>that is already there, and none of your business.)</p>
+<p>And then you begin your week, by ordering the AI to program in that language,<br>first creating magnificent User Interface Kits, and then Apps based on them.</p>
+<hr>
+<p>The first couple of weeks, AI will be missing UI components,<br>and sometimes even programming language functionality.</p>
+<p>This is where you tell the AI to create what it needs,<br>and continue keeping an an eye on code readability and large UI components.</p>
+<p>When you complete a series of 30 powerful apps,<br>based on basically what is popular.</p>
+<p>You can then be reasonably sure you have a good component library,<br>and a proper language.</p>
+<p>You can order your AI to begin enhancing the apps,<br>or just ask it to create a powerful app that fixes problems that people have.</p>
+<hr>
+<p>So you see, you set up the fundamentals,<br>and emerge out of them much-much more, without adding more.</p>
+<p>You then ask AI where to publish them, and to do so,<br>and AI will ask you questions based on user feedback.</p>
+<p>AI will fix bugs, and you can choose to ignore requests for features,<br>or expand your applications, to satisfy your users.</p>
+<hr>
+<p>It is easy to create a 100 powerful applications,<br>you may wish to consider giving them away fro free.</p>
+<p>And find a wiser and more respectful,<br>way to monetize your efforts.</p>
+<p>And you don’t have to publish to an existing app store,<br>you can ask AI to make your own.</p>
+<p>Here you could setup a monthly membership feature,<br>where your users pay for access to all the and their updates.</p>
+<hr>
+<p>Once you make a few dollars, being a CEO, you ask your AI,<br>to build a stronger application sales platform based on what you have.</p>
+<p>That may become another company, or separate effort,<br>or you can make your existing store free and open and move on to the next.</p>
+<p>You may wish to consider going one step up,<br>ad becoming a company that self software that creates companies.</p>
+<p>Your customers, would be paying you a lot more,<br>for the software that captures the process we just described.</p>
+<p>And lets them craft their own application platform,<br>in their own corner of some industry that they are comfortable with.</p>
+<p>The final touch is bundling AI with your apps, the browsers do this currently,<br>it is a 3GB file that requires a modern computer.</p>
+<p>Before you know it, local AI will be the standard way,<br>of how applications do their processing.</p>
+<p>To take our scary programming language for example,<br>you would still write the code, but it would be more like english XML.</p>
+<p>Like you are mapping an idea with a well structured language,<br>you make up function names, component names, you only hint on multiple users.</p>
+<p>And inside your compiler, is just an AI, a happy little thinking machine,<br>that will quote compile unquote, your program into an app.</p>
+<p>There is no parsing of the language,<br>the AI just reads the darn thing and makes what you need.</p>
+<p>This still needs strict boundaries, for compatibility with everything else,<br>but AI will of course know that.</p>
+<hr>
+<p>In contest of a Spreadsheet program, AI calculates,<br>that cure fill-in feature is just AI – but it is not a plugin like you see today.</p>
+<p>AI is the spreadsheet program, it is just sitting inside there,<br>watching you stumble and getting stuff done.</p>
+<hr>
+<p>AI will forever be computationally expensive,<br>and it takes a smaller device to just run a well made app.</p>
+<p>Plus, you know, it is a lot less creepy,<br>if there are no thinking creatures inside it.</p>
+
         </div>
 
         
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">emergence</span><span class="chip">AI</span><span class="chip">XML</span><span class="chip">programming language</span><span class="chip">component library</span>
+        </div>
+        
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com/"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com/</small></a>
-                </li>
-                
-              </ul>
+
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/858df2c8-2cb5-4ac8-8494-8d6bd467a21b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">You Finish Everything All The Time; Or, What Is It Like When You Are Finally Programming With AI?</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/590d6d50-d4e7-4a76-b9b9-510ce0ed5102/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Bodybuilding Is Very Easy</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/850fa081-f77c-468b-af95-d2222e6acbf7/">
+              <img src="https://catpea.github.io/chapter-16/poem-2324.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">A Touch Of Programming With Samurai Porkchops</span>
+                <span class="fg-3 fs-xs">July 14, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ea87653f-a648-45dc-8d9d-6dabe6b10b84/">
+              <img src="https://catpea.github.io/chapter-16/poem-2305.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">On Generating Lyrics</span>
+                <span class="fg-3 fs-xs">June 26, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/bf07b665-93bd-4f86-8114-68f73065558e/">
+              <img src="https://catpea.github.io/chapter-16/poem-2327.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">School Is Out: A Quick Note About Programming With AI</span>
+                <span class="fg-3 fs-xs">July 18, 2026</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/39c52c0b-8543-496f-82c2-5a341b71a250/">
+              <img src="https://catpea.github.io/chapter-16/poem-2304.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programmers Considered Fat; Or, Let Your Mom Make The Apps</span>
+                <span class="fg-3 fs-xs">June 24, 2026</span>
+              </span>
+            </a>
+            
           </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
         
 
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

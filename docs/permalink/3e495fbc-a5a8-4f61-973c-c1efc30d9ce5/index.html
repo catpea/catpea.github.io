@@ -1,178 +1,488 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X and Why: A Real Introduction To Real Mathematics</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>X and Why: A Real Introduction To Real Mathematics · Cat Pea</title>
+  <meta name="description" content="I recently created a simple p5.js sketch called **math‑101** (available on &lt;https://editor.p5js.org/catpea/sketches/&gt; and the GitHub repo &lt;https://github.com/catpea/p5&gt;) that demonstrates how to draw a stylized tree using basic vector math rather than raw scalars, illustrating why angles, magnitudes and trigonometry are essential for realistic branch lengths; after experimenting with manual code (no functions or loops until the final small‑branch stage), I explain how vectors (magnitude + angle) let me compute x/y components for each branch, showing that a circle’s radius naturally maps to branch length and that simple trig formulas suffice to generate multi‑generation trees—an approach I hope will inspire further generative art such as adding birds, squirrels or animals to the forest.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/3e495fbc-a5a8-4f61-973c-c1efc30d9ce5/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="X and Why: A Real Introduction To Real Mathematics · Cat Pea">
+  <meta property="og:description" content="I recently created a simple p5.js sketch called **math‑101** (available on &lt;https://editor.p5js.org/catpea/sketches/&gt; and the GitHub repo &lt;https://github.com/catpea/p5&gt;) that demonstrates how to draw a stylized tree using basic vector math rather than raw scalars, illustrating why angles, magnitudes and trigonometry are essential for realistic branch lengths; after experimenting with manual code (no functions or loops until the final small‑branch stage), I explain how vectors (magnitude + angle) let me compute x/y components for each branch, showing that a circle’s radius naturally maps to branch length and that simple trig formulas suffice to generate multi‑generation trees—an approach I hope will inspire further generative art such as adding birds, squirrels or animals to the forest.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-03/poem-0553.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-03/">Chapter 03</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0553</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-03/poem-0553.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-03/poem-0553.avif" alt="X and Why: A Real Introduction To Real Mathematics"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">X and Why: A Real Introduction To Real Mathematics</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-03/poem-0553.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 03</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0553</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">X and Why: A Real Introduction To Real Mathematics</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-09-05">9/4/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Long ago, I have discovered that revealing the fraud of modern education,<br>and having crazy amounts of fun while learning it for real, is one and the same!</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before I babble any further,<br>I wanted to share a program I just made for all of you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can find it at <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://editor.p5js.org/catpea/sketches/">https://editor.p5js.org/catpea/sketches/</a><br>under the name math-101</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And on github at:<br><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/catpea/p5">https://github.com/catpea/p5</a></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is almost exactly the same kind of program I wrote,<br>when I stopped learning in school because of bullies, and being accused of copying when I was writing my own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What you will discover in this program is coordinates of 0,0,<br>in the lower left hand corner - as it should be.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And a tree with four generations of branches,<br>red, green, blue, magenta.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The code is plainly spelled out, not in a loop, not in a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=xUI5Tsl2JpY">function</a>,<br>just friendly computer math that solves it self.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then at the end, when branches get too small,<br>I do make a loop, to show you what a loop looks like - and to finish off the top of the tree.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This tree is very special,<br>because it represents plain math, the math we use every day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But to fix the branches of the tree,<br>to make them more artistic and realistic like in <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=8QiPFmIMxFc">Bret Victor’s Inventing on Principle</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=_QC42w0npwQ">We can’t just use plain numbers, we need to upgrade them</a>,<br>to something more capacious.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The numbers we use every day are called Scalar,<br>the upgraded numbers are called Vectors.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Vectors store value called magnitude plus an angle,<br>and this is what we need for our tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We need to say this branch is 20 pixels,<br>but at a 15, or 30, or 45 degree angle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We can&#39;t do this with Scalar numbers,<br>because when you have things at an angle they can’t be calculated with subtraction and addition, the tree branches wouldn&#39;t be the same length.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So we need to leg go of x and y,<br>and focus on line length which will be the same for all the branches at a particular level, and angle which will differ for all the branches.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Look at a real tree,<br>branches in the middle are almost of the same length, and branches at the ends are very short.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.mathsisfun.com/algebra/vectors.html">Any source of information on the subject of vectors will give you all the formulas</a>,<br>they are all very easy.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But, there is a bit more to it,<br>because angles, mean circle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That’s where all the PI comes from,<br>and the consistent lengths of a set of branches, is just the circle radius.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We choose angles,<br>because that’s how branches grow on a tree.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And angles are best handled by means of circles,<br>and what is really cool, is that a radius of a circle makes for a fantastic representation of the length of a branch on a particular height.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To angle our virtual branch,<br>we draw a line at an angle starting in the middle of the circle.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">At this point,<br>we arrive at another area of mathematics, trigonometry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=mhd9FXYdf4s">Trigonometry is just relationships of lines moving around a circle</a>,<br>this is never explained correctly, and never given any real context.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is what our tree represents,<br>a need for Vectors, Vector Operations, and the underlying Trigonometry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I know that trigonometry makes people sad,<br>it represents failed tests, sometimes tears.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But trigonometry is just relationships between,<br>lines, triangles, and circles.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Do not be sad,<br>get mad.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://gist.github.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f">Because trigonometry, is less than 50 lines of code</a>,<br>it is just that it has been mishandled by schools.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The only big thing about trigonometry,<br>is that people studied it, and shared formulas, and knowledge about it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a result we can just use their more general formulas,<br>rather than inventing our own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our own would just be a smaller version that only deals with representing branches for our tree.<br>Inventing the formula would use a triangle, just like trigonometry.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I hope the tree will call to you,<br>I hope the fact that I just used scalar subtraction and addition instead of cool vectors will call to you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I don’t know what this memorization nonsense that schools are doing is,<br>but it is not math, if anything they are destroying math, they are not teaching it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What I just showed you is the math,<br>it is interesting, and colorful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it can make us dream about generating infinite forests of unique trees,<br>and why stop at trees we can add birds to the trees, and generative squires, and little chipmunks in various poses,<br>an odd bunny here and there, and two deer with universally unique antler configurations, and why not a cat or too... they always seem to be everywhere...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">...put a lion in there...</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-09-05T00:28:10.895Z">September 4, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:36<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-03/poem-0553.avif" aria-label="Cover for X and Why: A Real Introduction To Real Mathematics, full size">
+            <img src="https://catpea.github.io/chapter-03/poem-0553.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for X and Why: A Real Introduction To Real Mathematics" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:36
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-03/poem-0553.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-03/poem-0553.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-03/poem-0553.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Long ago, I have discovered that revealing the fraud of modern education,<br>and having crazy amounts of fun while learning it for real, is one and the same!</p>
+<p>Before I babble any further,<br>I wanted to share a program I just made for all of you.</p>
+<p>You can find it at <a href="https://editor.p5js.org/catpea/sketches/">https://editor.p5js.org/catpea/sketches/</a><br>under the name math-101</p>
+<p>And on github at:<br><a href="https://github.com/catpea/p5">https://github.com/catpea/p5</a></p>
+<p>This is almost exactly the same kind of program I wrote,<br>when I stopped learning in school because of bullies, and being accused of copying when I was writing my own.</p>
+<p>What you will discover in this program is coordinates of 0,0,<br>in the lower left hand corner - as it should be.</p>
+<p>And a tree with four generations of branches,<br>red, green, blue, magenta.</p>
+<p>The code is plainly spelled out, not in a loop, not in a <a href="https://www.youtube.com/watch?v=xUI5Tsl2JpY">function</a>,<br>just friendly computer math that solves it self.</p>
+<p>And then at the end, when branches get too small,<br>I do make a loop, to show you what a loop looks like - and to finish off the top of the tree.</p>
+<hr>
+<p>This tree is very special,<br>because it represents plain math, the math we use every day.</p>
+<p>But to fix the branches of the tree,<br>to make them more artistic and realistic like in <a href="https://www.youtube.com/watch?v=8QiPFmIMxFc">Bret Victor’s Inventing on Principle</a>.</p>
+<p><a href="https://www.youtube.com/watch?v=_QC42w0npwQ">We can’t just use plain numbers, we need to upgrade them</a>,<br>to something more capacious.</p>
+<p>The numbers we use every day are called Scalar,<br>the upgraded numbers are called Vectors.</p>
+<p>Vectors store value called magnitude plus an angle,<br>and this is what we need for our tree.</p>
+<p>We need to say this branch is 20 pixels,<br>but at a 15, or 30, or 45 degree angle.</p>
+<p>We can&#39;t do this with Scalar numbers,<br>because when you have things at an angle they can’t be calculated with subtraction and addition, the tree branches wouldn&#39;t be the same length.</p>
+<p>So we need to leg go of x and y,<br>and focus on line length which will be the same for all the branches at a particular level, and angle which will differ for all the branches.</p>
+<p>Look at a real tree,<br>branches in the middle are almost of the same length, and branches at the ends are very short.</p>
+<p><a href="https://www.mathsisfun.com/algebra/vectors.html">Any source of information on the subject of vectors will give you all the formulas</a>,<br>they are all very easy.</p>
+<p>But, there is a bit more to it,<br>because angles, mean circle.</p>
+<p>That’s where all the PI comes from,<br>and the consistent lengths of a set of branches, is just the circle radius.</p>
+<p>We choose angles,<br>because that’s how branches grow on a tree.</p>
+<p>And angles are best handled by means of circles,<br>and what is really cool, is that a radius of a circle makes for a fantastic representation of the length of a branch on a particular height.</p>
+<p>To angle our virtual branch,<br>we draw a line at an angle starting in the middle of the circle.</p>
+<p>At this point,<br>we arrive at another area of mathematics, trigonometry.</p>
+<p><a href="https://www.youtube.com/watch?v=mhd9FXYdf4s">Trigonometry is just relationships of lines moving around a circle</a>,<br>this is never explained correctly, and never given any real context.</p>
+<p>This is what our tree represents,<br>a need for Vectors, Vector Operations, and the underlying Trigonometry.</p>
+<p>I know that trigonometry makes people sad,<br>it represents failed tests, sometimes tears.</p>
+<p>But trigonometry is just relationships between,<br>lines, triangles, and circles.</p>
+<p>Do not be sad,<br>get mad.</p>
+<p><a href="https://gist.github.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f">Because trigonometry, is less than 50 lines of code</a>,<br>it is just that it has been mishandled by schools.</p>
+<p>The only big thing about trigonometry,<br>is that people studied it, and shared formulas, and knowledge about it.</p>
+<p>As a result we can just use their more general formulas,<br>rather than inventing our own.</p>
+<p>Our own would just be a smaller version that only deals with representing branches for our tree.<br>Inventing the formula would use a triangle, just like trigonometry.</p>
+<p>I hope the tree will call to you,<br>I hope the fact that I just used scalar subtraction and addition instead of cool vectors will call to you.</p>
+<p>I don’t know what this memorization nonsense that schools are doing is,<br>but it is not math, if anything they are destroying math, they are not teaching it.</p>
+<p>What I just showed you is the math,<br>it is interesting, and colorful.</p>
+<p>And it can make us dream about generating infinite forests of unique trees,<br>and why stop at trees we can add birds to the trees, and generative squires, and little chipmunks in various poses,<br>an odd bunny here and there, and two deer with universally unique antler configurations, and why not a cat or too... they always seem to be everywhere...</p>
+<p>...put a lion in there...</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://editor.p5js.org/catpea/sketches/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://editor.p5js.org/catpea/sketches/</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://editor.p5js.org/catpea/sketches/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://github.com/catpea/p5">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>https://github.com/catpea/p5</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://github.com/catpea/p5</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=xUI5Tsl2JpY">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>function</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=xUI5Tsl2JpY</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=8QiPFmIMxFc">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bret Victor’s Inventing on Principle</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=8QiPFmIMxFc</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=_QC42w0npwQ">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>We can’t just use plain numbers, we need to upgrade them</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=_QC42w0npwQ</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.mathsisfun.com/algebra/vectors.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Any source of information on the subject of vectors will give you all the formulas</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.mathsisfun.com/algebra/vectors.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=mhd9FXYdf4s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Trigonometry is just relationships of lines moving around a circle</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=mhd9FXYdf4s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://gist.github.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Because trigonometry, is less than 50 lines of code</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://gist.github.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">p5js</span><span class="chip">javascript</span><span class="chip">vector</span><span class="chip">trigonometry</span><span class="chip">recursion</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/Z5T9IHGItHY"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/Z5T9IHGItHY</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://editor.p5js.org/catpea/sketches/">
+              <span class="text-truncate">https://editor.p5js.org/catpea/sketches/</span>
+              <span class="fg-3 fs-xs flex-shrink-0">editor.p5js.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://github.com/catpea/p5">
+              <span class="text-truncate">https://github.com/catpea/p5</span>
+              <span class="fg-3 fs-xs flex-shrink-0">github.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=xUI5Tsl2JpY">
+              <span class="text-truncate">function</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=8QiPFmIMxFc">
+              <span class="text-truncate">Bret Victor’s Inventing on Principle</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=_QC42w0npwQ">
+              <span class="text-truncate">We can’t just use plain numbers, we need to upgrade them</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.mathsisfun.com/algebra/vectors.html">
+              <span class="text-truncate">Any source of information on the subject of vectors will give you all the formulas</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.mathsisfun.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=mhd9FXYdf4s">
+              <span class="text-truncate">Trigonometry is just relationships of lines moving around a circle</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://gist.github.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f">
+              <span class="text-truncate">Because trigonometry, is less than 50 lines of code</span>
+              <span class="fg-3 fs-xs flex-shrink-0">gist.github.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/7f2b0e55-9ea6-4b48-a16a-6f92098f0731/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">3D Models</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/63d44bce-c07d-48fd-9712-d1b6b95c92e8/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">You Must Expand The Meaning Of Poetry</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/9ae5da53-5ffe-40dc-aa12-c3f2eb0afaab/">
+              <img src="https://catpea.github.io/chapter-03/poem-0555.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming Challenge: declaration.json</span>
+                <span class="fg-3 fs-xs">September 6, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/d5132e62-f52c-4870-9c79-ae4590cee6b5/">
+              <img src="https://catpea.github.io/chapter-03/poem-0550.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Self Education, Blender 3D Print Toolbox, And Non-Manifold Geometry</span>
+                <span class="fg-3 fs-xs">September 1, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b64fdff4-1e45-4544-babf-854c69297f79/">
+              <img src="https://catpea.github.io/chapter-03/poem-0573.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Computers And Color Theory, A Little Programming Tutorial</span>
+                <span class="fg-3 fs-xs">September 24, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5b9fb4f8-228d-42f2-b0c7-89e0752963e3/">
+              <img src="https://catpea.github.io/chapter-03/poem-0515.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Programming A Remote Controlled Portable Raspberry Pi Audio Player</span>
+                <span class="fg-3 fs-xs">July 28, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,201 +1,490 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strange Programming Days; Or, The Interdimensional Alarm Clock</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Strange Programming Days; Or, The Interdimensional Alarm Clock · Cat Pea</title>
+  <meta name="description" content="I’ve been working on an AI‑assisted art project that turns a simple alarm clock into a vocalised reminder machine: when the set time arrives it plays a shuffled sequence of inspirational messages recorded via a teleprompter interface I had the AI generate for me. The post explains how I fed the AI prompts for creating button‑driven scripts, audio recording and downloading logic, then used those recordings in an alarm queue that shuffles three .mp3 files before playback—an approach that showcases how even budget AIs can produce complete small apps (widgets/portals) with verbose code. Although the final alarm clock is still untested and a bit clunky, the work demonstrates a new way to “download” functionality by simply asking an AI for the needed code rather than installing separate apps.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/421d35c8-8bf8-4b99-a22e-d5d021a81f36/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Strange Programming Days; Or, The Interdimensional Alarm Clock · Cat Pea">
+  <meta property="og:description" content="I’ve been working on an AI‑assisted art project that turns a simple alarm clock into a vocalised reminder machine: when the set time arrives it plays a shuffled sequence of inspirational messages recorded via a teleprompter interface I had the AI generate for me. The post explains how I fed the AI prompts for creating button‑driven scripts, audio recording and downloading logic, then used those recordings in an alarm queue that shuffles three .mp3 files before playback—an approach that showcases how even budget AIs can produce complete small apps (widgets/portals) with verbose code. Although the final alarm clock is still untested and a bit clunky, the work demonstrates a new way to “download” functionality by simply asking an AI for the needed code rather than installing separate apps.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-13/poem-1909.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-13/">Chapter 13</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#1909</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-13/poem-1909.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-13/poem-1909.avif" alt="Strange Programming Days; Or, The Interdimensional Alarm Clock"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Strange Programming Days; Or, The Interdimensional Alarm Clock</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-13/poem-1909.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 13</li>
-                <li class="breadcrumb-item fw-lighter active">Post #1909</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Strange Programming Days; Or, The Interdimensional Alarm Clock</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-05-24">5/23/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Preface,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The following text is about creating an art project with an AI,
-once complete, it will be an alarm clock that vocalizes inspirational messages.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I chose not to complete the project today,
-and may not complete it tomorrow, as not to hurry things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What this text demonstrates is about asking AI for small useful programs,
-which even though it is a budget AI, it creates them perfectly.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is not true that AI will eliminate need for programmers,
-you should instead learn programming, to know how to ask it for apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">From a broader perspective,
-it is time to write code in a way that AI can easily understand.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This will mean more verbose code, more repeating yourself,
-and probably a new application architecture.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What used to be called portals and widgets,
-which would allow low power budget AI, to create tiny apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Stitched together by broadcasting simple data events,
-that all little apps would listen to.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As widgets or portlets, the little apps are completely decoupled,
-they can be very easily replaced or upgraded.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A portal user interface is pretty much what we call a dashboard today,
-though a bit more clunky.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Well worth it though, because you just ask AI for what you need,
-perhaps even with voice commands.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can build out a full screen interactive toolbox,
-for any purpose, with an AI that maybe low power enough to run from a smartphone.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It appears the age of downloading apps, is coming to a close,
-as now you can just ask AI to make what you need.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Without furhther ado,
-Strange Days; Or, The Interdimensional Alarm Clock</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I’ve been taking a closer look at indoctrination,
-the things that we accept as fundamental, that aren’t.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But today, being Friday, I wanted to rest a little,
-and get a bit more creative in the process.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I remembered how Donnie Darko mentioned showing beautiful pictures,
-so that the world only knows good things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And how upon a good nap, some people feel reborn,
-or having transcended dimensions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So I imagined the idea of a clock that awakens with a spoken alarm,
-that reminds of the beautiful rules of universe.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I used an AI to expand on rules about poverty, bullies,
-and even being called a number in school.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Though I haven’t finished the list,
-it was only because, it is just too heavy to finish ion one day.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I remembered that I had a dusty link,
-to a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://cerebrascoder-cerebras_coder.web.val.run/">programming AI</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I hurried over there, to first create a kind of a <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/teleprompter.html">teleprompter</a>,
-because in this art project the rules of the universe are shuffled.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That means my reading must be broken up in 50 pieces,
-and it just makes sense to create a custom voice recorder for it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This being that strange wonderful age,
-where AI can code little apps for us.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I ptompted it that I will be reading a new line delimited script,
-and I will need previous line, next line, record audio, stop recording audio and download audio, buttons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is my first time programming with this AI,
-so I wanted to see if it could infer the code behind buttons.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It did, perfectly,
-which frightened me, immensely.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Hence the strange days,
-this shouldn&#39;t be possible.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I threw buttons at AI,
-and it gave me a program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That is, the reason why you only hear the negative people critiquing AI,
-that it creates bad code, steals jobs, and does not impress.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The rest of us, are quietly having kittens,
-whilst laying eggs as well, we are speechless.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I tested the teleprompter very little,
-but it records audio, and when you click stop, it sends it to your downloads.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So, you start at first line, click record, read the line,
-click stop, and the audio file jumps into you downloads.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The audio files can be easily played by the browser,
-disabling auto-download, allows for easier re-recording.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The AI, created,
-a perfect little program.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The matching <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/alarmclock.html">alarmclock</a> is untested,
-but all the code is there, including shuffling of the audio.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">My instructions were:
-“Create alarm clock input elements hour and minute, display and update &quot;Alarm will activate in hh:mm:ss&quot;, when time arrives dispatch dom event alarm. When dom event alarm is heard, shuffle audio array &#39;a.mp3&#39;,&#39;b.mp3&#39;,&#39;c.mp3&#39; into alarmQueue array and play each sound.”</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The use of the queue ensures that the audio files will play once,
-and that their order will be shuffled enough.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It appears to require minimal changes,
-I will have to give it files from the teleprompter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Where it says at line 45 (if you do view source),
-let audioFiles = &#39;a.mp3&#39;, &#39;b.mp3&#39;, &#39;c.mp3&#39;;</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I was hoping to set an alarm for a time of day,
-but the AI gave me a countdown timer, which is more accurate for naps.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This took about two minutes,
-and this is a slightly dated AI, and low powered service.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The new AI is much more powerful, instead of a singe file,
-it makes changes across entire code repositories.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I wish I could bundle the alarm clock today,
-but I should not do such a thing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a touching art project,
-though a bit clunky, and digitally whimsical, it is sure to make someone&#39;s day.</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-05-24T00:32:50.004Z">May 23, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>9:32<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>4 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-13/poem-1909.avif" aria-label="Cover for Strange Programming Days; Or, The Interdimensional Alarm Clock, full size">
+            <img src="https://catpea.github.io/chapter-13/poem-1909.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Strange Programming Days; Or, The Interdimensional Alarm Clock" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 9:32
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-13/poem-1909.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-13/poem-1909.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-13/poem-1909.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Preface,</p>
+<p>The following text is about creating an art project with an AI,<br>once complete, it will be an alarm clock that vocalizes inspirational messages.</p>
+<p>I chose not to complete the project today,<br>and may not complete it tomorrow, as not to hurry things.</p>
+<p>What this text demonstrates is about asking AI for small useful programs,<br>which even though it is a budget AI, it creates them perfectly.</p>
+<p>It is not true that AI will eliminate need for programmers,<br>you should instead learn programming, to know how to ask it for apps.</p>
+<p>From a broader perspective,<br>it is time to write code in a way that AI can easily understand.</p>
+<p>This will mean more verbose code, more repeating yourself,<br>and probably a new application architecture.</p>
+<p>What used to be called portals and widgets,<br>which would allow low power budget AI, to create tiny apps.</p>
+<p>Stitched together by broadcasting simple data events,<br>that all little apps would listen to.</p>
+<p>As widgets or portlets, the little apps are completely decoupled,<br>they can be very easily replaced or upgraded.</p>
+<p>A portal user interface is pretty much what we call a dashboard today,<br>though a bit more clunky.</p>
+<p>Well worth it though, because you just ask AI for what you need,<br>perhaps even with voice commands.</p>
+<p>You can build out a full screen interactive toolbox,<br>for any purpose, with an AI that maybe low power enough to run from a smartphone.</p>
+<p>It appears the age of downloading apps, is coming to a close,<br>as now you can just ask AI to make what you need.</p>
+<hr>
+<p>Without furhther ado,<br>Strange Days; Or, The Interdimensional Alarm Clock</p>
+<p>I’ve been taking a closer look at indoctrination,<br>the things that we accept as fundamental, that aren’t.</p>
+<p>But today, being Friday, I wanted to rest a little,<br>and get a bit more creative in the process.</p>
+<p>I remembered how Donnie Darko mentioned showing beautiful pictures,<br>so that the world only knows good things.</p>
+<p>And how upon a good nap, some people feel reborn,<br>or having transcended dimensions.</p>
+<p>So I imagined the idea of a clock that awakens with a spoken alarm,<br>that reminds of the beautiful rules of universe.</p>
+<p>I used an AI to expand on rules about poverty, bullies,<br>and even being called a number in school.</p>
+<p>Though I haven’t finished the list,<br>it was only because, it is just too heavy to finish ion one day.</p>
+<p>And I remembered that I had a dusty link,<br>to a <a href="https://cerebrascoder-cerebras_coder.web.val.run/">programming AI</a>.</p>
+<p>I hurried over there, to first create a kind of a <a href="files/teleprompter.html">teleprompter</a>,<br>because in this art project the rules of the universe are shuffled.</p>
+<p>That means my reading must be broken up in 50 pieces,<br>and it just makes sense to create a custom voice recorder for it.</p>
+<p>This being that strange wonderful age,<br>where AI can code little apps for us.</p>
+<p>I ptompted it that I will be reading a new line delimited script,<br>and I will need previous line, next line, record audio, stop recording audio and download audio, buttons.</p>
+<p>It is my first time programming with this AI,<br>so I wanted to see if it could infer the code behind buttons.</p>
+<p>It did, perfectly,<br>which frightened me, immensely.</p>
+<p>Hence the strange days,<br>this shouldn&#39;t be possible.</p>
+<p>I threw buttons at AI,<br>and it gave me a program.</p>
+<p>That is, the reason why you only hear the negative people critiquing AI,<br>that it creates bad code, steals jobs, and does not impress.</p>
+<p>The rest of us, are quietly having kittens,<br>whilst laying eggs as well, we are speechless.</p>
+<hr>
+<p>I tested the teleprompter very little,<br>but it records audio, and when you click stop, it sends it to your downloads.</p>
+<p>So, you start at first line, click record, read the line,<br>click stop, and the audio file jumps into you downloads.</p>
+<p>The audio files can be easily played by the browser,<br>disabling auto-download, allows for easier re-recording.</p>
+<p>The AI, created,<br>a perfect little program.</p>
+<hr>
+<p>The matching <a href="files/alarmclock.html">alarmclock</a> is untested,<br>but all the code is there, including shuffling of the audio.</p>
+<p>My instructions were:<br>“Create alarm clock input elements hour and minute, display and update &quot;Alarm will activate in hh:mm:ss&quot;, when time arrives dispatch dom event alarm. When dom event alarm is heard, shuffle audio array &#39;a.mp3&#39;,&#39;b.mp3&#39;,&#39;c.mp3&#39; into alarmQueue array and play each sound.”</p>
+<p>The use of the queue ensures that the audio files will play once,<br>and that their order will be shuffled enough.</p>
+<p>It appears to require minimal changes,<br>I will have to give it files from the teleprompter.</p>
+<p>Where it says at line 45 (if you do view source),<br>let audioFiles = &#39;a.mp3&#39;, &#39;b.mp3&#39;, &#39;c.mp3&#39;;</p>
+<hr>
+<p>I was hoping to set an alarm for a time of day,<br>but the AI gave me a countdown timer, which is more accurate for naps.</p>
+<hr>
+<p>This took about two minutes,<br>and this is a slightly dated AI, and low powered service.</p>
+<p>The new AI is much more powerful, instead of a singe file,<br>it makes changes across entire code repositories.</p>
+<p>I wish I could bundle the alarm clock today,<br>but I should not do such a thing.</p>
+<p>This is a touching art project,<br>though a bit clunky, and digitally whimsical, it is sure to make someone&#39;s day.</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://cerebrascoder-cerebras_coder.web.val.run/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>programming AI</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://cerebrascoder-cerebras_coder.web.val.run/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/teleprompter.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>teleprompter</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/teleprompter.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/alarmclock.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>alarmclock</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/alarmclock.html</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">javascript</span><span class="chip">webdev</span><span class="chip">programming</span><span class="chip">teleprompter</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://cerebrascoder-cerebras_coder.web.val.run/">
+              <span class="text-truncate">programming AI</span>
+              <span class="fg-3 fs-xs flex-shrink-0">cerebrascoder-cerebras_coder.web.val.run</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/teleprompter.html">
+              <span class="text-truncate">teleprompter</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/alarmclock.html">
+              <span class="text-truncate">alarmclock</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/alarmclock.html" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>alarmclock.html
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/teleprompter.html" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>teleprompter.html
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/d81e982a-1a91-44e7-b0d3-2524c1c79bd8/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Hacker Rising - A Story Of The Greatest Hack In Human History</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/eb61248d-c0a1-49ab-ab9e-222bf653f571/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">AI Helps You Easily Put Your Foot In JavaScript&#39;s Door</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/eb61248d-c0a1-49ab-ab9e-222bf653f571/">
+              <img src="https://catpea.github.io/chapter-13/poem-1910.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">AI Helps You Easily Put Your Foot In JavaScript&#39;s Door</span>
+                <span class="fg-3 fs-xs">May 24, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/92a0e0e5-41fb-4960-93fe-ebd3c2f35cd7/">
+              <img src="https://catpea.github.io/chapter-13/poem-1900.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn Programming: The Philosophy Of Syntax - For Thinkers, Hikers And The Visually Impaired</span>
+                <span class="fg-3 fs-xs">May 14, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5bf226da-3912-4f8c-96b2-a02c18bf856a/">
+              <img src="https://catpea.github.io/chapter-13/poem-1915.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Genius! Or, The Dunces Can Easily Help Themselves, But Geniuses Are Very Nearly Beyond All Hope</span>
+                <span class="fg-3 fs-xs">May 29, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b09d0440-6dd2-47f3-918a-f39f0bcc87bd/">
+              <img src="https://catpea.github.io/chapter-13/poem-1899.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Helping The World Grow With Adaptive Audio Books</span>
+                <span class="fg-3 fs-xs">May 13, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

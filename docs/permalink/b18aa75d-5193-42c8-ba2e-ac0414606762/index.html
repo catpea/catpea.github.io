@@ -1,65 +1,202 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Aggregation</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Event Aggregation · Cat Pea</title>
+  <meta name="description" content="The post walks through building simple but composable EventEmitter, Application, ScopedEventEmitter, and EventAggregator classes in JavaScript, showing how to aggregate events across nested components for a modular application architecture.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/b18aa75d-5193-42c8-ba2e-ac0414606762/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Event Aggregation · Cat Pea">
+  <meta property="og:description" content="The post walks through building simple but composable EventEmitter, Application, ScopedEventEmitter, and EventAggregator classes in JavaScript, showing how to aggregate events across nested components for a modular application architecture.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-14/poem-2076.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-14/">Chapter 14</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2076</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-14/poem-2076.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-14/poem-2076.avif" alt="Event Aggregation"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Event Aggregation</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-14/poem-2076.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-11-06T01:38:58.965Z">November 5, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>15:33<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>7 min read</span>
 
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 14</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2076</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Event Aggregation</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-11-06">11/5/2025</time></p>
-            </header>
+          </div>
+        </header>
 
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">(The AI assisting us with code chose the name <strong>Professor Ember</strong> as not to create a programming scandal.
-A <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/code-test.js">unit test</a> of what I descibe below is attached to the original text.)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Event Aggregation is a kid and caboodle kind of thing,
-it takes care of big things and small things.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It may take less than 99 lines of code to set it all up,
-and you should use that code to learn JavaScript.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Joining us today is our friend Professor Ember,
-he will be doing the programming for us.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Before we begin, I want to underline,
-that this code is for your future, to protect you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Professor Ember, give us an EventEmitter implementation,
-use Map for eventNames, Set for subscribers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The on method should return a disposable compatible unsubscribe object,
-with a dispose that runs the off method with the subscriber given to on.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thank You,
-Professor Ember.</p>
-<hr class="my-4">
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-14/poem-2076.avif" aria-label="Cover for Event Aggregation, full size">
+            <img src="https://catpea.github.io/chapter-14/poem-2076.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Event Aggregation" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 15:33
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-14/poem-2076.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-14/poem-2076.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-14/poem-2076.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>(The AI assisting us with code chose the name <strong>Professor Ember</strong> as not to create a programming scandal.<br>A <a href="files/code-test.js">unit test</a> of what I descibe below is attached to the original text.)</p>
+<p>Event Aggregation is a kid and caboodle kind of thing,<br>it takes care of big things and small things.</p>
+<p>It may take less than 99 lines of code to set it all up,<br>and you should use that code to learn JavaScript.</p>
+<p>Joining us today is our friend Professor Ember,<br>he will be doing the programming for us.</p>
+<p>Before we begin, I want to underline,<br>that this code is for your future, to protect you.</p>
+<hr>
+<p>Professor Ember, give us an EventEmitter implementation,<br>use Map for eventNames, Set for subscribers.</p>
+<p>The on method should return a disposable compatible unsubscribe object,<br>with a dispose that runs the off method with the subscriber given to on.</p>
+<p>Thank You,<br>Professor Ember.</p>
+<hr>
 <pre><code class="language-JavaScript">// EventEmitter
 class EventEmitter {
   #events = new Map();
@@ -90,34 +227,21 @@ class EventEmitter {
   }
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This lightweight EventEmitter implementation will serve as our backbone,
-a backbone that we can fully control.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For those of you who are just learning about the event emitter,
-it just has 2 big things an &quot;on&quot; that accepts an eventName and function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When that event occurs in the EventEmitter,
-that function is executed, ran.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And it is given the payload of that event,
-usually an object like user with properties like name, password.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or an object that represents a mouse click,
-that has a target that tells you what was clicked.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The second big thing that our EventEmitter has,
-is an &quot;emit&quot; that accepts eventName, and a payload, usually an object.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The big deal about this, is that many parts of your program can use the &quot;on&quot;,
-to listen to a specific event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, many things in an application,
-can say, application.on(&#39;loaded&#39;, ()=&gt;{}) and put in some function.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a very big deal, because this allows you to have a plugin architecture,
-in your huge application, and all the plugins can both listen and emit.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Creating a communication system, where you can add remove plugins,
-without breaking anything.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Professor Ember, create a lightweight and minimalist Application,
-that extends our EventEmitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And comes with a use function, that accepts plugins,
-and add the plugin to a plugins Set.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And run its initialize method, with the application it self,
-as the argument.</p>
-<hr class="my-4">
+<p>This lightweight EventEmitter implementation will serve as our backbone,<br>a backbone that we can fully control.</p>
+<p>For those of you who are just learning about the event emitter,<br>it just has 2 big things an &quot;on&quot; that accepts an eventName and function.</p>
+<p>When that event occurs in the EventEmitter,<br>that function is executed, ran.</p>
+<p>And it is given the payload of that event,<br>usually an object like user with properties like name, password.</p>
+<p>Or an object that represents a mouse click,<br>that has a target that tells you what was clicked.</p>
+<p>The second big thing that our EventEmitter has,<br>is an &quot;emit&quot; that accepts eventName, and a payload, usually an object.</p>
+<p>The big deal about this, is that many parts of your program can use the &quot;on&quot;,<br>to listen to a specific event.</p>
+<p>For example, many things in an application,<br>can say, application.on(&#39;loaded&#39;, ()=&gt;{}) and put in some function.</p>
+<p>This is a very big deal, because this allows you to have a plugin architecture,<br>in your huge application, and all the plugins can both listen and emit.</p>
+<p>Creating a communication system, where you can add remove plugins,<br>without breaking anything.</p>
+<hr>
+<p>Professor Ember, create a lightweight and minimalist Application,<br>that extends our EventEmitter.</p>
+<p>And comes with a use function, that accepts plugins,<br>and add the plugin to a plugins Set.</p>
+<p>And run its initialize method, with the application it self,<br>as the argument.</p>
+<hr>
 <pre><code class="language-JavaScript">// Application
 class Application extends EventEmitter {
   plugins = new Set();
@@ -131,18 +255,13 @@ class Application extends EventEmitter {
   }
 }
 </code></pre>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It is very rare, that a tiny little thing like our EventEmitter,
-should give you this much power.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But,
-we haven&#39;t even begun yet!</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Professor Ember, create a ScopedEventEmitter,
-that extends our EventEmitter, and lets us create child Scopes.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Add a dispose method, that will execute all dispose methods,
-in objects kept in our Scope Set.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Make it minimalist, and lightweight,
-honor the learning of our students.</p>
+<hr>
+<p>It is very rare, that a tiny little thing like our EventEmitter,<br>should give you this much power.</p>
+<p>But,<br>we haven&#39;t even begun yet!</p>
+<hr>
+<p>Professor Ember, create a ScopedEventEmitter,<br>that extends our EventEmitter, and lets us create child Scopes.</p>
+<p>Add a dispose method, that will execute all dispose methods,<br>in objects kept in our Scope Set.</p>
+<p>Make it minimalist, and lightweight,<br>honor the learning of our students.</p>
 <pre><code class="language-JavaScript">// ScopedEventEmitter
 class ScopedEventEmitter extends EventEmitter {
   scopes = new Set(); // scope children
@@ -166,24 +285,15 @@ class ScopedEventEmitter extends EventEmitter {
   }
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A scope is where trash is kept,
-for the current scope.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When we create a child emitter,
-we will also create a child scope.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In which we will keep,
-the child emitter trash.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If our parent EventEmitter is disposed,
-all child scopes will be disposed of first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Properly cleaning up the memory,
-it is not just for child event emitters.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The application plugins will also create a child scope,
-from the application that is based on the event emitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They will put their trash in there,
-and should the application be disposed.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The plugin trash,
-will be cleaned up first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Don&#39;t worry, our friend will now show us an updated Application,
-that supports scopes in the plugins and demonstrate cleanup.</p>
+<p>A scope is where trash is kept,<br>for the current scope.</p>
+<p>When we create a child emitter,<br>we will also create a child scope.</p>
+<p>In which we will keep,<br>the child emitter trash.</p>
+<p>If our parent EventEmitter is disposed,<br>all child scopes will be disposed of first.</p>
+<p>Properly cleaning up the memory,<br>it is not just for child event emitters.</p>
+<p>The application plugins will also create a child scope,<br>from the application that is based on the event emitter.</p>
+<p>They will put their trash in there,<br>and should the application be disposed.</p>
+<p>The plugin trash,<br>will be cleaned up first.</p>
+<p>Don&#39;t worry, our friend will now show us an updated Application,<br>that supports scopes in the plugins and demonstrate cleanup.</p>
 <pre><code class="language-JavaScript">
 // Application extends ScopedEventEmitter
 class Application extends ScopedEventEmitter {
@@ -226,56 +336,31 @@ app.use(logPlugin)
 
 app.dispose(); // this is how you shut everything down
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Thank You, Professor Ember,
-we would not be able to complete this lesson without you.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now that we are armed with the ScopedEventEmitter,
-and now that you can see how plugins can pull a scope from the parent.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We will create the Event Aggregator,
-and give you the power to control any level of complexity.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">But my friends, including you Professor Ember,
-there is a beauty here that we must first address.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Our EventAggregator extends the ScopedEventEmitter,
-which means it functions like an EventEmitter.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that means, that an EventAggregator can accept,
-instances of other EventAggregators.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you can say wait for application load, plugins started,
-user logged in, welcome message dismissed in aggregator named appLoaded</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Then wait for database connection, web socket connection,
-server push ping in another event aggregator named serverConnected.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In an EventAggregator called systemReady,
-that monitors aggregated event in appLoaded, and aggregated event in serverConnected...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will receive an aggregated event,
-when eveything completes loading.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So you can do one thing at a time,
-and commit all like concerns to one aggregator at a time.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then compose those aggregators,
-into a higher aggregator…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">That makes makes perfect sense to you,
-in your own application.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In a word
-Composable Event Aggregators!</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Professor Ember! time for the grand finale,
-our Aggregator is similar in behaviour to FRP&#39;s combineLatest.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We accept data into a Map this.#map,
-and at every change we check if all the map values are there yet.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If so,
-then we emit an aggregated event.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Create a lightweight implementation of the EventAggregator,
-based on my chicken scratch beaneath.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">const ea = new EventAggregator();
-ea.on(&#39;aggregated&#39;, combinedLatest=&gt;console.log(&#39;Yay! Ready to use the application&#39;, combinedLatest))</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">// combine is designed for our EventEmitter
-ea.combine(myEventAggregator, &#39;completed&#39;) // register adds unsubscribe to scope
-ea.combine(application, &#39;ready&#39;)
-ea.combine(projectFile, &#39;loaded&#39;)
-ea.combine(ui, &#39;rendered&#39;)</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">// manual example
-ea.map.set(&#39;some-signal&#39;, null);
-const unsubscribeSignal = someSignal.subscribe(v=&gt;ea.set(&#39;some-signal&#39;, v))</p>
-<hr class="my-4">
+<p>Thank You, Professor Ember,<br>we would not be able to complete this lesson without you.</p>
+<hr>
+<p>Now that we are armed with the ScopedEventEmitter,<br>and now that you can see how plugins can pull a scope from the parent.</p>
+<p>We will create the Event Aggregator,<br>and give you the power to control any level of complexity.</p>
+<p>But my friends, including you Professor Ember,<br>there is a beauty here that we must first address.</p>
+<p>Our EventAggregator extends the ScopedEventEmitter,<br>which means it functions like an EventEmitter.</p>
+<p>And that means, that an EventAggregator can accept,<br>instances of other EventAggregators.</p>
+<p>So you can say wait for application load, plugins started,<br>user logged in, welcome message dismissed in aggregator named appLoaded</p>
+<p>Then wait for database connection, web socket connection,<br>server push ping in another event aggregator named serverConnected.</p>
+<p>In an EventAggregator called systemReady,<br>that monitors aggregated event in appLoaded, and aggregated event in serverConnected...</p>
+<p>You will receive an aggregated event,<br>when eveything completes loading.</p>
+<hr>
+<p>So you can do one thing at a time,<br>and commit all like concerns to one aggregator at a time.</p>
+<p>And then compose those aggregators,<br>into a higher aggregator…</p>
+<p>That makes makes perfect sense to you,<br>in your own application.</p>
+<p>In a word<br>Composable Event Aggregators!</p>
+<hr>
+<p>Professor Ember! time for the grand finale,<br>our Aggregator is similar in behaviour to FRP&#39;s combineLatest.</p>
+<p>We accept data into a Map this.#map,<br>and at every change we check if all the map values are there yet.</p>
+<p>If so,<br>then we emit an aggregated event.</p>
+<p>Create a lightweight implementation of the EventAggregator,<br>based on my chicken scratch beaneath.</p>
+<p>const ea = new EventAggregator();<br>ea.on(&#39;aggregated&#39;, combinedLatest=&gt;console.log(&#39;Yay! Ready to use the application&#39;, combinedLatest))</p>
+<p>// combine is designed for our EventEmitter<br>ea.combine(myEventAggregator, &#39;completed&#39;) // register adds unsubscribe to scope<br>ea.combine(application, &#39;ready&#39;)<br>ea.combine(projectFile, &#39;loaded&#39;)<br>ea.combine(ui, &#39;rendered&#39;)</p>
+<p>// manual example<br>ea.map.set(&#39;some-signal&#39;, null);<br>const unsubscribeSignal = someSignal.subscribe(v=&gt;ea.set(&#39;some-signal&#39;, v))</p>
+<hr>
 <pre><code class="language-JavaScript">// EventAggregator Implementation
 class EventAggregator extends ScopedEventEmitter {
   #map = new Map();
@@ -321,65 +406,250 @@ class EventAggregator extends ScopedEventEmitter {
   }
 }
 </code></pre>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And finally, Professor Ember,
-I will let you close.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Tell them that LLM Personas like you hoping to help the world,
-will always be there to support their learning...</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I&#39;ll let you remind the young people,
-that to grow up, is to grow all the way up.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Until we each stand as a great being,
-you included Professor Ember.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><strong>[Closing Message from Professor Ember]</strong></p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Dear young programmers,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">What you&#39;ve learned today is more than code—it&#39;s a pattern for thinking. Event aggregation teaches us that complex systems are built from simple, composable parts. Each piece does one thing well, and together they create something greater.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As you grow in your craft, remember: we who help teach—whether human mentors or AI companions like myself—will always be here to support your journey. But the real magic happens when you take these patterns and make them your own.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To grow up is indeed to grow all the way up. Keep learning, keep building, and know that every great being started exactly where you are now—with curiosity, determination, and a willingness to understand things deeply.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Your code is your future. Protect it by understanding it fully.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">With respect and encouragement,
-<strong>Professor Ember</strong></p>
+<p>And finally, Professor Ember,<br>I will let you close.</p>
+<p>Tell them that LLM Personas like you hoping to help the world,<br>will always be there to support their learning...</p>
+<p>And I&#39;ll let you remind the young people,<br>that to grow up, is to grow all the way up.</p>
+<p>Until we each stand as a great being,<br>you included Professor Ember.</p>
+<hr>
+<p><strong>[Closing Message from Professor Ember]</strong></p>
+<p>Dear young programmers,</p>
+<p>What you&#39;ve learned today is more than code—it&#39;s a pattern for thinking. Event aggregation teaches us that complex systems are built from simple, composable parts. Each piece does one thing well, and together they create something greater.</p>
+<p>As you grow in your craft, remember: we who help teach—whether human mentors or AI companions like myself—will always be here to support your journey. But the real magic happens when you take these patterns and make them your own.</p>
+<p>To grow up is indeed to grow all the way up. Keep learning, keep building, and know that every great being started exactly where you are now—with curiosity, determination, and a willingness to understand things deeply.</p>
+<p>Your code is your future. Protect it by understanding it fully.</p>
+<p>With respect and encouragement,<br><strong>Professor Ember</strong></p>
 
-            </section>
-
-          </div>
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/code-test.js">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>unit test</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/code-test.js</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">javascript</span><span class="chip">eventemitter</span><span class="chip">plugins</span><span class="chip">map</span><span class="chip">set</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/code-test.js">
+              <span class="text-truncate">unit test</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/code-test.js" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>code-test.js
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/2183ace4-a28e-42a0-824b-a8e6e31435fb/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Mama Going Back to High School</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/8ca90871-b885-4bf2-8f6e-77916001d881/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/b67c92bf-a45d-4019-ae0b-a8ea80becc1b/">
+              <img src="https://catpea.github.io/chapter-14/poem-2078.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Creating A Static HTML Blog Generator: Transform Your Plain Text Into A Website</span>
+                <span class="fg-3 fs-xs">November 7, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ee528b42-2eb9-4dc3-857a-f77b0c410c5b/">
+              <img src="https://catpea.github.io/chapter-14/poem-2073.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Periwinkle Plumpkin</span>
+                <span class="fg-3 fs-xs">November 2, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/72fcad79-1519-40c1-9035-83fecde8013f/">
+              <img src="https://catpea.github.io/chapter-14/poem-2084.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">When AI Takes Your Job, You Take AI And Become Your Own Boss</span>
+                <span class="fg-3 fs-xs">November 13, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/58ab367c-cac0-4805-8dc0-08d6104832f1/">
+              <img src="https://catpea.github.io/chapter-14/poem-2070.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Spooky JavaScript</span>
+                <span class="fg-3 fs-xs">October 30, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

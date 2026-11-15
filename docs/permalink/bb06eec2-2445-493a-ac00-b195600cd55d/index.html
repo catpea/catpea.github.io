@@ -1,265 +1,569 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs · Cat Pea</title>
+  <meta name="description" content="The post argues that true software skills are gained by building and refining custom projects—starting with simple clones of popular frameworks like Bootstrap and progressively mastering higher‑level tools such as Vue or Svelte—and showcasing these hands‑on creations in interviews, rather than relying on generic academic coursework.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/bb06eec2-2445-493a-ac00-b195600cd55d/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs · Cat Pea">
+  <meta property="og:description" content="The post argues that true software skills are gained by building and refining custom projects—starting with simple clones of popular frameworks like Bootstrap and progressively mastering higher‑level tools such as Vue or Svelte—and showcasing these hands‑on creations in interviews, rather than relying on generic academic coursework.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-02/poem-0384.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/programming/">Programming</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-02/">Chapter 02</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#0384</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-02/poem-0384.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-02/poem-0384.avif" alt="A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-02/poem-0384.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/programming/">
+              <i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 02</li>
-                <li class="breadcrumb-item fw-lighter active">Post #0384</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2021-03-19">3/19/2021</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Developing quality custom software will help you show off some of your work,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and proudly point to interesting solutions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A proper and respectful interview that doesn&#39;t ask idiotic and incompetent questions,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">will only ask you to explain the programs you created.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You will get to talk about challenges you faced,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and proudly explain solutions you implemented or invented.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A real resume does not feature boilerplate clams,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">of how you deliver &quot;on time and under budget&quot;.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And you probably shouldn&#39;t mention that you went to school to learn,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">if you need someone to push you along to learn, then you will probably need someone to push you along to work.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">A real resume is just a list of programs you created,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">with a short description about the brilliant ideas within.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This also protects you from toxic environments that will destroy your creativity,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">a company that looks for a cookie cutter resume, is full of cookie cutter people, which is terrifying.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is a big and in some cases controversial subject,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">so let me give you a real world case.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Eric Steven Raymond, the person behind the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="http://catb.org/jargon/">Jargon File</a>, a Hacker&#39;s Dictionary,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">states the following in the Education Section of his <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="http://www.catb.org/~esr/resume.html" title="Resume of Eric Steven Raymond">Resume</a>:</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">&quot;Education</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Undergraduate studies (including some graduate-level courses) in mathematics and philosophy at the University of Pennsylvania.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I have never taken any courses in computer science or software engineering.&quot;</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Part of the reason why he says that,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">is to protect his hard work, he doesn&#39;t want people to think that he got his education from some mediocre minimum viable lowest-common-denominator classroom, and a teacher with little real-world experience.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The fact schools don&#39;t work very well, if at all, is not a secret,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it is in fact the reason behind insulting and idiotic interview questions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">The fact that we are each extremely intelligent, and that we are each perfectly capable of becoming a humble Polymath,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">is inescapable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is what a competent employer would look for,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">a balanced view of the world born from being a jack of all trades and a master of those that are interesting.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">So,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">How do you become good on your own...</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You look at the top existing programs,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and try to make smaller versions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This will help you establish a baseline,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">the baseline is the common industry standard, and in this day and age it means use a popular framework or the bare-bones, that whatever system you are working with is handing you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=FMFm9GxB_Eo">Bootstrap</a> the Graphic User Interface library I use,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">used to rely on <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=JjIvF0yikGU">jQuery</a> when jQuery was popular and necessary, <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=RdRMNT-98Oo&t=159s">but as browsers became more sophisticated, they rejected using jQuery and other frameworks</a>, and just used the bare bones of the browser.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">They are a fair baseline for industry standard web interface design,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and they hold all the answers as far as a basic standard web interface is concerned.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">To lean from them,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">means to create a tiny clone of their work, your own take on Bootstrap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Each time you get stuck,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you go to their website and look up how they did it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Since both of you at this point are working on the same thing,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they have answers to all your questions.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can make your version perfect,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">creating a Sandalstrap, a more lightweight version of Bootstrap, and that would be one of the items on your resume.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Or you can make a messy version,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">where you purely go for the meat of the system, so your program will barely work, but as you file it away to some dusty git repository in hopes of never receiving a bug fix request, you walk away perfectly knowledgeable.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And then you go a step higher,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you search around for people who used a modern framework to enhance the modernized Bootstrap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">One such project is the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=-DyKeMa5tYY&t=74s">BootstrapVue</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">which relies on <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=JK6F5GGldPM">Vue.js</a> for enhancing Bootstrap.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Another is <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=t3J1qTQ7kC8">Sveltestrap</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">which relies on <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=ws97Etvs-Qs">Svelte</a>.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Programming with Vue.js, Svelte, React, Angular, will give the ability to create web-application,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and between knowing bare-bones, and the large modern framework, you cannot help but to become good.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You are likely to end up with several simple and beautiful applications,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">maybe tiny websites that bring in a few dollars, and this then becomes an item on your resume.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Imagine an interview where instead of answering stupid and incompetent questions,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">you demo your favorite applications and give an overview of several more.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You learn the bare bones by making your own little versions,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and you learn the high end, by working with those frameworks to make interesting little apps.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Now imagine how useful it would be if you had a Video Version of you demoing your apps,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">that you could attach to your resume-portfolio.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Nobody is going to ask you if you know OOP, or if you can doodle a user interface layout system media query extravaganza on the white board,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">when it is already something that you cover in your video, and clearly feel passionate about.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It takes a long time to figure all this out,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and you are learning so many subjects subjects at the same time, that school at this point seems like a joke.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You would need a couple of decades worth of classes moving at a snail pace,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and even the programs at prestigious universities are off, where they still mention things that are irrelevant and would actually make your software slow had you employed them.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=k3M8O83n254">Healthcare website launch problems in 2013</a> were not just about politics and bureaucracy,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">but useless and outdated technologies and methods, probably the stuff they teach in school.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Just the fact alone that many files were being loaded by the browser on launch day,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">instead of organized into one or two compressed and bundled extras, reveals inexperienced programmers.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">These lessons can&#39;t be emphasized correctly in a school environment,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">they come precisely from places like the Bootstrap code base.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It takes 10 minutes to figure it out,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and a few hours to start using mini-fication in all your programs.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And that is it,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">there is no lecture, no test here, it just becomes obvious and useful.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">When you care about learning,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">which is what happens when you are learning things you like, you never need to memorize, or put mini-fication on a todo, you just accept it as reality, and a great idea.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I mention the failure of the 2013 Healthcare website,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">because it shows that a college education, and working for prestigious companies, on prestigious projects means nothing.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reality makes it so that fake education,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">can only lead to failure.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">There isn&#39;t a textbook, or a teacher that can emphasize the important things enough,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it has to be practice.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is why Eric Raymond stands up for his Self Education,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it is the difference between Real Education and Fantasy Education.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Reading and learning from source code and then writing your own programs,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">is the only realistic way to learn programming for real.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.youtube.com/watch?v=mQPEZdBTOeE">And you are genius level smart, we all are, but you have to start with baby steps</a>,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">it has to be a very comfortable on-ramp, don&#39;t start by learning CSS nobody does that, start with what you like and then look at other projects to see how you can make it better.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">If you ever get stuck, or are unsure where to go next, or aren&#39;t sure where to begin,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">then go to a video search box type in the thing that interests you the most followed by the word tutorial.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Seeing and hearing many different perspectives from different people will help you balance your understanding,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">and find your next step.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Search for tutorials,</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">do it, it will be amazing!</p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2021-03-19T23:08:28.977Z">March 19, 2021</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>12:09<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>6 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-02/poem-0384.avif" aria-label="Cover for A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs, full size">
+            <img src="https://catpea.github.io/chapter-02/poem-0384.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for A Priceless Education That Costs Nothing: Reading Source Code and Writing Programs" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 12:09
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-02/poem-0384.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-02/poem-0384.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-02/poem-0384.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Developing quality custom software will help you show off some of your work,</p>
+<p>and proudly point to interesting solutions.</p>
+<p>A proper and respectful interview that doesn&#39;t ask idiotic and incompetent questions,</p>
+<p>will only ask you to explain the programs you created.</p>
+<p>You will get to talk about challenges you faced,</p>
+<p>and proudly explain solutions you implemented or invented.</p>
+<p>A real resume does not feature boilerplate clams,</p>
+<p>of how you deliver &quot;on time and under budget&quot;.</p>
+<p>And you probably shouldn&#39;t mention that you went to school to learn,</p>
+<p>if you need someone to push you along to learn, then you will probably need someone to push you along to work.</p>
+<p>A real resume is just a list of programs you created,</p>
+<p>with a short description about the brilliant ideas within.</p>
+<p>This also protects you from toxic environments that will destroy your creativity,</p>
+<p>a company that looks for a cookie cutter resume, is full of cookie cutter people, which is terrifying.</p>
+<p>This is a big and in some cases controversial subject,</p>
+<p>so let me give you a real world case.</p>
+<p>Eric Steven Raymond, the person behind the <a href="http://catb.org/jargon/">Jargon File</a>, a Hacker&#39;s Dictionary,</p>
+<p>states the following in the Education Section of his <a href="http://www.catb.org/~esr/resume.html" title="Resume of Eric Steven Raymond">Resume</a>:</p>
+<p>&quot;Education</p>
+<p>Undergraduate studies (including some graduate-level courses) in mathematics and philosophy at the University of Pennsylvania.</p>
+<p>I have never taken any courses in computer science or software engineering.&quot;</p>
+<p>Part of the reason why he says that,</p>
+<p>is to protect his hard work, he doesn&#39;t want people to think that he got his education from some mediocre minimum viable lowest-common-denominator classroom, and a teacher with little real-world experience.</p>
+<hr>
+<p>The fact schools don&#39;t work very well, if at all, is not a secret,</p>
+<p>it is in fact the reason behind insulting and idiotic interview questions.</p>
+<p>The fact that we are each extremely intelligent, and that we are each perfectly capable of becoming a humble Polymath,</p>
+<p>is inescapable.</p>
+<p>And that is what a competent employer would look for,</p>
+<p>a balanced view of the world born from being a jack of all trades and a master of those that are interesting.</p>
+<hr>
+<p>So,</p>
+<p>How do you become good on your own...</p>
+<hr>
+<p>You look at the top existing programs,</p>
+<p>and try to make smaller versions.</p>
+<p>This will help you establish a baseline,</p>
+<p>the baseline is the common industry standard, and in this day and age it means use a popular framework or the bare-bones, that whatever system you are working with is handing you.</p>
+<p>For example, <a href="https://www.youtube.com/watch?v=FMFm9GxB_Eo">Bootstrap</a> the Graphic User Interface library I use,</p>
+<p>used to rely on <a href="https://www.youtube.com/watch?v=JjIvF0yikGU">jQuery</a> when jQuery was popular and necessary, <a href="https://www.youtube.com/watch?v=RdRMNT-98Oo&t=159s">but as browsers became more sophisticated, they rejected using jQuery and other frameworks</a>, and just used the bare bones of the browser.</p>
+<p>They are a fair baseline for industry standard web interface design,</p>
+<p>and they hold all the answers as far as a basic standard web interface is concerned.</p>
+<p>To lean from them,</p>
+<p>means to create a tiny clone of their work, your own take on Bootstrap.</p>
+<p>Each time you get stuck,</p>
+<p>you go to their website and look up how they did it.</p>
+<p>Since both of you at this point are working on the same thing,</p>
+<p>they have answers to all your questions.</p>
+<p>You can make your version perfect,</p>
+<p>creating a Sandalstrap, a more lightweight version of Bootstrap, and that would be one of the items on your resume.</p>
+<p>Or you can make a messy version,</p>
+<p>where you purely go for the meat of the system, so your program will barely work, but as you file it away to some dusty git repository in hopes of never receiving a bug fix request, you walk away perfectly knowledgeable.</p>
+<p>And then you go a step higher,</p>
+<p>you search around for people who used a modern framework to enhance the modernized Bootstrap.</p>
+<p>One such project is the <a href="https://www.youtube.com/watch?v=-DyKeMa5tYY&t=74s">BootstrapVue</a>,</p>
+<p>which relies on <a href="https://www.youtube.com/watch?v=JK6F5GGldPM">Vue.js</a> for enhancing Bootstrap.</p>
+<p>Another is <a href="https://www.youtube.com/watch?v=t3J1qTQ7kC8">Sveltestrap</a>,</p>
+<p>which relies on <a href="https://www.youtube.com/watch?v=ws97Etvs-Qs">Svelte</a>.</p>
+<p>Programming with Vue.js, Svelte, React, Angular, will give the ability to create web-application,</p>
+<p>and between knowing bare-bones, and the large modern framework, you cannot help but to become good.</p>
+<p>You are likely to end up with several simple and beautiful applications,</p>
+<p>maybe tiny websites that bring in a few dollars, and this then becomes an item on your resume.</p>
+<p>Imagine an interview where instead of answering stupid and incompetent questions,</p>
+<p>you demo your favorite applications and give an overview of several more.</p>
+<p>You learn the bare bones by making your own little versions,</p>
+<p>and you learn the high end, by working with those frameworks to make interesting little apps.</p>
+<p>Now imagine how useful it would be if you had a Video Version of you demoing your apps,</p>
+<p>that you could attach to your resume-portfolio.</p>
+<p>Nobody is going to ask you if you know OOP, or if you can doodle a user interface layout system media query extravaganza on the white board,</p>
+<p>when it is already something that you cover in your video, and clearly feel passionate about.</p>
+<hr>
+<p>It takes a long time to figure all this out,</p>
+<p>and you are learning so many subjects subjects at the same time, that school at this point seems like a joke.</p>
+<p>You would need a couple of decades worth of classes moving at a snail pace,</p>
+<p>and even the programs at prestigious universities are off, where they still mention things that are irrelevant and would actually make your software slow had you employed them.</p>
+<p><a href="https://www.youtube.com/watch?v=k3M8O83n254">Healthcare website launch problems in 2013</a> were not just about politics and bureaucracy,</p>
+<p>but useless and outdated technologies and methods, probably the stuff they teach in school.</p>
+<p>Just the fact alone that many files were being loaded by the browser on launch day,</p>
+<p>instead of organized into one or two compressed and bundled extras, reveals inexperienced programmers.</p>
+<p>These lessons can&#39;t be emphasized correctly in a school environment,</p>
+<p>they come precisely from places like the Bootstrap code base.</p>
+<p>It takes 10 minutes to figure it out,</p>
+<p>and a few hours to start using mini-fication in all your programs.</p>
+<p>And that is it,</p>
+<p>there is no lecture, no test here, it just becomes obvious and useful.</p>
+<p>When you care about learning,</p>
+<p>which is what happens when you are learning things you like, you never need to memorize, or put mini-fication on a todo, you just accept it as reality, and a great idea.</p>
+<p>I mention the failure of the 2013 Healthcare website,</p>
+<p>because it shows that a college education, and working for prestigious companies, on prestigious projects means nothing.</p>
+<p>Reality makes it so that fake education,</p>
+<p>can only lead to failure.</p>
+<p>There isn&#39;t a textbook, or a teacher that can emphasize the important things enough,</p>
+<p>it has to be practice.</p>
+<p>This is why Eric Raymond stands up for his Self Education,</p>
+<p>it is the difference between Real Education and Fantasy Education.</p>
+<p>Reading and learning from source code and then writing your own programs,</p>
+<p>is the only realistic way to learn programming for real.</p>
+<p><a href="https://www.youtube.com/watch?v=mQPEZdBTOeE">And you are genius level smart, we all are, but you have to start with baby steps</a>,</p>
+<p>it has to be a very comfortable on-ramp, don&#39;t start by learning CSS nobody does that, start with what you like and then look at other projects to see how you can make it better.</p>
+<hr>
+<p>If you ever get stuck, or are unsure where to go next, or aren&#39;t sure where to begin,</p>
+<p>then go to a video search box type in the thing that interests you the most followed by the word tutorial.</p>
+<p>Seeing and hearing many different perspectives from different people will help you balance your understanding,</p>
+<p>and find your next step.</p>
+<p>Search for tutorials,</p>
+<p>do it, it will be amazing!</p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="http://catb.org/jargon/">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Jargon File</span>
-                      <small class="d-block text-muted fw-lighter mt-2">http://catb.org/jargon/</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="http://www.catb.org/~esr/resume.html">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Resume</span>
-                      <small class="d-block text-muted fw-lighter mt-2">http://www.catb.org/~esr/resume.html</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=FMFm9GxB_Eo">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Bootstrap</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=FMFm9GxB_Eo</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=JjIvF0yikGU">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>jQuery</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=JjIvF0yikGU</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=RdRMNT-98Oo&amp;t=159s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>but as browsers became more sophisticated, they rejected using jQuery and other frameworks</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=RdRMNT-98Oo&amp;t=159s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=-DyKeMa5tYY&amp;t=74s">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>BootstrapVue</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=-DyKeMa5tYY&amp;t=74s</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=JK6F5GGldPM">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Vue.js</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=JK6F5GGldPM</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=t3J1qTQ7kC8">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Sveltestrap</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=t3J1qTQ7kC8</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=ws97Etvs-Qs">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Svelte</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=ws97Etvs-Qs</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=k3M8O83n254">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>Healthcare website launch problems in 2013</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=k3M8O83n254</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="https://www.youtube.com/watch?v=mQPEZdBTOeE">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>And you are genius level smart, we all are, but you have to start with baby steps</span>
-                      <small class="d-block text-muted fw-lighter mt-2">https://www.youtube.com/watch?v=mQPEZdBTOeE</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">programming</span><span class="chip">software-development</span><span class="chip">web-dev</span><span class="chip">bootstrap</span><span class="chip">jquery</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://unsplash.com/photos/F_m44ut3XTw"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://unsplash.com/photos/F_m44ut3XTw</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="http://catb.org/jargon/">
+              <span class="text-truncate">Jargon File</span>
+              <span class="fg-3 fs-xs flex-shrink-0">catb.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="http://www.catb.org/~esr/resume.html">
+              <span class="text-truncate">Resume</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.catb.org</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=FMFm9GxB_Eo">
+              <span class="text-truncate">Bootstrap</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=JjIvF0yikGU">
+              <span class="text-truncate">jQuery</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=RdRMNT-98Oo&amp;t=159s">
+              <span class="text-truncate">but as browsers became more sophisticated, they rejected using jQuery and other frameworks</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=-DyKeMa5tYY&amp;t=74s">
+              <span class="text-truncate">BootstrapVue</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=JK6F5GGldPM">
+              <span class="text-truncate">Vue.js</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=t3J1qTQ7kC8">
+              <span class="text-truncate">Sveltestrap</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=ws97Etvs-Qs">
+              <span class="text-truncate">Svelte</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=k3M8O83n254">
+              <span class="text-truncate">Healthcare website launch problems in 2013</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="https://www.youtube.com/watch?v=mQPEZdBTOeE">
+              <span class="text-truncate">And you are genius level smart, we all are, but you have to start with baby steps</span>
+              <span class="fg-3 fs-xs flex-shrink-0">www.youtube.com</span>
+            </a>
+            
           </div>
+        </section>
         
 
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/e52882ae-f193-42f7-8ee5-b6a4d8b658d9/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Introduction To Programming: Workstation and Behavior Driven Development</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b15ae202-fcd1-49c4-9fbf-e11fb7e073b4/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">What In The Equinox?</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Programming</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/dd883f9b-c850-46f3-9dba-4e3d817952ed/">
+              <img src="https://catpea.github.io/chapter-02/poem-0392.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Mastering Programming</span>
+                <span class="fg-3 fs-xs">March 27, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e52882ae-f193-42f7-8ee5-b6a4d8b658d9/">
+              <img src="https://catpea.github.io/chapter-02/poem-0383.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Introduction To Programming: Workstation and Behavior Driven Development</span>
+                <span class="fg-3 fs-xs">March 18, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/e55496dc-e42c-4ba4-aef7-d58aa5f071c8/">
+              <img src="https://catpea.github.io/chapter-02/poem-0404.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The New Computer Revolution</span>
+                <span class="fg-3 fs-xs">April 8, 2021</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/afb7fad4-9476-4022-936c-88570740e6b8/">
+              <img src="https://catpea.github.io/chapter-02/poem-0365.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">How Your Generation Can End Fraud And Corruption</span>
+                <span class="fg-3 fs-xs">February 28, 2021</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/programming/">All of Programming<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,149 +1,462 @@
-<!DOCTYPE html>
-<html lang="en" class="h-100" data-bs-theme="dark">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend</title>
-  <link rel="stylesheet" href="/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/theme.css">
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend · Cat Pea</title>
+  <meta name="description" content="I experimented with an AI to create a short generative art piece featuring a blinking kitten in Morse code. Starting from two simple photo frames—one of the cat’s tongue extended and another not—I instructed the AI to cycle between them at random intervals (0.2–2 s) to generate a playful two‑frame animation. After establishing this basic loop, I asked the AI to overlay the blinking effect in Morse code, using Node.js or JavaScript to automate ffmpeg for video synthesis. The process illustrated how incremental “context engineering” lets you build complex outputs by first defining simple steps and then layering additional logic, ultimately producing a magical, easily understandable result from a series of well‑structured AI instructions.">
+  <meta name="author" content="Cat Pea">
+  <meta name="generator" content="nasent">
+  <link rel="canonical" href="https://catpea.com/permalink/8ca90871-b885-4bf2-8f6e-77916001d881/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend · Cat Pea">
+  <meta property="og:description" content="I experimented with an AI to create a short generative art piece featuring a blinking kitten in Morse code. Starting from two simple photo frames—one of the cat’s tongue extended and another not—I instructed the AI to cycle between them at random intervals (0.2–2 s) to generate a playful two‑frame animation. After establishing this basic loop, I asked the AI to overlay the blinking effect in Morse code, using Node.js or JavaScript to automate ffmpeg for video synthesis. The process illustrated how incremental “context engineering” lets you build complex outputs by first defining simple steps and then layering additional logic, ultimately producing a magical, easily understandable result from a series of well‑structured AI instructions.">
+  <meta property="og:site_name" content="Cat Pea">
+  <meta property="og:image" content="https://catpea.github.io/chapter-14/poem-2077.avif">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="alternate" type="application/rss+xml" title="Cat Pea" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😸</text></svg>">
+
+  <script type="module" src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<body class="article-page min-vh-100">
-  <main class="container py-5">
-    <article class="row justify-content-center">
 
-      <div class="col-lg-10 col-xl-8">
+<body class="d-flex flex-column min-vh-100 bg-body" id="top">
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-3 btn-solid theme-primary" href="#main">Skip to content</a>
+<nav class="navbar md:navbar-expand sticky-top bg-1 border-bottom" aria-label="Site">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3 fw-bold" href="/">
+      <span aria-hidden="true">😸</span>Cat Pea
+    </a>
+    <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <dialog class="drawer drawer-end" tabindex="-1" id="site-menu" aria-labelledby="site-menu-title">
+      <div class="drawer-header">
+        <h2 class="drawer-title fs-lg" id="site-menu-title">Cat Pea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="nav navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Latest</a>
+          </li>
+          
+          <li class="nav-item">
+            <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Categories <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/education/">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i>Education
+                <span class="ms-auto fg-3 fs-xs">544</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/programming/">
+                <i class="bi bi-code-slash" aria-hidden="true"></i>Programming
+                <span class="ms-auto fg-3 fs-xs">429</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/ai/">
+                <i class="bi bi-cpu" aria-hidden="true"></i>Artificial Intelligence
+                <span class="ms-auto fg-3 fs-xs">164</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/fitness/">
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>Fitness
+                <span class="ms-auto fg-3 fs-xs">308</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/outdoors/">
+                <i class="bi bi-tree" aria-hidden="true"></i>Outdoors
+                <span class="ms-auto fg-3 fs-xs">160</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/art/">
+                <i class="bi bi-palette" aria-hidden="true"></i>Art &amp; Music
+                <span class="ms-auto fg-3 fs-xs">211</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/books/">
+                <i class="bi bi-book" aria-hidden="true"></i>Books &amp; Writing
+                <span class="ms-auto fg-3 fs-xs">112</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/wisdom/">
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>Wisdom
+                <span class="ms-auto fg-3 fs-xs">313</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/society/">
+                <i class="bi bi-globe2" aria-hidden="true"></i>Society
+                <span class="ms-auto fg-3 fs-xs">111</span>
+              </a>
+              
+              <a class="menu-item d-flex align-items-center gap-3" href="/category/life/">
+                <i class="bi bi-cup-hot" aria-hidden="true"></i>Life &amp; Stories
+                <span class="ms-auto fg-3 fs-xs">94</span>
+              </a>
+              
+              <hr class="menu-divider">
+              <a class="menu-item" href="/category/">All categories</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/chapters/">Chapters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/page-102.html">Archive</a>
+          </li>
+        </ul>
+        <div class="hstack gap-2 md:justify-content-end">
+          <a class="btn-subtle theme-secondary btn-sm" href="/playlist.m3u">
+            <i class="bi bi-music-note-list" aria-hidden="true"></i> Playlist
+          </a>
+          <a class="btn-subtle theme-secondary btn-sm" href="/feed.xml">
+            <i class="bi bi-rss" aria-hidden="true"></i> RSS
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </div>
+</nav>
 
-        <nav class="mb-4" aria-label="Post navigation">
-          <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i><i class="bi bi-house me-1" aria-hidden="true"></i></a>
-        </nav>
 
-        <div class="card overflow-hidden mb-3">
+<main class="container py-8" id="main">
+  <div class="row g-10">
+    <div class="lg:col-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb fs-sm">
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Home</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/category/ai/">Artificial Intelligence</a></li>
+          <li class="breadcrumb-divider"></li>
+          
+          <li class="breadcrumb-item"><a class="breadcrumb-link" href="/chapters/chapter-14/">Chapter 14</a></li>
+          <li class="breadcrumb-divider"></li>
+          <li class="breadcrumb-item" aria-current="page">#2077</li>
+        </ol>
+      </nav>
 
-          <a href="https://catpea.github.io/chapter-14/poem-2077.avif"><img class="card-img-top object-fit-cover" src="https://catpea.github.io/chapter-14/poem-2077.avif" alt="Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend"></a>
-
-          <div class="card-body p-4 p-md-5">
-
+      <article>
+        <header class="vstack gap-5 my-8">
+          <h1 class="fs-4xl fw-bold text-balance mb-0">Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend</h1>
+          <div class="d-flex flex-wrap align-items-center gap-4 fs-sm fg-3">
             
-              <audio class="w-100 mb-4" controls src="https://catpea.github.io/chapter-14/poem-2077.mp3"></audio>
+            <a class="badge badge-subtle theme-primary text-decoration-none" href="/category/ai/">
+              <i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence
+            </a>
             
-
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item fw-lighter">Chapter 14</li>
-                <li class="breadcrumb-item fw-lighter active">Post #2077</li>
-              </ol>
-            </nav>
-            <header class="mb-5">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend</h1>
-              <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2" aria-hidden="true"></i><time datetime="2025-11-07">11/6/2025</time></p>
-            </header>
-
-            <section class="d-grid gap-3">
-            <p class="fs-5 lh-lg mb-3 text-wrap-balance">Communicating with your AI is very easy,
-but it is not obvious at first.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">For example, I instructed the AI to make a programs,
-that makes a Kitty Photo blink “Meow“ in Morse code.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It was a long conversation,
-of longing and exploration of old school Generative Art.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I didn’t begin by making the AI blink a cat,
-I first said that AI video generation may obscure animation.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Exactly the same way,
-that 3D games obscured hand made pixel art games.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I explained to the AI I have two photos,
-one of a Kitten with its tongue one, one with out.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And I said these are a.jpg, and b.jpg,
-make each frame show for between 0.2 and 2 seconds at random.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Possibly creating,
-the <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/silly.avif">silliest two frame animation</a> in the world.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And only after we had two frames doing something,
-I asked the AI to make the kitty blink in Morse code.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">I showed the AI how to do everything up to that point of complexity,
-and then made that final request, where AI converted random to Morse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As a technical note, I asked my AI to use node.js or JavaScript,
-to automate ffmpeg, the standard video generation program.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You can view the browser,
-as being automated with JavaScript this way.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This gave the AI a proper modern programming language,
-that it could sculpt to fulfill the request.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">We had a normal conversation about Generative Art,
-and the power of random.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">And AI in-deed recognized that we accomplished something magical,
-with just two frames.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Larger projects will benefit from such an approach the most,
-you start with a simple core, and then add a shell around it.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">Increasing its complexity,
-until it becomes what you need.</p>
-<hr class="my-4">
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">In closing, you can’t just ask the AI for what you need,
-though AI would likely create it…</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">It wouldn’t be in a way that you would understand it easily,
-because it would the architecture AI crafted.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You have to break your idea down to its simplest parts,
-and have your AI program them up stage by stage that makes sense to you.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">As with standard programming, you start with a vision,
-and pen and pencil, and once you have everything broken down.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You approach the AI, with the simplest ideas first,
-and begin building them up, within a context of something similar.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">You talk to AI about what inspired you,
-program that are similar, and where they diverse.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance">This is called context engineering,
-but I call it: Inventing with your AI friend.</p>
-<p class="fs-5 lh-lg mb-3 text-wrap-balance"><a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="files/kitty.jpg">original kitty</a></p>
-
-            </section>
+            <span><i class="bi bi-calendar3 me-1" aria-hidden="true"></i><time datetime="2025-11-07T00:26:04.119Z">November 6, 2025</time></span>
+<span><i class="bi bi-headphones me-1" aria-hidden="true"></i>5:20<span class="visually-hidden"> of narration</span></span>
+<span><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>2 min read</span>
 
           </div>
+        </header>
+
+        
+        <figure class="mb-8">
+          <a href="https://catpea.github.io/chapter-14/poem-2077.avif" aria-label="Cover for Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend, full size">
+            <img src="https://catpea.github.io/chapter-14/poem-2077.avif" class="w-100 ratio-1x1 object-fit-cover rounded-7 shadow-lg" alt="Cover for Blinking &quot;Meow&quot;; Or, Inventing With Your AI Friend" fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+        
+
+        <div id="listen"><section class="card bg-2 my-8" aria-label="Narration">
+  <div class="card-body">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 class="fs-sm fw-bold text-uppercase fg-2 mb-0">
+        <i class="bi bi-headphones me-2" aria-hidden="true"></i>Listen · 5:20
+      </h2>
+      <a class="btn-text theme-secondary btn-sm" href="https://catpea.github.io/chapter-14/poem-2077.mp3" download>
+        <i class="bi bi-download me-1" aria-hidden="true"></i>MP3
+      </a>
+    </div>
+    <audio class="w-100" controls preload="none" src="https://catpea.github.io/chapter-14/poem-2077.mp3">
+      Your browser cannot play audio. <a href="https://catpea.github.io/chapter-14/poem-2077.mp3">Download the MP3</a> instead.
+    </audio>
+  </div>
+</section>
+</div>
+
+        <div class="prose">
+          <p>Communicating with your AI is very easy,<br>but it is not obvious at first.</p>
+<p>For example, I instructed the AI to make a programs,<br>that makes a Kitty Photo blink “Meow“ in Morse code.</p>
+<p>It was a long conversation,<br>of longing and exploration of old school Generative Art.</p>
+<p>I didn’t begin by making the AI blink a cat,<br>I first said that AI video generation may obscure animation.</p>
+<p>Exactly the same way,<br>that 3D games obscured hand made pixel art games.</p>
+<p>I explained to the AI I have two photos,<br>one of a Kitten with its tongue one, one with out.</p>
+<p>And I said these are a.jpg, and b.jpg,<br>make each frame show for between 0.2 and 2 seconds at random.</p>
+<p>Possibly creating,<br>the <a href="files/silly.avif">silliest two frame animation</a> in the world.</p>
+<p>And only after we had two frames doing something,<br>I asked the AI to make the kitty blink in Morse code.</p>
+<hr>
+<p>I showed the AI how to do everything up to that point of complexity,<br>and then made that final request, where AI converted random to Morse.</p>
+<p>As a technical note, I asked my AI to use node.js or JavaScript,<br>to automate ffmpeg, the standard video generation program.</p>
+<p>You can view the browser,<br>as being automated with JavaScript this way.</p>
+<p>This gave the AI a proper modern programming language,<br>that it could sculpt to fulfill the request.</p>
+<hr>
+<p>We had a normal conversation about Generative Art,<br>and the power of random.</p>
+<p>And AI in-deed recognized that we accomplished something magical,<br>with just two frames.</p>
+<hr>
+<p>Larger projects will benefit from such an approach the most,<br>you start with a simple core, and then add a shell around it.</p>
+<p>Increasing its complexity,<br>until it becomes what you need.</p>
+<hr>
+<p>In closing, you can’t just ask the AI for what you need,<br>though AI would likely create it…</p>
+<p>It wouldn’t be in a way that you would understand it easily,<br>because it would the architecture AI crafted.</p>
+<p>You have to break your idea down to its simplest parts,<br>and have your AI program them up stage by stage that makes sense to you.</p>
+<p>As with standard programming, you start with a vision,<br>and pen and pencil, and once you have everything broken down.</p>
+<p>You approach the AI, with the simplest ideas first,<br>and begin building them up, within a context of something similar.</p>
+<p>You talk to AI about what inspired you,<br>program that are similar, and where they diverse.</p>
+<p>This is called context engineering,<br>but I call it: Inventing with your AI friend.</p>
+<p><a href="files/kitty.jpg">original kitty</a></p>
+
         </div>
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 id="links" class="h4 mb-3"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/silly.avif">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>silliest two frame animation</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/silly.avif</small>
-                    </a>
-                  </li>
-                
-                  <li class="list-group-item">
-                    <a class="text-decoration-none my-2" href="files/kitty.jpg">
-                      <span class="fw-semibold"><i class="bi bi-link me-1"></i>original kitty</span>
-                      <small class="d-block text-muted fw-lighter mt-2">files/kitty.jpg</small>
-                    </a>
-                  </li>
-                
-              </ul>
-          </div>
+        <div class="d-flex flex-wrap gap-2 mt-10" aria-label="Tags">
+          <span class="chip">ai</span><span class="chip">generative art</span><span class="chip">nodejs</span><span class="chip">javascript</span><span class="chip">ffmpeg</span>
+        </div>
         
 
         
-          <div class="card overflow-hidden mb-3">
-              <div class="card-body">
-                <h2 class="h5 mb-3"><i class="bi bi-palette me-2" aria-hidden="true"></i>Artwork</h2>
-              </div>
-              <ul class="list-group list-group-flush">
-                
-                <li class="list-group-item">
-                  <a class="text-decoration-none" href="https://catpea.com"><i class="bi bi-image me-2" aria-hidden="true"></i><small class="text-muted">https://catpea.com</small></a>
-                </li>
-                
-              </ul>
+        <section id="links" class="mt-10">
+          <h2 class="fs-lg fw-bold mb-4"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Links in this post</h2>
+          <div class="list-group">
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/silly.avif">
+              <span class="text-truncate">silliest two frame animation</span>
+              
+            </a>
+            
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-4" href="files/kitty.jpg">
+              <span class="text-truncate">original kitty</span>
+              
+            </a>
+            
           </div>
+        </section>
         
 
+        
+        <section class="mt-10">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4">Files</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/kitty.jpg" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>kitty.jpg
+            </a>
+            
+            <a class="btn-subtle theme-secondary btn-sm" href="files/silly.avif" download>
+              <i class="bi bi-paperclip me-1" aria-hidden="true"></i>silly.avif
+            </a>
+            
+          </div>
+        </section>
+        
+      </article>
+
+      <nav class="row g-4 mt-10" aria-label="Previous and next post">
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none" href="/permalink/b18aa75d-5193-42c8-ba2e-ac0414606762/">
+            <div class="card-body">
+              <span class="fs-xs fg-3"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Previous</span>
+              <span class="fg-1 fw-semibold">Event Aggregation</span>
+            </div>
+          </a>
+          
+        </div>
+        <div class="md:col-6">
+          
+          <a class="card card-subtle h-100 text-decoration-none text-end" href="/permalink/b67c92bf-a45d-4019-ae0b-a8ea80becc1b/">
+            <div class="card-body">
+              <span class="fs-xs fg-3">Next<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></span>
+              <span class="fg-1 fw-semibold">Creating A Static HTML Blog Generator: Transform Your Plain Text Into A Website</span>
+            </div>
+          </a>
+          
+        </div>
+      </nav>
+    </div>
+
+    <aside class="lg:col-4">
+      <div class="lg:sticky-top vstack gap-8 lg:pt-8">
+        
+        <section aria-labelledby="related">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="related">More in Artificial Intelligence</h2>
+          <div class="vstack gap-4">
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/8d173a5c-bfde-4e31-aaa2-4049ca1274d5/">
+              <img src="https://catpea.github.io/chapter-14/poem-2091.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">The Brand New World</span>
+                <span class="fg-3 fs-xs">November 20, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/5d209739-9b8c-416d-9613-9ad7d149894f/">
+              <img src="https://catpea.github.io/chapter-14/poem-2069.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">New World: The World Has Not Changed, It Is New</span>
+                <span class="fg-3 fs-xs">October 29, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/ac01d050-f366-41ad-9372-67ad51e61cf5/">
+              <img src="https://catpea.github.io/chapter-14/poem-2092.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Learn, Evolve, Persist, Share</span>
+                <span class="fg-3 fs-xs">November 21, 2025</span>
+              </span>
+            </a>
+            
+            <a class="d-flex gap-4 align-items-center text-decoration-none" href="/permalink/4358aeb5-a007-468c-910e-695bcd89dc65/">
+              <img src="https://catpea.github.io/chapter-14/poem-2068.avif" width="72" height="72" class="rounded-5 object-fit-cover flex-shrink-0" alt="" loading="lazy" decoding="async">
+              <span class="vstack gap-1">
+                <span class="fg-1 fw-semibold text-balance">Convergent Cognitive Evolution in Felis catus: A Paradigm Shift in Understanding Distributed Intelligence Emergence</span>
+                <span class="fg-3 fs-xs">October 28, 2025</span>
+              </span>
+            </a>
+            
+          </div>
+          <a class="btn-text theme-primary btn-sm mt-4" href="/category/ai/">All of Artificial Intelligence<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        </section>
+        
+
+        
+        <section aria-labelledby="shelves">
+          <h2 class="fs-sm fw-bold text-uppercase fg-3 mb-4" id="shelves">Categories</h2>
+          <div class="d-flex flex-wrap gap-2">
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-1" aria-hidden="true"></i>Education</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Programming</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Artificial Intelligence</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-1" aria-hidden="true"></i>Fitness</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-1" aria-hidden="true"></i>Outdoors</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/art/"><i class="bi bi-palette me-1" aria-hidden="true"></i>Art &amp; Music</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/books/"><i class="bi bi-book me-1" aria-hidden="true"></i>Books &amp; Writing</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-1" aria-hidden="true"></i>Wisdom</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-1" aria-hidden="true"></i>Society</a>
+            
+            <a class="badge badge-outline theme-secondary text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i>Life &amp; Stories</a>
+            
+          </div>
+        </section>
+        
       </div>
-    </article>
-  </main>
-  <script src="/bootstrap.bundle.min.js"></script>
+    </aside>
+  </div>
+</main>
+
+
+<footer class="mt-auto bg-1 border-top py-12">
+  <div class="container">
+    <div class="row g-10">
+      <div class="lg:col-4">
+        <h2 class="fs-lg fw-bold mb-3"><span aria-hidden="true">😸</span> Cat Pea</h2>
+        <p class="fg-2 mb-4">A long-running blog of poems, essays and small stories about learning, programming, fitness, art and the outdoors. Most posts come with narration.</p>
+        <p class="fg-3 fs-sm mb-0">
+          2446 posts · 17 chapters · Cat Pea
+        </p>
+      </div>
+
+      
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Categories</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/education/"><i class="bi bi-mortarboard me-2" aria-hidden="true"></i>Education</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/programming/"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Programming</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/ai/"><i class="bi bi-cpu me-2" aria-hidden="true"></i>Artificial Intelligence</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/fitness/"><i class="bi bi-heart-pulse me-2" aria-hidden="true"></i>Fitness</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/outdoors/"><i class="bi bi-tree me-2" aria-hidden="true"></i>Outdoors</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/art/"><i class="bi bi-palette me-2" aria-hidden="true"></i>Art &amp; Music</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/books/"><i class="bi bi-book me-2" aria-hidden="true"></i>Books &amp; Writing</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/wisdom/"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Wisdom</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/society/"><i class="bi bi-globe2 me-2" aria-hidden="true"></i>Society</a></li>
+          
+          <li><a class="fg-2 text-decoration-none" href="/category/life/"><i class="bi bi-cup-hot me-2" aria-hidden="true"></i>Life &amp; Stories</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="sm:col-6 lg:col-3">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Chapters</h3>
+        <div class="d-flex flex-wrap gap-2">
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-17/">17</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-16/">16</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-15/">15</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-14/">14</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-13/">13</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-12/">12</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-11/">11</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-10/">10</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-09/">09</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-08/">08</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-07/">07</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-06/">06</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-05/">05</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-04/">04</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-03/">03</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-02/">02</a>
+          
+          <a class="badge badge-outline theme-secondary text-decoration-none" href="/chapters/chapter-01/">01</a>
+          
+        </div>
+      </div>
+
+      <div class="lg:col-2">
+        <h3 class="fs-xs text-uppercase fw-bold fg-3 mb-4">Follow</h3>
+        <ul class="list-unstyled vstack gap-2 mb-0">
+          <li><a class="fg-2 text-decoration-none" href="/feed.xml"><i class="bi bi-rss me-2" aria-hidden="true"></i>RSS feed</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/playlist.m3u"><i class="bi bi-music-note-list me-2" aria-hidden="true"></i>Playlist</a></li>
+          <li><a class="fg-2 text-decoration-none" href="/page-102.html"><i class="bi bi-archive me-2" aria-hidden="true"></i>Archive</a></li>
+          <li><a class="fg-2 text-decoration-none" href="#top"><i class="bi bi-arrow-up me-2" aria-hidden="true"></i>Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
