@@ -1,0 +1,2541 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Systems Atlas — a portable XML-native room and machine workbench.">
+  <title>Systems Atlas · XML Rooms</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.2/font/bootstrap-icons.min.css">
+  <style>
+/* Bootstrap 6 supplies all controls. These rules own only the spatial workstation layout.
+   Tiny fallback primitives keep the local-first app legible if the CDN is unavailable. */
+:root{color-scheme:dark;--atlas-bg:#10151d;--atlas-elev:#181e28;--atlas-card:#1c2430;--atlas-line:#303b4b;--atlas-ink:#e4eaf3;--atlas-dim:#93a3b8;--atlas-accent:#73b3f3;--atlas-glow:#2b4967;--atlas-sidebar:235px;--atlas-gap:6.25rem}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--atlas-bg);color:var(--atlas-ink);font:14px/1.48 system-ui,-apple-system,'Segoe UI',sans-serif}
+button,select,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid #8bc1ff;outline-offset:2px}
+a{color:var(--atlas-accent);text-decoration:none}
+.app-shell{display:flex;flex-direction:column;width:100vw;height:100dvh;min-height:360px;overflow:hidden}
+.app-header{height:68px;flex-shrink:0;display:flex;align-items:center;gap:2rem;padding:0 22px;border-bottom:1px solid var(--atlas-line);background:#151b24}
+.brand{display:flex;align-items:center;gap:12px;color:var(--atlas-ink);white-space:nowrap}
+.brand:hover{color:white}
+.brand-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#203b56;color:#96caff;font-size:21px}
+.brand strong{display:block;font-size:11px;letter-spacing:.135em}
+.brand small{display:block;color:var(--atlas-dim);font-size:9px;letter-spacing:.12em;margin-top:2px}
+.header-room{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;min-width:120px}.header-room strong{font-size:15px}
+.header-actions{display:flex;gap:8px;flex-shrink:0}
+.eyebrow{font-size:10px;letter-spacing:.12em;font-weight:700;color:var(--atlas-dim);text-transform:uppercase}
+.app-body{display:flex;flex:1;min-height:0}
+.sidebar{display:flex;flex-direction:column;width:var(--atlas-sidebar);flex:0 0 var(--atlas-sidebar);border-right:1px solid var(--atlas-line);background:#151b24;min-height:0}
+.sidebar-header{padding:22px 19px 14px}.sidebar-header strong{display:block;margin-top:4px;font-size:16px}
+.sidebar-scroll{flex:1;min-height:0;overflow:auto;padding:0 12px 24px}
+#room-tree ul{list-style:none;margin:0;padding:0 0 0 13px;border-left:1px solid #384354}
+#room-tree>ul{padding:0;border:0}.tree-item{margin:3px 0}.tree-row{display:flex;align-items:center;gap:4px;width:100%}
+.tree-chevron{font-size:11px;color:#728398;min-width:15px;text-align:center}
+.tree-button,.machine-link{width:100%;border:0;background:transparent;color:#bec9d8;padding:7px 9px;text-align:left;border-radius:7px;font-size:12px}
+.tree-button:hover,.machine-link:hover{background:#253141;color:#fff}
+.tree-button.active,.machine-link.active{background:#233d59;color:#a8d4ff}
+.tree-cycle{font-size:12px;color:#8291a6}
+.side-section{margin-top:30px;border-top:1px solid var(--atlas-line);padding:19px 7px}
+.machine-link{display:flex;gap:9px;align-items:center;margin-bottom:2px}
+.sidebar-footer{border-top:1px solid var(--atlas-line);padding:16px 14px}.sidebar-stat{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--atlas-dim);margin:0 0 13px}
+#peer-count{margin-left:auto;display:inline-block;background:#254363;border-radius:15px;padding:1px 7px;color:#bfdeff}
+.main-column{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
+.room-toolbar{height:62px;flex:0 0 62px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 24px;border-bottom:1px solid var(--atlas-line)}
+.room-context{min-width:0;display:flex;flex-direction:column;line-height:1.65}.room-context>:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
+.room-jump{width:130px;flex:0 0 130px;font-size:11px!important}
+.quick-command{max-width:470px;min-width:250px;width:48%;flex-wrap:nowrap!important}
+.quick-command select{min-width:88px;flex:1}.quick-command button{white-space:nowrap}
+.alert-line{position:absolute;top:67px;left:20px;right:20px;z-index:30;padding:8px 15px;background:#24374b;border:1px solid #497299;border-radius:7px;font-size:12px;box-shadow:0 5px 20px #0006}
+.alert-line.error{background:#4b2428;border-color:#ad5560}
+.stage-wrapper{flex:1;position:relative;min-height:0;overflow:hidden}
+#stage{display:flex;align-items:stretch;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-behavior:smooth;overscroll-behavior-x:contain;gap:var(--atlas-gap);height:100%;padding:28px 6.5rem 92px 36px;scrollbar-color:#506178 transparent;scrollbar-width:thin}
+#stage:focus-visible{outline-offset:-4px}
+.room-intro{width:280px;flex:0 0 280px;scroll-snap-align:start;padding:32px 18px 0 2px}
+.room-intro h1{font-size:32px;letter-spacing:-.035em;line-height:1.15;margin:14px 0 18px}
+.room-intro p{font-size:13px;color:#abb9cb;line-height:1.75}
+.room-intro .room-counter{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}
+.counter{background:#1d2937;border:1px solid #354357;border-radius:8px;padding:11px 14px;font-size:12px}.counter strong{display:block;font-size:19px;color:#d7e9ff}
+.room-intro .hint{margin-top:50px;font-size:11px;line-height:1.7;color:var(--atlas-dim)}
+.machine-cluster{display:flex;align-items:stretch;flex-shrink:0;min-width:0;scroll-snap-align:start;position:relative}
+.machine-cluster::before{content:attr(data-index);position:absolute;top:-21px;left:2px;font-size:10px;letter-spacing:.13em;color:#7c91aa;font-weight:700}
+.connected-cards{display:flex;align-items:stretch;min-width:0;gap:0}
+.machine-card,.context-card,.door-card{border:1px solid var(--atlas-line)!important;background:var(--atlas-card)!important;color:var(--atlas-ink)!important;box-shadow:0 8px 30px #0002}
+.machine-card{width:clamp(450px,45vw,690px);flex-shrink:0;display:flex;flex-direction:column;border-radius:12px!important;overflow:hidden;min-height:0;height:100%}
+.connected-cards:has(.context-card) .machine-card{border-radius:12px 0 0 12px!important}
+.context-card{width:345px;flex:0 0 345px;min-height:0;height:100%;max-height:100%;border-radius:0!important;border-left:0!important;display:flex;flex-direction:column}
+.context-card:last-child{border-radius:0 12px 12px 0!important}
+.card-header{border-bottom:1px solid var(--atlas-line)!important;background:#1e2734!important;color:var(--atlas-ink)!important}
+.machine-head{display:flex;gap:12px;align-items:center;padding:17px 18px}
+.machine-logo{width:38px;height:38px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;background:#26445f;color:#a7d9ff;font-size:18px}
+.machine-head h2{font-size:17px;margin:2px 0 0;letter-spacing:-.01em}
+.machine-head .eyebrow{color:#9cb0c8}
+.machine-tools{margin-left:auto;align-self:center}
+.machine-card .card-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:17px!important;overflow-y:auto}
+.machine-summary{font-size:12px;color:#abbad0;max-width:650px;margin-bottom:17px;min-height:30px}
+.schematic{height:clamp(165px,33vh,310px);min-height:165px;flex:0 0 auto;background:#141b26;border:1px solid #313d4d;border-radius:8px;position:relative;overflow:auto;display:grid;place-items:center;padding:10px;--pele-bg:#141b26;--pele-fg:#eef4ff;--pele-fg-on-light:#1f1f1f;--pele-fg-on-dark:#eef4ff;--pele-muted:#b2c2d5;--pele-line:#91b8df;--pele-surface:#26394d;--pele-surface-alt:#1d2b3c;--pele-border:#6a8cad;--pele-accent:#89c5fa;--pele-error:#e45756;--pele-font:Inter,"Segoe UI",Arial,sans-serif;--pele-radius:6px}
+.schematic svg{max-width:100%;max-height:100%;width:100%;height:auto;display:block}
+.schematic [data-id].diagram-hit{cursor:pointer;outline-offset:3px}.schematic [data-id].diagram-hit:hover{filter:brightness(1.24)}
+.node-buttons{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;margin-top:15px;padding-bottom:4px;align-items:center}
+.node-buttons .btn{white-space:nowrap;flex-shrink:0;padding:4px 9px;font-size:11px}
+.node-buttons .active{background:#244869!important;color:#d6eaff!important;border-color:#69a7e6!important}
+.state-strip{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;border-top:1px solid var(--atlas-line);min-height:44px;scrollbar-width:thin}
+.state-chip{display:inline-flex;align-items:center;flex-shrink:0;border-radius:20px;background:#263344;padding:3px 10px;color:#9eb8d1;font-size:10px;white-space:nowrap;max-width:255px;overflow:hidden;text-overflow:ellipsis}
+.context-card .card-header{padding:16px 17px;display:flex;align-items:flex-start;gap:9px}
+.context-card .card-header h3{font-size:15px;margin:4px 0 0}
+.context-card .card-header .btn{margin-left:auto}
+.context-card .card-body{padding:20px 18px!important;min-height:0;overflow-y:auto;flex:1}
+.context-card .card-body p{font-size:13px;line-height:1.7;color:#b9c7d8}
+.context-card .card-body .text-preview{white-space:pre-wrap;word-break:break-word;overflow:auto;max-height:36vh;background:#121a24;padding:13px;border:1px solid var(--atlas-line);border-radius:7px;color:#bfe0fc;font-size:11px}
+.context-card .card-footer{padding:12px 15px;border-top:1px solid var(--atlas-line);background:#1b2531}
+.context-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:10px 9px;border:1px solid #34455a;border-radius:6px;background:#223247;color:#b8d9f6;font-size:12px;margin-top:7px;gap:10px}
+.context-link:hover{background:#2b4764;color:#fff}.context-link i{font-size:12px}
+.machine-details{border:1px solid #344456;background:#182330;border-radius:8px;padding:12px;margin:0 0 15px}
+.machine-details strong{display:block;font-size:11px;color:#a8c9ed}.machine-details code{font-size:11px;color:#e8d9a8}
+.form-label{font-size:11px;font-weight:600;margin-bottom:5px;color:#c9d8e9}
+.field-group{margin-bottom:16px}.field-group .form-text{font-size:10px}
+.form-control,.form-select{background:#121b26!important;color:#ecf2f9!important;border:1px solid #405065!important;font-size:12px!important}
+.form-control:focus,.form-select:focus{background:#162232!important;border-color:#82b7fa!important;color:white!important}
+.form-control::placeholder{color:#8995a4!important}
+.form-check-label{font-size:12px}
+.door-group{flex:0 0 300px;scroll-snap-align:start;margin-left:30px;display:flex;flex-direction:column;gap:14px;padding-top:2px}
+.door-group h2{font-size:13px;color:#becce0;margin-bottom:3px}
+.door-card{border-radius:10px!important;padding:16px;display:flex;align-items:center;gap:14px;text-align:left;width:100%}
+.door-icon{width:34px;height:34px;border:1px solid #416083;border-radius:9px;display:grid;place-items:center;color:#94c4fa;background:#1d3652}
+.door-card strong{display:block;font-size:13px;color:#edf5ff}.door-card small{font-size:11px;color:#a0b2c7}
+.door-card:hover{border-color:#7fb5ef!important;background:#203148!important}
+#presence-rail{height:58px;position:absolute;bottom:0;left:0;right:0;pointer-events:none;background:linear-gradient(180deg,#161e28eb,#111923f9);border-top:1px solid #354151;overflow:hidden}
+.presence-caption{position:absolute;left:16px;top:12px;font-size:9px;letter-spacing:.1em;color:#8ea2bb}
+#avatars{position:relative;height:100%}.presence-marker{position:absolute;top:17px;display:flex;gap:6px;align-items:center;pointer-events:auto;max-width:145px;transform:translateX(-50%)}
+.presence-marker .avatar{display:inline-grid;place-items:center;position:relative;background:#2a5072;color:#eff6ff;border:1px solid #5c86aa;border-radius:50%;width:27px;height:27px;font-size:10px;flex:0 0 27px}
+.presence-marker .avatar-status{position:absolute;bottom:-1px;right:-2px;width:9px;height:9px;border:2px solid #151d28;border-radius:50%;background:#5dd59d}
+.presence-marker .avatar-status.status-busy{border-radius:2px;background:#eb816f}.presence-marker small{font-size:10px;color:#a8c3dc;max-width:90px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.app-footer{height:31px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 19px;background:#141c25;border-top:1px solid var(--atlas-line);font-size:10px;color:#879cb4;flex-shrink:0}
+.footer-right{display:flex;gap:18px;overflow:hidden;white-space:nowrap;max-width:60%}.save-dot{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:100%;background:#64c694}
+.save-dot.warn{background:#e7a65e}.save-dot.error{background:#e77d7d}
+.work-dialog{width:min(970px,95vw);height:min(850px,90dvh);max-height:90dvh;border:1px solid #546982;border-radius:14px;background:#1b2430;color:var(--atlas-ink);padding:0;box-shadow:0 20px 80px #0009}
+.work-dialog::backdrop{background:#080d14bb;backdrop-filter:blur(5px)}
+.work-dialog form{height:100%;min-height:0;display:flex;flex-direction:column;padding:26px}
+.dialog-header{display:flex;align-items:start;justify-content:space-between;gap:15px}.dialog-header h2{font-size:23px;margin:7px 0 12px}.dialog-footer{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:14px}.dialog-footer>div{display:flex;gap:8px}
+.xml-textarea{flex:1;min-height:130px;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important;white-space:pre;resize:none;tab-size:2}
+.small-dialog{width:min(530px,94vw);height:auto;max-height:92vh}.small-dialog form{display:block}.small-dialog .dialog-footer{border-top:1px solid var(--atlas-line);padding-top:17px}
+.checkline{display:flex;align-items:center;gap:9px;margin:13px 0;color:#c5d1e0;font-size:12px}
+.diagram-fallback{width:100%;padding:12px}.fallback-nodes{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}.diagram-fallback .btn{min-width:66px}
+/* CDN fallback: the HTML remains functional even without fetching Bootstrap. */
+.card{display:flex;flex-direction:column}.card-body{padding:1rem}.card-header,.card-footer{padding:.75rem 1rem}
+.btn{border:1px solid #56708a;border-radius:6px;padding:.44rem .75rem;background:#263649;color:#e3edf7;white-space:nowrap}.btn:hover{filter:brightness(1.15)}.btn-sm{padding:.3rem .55rem;font-size:12px}.btn-primary{background:#377fc5;color:white;border-color:#4797dc}.btn-outline-secondary{background:transparent;border-color:#506177;color:#b7cee8}.btn-outline-danger{background:transparent;border-color:#a65865;color:#eeacb7}
+.form-control{width:100%;padding:.5rem .65rem;border-radius:6px}.form-control-sm{padding:.3rem .5rem}.input-group{display:flex;align-items:stretch}.input-group>.form-control{width:auto;min-width:0;flex:1}.input-group>.btn{border-radius:0 6px 6px 0}.input-group-text{display:grid;place-items:center;padding:0 .65rem;border:1px solid #46596f;background:#233042;color:#bfcfe1;font-size:12px}
+.w-100{width:100%}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:1rem}.mt-3{margin-top:1rem}.mb-0{margin-bottom:0}.small{font-size:11px}.text-body-secondary{color:var(--atlas-dim)!important}
+@media(max-width:1130px){.room-context{display:none}.room-jump{width:130px;flex-basis:130px}}
+@media(max-width:870px){:root{--atlas-sidebar:180px;--atlas-gap:4rem}.app-header{gap:12px;padding:0 12px}.brand small{display:none}.header-room{display:none}.room-toolbar{padding:0 14px}.machine-card{width:490px}.context-card{width:300px;flex-basis:300px}.room-intro{width:240px;flex-basis:240px}#stage{padding-left:18px}.quick-command{min-width:220px;width:55%}}
+@media(max-width:650px){:root{--atlas-sidebar:0px;--atlas-gap:2rem}.sidebar{display:none}.brand strong{font-size:10px}.header-actions{gap:4px}.btn-title{display:none}.app-header{height:54px}.room-toolbar{height:58px;flex-basis:58px}.room-context{display:none}.room-jump{width:105px;flex-basis:105px}.quick-command{width:100%;max-width:none;min-width:0}.machine-card{width:min(84vw,490px)}.context-card{width:min(84vw,330px);flex-basis:min(84vw,330px)}.room-intro{width:78vw;flex-basis:78vw}.door-group{flex-basis:75vw}.footer-right{max-width:50%}.footer-right #event-status{display:none}}
+@media(prefers-reduced-motion:reduce){#stage{scroll-behavior:auto}}
+
+@media(max-height:600px){#stage{padding-top:10px;padding-bottom:63px}.room-intro{padding-top:5px}.room-intro .hint{margin-top:14px}.schematic{height:150px;min-height:120px}#presence-rail{height:44px}.presence-marker{top:8px}.room-toolbar{height:52px;flex-basis:52px}}
+
+</style>
+  <script defer src="https://cdn.jsdelivr.net/npm/pele@1/dist/pele.global.js"></script>
+  <script>
+(()=>{
+"use strict";
+const __modules=Object.create(null);
+const __SAMPLE_XML="\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\u003cworld version=\"1\" id=\"team-solve\" name=\"Systems Atlas\" start=\"workshop\">\n  \u003c!-- A local-first world. Rooms and machines are durable. Presence is transient. -->\n  \u003croom id=\"workshop\" name=\"Workshop\" subtitle=\"Design, coordinate, execute\">\n    \u003cdescription>Every machine is an inspectable system. Select a graph node to reveal the meaning and controls on its right. Commands produce inspectable previews and local state transitions, never shell execution.\u003c/description>\n\n    \u003cmachine id=\"team\" name=\"Team Solve\" type=\"diagram\" tag=\"Agent workflow\" icon=\"diagram-3\">\n      \u003csummary>Two ideation agents work in parallel, then converge on a solution, tests, review, repair and verification.\u003c/summary>\n      \u003cdiagram direction=\"LR\">\n        \u003cnode id=\"plan\" name=\"Plan\" status=\"ready\" command=\"plan-work\">\n          \u003cinfo>Define the objective, acceptance criteria, constraints and completion evidence before assigning work.\u003c/info>\n          \u003clink label=\"Inspect the specification\" machine=\"brief\" node=\"requirements\"/>\n          \u003clink label=\"Open planning instructions\" help=\"plan-work\"/>\n        \u003c/node>\n        \u003cnode id=\"ideate-a\" name=\"Ideate A\" status=\"waiting\" command=\"ideate\">\n          \u003cinfo>An independent line of reasoning. Keep its hypotheses separate until synthesis.\u003c/info>\n          \u003clink label=\"Inspect Ideate B\" node=\"ideate-b\"/>\n        \u003c/node>\n        \u003cnode id=\"ideate-b\" name=\"Ideate B\" status=\"waiting\" command=\"ideate\">\n          \u003cinfo>A second independent strategy. Favor alternative designs rather than repeating the first.\u003c/info>\n          \u003clink label=\"Inspect Ideate A\" node=\"ideate-a\"/>\n        \u003c/node>\n        \u003cnode id=\"solve\" name=\"Solve\" status=\"waiting\" command=\"delegate\">\n          \u003cinfo>Compare the plans and select one concrete solution. Record the winning approach and why.\u003c/info>\n          \u003clink label=\"Open test specification\" room=\"quality-room\" machine=\"quality\" node=\"cases\"/>\n        \u003c/node>\n        \u003cnode id=\"test\" name=\"Test\" status=\"waiting\" command=\"run-tests\">\n          \u003cinfo>Run representative checks, preserve failures, and capture observable outcomes.\u003c/info>\n          \u003clink label=\"Test matrix\" room=\"quality-room\" machine=\"quality\" node=\"cases\"/>\n        \u003c/node>\n        \u003cnode id=\"review\" name=\"Review\" status=\"waiting\" command=\"review\">\n          \u003cinfo>Audit correctness and maintainability. Request repairs with specific evidence.\u003c/info>\n        \u003c/node>\n        \u003cnode id=\"repair\" name=\"Repair\" status=\"waiting\" command=\"repair\">\n          \u003cinfo>Address the test and review findings with a bounded, reproducible correction.\u003c/info>\n        \u003c/node>\n        \u003cnode id=\"verify\" name=\"Verify\" status=\"waiting\" command=\"verify\">\n          \u003cinfo>Confirm that fixes meet the objective. Verification is a gate, not a ceremony.\u003c/info>\n          \u003clink label=\"Visit quality room\" room=\"quality-room\"/>\n        \u003c/node>\n        \u003cedge from=\"plan\" to=\"ideate-a\"/>\n        \u003cedge from=\"plan\" to=\"ideate-b\"/>\n        \u003cedge from=\"ideate-a\" to=\"solve\"/>\n        \u003cedge from=\"ideate-b\" to=\"solve\"/>\n        \u003cedge from=\"solve\" to=\"test\"/>\n        \u003cedge from=\"test\" to=\"review\"/>\n        \u003cedge from=\"review\" to=\"repair\"/>\n        \u003cedge from=\"repair\" to=\"verify\"/>\n      \u003c/diagram>\n      \u003cstate key=\"lastAction\" value=\"None yet\"/>\n      \u003cstate key=\"objective\" value=\"Build a dependable XML world explorer\"/>\n      \u003ccommand id=\"plan-work\" name=\"Compose plan\" output=\"text\" template=\"PLAN {{objective}}\\nOwner: {{owner}}\\nDeliverable: {{deliverable}}\" event=\"plan.updated\">\n        \u003chelp>The browser produces a command preview. In a server-backed installation an adapter could dispatch the same structured command; this demonstration does not execute external tools.\u003c/help>\n        \u003cfield id=\"objective\" label=\"Objective\" type=\"text\" required=\"true\" default=\"Build a dependable XML world explorer\"/>\n        \u003cfield id=\"owner\" label=\"Responsible agent\" type=\"select\" default=\"orchestrator\">\u003coption value=\"orchestrator\" label=\"Orchestrator\"/>\u003coption value=\"coder\" label=\"Coder\"/>\u003coption value=\"reviewer\" label=\"Reviewer\"/>\u003c/field>\n        \u003cfield id=\"deliverable\" label=\"Deliverable\" type=\"textarea\" default=\"A validated, portable XML world\"/>\n        \u003cwrite key=\"lastAction\" value=\"Planned: {{objective}}\"/>\n        \u003cwrite key=\"objective\" value=\"{{objective}}\"/>\n      \u003c/command>\n      \u003ccommand id=\"ideate\" name=\"Request idea\" output=\"json\" event=\"idea.requested\">\n        \u003chelp>Capture an ideation request for an agent. JSON is the executable contract for a future MCP or other command adapter.\u003c/help>\n        \u003cfield id=\"strategy\" label=\"Approach\" type=\"select\">\u003coption value=\"independent\" label=\"Independent\"/>\u003coption value=\"critic\" label=\"Critic\"/>\u003coption value=\"conservative\" label=\"Conservative\"/>\u003c/field>\n        \u003cfield id=\"context\" label=\"Constraints\" type=\"textarea\" default=\"Prefer simplicity, testability and durable files\"/>\n        \u003cwrite key=\"lastAction\" value=\"Ideation requested\"/>\n      \u003c/command>\n      \u003ccommand id=\"delegate\" name=\"Assign solution\" output=\"json\" event=\"solve.assigned\">\n        \u003chelp>Assign responsibility. This creates a command preview and updates this document; no remote agent is contacted unless an adapter is explicitly installed.\u003c/help>\n        \u003cfield id=\"agent\" label=\"Agent\" type=\"select\">\u003coption value=\"coder\" label=\"Coder\"/>\u003coption value=\"orchestrator\" label=\"Orchestrator\"/>\u003c/field>\n        \u003cfield id=\"task\" label=\"Task\" type=\"textarea\" required=\"true\"/>\n        \u003cwrite key=\"lastAction\" value=\"Solution assigned to {{agent}}\"/>\n      \u003c/command>\n      \u003ccommand id=\"run-tests\" name=\"Compose test request\" output=\"text\" template=\"npm run {{script}} -- --reporter={{reporter}}\" event=\"test.requested\">\n        \u003chelp>This prints a shell command without executing it. Use the resulting text in an authorized terminal or an external executor.\u003c/help>\n        \u003cfield id=\"script\" label=\"Script\" type=\"select\" default=\"test\">\u003coption value=\"test\" label=\"Unit tests\"/>\u003coption value=\"test:website\" label=\"Website tests\"/>\u003coption value=\"typecheck\" label=\"Typecheck\"/>\u003c/field>\n        \u003cfield id=\"reporter\" label=\"Reporter\" type=\"select\" default=\"default\">\u003coption value=\"default\" label=\"Default\"/>\u003coption value=\"verbose\" label=\"Verbose\"/>\u003c/field>\n        \u003cwrite key=\"lastAction\" value=\"Test requested: {{script}}\"/>\n      \u003c/command>\n      \u003ccommand id=\"review\" name=\"Request review\" output=\"json\" event=\"review.requested\">\n        \u003cfield id=\"scope\" label=\"Review focus\" type=\"select\">\u003coption value=\"correctness\" label=\"Correctness\"/>\u003coption value=\"security\" label=\"Security\"/>\u003coption value=\"accessibility\" label=\"Accessibility\"/>\u003c/field>\n        \u003cfield id=\"notes\" label=\"Notes\" type=\"textarea\"/>\n      \u003c/command>\n      \u003ccommand id=\"repair\" name=\"Prepare repair\" output=\"json\" event=\"repair.requested\">\n        \u003cfield id=\"failure\" label=\"Observed failure\" type=\"textarea\" required=\"true\"/>\n        \u003cfield id=\"owner\" label=\"Owner\" type=\"text\" default=\"coder\"/>\n      \u003c/command>\n      \u003ccommand id=\"verify\" name=\"Record verification\" output=\"json\" event=\"verification.recorded\">\n        \u003cfield id=\"passed\" label=\"Passed\" type=\"checkbox\" default=\"false\"/>\n        \u003cfield id=\"evidence\" label=\"Evidence\" type=\"textarea\" required=\"true\"/>\n        \u003cwrite key=\"lastAction\" value=\"Verification recorded\"/>\n      \u003c/command>\n    \u003c/machine>\n\n    \u003cmachine id=\"brief\" name=\"Project Brief\" type=\"diagram\" tag=\"Reference\" icon=\"journal-text\">\n      \u003csummary>An inspectable requirements schematic: constraints, deliverables and acceptance criteria.\u003c/summary>\n      \u003cdiagram direction=\"LR\">\n        \u003cnode id=\"requirements\" name=\"Requirements\">\u003cinfo>Define the system boundary and operational intent. This world exists independently of whether any agents are connected.\u003c/info>\u003clink label=\"Edit objective\" command=\"edit-objective\"/>\u003clink label=\"See delivery tests\" room=\"quality-room\" machine=\"quality\" node=\"cases\"/>\u003c/node>\n        \u003cnode id=\"constraints\" name=\"Constraints\">\u003cinfo>Browser-first, no application backend required for save/load, XML portable, explicit commands, no executable code inside XML.\u003c/info>\u003c/node>\n        \u003cnode id=\"deliverables\" name=\"Deliverables\">\u003cinfo>One exportable XML world, navigable rooms, and reusable typed machine specifications.\u003c/info>\u003c/node>\n        \u003cedge from=\"requirements\" to=\"constraints\"/>\u003cedge from=\"constraints\" to=\"deliverables\"/>\n      \u003c/diagram>\n      \u003cstate key=\"objective\" value=\"Build a dependable XML world explorer\"/>\n      \u003clisten event=\"plan.updated\" key=\"objective\" value=\"{{objective}}\"/>\n      \u003ccommand id=\"edit-objective\" name=\"Edit project objective\" output=\"json\" event=\"brief.changed\">\n        \u003chelp>The objective is written to this machine's durable XML state and exported in the next save.\u003c/help>\n        \u003cfield id=\"objective\" label=\"Objective\" type=\"textarea\" required=\"true\" default=\"Build a dependable XML world explorer\"/>\n        \u003cwrite key=\"objective\" value=\"{{objective}}\"/>\n      \u003c/command>\n    \u003c/machine>\n\n    \u003cmachine id=\"delivery\" name=\"Delivery Map\" type=\"diagram\" tag=\"Release control\" icon=\"box-seam\">\n      \u003csummary>Visible release checkpoints, from package scripts to verified artifacts.\u003c/summary>\n      \u003cdiagram direction=\"LR\">\n        \u003cnode id=\"scripts\" name=\"Scripts\">\u003cinfo>Map npm commands to explicit interfaces. Here they are previews, not child processes.\u003c/info>\u003clink label=\"Prepare a build\" command=\"build\"/>\u003c/node>\n        \u003cnode id=\"checks\" name=\"Checks\">\u003cinfo>Type checking and tests must pass before artifacts are trusted.\u003c/info>\u003clink label=\"QA testing room\" room=\"quality-room\"/>\u003c/node>\n        \u003cnode id=\"publish\" name=\"Publish\">\u003cinfo>Publishing requires an explicit authorized runtime outside this static browser.\u003c/info>\u003clink label=\"Prepare release note\" command=\"release\"/>\u003c/node>\n        \u003cedge from=\"scripts\" to=\"checks\"/>\u003cedge from=\"checks\" to=\"publish\"/>\n      \u003c/diagram>\n      \u003cstate key=\"plan\" value=\"Unprepared\"/>\n      \u003clisten event=\"verification.recorded\" key=\"plan\" value=\"Verification submitted\"/>\n      \u003ccommand id=\"build\" name=\"Build command\" output=\"text\" template=\"npm run {{script}}\">\n        \u003chelp>This text preview can be copied into a shell. Nothing is executed in the browser.\u003c/help>\n        \u003cfield id=\"script\" label=\"Script\" type=\"select\" default=\"build\">\u003coption value=\"build\" label=\"Build\"/>\u003coption value=\"typecheck\" label=\"Typecheck\"/>\u003coption value=\"test\" label=\"Unit test\"/>\u003coption value=\"bench\" label=\"Benchmark\"/>\u003coption value=\"bench:mermaid\" label=\"Mermaid benchmark\"/>\u003coption value=\"prepublishOnly\" label=\"Prepublish checks\"/>\u003coption value=\"test:watch\" label=\"Watch tests (long-running)\"/>\u003coption value=\"test:website\" label=\"Website tests\"/>\u003coption value=\"website\" label=\"Start website (long-running)\"/>\u003c/field>\n      \u003c/command>\n      \u003ccommand id=\"release\" name=\"Prepare release note\" output=\"text\" template=\"Release {{version}}: {{notes}}\">\n        \u003cfield id=\"version\" label=\"Version\" type=\"text\" required=\"true\" default=\"1.0.0\"/>\n        \u003cfield id=\"notes\" label=\"Notes\" type=\"textarea\" required=\"true\"/>\n      \u003c/command>\n    \u003c/machine>\n\n    \u003cdoor id=\"to-qa\" name=\"Quality Lab\" to=\"quality-room\" description=\"Inspect test systems and execution evidence\"/>\n    \u003cdoor id=\"to-release\" name=\"Release Desk\" to=\"release-room\" description=\"Review artifacts and deliverables\"/>\n  \u003c/room>\n\n  \u003croom id=\"quality-room\" name=\"Quality Lab\" subtitle=\"Findings, confidence, verification\">\n    \u003cdescription>Test criteria and command evidence live here. Follow doors to traverse the same world model without inventing a filesystem hierarchy.\u003c/description>\n    \u003cmachine id=\"quality\" name=\"Test Matrix\" type=\"diagram\" tag=\"Quality assurance\" icon=\"clipboard-check\">\n      \u003csummary>Requirements lead to test cases, execution, evidence and acceptance.\u003c/summary>\n      \u003cdiagram direction=\"LR\">\n        \u003cnode id=\"cases\" name=\"Cases\" command=\"new-case\">\u003cinfo>Describe an observable acceptance test. A durable result must identify the requirement it proves.\u003c/info>\u003clink label=\"Open project brief\" room=\"workshop\" machine=\"brief\" node=\"requirements\"/>\u003c/node>\n        \u003cnode id=\"execute\" name=\"Execute\" command=\"test-run\">\u003cinfo>Capture invocation metadata. Use an external executor to run actual tests.\u003c/info>\u003c/node>\n        \u003cnode id=\"evidence\" name=\"Evidence\">\u003cinfo>Preserve logs, reproduction steps and artifacts. Results are visible as machine state and history in XML.\u003c/info>\u003c/node>\n        \u003cnode id=\"accept\" name=\"Accept\" command=\"accept\">\u003cinfo>Acceptance requires specific evidence and an explicit decision.\u003c/info>\u003c/node>\n        \u003cedge from=\"cases\" to=\"execute\"/>\u003cedge from=\"execute\" to=\"evidence\"/>\u003cedge from=\"evidence\" to=\"accept\"/>\n      \u003c/diagram>\n      \u003cstate key=\"lastCase\" value=\"No case recorded\"/>\n      \u003cstate key=\"accepted\" value=\"Not reviewed\"/>\n      \u003clisten event=\"test.requested\" key=\"lastCase\" value=\"Command request: {{script}}\"/>\n      \u003ccommand id=\"new-case\" name=\"Design test case\" output=\"json\" event=\"case.created\">\n        \u003cfield id=\"requirement\" label=\"Requirement\" type=\"text\" required=\"true\"/>\n        \u003cfield id=\"method\" label=\"Method\" type=\"select\">\u003coption value=\"unit\" label=\"Unit\"/>\u003coption value=\"browser\" label=\"Browser\"/>\u003coption value=\"manual\" label=\"Manual\"/>\u003c/field>\n        \u003cfield id=\"expected\" label=\"Expected result\" type=\"textarea\" required=\"true\"/>\n        \u003cwrite key=\"lastCase\" value=\"{{requirement}}\"/>\n      \u003c/command>\n      \u003ccommand id=\"test-run\" name=\"Record test invocation\" output=\"text\" template=\"npm run {{script}} -- {{target}}\">\n        \u003cfield id=\"script\" label=\"Script\" type=\"select\">\u003coption value=\"test\" label=\"Unit\"/>\u003coption value=\"test:website\" label=\"Website\"/>\u003c/field>\n        \u003cfield id=\"target\" label=\"Target\" type=\"text\" default=\"--runInBand\"/>\n      \u003c/command>\n      \u003ccommand id=\"accept\" name=\"Record acceptance\" output=\"json\" event=\"quality.accepted\">\n        \u003cfield id=\"decision\" label=\"Decision\" type=\"select\">\u003coption value=\"accepted\" label=\"Accepted\"/>\u003coption value=\"rejected\" label=\"Rejected\"/>\u003c/field>\n        \u003cfield id=\"evidence\" label=\"Evidence\" type=\"textarea\" required=\"true\"/>\n        \u003cwrite key=\"accepted\" value=\"{{decision}}\"/>\n      \u003c/command>\n    \u003c/machine>\n    \u003cdoor id=\"back-workshop\" name=\"Workshop\" to=\"workshop\" description=\"Return to the design machines\"/>\n    \u003cdoor id=\"forward-release\" name=\"Release Desk\" to=\"release-room\"/>\n  \u003c/room>\n\n  \u003croom id=\"release-room\" name=\"Release Desk\" subtitle=\"Packaging and handoff\">\n    \u003cdescription>Review the work before exporting the entire world as one standalone XML document.\u003c/description>\n    \u003cmachine id=\"handoff\" name=\"Release Handoff\" type=\"diagram\" tag=\"Deliverable\" icon=\"archive\">\n      \u003csummary>Readiness is the combination of validated scope, evidence and an explicit handoff.\u003c/summary>\n      \u003cdiagram direction=\"LR\">\n        \u003cnode id=\"scope\" name=\"Scope\">\u003cinfo>Confirm the project boundary is clear. Link back to the requirements rather than duplicating them.\u003c/info>\u003clink label=\"Requirements\" room=\"workshop\" machine=\"brief\" node=\"requirements\"/>\u003c/node>\n        \u003cnode id=\"proof\" name=\"Proof\">\u003cinfo>Review evidence gathered in the quality room.\u003c/info>\u003clink label=\"Test matrix\" room=\"quality-room\" machine=\"quality\" node=\"evidence\"/>\u003c/node>\n        \u003cnode id=\"handoff\" name=\"Handoff\" command=\"note\">\u003cinfo>Compose a human-readable handoff summary and export the durable world XML.\u003c/info>\u003c/node>\n        \u003cedge from=\"scope\" to=\"proof\"/>\u003cedge from=\"proof\" to=\"handoff\"/>\n      \u003c/diagram>\n      \u003cstate key=\"releaseNote\" value=\"Not composed\"/>\n      \u003clisten event=\"quality.accepted\" key=\"releaseNote\" value=\"Quality status: {{decision}}\"/>\n      \u003ccommand id=\"note\" name=\"Compose handoff\" output=\"text\" template=\"Project: {{project}}\\nRelease: {{version}}\\nSummary: {{summary}}\">\n        \u003chelp>Use Export XML to preserve the entire world, including changes and history. This command only formats a draft summary.\u003c/help>\n        \u003cfield id=\"project\" label=\"Project\" type=\"text\" default=\"Systems Atlas\"/>\n        \u003cfield id=\"version\" label=\"Version\" type=\"text\" default=\"1.0.0\"/>\n        \u003cfield id=\"summary\" label=\"Handoff summary\" type=\"textarea\" required=\"true\"/>\n        \u003cwrite key=\"releaseNote\" value=\"{{summary}}\"/>\n      \u003c/command>\n    \u003c/machine>\n    \u003cdoor id=\"to-workshop\" name=\"Workshop\" to=\"workshop\"/>\n  \u003c/room>\n  \u003chistory/>\n\u003c/world>\n";
+// vendor/push-scope/signal.js
+__modules["vendor/push-scope/signal.js"]=(()=>{
+/**
+ * Signal — explicit, synchronous PUSH reactivity (no dependency tracking).
+ *
+ * Semantics:
+ * - An outer batch coalesces writes. Reads of derived values inside the batch
+ *   settle the graph, but listeners only run after the batch.
+ * - Dependencies settle in graph-depth order (O(log N) queue operations).
+ * - Each publication wave carries immutable {value, previous} *envelopes*.
+ *   Writes made by listeners become a subsequent wave, never rewrite one.
+ * - Failed projections invalidate their downstream graph, drain pending source
+ *   publications, and can recover on a future changed input.
+ */
+
+const UNSET = Symbol('uninitialized');
+const pending = new Map();
+let batchDepth = 0;
+let flushing = false;
+let settling = false;
+const deferredProjectionErrors = []; // Includes failures found during read-through batches.
+
+// Indexed binary heap: depth-ordered, stable order at equal depth, O(log N).
+class DirtyQueue {
+  #heap = [];
+  #indices = new Map();
+  #ticket = 0;
+  get size() { return this.#heap.length; }
+  #less(a, b) {
+    return a.node.depth < b.node.depth ||
+      (a.node.depth === b.node.depth && a.ticket < b.ticket);
+  }
+  #swap(a, b) {
+    const heap = this.#heap;
+    [heap[a], heap[b]] = [heap[b], heap[a]];
+    this.#indices.set(heap[a].node, a);
+    this.#indices.set(heap[b].node, b);
+  }
+  #up(index) {
+    while (index) {
+      const parent = (index - 1) >> 1;
+      if (!this.#less(this.#heap[index], this.#heap[parent])) break;
+      this.#swap(index, parent);
+      index = parent;
+    }
+  }
+  #down(index) {
+    const length = this.#heap.length;
+    for (;;) {
+      const left = index * 2 + 1;
+      const right = left + 1;
+      let smallest = index;
+      if (left < length && this.#less(this.#heap[left], this.#heap[smallest])) smallest = left;
+      if (right < length && this.#less(this.#heap[right], this.#heap[smallest])) smallest = right;
+      if (smallest === index) break;
+      this.#swap(index, smallest);
+      index = smallest;
+    }
+  }
+  add(node) {
+    if (this.#indices.has(node)) return;
+    const index = this.#heap.length;
+    this.#heap.push({ node, ticket: this.#ticket++ });
+    this.#indices.set(node, index);
+    this.#up(index);
+  }
+  delete(node) {
+    const index = this.#indices.get(node);
+    if (index === undefined) return;
+    const last = this.#heap.pop();
+    this.#indices.delete(node);
+    if (index === this.#heap.length) return;
+    this.#heap[index] = last;
+    this.#indices.set(last.node, index);
+    this.#up(index);
+    this.#down(this.#indices.get(last.node));
+  }
+  take() {
+    if (!this.size) return null;
+    const result = this.#heap[0].node;
+    this.delete(result);
+    return result;
+  }
+  clear() { this.#heap.length = 0; this.#indices.clear(); }
+}
+
+const dirty = new DirtyQueue();
+const hasValue = value => value !== null && value !== undefined;
+
+function markChildren(signal) {
+  for (const child of signal._dependents()) dirty.add(child);
+}
+
+function enqueue(signal, previous, wasInitialized, force = false) {
+  const previousEntry = pending.get(signal);
+  if (previousEntry) previousEntry.force ||= force;
+  else pending.set(signal, { previous, wasInitialized, force });
+  markChildren(signal);
+  flush();
+}
+
+function settle() {
+  if (settling) return;
+  settling = true;
+  const errors = [];
+  let computations = 0;
+  try {
+    while (dirty.size) {
+      if (++computations > 100000) {
+        dirty.clear();
+        errors.push(new Error('Reactive graph exceeded 100000 recomputations; projections must be pure'));
+        break;
+      }
+      const next = dirty.take();
+      try {
+        const error = next._recompute();
+        if (error !== null) errors.push(error);
+      } catch (error) {
+        next._fail(error);
+        errors.push(error);
+      }
+    }
+  } finally {
+    settling = false;
+  }
+  deferredProjectionErrors.push(...errors);
+}
+
+function throwErrors(errors, message) {
+  if (errors.length === 1) throw errors[0];
+  if (errors.length > 1) throw new AggregateError(errors, message);
+}
+
+function flush() {
+  if (flushing || settling || batchDepth) return;
+  flushing = true;
+  const errors = [];
+  let waves = 0;
+  try {
+    while (dirty.size || pending.size || deferredProjectionErrors.length) {
+      if (++waves > 10000) {
+        dirty.clear();
+        pending.clear();
+        // Report these now; otherwise a later, unrelated flush would throw them.
+        errors.push(...deferredProjectionErrors.splice(0));
+        errors.push(new Error('Reactive feedback loop exceeded 10000 publication waves'));
+        break;
+      }
+      settle();
+      errors.push(...deferredProjectionErrors.splice(0));
+      // Capture the *next* value before running any listener. A callback is
+      // allowed to call set(); it cannot change these envelopes in-place.
+      const wave = [...pending].map(([signal, change]) => ({
+        signal, value: signal._snapshotValue(), ...change
+      }));
+      pending.clear();
+      for (const { signal, value, previous, wasInitialized, force } of wave) {
+        if (signal._failure()) continue; // Never publish stale derived state.
+        if (!force && wasInitialized && signal._equal(previous, value)) continue;
+        try { signal._deliver(value, previous); }
+        catch (error) { errors.push(error); }
+      }
+    }
+  } finally {
+    flushing = false;
+  }
+  throwErrors(errors, 'Signal propagation failed');
+}
+
+/** Batch synchronous writes. Async functions are deliberately not supported. */
+function batch(fn) {
+  if (typeof fn !== 'function') throw new TypeError('batch(fn) requires a function');
+  batchDepth++;
+  let result;
+  let callbackError;
+  let callbackThrew = false;
+  try {
+    result = fn();
+    if (result != null && typeof result.then === 'function') {
+      throw new TypeError('batch() requires a synchronous callback; do not return a Promise');
+    }
+  } catch (error) { callbackThrew = true; callbackError = error; }
+  batchDepth--;
+  let flushError;
+  let flushThrew = false;
+  if (batchDepth === 0) {
+    try { flush(); } catch (error) { flushThrew = true; flushError = error; }
+  }
+  if (callbackThrew && flushThrew) {
+    throw new AggregateError([callbackError, flushError], 'Batch callback and signal delivery both failed');
+  }
+  if (callbackThrew) throw callbackError;
+  if (flushThrew) throw flushError;
+  return result;
+}
+
+class Signal {
+  #value;
+  #initialized = false;
+  #equals;
+  #listeners = new Set();
+  #children = new Set();
+  #forceVersion = 0;
+
+  constructor(value, options = {}) {
+    if (options.equals !== undefined && typeof options.equals !== 'function') {
+      throw new TypeError('equals must be a function');
+    }
+    this.#equals = options.equals ?? Object.is;
+    if (arguments.length > 0 && value !== UNSET) {
+      this.#value = value;
+      this.#initialized = true;
+    }
+  }
+
+  get value() { return this.#value; }
+  set value(value) { this.set(value); }
+  get initialized() { return this.#initialized; }
+  get hasValue() { return this.initialized && hasValue(this.#value); }
+  get size() { return this.#listeners.size; }
+  get() { return this.value; }
+
+  set(next, { force = false } = {}) {
+    if (this.#initialized && !force && this.#equals(next, this.#value)) return this;
+    const previous = this.#value;
+    const wasInitialized = this.#initialized;
+    this.#value = next;
+    this.#initialized = true;
+    if (force) this.#forceVersion++;
+    enqueue(this, previous, wasInitialized, force);
+    return this;
+  }
+  update(fn, options) {
+    if (typeof fn !== 'function') throw new TypeError('update(fn) requires a function');
+    return this.set(fn(this.#value), options);
+  }
+  mutate(fn) {
+    if (typeof fn !== 'function') throw new TypeError('mutate(fn) requires a function');
+    fn(this.#value);
+    return this.set(this.#value, { force: true });
+  }
+  notify(previous = this.#value) {
+    if (this.#initialized) {
+      this.#forceVersion++;
+      enqueue(this, previous, true, true);
+    }
+    return this;
+  }
+  subscribe(fn, { immediate = true } = {}) {
+    if (typeof fn !== 'function') throw new TypeError('subscribe(fn) requires a function');
+    const entry = { fn };
+    this.#listeners.add(entry);
+    if (immediate && this.initialized) {
+      try { fn(this.value, undefined); }
+      catch (error) { this.#listeners.delete(entry); throw error; }
+    }
+    return () => this.#listeners.delete(entry);
+  }
+  once(fn) {
+    const off = this.subscribe((value, previous) => {
+      off();
+      fn(value, previous);
+    }, { immediate: false });
+    return off;
+  }
+  map(fn, options = {}) { return combineLatest(this, fn, options); }
+
+  // Graph plumbing: no implicit subscriptions on read.
+  _dependents() { return this.#children; }
+  _sources() { return []; } // Diagnostics only: explicit dependencies, no tracking.
+  _attach(child) { this.#children.add(child); return () => this.#children.delete(child); }
+  _equal(a, b) { return this.#equals(a, b); }
+  _forcedVersion() { return this.#forceVersion; }
+  _snapshotValue() { return this.#value; }
+  _failure() { return null; }
+  _deliver(value, previous) {
+    const errors = [];
+    for (const entry of [...this.#listeners]) {
+      if (!this.#listeners.has(entry)) continue;
+      try { entry.fn(value, previous); }
+      catch (error) { errors.push(error); }
+    }
+    throwErrors(errors, 'Signal subscribers failed');
+  }
+  _clearListeners() { this.#listeners.clear(); }
+}
+
+function equalTuple(a, b) {
+  return Array.isArray(a) && Array.isArray(b) && a.length === b.length &&
+    a.every((value, index) => Object.is(value, b[index]));
+}
+
+/** Internal, eagerly settled, read-only Signal. */
+class DerivedSignal extends Signal {
+  #sources;
+  #project;
+  #detach;
+  #allowPartial;
+  #disposed = false;
+  #computing = false;
+  #inputs = null;
+  #forceVersions = null;
+  #failure = null;
+
+  constructor(sources, project, options = {}) {
+    super(UNSET, options);
+    this.#sources = sources;
+    this.#project = project;
+    this.#allowPartial = options.allowPartial === true;
+    this.depth = 1 + Math.max(0, ...sources.map(s => s.depth ?? 0));
+    settle(); // Inside a batch or wave, project from settled inputs, not stale ones.
+    this.#detach = sources.map(s => s._attach(this));
+    try {
+      const error = this._recompute();
+      if (error !== null) throw error;
+    } catch (error) {
+      this.dispose();
+      throw error;
+    }
+    // The initial projection is not a change: subscribers created now receive
+    // it immediately, and must not receive it again when a batch/wave flushes.
+    pending.delete(this);
+  }
+
+  get disposed() { return this.#disposed; }
+  get initialized() { return !this.#failure && super.initialized; }
+  get hasValue() { return this.initialized && hasValue(this._snapshotValue()); }
+  get error() { return this.#failure?.error ?? null; }
+  get value() {
+    settle(); // Read-through inside a batch; no observer is notified here.
+    if (this.#failure) throw this.#failure.error;
+    return super.value;
+  }
+  set value(_) { throw new TypeError('Derived signals are read-only'); }
+  set() { throw new TypeError('Derived signals are read-only'); }
+  update() { throw new TypeError('Derived signals are read-only'); }
+  mutate() { throw new TypeError('Derived signals are read-only'); }
+  notify() { throw new TypeError('Derived signals are read-only'); }
+  _failure() { return this.#failure; }
+  _sources() { return [...this.#sources]; }
+
+  _fail(error) {
+    if (this.#disposed) return;
+    // A cached value must NEVER pretend to be current when projection fails.
+    const changed = !this.#failure || this.#failure.error !== error;
+    this.#failure = { error };
+    pending.delete(this);
+    if (changed) markChildren(this);
+  }
+
+  _recompute() {
+    if (this.#disposed) return null;
+    if (this.#computing) return new Error('Circular derived signal computation');
+    for (const source of this.#sources) {
+      const failure = source._failure();
+      if (failure) {
+        this._fail(failure.error);
+        return null; // Report the root projector's error only once.
+      }
+    }
+    if (!this.#allowPartial && !this.#sources.every(s => s.initialized)) return null;
+
+    // Prevent spuriously recomputing tuples (or calling user projectors) when
+    // input writes cancel one another within a batch.
+    const values = this.#sources.map(s => s._snapshotValue());
+    const forces = this.#sources.map(s => s._forcedVersion());
+    if (!this.#failure && this.#inputs && this.#inputs.length === values.length &&
+      values.every((value, i) => this.#sources[i]._equal(value, this.#inputs[i]) &&
+        forces[i] === this.#forceVersions[i])) return null;
+
+    this.#computing = true;
+    try {
+      const next = this.#project(...values);
+      const recovering = !!this.#failure;
+      this.#failure = null;
+      this.#inputs = values;
+      this.#forceVersions = forces;
+      super.set(next, { force: recovering });
+    } catch (error) {
+      this._fail(error);
+      return error;
+    } finally {
+      this.#computing = false;
+    }
+    return null;
+  }
+
+  dispose() {
+    if (this.#disposed) return this;
+    this.#disposed = true;
+    dirty.delete(this);
+    pending.delete(this);
+    for (const detach of this.#detach) detach();
+    this.#detach.length = 0;
+    this._clearListeners();
+    return this;
+  }
+}
+
+/**
+ * combineLatest(signal1, signal2, ..., project, {scope})
+ * combineLatest([signal1, signal2], project, {scope})
+ * A missing projector produces a shallow-equal tuple, not a fresh event when
+ * the input values have remained equal after a batch.
+ */
+function combineLatest(...args) {
+  let options = {};
+  const last = args.at(-1);
+  if (last !== null && typeof last === 'object' && !(last instanceof Signal) &&
+    !Array.isArray(last)) options = args.pop();
+  const explicitProject = typeof args.at(-1) === 'function';
+  const project = explicitProject ? args.pop() : (...values) => values;
+  const sources = args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
+  if (!sources.length) throw new TypeError('combineLatest requires at least one source Signal');
+  if (sources.some(s => !(s instanceof Signal))) {
+    throw new TypeError('combineLatest sources must be Signal instances');
+  }
+  const config = !explicitProject && options.equals === undefined
+    ? { ...options, equals: equalTuple }
+    : options;
+  const result = new DerivedSignal(sources, project, config);
+  options.scope?.collect(result);
+  return result;
+}
+
+return {hasValue,batch,Signal,combineLatest};
+})();
+// vendor/push-scope/persist.js
+__modules["vendor/push-scope/persist.js"]=(()=>{
+/**
+ * Optional small-state persistence. Zero browser globals are accessed at import.
+ *
+ * localStorage holds a versioned, JSON-only value with a Lamport revision and
+ * deterministic origin tie-break. Storage events and BroadcastChannel deliver
+ * cross-tab updates; neither makes localStorage transactional or multi-writer safe.
+ * Use IndexedDB + domain-specific conflict handling for collections/documents.
+ */
+const { Signal } = __modules["vendor/push-scope/signal.js"];
+const FORMAT = 'push-scope/state';
+const CHANNEL_TYPE = 'push-scope/record';
+const owns = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
+
+function checkJSON(value, seen = new Set()) {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return;
+  if (typeof value === 'number' && Number.isFinite(value) && !Object.is(value, -0)) return;
+  if (!value || typeof value !== 'object') {
+    throw new TypeError('Persistent state must be JSON data (no undefined, NaN, Infinity, bigint or functions)');
+  }
+  if (seen.has(value)) throw new TypeError('Persistent state cannot contain circular references');
+  const prototype = Object.getPrototypeOf(value);
+  if (!Array.isArray(value) && prototype !== Object.prototype && prototype !== null) {
+    throw new TypeError('Persistent state must contain plain objects and arrays; supply a codec for other types');
+  }
+  if (owns(value, 'toJSON')) throw new TypeError('Persistent state cannot override JSON serialization');
+  if (Object.getOwnPropertySymbols(value).length) {
+    throw new TypeError('Persistent state cannot contain symbol-keyed properties');
+  }
+  seen.add(value);
+  if (Array.isArray(value)) {
+    for (const key of Object.keys(value)) {
+      if (!/^(0|[1-9][0-9]*)$/.test(key) || Number(key) >= value.length) {
+        throw new TypeError('Persistent arrays cannot contain extra named properties');
+      }
+    }
+    for (let index = 0; index < value.length; index++) {
+      if (!owns(value, index)) throw new TypeError('Persistent arrays cannot contain holes');
+      const desc = Object.getOwnPropertyDescriptor(value, index);
+      if (!('value' in desc)) throw new TypeError('Persistent state cannot contain accessor properties');
+      checkJSON(desc.value, seen);
+    }
+  } else {
+    for (const key of Object.keys(value)) {
+      const desc = Object.getOwnPropertyDescriptor(value, key);
+      if (!('value' in desc)) throw new TypeError('Persistent state cannot contain accessor properties');
+      checkJSON(desc.value, seen);
+    }
+  }
+  seen.delete(value);
+}
+
+function compare(a, b) {
+  if (!a) return b ? -1 : 0;
+  if (!b) return 1;
+  if (a.counter !== b.counter) return a.counter < b.counter ? -1 : 1;
+  return a.origin < b.origin ? -1 : a.origin > b.origin ? 1 : 0;
+}
+
+function parse(raw, key, version) {
+  if (raw === null) return null;
+  let record;
+  try { record = JSON.parse(raw); }
+  catch { throw new SyntaxError(`Persisted record '${key}' is not valid JSON`); }
+  if (!record || typeof record !== 'object' || Array.isArray(record) ||
+      record.format !== FORMAT || !owns(record, 'data') ||
+      !record.stamp || !Number.isSafeInteger(record.stamp.counter) ||
+      record.stamp.counter < 0 || typeof record.stamp.origin !== 'string' ||
+      !record.stamp.origin) {
+    throw new TypeError(`Persisted record '${key}' does not match the PUSH Scope format`);
+  }
+  if (record.version !== version) {
+    throw new Error(`Persisted record '${key}' uses schema ${record.version}; expected ${version}. Migrate explicitly before binding.`);
+  }
+  checkJSON(record.data);
+  return { raw, data: record.data, stamp: record.stamp };
+}
+
+function originID() {
+  if (typeof globalThis.crypto?.randomUUID === 'function') return globalThis.crypto.randomUUID();
+  throw new Error('Persistence requires crypto.randomUUID() or an explicit unique origin');
+}
+
+/**
+ * Bind a mutable Signal to a small, JSON-only localStorage key.
+ *
+ * persist(signal, { key, storage=localStorage, sync=false, ... }) -> controller
+ *
+ * Optional injected eventTarget/channelFactory make the adapter deterministic
+ * to test and usable with custom same-origin storage transports.
+ */
+function persist(signal, options = {}) {
+  if (!(signal instanceof Signal) || signal.disposed === true ||
+      signal.set !== Signal.prototype.set) {
+    throw new TypeError('persist() needs a writable source Signal, not a derived Signal');
+  }
+  const {
+    key, sync = false, version = 1, codec = {}, onError,
+    storage = globalThis.localStorage,
+    eventTarget = typeof window === 'undefined' ? null : window,
+    channelFactory = typeof window === 'undefined' || typeof window.BroadcastChannel !== 'function'
+      ? null : name => new window.BroadcastChannel(name),
+    channelName = `push-scope:${key}`,
+    origin = originID()
+  } = options;
+  if (typeof key !== 'string' || !key.trim()) throw new TypeError('persist key must be a nonempty string');
+  if (!storage || typeof storage.getItem !== 'function' || typeof storage.setItem !== 'function') {
+    throw new TypeError('persist requires a localStorage-compatible storage object');
+  }
+  if (!Number.isSafeInteger(version) || version < 1) throw new TypeError('persist version must be a positive integer');
+  if (typeof origin !== 'string' || !origin) throw new TypeError('persist origin must be nonempty');
+  if (onError !== undefined && typeof onError !== 'function') throw new TypeError('onError must be a function');
+  if (codec.encode !== undefined && typeof codec.encode !== 'function' ||
+      codec.decode !== undefined && typeof codec.decode !== 'function') {
+    throw new TypeError('codec.encode and codec.decode must be functions');
+  }
+  const encode = codec.encode ?? (value => value);
+  const decode = codec.decode ?? (value => value);
+  const channelAvailable = sync && typeof channelFactory === 'function';
+  const eventAvailable = sync && typeof eventTarget?.addEventListener === 'function';
+  if (sync && !channelAvailable && !eventAvailable) {
+    throw new Error('sync requires a storage event target or a BroadcastChannel factory');
+  }
+
+  // Validate/hydrate before subscribing, so hydration never overwrites storage.
+  let latest = parse(storage.getItem(key), key, version);
+  if (latest) signal.set(decode(latest.data));
+  let disposed = false;
+  let applyingRemote = false;
+  let remoteEnvelopeValue;
+  let channel = null;
+
+  function report(error) {
+    if (onError) onError(error);
+    else throw error;
+  }
+  function stored() { return parse(storage.getItem(key), key, version); }
+  function ensureStored() {
+    const current = stored();
+    if (latest && (!current || compare(latest.stamp, current.stamp) > 0)) {
+      storage.setItem(key, latest.raw);
+    }
+  }
+  function receive(raw) {
+    if (disposed || raw === null) return;
+    try {
+      const incoming = parse(raw, key, version);
+      const currentStorage = stored();
+      // A pending storage event may already have been superseded on disk.
+      const candidate = currentStorage && compare(currentStorage.stamp, incoming.stamp) > 0
+        ? currentStorage : incoming;
+      const order = compare(candidate.stamp, latest?.stamp);
+      if (order > 0) {
+        // Decode BEFORE advancing the stamp, so invalid content cannot poison state.
+        const value = decode(candidate.data);
+        latest = candidate;
+        applyingRemote = true;
+        remoteEnvelopeValue = value;
+        try { signal.set(value); }
+        finally { applyingRemote = false; remoteEnvelopeValue = undefined; }
+      } else if (order === 0 && latest.raw !== candidate.raw) {
+        throw new Error(`Conflicting payloads share a revision for '${key}'`);
+      }
+      ensureStored(); // Repair out-of-order losing writes without an echo storm.
+    } catch (error) { report(error); }
+  }
+  function onStorage(event) {
+    if (event.key !== key || event.newValue === null) return;
+    if (event.storageArea !== undefined && event.storageArea !== storage) return;
+    receive(event.newValue);
+  }
+  function onMessage(event) {
+    const data = event.data;
+    if (!data || data.type !== CHANNEL_TYPE || data.key !== key || typeof data.raw !== 'string') return;
+    receive(data.raw);
+  }
+
+  // Failure-safe setup; no leaked observer or half-open BroadcastChannel.
+  try {
+    if (channelAvailable) {
+      channel = channelFactory(channelName);
+      if (!channel || typeof channel.addEventListener !== 'function' ||
+          typeof channel.postMessage !== 'function' || typeof channel.close !== 'function') {
+        throw new TypeError('channelFactory must return a BroadcastChannel-compatible object');
+      }
+      channel.addEventListener('message', onMessage);
+    }
+    if (eventAvailable) eventTarget.addEventListener('storage', onStorage);
+  } catch (error) {
+    if (channel) { channel.removeEventListener?.('message', onMessage); channel.close?.(); }
+    if (eventAvailable) eventTarget.removeEventListener('storage', onStorage);
+    throw error;
+  }
+
+  function save(value) {
+    // Encoding failure leaves the existing durable record untouched.
+    const data = encode(value);
+    checkJSON(data);
+    const disk = stored();
+    const counter = Math.max(latest?.stamp.counter ?? 0, disk?.stamp.counter ?? 0) + 1;
+    if (!Number.isSafeInteger(counter)) throw new RangeError('Persistence logical clock overflow');
+    const raw = JSON.stringify({ format: FORMAT, version,
+      stamp: { counter, origin }, data });
+    // localStorage write succeeds before the record is advertised to peers.
+    storage.setItem(key, raw);
+    latest = { raw, stamp: { counter, origin }, data };
+    channel?.postMessage({ type: CHANNEL_TYPE, key, raw });
+  }
+
+  const stop = signal.subscribe(value => {
+    // Only suppress the accepted remote publication envelope. If an app
+    // subscriber writes a *different* local value in a reentrant wave, that
+    // is a genuine new edit, not a cross-tab echo, and must be persisted.
+    if (applyingRemote && Object.is(value, remoteEnvelopeValue)) return;
+    try { save(value); } catch (error) { report(error); }
+  }, { immediate: false });
+
+  const controller = {
+    get disposed() { return disposed; },
+    get revision() { return latest ? { ...latest.stamp } : null; },
+    /** Explicit retry after a quota/serialization/transport failure. */
+    save() {
+      if (disposed) throw new Error('Persistence binding is disposed');
+      if (!signal.initialized) throw new Error('Cannot persist an uninitialized Signal');
+      try { save(signal.value); } catch (error) { report(error); }
+      return controller;
+    },
+    dispose() {
+      if (disposed) return;
+      disposed = true;
+      stop();
+      if (eventAvailable) eventTarget.removeEventListener('storage', onStorage);
+      if (channel) {
+        channel.removeEventListener('message', onMessage);
+        channel.close();
+      }
+    }
+  };
+  return controller;
+}
+
+return {persist};
+})();
+// vendor/push-scope/scope.js
+__modules["vendor/push-scope/scope.js"]=(()=>{
+/**
+ * Scope — a small fluent owner for Signal state, effects, event listeners,
+ * DOM bindings, timers, and teardown.
+ *
+ * A Scope never polls. Signals PUSH updates into precise DOM operations.
+ */
+
+const { Signal, combineLatest, batch, hasValue } = __modules["vendor/push-scope/signal.js"];
+const { persist } = __modules["vendor/push-scope/persist.js"];
+function disposeOne(item) {
+  if (!item) return;
+  if (typeof item === 'function') return item();
+  if (typeof item.dispose === 'function') return item.dispose();
+  if (typeof Symbol.dispose === 'symbol' && typeof item[Symbol.dispose] === 'function') {
+    return item[Symbol.dispose]();
+  }
+}
+
+function flatten(items) { return items.flat(Infinity).filter(Boolean); }
+
+// Boolean HTML attributes differ from string-valued ARIA/data attributes.
+// In particular aria-expanded="false" must not be removed.
+const HTML_BOOLEAN_ATTRIBUTES = new Set([
+  'allowfullscreen', 'async', 'autofocus', 'autoplay', 'checked', 'controls',
+  'default', 'defer', 'disabled', 'formnovalidate', 'hidden', 'inert', 'ismap',
+  'itemscope', 'loop', 'multiple', 'muted', 'nomodule', 'novalidate', 'open',
+  'playsinline', 'readonly', 'required', 'reversed', 'selected'
+]);
+
+function isValidNumber(raw) {
+  return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(raw);
+}
+
+
+/**
+ * Fluent DOM selection and binding, not a reactive graph primitive.
+ * Captures matching elements exactly once (no live collections / rescans).
+ */
+class ScopedSelection {
+  constructor(scope, nodes) {
+    this.scope = scope;
+    this.nodes = Object.freeze([...nodes]);
+  }
+  get length() { return this.nodes.length; }
+  first() { return this.nodes[0] ?? null; }
+  each(fn) { this.nodes.forEach((node, index) => fn(node, index)); return this; }
+  #bind(method, ...args) {
+    for (const node of this.nodes) this.scope[method](node, ...args);
+    return this;
+  }
+  text(source, fallback) { return this.#bind('text', source, fallback); }
+  unsafeHTML(source, fallback) { return this.#bind('unsafeHTML', source, fallback); }
+  input(source, eventName) { return this.#bind('input', source, eventName); }
+  number(source, options) { return this.#bind('number', source, options); }
+  checked(source) { return this.#bind('checked', source); }
+  toggle(name, source, predicate) { return this.#bind('toggle', name, source, predicate); }
+  attr(name, source, transform) { return this.#bind('attr', name, source, transform); }
+  style(name, source, transform) { return this.#bind('style', name, source, transform); }
+  on(eventName, handler, options) { return this.#bind('on', eventName, handler, options); }
+}
+
+class Scope {
+  #items = [];
+  #signals = new Map();
+  #disposed = false;
+
+  /** An optional Element/Document/ShadowRoot used for selector-based binding. */
+  constructor(root = null) { this.root = root; }
+
+  get disposed() { return this.#disposed; }
+  #active() {
+    if (this.#disposed) throw new Error('This Scope has been disposed');
+  }
+
+  /** Register disposers in LIFO order; disposed scopes destroy new items at once. */
+  collect(...items) {
+    const flat = flatten(items);
+    if (this.#disposed) {
+      for (let i = flat.length - 1; i >= 0; i--) disposeOne(flat[i]);
+    } else {
+      this.#items.push(...flat);
+    }
+    return this;
+  }
+  defer(fn) { return this.collect(fn); }
+  child(root = this.root) {
+    this.#active();
+    const child = new Scope(root);
+    this.collect(child);
+    return child;
+  }
+
+  dispose() {
+    if (this.#disposed) return this;
+    this.#disposed = true;
+    this.#signals.clear();
+    const errors = [];
+    for (const item of this.#items.splice(0).reverse()) {
+      try { disposeOne(item); } catch (error) { errors.push(error); }
+    }
+    if (errors.length) throw new AggregateError(errors, 'Scope cleanup failed');
+    return this;
+  }
+
+  /** Declare a named signal exactly once. Update it with set() or update(). */
+  signal(name, value, options) {
+    this.#active();
+    if (typeof name !== 'string' || !name) throw new TypeError('Signal name must be a nonempty string');
+    if (this.#signals.has(name)) throw new Error(`Signal '${name}' already registered`);
+    const result = value instanceof Signal ? value : arguments.length >= 2
+      ? new Signal(value, options) : new Signal();
+    this.#signals.set(name, result);
+    return result;
+  }
+  hasSignal(name) { return this.#signals.has(name); }
+
+  /** Own opt-in JSON persistence and optional cross-tab synchronization. */
+  persist(source, options) {
+    this.#active();
+    this.collect(persist(this.resolve(source), options));
+    return this;
+  }
+
+  /** Read-only graph/ownership snapshot for development tooling and agents. */
+  inspect() {
+    const names = new Map();
+    for (const [name, signal] of this.#signals) names.set(signal, name);
+    const nodes = new Set([
+      ...this.#signals.values(),
+      ...this.#items.filter(item => item instanceof Signal)
+    ]);
+    // Include external inputs of owned derivations for a complete, explicit trace.
+    const todo = [...nodes];
+    for (let i = 0; i < todo.length; i++) {
+      for (const source of todo[i]._sources()) {
+        if (!nodes.has(source)) { nodes.add(source); todo.push(source); }
+      }
+    }
+    const ids = new Map();
+    let anonymous = 0;
+    for (const signal of nodes) {
+      if (names.has(signal)) { ids.set(signal, names.get(signal)); continue; }
+      let id;
+      do { id = `@${++anonymous}`; } while ([...names.values()].includes(id));
+      ids.set(signal, id);
+    }
+    return {
+      disposed: this.#disposed,
+      resources: this.#items.length,
+      signals: [...nodes].map(signal => ({
+        id: ids.get(signal),
+        initialized: signal.initialized,
+        listeners: signal.size,
+        downstream: signal._dependents().size,
+        sources: signal._sources().map(source => ids.get(source)),
+        disposed: signal.disposed === true,
+        error: signal._failure()?.error?.message ?? null
+      }))
+    };
+  }
+
+  resolve(source) {
+    this.#active();
+    if (source instanceof Signal) return source;
+    if (typeof source === 'string') {
+      const signal = this.#signals.get(source);
+      if (!signal) {
+        throw new Error(`Unknown signal '${source}'. Declare it first with scope.signal('${source}', initialValue).`);
+      }
+      return signal;
+    }
+    throw new TypeError('Expected a Signal or its registered name');
+  }
+  get(source) { return this.resolve(source).value; }
+  set(source, value) { this.resolve(source).set(value); return this; }
+  update(source, fn) { this.resolve(source).update(fn); return this; }
+  batch(fn) { batch(() => fn(this)); return this; }
+
+  /** subscribe() returns unsubscribe; watch() returns this for fluent use. */
+  subscribe(source, fn, options) {
+    this.#active();
+    const stop = this.resolve(source).subscribe(fn, options);
+    this.collect(stop);
+    return stop;
+  }
+  watch(source, fn, options) { this.subscribe(source, fn, options); return this; }
+
+  /** A derived Signal owned by this Scope, with named input support. */
+  combineLatest(...args) {
+    this.#active();
+    let options = {};
+    const last = args.at(-1);
+    if (last !== null && typeof last === 'object' && !(last instanceof Signal) &&
+        !Array.isArray(last)) options = args.pop();
+    const fn = typeof args.at(-1) === 'function' ? args.pop() : null;
+    const sources = args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
+    const resolved = sources.map(source => this.resolve(source));
+    const config = { ...options, scope: this };
+    return fn ? combineLatest(resolved, fn, config) : combineLatest(resolved, config);
+  }
+
+  /** A read-only derived Signal, accessible later by its name. */
+  computed(name, sources, fn, options = {}) {
+    this.#active();
+    if (typeof name !== 'string' || !name) throw new TypeError('Signal name must be a nonempty string');
+    if (this.#signals.has(name)) throw new Error(`Signal '${name}' already registered`);
+    if (typeof fn !== 'function') throw new TypeError('computed() requires a projection');
+    const result = this.combineLatest(sources, fn, options);
+    this.#signals.set(name, result);
+    return result;
+  }
+
+  /** Side effect with cleanup-before-rerun and cleanup-on-dispose. */
+  effect(sources, fn, options = {}) {
+    this.#active();
+    if (typeof fn !== 'function') throw new TypeError('effect() requires a function');
+    const inputs = Array.isArray(sources) ? sources : [sources];
+    // Create privately, and only transfer ownership to this Scope after the
+    // initial effect has succeeded. Failed construction cannot leak graph edges.
+    const combined = combineLatest(inputs.map(source => this.resolve(source)),
+      { ...options, scope: undefined });
+    let cleanup = null;
+    let running = false;
+    let nextValues = null;
+    const run = (values) => {
+      if (running) { nextValues = values; return; }
+      let cycles = 0;
+      let current = values;
+      while (current) {
+        if (++cycles > 10000) throw new Error('Effect feedback loop exceeded 10000 runs');
+        running = true;
+        nextValues = null;
+        try {
+          const previousCleanup = cleanup;
+          cleanup = null;
+          previousCleanup?.();
+          const result = fn(...current);
+          if (result && typeof result.then === 'function') {
+            throw new TypeError('Effect callbacks must be synchronous; use a scoped abort controller for async work');
+          }
+          cleanup = typeof result === 'function' ? result : null;
+        } finally {
+          running = false;
+        }
+        current = nextValues;
+      }
+    };
+    const stop = combined.subscribe(run, { immediate: false });
+    try {
+      if (combined.initialized) run(combined.value);
+    } catch (error) {
+      stop();
+      combined.dispose();
+      throw error;
+    }
+    // LIFO: stop notifications, run final cleanup, then detach graph edges.
+    this.collect(combined, () => cleanup?.(), stop);
+    return this;
+  }
+
+  /** DOM selectors are scoped to root; explicit nodes are also accepted. */
+  select(target) {
+    this.#active();
+    if (typeof target !== 'string') {
+      if (!target) throw new TypeError('A DOM selection target is required');
+      if (typeof target[Symbol.iterator] === 'function' &&
+          typeof target.addEventListener !== 'function') {
+        return new ScopedSelection(this, target);
+      }
+      return new ScopedSelection(this, [target]);
+    }
+    const root = this.root ?? (typeof document !== 'undefined' ? document : null);
+    if (!root?.querySelectorAll) throw new Error('Scope.select() requires a DOM query root');
+    const nodes = root.querySelectorAll(target);
+    if (!nodes.length) throw new Error(`No elements match '${target}'`);
+    return new ScopedSelection(this, nodes);
+  }
+
+  element(target) {
+    if (typeof target !== 'string') {
+      if (!target) throw new TypeError('A DOM target is required');
+      return target;
+    }
+    const root = this.root ?? (typeof document !== 'undefined' ? document : null);
+    const node = root?.querySelector?.(target);
+    if (!node) throw new Error(`No element matches '${target}'`);
+    return node;
+  }
+
+  /** Register an event listener; on('click', fn) uses this.root. */
+  on(target, eventName, handler, options) {
+    this.#active();
+    if (typeof eventName === 'function') {
+      options = handler;
+      handler = eventName;
+      eventName = target;
+      target = this.root;
+    }
+    const node = this.element(target);
+    node.addEventListener(eventName, handler, options);
+    this.collect(() => node.removeEventListener(eventName, handler, options));
+    return this;
+  }
+
+  delegate(root, eventName, selector, handler, options) {
+    this.#active();
+    const node = this.element(root);
+    return this.on(node, eventName, (event) => {
+      const origin = event.target?.closest ? event.target : event.target?.parentElement;
+      const match = origin?.closest?.(selector);
+      if (match && (match === node || node.contains(match))) handler(event, match);
+    }, options);
+  }
+
+  // Bindings target precise existing nodes without replacing surrounding markup.
+  text(target, source, fallback = '') {
+    const node = this.element(target);
+    return this.watch(source, value => {
+      const next = hasValue(value) ? String(value) : fallback;
+      if (node.textContent !== next) node.textContent = next;
+    });
+  }
+  /** Unsanitized HTML insertion; never use with untrusted data. */
+  unsafeHTML(target, source, fallback = '') {
+    const node = this.element(target);
+    // Only use with trusted markup; this API does not sanitize HTML.
+    return this.watch(source, value => {
+      const next = hasValue(value) ? String(value) : fallback;
+      if (node.innerHTML !== next) node.innerHTML = next;
+    });
+  }
+  input(target, source, eventName = 'input') {
+    const node = this.element(target);
+    const signal = this.resolve(source);
+    let composing = false;
+    this.watch(signal, value => {
+      if (composing) return;
+      const next = hasValue(value) ? String(value) : '';
+      if (node.value !== next) node.value = next;
+    });
+    this.on(node, eventName, event => {
+      if (!composing && !event?.isComposing) signal.set(node.value);
+    });
+    this.on(node, 'compositionstart', () => { composing = true; });
+    this.on(node, 'compositionend', () => { composing = false; signal.set(node.value); });
+    return this;
+  }
+  /** Two-way, numeric input binding. Empty => null; invalid text is ignored. */
+  number(target, source, options = {}) {
+    const node = this.element(target);
+    const signal = this.resolve(source);
+    if (typeof options === 'string') options = { event: options };
+    const { event = 'input', empty = null } = options;
+    let composing = false;
+    // Text the user typed that already means `value` ('007', '1e3') stays as typed.
+    const represents = (raw, value) => isValidNumber(raw) && Object.is(Number(raw), value);
+    this.watch(signal, value => {
+      if (composing || represents(String(node.value).trim(), value)) return;
+      const next = hasValue(value) ? String(value) : '';
+      if (node.value !== next) node.value = next;
+    });
+    const sync = event => {
+      if (composing || event?.isComposing) return;
+      const raw = String(node.value).trim();
+      if (!raw) { signal.set(empty); return; }
+      if (!isValidNumber(raw)) return;
+      const value = Number(raw);
+      if (Number.isFinite(value)) signal.set(value);
+    };
+    this.on(node, event, sync);
+    this.on(node, 'compositionstart', () => { composing = true; });
+    this.on(node, 'compositionend', () => { composing = false; sync(); });
+    return this;
+  }
+  checked(target, source) {
+    const node = this.element(target);
+    const signal = this.resolve(source);
+    this.watch(signal, value => { node.checked = Boolean(value); });
+    this.on(node, 'change', () => signal.set(node.checked));
+    return this;
+  }
+  /** Safely toggle ONE class without replacing Bootstrap's existing classes. */
+  toggle(target, className, source, predicate = Boolean) {
+    if (typeof className !== 'string' || !className) {
+      throw new TypeError('toggle requires one CSS class name');
+    }
+    const node = this.element(target);
+    return this.watch(source, value => node.classList.toggle(className, Boolean(predicate(value))));
+  }
+  style(target, property, source, transform = value => value) {
+    const node = this.element(target);
+    return this.watch(source, value => {
+      const next = transform(value);
+      if (!hasValue(next) || next === false) node.style.removeProperty(property);
+      else node.style.setProperty(property, String(next));
+    });
+  }
+  attr(target, attributeName, source, transform = value => value) {
+    const node = this.element(target);
+    return this.watch(source, value => {
+      const next = transform(value);
+      if (!hasValue(next)) {
+        node.removeAttribute(attributeName);
+      } else if (typeof next === 'boolean' &&
+          HTML_BOOLEAN_ATTRIBUTES.has(attributeName.toLowerCase())) {
+        if (next) node.setAttribute(attributeName, '');
+        else node.removeAttribute(attributeName);
+      } else {
+        // ARIA, data-* and enumerated attributes serialize booleans as text.
+        node.setAttribute(attributeName, String(next));
+      }
+    });
+  }
+
+  /** Render DOM Nodes only; untrusted strings never become HTML. */
+  render(target, source, fn) {
+    const host = this.element(target);
+    return this.watch(source, value => {
+      const result = fn(value);
+      if (Array.isArray(result)) host.replaceChildren(...result);
+      else if (typeof Node !== 'undefined' && result instanceof Node) host.replaceChildren(result);
+      else if (result == null) host.replaceChildren();
+      else throw new TypeError('render() requires a DOM Node, Node array, or null; use unsafeHTML() only for trusted markup');
+    });
+  }
+
+  // Custom-element attribute signals.
+  attributes(element, names = element.constructor.observedAttributes ?? []) {
+    for (const name of names) if (!this.hasSignal(name)) this.signal(name);
+    return this;
+  }
+  hydrateAttributes(element, names = element.constructor.observedAttributes ?? []) {
+    for (const name of names) {
+      if (element.hasAttribute(name)) this.set(name, element.getAttribute(name));
+      else this.set(name, null);
+    }
+    return this;
+  }
+  reflectAttribute(source, element, attributeName = source) {
+    return this.attr(element, attributeName, source);
+  }
+
+  /** Own cancellation for scoped network requests and other async tasks. */
+  abortController() {
+    this.#active();
+    const controller = new AbortController();
+    this.collect(() => controller.abort());
+    return controller;
+  }
+
+  timeout(fn, ms) {
+    this.#active();
+    const id = setTimeout(fn, ms);
+    this.collect(() => clearTimeout(id));
+    return id;
+  }
+  interval(fn, ms) {
+    this.#active();
+    const id = setInterval(fn, ms);
+    this.collect(() => clearInterval(id));
+    return id;
+  }
+  frame(fn) {
+    this.#active();
+    const id = requestAnimationFrame(fn);
+    this.collect(() => cancelAnimationFrame(id));
+    return id;
+  }
+  clearTimeout(id) { clearTimeout(id); return this; }
+  clearInterval(id) { clearInterval(id); return this; }
+}
+
+if (typeof Symbol.dispose === 'symbol') Scope.prototype[Symbol.dispose] = Scope.prototype.dispose;
+
+return {Scope};
+})();
+// vendor/push-scope/index.js
+__modules["vendor/push-scope/index.js"]=(()=>{
+/** Core exports; DOM custom elements and persistence are opt-in modules. */
+const { Signal, combineLatest, batch } = __modules["vendor/push-scope/signal.js"];
+const { Scope } = __modules["vendor/push-scope/scope.js"];
+const { persist } = __modules["vendor/push-scope/persist.js"];
+return {Signal,combineLatest,batch,Scope,persist};
+})();
+// src/events.js
+__modules["src/events.js"]=(()=>{
+/** Synchronous event hub: documented event contracts, explicit subscription lifetimes. */
+class EventHub {
+  #subscriptions = new Map();
+  on(type, listener) {
+    if (typeof listener !== 'function') throw new TypeError('Event listener must be callable');
+    const listeners = this.#subscriptions.get(type) ?? new Set();
+    listeners.add(listener); this.#subscriptions.set(type, listeners);
+    return () => { listeners.delete(listener); if (!listeners.size) this.#subscriptions.delete(type); };
+  }
+  emit(type, payload) {
+    const failures = [];
+    for (const listener of [...(this.#subscriptions.get(type) ?? [])]) {
+      try { listener(payload); } catch (error) { failures.push(error); }
+    }
+    // External observers cannot prevent command persistence or other listeners.
+    return failures;
+  }
+  clear() { this.#subscriptions.clear(); }
+}
+
+return {EventHub};
+})();
+// src/template.js
+__modules["src/template.js"]=(()=>{
+/** Braced-value substitution: data only, never eval, property paths or HTML. */
+function interpolate(template, values = {}) {
+  return String(template ?? '').replace(/{{\s*([a-zA-Z][\w-]*)\s*}}/g, (_, name) =>
+    Object.hasOwn(values, name) ? String(values[name]) : '');
+}
+function makeEnvelope({ world, room, machine, command, actor, args, timestamp }) {
+  return { kind: 'command.preview', world, room, machine, verb: command, actor,
+    args: structuredClone(args), timestamp };
+}
+function coerceField(field, raw) {
+  if (field.type === 'checkbox') return raw === true || raw === 'true' || raw === 'on';
+  const value = String(raw ?? '').trim();
+  if (field.required && !value) throw new Error(`${field.label} is required`);
+  if (field.type === 'number') {
+    if (!value && !field.required) return null;
+    const number = Number(value);
+    if (!value || !Number.isFinite(number)) throw new Error(`${field.label} must be a finite number`);
+    if (field.min !== null && number < field.min) throw new Error(`${field.label} is below ${field.min}`);
+    if (field.max !== null && number > field.max) throw new Error(`${field.label} exceeds ${field.max}`);
+    return number;
+  }
+  if (field.type === 'select' && !field.options.some(option => option.value === value)) {
+    throw new Error(`${field.label} has an invalid choice`);
+  }
+  if (value.length > (field.maxlength ?? 5000)) throw new Error(`${field.label} is too long`);
+  return value;
+}
+function validateFields(fields, input = {}) {
+  const output = Object.create(null);
+  for (const field of fields) output[field.id] = coerceField(field, input[field.id] ?? field.default);
+  return output;
+}
+function toMermaid(diagram) {
+  const ids = new Map(diagram.nodes.map((node, i) => [node.id, `n${i}`]));
+  const direction = diagram.direction === 'TB' ? 'TB' : 'LR';
+  const lines = [`flowchart ${direction}`];
+  for (const node of diagram.nodes) {
+    // Escape Mermaid grammar before sending to PELE; never include raw user Mermaid directives.
+    const label = node.name.replace(/[\\"\[\]{}()<>|`\n\r]/g, ' ').replace(/\s+/g, ' ').slice(0, 80);
+    lines.push(`  ${ids.get(node.id)}["${label}"]`);
+  }
+  for (const edge of diagram.edges) lines.push(`  ${ids.get(edge.from)} --> ${ids.get(edge.to)}`);
+  return { source: lines.join('\n'), ids };
+}
+
+return {interpolate,makeEnvelope,coerceField,validateFields,toMermaid};
+})();
+// src/model.js
+__modules["src/model.js"]=(()=>{
+const { interpolate, makeEnvelope, toMermaid, validateFields } = __modules["src/template.js"];
+const { EventHub } = __modules["src/events.js"];
+const MAX_XML = 1_500_000;
+const ID = /^[a-zA-Z][\w-]{0,63}$/;
+const children = (element, name) => [...element.children].filter(child => child.tagName === name);
+const child = (element, name) => children(element, name)[0] ?? null;
+const attr = (element, key, defaultValue = '') => element?.getAttribute(key) ?? defaultValue;
+const body = element => element?.textContent?.trim() ?? '';
+
+function ensure(ok, message) { if (!ok) throw new Error(message); }
+function checkID(value, where) { ensure(ID.test(value), `${where}: invalid identifier '${value}'`); return value; }
+function unique(items, where) {
+  const seen = new Set();
+  for (const item of items) { checkID(item.id, where); ensure(!seen.has(item.id), `${where}: duplicate id '${item.id}'`); seen.add(item.id); }
+}
+function parseLink(el) {
+  return { label: attr(el, 'label', 'Open'), room: attr(el, 'room'), machine: attr(el, 'machine'),
+    node: attr(el, 'node'), command: attr(el, 'command'), help: attr(el, 'help') };
+}
+function parseField(el) {
+  const type = attr(el, 'type', 'text');
+  ensure(['text', 'textarea', 'select', 'number', 'checkbox'].includes(type), `Unknown field type ${type}`);
+  const options = children(el, 'option').map(option => ({value: attr(option, 'value'), label: attr(option, 'label', attr(option, 'value'))}));
+  if (type === 'select') ensure(options.length, `Select field ${attr(el,'id')} requires options`);
+  const bound = key => el.hasAttribute(key) ? Number(attr(el, key)) : null;
+  const min = bound('min'), max = bound('max'), maxlength = bound('maxlength');
+  ensure([min, max, maxlength].every(value => value === null || Number.isFinite(value)), 'Invalid field limit');
+  return { id: attr(el, 'id'), label: attr(el, 'label', attr(el, 'id')), type,
+    required: attr(el, 'required') === 'true', default: attr(el, 'default', type === 'select' ? options[0]?.value : type === 'checkbox' ? 'false' : ''),
+    options, min, max, maxlength };
+}
+function parseCommand(el) {
+  const output = attr(el, 'output', 'json');
+  ensure(['json', 'text'].includes(output), `Unknown output type ${output}`);
+  const fields = children(el, 'field').map(parseField);
+  unique(fields, `command ${attr(el, 'id')} fields`);
+  const writes = children(el, 'write').map(write => ({ key: attr(write, 'key'), value: attr(write, 'value'), target: attr(write, 'target') }));
+  ensure(writes.every(write => write.key && !write.key.startsWith('__')), 'Invalid write key');
+  return { id: attr(el, 'id'), name: attr(el, 'name', attr(el, 'id')), output, template: attr(el, 'template'), event: attr(el, 'event'),
+    help: body(child(el, 'help')), fields, writes };
+}
+function parseMachine(el, roomID) {
+  const diagram = child(el, 'diagram');
+  ensure(diagram !== null, `Machine ${attr(el, 'id')} requires a diagram`);
+  const nodes = children(diagram, 'node').map(node => ({
+    id: attr(node, 'id'), name: attr(node, 'name', attr(node, 'id')),
+    status: attr(node, 'status'), command: attr(node, 'command'),
+    info: body(child(node, 'info')), links: children(node, 'link').map(parseLink)
+  }));
+  unique(nodes, `machine ${roomID}/${attr(el, 'id')} nodes`);
+  ensure(nodes.length > 0 && nodes.length <= 160, 'Diagrams must contain 1–160 nodes');
+  const edges = children(diagram, 'edge').map(edge => ({ from: attr(edge, 'from'), to: attr(edge, 'to') }));
+  ensure(edges.length <= 400, 'Too many edges');
+  for (const edge of edges) ensure(nodes.some(n => n.id === edge.from) && nodes.some(n => n.id === edge.to), `Unknown edge ${edge.from} → ${edge.to}`);
+  const commands = children(el, 'command').map(parseCommand);
+  unique(commands, `machine ${attr(el, 'id')} commands`);
+  const states = children(el, 'state').map(state => ({key: attr(state, 'key'), value: attr(state, 'value')}));
+  ensure(new Set(states.map(s => s.key)).size === states.length, 'Duplicate machine state key');
+  const listeners = children(el, 'listen').map(event => ({event: attr(event, 'event'), key: attr(event, 'key'), value: attr(event, 'value')}));
+  for (const node of nodes) {
+    if (node.command) ensure(commands.some(c => c.id === node.command), `Node ${node.id} references missing command ${node.command}`);
+  }
+  return {id: attr(el, 'id'), name: attr(el, 'name', attr(el, 'id')), type: attr(el, 'type', 'diagram'),
+    room: roomID, icon: attr(el, 'icon'), tag: attr(el, 'tag'), summary: body(child(el, 'summary')),
+    diagram: {direction: attr(diagram, 'direction', 'LR'), nodes, edges}, commands, states, listeners, element: el};
+}
+
+/** Portable XML document and validated in-memory projections. Only state/history are mutated by commands. */
+class World {
+  constructor(xml) {
+    ensure(typeof xml === 'string' && xml.length <= MAX_XML, `XML must be shorter than ${MAX_XML} bytes`);
+    ensure(!/<!DOCTYPE\b|<!ENTITY\b/i.test(xml), 'DTD/entity declarations are not supported');
+    const doc = new DOMParser().parseFromString(xml, 'application/xml');
+    ensure(!doc.querySelector('parsererror'), 'XML syntax error: ' + (doc.querySelector('parsererror')?.textContent ?? '').slice(0, 230));
+    ensure(doc.documentElement?.tagName === 'world', 'Root must be <world>');
+    ensure(attr(doc.documentElement, 'version') === '1', 'Unsupported XML world version');
+    this.doc = doc;
+    this.events = new EventHub();
+    this.id = checkID(attr(doc.documentElement, 'id'), 'world');
+    this.name = attr(doc.documentElement, 'name', this.id);
+    this.start = attr(doc.documentElement, 'start');
+    this.rooms = children(doc.documentElement, 'room').map(room => {
+      const id = attr(room, 'id');
+      const machines = children(room, 'machine').map(machine => parseMachine(machine, id));
+      unique(machines, `room ${id} machines`);
+      const doors = children(room, 'door').map(door => ({id: attr(door, 'id'), name: attr(door, 'name', attr(door, 'id')),
+        to: attr(door, 'to'), description: attr(door, 'description')}));
+      unique(doors, `room ${id} doors`);
+      return {id, name: attr(room, 'name', id), subtitle: attr(room, 'subtitle'), description: body(child(room, 'description')),
+        machines, doors};
+    });
+    unique(this.rooms, 'rooms');
+    ensure(this.rooms.length > 0 && this.rooms.length <= 50, 'World must contain 1–50 rooms');
+    ensure(this.room(this.start), `Start room '${this.start}' is missing`);
+    this.validateLinks();
+  }
+  room(id) { return this.rooms.find(room => room.id === id); }
+  machine(room, id) { return this.room(room)?.machines.find(machine => machine.id === id); }
+  node(room, machine, id) { return this.machine(room, machine)?.diagram.nodes.find(node => node.id === id); }
+  command(room, machine, id) { return this.machine(room, machine)?.commands.find(command => command.id === id); }
+  validateLinks() {
+    for (const room of this.rooms) {
+      for (const door of room.doors) ensure(this.room(door.to), `Door ${door.id} leads to unknown room '${door.to}'`);
+      for (const machine of room.machines) {
+        for (const command of machine.commands) for (const write of command.writes) {
+          ensure(!write.target || this.machine(room.id, write.target), `Unknown write target '${write.target}'`);
+        }
+        for (const node of machine.diagram.nodes) for (const link of node.links) {
+          const targetRoom = link.room || room.id;
+          const targetMachine = link.machine || machine.id;
+          ensure(this.room(targetRoom), `Broken link: room '${targetRoom}'`);
+          if (link.machine || link.node || link.command || link.help) ensure(this.machine(targetRoom, targetMachine), `Broken link: machine '${targetMachine}'`);
+          if (link.node) ensure(this.node(targetRoom, targetMachine, link.node), `Broken link: node '${link.node}'`);
+          if (link.command || link.help) ensure(this.command(targetRoom, targetMachine, link.command || link.help), 'Broken link: command');
+        }
+      }
+    }
+  }
+  state(room, machine) { return Object.fromEntries(this.machine(room, machine)?.states.map(({key, value}) => [key,value]) ?? []); }
+  setState(roomID, machineID, key, value) {
+    ensure(/^[\w.-]{1,80}$/.test(key), `Invalid state key: ${key}`);
+    const machine = this.machine(roomID, machineID);
+    ensure(machine, `Unknown machine ${roomID}/${machineID}`);
+    let state = machine.states.find(item => item.key === key);
+    if (!state) {
+      state = {key, value: String(value)};
+      machine.states.push(state);
+      const el = this.doc.createElement('state');
+      el.setAttribute('key', key);
+      el.setAttribute('value', String(value));
+      machine.element.append(el);
+    } else {
+      state.value = String(value);
+      const el = children(machine.element, 'state').find(element => attr(element, 'key') === key);
+      el.setAttribute('value', state.value);
+    }
+  }
+  history() {
+    const history = child(this.doc.documentElement, 'history');
+    return history ? children(history, 'event').map(el => ({
+      time: attr(el, 'time'), actor: attr(el, 'actor'), room: attr(el, 'room'), machine: attr(el, 'machine'),
+      command: attr(el, 'command'), output: body(el)
+    })) : [];
+  }
+  appendHistory(data, result) {
+    let history = child(this.doc.documentElement, 'history');
+    if (!history) { history = this.doc.createElement('history'); this.doc.documentElement.append(history); }
+    const item = this.doc.createElement('event');
+    for (const key of ['time','actor','room','machine','command']) item.setAttribute(key, String(data[key] ?? ''));
+    item.textContent = String(result).slice(0, 12000);
+    history.append(item);
+    // Keep XML documents bounded; the latest 150 events remain exportable.
+    while (children(history,'event').length > 150) history.removeChild(history.firstElementChild);
+  }
+  /** Execute a browser-only command; external execution is intentionally NEVER implied. */
+  invoke({room, machine, command, args, actor = 'local', timestamp = new Date().toISOString()}) {
+    const definition = this.command(room, machine, command);
+    ensure(definition, `Unknown verb '${command}'`);
+    const values = validateFields(definition.fields, args);
+    const envelope = makeEnvelope({world: this.id, room, machine, command, actor, args: values, timestamp});
+    const result = definition.output === 'text'
+      ? interpolate(definition.template, values).replace(/\\n/g, '\n')
+      : JSON.stringify(envelope, null, 2);
+    // Validate target references before mutating the XML document.
+    const writes = definition.writes.map(write => ({room, machine: write.target || machine, key: write.key, value: interpolate(write.value, values)}));
+    if (definition.event) {
+      for (const destRoom of this.rooms) for (const destMachine of destRoom.machines) {
+        for (const listener of destMachine.listeners) if (listener.event === definition.event) {
+          writes.push({room: destRoom.id, machine: destMachine.id, key: listener.key, value: interpolate(listener.value, values)});
+        }
+      }
+    }
+    for (const write of writes) ensure(/^[\w.-]{1,80}$/.test(write.key), 'Invalid destination state key');
+    for (const write of writes) this.setState(write.room, write.machine, write.key, write.value);
+    this.appendHistory({time:timestamp, actor, room, machine, command}, result);
+    this.events.emit('command', envelope);
+    if (definition.event) this.events.emit(definition.event, {envelope, args:values, writes});
+    for (const write of writes) this.events.emit('state.changed', write);
+    return {envelope, result, writes, event:definition.event};
+  }
+  xml() { return new XMLSerializer().serializeToString(this.doc); }
+  mermaid(room, machine) { return toMermaid(this.machine(room, machine).diagram); }
+}
+
+return {World};
+})();
+// src/store.js
+__modules["src/store.js"]=(()=>{
+/** Best-effort cross-tab XML exchange. This is NOT a distributed transaction protocol. */
+class DocumentStore {
+  constructor(key = 'system-rooms:document:v1', storage = globalThis.localStorage) {
+    this.key = key; this.storage = storage; this.version = null;
+  }
+  read() {
+    const raw = this.storage.getItem(this.key);
+    if (!raw) { this.version = null; return null; }
+    const record = JSON.parse(raw);
+    if (record.format !== 'system-rooms/xml' || typeof record.xml !== 'string' || typeof record.version !== 'string') {
+      throw new Error('Saved document record has an invalid format');
+    }
+    this.version = record.version;
+    return record;
+  }
+  save(xml, {force = false} = {}) {
+    if (typeof xml !== 'string') throw new TypeError('Document must be XML text');
+    const current = this.storage.getItem(this.key);
+    if (!force && current && JSON.parse(current).version !== this.version) {
+      throw new Error('A different tab saved a newer world. Export your copy or reload before editing.');
+    }
+    if (!force && !current && this.version !== null) throw new Error('Saved world was removed in another tab');
+    const record = {format:'system-rooms/xml', version: crypto.randomUUID(), xml};
+    this.storage.setItem(this.key, JSON.stringify(record));
+    this.version = record.version;
+    return record;
+  }
+  clear() { this.storage.removeItem(this.key); this.version = null; }
+}
+
+/** Short-lived, tab-scoped presence over BroadcastChannel. Real peers only: no invented agents. */
+class Presence {
+  constructor({world, name, onChange, onState}) {
+    this.world = world; this.onChange = onChange; this.onState = onState;
+    this.id = crypto.randomUUID();
+    this.name = name; this.room = ''; this.machine = ''; this.node = '';
+    this.peers = new Map(); this.remote = new Map();
+    this.channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel(`system-rooms:${world}`) : null;
+    if (this.channel) this.channel.onmessage = event => this.receive(event.data);
+    this.heartbeat = setInterval(() => { this.broadcast(); this.expire(); }, 2500);
+    this.broadcast();
+  }
+  setLocation(room, machine = '', node = '') {
+    this.room = room; this.machine = machine; this.node = node;
+    this.broadcast(); this.onChange?.();
+  }
+  setName(name) { this.name = name.slice(0, 40); this.broadcast(); this.onChange?.(); }
+  broadcast() {
+    this.channel?.postMessage({type:'presence', world:this.world, id:this.id, name:this.name,
+      room:this.room, machine:this.machine, node:this.node, status:'online', time:Date.now(), source:'tab'});
+  }
+  publishState(xml, version) {
+    this.channel?.postMessage({type:'document', world:this.world, id:this.id, version, time:Date.now()});
+  }
+  receive(data) {
+    if (!data || data.world !== this.world || data.id === this.id) return;
+    if (data.type === 'document') { this.onState?.(data); return; }
+    if (data.type !== 'presence') return;
+    if (data.status === 'offline') this.peers.delete(data.id);
+    else if (typeof data.name === 'string' && typeof data.room === 'string' && typeof data.id === 'string') {
+      const fresh = !this.peers.has(data.id);
+      this.peers.set(data.id, {...data, time:Date.now()});
+      if (fresh) this.broadcast(); // reply once to a newly discovered tab
+    }
+    this.onChange?.();
+  }
+  expire() {
+    const now = Date.now(); let changed = false;
+    for (const [key, value] of this.peers) if (now - value.time > 8000) {this.peers.delete(key); changed=true;}
+    for (const [key, value] of this.remote) if (now - value.time > 15000) {this.remote.delete(key); changed=true;}
+    if (changed) this.onChange?.();
+  }
+  setRemote(data) {
+    if (!data || typeof data.id !== 'string' || typeof data.name !== 'string' || typeof data.room !== 'string') return;
+    const item = {...data, source:'remote', time:Date.now()};
+    if (data.status === 'offline') this.remote.delete(data.id);
+    else this.remote.set(data.id, item);
+    this.onChange?.();
+  }
+  get all() { return [
+    {id:this.id, name:this.name, room:this.room, machine:this.machine, node:this.node, source:'local', status:'online'},
+    ...this.peers.values(), ...this.remote.values()]; }
+  close() {
+    clearInterval(this.heartbeat);
+    this.channel?.postMessage({type:'presence', world:this.world, id:this.id, status:'offline'});
+    this.channel?.close();
+  }
+}
+
+/** Explicit remote read/optional-command adapter; the XML never contains a live socket credential. */
+class RemoteBridge {
+  constructor({onMessage, onStatus}) { this.onMessage = onMessage; this.onStatus = onStatus; this.connection = null; this.kind = ''; }
+  connect(url, kind) {
+    this.disconnect();
+    const target = new URL(url, location.href);
+    if (kind === 'sse') {
+      if (!['https:', 'http:'].includes(target.protocol)) throw new Error('SSE requires an HTTP(S) URL');
+      this.connection = new EventSource(target.href);
+      this.connection.onmessage = event => this.process(event.data);
+      this.connection.onerror = () => this.onStatus?.('SSE connection interrupted');
+      this.connection.onopen = () => this.onStatus?.('SSE connected');
+    } else if (kind === 'ws') {
+      if (!['wss:', 'ws:'].includes(target.protocol)) throw new Error('WebSocket requires a WS(S) URL');
+      this.connection = new WebSocket(target.href);
+      this.connection.onmessage = event => this.process(event.data);
+      this.connection.onerror = () => this.onStatus?.('WebSocket error');
+      this.connection.onclose = () => this.onStatus?.('WebSocket disconnected');
+      this.connection.onopen = () => this.onStatus?.('WebSocket connected');
+    } else throw new Error('Unknown connection type');
+    this.kind = kind;
+  }
+  process(text) {
+    try { const value = JSON.parse(text); this.onMessage?.(value); }
+    catch (error) { this.onStatus?.(`Remote message rejected: ${error.message}`); }
+  }
+  send(object) {
+    if (this.kind !== 'ws' || this.connection?.readyState !== WebSocket.OPEN) return false;
+    this.connection.send(JSON.stringify(object)); return true;
+  }
+  disconnect() { this.connection?.close(); this.connection = null; this.kind = ''; }
+}
+
+return {DocumentStore,Presence,RemoteBridge};
+})();
+// src/storage-fallback.js
+__modules["src/storage-fallback.js"]=(()=>{
+const memory = new Map();
+const fallback = {
+  getItem:key=>memory.get(key)??null,
+  setItem:(key,value)=>memory.set(String(key),String(value)),
+  removeItem:key=>memory.delete(String(key))
+};
+/** file:// browsers may disable localStorage. Never lose import/export access. */
+function availableStorage() {
+  try {
+    const store=globalThis.localStorage;
+    const probe='system-rooms:availability-probe';
+    store.setItem(probe,'1');store.removeItem(probe);
+    return {storage:store,persistent:true};
+  } catch { return {storage:fallback,persistent:false}; }
+}
+
+return {availableStorage};
+})();
+// src/diagram.js
+__modules["src/diagram.js"]=(()=>{
+const { toMermaid } = __modules["src/template.js"];
+const SVG_TAGS = new Set(['svg','g','path','rect','circle','ellipse','polygon','polyline','line','text','tspan',
+  'defs','marker','linearGradient','radialGradient','stop','title','desc','clipPath','mask','pattern','use']);
+const SVG_ATTRS = new Set(['id','class','d','x','y','x1','x2','y1','y2','cx','cy','r','rx','ry','width','height',
+  'viewBox','preserveAspectRatio','transform','fill','stroke','stroke-width','stroke-dasharray','stroke-linecap','stroke-linejoin',
+  'opacity','fill-opacity','stroke-opacity','font-size','font-weight','font-family','font-style','text-anchor','dominant-baseline',
+  'stroke-dashoffset','stroke-miterlimit','vector-effect','paint-order',
+  'points','marker-end','marker-start','marker-mid','markerWidth','markerHeight','refX','refY','orient',
+  'gradientUnits','gradientTransform','offset','stop-color','stop-opacity','clip-path','mask','role','tabindex',
+  'aria-label','aria-labelledby','aria-describedby','focusable','xmlns','version']);
+
+/** Pele's compact --_s/--_b variables are local *aliases*, not misspelled --pele-* tokens.
+ * Its SVG uses inline style declarations to define them and to style edges. Do not
+ * remove every style attribute: doing so makes node fills and connector lines vanish.
+ * Keep only color/text/stroke presentation properties and local Pele CSS variables;
+ * reject CSS capable of loading external content or introducing another declaration. */
+const SVG_STYLE_PROPERTIES = new Set([
+  'fill','stroke','color','opacity','fill-opacity','stroke-opacity',
+  'stroke-width','stroke-dasharray','stroke-dashoffset','stroke-linecap',
+  'stroke-linejoin','stroke-miterlimit','paint-order',
+  'font-family','font-size','font-style','font-weight','letter-spacing',
+  'text-anchor','dominant-baseline','visibility'
+]);
+const SAFE_CSS_VALUE = /^[a-zA-Z0-9_#%.,()+\/\-\s]*$/;
+function sanitizePeleInlineStyle(value) {
+  if (typeof value !== 'string' || value.length > 8192) return '';
+  const declarations = [];
+  for (const part of value.split(';')) {
+    const colon = part.indexOf(':');
+    if (colon < 0) continue;
+    const property = part.slice(0, colon).trim();
+    const color = part.slice(colon + 1).trim();
+    const allowed = SVG_STYLE_PROPERTIES.has(property) || /^--(?:_[\w-]+|pele-[\w-]+)$/.test(property);
+    if (!allowed || !color || !SAFE_CSS_VALUE.test(color)) continue;
+    if (/url\s*\(/i.test(color) && !/^url\s*\(\s*#[a-zA-Z0-9_-]+\s*\)$/i.test(color)) continue;
+    declarations.push(`${property}:${color}`);
+  }
+  return declarations.join(';');
+}
+
+/** Defense-in-depth SVG sanitizer for PELE's own render output. XML does not directly provide SVG. */
+function sanitizeSVG(svg) {
+  const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
+  if (doc.querySelector('parsererror') || doc.documentElement?.localName !== 'svg') throw new Error('Invalid SVG from diagram renderer');
+  const all = [doc.documentElement, ...doc.documentElement.querySelectorAll('*')];
+  for (const element of all.reverse()) {
+    if (!SVG_TAGS.has(element.localName)) { element.remove(); continue; }
+    for (const attribute of [...element.attributes]) {
+      const name = attribute.name;
+      const value = attribute.value;
+      if (name === 'style') {
+        const safeStyle = sanitizePeleInlineStyle(value);
+        if (safeStyle) element.setAttribute('style', safeStyle);
+        else element.removeAttribute('style');
+        continue;
+      }
+      if (!(SVG_ATTRS.has(name) || name.startsWith('data-') || name.startsWith('aria-')) ||
+          /url\s*\(/i.test(value) && !/^url\s*\(\s*['"]?#[\w-]+['"]?\s*\)$/i.test(value) ||
+          (name === 'href' && !value.startsWith('#'))) {
+        element.removeAttribute(name);
+      }
+    }
+  }
+  return document.importNode(doc.documentElement, true);
+}
+
+function mountDiagram(container, diagram, {onSelect, onError}) {
+  let mounted = null;
+  const {source, ids} = toMermaid(diagram);
+  const reverse = new Map([...ids].map(([name,id]) => [id,name]));
+  const clickHandler = event => {
+    let target = event.target;
+    while (target && target !== container) {
+      const identifiers = [target.getAttribute?.('data-id'), target.id, target.getAttribute?.('data-node')];
+      for (const candidate of identifiers) {
+        if (!candidate) continue;
+        const match = [...reverse.entries()].find(([rendered]) => candidate === rendered || candidate.endsWith(`-${rendered}`) || candidate.endsWith(`_${rendered}`));
+        if (match) {onSelect(match[1]); return;}
+      }
+      target = target.parentElement;
+    }
+    // A click anywhere in unoccupied diagram space dismisses the node inspector.
+    onSelect(null);
+  };
+  container.addEventListener('click', clickHandler);
+  const keyHandler = event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      const id = event.target?.getAttribute?.('data-id');
+      if (id && reverse.has(id)) {event.preventDefault(); onSelect(reverse.get(id));}
+    }
+  };
+  container.addEventListener('keydown', keyHandler);
+  const pele = globalThis.pele;
+  if (pele?.mount) {
+    try {
+      mounted = pele.mount(container, source, {
+        links:false, images:false, icons:()=>null, autoDirection:false, zoom:false,
+        sanitize:sanitizeSVG,
+        onRender:()=> {
+          // PELE supplies data-id for selectable flowchart nodes in supported versions.
+          // Inspect programmatically rather than trusting labels as selectors.
+          queueMicrotask(() => {
+            for (const element of container.querySelectorAll('[data-id]')) {
+              if (reverse.has(element.getAttribute('data-id'))) {
+                element.setAttribute('tabindex','0'); element.setAttribute('role','button');
+                element.setAttribute('aria-label', `Inspect ${diagram.nodes.find(n=>ids.get(n.id)===element.getAttribute('data-id'))?.name}`);
+                element.classList.add('diagram-hit');
+              }
+            }
+          });
+        },
+        onError: error => onError?.(String(error))
+      });
+      container.dataset.renderer = 'pele';
+    } catch (error) { onError?.(error.message); }
+  }
+  if (!mounted) {
+    container.dataset.renderer = 'accessible';
+    const wrapper = document.createElement('div'); wrapper.className = 'diagram-fallback';
+    const nodes = document.createElement('div'); nodes.className = 'fallback-nodes';
+    for (const node of diagram.nodes) {
+      const button = document.createElement('button'); button.type='button'; button.className='btn btn-outline-secondary btn-sm';
+      button.textContent = node.name; button.addEventListener('click', event=>{event.stopPropagation(); onSelect(node.id);});
+      nodes.append(button);
+    }
+    const edges = document.createElement('p'); edges.className='small text-body-secondary mt-3 mb-0';
+    edges.textContent = diagram.edges.map(e=>`${e.from} → ${e.to}`).join(' · ');
+    wrapper.append(nodes, edges); container.append(wrapper);
+  }
+  return () => {mounted?.destroy(); container.removeEventListener('click',clickHandler); container.removeEventListener('keydown', keyHandler);};
+}
+
+return {sanitizePeleInlineStyle,sanitizeSVG,mountDiagram};
+})();
+// src/app.js
+__modules["src/app.js"]=(()=>{
+const { Scope } = __modules["vendor/push-scope/index.js"];
+const { World } = __modules["src/model.js"];
+const { DocumentStore, Presence, RemoteBridge } = __modules["src/store.js"];
+const { mountDiagram } = __modules["src/diagram.js"];
+const { availableStorage } = __modules["src/storage-fallback.js"];
+const $ = (selector, base = document) => base.querySelector(selector);
+const $$ = (selector, base = document) => [...base.querySelectorAll(selector)];
+const text = (value) => document.createTextNode(String(value ?? ''));
+const make = (tag, attributes = {}, ...children) => {
+  const element = document.createElement(tag);
+  for (const [key, value] of Object.entries(attributes)) {
+    if (value == null || value === false) continue;
+    if (key === 'class') element.className = value;
+    else if (key === 'text') element.textContent = String(value);
+    else if (key === 'title') element.title = String(value);
+    else if (key === 'dataset') Object.assign(element.dataset, value);
+    else if (key === 'onClick') element.addEventListener('click', value);
+    else if (key === 'onChange') element.addEventListener('change', value);
+    else if (key === 'onInput') element.addEventListener('input', value);
+    else if (key === 'onSubmit') element.addEventListener('submit', value);
+    else if (key === 'value') element.value = String(value);
+    else if (key === 'checked') element.checked = !!value;
+    else if (key === 'required') element.required = !!value;
+    else if (key === 'disabled') element.disabled = !!value;
+    else element.setAttribute(key, String(value));
+  }
+  for (const child of children.flat(Infinity)) {
+    if (child == null || child === false) continue;
+    element.append(child instanceof Node ? child : text(child));
+  }
+  return element;
+};
+const icon = (name) => make('i', {class:`bi bi-${name}`, 'aria-hidden':'true'});
+const button = (label, handler, kind = 'btn-outline-secondary', attrs = {}) =>
+  make('button', {type:'button',class:`btn btn-sm ${kind}`,...attrs,onClick:handler}, label);
+const heading = (eyebrow, title, close) => make('div',{class:'card-header'},
+  make('div',{},make('div',{class:'eyebrow'},eyebrow),make('h3',{},title)),
+  close ? button(icon('x-lg'),close,'btn-outline-secondary',{'aria-label':'Close pane',title:'Close this pane'}) : null);
+const initials = (name) => name.trim().split(/\s+/).slice(0,2).map(s=>s[0]?.toUpperCase()).join('') || '?';
+
+// Exclude mutable machine state and event history when deciding whether a peer
+// update requires rebuilding the workbench. Forms remain mounted for state changes.
+function structuralSignature(world) {
+  return JSON.stringify(world.rooms.map(room=>({id:room.id,name:room.name,subtitle:room.subtitle,
+    description:room.description,doors:room.doors,machines:room.machines.map(machine=>({
+      id:machine.id,name:machine.name,tag:machine.tag,icon:machine.icon,summary:machine.summary,
+      diagram:machine.diagram,commands:machine.commands,listeners:machine.listeners
+    }))})));
+}
+
+class Workbench {
+  constructor(sample) {
+    this.sample = sample;
+    const persistence=availableStorage();
+    this.store = new DocumentStore('system-rooms:document:v1',persistence.storage);
+    this.persistent=persistence.persistent;
+    this.bridge = new RemoteBridge({onMessage:value=>this.remoteMessage(value),onStatus:status=>this.transportStatus(status)});
+    this.ui = new Scope(document);
+    this.ui.signal('room','');
+    this.ui.signal('save','Local document ready');
+    this.ui.signal('rendering','PELE loading…');
+    this.ui.signal('event','No actions yet');
+    this.ui.signal('peers','1');
+    this.ui.text('#current-room-title','room');
+    this.ui.text('#save-status','save');
+    this.ui.text('#renderer-status','rendering');
+    this.ui.text('#event-status','event');
+    this.ui.text('#peer-count','peers');
+    this.machineViews = new Map(); this.active = new Map(); this.mounts = [];
+    this.alertTimeout = null; this.presence = null;
+    try { this.actorName = localStorage.getItem('system-rooms:actor-name') || 'You'; }
+    catch { this.actorName = 'You'; }
+    this.ui.on('#brand-home','click',event=>{event.preventDefault();this.navigate(this.world.start);});
+    this.ui.on('#import-world','click',()=>$('#upload-xml').click());
+    this.ui.on('#upload-xml','change',event=>this.importFile(event.target.files?.[0]));
+    this.ui.on('#export-world','click',()=>this.exportXML());
+    this.ui.on('#edit-source','click',()=>this.openSource());
+    this.ui.on('#apply-source','click',()=>this.applySource());
+    this.ui.on('#reset-demo','click',()=>this.resetDemo());
+    this.ui.on('#quick-machine','change',()=>this.populateVerbs());
+    this.ui.on('#room-jump','change',event=>this.navigate(event.target.value));
+    this.ui.on('#quick-open','click',()=>this.quickOpen());
+    this.ui.on('#connection-settings','click',()=>this.openConnections());
+    this.ui.on('#save-name','click',()=>this.changeName());
+    this.ui.on('#connect-remote','click',()=>this.connectRemote());
+    this.ui.on('#disconnect-remote','click',()=>{this.bridge.disconnect();this.transportStatus('Disconnected');});
+    this.ui.on('#stage','scroll',()=>this.schedulePresence());
+    this.ui.on('#stage','keydown',event=>{
+      if (event.key === 'Escape') {this.clearFocus(); event.preventDefault();}
+      if (event.key === 'ArrowRight' && event.altKey) {this.nextRoom(1);event.preventDefault();}
+      if (event.key === 'ArrowLeft' && event.altKey) {this.nextRoom(-1);event.preventDefault();}
+    });
+    this.ui.on(window,'resize',()=>this.schedulePresence());
+    this.ui.on(window,'storage',event=>{
+      if (event.key === this.store.key && event.newValue) this.acceptShared(event.newValue);
+    });
+    this.ui.on(window,'pagehide',()=>this.presence?.close());
+    this.ui.on(window,'keydown',event=>{
+      if (event.key === 'Escape' && !document.querySelector('dialog[open]')) this.clearFocus();
+    });
+    try {
+      const saved = this.store.read();
+      this.loadWorld(saved?.xml ?? this.sample, {save:!saved, room:null});
+      if (saved) this.setSave('Restored from this browser');
+    } catch (error) {
+      this.setSave('Saved world could not load', 'error');
+      this.loadWorld(this.sample, {save:false,room:null});
+      this.notice(`Cannot read saved XML: ${error.message}. Export or edit before replacing it.`,true);
+    }
+  }
+  setSave(message, status = 'good') {
+    this.ui.set('save',message);
+    $('#save-indicator').className = `save-dot ${status==='good'?'':status==='error'?'error':'warn'}`;
+  }
+  notice(message, isError = false) {
+    const line=$('#alerts');line.textContent=message;line.hidden=false;
+    line.classList.toggle('error',isError);
+    clearTimeout(this.alertTimeout);
+    this.alertTimeout=setTimeout(()=>{line.hidden=true;},7000);
+  }
+  loadWorld(source,{save = false, room = null, force = false} = {}) {
+    // Validate first. A broken import cannot replace the current world or its persisted copy.
+    const next = new World(source);
+    if (save) this.store.save(next.xml(), {force});
+    const oldWorld = this.world?.id;
+    this.presence?.close();
+    this.world=next;this.active.clear();
+    this.presence=new Presence({world:next.id,name:this.actorName,
+      onChange:()=>this.schedulePresence(),onState:()=>this.tryShared()});
+    this.renderTree();
+    $('#room-jump').replaceChildren(...next.rooms.map(r=>make('option',{value:r.id},r.name)));
+    this.navigate(next.room(room)?room:next.start);
+    $('#world-name').textContent=next.name;
+    $('#world-stats').textContent=`${next.rooms.length} rooms · ${next.rooms.reduce((n,r)=>n+r.machines.length,0)} machines`;
+    if (!this.persistent) this.setSave('Memory only — Export XML to preserve changes', 'warn');
+    if (oldWorld && oldWorld!==next.id) this.notice('Loaded a new world; peers will appear for its unique ID.');
+  }
+  persist() {
+    try { const record=this.store.save(this.world.xml());
+      this.presence.publishState(record.xml,record.version);
+      this.setSave(this.persistent?`Saved locally · ${new Date().toLocaleTimeString()}`:'Memory only — export XML to save','good');
+      return true;
+    } catch(error) {this.setSave('Save conflict — export your XML', 'error');this.notice(error.message,true);return false;}
+  }
+  tryShared() {
+    const value=localStorage.getItem(this.store.key);
+    if (value) this.acceptShared(value);
+  }
+  acceptShared(raw) {
+    try {
+      const record=JSON.parse(raw);
+      if(record.version===this.store.version)return;
+      if(record.format!=='system-rooms/xml')return;
+      const target=new World(record.xml);
+      const room=target.room(this.roomID)?this.roomID:target.start;
+      this.store.version=record.version;
+      // A state-only sync changes the underlying XML and visible state chips, but NEVER
+      // dismisses another tab's inspector or destroys its partially completed form.
+      if(this.world && structuralSignature(target)===structuralSignature(this.world)) {
+        this.world=target;
+        for(const [id,view] of this.machineViews) {
+          view.machine=target.machine(this.roomID,id);
+          this.updateMachineState(id);
+          this.refreshInfoStates(id);
+        }
+      } else this.loadWorld(record.xml,{room,save:false});
+      this.setSave('Synchronized XML from another tab');
+    }catch(error){this.notice(`Other tab update rejected: ${error.message}`,true);}
+  }
+  refreshInfoStates(machineID) {
+    const view=this.machineViews.get(machineID);
+    if(!view)return;
+    for(const inspector of $$('[data-state-inspector]',view.panes)) {
+      inspector.replaceChildren(make('strong',{},'Shared machine state'),
+        ...this.world.machine(this.roomID,machineID).states.map(s=>make('div',{class:'small text-body-secondary'},`${s.key}: ${s.value}`)));
+    }
+  }
+  renderTree() {
+    const nav=$('#room-tree');nav.replaceChildren();
+    const ul=make('ul');const visited=new Set();
+    const render=(id,parent)=>{
+      const room=this.world.room(id);if(!room)return;
+      const cycle=visited.has(id);if(!cycle)visited.add(id);
+      const row=make('div',{class:'tree-row'},
+        make('span',{class:'tree-chevron'},cycle?'»':icon('chevron-right')),
+        button(room.name,()=>this.navigate(id),'tree-button',{'data-room':id,'aria-label':`Open ${room.name}`})
+      );
+      const li=make('li',{class:'tree-item'},row);
+      if(cycle)row.append(make('span',{class:'tree-cycle',title:'Circular room link'}));
+      parent.append(li);
+      if(!cycle && room.doors.length){
+        const sub=make('ul');li.append(sub);
+        for(const door of room.doors)render(door.to,sub);
+      }
+    };
+    render(this.world.start,ul);
+    for(const room of this.world.rooms)if(!visited.has(room.id))render(room.id,ul);
+    nav.append(ul);
+  }
+  navigate(roomID,{machine='',node=''}={}) {
+    const room=this.world.room(roomID);if(!room){this.notice(`Unknown room ${roomID}`,true);return;}
+    this.roomID=roomID;
+    $('#room-jump').value=roomID;
+    this.active.clear();
+    this.ui.set('room',room.name);
+    $('#room-path').textContent=`${this.world.name.toUpperCase()} / ${room.name.toUpperCase()}`;
+    $('#room-subtitle').textContent=room.subtitle||'Explore the systems';
+    for(const element of $$('.tree-button'))element.classList.toggle('active',element.dataset.room===roomID);
+    this.renderMachineNav(room);
+    this.renderRoom(room);
+    this.populateQuick(room);
+    this.presence?.setLocation(roomID);
+    if(machine){
+      if(node)this.focusNode(roomID,machine,node);
+      else this.focusMachine(machine);
+    }
+    this.schedulePresence();
+  }
+  renderMachineNav(room) {
+    const nav=$('#machine-nav');nav.replaceChildren();
+    for(const machine of room.machines)nav.append(button([icon(machine.icon||'diagram-3'),machine.name],()=>this.focusMachine(machine.id),'machine-link',{'data-machine':machine.id}));
+  }
+  renderRoom(room) {
+    for(const stop of this.mounts.splice(0))stop();
+    this.machineViews.clear();
+    const stage=$('#stage');stage.replaceChildren();
+    const intro=make('section',{class:'room-intro'},
+      make('div',{class:'eyebrow'},`ROOM / ${room.id.toUpperCase()}`),
+      make('h1',{},room.name),make('p',{},room.description),
+      make('div',{class:'room-counter'},
+        make('div',{class:'counter'},make('strong',{},String(room.machines.length)),'Machines'),
+        make('div',{class:'counter'},make('strong',{},String(room.doors.length)),'Doors')),
+      make('p',{class:'hint'},icon('arrows-expand'),'  Scroll horizontally to explore. Choose a schematic node for an inspector; follow its links to open adjacent forms and instructions. Alt + ← / → switches rooms.')
+    );
+    stage.append(intro);
+    room.machines.forEach((machine,index)=>{
+      const outer=make('section',{class:'machine-cluster',dataset:{machine:machine.id,index:`MACHINE ${String(index+1).padStart(2,'0')} · ${machine.tag||'SCHEMATIC'}`},'aria-label':`${machine.name} schematic and inspectors`});
+      const connected=make('div',{class:'card-group connected-cards'});
+      const graph=make('div',{class:'card machine-card'});
+      const header=make('div',{class:'card-header machine-head'},
+        make('span',{class:'machine-logo'},icon(machine.icon||'diagram-3')),
+        make('div',{},make('span',{class:'eyebrow'},machine.tag||'DIAGRAM MACHINE'),make('h2',{},machine.name)),
+        make('div',{class:'machine-tools'},button(icon('three-dots'),()=>this.openMachineDetails(machine.id),'btn-outline-secondary',{'aria-label':`Inspect ${machine.name} machine`}))
+      );
+      const graphSurface=make('div',{class:'schematic','aria-label':`${machine.name} graph`});
+      const selectionButtons=make('div',{class:'node-buttons','aria-label':'Select diagram node'});
+      for(const node of machine.diagram.nodes){
+        selectionButtons.append(button(node.name,()=>this.focusNode(room.id,machine.id,node.id),'btn-outline-secondary',{'data-node-button':node.id,'aria-label':`Inspect ${node.name}`}));
+      }
+      const states=make('div',{class:'state-strip','aria-label':`${machine.name} machine state`});
+      graph.append(header,make('div',{class:'card-body'},make('p',{class:'machine-summary'},machine.summary),graphSurface,selectionButtons),states);
+      const panes=make('div',{class:'card-group context-panes connected-cards'});
+      connected.append(graph,panes);outer.append(connected);stage.append(outer);
+      this.machineViews.set(machine.id,{machine,outer,graphSurface,panes,selectionButtons,states});
+      this.updateMachineState(machine.id);
+      const destroy=mountDiagram(graphSurface,machine.diagram,{
+        onSelect:id=>id?this.focusNode(room.id,machine.id,id):this.clearFocus(machine.id),
+        onError:message=>this.ui.set('rendering',`PELE: ${message.slice(0,50)}`)
+      });
+      this.mounts.push(destroy);
+    });
+    const doors=make('section',{class:'door-group','aria-label':'Doors to other rooms'},make('span',{class:'eyebrow'},'TRAVEL THROUGH THE WORLD'),make('h2',{},'Doors & connections'));
+    for(const door of room.doors){
+      doors.append(button([
+        make('span',{class:'door-icon'},icon('door-open')),
+        make('span',{},make('strong',{},door.name),make('small',{},door.description||'Enter connected room')),
+        icon('arrow-right')
+      ],()=>this.navigate(door.to),'door-card',{'aria-label':`Enter ${door.name}`}));
+    }
+    stage.append(doors);
+    stage.scrollLeft=0;
+    this.ui.set('rendering',globalThis.pele?.mount?'PELE schematics':'Accessible graph fallback (PELE unavailable)');
+  }
+  updateMachineState(id) {
+    const view=this.machineViews.get(id);if(!view)return;
+    view.states.replaceChildren();
+    if(!view.machine.states.length)view.states.append(make('span',{class:'state-chip'},'No local state'));
+    for(const entry of view.machine.states) {
+      view.states.append(make('span',{class:'state-chip',title:`${entry.key}: ${entry.value}`},`${entry.key}: ${entry.value}`));
+    }
+  }
+  populateQuick(room) {
+    const machineSelect=$('#quick-machine');machineSelect.replaceChildren();
+    for(const machine of room.machines)machineSelect.append(make('option',{value:machine.id},machine.name));
+    this.populateVerbs();
+  }
+  populateVerbs() {
+    const machine=this.world.machine(this.roomID,$('#quick-machine').value);
+    const select=$('#quick-verb');select.replaceChildren();
+    for(const command of machine?.commands??[])select.append(make('option',{value:command.id},command.name));
+    $('#quick-open').disabled=!machine?.commands.length;
+  }
+  quickOpen() {
+    const machine=$('#quick-machine').value, command=$('#quick-verb').value;
+    if(machine && command)this.openForm(machine,command);
+  }
+  focusMachine(machineID) {
+    const view=this.machineViews.get(machineID);if(!view)return;
+    this.presence.setLocation(this.roomID,machineID);
+    view.outer.scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+    for(const element of $$('.machine-link'))element.classList.toggle('active',element.dataset.machine===machineID);
+    this.schedulePresence();
+  }
+  focusNode(roomID,machineID,nodeID,{append=false}={}) {
+    if(roomID!==this.roomID){this.navigate(roomID,{machine:machineID,node:nodeID});return;}
+    const node=this.world.node(roomID,machineID,nodeID);
+    if(!node){this.notice(`Unknown node ${nodeID}`,true);return;}
+    for(const [key] of this.active)if(key!==machineID){this.active.delete(key);this.renderPanes(key);}
+    let trail=this.active.get(machineID)?.trail??[];
+    trail=append?[...trail,{kind:'info',node:nodeID}]:[{kind:'info',node:nodeID}];
+    this.active.set(machineID,{trail,node:nodeID});
+    this.renderPanes(machineID);
+    this.focusMachine(machineID);
+    this.presence.setLocation(roomID,machineID,nodeID);
+    this.scrollLastPane(machineID);
+  }
+  clearFocus(machineID=null) {
+    if(machineID){this.active.delete(machineID);this.renderPanes(machineID);}
+    else {for(const id of this.active.keys()){this.active.delete(id);this.renderPanes(id);}}
+    for(const view of this.machineViews.values())for(const el of $$('[data-node-button]',view.selectionButtons))el.classList.remove('active');
+    this.presence.setLocation(this.roomID);
+  }
+  openMachineDetails(machineID) {
+    this.active.set(machineID,{trail:[{kind:'machine'}],node:''});
+    this.renderPanes(machineID);this.focusMachine(machineID);this.scrollLastPane(machineID);
+  }
+  openForm(machineID,commandID) {
+    const command=this.world.command(this.roomID,machineID,commandID);if(!command){this.notice('No such command',true);return;}
+    for(const [key] of this.active)if(key!==machineID){this.active.delete(key);this.renderPanes(key);}
+    const active=this.active.get(machineID)??{trail:[],node:''};
+    active.trail=active.trail.filter(p=>p.kind!=='help'&&p.kind!=='result');
+    active.trail.push({kind:'form',command:commandID});
+    this.active.set(machineID,active);this.renderPanes(machineID);
+    this.focusMachine(machineID);this.scrollLastPane(machineID);
+  }
+  openHelp(machineID,commandID) {
+    const active=this.active.get(machineID)??{trail:[],node:''};
+    active.trail=active.trail.filter(p=>p.kind!=='help');
+    active.trail.push({kind:'help',command:commandID});
+    this.active.set(machineID,active);this.renderPanes(machineID);this.scrollLastPane(machineID);
+  }
+  pushResult(machineID,result) {
+    const active=this.active.get(machineID);
+    if(!active)return;
+    active.trail=active.trail.filter(p=>p.kind!=='result');
+    active.trail.push({kind:'result',result});
+    this.renderPanes(machineID);this.scrollLastPane(machineID);
+  }
+  closePane(machineID,index) {
+    const active=this.active.get(machineID);if(!active)return;
+    active.trail=active.trail.slice(0,index);
+    if(active.trail.length===0)this.active.delete(machineID);
+    this.renderPanes(machineID);
+  }
+  renderPanes(machineID) {
+    const view=this.machineViews.get(machineID);if(!view)return;
+    const active=this.active.get(machineID);
+    view.panes.replaceChildren();
+    for(const [i,pane] of (active?.trail??[]).entries()){
+      let element;
+      if(pane.kind==='info')element=this.makeInfoPane(machineID,pane.node,i);
+      if(pane.kind==='form')element=this.makeFormPane(machineID,pane.command,i);
+      if(pane.kind==='help')element=this.makeHelpPane(machineID,pane.command,i);
+      if(pane.kind==='result')element=this.makeResultPane(machineID,pane.result,i);
+      if(pane.kind==='machine')element=this.makeMachinePane(machineID,i);
+      if(element)view.panes.append(element);
+    }
+    for(const element of $$('[data-node-button]',view.selectionButtons)){
+      element.classList.toggle('active',element.dataset.nodeButton===active?.node);
+    }
+    this.schedulePresence();
+  }
+  makePane(eyebrow,title,close,contents,footer=null) {
+    return make('div',{class:'card context-card'},heading(eyebrow,title,close),make('div',{class:'card-body'},contents),footer?make('div',{class:'card-footer'},footer):null);
+  }
+  makeInfoPane(machineID,nodeID,index) {
+    const node=this.world.node(this.roomID,machineID,nodeID);
+    const items=[
+      make('div',{class:'eyebrow'},node.status?`STATUS / ${node.status.toUpperCase()}`:'SYSTEM NODE'),
+      make('p',{},node.info||'No notes are attached to this node.'),
+    ];
+    const machine=this.world.machine(this.roomID,machineID);
+    if(machine.states.length){
+      items.push(make('div',{class:'machine-details',dataset:{stateInspector:machineID}},make('strong',{},'Shared machine state'),
+        ...machine.states.map(s=>make('div',{class:'small text-body-secondary'},`${s.key}: ${s.value}`))));
+    }
+    if(node.command){const command=this.world.command(this.roomID,machineID,node.command);
+      items.push(button([icon('play-circle'),` ${command.name}`,icon('chevron-right')],()=>this.openForm(machineID,command.id),'context-link'));
+    }
+    for(const link of node.links){
+      items.push(button([link.label,icon('arrow-up-right')],()=>this.followLink(this.roomID,machineID,link),'context-link'));
+    }
+    return this.makePane('INSPECT / NODE',node.name,()=>this.closePane(machineID,index),items,
+      make('span',{class:'small text-body-secondary'},`${this.roomID} / ${machineID} / ${nodeID}`));
+  }
+  followLink(roomID,machineID,link) {
+    const room=link.room||roomID, machine=link.machine||machineID;
+    if(link.room && !link.machine && !link.node && !link.command && !link.help){this.navigate(room);return;}
+    if(link.node){this.focusNode(room,machine,link.node,{append:room===this.roomID&&machine===machineID});return;}
+    if(room!==this.roomID)this.navigate(room,{machine});
+    if(link.command)this.openForm(machine,link.command);
+    else if(link.help)this.openHelp(machine,link.help);
+    else if(link.machine)this.focusMachine(machine);
+  }
+  makeMachinePane(machineID,index){
+    const machine=this.world.machine(this.roomID,machineID);
+    const controls=machine.commands.map(cmd=>button([cmd.name,icon('chevron-right')],()=>this.openForm(machineID,cmd.id),'context-link'));
+    return this.makePane('INSPECT / MACHINE',machine.name,()=>this.closePane(machineID,index),[
+      make('p',{},machine.summary),make('div',{class:'machine-details'},make('strong',{},'Machine address'),make('code',{},`${this.roomID}/${machineID}`)),
+      make('div',{class:'eyebrow'},'AVAILABLE VERBS'),...controls]);
+  }
+  makeFormPane(machineID,commandID,index) {
+    const command=this.world.command(this.roomID,machineID,commandID);
+    const form=make('form',{novalidate:'novalidate'});
+    for(const field of command.fields){
+      const ident=`form-${machineID}-${index}-${field.id}`;
+      const group=make('div',{class:'field-group'});
+      const label=make('label',{class:'form-label',for:ident},field.label,field.required?' *':'');
+      let input;
+      if(field.type==='textarea')input=make('textarea',{id:ident,name:field.id,class:'form-control',rows:'4',maxlength:field.maxlength??5000,required:field.required},field.default);
+      else if(field.type==='select')input=make('select',{id:ident,name:field.id,class:'form-control',required:field.required},
+        ...field.options.map(option=>make('option',{value:option.value},option.label)));
+      else if(field.type==='checkbox')input=make('input',{id:ident,name:field.id,type:'checkbox',class:'form-check-input',checked:field.default==='true'});
+      else input=make('input',{id:ident,name:field.id,class:'form-control',type:field.type==='number'?'number':'text',
+        value:field.default,required:field.required,maxlength:field.maxlength??5000,min:field.min,max:field.max});
+      if(field.type==='select')input.value=field.default;
+      if(field.type==='checkbox'){group.append(make('label',{class:'form-label',for:ident},input,' ',field.label));}
+      else group.append(label,input);
+      form.append(group);
+    }
+    const validation=make('p',{class:'small',role:'alert','aria-live':'polite'});
+    form.append(validation);
+    form.addEventListener('submit',event=>{
+      event.preventDefault();
+      const raw={};
+      for(const field of command.fields){const input=form.elements.namedItem(field.id);
+        raw[field.id]=field.type==='checkbox'?input.checked:input.value;}
+      try {
+        // Validate fields before persistence; explicit preview, not external shell execution.
+        const result=this.world.invoke({room:this.roomID,machine:machineID,command:commandID,args:raw,
+          actor:this.presence.name});
+        validation.textContent='';
+        this.persist();
+        for(const view of this.machineViews.values()) {this.updateMachineState(view.machine.id);this.refreshInfoStates(view.machine.id);}
+        this.ui.set('event',`${command.name} · ${new Date().toLocaleTimeString()}`);
+        if($('#remote-send').checked && this.bridge.kind==='ws'){
+          const sent=this.bridge.send(result.envelope);
+          if(!sent)this.notice('Remote command forwarding requested but socket is not open.',true);
+        }
+        this.pushResult(machineID,result);
+      }catch(error){validation.textContent=error.message;validation.style.color='#ffadb2';}
+    });
+    const help=button([icon('question-circle'),' Help'],()=>this.openHelp(machineID,commandID),'btn-outline-secondary');
+    const action=make('button',{class:'btn btn-primary btn-sm',type:'submit',form:form.id||''},'Prepare command');
+    // Submission occurs through this explicit form control, not any machine-specific executor.
+    action.removeAttribute('form');form.append(make('div',{class:'d-flex'},action));
+    const body=[make('div',{class:'machine-details'},make('strong',{},'Execution mode'),
+      make('span',{class:'small'},command.output==='json'?'JSON action preview · local state':'Interpolated text · local state')),
+      form];
+    return this.makePane('VERB / COMMAND',command.name,()=>this.closePane(machineID,index),body,
+      make('div',{class:'d-flex'},help,make('span',{class:'small text-body-secondary',style:'margin-left:auto'},'Local preview')));
+  }
+  makeHelpPane(machineID,commandID,index) {
+    const command=this.world.command(this.roomID,machineID,commandID);
+    return this.makePane('REFERENCE / HELP',`${command.name} · Help`,()=>this.closePane(machineID,index),[
+      make('p',{},command.help||'No additional instructions defined.'),
+      make('div',{class:'machine-details'},make('strong',{},'Command identifier'),make('code',{},`${machineID}.${commandID}`)),
+      make('p',{},'Commands are data. A form produces an inspectable preview; only local XML state changes are applied unless you explicitly connect a remote executor.')]);
+  }
+  makeResultPane(machineID,result,index) {
+    const output=make('pre',{class:'text-preview'},result.result);
+    const copy=button([icon('clipboard'),' Copy'],async()=>{
+      try{await navigator.clipboard.writeText(result.result);this.notice('Command copied.');}
+      catch{this.notice('Clipboard unavailable; select text and copy from the result.',true);}
+    },'btn-outline-secondary');
+    const changes=result.writes.map(write=>`${write.room}/${write.machine}.${write.key} = ${write.value}`);
+    return this.makePane('OUTPUT / PREVIEW','Command result',()=>this.closePane(machineID,index),[
+      make('div',{class:'eyebrow'},result.envelope.verb.toUpperCase()),output,
+      make('div',{class:'machine-details'},make('strong',{},'Durable XML changes'),
+        ...(changes.length?changes.map(line=>make('div',{class:'small text-body-secondary'},line)):[make('span',{class:'small text-body-secondary'},'No machine state changed')]))],copy);
+  }
+  scrollLastPane(machineID) {
+    requestAnimationFrame(()=>{
+      const view=this.machineViews.get(machineID);if(!view)return;
+      const last=view.panes.lastElementChild||view.outer;
+      const stage=$('#stage');const stageRect=stage.getBoundingClientRect(),targetRect=last.getBoundingClientRect();
+      // Prefer showing graph + relevant panes; move only enough to expose the rightmost pane.
+      if(targetRect.right>stageRect.right-24)stage.scrollBy({left:targetRect.right-stageRect.right+38,behavior:'smooth'});
+      else if(targetRect.left<stageRect.left)stage.scrollBy({left:targetRect.left-stageRect.left-20,behavior:'smooth'});
+      this.schedulePresence();
+    });
+  }
+  nextRoom(direction) {
+    const index=this.world.rooms.findIndex(r=>r.id===this.roomID);
+    this.navigate(this.world.rooms[(index+direction+this.world.rooms.length)%this.world.rooms.length].id);
+  }
+  schedulePresence() {
+    if(this.presencePending)return;
+    this.presencePending=true;
+    requestAnimationFrame(()=>{this.presencePending=false;this.renderPresence();});
+  }
+  renderPresence() {
+    const holder=$('#avatars');holder.replaceChildren();
+    if(!this.presence)return;
+    this.ui.set('peers',String(this.presence.all.length));
+    const stage=$('#stage');const rect=stage.getBoundingClientRect();
+    const peers=this.presence.all.filter(peer=>peer.room===this.roomID);
+    const positions=[];
+    for(const peer of peers){
+      const target=peer.machine?this.machineViews.get(peer.machine)?.outer:$('section.room-intro',stage);
+      if(!target)continue;
+      const targetRect=target.getBoundingClientRect();
+      const position=(targetRect.left + Math.min(targetRect.width/2,160))-rect.left;
+      // Stagger co-located avatars so they remain independently identifiable.
+      const count=positions.filter(x=>Math.abs(x-position)<50).length;positions.push(position);
+      const left=position+count*58;
+      if(left<35 || left>rect.width-35)continue; // No false position at a viewport edge.
+      const marker=make('div',{class:'presence-marker',title:`${peer.name} · ${peer.source} · ${peer.machine||'room'}${peer.node?' / '+peer.node:''}`},
+        make('span',{class:'avatar'},initials(peer.name),make('span',{class:`avatar-status status-${peer.status==='busy'?'busy':'online'}`,role:'img','aria-label':peer.status||'online'})),
+        make('small',{},peer.name));
+      marker.style.left=`${left}px`;holder.append(marker);
+    }
+  }
+  exportXML() {
+    const xml=`<?xml version="1.0" encoding="UTF-8"?>\n${this.world.xml()}`;
+    const url=URL.createObjectURL(new Blob([xml],{type:'application/xml;charset=utf-8'}));
+    const a=make('a',{href:url,download:`${this.world.id}.xml`});document.body.append(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    this.notice('Exported a complete XML world (rooms, state and history).');
+  }
+  async importFile(file) {
+    if(!file)return;
+    if(file.size>1_500_000){this.notice('XML files must be under 1.5 MB',true);return;}
+    try {
+      const raw=await file.text();
+      const next=new World(raw);
+      this.loadWorld(next.xml(),{save:true,force:true});
+      this.setSave('Imported and saved in this browser');
+      this.notice(`Imported ${next.name}.`);
+    }catch(error){this.notice(`Import rejected: ${error.message}`,true);}
+    finally{$('#upload-xml').value='';}
+  }
+  openSource(){
+    $('#source-text').value=`<?xml version="1.0" encoding="UTF-8"?>\n${this.world.xml()}`;
+    $('#source-dialog').showModal();
+  }
+  applySource() {
+    $('#source-error').textContent='';
+    try {
+      const next=new World($('#source-text').value);
+      const room=next.room(this.roomID)?this.roomID:next.start;
+      this.loadWorld(next.xml(),{save:true,force:true,room});
+      $('#source-dialog').close();this.notice('XML applied and validated.');
+    }catch(error){$('#source-error').textContent=error.message;this.notice(`XML not applied: ${error.message}`,true);}
+  }
+  resetDemo() {
+    if(!confirm('Replace the current world with the demo? Export XML first to preserve your work.'))return;
+    this.loadWorld(this.sample,{save:true,force:true});
+    $('#source-dialog').close();this.notice('Demo world restored.');
+  }
+  openConnections() {
+    $('#participant-name').value=this.actorName;
+    $('#connection-dialog').showModal();
+  }
+  changeName(){
+    const name=$('#participant-name').value.trim().slice(0,40);
+    if(!name){this.notice('Please enter a participant name.',true);return;}
+    this.actorName=name;try{localStorage.setItem('system-rooms:actor-name',name);}catch{}
+    this.presence?.setName(name);this.notice('Participant name updated.');
+  }
+  transportStatus(message){$('#transport-status').textContent=message;}
+  connectRemote() {
+    try {
+      this.bridge.connect($('#transport-url').value,$('#transport-type').value);
+      this.transportStatus('Connecting…');
+    }catch(error){this.transportStatus(error.message);this.notice(error.message,true);}
+  }
+  remoteMessage(value) {
+    if(!value||value.world!==this.world.id)return;
+    if(value.type==='presence')this.presence.setRemote(value);
+    else if(value.type==='machine.state' && $('#remote-state').checked){
+      const {room,machine,key,state}=value;
+      if(typeof state!=='string'||state.length>5000||typeof key!=='string')return;
+      try {
+        this.world.setState(room,machine,key,state);
+        this.persist();
+        this.updateMachineState(machine);
+        this.ui.set('event',`Remote state: ${machine}.${key}`);
+      }catch(error){this.notice(`Remote state rejected: ${error.message}`,true);}
+    }
+    else if(value.type==='event' && typeof value.label==='string'){
+      this.ui.set('event',`Remote event: ${value.label.slice(0,80)}`);
+    }
+  }
+}
+
+async function start() {
+  try {
+    const app=new Workbench(__SAMPLE_XML);
+    // Read-only debugging API: external tools may inspect the world, but cannot bypass form validation.
+    window.systemsAtlas={get world(){return app.world;},get room(){return app.roomID;},
+      navigate:(room,machine='',node='')=>app.navigate(room,{machine,node}),
+      exportXML:()=>app.exportXML()};
+  }catch(error){
+    const holder=$('#stage');holder.replaceChildren(make('div',{class:'card m-4 p-4'},
+      make('h2',{},'Could not start Systems Atlas'),make('p',{},String(error.message)),
+      make('p',{},'Launch using npm run dev so the browser can read the sample XML and ES modules. No application backend or database is required.')));
+  }
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
+else start();
+
+return {};
+})();
+})();
+
+</script>
+</head>
+<body>
+  <div id="application" class="app-shell">
+    <header class="app-header">
+      <a href="#" class="brand" id="brand-home" aria-label="Go to starting room">
+        <span class="brand-icon"><i class="bi bi-boxes" aria-hidden="true"></i></span>
+        <span><strong>SYSTEMS ATLAS</strong><small>XML WORLDS / MACHINE WORKBENCH</small></span>
+      </a>
+      <div class="header-room"><span class="eyebrow">CURRENT ROOM</span><strong id="current-room-title">Workshop</strong></div>
+      <div class="header-actions">
+        <button id="edit-source" class="btn btn-outline-secondary btn-sm" type="button"><i class="bi bi-code-slash" aria-hidden="true"></i><span class="btn-title"> XML</span></button>
+        <button id="import-world" class="btn btn-outline-secondary btn-sm" type="button"><i class="bi bi-upload" aria-hidden="true"></i><span class="btn-title"> Import</span></button>
+        <button id="export-world" class="btn btn-primary btn-sm" type="button"><i class="bi bi-download" aria-hidden="true"></i><span class="btn-title"> Export XML</span></button>
+        <input id="upload-xml" type="file" accept=".xml,text/xml,application/xml" hidden>
+      </div>
+    </header>
+    <div class="app-body">
+      <aside class="sidebar" aria-label="World navigation">
+        <div class="sidebar-header"><span class="eyebrow">WORLD EXPLORER</span><strong id="world-name">Systems Atlas</strong></div>
+        <div class="sidebar-scroll">
+          <nav id="room-tree" aria-label="Room graph"></nav>
+          <div class="side-section">
+            <div class="eyebrow mb-2">CURRENT ROOM MACHINES</div>
+            <nav id="machine-nav" aria-label="Machines"></nav>
+          </div>
+        </div>
+        <div class="sidebar-footer">
+          <div class="sidebar-stat"><i class="bi bi-hdd-network" aria-hidden="true"></i> <span id="world-stats">3 rooms · 5 machines</span></div>
+          <button id="connection-settings" class="btn btn-outline-secondary btn-sm w-100" type="button"><i class="bi bi-broadcast" aria-hidden="true"></i> Peers &amp; transport <span id="peer-count" class="small">1</span></button>
+        </div>
+      </aside>
+      <div class="main-column">
+        <div class="room-toolbar">
+          <div class="room-context"><span class="eyebrow" id="room-path">WORLD / WORKSHOP</span><span id="room-subtitle" class="text-body-secondary">Design, coordinate, execute</span></div>
+          <select id="room-jump" class="form-control form-control-sm room-jump" aria-label="Jump to room"></select>
+          <div class="quick-command input-group input-group-sm" aria-label="Quick command">
+            <span class="input-group-text">Verb</span>
+            <select id="quick-machine" class="form-control" aria-label="Machine"></select>
+            <select id="quick-verb" class="form-control" aria-label="Command"></select>
+            <button class="btn btn-outline-secondary" type="button" id="quick-open">Open form</button>
+          </div>
+        </div>
+        <div id="alerts" role="status" aria-live="polite" class="alert-line" hidden></div>
+        <div class="stage-wrapper">
+          <main id="stage" aria-label="Room machines and connected inspector panes" tabindex="0"></main>
+          <div id="presence-rail" aria-label="Live participant locations"><span class="presence-caption">LIVE PRESENCE</span><div id="avatars"></div></div>
+        </div>
+        <footer class="app-footer"><span><span id="save-indicator" class="save-dot"></span> <span id="save-status">Local document ready</span></span><span class="footer-right"><span id="renderer-status">Checking PELE…</span><span id="event-status">No actions yet</span></span></footer>
+      </div>
+    </div>
+  </div>
+  <dialog id="source-dialog" class="work-dialog" aria-labelledby="source-dialog-title">
+    <form method="dialog" id="source-form">
+      <div class="dialog-header"><div><span class="eyebrow">AUTHORITATIVE SOURCE</span><h2 id="source-dialog-title">Edit the XML world</h2></div><button class="btn btn-outline-secondary btn-sm" value="cancel" aria-label="Close source editor">Close</button></div>
+      <p class="small text-body-secondary">The entire world is portable XML. Changes are validated before replacing the current document.</p>
+      <textarea id="source-text" class="form-control xml-textarea" aria-label="XML source" spellcheck="false"></textarea>
+      <p id="source-error" role="alert" class="small" style="color:#ffadb2; margin:8px 0 0"></p>
+      <div class="dialog-footer"><button type="button" id="reset-demo" class="btn btn-outline-danger btn-sm">Reset to demo</button><div><button class="btn btn-outline-secondary btn-sm" value="cancel">Cancel</button><button type="button" id="apply-source" class="btn btn-primary btn-sm">Apply XML</button></div></div>
+    </form>
+  </dialog>
+  <dialog id="connection-dialog" class="work-dialog small-dialog" aria-labelledby="connection-dialog-title">
+    <form method="dialog">
+      <div class="dialog-header"><div><span class="eyebrow">AGENTS &amp; PARTICIPANTS</span><h2 id="connection-dialog-title">Connections</h2></div><button class="btn btn-outline-secondary btn-sm" value="cancel">Close</button></div>
+      <label class="form-label" for="participant-name">This tab's displayed name</label>
+      <div class="input-group input-group-sm mb-3"><input id="participant-name" maxlength="40" class="form-control" value="You"><button type="button" id="save-name" class="btn btn-outline-secondary">Update</button></div>
+      <p class="small text-body-secondary">Other tabs running this world are discovered automatically through BroadcastChannel. Remote agents require an explicit SSE or WebSocket relay.</p>
+      <label class="form-label" for="transport-type">Remote transport</label>
+      <select id="transport-type" class="form-control form-control-sm mb-2"><option value="sse">Server-Sent Events (receive only)</option><option value="ws">WebSocket (bidirectional)</option></select>
+      <label class="form-label" for="transport-url">Relay endpoint</label>
+      <input id="transport-url" class="form-control form-control-sm mb-2" placeholder="https://localhost:8443/events" type="url" autocomplete="off">
+      <label class="checkline"><input id="remote-state" type="checkbox"> Accept remote machine.state changes (trusted relay only)</label>
+      <label class="checkline"><input id="remote-send" type="checkbox"> Forward command previews to WebSocket (may execute on server)</label>
+      <div class="dialog-footer"><span class="small text-body-secondary" id="transport-status">Disconnected</span><div><button type="button" class="btn btn-outline-secondary btn-sm" id="disconnect-remote">Disconnect</button><button type="button" class="btn btn-primary btn-sm" id="connect-remote">Connect</button></div></div>
+    </form>
+  </dialog>
+</body>
+</html>
